@@ -25,6 +25,7 @@ var _time:      int   = 0
 func _ready() -> void:
 	set_speed        (200.0, 700.0)
 	set_obeys_gravity(true)
+	$AnimatedSprite.play("run")
 	
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -36,10 +37,4 @@ func _physics_process(_delta: float) -> void:
 	# Change the direction the enemy is moving
 	if is_on_wall():
 		_direction = -_direction
-	
-	# Regulates when the enemy jumps
-	if is_on_floor():
-		_time += 1
-		if _time >= 20:
-			jump(1.0)
-			_time = 0
+		$AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
