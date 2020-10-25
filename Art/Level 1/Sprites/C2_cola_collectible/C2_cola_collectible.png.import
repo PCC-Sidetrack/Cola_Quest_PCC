@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/C2_cola_collectible.png-509de75be81cac463684103ac8d31526.stex"
+path="res://.import/C2_cola_collectible.png-47ef10cff4b19182a6a8a30735359090.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 1/Sprites/C2_cola_collectible/C2_cola_collectible.png"
-dest_files=[ "res://.import/C2_cola_collectible.png-509de75be81cac463684103ac8d31526.stex" ]
+source_file="res://art/entities/C2_cola_collectible/C2_cola_collectible.png"
+dest_files=[ "res://.import/C2_cola_collectible.png-47ef10cff4b19182a6a8a30735359090.stex" ]
 
 [params]
 

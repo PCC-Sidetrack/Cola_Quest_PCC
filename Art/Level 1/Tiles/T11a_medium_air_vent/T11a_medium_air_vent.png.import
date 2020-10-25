@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T11a_medium_air_vent.png-4824ba4104f4cf28f833f372e3ebfe61.stex"
+path="res://.import/T11a_medium_air_vent.png-e31c13497267dcb644bde79e2e66e0d2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 1/Tiles/T11a_medium_air_vent/T11a_medium_air_vent.png"
-dest_files=[ "res://.import/T11a_medium_air_vent.png-4824ba4104f4cf28f833f372e3ebfe61.stex" ]
+source_file="res://art/terrain/T11a_medium_air_vent/T11a_medium_air_vent.png"
+dest_files=[ "res://.import/T11a_medium_air_vent.png-e31c13497267dcb644bde79e2e66e0d2.stex" ]
 
 [params]
 

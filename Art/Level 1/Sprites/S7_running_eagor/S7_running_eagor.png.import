@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S7_running_eagor.png-b5bbcd407a1ce898dd13761aad97536a.stex"
+path="res://.import/S7_running_eagor.png-4d92bec81cf199df41a2e62d332698a5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 1/Sprites/S7_running_eagor/S7_running_eagor.png"
-dest_files=[ "res://.import/S7_running_eagor.png-b5bbcd407a1ce898dd13761aad97536a.stex" ]
+source_file="res://art/entities/S7_running_eagor/S7_running_eagor.png"
+dest_files=[ "res://.import/S7_running_eagor.png-4d92bec81cf199df41a2e62d332698a5.stex" ]
 
 [params]
 

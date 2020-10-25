@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PL1_blue_sky_clouds.png-3b659de279aad7d4303e3bbc1f00a0ef.stex"
+path="res://.import/PL1_blue_sky_clouds.png-22ac96a228a319c7e48fc4360ec48e27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 1/Parallaxing/Background/PL1_blue_sky_clouds/PL1_blue_sky_clouds.png"
-dest_files=[ "res://.import/PL1_blue_sky_clouds.png-3b659de279aad7d4303e3bbc1f00a0ef.stex" ]
+source_file="res://art/parallaxing/PL1_blue_sky_clouds/PL1_blue_sky_clouds.png"
+dest_files=[ "res://.import/PL1_blue_sky_clouds.png-22ac96a228a319c7e48fc4360ec48e27.stex" ]
 
 [params]
 

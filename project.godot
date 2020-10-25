@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "KinematicBody2D",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://Code/src/scripts/entity.gd"
+"path": "res://src/scripts/entity.gd"
 } ]
 _global_script_class_icons={
 "Entity": ""
@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Game Files"
-run/main_scene="res://Code/src/levels/test_level.tscn"
+run/main_scene="res://src/levels/test_level.tscn"
 config/icon="res://icon.png"
 
 [display]

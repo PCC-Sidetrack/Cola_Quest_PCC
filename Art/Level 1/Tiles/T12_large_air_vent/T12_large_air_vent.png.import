@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T12_large_air_vent.png-0ab25e548e4c28288abb534476e3c5c3.stex"
+path="res://.import/T12_large_air_vent.png-6223791c2ea0a54f12ba67ce03043343.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 1/Tiles/T12_large_air_vent/T12_large_air_vent.png"
-dest_files=[ "res://.import/T12_large_air_vent.png-0ab25e548e4c28288abb534476e3c5c3.stex" ]
+source_file="res://art/terrain/T12_large_air_vent/T12_large_air_vent.png"
+dest_files=[ "res://.import/T12_large_air_vent.png-6223791c2ea0a54f12ba67ce03043343.stex" ]
 
 [params]
 
