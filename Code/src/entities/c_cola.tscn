@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://src/scripts/cola_collectible.gd" type="Script" id=1]
-[ext_resource path="res://art/entities/C2_cola_collectible/C2_cola_collectible.png" type="Texture" id=2]
+[ext_resource path="res://Code/src/scripts/cola_collectible.gd" type="Script" id=1]
+[ext_resource path="res://Art/Level 1/Sprites/C2_cola_collectible/C2_cola_collectible.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -56,7 +56,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -16 )
 frames = SubResource( 9 )
 animation = "spin"
-frame = 5
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
