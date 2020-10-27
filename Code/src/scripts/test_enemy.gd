@@ -15,16 +15,15 @@ extends Entity
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # The direction the enemy is moving
-var _direction: float = _RIGHT
-# Time between jumps
-var _time:      int   = 0
+var _direction: float = _LEFT
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	set_speed        (200.0, 700.0)
-	set_obeys_gravity(true)
+	set_obeys_gravity  (true)
+	set_speed          (200.0, 700.0)
+	set_type           ("hostile")
 	$AnimatedSprite.play("run")
 	
 #-----------------------------------------------------------------------------#

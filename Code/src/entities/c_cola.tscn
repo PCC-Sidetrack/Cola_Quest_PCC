@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Code/src/scripts/cola_collectible.gd" type="Script" id=1]
 [ext_resource path="res://Art/Level 1/Sprites/C2_cola_collectible/C2_cola_collectible.png" type="Texture" id=2]
@@ -43,11 +43,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 8.0
-height = 0.0
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 8.17279, 10.5162 )
 
-[node name="DtKoke" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 9.72687, 11.4999 )
+
+[node name="c_cola" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
@@ -56,10 +58,21 @@ script = ExtResource( 1 )
 position = Vector2( 0, -16 )
 frames = SubResource( 9 )
 animation = "spin"
-frame = 3
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, -16 )
+position = Vector2( -0.444023, -14.2086 )
 shape = SubResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -16 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 0.262745, 0.443137, 0.921569, 1 )
+position = Vector2( -0.333023, 1.44307 )
+shape = SubResource( 11 )
+disabled = true

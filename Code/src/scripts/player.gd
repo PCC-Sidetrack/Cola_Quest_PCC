@@ -43,9 +43,10 @@ var _remaining_jumps:  int   = _MAX_JUMPS
 func _ready():
 	set_damage          (5)
 	set_direction_facing(1.0)
-	set_health          (30)
+	set_max_health      (30)
 	set_obeys_gravity   (true)
 	set_speed           (300.0, 800.0)
+	set_type            ("neutral")
 	set_rate_of_change  (30.0, 30.0)
 
 #-----------------------------------------------------------------------------#
@@ -102,6 +103,15 @@ func _get_input() -> float:
 	_set_sprite(direction)
 	
 	return direction
+
+# Handle entity collisions
+func _on_hitbox_body_entered(body: Node) -> void:
+	# Interactions with collectibles
+	if body.get_type() == 1:
+		body.delete()
+	# Interactions with enemies
+	elif body.get_type() == -1:
+		knockback(body.position.x)
 
 # Set which sprite is currently displayed
 func _set_sprite(direction: float) -> void:
