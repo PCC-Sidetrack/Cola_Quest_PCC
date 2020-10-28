@@ -23,27 +23,29 @@ const _LEFT:    float = -1.0
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # The current velocity the entity is traveling
-var _current_velocity: Vector2 = Vector2.ZERO
+var _current_velocity:  Vector2 = Vector2.ZERO
 # The damage the entity does
-var _damage:           int     = 0
+var _damage:            int     = 0
 # What is considered to be the floor
-var _floor_normal:     Vector2 = Vector2.UP
+var _floor_normal:      Vector2 = Vector2.UP
 # The health of the entity
-var _health:           int     = 1
+var _max_health:        int     = 1
 # The direction the entity was last moving
-var _last_direction:   float   = _RIGHT
+var _last_direction:    float   = _RIGHT
 # Whether or not the entity obeys gravity
-var _obeys_gravity:    bool    = true
+var _obeys_gravity:     bool    = true
 # How quickly the entity is changing direction
-var _rate_of_change:   Vector2 = Vector2(20.0, 30.0)
+var _rate_of_change:    Vector2 = Vector2(20.0, 30.0)
 # The maximum normal vertical and horizontal speeds of the entity
-var _speed:            Vector2 = Vector2.ZERO
+var _speed:             Vector2 = Vector2.ZERO
 # How long the entity has been in the air
-var _time_in_air:      float   = 0.0
+var _time_in_air:       float   = 0.0
 # The time moving in a direction
 var _time_in_direction: float  = 0.0
 # How long the entity has been on the ground
-var _time_on_ground:   float   = 0.0
+var _time_on_ground:    float   = 0.0
+# What entity type
+var _type:              int     = 0
 
 #-----------------------------------------------------------------------------#
 #                               Process Loop                                  #
@@ -74,6 +76,10 @@ func calculate_new_velocity(direction: float) -> Vector2:
 func calculate_vertical_velocity() -> float:
 	return move_toward(_current_velocity.y, _GRAVITY * 0.4, _rate_of_change.y)
 
+# Delete the entity
+func delete() -> void:
+	queue_free()
+
 # Get the damage the entity does
 func get_damage() -> int:
 	return _damage
@@ -86,13 +92,13 @@ func get_floor_normal() -> Vector2:
 func get_gravity() -> float:
 	return _GRAVITY
 
-# Get the current health of the entity
-func get_health() -> int:
-	return _health
-
 # Get the current horizontal velocity of the entity
 func get_horizontal_velocity() -> float:
 	return _current_velocity.x
+
+# Get the current health of the entity
+func get_max_health() -> int:
+	return _max_health
 
 # Get the last direction the entity was moving horizontally
 func get_last_direction() -> float:
@@ -110,13 +116,25 @@ func get_time_in_air() -> float:
 func get_time_on_ground() -> float:
 	return _time_on_ground
 
+# Get the entity type
+func get_type() -> int:
+	return _type
+
 # Get the current vertical velocity of the entity
 func get_vertical_velocity() -> float:
 	return _current_velocity.y
 
-# Make the entity jump
+# Make this entity jump
 func jump(height: float) -> void:
 	_current_velocity.y = _speed.y * -height
+
+# Handle the knockback of this entity
+func knockback(position: float) -> void:
+	jump(0.75)
+	if position > self.position.x:
+		_current_velocity.x = -2.0 * _speed.x
+	else:
+		_current_velocity.x = 2.0 * _speed.x
 
 # Set the damage that the entity does
 func set_damage(new_damage: int) -> void:
@@ -130,8 +148,8 @@ func set_direction_facing(direction: float) -> void:
 		_last_direction = _LEFT
 	
 # Set the health of the entity
-func set_health(new_health: int) -> void:
-	_health = new_health
+func set_max_health(new_health: int) -> void:
+	_max_health = new_health
 
 # Set the horizontal and vertical speed of the entity
 # This is in pixels / second (velocity)
@@ -147,6 +165,16 @@ func set_obeys_gravity(boolean: bool) -> void:
 func set_rate_of_change(horizontal_change: float, vertial_change: float) -> void:
 	_rate_of_change.x = horizontal_change
 	_rate_of_change.y = vertial_change
+
+# Set the type of entity (in relation to the player)
+func set_type(new_type: String) -> void:
+	match new_type:
+		"hostile", "enemy", "boss":
+			_type = -1
+		"collectible":
+			_type = 1
+		_:
+			_type = 0
 
 # Set the current horizontal and vertical velocity of the entity
 func set_velocity(velocity: Vector2) -> void:
