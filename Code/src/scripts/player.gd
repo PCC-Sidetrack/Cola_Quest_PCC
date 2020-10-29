@@ -16,15 +16,23 @@ extends Entity
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
 # Maximum amount of time the player has after they step off a ledge to jump
-const _COYOTE_TIME:       float = 0.12
+const _COYOTE_TIME:       float  = 0.12
+# The dash input
+const _DASH:              String = "dash"
 # Max speed of the in-air jump
-const _DOUBLE_JUMP_SPEED: float = 0.75
+const _DOUBLE_JUMP_SPEED: float  = 0.75
 # Time needed to refresh the dash
-const _DASH_REFRESH:      float = 0.5
+const _DASH_REFRESH:      float  = 0.5
+# The jump input
+const _JUMP:              String = "jump"
 # The maximum number of jumps the player can make before touching a wall or the floor
-const _MAX_JUMPS:         int   = 2
+const _MAX_JUMPS:         int    = 2
 # The maximum number of in air dashes
-const _MAX_DASHES:        int   = 1
+const _MAX_DASHES:        int    = 1
+# The move_left input
+const _MOVE_LEFT:         String = "move_left"
+# The move_right input
+const _MOVE_RIGHT:        String = "move_right"
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
@@ -41,6 +49,8 @@ var _remaining_jumps:  int   = _MAX_JUMPS
 #-----------------------------------------------------------------------------#
 # Initialize the player
 func _ready():
+	_check_configuration()
+	
 	set_damage          (5)
 	set_direction_facing(1.0)
 	set_max_health      (30)
@@ -60,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	var vertical:   float = calculate_vertical_velocity()
 	
 	# Allow the player to dash
-	if Input.is_action_just_pressed("dash") and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES:
+	if Input.is_action_just_pressed(_DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES:
 		if get_last_direction() >= 0.0:
 			horizontal = get_speed().x * 3.0
 		else:
@@ -87,12 +97,20 @@ func _physics_process(delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
+# Check to see if the programmer has correctly configured their project
+func _check_configuration() -> void:
+	if InputMap.has_action(_JUMP) and InputMap.has_action(_MOVE_LEFT) and InputMap.has_action(_MOVE_RIGHT) and InputMap.has_action(_DASH):
+		pass
+	else:
+		push_error("InputMap not correctly configured. Unable to control character.")
+		get_tree().quit(-1)
+		
 # Get the input from player
 func _get_input() -> float:
-	var direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var direction = Input.get_action_strength(_MOVE_RIGHT) - Input.get_action_strength(_MOVE_LEFT)
 	
 	# If the player can jump, then jump
-	if (Input.is_action_just_pressed("jump") and _remaining_jumps > 0):
+	if (Input.is_action_just_pressed(_JUMP) and _remaining_jumps > 0):
 		if get_time_in_air() < _COYOTE_TIME:
 			jump(1.0)
 		else:

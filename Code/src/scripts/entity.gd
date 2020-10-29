@@ -22,6 +22,8 @@ const _LEFT:    float = -1.0
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
+# The current health of the entity
+var _current_health:    int     = 1
 # The current velocity the entity is traveling
 var _current_velocity:  Vector2 = Vector2.ZERO
 # The damage the entity does
@@ -46,6 +48,12 @@ var _time_in_direction: float  = 0.0
 var _time_on_ground:    float   = 0.0
 # What entity type
 var _type:              int     = 0
+
+#-----------------------------------------------------------------------------#
+#                              Initialization                                 #
+#-----------------------------------------------------------------------------#
+func _ready() -> void:
+	_current_health = _max_health
 
 #-----------------------------------------------------------------------------#
 #                               Process Loop                                  #
@@ -79,6 +87,10 @@ func calculate_vertical_velocity() -> float:
 # Delete the entity
 func delete() -> void:
 	queue_free()
+
+# Get the current health of the entity
+func get_current_health() -> int:
+	return _current_health
 
 # Get the damage the entity does
 func get_damage() -> int:
@@ -146,6 +158,10 @@ func set_direction_facing(direction: float) -> void:
 		_last_direction = _RIGHT
 	else:
 		_last_direction = _LEFT
+
+# Set the current health of the entity
+func set_current_health(new_health: int) -> void:
+	_current_health = new_health
 	
 # Set the health of the entity
 func set_max_health(new_health: int) -> void:
