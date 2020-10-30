@@ -1,0 +1,1 @@
+Store sprites in Godot Scenes at this location.
