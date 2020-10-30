@@ -43,7 +43,7 @@ var _speed:             Vector2 = Vector2.ZERO
 # How long the entity has been in the air
 var _time_in_air:       float   = 0.0
 # The time moving in a direction
-var _time_in_direction: float  = 0.0
+var _time_in_direction: float   = 0.0
 # How long the entity has been on the ground
 var _time_on_ground:    float   = 0.0
 # What entity type
