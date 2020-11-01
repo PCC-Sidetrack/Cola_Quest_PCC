@@ -144,11 +144,12 @@ func _set_sprite(direction: float) -> void:
 	# Display the appropriate animation
 	if is_on_floor():
 		if _dash_cooldown < 0.3:
-			$AnimatedSprite.play("dash")
+			#$AnimatedSprite.play("dash")
+			pass
 		elif direction != 0.0:
 			$AnimatedSprite.play("walk")
 	else:
-		if get_vertical_velocity() > 0.0:
-			$AnimatedSprite.play("fall")
-		else:
+		#if get_vertical_velocity() > 0.0:
+			#$AnimatedSprite.play("fall")
+		#else:
 			$AnimatedSprite.play("jump")

@@ -1,81 +1,69 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Art/Level 1/Sprites/test_player/advnt_full.png" type="Texture" id=1]
+[ext_resource path="res://Art/Level 1/Sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=1]
 [ext_resource path="res://Code/src/scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://Art/Level 1/Sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=3]
+[ext_resource path="res://Art/Level 1/Sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 24 )
+extents = Vector2( 15.2958, 30.3784 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 64 )
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 128, 32, 64 )
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 224, 64, 32, 64 )
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 64 )
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 32, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 32, 64 )
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 32, 64 )
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 160, 0, 32, 64 )
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 64, 32, 64 )
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
-"loop": false,
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ) ],
-"loop": false,
-"name": "dash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 18 ) ],
 "loop": false,
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "walk",
-"speed": 6.0
-}, {
-"frames": [ SubResource( 11 ) ],
-"loop": false,
-"name": "fall",
-"speed": 5.0
+"speed": 8.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 12.1907, 26.1291 )
+extents = Vector2( 16.2869, 31.2386 )
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
@@ -84,13 +72,14 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( -1.15959, 8.46839 )
+position = Vector2( -9.53506, 1.41536 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -0.165649, -0.0285721 )
+position = Vector2( -0.386062, 0.412235 )
 frames = SubResource( 12 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -103,6 +92,6 @@ collision_mask = 6
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
 modulate = Color( 0.203922, 0.423529, 1, 1 )
-position = Vector2( -0.828262, 7.78575 )
+position = Vector2( -9.42412, 1.17354 )
 shape = SubResource( 13 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
