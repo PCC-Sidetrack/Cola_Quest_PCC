@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T11_small_air_vent.png-57c518a4a7b98712ad7dea10fdd6651f.stex"
+path="res://.import/T11_small_air_vent.png-a7910fd3286204698c8f46a5e43cf84c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T11_small_air_vent/T11_small_air_vent.png"
-dest_files=[ "res://.import/T11_small_air_vent.png-57c518a4a7b98712ad7dea10fdd6651f.stex" ]
+source_file="res://art/level_1/tiles/T11_small_air_vent/T11_small_air_vent.png"
+dest_files=[ "res://.import/T11_small_air_vent.png-a7910fd3286204698c8f46a5e43cf84c.stex" ]
 
 [params]
 

@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "KinematicBody2D",
+"base": "Reference",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://Code/src/scripts/entity.gd"
+"path": "res://code/src/scripts/entity.gd"
 } ]
 _global_script_class_icons={
 "Entity": ""

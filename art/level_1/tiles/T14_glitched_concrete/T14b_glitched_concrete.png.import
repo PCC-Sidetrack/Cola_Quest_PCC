@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T14b_glitched_concrete.png-bfb2f23f589ddee9d8561060fa9f770e.stex"
+path="res://.import/T14b_glitched_concrete.png-5d430ef68fb219a1866df08737fffaa9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T14_glitched_concrete/T14b_glitched_concrete.png"
-dest_files=[ "res://.import/T14b_glitched_concrete.png-bfb2f23f589ddee9d8561060fa9f770e.stex" ]
+source_file="res://art/level_1/tiles/T14_glitched_concrete/T14b_glitched_concrete.png"
+dest_files=[ "res://.import/T14b_glitched_concrete.png-5d430ef68fb219a1866df08737fffaa9.stex" ]
 
 [params]
 

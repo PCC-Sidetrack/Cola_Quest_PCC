@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T2_concrete_floor.png-dbd61f538427c29ca2816f45c5235fdf.stex"
+path="res://.import/T2_concrete_floor.png-a37055f57adcfc48cf72677b4e251a7a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T2_concrete_floor/T2_concrete_floor.png"
-dest_files=[ "res://.import/T2_concrete_floor.png-dbd61f538427c29ca2816f45c5235fdf.stex" ]
+source_file="res://art/level_1/tiles/T2_concrete_floor/T2_concrete_floor.png"
+dest_files=[ "res://.import/T2_concrete_floor.png-a37055f57adcfc48cf72677b4e251a7a.stex" ]
 
 [params]
 

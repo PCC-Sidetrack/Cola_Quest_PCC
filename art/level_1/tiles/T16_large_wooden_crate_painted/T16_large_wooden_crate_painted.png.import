@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T16_large_wooden_crate_painted.png-44ed51fbde36c9482a07d29547cddfb9.stex"
+path="res://.import/T16_large_wooden_crate_painted.png-d9f56f33c0197c5fc64905cdfef446d6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T16_large_wooden_crate_painted/T16_large_wooden_crate_painted.png"
-dest_files=[ "res://.import/T16_large_wooden_crate_painted.png-44ed51fbde36c9482a07d29547cddfb9.stex" ]
+source_file="res://art/level_1/tiles/T16_large_wooden_crate_painted/T16_large_wooden_crate_painted.png"
+dest_files=[ "res://.import/T16_large_wooden_crate_painted.png-d9f56f33c0197c5fc64905cdfef446d6.stex" ]
 
 [params]
 

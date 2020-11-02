@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S11_instrument_bow.png-379910df794162d13126fd721ef7dc53.stex"
+path="res://.import/S11_instrument_bow.png-e40b443ea53abf25be1f6fd0b0856689.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S11_bow/S11_instrument_bow.png"
-dest_files=[ "res://.import/S11_instrument_bow.png-379910df794162d13126fd721ef7dc53.stex" ]
+source_file="res://art/level_1/sprites/S11_bow/S11_instrument_bow.png"
+dest_files=[ "res://.import/S11_instrument_bow.png-e40b443ea53abf25be1f6fd0b0856689.stex" ]
 
 [params]
 

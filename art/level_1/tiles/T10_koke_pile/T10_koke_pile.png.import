@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T10_koke_pile.png-6bb99893b112e25934e364762441a187.stex"
+path="res://.import/T10_koke_pile.png-bb696c8b72a0e0aad4a993f3f89e5028.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T10_koke_pile/T10_koke_pile.png"
-dest_files=[ "res://.import/T10_koke_pile.png-6bb99893b112e25934e364762441a187.stex" ]
+source_file="res://art/level_1/tiles/T10_koke_pile/T10_koke_pile.png"
+dest_files=[ "res://.import/T10_koke_pile.png-bb696c8b72a0e0aad4a993f3f89e5028.stex" ]
 
 [params]
 

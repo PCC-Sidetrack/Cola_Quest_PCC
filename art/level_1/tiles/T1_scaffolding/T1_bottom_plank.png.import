@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T1_bottom_plank.png-fe5919473ce01c645388ab4dca0695dd.stex"
+path="res://.import/T1_bottom_plank.png-f00bf82f6b3cc79d774b5b44d18217ee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T1_scaffolding/T1_bottom_plank.png"
-dest_files=[ "res://.import/T1_bottom_plank.png-fe5919473ce01c645388ab4dca0695dd.stex" ]
+source_file="res://art/level_1/tiles/T1_scaffolding/T1_bottom_plank.png"
+dest_files=[ "res://.import/T1_bottom_plank.png-f00bf82f6b3cc79d774b5b44d18217ee.stex" ]
 
 [params]
 

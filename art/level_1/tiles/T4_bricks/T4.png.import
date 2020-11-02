@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T4.png-4cd22ecd11d6c571ff10c8cd4217a75e.stex"
+path="res://.import/T4.png-82a091949d65e4ce41a29e981c5b72a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T4_bricks/T4.png"
-dest_files=[ "res://.import/T4.png-4cd22ecd11d6c571ff10c8cd4217a75e.stex" ]
+source_file="res://art/level_1/tiles/T4_bricks/T4.png"
+dest_files=[ "res://.import/T4.png-82a091949d65e4ce41a29e981c5b72a9.stex" ]
 
 [params]
 

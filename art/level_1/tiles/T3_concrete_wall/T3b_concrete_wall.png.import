@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T3b_concrete_wall.png-4f99f552a71f2962afdd389240bccb99.stex"
+path="res://.import/T3b_concrete_wall.png-b4ed778f77c5dd02ca5b8c3bb919e132.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T3_concrete_wall/T3b_concrete_wall.png"
-dest_files=[ "res://.import/T3b_concrete_wall.png-4f99f552a71f2962afdd389240bccb99.stex" ]
+source_file="res://art/level_1/tiles/T3_concrete_wall/T3b_concrete_wall.png"
+dest_files=[ "res://.import/T3b_concrete_wall.png-b4ed778f77c5dd02ca5b8c3bb919e132.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rooftop_background_tilesheet.png-2f008db2fd77d24a1aa28c533a88ff89.stex"
+path="res://.import/rooftop_background_tilesheet.png-e710d2840ce67f08a1a9a8f5d24ef4e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png"
-dest_files=[ "res://.import/rooftop_background_tilesheet.png-2f008db2fd77d24a1aa28c533a88ff89.stex" ]
+source_file="res://art/level_1/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png"
+dest_files=[ "res://.import/rooftop_background_tilesheet.png-e710d2840ce67f08a1a9a8f5d24ef4e5.stex" ]
 
 [params]
 

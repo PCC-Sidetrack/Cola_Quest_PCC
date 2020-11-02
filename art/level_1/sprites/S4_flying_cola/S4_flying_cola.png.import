@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S4_flying_cola.png-230c4691fe61b6f9c831cd21b381546e.stex"
+path="res://.import/S4_flying_cola.png-c972161d5388d01e52ce268fbff612c7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S4_flying_cola/S4_flying_cola.png"
-dest_files=[ "res://.import/S4_flying_cola.png-230c4691fe61b6f9c831cd21b381546e.stex" ]
+source_file="res://art/level_1/sprites/S4_flying_cola/S4_flying_cola.png"
+dest_files=[ "res://.import/S4_flying_cola.png-c972161d5388d01e52ce268fbff612c7.stex" ]
 
 [params]
 

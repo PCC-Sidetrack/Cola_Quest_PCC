@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CH_dr_adkins.png-49792faec817f32aec03ee738bc97ff2.stex"
+path="res://.import/CH_dr_adkins.png-f33c3b472174182f6788ae2258fb0c2b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins.png"
-dest_files=[ "res://.import/CH_dr_adkins.png-49792faec817f32aec03ee738bc97ff2.stex" ]
+source_file="res://art/level_1/sprites/CH_dr_adkins/CH_dr_adkins.png"
+dest_files=[ "res://.import/CH_dr_adkins.png-f33c3b472174182f6788ae2258fb0c2b.stex" ]
 
 [params]
 

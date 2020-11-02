@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T13_air_duct.png-f7224add2033427acf47a95a55e59621.stex"
+path="res://.import/T13_air_duct.png-26c43ad11e172f1a56947fb46b0dc138.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T13_air_duct/T13_air_duct.png"
-dest_files=[ "res://.import/T13_air_duct.png-f7224add2033427acf47a95a55e59621.stex" ]
+source_file="res://art/level_1/tiles/T13_air_duct/T13_air_duct.png"
+dest_files=[ "res://.import/T13_air_duct.png-26c43ad11e172f1a56947fb46b0dc138.stex" ]
 
 [params]
 

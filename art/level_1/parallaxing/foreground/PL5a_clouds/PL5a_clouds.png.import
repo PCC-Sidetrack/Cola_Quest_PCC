@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PL5a_clouds.png-5e6004d47a3cf12af39e424715a9b391.stex"
+path="res://.import/PL5a_clouds.png-b473c4e57ec257b76fde6ae701af09c1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/parallaxing/foreground/PL5a_clouds/PL5a_clouds.png"
-dest_files=[ "res://.import/PL5a_clouds.png-5e6004d47a3cf12af39e424715a9b391.stex" ]
+source_file="res://art/level_1/parallaxing/foreground/PL5a_clouds/PL5a_clouds.png"
+dest_files=[ "res://.import/PL5a_clouds.png-b473c4e57ec257b76fde6ae701af09c1.stex" ]
 
 [params]
 

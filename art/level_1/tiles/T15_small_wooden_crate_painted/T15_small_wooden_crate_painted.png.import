@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T15_small_wooden_crate_painted.png-075280dedb4e739603960bd37d6e3edd.stex"
+path="res://.import/T15_small_wooden_crate_painted.png-c35d2cf8dfd5f7ef90e70d82e3a9b0b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T15_small_wooden_crate_painted/T15_small_wooden_crate_painted.png"
-dest_files=[ "res://.import/T15_small_wooden_crate_painted.png-075280dedb4e739603960bd37d6e3edd.stex" ]
+source_file="res://art/level_1/tiles/T15_small_wooden_crate_painted/T15_small_wooden_crate_painted.png"
+dest_files=[ "res://.import/T15_small_wooden_crate_painted.png-c35d2cf8dfd5f7ef90e70d82e3a9b0b6.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S12c_error_box.png-be13361b7dcc8e43a7a18e2508783a83.stex"
+path="res://.import/S12c_error_box.png-73e842d7e7ecd5dbf2dcc1f6255f5da9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S12_error_box/S12c_error_box.png"
-dest_files=[ "res://.import/S12c_error_box.png-be13361b7dcc8e43a7a18e2508783a83.stex" ]
+source_file="res://art/level_1/sprites/S12_error_box/S12c_error_box.png"
+dest_files=[ "res://.import/S12c_error_box.png-73e842d7e7ecd5dbf2dcc1f6255f5da9.stex" ]
 
 [params]
 

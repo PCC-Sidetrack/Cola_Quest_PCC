@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T5_chimney_top.png-c0dfdf71ea29d922930334d9054aadc8.stex"
+path="res://.import/T5_chimney_top.png-22aae416a287ec2be3b33e401661a54b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T5_chimney_pipes/T5_chimney_top.png"
-dest_files=[ "res://.import/T5_chimney_top.png-c0dfdf71ea29d922930334d9054aadc8.stex" ]
+source_file="res://art/level_1/tiles/T5_chimney_pipes/T5_chimney_top.png"
+dest_files=[ "res://.import/T5_chimney_top.png-22aae416a287ec2be3b33e401661a54b.stex" ]
 
 [params]
 

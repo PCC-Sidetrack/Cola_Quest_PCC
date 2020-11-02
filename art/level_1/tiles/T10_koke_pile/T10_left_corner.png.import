@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T10_left_corner.png-17b99a96d7fa6bb4aae79a3193a169ea.stex"
+path="res://.import/T10_left_corner.png-88d2627fda8879c806308a516874c180.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T10_koke_pile/T10_left_corner.png"
-dest_files=[ "res://.import/T10_left_corner.png-17b99a96d7fa6bb4aae79a3193a169ea.stex" ]
+source_file="res://art/level_1/tiles/T10_koke_pile/T10_left_corner.png"
+dest_files=[ "res://.import/T10_left_corner.png-88d2627fda8879c806308a516874c180.stex" ]
 
 [params]
 

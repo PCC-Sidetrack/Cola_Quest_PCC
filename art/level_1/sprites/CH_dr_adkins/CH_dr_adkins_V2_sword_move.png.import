@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CH_dr_adkins_V2_sword_move.png-f21b005ee0c24e7dfc724d4e8790a6e7.stex"
+path="res://.import/CH_dr_adkins_V2_sword_move.png-cf362ab9fba4429a5c0c6ff65501af39.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 1/Sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png"
-dest_files=[ "res://.import/CH_dr_adkins_V2_sword_move.png-f21b005ee0c24e7dfc724d4e8790a6e7.stex" ]
+source_file="res://art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png"
+dest_files=[ "res://.import/CH_dr_adkins_V2_sword_move.png-cf362ab9fba4429a5c0c6ff65501af39.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S5_doctorate_degree-Sheet.png-fc7236abb59da5f581a6869b0709198d.stex"
+path="res://.import/S5_doctorate_degree-Sheet.png-ac6bb592990e5dff91af4b201978a0d2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S5_doctorate_degree/S5_doctorate_degree-Sheet.png"
-dest_files=[ "res://.import/S5_doctorate_degree-Sheet.png-fc7236abb59da5f581a6869b0709198d.stex" ]
+source_file="res://art/level_1/sprites/S5_doctorate_degree/S5_doctorate_degree-Sheet.png"
+dest_files=[ "res://.import/S5_doctorate_degree-Sheet.png-ac6bb592990e5dff91af4b201978a0d2.stex" ]
 
 [params]
 

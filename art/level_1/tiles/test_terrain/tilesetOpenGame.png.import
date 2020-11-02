@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilesetOpenGame.png-9b9aa411dd805593eb78a88301127ff3.stex"
+path="res://.import/tilesetOpenGame.png-f6042ab384d020ef9169dcb39c966079.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/test_terrain/tilesetOpenGame.png"
-dest_files=[ "res://.import/tilesetOpenGame.png-9b9aa411dd805593eb78a88301127ff3.stex" ]
+source_file="res://art/level_1/tiles/test_terrain/tilesetOpenGame.png"
+dest_files=[ "res://.import/tilesetOpenGame.png-f6042ab384d020ef9169dcb39c966079.stex" ]
 
 [params]
 

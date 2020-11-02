@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T1_ladder.png-2bfcfb66aa32cd5bfc05880e05ef2bfc.stex"
+path="res://.import/T1_ladder.png-8c7aa734ed2c148c31ff57de5cff233f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T1_scaffolding/T1_ladder.png"
-dest_files=[ "res://.import/T1_ladder.png-2bfcfb66aa32cd5bfc05880e05ef2bfc.stex" ]
+source_file="res://art/level_1/tiles/T1_scaffolding/T1_ladder.png"
+dest_files=[ "res://.import/T1_ladder.png-8c7aa734ed2c148c31ff57de5cff233f.stex" ]
 
 [params]
 

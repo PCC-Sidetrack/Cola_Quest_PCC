@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/V5Fan-Sheet.png-7152adbdff8981b98922900a8aaca417.stex"
+path="res://.import/V5Fan-Sheet.png-99d42265fa1479aa9856d838fc27cb49.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T9_fan/V5Fan-Sheet.png"
-dest_files=[ "res://.import/V5Fan-Sheet.png-7152adbdff8981b98922900a8aaca417.stex" ]
+source_file="res://art/level_1/tiles/T9_fan/V5Fan-Sheet.png"
+dest_files=[ "res://.import/V5Fan-Sheet.png-99d42265fa1479aa9856d838fc27cb49.stex" ]
 
 [params]
 

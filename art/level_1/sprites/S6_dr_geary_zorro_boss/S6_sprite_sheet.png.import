@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S6_sprite_sheet.png-167748230ed0419c3fba224a0d0cd155.stex"
+path="res://.import/S6_sprite_sheet.png-ae06c5b5c01c324e00a06774f9bf2422.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet.png"
-dest_files=[ "res://.import/S6_sprite_sheet.png-167748230ed0419c3fba224a0d0cd155.stex" ]
+source_file="res://art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet.png"
+dest_files=[ "res://.import/S6_sprite_sheet.png-ae06c5b5c01c324e00a06774f9bf2422.stex" ]
 
 [params]
 

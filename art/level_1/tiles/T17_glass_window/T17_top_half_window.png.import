@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T17_top_half_window.png-9d5233f4c28168a63b9adbe9d04c5a4c.stex"
+path="res://.import/T17_top_half_window.png-05ba6c5a06fdc627e296d67c1854ba65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T17_glass_window/T17_top_half_window.png"
-dest_files=[ "res://.import/T17_top_half_window.png-9d5233f4c28168a63b9adbe9d04c5a4c.stex" ]
+source_file="res://art/level_1/tiles/T17_glass_window/T17_top_half_window.png"
+dest_files=[ "res://.import/T17_top_half_window.png-05ba6c5a06fdc627e296d67c1854ba65.stex" ]
 
 [params]
 

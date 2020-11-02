@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S3_flying_bird.png-9edb79acb5bb1430d8df685dd624c19e.stex"
+path="res://.import/S3_flying_bird.png-dd6cac6fbc747ac96f76715b7f9eaf66.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S3_flying_bird/S3_flying_bird.png"
-dest_files=[ "res://.import/S3_flying_bird.png-9edb79acb5bb1430d8df685dd624c19e.stex" ]
+source_file="res://art/level_1/sprites/S3_flying_bird/S3_flying_bird.png"
+dest_files=[ "res://.import/S3_flying_bird.png-dd6cac6fbc747ac96f76715b7f9eaf66.stex" ]
 
 [params]
 

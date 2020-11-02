@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T5_horizontal_pipe.png-5b2f14553543a71c4516e5f72c9b8c73.stex"
+path="res://.import/T5_horizontal_pipe.png-6016ebbe571a304510fa950f180ef593.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T5_chimney_pipes/T5_horizontal_pipe.png"
-dest_files=[ "res://.import/T5_horizontal_pipe.png-5b2f14553543a71c4516e5f72c9b8c73.stex" ]
+source_file="res://art/level_1/tiles/T5_chimney_pipes/T5_horizontal_pipe.png"
+dest_files=[ "res://.import/T5_horizontal_pipe.png-6016ebbe571a304510fa950f180ef593.stex" ]
 
 [params]
 

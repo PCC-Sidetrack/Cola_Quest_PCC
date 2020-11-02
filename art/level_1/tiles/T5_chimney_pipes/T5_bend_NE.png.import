@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T5_bend_NE.png-4af4d2114820dc181e0c237fe39220b0.stex"
+path="res://.import/T5_bend_NE.png-2717e4a253232d8469684dc9e2faa716.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/T5_chimney_pipes/T5_bend_NE.png"
-dest_files=[ "res://.import/T5_bend_NE.png-4af4d2114820dc181e0c237fe39220b0.stex" ]
+source_file="res://art/level_1/tiles/T5_chimney_pipes/T5_bend_NE.png"
+dest_files=[ "res://.import/T5_bend_NE.png-2717e4a253232d8469684dc9e2faa716.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/P1_smoke-Sheet.png-d6db730bedff6b12340cf8c5f842b0fc.stex"
+path="res://.import/P1_smoke-Sheet.png-636e2ea87a7ed91ee2a35f1a93781887.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/particles/P1_smoke/P1_smoke-Sheet.png"
-dest_files=[ "res://.import/P1_smoke-Sheet.png-d6db730bedff6b12340cf8c5f842b0fc.stex" ]
+source_file="res://art/level_1/particles/P1_smoke/P1_smoke-Sheet.png"
+dest_files=[ "res://.import/P1_smoke-Sheet.png-636e2ea87a7ed91ee2a35f1a93781887.stex" ]
 
 [params]
 

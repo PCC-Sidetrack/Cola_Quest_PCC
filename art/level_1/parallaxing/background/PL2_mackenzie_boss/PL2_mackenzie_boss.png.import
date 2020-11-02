@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PL2_mackenzie_boss.png-ed202c91a6103469e967b922c9bc037a.stex"
+path="res://.import/PL2_mackenzie_boss.png-ae41c9891353b680ddb23f17a8658665.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/parallaxing/background/PL2_mackenzie_boss/PL2_mackenzie_boss.png"
-dest_files=[ "res://.import/PL2_mackenzie_boss.png-ed202c91a6103469e967b922c9bc037a.stex" ]
+source_file="res://art/level_1/parallaxing/background/PL2_mackenzie_boss/PL2_mackenzie_boss.png"
+dest_files=[ "res://.import/PL2_mackenzie_boss.png-ae41c9891353b680ddb23f17a8658665.stex" ]
 
 [params]
 
