@@ -22,38 +22,48 @@ const _LEFT:    float = -1.0
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
+# The current health of the entity
+var _current_health:        int     = 1
 # The current velocity the entity is traveling
-var _current_velocity:  Vector2 = Vector2.ZERO
+var _current_velocity:      Vector2 = Vector2.ZERO
 # The damage the entity does
-var _damage:            int     = 0
+var _damage:                int     = 0
 # What is considered to be the floor
-var _floor_normal:      Vector2 = Vector2.UP
+var _floor_normal:          Vector2 = Vector2.UP
+# How long is the entity vulnerable
+var _invulnerable_duration: float    = 0.0
 # The health of the entity
-var _max_health:        int     = 1
+var _max_health:            int     = 1
 # The direction the entity was last moving
-var _last_direction:    float   = _RIGHT
+var _last_direction:        float   = _RIGHT
 # Whether or not the entity obeys gravity
-var _obeys_gravity:     bool    = true
+var _obeys_gravity:         bool    = true
 # How quickly the entity is changing direction
-var _rate_of_change:    Vector2 = Vector2(20.0, 30.0)
+var _rate_of_change:        Vector2 = Vector2(20.0, 30.0)
 # The maximum normal vertical and horizontal speeds of the entity
-var _speed:             Vector2 = Vector2.ZERO
+var _speed:                 Vector2 = Vector2.ZERO
 # How long the entity has been in the air
-var _time_in_air:       float   = 0.0
+var _time_in_air:           float   = 0.0
 # The time moving in a direction
-var _time_in_direction: float  = 0.0
+var _time_in_direction:     float   = 0.0
 # How long the entity has been on the ground
-var _time_on_ground:    float   = 0.0
+var _time_on_ground:        float   = 0.0
 # What entity type
-var _type:              int     = 0
+var _type:                  int     = 0
+
+#-----------------------------------------------------------------------------#
+#                              Initialization                                 #
+#-----------------------------------------------------------------------------#
+func _ready() -> void:
+	_current_health = _max_health
 
 #-----------------------------------------------------------------------------#
 #                               Process Loop                                  #
 #-----------------------------------------------------------------------------#
 # Run the process loop on the entity
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if _obeys_gravity:
-		_update_stats()
+		_update_stats(delta)
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
@@ -80,6 +90,10 @@ func calculate_vertical_velocity() -> float:
 func delete() -> void:
 	queue_free()
 
+# Get the current health of the entity
+func get_current_health() -> int:
+	return _current_health
+
 # Get the damage the entity does
 func get_damage() -> int:
 	return _damage
@@ -95,6 +109,10 @@ func get_gravity() -> float:
 # Get the current horizontal velocity of the entity
 func get_horizontal_velocity() -> float:
 	return _current_velocity.x
+
+# Is the entity invulnerable
+func get_invulnerability() -> bool:
+	return _invulnerable_duration > 0.0
 
 # Get the current health of the entity
 func get_max_health() -> int:
@@ -146,6 +164,10 @@ func set_direction_facing(direction: float) -> void:
 		_last_direction = _RIGHT
 	else:
 		_last_direction = _LEFT
+
+# Set the current health of the entity
+func set_current_health(new_health: int) -> void:
+	_current_health = new_health
 	
 # Set the health of the entity
 func set_max_health(new_health: int) -> void:
@@ -179,18 +201,27 @@ func set_type(new_type: String) -> void:
 # Set the current horizontal and vertical velocity of the entity
 func set_velocity(velocity: Vector2) -> void:
 	_current_velocity = velocity
+	
+# Set how long the entity is invulnerable
+func set_invulnerability(duration: float) -> void:
+	_invulnerable_duration += duration
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
 # Update the players statistics
-func _update_stats() -> void:
+func _update_stats(delta: float) -> void:
 	if is_on_floor():
-		_time_on_ground += get_physics_process_delta_time()
+		_time_on_ground += delta
 		_time_in_air     = 0.0
 	elif not (is_on_floor() or is_on_wall()):
-		_time_in_air    += get_physics_process_delta_time()
+		_time_in_air    += delta
 		_time_on_ground  = 0.0
 	
 	if _current_velocity.x != 0.0:
-		_time_in_direction += get_physics_process_delta_time()
+		_time_in_direction += delta
+	
+	if _invulnerable_duration > 0.0:
+		_invulnerable_duration -= delta
+	elif _invulnerable_duration < 0.0:
+		_invulnerable_duration = 0.0
