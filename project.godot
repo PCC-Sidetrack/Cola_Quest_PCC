@@ -64,10 +64,10 @@ dash={
 
 [layer_names]
 
-2d_render/layer_1="player"
-2d_render/layer_2="enemy"
-2d_render/layer_3="collectables"
-2d_render/layer_4="world"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
+2d_physics/layer_3="collectibles"
+2d_physics/layer_4="world"
 
 [rendering]
 

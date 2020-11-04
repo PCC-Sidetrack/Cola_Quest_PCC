@@ -197,18 +197,24 @@ func set_rate_of_change(horizontal_change: float, vertial_change: float) -> void
 func set_type(new_type: String) -> void:
 	match new_type:
 		"hostile", "enemy", "boss":
-			set_collision_layer_bit(_LAYER_ENEMY, true)
-			set_collision_mask_bit (_LAYER_PLAYER, true)
-			set_collision_mask_bit (_LAYER_ENEMY, true)
-			set_collision_mask_bit (_LAYER_WORLD, true)
+			_set_layer_bits(self, [_LAYER_ENEMY])
+			_set_mask_bits (self, [_LAYER_PLAYER, _LAYER_ENEMY, _LAYER_WORLD])
+			_set_layer_bits($Area2D, [_LAYER_ENEMY])
+			_set_mask_bits ($Area2D, [_LAYER_PLAYER])
+			$Area2D/CollisionShape2D.disabled = true
 			_type = -1
 		"collectible":
-			set_collision_layer_bit(_LAYER_COLLECT, true)
+			_set_layer_bits(self, [_LAYER_COLLECT])
+			_set_mask_bits (self, [])
+			_set_layer_bits($Area2D, [_LAYER_COLLECT])
+			_set_mask_bits ($Area2D, [_LAYER_PLAYER])
+			$Area2D/CollisionShape2D.disabled = true
 			_type = 1
 		_:
-			set_collision_layer_bit(_LAYER_PLAYER, true)
-			set_collision_mask_bit (_LAYER_ENEMY, true)
-			set_collision_mask_bit (_LAYER_WORLD, true)
+			_set_layer_bits(self, [_LAYER_PLAYER])
+			_set_mask_bits (self, [_LAYER_ENEMY, _LAYER_WORLD])
+			_set_layer_bits($hitbox, [_LAYER_PLAYER])
+			_set_layer_bits($hitbox, [_LAYER_ENEMY, _LAYER_COLLECT])
 			_type = 0
 
 # Set the current horizontal and vertical velocity of the entity
@@ -222,6 +228,24 @@ func set_invulnerability(duration: float) -> void:
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
+# Set the layers for the entity
+func _set_layer_bits(entity: Node, layers: Array) -> void:
+	for current_layer in range(32):
+		entity.set_collision_layer_bit(current_layer, false)
+		for given_layer in range(layers.size()):
+			if current_layer == layers[given_layer]:
+				entity.set_collision_layer_bit(current_layer, true)
+				break
+
+# Set the masks for the entity
+func _set_mask_bits(entity: Node, masks: Array) -> void:
+	for current_mask in range(32):
+		entity.set_collision_mask_bit(current_mask, false)
+		for given_mask in range(masks.size()):
+			if current_mask == masks[given_mask]:
+				entity.set_collision_mask_bit(current_mask, true)
+				break
+		
 # Update the players statistics
 func _update_stats(delta: float) -> void:
 	if is_on_floor():

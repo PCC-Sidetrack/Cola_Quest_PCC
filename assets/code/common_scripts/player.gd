@@ -137,13 +137,13 @@ func _on_hitbox_body_entered(body: Node) -> void:
 func _set_sprite(direction: float) -> void:
 	# Change the direction the sprite is facing and flip the collision box
 	if direction > 0.0:
-		$AnimatedSprite.flip_h = false
-		if $CollisionShape2D.position.x >= 0:
-			$CollisionShape2D.position.x *= -1
+		$AnimatedSprite.flip_h              = false
+		$CollisionShape2D.position.x        = -abs($CollisionShape2D.position.x)
+		$hitbox/CollisionShape2D.position.x = -abs($hitbox/CollisionShape2D.position.x)
 	elif direction < 0.0:
-		$AnimatedSprite.flip_h = true
-		if $CollisionShape2D.position.x < 0:
-			$CollisionShape2D.position.x *= -1
+		$AnimatedSprite.flip_h              = true
+		$CollisionShape2D.position.x        = abs($CollisionShape2D.position.x)
+		$hitbox/CollisionShape2D.position.x = abs($hitbox/CollisionShape2D.position.x)
 	elif is_on_floor():
 		$AnimatedSprite.play("idle")
 	
