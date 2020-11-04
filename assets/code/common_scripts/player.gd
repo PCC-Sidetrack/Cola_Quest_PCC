@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------#
 # File Name:   player.gd
-# Description: The controls and physics for the player actor
+# Description: The controls and physics for the player entity
 # Author:      Jeff Newell
 # Company:     Sidetrack
 # Date:        October 1, 2020
@@ -108,7 +108,7 @@ func _check_configuration() -> void:
 	if InputMap.has_action(_JUMP) and InputMap.has_action(_MOVE_LEFT) and InputMap.has_action(_MOVE_RIGHT) and InputMap.has_action(_DASH) and InputMap.has_action(_MELEE_ATTACK) and InputMap.has_action(_RANGED_ATTACK):
 		pass
 	else:
-		push_error("InputMap not correctly configured. Unable to control character.")
+		push_error("Unable to control character.\nInputMap not correctly configured.")
 		get_tree().quit(-1)
 		
 # Get the input from player
