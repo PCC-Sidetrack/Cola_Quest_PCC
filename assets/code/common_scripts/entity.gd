@@ -237,7 +237,7 @@ func _set_layer_bits(entity: Node, layers: Array) -> void:
 	
 	for current_layer in range(32):
 		entity.set_collision_layer_bit(current_layer, false)
-		for given_layer in layers:
+		for given_layer in range(layers.size()):
 			if current_layer == layers[given_layer]:
 				entity.set_collision_layer_bit(current_layer, true)
 				break
@@ -251,7 +251,7 @@ func _set_mask_bits(entity: Node, masks: Array) -> void:
 	
 	for current_mask in range(32):
 		entity.set_collision_mask_bit(current_mask, false)
-		for given_mask in masks:
+		for given_mask in range(masks.size()):
 			if current_mask == masks[given_mask]:
 				entity.set_collision_mask_bit(current_mask, true)
 				break
