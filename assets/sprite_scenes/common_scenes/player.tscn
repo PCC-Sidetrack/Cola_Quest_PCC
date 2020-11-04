@@ -5,21 +5,25 @@
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=3]
 [ext_resource path="res://assets/code/common_scripts/player.gd" type="Script" id=4]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
@@ -37,33 +41,29 @@ region = Rect2( 128, 0, 64, 64 )
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": false,
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 10 ) ],
-"loop": false,
-"name": "jump",
-"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 13, 30 )
 
 [sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 16.2869, 31.2386 )
+extents = Vector2( 16.6424, 31.0876 )
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
@@ -71,7 +71,8 @@ collision_mask = 10
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 11 )
+position = Vector2( 1.1439, -1.28689 )
+frames = SubResource( 10 )
 animation = "idle"
 frame = 1
 playing = true
@@ -79,7 +80,7 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -6, 2 )
-shape = SubResource( 1 )
+shape = SubResource( 11 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -89,8 +90,8 @@ current = true
 visible = false
 collision_mask = 6
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 modulate = Color( 0.203922, 0.423529, 1, 1 )
-position = Vector2( -9.42412, 1.17354 )
+position = Vector2( -6.27842, 1.31652 )
 shape = SubResource( 12 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
