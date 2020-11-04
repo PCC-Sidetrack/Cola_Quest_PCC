@@ -230,6 +230,11 @@ func set_invulnerability(duration: float) -> void:
 #-----------------------------------------------------------------------------#
 # Set the layers for the entity
 func _set_layer_bits(entity: Node, layers: Array) -> void:
+	# Does the entity have a collision shape
+	if not entity.has_node("CollisionShape2D"):
+		push_error("Cannot modify layers.\nEntity does not contain a CollisionShape2D.")
+		get_tree().quit(-1)
+	
 	for current_layer in range(32):
 		entity.set_collision_layer_bit(current_layer, false)
 		for given_layer in layers:
@@ -239,6 +244,11 @@ func _set_layer_bits(entity: Node, layers: Array) -> void:
 
 # Set the masks for the entity
 func _set_mask_bits(entity: Node, masks: Array) -> void:
+	# Does the entity have a collision shape
+	if not entity.has_node("CollisionShape2D"):
+		push_error("Cannot modify masks.\nEntity does not contain a CollisionShape2D.")
+		get_tree().quit(-1)
+	
 	for current_mask in range(32):
 		entity.set_collision_mask_bit(current_mask, false)
 		for given_mask in masks:
