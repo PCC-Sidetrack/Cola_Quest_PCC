@@ -8,8 +8,6 @@ var animate: 	bool = true
 var frame: 		int  = 0
 # Max number of saved frames before frame resets
 var max_frames: int  = 1000
-# Type of object
-var type:       int  = 0
 
 # Animates certain tiles in the collidable tilesheet for level_1
 func _process(delta: float) -> void:
@@ -47,6 +45,3 @@ func animate_tile(tile_id: int, tile_span: int, x_tile_iter: int, rate: int) -> 
 			else:
 				set_cell(cell.x, cell.y, tile_id, false, false, false,
 						Vector2(coord.x + x_tile_iter, coord.y))
-
-func get_type() -> int:
-	return type

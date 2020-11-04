@@ -15,9 +15,14 @@ extends    KinematicBody2D
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
-const _GRAVITY: float = 2000.0
-const _RIGHT:   float = 1.0
-const _LEFT:    float = -1.0
+const _GRAVITY:       float = 2000.0
+const _LAYER_COLLECT: int   = 2
+const _LAYER_ENEMY:   int   = 1
+const _LAYER_PLAYER:  int   = 0
+const _LAYER_WORLD:   int   = 3
+const _LEFT:          float = -1.0
+const _RIGHT:         float = 1.0
+
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
@@ -192,10 +197,18 @@ func set_rate_of_change(horizontal_change: float, vertial_change: float) -> void
 func set_type(new_type: String) -> void:
 	match new_type:
 		"hostile", "enemy", "boss":
+			set_collision_layer_bit(_LAYER_ENEMY, true)
+			set_collision_mask_bit (_LAYER_PLAYER, true)
+			set_collision_mask_bit (_LAYER_ENEMY, true)
+			set_collision_mask_bit (_LAYER_WORLD, true)
 			_type = -1
 		"collectible":
+			set_collision_layer_bit(_LAYER_COLLECT, true)
 			_type = 1
 		_:
+			set_collision_layer_bit(_LAYER_PLAYER, true)
+			set_collision_mask_bit (_LAYER_ENEMY, true)
+			set_collision_mask_bit (_LAYER_WORLD, true)
 			_type = 0
 
 # Set the current horizontal and vertical velocity of the entity
