@@ -1471,53 +1471,55 @@ script = ExtResource( 1 )
 [node name="S1a" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 1056, 96 )
 frames = SubResource( 95 )
+frame = 2
 playing = true
 
 [node name="S1b" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 1984, -96 )
 frames = SubResource( 102 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="S1b2" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 2144, -80 )
 frames = SubResource( 102 )
-frame = 2
+frame = 4
 playing = true
 
 [node name="S1b3" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 2208, -80 )
 frames = SubResource( 102 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="S1b4" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 3296, 0 )
 frames = SubResource( 102 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="S1b5" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 3520, 64 )
 frames = SubResource( 102 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="S1b6" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 3616, 96 )
 frames = SubResource( 102 )
+frame = 2
 playing = true
 
 [node name="S1b7" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 4064, 256 )
 frames = SubResource( 102 )
-frame = 5
+frame = 1
 playing = true
 
 [node name="S1b8" type="AnimatedSprite" parent="Drones"]
 position = Vector2( 4768, 352 )
 frames = SubResource( 102 )
-frame = 5
+frame = 1
 playing = true
 
 [node name="player" parent="." instance=ExtResource( 5 )]
