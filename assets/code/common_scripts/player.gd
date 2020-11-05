@@ -28,7 +28,7 @@ const _DASH_REFRESH:      float  = 0.5
 # The jump input
 const _JUMP:              String = "jump"
 # The maximum number of jumps the player can make before touching a wall or the floor
-const _MAX_JUMPS:         int    = 1
+const _MAX_JUMPS:         int    = 2
 # The maximum number of in air dashes
 const _MAX_DASHES:        int    = 1
 # The melee attack input
@@ -61,7 +61,7 @@ func _ready():
 	set_direction_facing(1.0)
 	set_max_health      (30)
 	set_obeys_gravity   (true)
-	set_speed           (200.0, 800.0)
+	set_speed           (200.0, 850.0)
 	set_type            ("neutral")
 	set_rate_of_change  (30.0, 30.0)
 

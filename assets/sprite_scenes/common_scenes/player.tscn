@@ -73,7 +73,7 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -82,8 +82,14 @@ position = Vector2( -6, 2 )
 shape = SubResource( 11 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 current = true
+limit_left = 0
+limit_top = -256
+limit_bottom = 512
+limit_smoothed = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+editor_draw_screen = false
 
 [node name="hitbox" type="Area2D" parent="."]
 visible = false

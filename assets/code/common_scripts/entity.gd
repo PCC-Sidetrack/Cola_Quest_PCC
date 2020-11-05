@@ -15,13 +15,14 @@ extends    KinematicBody2D
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
-const _GRAVITY:       float = 2000.0
-const _LAYER_COLLECT: int   = 2
-const _LAYER_ENEMY:   int   = 1
-const _LAYER_PLAYER:  int   = 0
-const _LAYER_WORLD:   int   = 3
-const _LEFT:          float = -1.0
-const _RIGHT:         float = 1.0
+const _GRAVITY:        float = 2000.0
+const _LAYER_COLLECT:  int   = 2
+const _LAYER_ENEMY:    int   = 1
+const _LAYER_INTERACT: int   = 4
+const _LAYER_PLAYER:   int   = 0
+const _LAYER_WORLD:    int   = 3
+const _LEFT:           float = -1.0
+const _RIGHT:          float = 1.0
 
 
 #-----------------------------------------------------------------------------#
@@ -196,6 +197,13 @@ func set_rate_of_change(horizontal_change: float, vertial_change: float) -> void
 # Set the type of entity (in relation to the player)
 func set_type(new_type: String) -> void:
 	match new_type:
+		"ladder":
+			_set_layer_bits(self, [_LAYER_INTERACT])
+			_set_mask_bits (self, [])
+			_set_layer_bits($Area2D, [_LAYER_INTERACT])
+			_set_mask_bits ($Area2D, [_LAYER_PLAYER])
+			$Area2D/CollisionShape2D.disabled = true
+			_type = 2
 		"hostile", "enemy", "boss":
 			_set_layer_bits(self, [_LAYER_ENEMY])
 			_set_mask_bits (self, [_LAYER_PLAYER, _LAYER_ENEMY, _LAYER_WORLD])
@@ -222,8 +230,12 @@ func set_velocity(velocity: Vector2) -> void:
 	_current_velocity = velocity
 	
 # Set how long the entity is invulnerable
+# Set to -1.0 for permanent invulnerability
 func set_invulnerability(duration: float) -> void:
-	_invulnerable_duration += duration
+	if duration > 0.0:
+		_invulnerable_duration += duration
+	else:
+		_invulnerable_duration = duration
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -268,7 +280,8 @@ func _update_stats(delta: float) -> void:
 	if _current_velocity.x != 0.0:
 		_time_in_direction += delta
 	
-	if _invulnerable_duration > 0.0:
-		_invulnerable_duration -= delta
-	elif _invulnerable_duration < 0.0:
-		_invulnerable_duration = 0.0
+	if _invulnerable_duration != -1.0:
+		if _invulnerable_duration > 0.0:
+			_invulnerable_duration -= delta
+		elif _invulnerable_duration < 0.0:
+			_invulnerable_duration = 0.0
