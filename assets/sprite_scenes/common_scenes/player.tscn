@@ -13,11 +13,11 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/idle:frame")
 tracks/0/interp = 2
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.75 ),
 "transitions": PoolRealArray( 1, 0.999999 ),
 "update": 0,
 "values": [ 0, 3 ]
@@ -72,20 +72,20 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/walk:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 2, 1, 0 ]
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 13, 30 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 16.6424, 31.0876 )
 
 [sub_resource type="RectangleShape2D" id=7]
@@ -105,7 +105,7 @@ anims/walk = SubResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -6, 2 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="hitbox" type="Area2D" parent="."]
 visible = false
@@ -114,7 +114,7 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 modulate = Color( 0.203922, 0.423529, 1, 1 )
 position = Vector2( -6, 2 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="melee" type="Area2D" parent="."]
 visible = false
@@ -128,6 +128,7 @@ disabled = true
 [node name="sprites" type="Node2D" parent="."]
 
 [node name="idle" type="Sprite" parent="sprites"]
+visible = false
 texture = ExtResource( 1 )
 hframes = 4
 frame = 1
@@ -142,9 +143,9 @@ texture = ExtResource( 5 )
 hframes = 7
 
 [node name="walk" type="Sprite" parent="sprites"]
-visible = false
 texture = ExtResource( 3 )
 hframes = 4
+frame = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
