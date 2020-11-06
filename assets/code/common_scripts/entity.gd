@@ -23,6 +23,8 @@ const _LAYER_PLAYER:   int   = 0
 const _LAYER_WORLD:    int   = 3
 const _LEFT:           float = -1.0
 const _RIGHT:          float = 1.0
+const _UP:             float = -1.0
+const _DOWN:           float = 1.0
 
 
 #-----------------------------------------------------------------------------#
@@ -56,6 +58,8 @@ var _time_in_direction:     float   = 0.0
 var _time_on_ground:        float   = 0.0
 # What entity type
 var _type:                  int     = 0
+# Multiplied by speed.x to determine knockback speed
+var _knockback_multiplier:  float   = 0.75
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
@@ -147,6 +151,10 @@ func get_type() -> int:
 # Get the current vertical velocity of the entity
 func get_vertical_velocity() -> float:
 	return _current_velocity.y
+	
+# Get the knockback multiplier
+func get_knockback_multiplier() -> float:
+	return _knockback_multiplier
 
 # Make this entity jump
 func jump(height: float) -> void:
@@ -154,7 +162,9 @@ func jump(height: float) -> void:
 
 # Handle the knockback of this entity
 func knockback(position: float) -> void:
-	jump(0.75)
+	print('entity')
+	print(_knockback_multiplier)
+	jump(_knockback_multiplier)
 	if position > self.position.x:
 		_current_velocity.x = -2.0 * _speed.x
 	else:
@@ -236,6 +246,10 @@ func set_invulnerability(duration: float) -> void:
 		_invulnerable_duration += duration
 	else:
 		_invulnerable_duration = duration
+		
+# Set the knockback multiplier
+func set_knockback_multiplier(multiplier: float) -> void:
+	_knockback_multiplier = multiplier
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
