@@ -66,3 +66,6 @@ visible = false
 position = Vector2( 0, 2 )
 scale = Vector2( 1.1761, 1.27476 )
 shape = SubResource( 8 )
+
+[node name="StudyCardSpawn" type="Node2D" parent="."]
+position = Vector2( -5, 10 )
