@@ -1410,13 +1410,13 @@ animations = [ {
 
 [node name="rooftop_level" type="Node2D"]
 
-[node name="Sky" type="ParallaxBackground" parent="."]
+[node name="sky" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0.3, 0.3 )
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Sky"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="sky"]
 motion_mirroring = Vector2( 1280, 640 )
 
-[node name="Sprite" type="Sprite" parent="Sky/ParallaxLayer"]
+[node name="Sprite" type="Sprite" parent="sky/ParallaxLayer"]
 position = Vector2( 119, 32.7847 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 6 )
@@ -1466,60 +1466,59 @@ format = 1
 tile_data = PoolIntArray( 327712, 9, 0, 393247, 8, 65536, 393250, 13, 0, 393253, 8, 65536 )
 script = ExtResource( 1 )
 
-[node name="Drones" type="Node2D" parent="."]
+[node name="drones" type="Node2D" parent="."]
 
-[node name="S1a" type="AnimatedSprite" parent="Drones"]
+[node name="S1a" type="AnimatedSprite" parent="drones"]
 position = Vector2( 1056, 96 )
 frames = SubResource( 95 )
+playing = true
+
+[node name="S1b" type="AnimatedSprite" parent="drones"]
+position = Vector2( 1984, -96 )
+frames = SubResource( 102 )
 frame = 3
 playing = true
 
-[node name="S1b" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 1984, -96 )
+[node name="S1b2" type="AnimatedSprite" parent="drones"]
+position = Vector2( 2144, -80 )
+frames = SubResource( 102 )
+frame = 2
+playing = true
+
+[node name="S1b3" type="AnimatedSprite" parent="drones"]
+position = Vector2( 2208, -80 )
+frames = SubResource( 102 )
+frame = 1
+playing = true
+
+[node name="S1b4" type="AnimatedSprite" parent="drones"]
+position = Vector2( 3296, 0 )
+frames = SubResource( 102 )
+frame = 1
+playing = true
+
+[node name="S1b5" type="AnimatedSprite" parent="drones"]
+position = Vector2( 3520, 64 )
+frames = SubResource( 102 )
+frame = 1
+playing = true
+
+[node name="S1b6" type="AnimatedSprite" parent="drones"]
+position = Vector2( 3616, 96 )
 frames = SubResource( 102 )
 playing = true
 
-[node name="S1b2" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 2144, -80 )
+[node name="S1b7" type="AnimatedSprite" parent="drones"]
+position = Vector2( 4064, 256 )
 frames = SubResource( 102 )
 frame = 5
 playing = true
 
-[node name="S1b3" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 2208, -80 )
-frames = SubResource( 102 )
-frame = 4
-playing = true
-
-[node name="S1b4" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 3296, 0 )
-frames = SubResource( 102 )
-frame = 4
-playing = true
-
-[node name="S1b5" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 3520, 64 )
-frames = SubResource( 102 )
-frame = 4
-playing = true
-
-[node name="S1b6" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 3616, 96 )
-frames = SubResource( 102 )
-frame = 3
-playing = true
-
-[node name="S1b7" type="AnimatedSprite" parent="Drones"]
-position = Vector2( 4064, 256 )
-frames = SubResource( 102 )
-frame = 2
-playing = true
-
-[node name="S1b8" type="AnimatedSprite" parent="Drones"]
+[node name="S1b8" type="AnimatedSprite" parent="drones"]
 position = Vector2( 4768, 352 )
 frames = SubResource( 102 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 160, 192 )
+position = Vector2( 155.577, 191.431 )

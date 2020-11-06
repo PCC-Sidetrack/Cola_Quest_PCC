@@ -110,6 +110,21 @@ func _check_configuration() -> void:
 	else:
 		push_error("Unable to control character.\nInputMap not correctly configured.")
 		get_tree().quit(-1)
+
+# Flip the sprites
+func _flip_sprites(is_flipped: bool) -> void:
+	var sprites: Array = $sprites.get_children()
+	for sprite in sprites:
+		sprite.flip_h = is_flipped
+		
+	if is_flipped:
+		$CollisionShape2D.position.x        = abs($CollisionShape2D.position.x)
+		$hitbox/CollisionShape2D.position.x = abs($hitbox/CollisionShape2D.position.x)
+		$melee/CollisionShape2D.position.x  = -abs($melee/CollisionShape2D.position.x)
+	else:
+		$CollisionShape2D.position.x        = -abs($CollisionShape2D.position.x)
+		$hitbox/CollisionShape2D.position.x = -abs($hitbox/CollisionShape2D.position.x)
+		$melee/CollisionShape2D.position.x  = abs($melee/CollisionShape2D.position.x)
 		
 # Get the input from player
 func _get_input() -> float:
@@ -141,15 +156,11 @@ func _on_hitbox_body_entered(body: Node) -> void:
 func _set_sprite(direction: float) -> void:
 	# Change the direction the sprite is facing and flip the collision box
 	if direction > 0.0:
-		$AnimatedSprite.flip_h              = false
-		$CollisionShape2D.position.x        = -abs($CollisionShape2D.position.x)
-		$hitbox/CollisionShape2D.position.x = -abs($hitbox/CollisionShape2D.position.x)
+		_flip_sprites(false)
 	elif direction < 0.0:
-		$AnimatedSprite.flip_h              = true
-		$CollisionShape2D.position.x        = abs($CollisionShape2D.position.x)
-		$hitbox/CollisionShape2D.position.x = abs($hitbox/CollisionShape2D.position.x)
+		_flip_sprites(true)
 	elif is_on_floor():
-		$AnimatedSprite.play("idle")
+		_switch_sprite("idle")
 	
 	# Display the appropriate animation
 	if is_on_floor():
@@ -157,9 +168,18 @@ func _set_sprite(direction: float) -> void:
 			#$AnimatedSprite.play("dash")
 			pass
 		elif direction != 0.0:
-			$AnimatedSprite.play("walk")
+			_switch_sprite("walk")
 	else:
 		#if get_vertical_velocity() > 0.0:
 			#$AnimatedSprite.play("fall")
 		#else:
-			$AnimatedSprite.play("jump")
+			_switch_sprite("jump")
+
+# Change what the currently displaying sprite is
+func _switch_sprite(new_sprite: String) -> void:
+	var sprites: Array = $sprites.get_children()
+	for sprite in sprites:
+		sprite.visible = false
+	
+	$sprites.get_node(new_sprite).visible = true
+	$AnimationPlayer.play(new_sprite)
