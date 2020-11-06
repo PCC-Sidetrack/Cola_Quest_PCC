@@ -131,18 +131,17 @@ disabled = true
 visible = false
 texture = ExtResource( 1 )
 hframes = 4
-frame = 1
 
 [node name="jump" type="Sprite" parent="sprites"]
 visible = false
 texture = ExtResource( 2 )
 
 [node name="melee" type="Sprite" parent="sprites"]
-visible = false
 texture = ExtResource( 5 )
 hframes = 7
 
 [node name="walk" type="Sprite" parent="sprites"]
+visible = false
 texture = ExtResource( 3 )
 hframes = 4
 frame = 2
