@@ -15,23 +15,15 @@ extends    KinematicBody2D
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
-const _GRAVITY:        float = 2000.0
-const _LAYER_COLLECT:  int   = 2
-const _LAYER_ENEMY:    int   = 1
-const _LAYER_INTERACT: int   = 4
-const _LAYER_PLAYER:   int   = 0
-const _LAYER_WORLD:    int   = 3
-const _LEFT:           float = -1.0
-const _RIGHT:          float = 1.0
-const _UP:             float = -1.0
-const _DOWN:           float = 1.0
+const _LEFT:           	float = -1.0
+const _RIGHT:          	float = 1.0
+const _UP:             	float = -1.0
+const _DOWN:           	float = 1.0
 
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
-# The current health of the entity
-var _current_health:        int     = 1
 # The current velocity the entity is traveling
 var _current_velocity:      Vector2 = Vector2.ZERO
 # The damage the entity does
@@ -62,10 +54,13 @@ var _type:                  int     = 0
 var _knockback_multiplier:  float   = 0.75
 
 #-----------------------------------------------------------------------------#
-#                              Initialization                                 #
+#                              Onready Variables                              #
 #-----------------------------------------------------------------------------#
-func _ready() -> void:
-	_current_health = _max_health
+# Holds the reference to the global variables class
+#onready var Globals:         Node2D = get_node("res://assets/code/common_scripts/Globals.gd")
+# The current health of the entity
+onready var _current_health: int  = _max_health
+
 
 #-----------------------------------------------------------------------------#
 #                               Process Loop                                  #
@@ -94,7 +89,7 @@ func calculate_new_velocity(direction: float) -> Vector2:
 
 # Calculate the vertical velocity of the player
 func calculate_vertical_velocity() -> float:
-	return move_toward(_current_velocity.y, _GRAVITY * 0.4, _rate_of_change.y)
+	return move_toward(_current_velocity.y, Globals.GRAVITY * 0.4, _rate_of_change.y)
 
 # Delete the entity
 func delete() -> void:
@@ -111,10 +106,6 @@ func get_damage() -> int:
 # Get the floor normal for calculating collision orientation
 func get_floor_normal() -> Vector2:
 	return _floor_normal
-
-# Get the value of gravity
-func get_gravity() -> float:
-	return _GRAVITY
 
 # Get the current horizontal velocity of the entity
 func get_horizontal_velocity() -> float:
@@ -162,8 +153,6 @@ func jump(height: float) -> void:
 
 # Handle the knockback of this entity
 func knockback(position: float) -> void:
-	print('entity')
-	print(_knockback_multiplier)
 	jump(_knockback_multiplier)
 	if position > self.position.x:
 		_current_velocity.x = -2.0 * _speed.x
@@ -207,32 +196,39 @@ func set_rate_of_change(horizontal_change: float, vertial_change: float) -> void
 # Set the type of entity (in relation to the player)
 func set_type(new_type: String) -> void:
 	match new_type:
+		"projectile":
+			_set_layer_bits(self, [Globals.LAYER_PROJECTILES])
+			_set_mask_bits (self, [Globals.LAYER_PLAYER, Globals.LAYER_WORLD])
+			_set_layer_bits($Area2D, [Globals.LAYER_PROJECTILES])
+			_set_mask_bits ($Area2D, [Globals.LAYER_PLAYER, Globals.LAYER_WORLD])
 		"ladder":
-			_set_layer_bits(self, [_LAYER_INTERACT])
+			_set_layer_bits(self, [Globals.LAYER_INTERACT])
 			_set_mask_bits (self, [])
-			_set_layer_bits($Area2D, [_LAYER_INTERACT])
-			_set_mask_bits ($Area2D, [_LAYER_PLAYER])
+			_set_layer_bits($Area2D, [Globals.LAYER_INTERACT])
+			_set_mask_bits ($Area2D, [Globals.LAYER_PLAYER])
 			$Area2D/CollisionShape2D.disabled = true
 			_type = 2
 		"hostile", "enemy", "boss":
-			_set_layer_bits(self, [_LAYER_ENEMY])
-			_set_mask_bits (self, [_LAYER_PLAYER, _LAYER_ENEMY, _LAYER_WORLD])
-			_set_layer_bits($Area2D, [_LAYER_ENEMY])
-			_set_mask_bits ($Area2D, [_LAYER_PLAYER])
+			_set_layer_bits(self, [Globals.LAYER_ENEMY])
+			_set_mask_bits (self, [Globals.LAYER_PLAYER, Globals.LAYER_ENEMY, Globals.LAYER_WORLD])
+			_set_layer_bits($Area2D, [Globals.LAYER_ENEMY])
+			_set_mask_bits ($Area2D, [Globals.LAYER_PLAYER])
 			$Area2D/CollisionShape2D.disabled = true
 			_type = -1
 		"collectible":
-			_set_layer_bits(self, [_LAYER_COLLECT])
+			_set_layer_bits(self, [Globals.LAYER_COLLECT])
 			_set_mask_bits (self, [])
-			_set_layer_bits($Area2D, [_LAYER_COLLECT])
-			_set_mask_bits ($Area2D, [_LAYER_PLAYER])
+			_set_layer_bits($Area2D, [Globals.LAYER_COLLECT])
+			_set_mask_bits ($Area2D, [Globals.LAYER_PLAYER])
 			$Area2D/CollisionShape2D.disabled = true
 			_type = 1
 		_:
-			_set_layer_bits(self, [_LAYER_PLAYER])
-			_set_mask_bits (self, [_LAYER_ENEMY, _LAYER_WORLD])
-			_set_layer_bits($hitbox, [_LAYER_PLAYER])
-			_set_layer_bits($hitbox, [_LAYER_ENEMY, _LAYER_COLLECT])
+			_set_layer_bits(self, [Globals.LAYER_PLAYER])
+			_set_mask_bits (self, [Globals.LAYER_ENEMY, Globals.LAYER_PROJECTILES,
+					Globals.LAYER_WORLD])
+			_set_layer_bits($hitbox, [Globals.LAYER_PLAYER])
+			_set_layer_bits($hitbox, [Globals.LAYER_ENEMY, Globals.LAYER_PROJECTILES,
+					Globals.LAYER_COLLECT])
 			_type = 0
 
 # Set the current horizontal and vertical velocity of the entity

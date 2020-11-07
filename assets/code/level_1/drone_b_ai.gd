@@ -39,7 +39,8 @@ func _ready() -> void:
 	set_knockback_multiplier(0.25)
 	_update_time += turnaround_time / 2
 	$AnimatedSprite.play("fly")
-	
+
+
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#

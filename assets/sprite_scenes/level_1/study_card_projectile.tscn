@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/art/level_1/sprites/S2_3x5_card/S2_3x5_card.png" type="Texture" id=1]
-[ext_resource path="res://assets/code/level_1/3by5_projectile.gd" type="Script" id=2]
+[ext_resource path="res://assets/code/common_scripts/projectile.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -57,5 +57,16 @@ frames = SubResource( 8 )
 animation = "spin"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.400906, 0.489994 )
+shape = SubResource( 9 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.400906, 0.489994 )
 shape = SubResource( 9 )

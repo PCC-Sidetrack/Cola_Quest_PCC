@@ -70,6 +70,8 @@ func _ready():
 #-----------------------------------------------------------------------------#
 # Run the physics process on the player
 func _physics_process(delta: float) -> void:
+	# Update the player location
+	Globals.player_position = global_position
 	# Calculate the horizontal velocity of the player
 	var horizontal: float = calculate_horizontal_velocity(_get_input())
 	# Calculate the vertical velocity of the player

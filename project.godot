@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Entity",
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/entity.gd"
+}, {
+"base": "Entity",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://assets/code/common_scripts/projectile.gd"
+}, {
+"base": "Node2D",
+"class": "globals",
+"language": "GDScript",
+"path": "res://assets/code/common_scripts/globals.gd"
 } ]
 _global_script_class_icons={
 "Animate_Tiles": "",
-"Entity": ""
+"Entity": "",
+"Projectile": "",
+"globals": ""
 }
 
 [application]
@@ -29,6 +41,10 @@ _global_script_class_icons={
 config/name="Sidetrack"
 run/main_scene="res://assets/levels/Rooftop Level.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://assets/code/common_scripts/globals.gd"
 
 [display]
 
@@ -86,6 +102,7 @@ ranged_attack={
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="collectibles"
 2d_physics/layer_4="world"
+2d_physics/layer_5="projectiles"
 
 [rendering]
 

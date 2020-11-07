@@ -59,11 +59,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 13, 30 )
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 11.0
+height = 40.0
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 16.6424, 31.0876 )
+[sub_resource type="CapsuleShape2D" id=12]
+height = 40.0
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
@@ -73,7 +74,7 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -92,11 +93,10 @@ smoothing_enabled = true
 editor_draw_screen = false
 
 [node name="hitbox" type="Area2D" parent="."]
-visible = false
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-modulate = Color( 0.203922, 0.423529, 1, 1 )
+visible = false
 position = Vector2( -6, 2 )
 shape = SubResource( 12 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
