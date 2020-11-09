@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S16_Drushinin_raise_brush.png-d2cefdee83bd3f86f857527ae5727eac.stex"
+path="res://.import/S21_White_Glove_Boss_running.png-79d73cf04d0bb79ef0874ec4fe8ffced.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 2/Sprites/S16_Drushinin/S16_Drushinin_raise_brush.png"
-dest_files=[ "res://.import/S16_Drushinin_raise_brush.png-d2cefdee83bd3f86f857527ae5727eac.stex" ]
+source_file="res://assets/art/level_2/sprites/S21_White_Glove_Boss/S21_White_Glove_Boss_running.png"
+dest_files=[ "res://.import/S21_White_Glove_Boss_running.png-79d73cf04d0bb79ef0874ec4fe8ffced.stex" ]
 
 [params]
 

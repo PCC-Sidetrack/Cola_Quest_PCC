@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S21_White_Glove_Boss_running.png-0ac7f66e9c1a5160cdd1bceb1fb9e593.stex"
+path="res://.import/B16_art_board.png-90067805aefb1aa0c5b49a5c66e41509.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 2/Sprites/S21_White_Glove_Boss/S21_White_Glove_Boss_running.png"
-dest_files=[ "res://.import/S21_White_Glove_Boss_running.png-0ac7f66e9c1a5160cdd1bceb1fb9e593.stex" ]
+source_file="res://assets/art/level_2/parallaxing/background/B16_art_board/B16_art_board.png"
+dest_files=[ "res://.import/B16_art_board.png-90067805aefb1aa0c5b49a5c66e41509.stex" ]
 
 [params]
 

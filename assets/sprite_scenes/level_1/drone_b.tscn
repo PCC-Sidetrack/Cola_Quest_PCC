@@ -35,7 +35,7 @@ animations = [ {
 "speed": 40.0
 } ]
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=8]
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id=9]
@@ -52,7 +52,7 @@ offset = Vector2( 256, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, -1 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S16_Drushinin.png-142131d33865796f3ea3b54744da00ae.stex"
+path="res://.import/S16_Drushinin_raise_brush.png-f241fdab8229919ebdce77e887a94043.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Level 2/Sprites/S16_Drushinin/S16_Drushinin.png"
-dest_files=[ "res://.import/S16_Drushinin.png-142131d33865796f3ea3b54744da00ae.stex" ]
+source_file="res://assets/art/level_2/sprites/S16_Drushinin/S16_Drushinin_raise_brush.png"
+dest_files=[ "res://.import/S16_Drushinin_raise_brush.png-f241fdab8229919ebdce77e887a94043.stex" ]
 
 [params]
 

@@ -22,24 +22,24 @@ atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 64 )
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
@@ -48,23 +48,22 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "walk",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": false,
 "name": "jump",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=11]
-radius = 11.0
-height = 40.0
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 8, 28 )
 
-[sub_resource type="CapsuleShape2D" id=12]
-height = 40.0
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 9, 29 )
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
@@ -74,29 +73,30 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( -6, 2 )
-shape = SubResource( 11 )
+position = Vector2( -6, 4 )
+shape = SubResource( 13 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_left = 0
-limit_top = -256
-limit_bottom = 512
+limit_top = -512
+limit_bottom = 704
 limit_smoothed = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
+smoothing_speed = 8.0
 editor_draw_screen = false
 
 [node name="hitbox" type="Area2D" parent="."]
+visible = false
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-visible = false
-position = Vector2( -6, 2 )
-shape = SubResource( 12 )
+position = Vector2( -6, 4 )
+shape = SubResource( 14 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

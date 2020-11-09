@@ -35,10 +35,10 @@ animations = [ {
 "speed": 40.0
 } ]
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=8]
 radius = 6.00335
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=9]
 
 [node name="Drone_a" type="KinematicBody2D"]
 collision_layer = 2
@@ -54,7 +54,7 @@ frame = 1
 visible = false
 position = Vector2( 0, 2 )
 scale = Vector2( 1.1761, 1.27476 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
@@ -66,7 +66,7 @@ scale = Vector2( 1.5, 1.4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
 position = Vector2( 0, 1 )
-shape = SubResource( 11 )
+shape = SubResource( 9 )
 
 [node name="StudyCardSpawn" type="Node2D" parent="."]
 position = Vector2( -5, 10 )
