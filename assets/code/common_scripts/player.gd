@@ -150,7 +150,7 @@ func _on_hitbox_body_entered(body: Node) -> void:
 		body.delete()
 	# Interactions with enemies
 	elif body.get_type() == -1:
-		knockback(body.position.x)
+		knockback(body.position.x, body.get_knockback_multiplier())
 
 # Set which sprite is currently displayed
 func _set_sprite(direction: float) -> void:
