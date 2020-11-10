@@ -59,11 +59,11 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 13, 30 )
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 8, 28 )
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 16.6424, 31.0876 )
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 9, 29 )
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
@@ -78,17 +78,18 @@ playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( -6, 2 )
-shape = SubResource( 11 )
+position = Vector2( -6, 4 )
+shape = SubResource( 13 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_left = 0
-limit_top = -256
-limit_bottom = 512
+limit_top = -512
+limit_bottom = 704
 limit_smoothed = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
+smoothing_speed = 8.0
 editor_draw_screen = false
 
 [node name="hitbox" type="Area2D" parent="."]
@@ -96,7 +97,6 @@ visible = false
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-modulate = Color( 0.203922, 0.423529, 1, 1 )
-position = Vector2( -6, 2 )
-shape = SubResource( 12 )
+position = Vector2( -6, 4 )
+shape = SubResource( 14 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

@@ -206,6 +206,8 @@ func set_type(new_type: String) -> void:
 			_set_mask_bits (self, [Globals.LAYER_PLAYER, Globals.LAYER_WORLD])
 			_set_layer_bits($Area2D, [Globals.LAYER_PROJECTILES])
 			_set_mask_bits ($Area2D, [Globals.LAYER_PLAYER, Globals.LAYER_WORLD])
+			$Area2D/CollisionShape2D.disabled = true
+			_type = -1
 		"ladder":
 			_set_layer_bits(self, [Globals.LAYER_INTERACT])
 			_set_mask_bits (self, [])

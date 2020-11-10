@@ -12,11 +12,13 @@ extends Entity
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
 # Boolean indicating if the sprite's ai is active
-export var ai_enabled:    	bool  = true
+export var ai_enabled:    	 bool  = true
 # Movement speed
-export var movement_speed:	float = 30
+export var movement_speed:	 float = 30
 # Seconds of movement before changing directions
-export var turnaround_time: int   = 3
+export var turnaround_time:  int   = 3
+# Initial starting direction
+export var start_moving_up:  bool  = true
 
 #-----------------------------------------------------------------------------#
 #                            Private Variables                                #
@@ -40,11 +42,16 @@ func _ready() -> void:
 	_update_time += turnaround_time / 2
 	$AnimatedSprite.play("fly")
 	
+	# Set the starting movement direction of the drone
+	if not start_moving_up:
+		_vertical_direction = _DOWN
+
+
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
-func _process(delta: float) -> void:
-	#print(get_knockback_multiplier())
+# Built in function is called every physics frame
+func _physics_process(delta: float) -> void:
 	if ai_enabled:
 		_update_time += delta
 		# Calculate the movement of the drone
