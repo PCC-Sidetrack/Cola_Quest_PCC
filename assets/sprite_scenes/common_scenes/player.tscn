@@ -121,6 +121,7 @@ visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
+visible = false
 position = Vector2( 17.2893, 2 )
 shape = SubResource( 7 )
 disabled = true
@@ -131,6 +132,7 @@ disabled = true
 visible = false
 texture = ExtResource( 1 )
 hframes = 4
+frame = 1
 
 [node name="jump" type="Sprite" parent="sprites"]
 visible = false
