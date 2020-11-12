@@ -42,7 +42,6 @@ func _ready() -> void:
 	# TODO: Add timer that deletes entity after timeout
 	set_obeys_gravity(true)
 	set_type("projectile")
-	set_knockback_multiplier(0.25)
 	$AnimatedSprite.play("spin")
 
 #-----------------------------------------------------------------------------#

@@ -50,7 +50,6 @@ func _ready() -> void:
 	set_obeys_gravity(false)
 	set_type("hostile")
 	set_speed(0.0, movement_speed)
-	set_knockback_multiplier(0.25)
 	_movement_update_time += turnaround_time / 2
 	$AnimatedSprite.play("fly")
 

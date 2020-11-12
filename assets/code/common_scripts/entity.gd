@@ -57,6 +57,8 @@ var _time_in_direction:     float   = 0.0
 var _time_on_ground:        float   = 0.0
 # What entity type
 var _type:                  int     = 0
+# How far an entity is knocked back
+var _knockback_multiplier:  float   = 0.5
 
 #-----------------------------------------------------------------------------#
 #                              Onready Variables                              #
