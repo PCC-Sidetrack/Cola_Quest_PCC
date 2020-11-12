@@ -128,7 +128,6 @@ disabled = true
 [node name="sprites" type="Node2D" parent="."]
 
 [node name="idle" type="Sprite" parent="sprites"]
-visible = false
 texture = ExtResource( 1 )
 hframes = 4
 
@@ -137,6 +136,7 @@ visible = false
 texture = ExtResource( 2 )
 
 [node name="melee" type="Sprite" parent="sprites"]
+visible = false
 texture = ExtResource( 5 )
 hframes = 7
 
@@ -148,6 +148,7 @@ frame = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.25, 1.25 )
 limit_left = 0
 limit_top = -512
 limit_bottom = 1024
