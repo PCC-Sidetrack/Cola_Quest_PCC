@@ -37,3 +37,10 @@ frames = SubResource( 5 )
 animation = "smoke"
 frame = 3
 playing = true
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+position = Vector2( 1.64286, -0.0342464 )
+scale = Vector2( 1.99286, 2.06963 )
+process_parent = true
+physics_process_parent = true

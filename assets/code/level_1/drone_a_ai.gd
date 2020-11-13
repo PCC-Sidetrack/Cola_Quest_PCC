@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------#
-# File Name:   	drone_a_ai.gd                                                    #
+# File Name:   	drone_a_ai.gd                                                 #
 # Description: 	Directs the animation and ai for the dronea sprite            #
 # Author:      	Andrew Zedwick                                                #
 # Company:    	Sidetrack                                                     #
