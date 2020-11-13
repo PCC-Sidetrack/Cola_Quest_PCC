@@ -58,6 +58,8 @@ shape = SubResource( 8 )
 visible = false
 position = Vector2( 4.76837e-07, -9.53674e-07 )
 scale = Vector2( 1.4, 1.2 )
+process_parent = true
+physics_process_parent = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

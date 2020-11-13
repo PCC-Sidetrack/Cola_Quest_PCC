@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
-# File Name:   entity.gd
-# Description: The basic physics and class methods for any entity in each level
-# Author:      Jeff Newell
-# Company:     Sidetrack
-# Date:        October 1, 2020
+# File Name:   entity.gd                                                      #
+# Description: The basic physics methods for any entity in each level         #
+# Author:      Jeff Newell                                                    #
+# Company:     Sidetrack                                                      #
+# Date:        October 1, 2020                                                #
 #-----------------------------------------------------------------------------#
 
 class_name Entity
