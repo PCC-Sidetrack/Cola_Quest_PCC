@@ -1493,44 +1493,44 @@ turnaround_time = 7
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6224, -75 )
-frame = 0
+frame = 2
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6571, -102 )
+frame = 1
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 848, 21 )
+frame = 1
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10255, 118 )
-frame = 2
+frame = 0
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10416, 149 )
-frame = 2
+frame = 0
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10613, 218 )
-frame = 1
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10672, 310 )
-frame = 1
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10928, 246 )
-frame = 1
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 11056, 342 )
-frame = 0
+frame = 2
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 11920, 23 )
-frame = 0
+frame = 2
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 16784, 54 )
+frame = 1
 
 [node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
 position = Vector2( 16406, -1 )
