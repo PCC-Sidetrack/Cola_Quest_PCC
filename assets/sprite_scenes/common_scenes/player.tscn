@@ -9,7 +9,7 @@
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
 loop = true
-step = 0.05
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/idle:frame")
 tracks/0/interp = 2
@@ -144,16 +144,19 @@ hframes = 7
 visible = false
 texture = ExtResource( 3 )
 hframes = 4
-frame = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.25, 1.25 )
 limit_left = 0
-limit_top = -512
+limit_top = -1024
 limit_bottom = 1024
 limit_smoothed = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
 editor_draw_screen = false
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
