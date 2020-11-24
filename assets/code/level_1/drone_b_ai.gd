@@ -14,9 +14,9 @@ extends Entity
 # Boolean indicating if the sprite's ai is active
 export var ai_enabled:    	 bool  = true
 # Movement speed
-export var movement_speed:	 float = 30
+export var movement_speed:	 float = 50
 # Seconds of movement before changing directions
-export var turnaround_time:  int   = 3
+export var turnaround_time:  int   = 2
 # Initial starting direction
 export var start_moving_up:  bool  = true
 

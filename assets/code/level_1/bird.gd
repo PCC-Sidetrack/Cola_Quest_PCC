@@ -17,7 +17,7 @@ export var ai_enabled:         bool  = true
 export var movement_speed: 	   float = 60.0
 # Seconds of movement before changing directions
 export var turnaround_time:    float = 3.0
-# Start facing right
+# Start facing right?
 export var start_moving_right: bool  = true
 
 #-----------------------------------------------------------------------------#
