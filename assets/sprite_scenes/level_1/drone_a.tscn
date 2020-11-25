@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/code/level_1/drone_a_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S1_drone/S1a_drone.png" type="Texture" id=2]
@@ -35,8 +35,10 @@ animations = [ {
 "speed": 40.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 5.10161, 4.70677 )
+[sub_resource type="CircleShape2D" id=8]
+radius = 6.00335
+
+[sub_resource type="CircleShape2D" id=9]
 
 [node name="Drone_a" type="KinematicBody2D"]
 collision_layer = 2
@@ -58,14 +60,15 @@ shape = SubResource( 8 )
 visible = false
 position = Vector2( 0, 2 )
 scale = Vector2( 1.5, 1.4 )
+process_parent = true
+physics_process_parent = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
-position = Vector2( 0, 2 )
-scale = Vector2( 1.1761, 1.27476 )
-shape = SubResource( 8 )
+position = Vector2( 0, 1 )
+shape = SubResource( 9 )
 
 [node name="StudyCardSpawn" type="Node2D" parent="."]
 position = Vector2( -5, 10 )

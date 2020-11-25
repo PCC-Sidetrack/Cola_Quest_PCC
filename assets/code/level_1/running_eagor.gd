@@ -12,6 +12,14 @@
 extends Entity
 
 #-----------------------------------------------------------------------------#
+#                           Exported Variables                                #
+#-----------------------------------------------------------------------------#
+# Speed
+export var movement_speed:     Vector2 = Vector2(200, 700)
+# Start facing right?
+export var start_moving_right: bool    = false
+
+#-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # The direction the enemy is moving
@@ -21,8 +29,13 @@ var _direction: float = _LEFT
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
+	# Flip the direction of the sprite if it's set to start right
+	if start_moving_right:
+		_direction = _RIGHT
+		$AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
+		
 	set_obeys_gravity   (true)
-	set_speed           (200.0, 700.0)
+	set_speed           (movement_speed.x, movement_speed.y)
 	set_type            ("hostile")
 	$AnimatedSprite.play("run")
 	

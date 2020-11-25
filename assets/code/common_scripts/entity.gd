@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
-# File Name:   entity.gd
-# Description: The basic physics and class methods for any entity in each level
-# Author:      Jeff Newell
-# Company:     Sidetrack
-# Date:        October 1, 2020
+# File Name:   entity.gd                                                      #
+# Description: The basic physics methods for any entity in each level         #
+# Author:      Jeff Newell                                                    #
+# Company:     Sidetrack                                                      #
+# Date:        October 1, 2020                                                #
 #-----------------------------------------------------------------------------#
 
 class_name Entity
@@ -11,14 +11,21 @@ extends    KinematicBody2D
 
 # This is the class that contains all of the basic information for any entity in a level.
 # It is extendable to include AI or controls for each entity.
+# An entity is an object that moves and interacts
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
-const _LEFT:           	float = -1.0
-const _RIGHT:          	float = 1.0
-const _UP:             	float = -1.0
-const _DOWN:           	float = 1.0
+const _DOWN:           float = 1.0
+const _GRAVITY:        float = 2000.0
+const _LAYER_COLLECT:  int   = 2
+const _LAYER_ENEMY:    int   = 1
+const _LAYER_INTERACT: int   = 4
+const _LAYER_PLAYER:   int   = 0
+const _LAYER_WORLD:    int   = 3
+const _LEFT:           float = -1.0
+const _RIGHT:          float = 1.0
+const _UP:             float = -1.0
 
 
 #-----------------------------------------------------------------------------#
@@ -50,8 +57,8 @@ var _time_in_direction:     float   = 0.0
 var _time_on_ground:        float   = 0.0
 # What entity type
 var _type:                  int     = 0
-# Multiplied by speed.x to determine knockback speed
-var _knockback_multiplier:  float   = 0.75
+# How far an entity is knocked back
+var _knockback_multiplier:  float   = 0.5
 
 #-----------------------------------------------------------------------------#
 #                              Onready Variables                              #
@@ -152,8 +159,8 @@ func jump(height: float) -> void:
 	_current_velocity.y = _speed.y * -height
 
 # Handle the knockback of this entity
-func knockback(position: float) -> void:
-	jump(_knockback_multiplier)
+func knockback(position: float, knockback_multiplier: float) -> void:
+	jump(knockback_multiplier)
 	if position > self.position.x:
 		_current_velocity.x = -2.0 * _speed.x
 	else:
@@ -201,6 +208,8 @@ func set_type(new_type: String) -> void:
 			_set_mask_bits (self, [Globals.LAYER_PLAYER, Globals.LAYER_WORLD])
 			_set_layer_bits($Area2D, [Globals.LAYER_PROJECTILES])
 			_set_mask_bits ($Area2D, [Globals.LAYER_PLAYER, Globals.LAYER_WORLD])
+			$Area2D/CollisionShape2D.disabled = true
+			_type = -1
 		"ladder":
 			_set_layer_bits(self, [Globals.LAYER_INTERACT])
 			_set_mask_bits (self, [])

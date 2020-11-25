@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------#
-# File Name:   	drone_b_ai.gd                                                    #
+# File Name:   	drone_b_ai.gd                                                 #
 # Description: 	Directs the animation and ai for the dronea sprite            #
 # Author:      	Andrew Zedwick                                                #
 # Company:    	Sidetrack                                                     #
@@ -12,11 +12,13 @@ extends Entity
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
 # Boolean indicating if the sprite's ai is active
-export var ai_enabled:    	bool  = true
+export var ai_enabled:    	 bool  = true
 # Movement speed
-export var movement_speed:	float = 30
+export var movement_speed:	 float = 50
 # Seconds of movement before changing directions
-export var turnaround_time: int   = 3
+export var turnaround_time:  int   = 2
+# Initial starting direction
+export var start_moving_up:  bool  = true
 
 #-----------------------------------------------------------------------------#
 #                            Private Variables                                #
@@ -36,15 +38,19 @@ func _ready() -> void:
 	set_obeys_gravity(false)
 	set_type("hostile")
 	set_speed(0.0, movement_speed)
-	set_knockback_multiplier(0.25)
 	_update_time += turnaround_time / 2
 	$AnimatedSprite.play("fly")
 	
+	# Set the starting movement direction of the drone
+	if not start_moving_up:
+		_vertical_direction = _DOWN
+
+
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
-func _process(delta: float) -> void:
-	#print(get_knockback_multiplier())
+# Built in function is called every physics frame
+func _physics_process(delta: float) -> void:
 	if ai_enabled:
 		_update_time += delta
 		# Calculate the movement of the drone
