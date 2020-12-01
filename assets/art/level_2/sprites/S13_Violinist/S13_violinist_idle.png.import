@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S13_violinist_idle.png-9e8aedf3b44d0a2a3ede88439d21ea9b.stex"
+path="res://.import/S13_violinist_idle.png-8f096471f68cec7de7b729132b83700b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/sprites/S13_Violinist/S13_violinist_idle.png"
-dest_files=[ "res://.import/S13_violinist_idle.png-9e8aedf3b44d0a2a3ede88439d21ea9b.stex" ]
+source_file="res://assets/art/level_2/sprites/S13_Violinist/S13_violinist_idle.png"
+dest_files=[ "res://.import/S13_violinist_idle.png-8f096471f68cec7de7b729132b83700b.stex" ]
 
 [params]
 

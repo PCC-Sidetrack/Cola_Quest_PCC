@@ -19,21 +19,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/entity.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Entityv2",
+"language": "GDScript",
+"path": "res://assets/code/common_scripts/entityv2.gd"
+}, {
 "base": "Entity",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/projectile.gd"
 }, {
 "base": "Node2D",
-"class": "globals",
+"class": "globalsv1",
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/globals.gd"
 } ]
 _global_script_class_icons={
 "Animate_Tiles": "",
 "Entity": "",
+"Entityv2": "",
 "Projectile": "",
-"globals": ""
+"globalsv1": ""
 }
 
 [application]
@@ -44,7 +50,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Globalsv2="*res://assets/code/common_scripts/globalsv2.gd"
 Globals="*res://assets/code/common_scripts/globals.gd"
+ProgramAlerts="*res://assets/code/common_scripts/program_alerts.gd"
 
 [display]
 
