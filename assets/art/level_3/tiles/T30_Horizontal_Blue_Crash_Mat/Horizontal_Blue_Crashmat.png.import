@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S13_violinist_idle.png-8f096471f68cec7de7b729132b83700b.stex"
+path="res://.import/Horizontal_Blue_Crashmat.png-f9dce3f87da669df227f46f9a8692b2a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_2/sprites/S13_Violinist/S13_violinist_idle.png"
-dest_files=[ "res://.import/S13_violinist_idle.png-8f096471f68cec7de7b729132b83700b.stex" ]
+source_file="res://assets/art/level_3/tiles/T30_Horizontal_Blue_Crash_Mat/Horizontal_Blue_Crashmat.png"
+dest_files=[ "res://.import/Horizontal_Blue_Crashmat.png-f9dce3f87da669df227f46f9a8692b2a.stex" ]
 
 [params]
 

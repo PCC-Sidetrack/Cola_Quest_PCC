@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/S13_violinist_idle.png-8f096471f68cec7de7b729132b83700b.stex"
+path="res://.import/Small_Square_Birch_Crate.png-ef76e389375a272d4b9a7cf6f79634e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_2/sprites/S13_Violinist/S13_violinist_idle.png"
-dest_files=[ "res://.import/S13_violinist_idle.png-8f096471f68cec7de7b729132b83700b.stex" ]
+source_file="res://assets/art/level_3/tiles/T27_Small_Birch_Crate/Small_Square_Birch_Crate.png"
+dest_files=[ "res://.import/Small_Square_Birch_Crate.png-ef76e389375a272d4b9a7cf6f79634e5.stex" ]
 
 [params]
 

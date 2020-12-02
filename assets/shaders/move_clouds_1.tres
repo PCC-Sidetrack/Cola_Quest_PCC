@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// The number of seconds before the clouds reset
+const float turnaround_time = 1.0;
+// The speed of the cloud movement
+const float speed           = 5.0;
+
+void vertex() {
+	// Every 10 seconds, reset the location of the clouds
+	if (mod(TIME, turnaround_time) != 0.0){
+		VERTEX.x += TIME * speed;
+	} else {
+		VERTEX.x -= TIME * turnaround_time * speed;
+	}
+}"
+
+[resource]
+shader = SubResource( 1 )

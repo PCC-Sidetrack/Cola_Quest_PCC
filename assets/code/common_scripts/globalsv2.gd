@@ -29,6 +29,7 @@ const LAYER: Dictionary = {
 	WORLD        = 3,
 	INTERACTABLE = 4,
 	PROJECTILE   = 5,
+	SPAWNPOINT   = 6,
 }
 
 # Orientation
@@ -44,8 +45,8 @@ func _ready() -> void:
 
 # Convert pixels to tiles
 func pix2til(pixels: float) -> float:
-	return pixels / Globals.ORIENTATION.TILE_SIZE
+	return pixels / ORIENTATION.TILE_SIZE
 
 # Convert tiles to pixels
 func til2pix(tiles: float) -> float:
-	return tiles * Globals.ORIENTATION.TILE_SIZE
+	return tiles * ORIENTATION.TILE_SIZE
