@@ -7,7 +7,6 @@
 #-----------------------------------------------------------------------------#
 
 class_name EntityV2
-
 extends    KinematicBody2D
 
 # An entity is any object that moves and interacts with the terrain
@@ -42,7 +41,7 @@ var _movement: Dictionary = {
 var _metadata: Dictionary = {
 	auto_facing         = false,
 	debug               = false,
-	direction_facing    = Globalsv2.DIRECTION.RIGHT,
+	direction_facing    = Globals.DIRECTION.RIGHT,
 	is_looking          = false,
 	is_movement_smooth  = true,
 	last_direction      = Vector2(Globals.DIRECTION.RIGHT, Globals.DIRECTION.UP),
@@ -136,8 +135,8 @@ func set_sprite_facing_direction(direction: float) -> void:
 	if direction != _metadata.direction_facing:
 		_flip_entity(self)
 #func set_jump                   (new_jump_height: float = 1.0, new_jump_time: float = 0.05) -> void:
-#_movement.gravity               = Globalsv2.til2pix(new_jump_height) / new_jump_time
-#_movement.initial_jump_velocity = sqrt(2 * _movement.gravity * Globalsv2.til2pix(new_jump_height))
+#	_movement.gravity               = Globals.til2pix(new_jump_height) / new_jump_time
+#	_movement.initial_jump_velocity = sqrt(2 * _movement.gravity * Globals.til2pix(new_jump_height))
 func set_jump                   (velocity: float) -> void:
 	_movement.initial_jump_velocity = velocity
 func set_knockback_multiplier   (new_multiplier: float) -> void:
@@ -155,13 +154,17 @@ func set_smooth_movement        (is_smooth: bool = !_metadata.is_movement_smooth
 func set_spawn_point            (new_point: Vector2) -> void:
 	_metadata.spawn_point = new_point
 func set_speed                  (new_movement_speed: float) -> void:
-	_movement.speed = Globalsv2.til2pix(new_movement_speed)
+	_movement.speed = Globals.til2pix(new_movement_speed)
 func set_velocity               (new_velocity: Vector2) -> void:
 	_movement.current_velocity = new_velocity
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
+# Attack another entity
+func attack(other_entity: KinematicBody2D) -> void:
+	other_entity.set_current_health(other_entity.get_current_health() - self.get_damage())
+	
 # Delete the entity
 func delete() -> void:
 	queue_free()
@@ -180,16 +183,16 @@ func end_point(destination: Vector2) -> Array:
 
 # Initialize a collectable entity
 func initialize_collectable() -> void:
-	add_to_group   (Globalsv2.GROUP.COLLECTABLE)
-	_set_layer_bits([Globalsv2.LAYER.COLLECTABLE])
-	_set_mask_bits ([Globalsv2.LAYER.PLAYER])
+	add_to_group   (Globals.GROUP.COLLECTABLE)
+	_set_layer_bits([Globals.LAYER.COLLECTABLE])
+	_set_mask_bits ([Globals.LAYER.PLAYER])
 
 # Initialize an enemy entity
 #func initialize_enemy(health: int, damage: int, speed: float, acceleration: float = 20.0, jump_height:float = 0.0, jump_duration: float = 1.0, smooth_movement: bool = true) -> void:
 func initialize_enemy(health: int, damage: int, speed: float, acceleration: float = 20.0, jump_velocity: float = 1.0, obeys_gravity: bool = false, smooth_movement: bool = true) -> void:
-	add_to_group       (Globalsv2.GROUP.ENEMY)
-	_set_layer_bits    ([Globalsv2.LAYER.ENEMY])
-	_set_mask_bits     ([Globalsv2.LAYER.PLAYER, Globalsv2.LAYER.WORLD])
+	add_to_group       (Globals.GROUP.ENEMY)
+	_set_layer_bits    ([Globals.LAYER.ENEMY])
+	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD])
 	set_acceleration   (acceleration)
 	set_current_health (health)
 	set_damage         (damage)
@@ -215,9 +218,9 @@ func initialize_instructions(movements: Array, is_looping: bool = false) -> void
 # Initialize a player entity
 #func initialize_player(health: int, damage: int, speed: float, acceleration: float, jump_height:float, jump_duration: float, smooth_movement: bool = true) -> void:
 func initialize_player(health: int, damage: int, speed: float, acceleration: float, jump_velocity: float, obeys_gravity: bool = false, smooth_movement: bool = true) -> void:
-	add_to_group       (Globalsv2.GROUP.PLAYER)
-	_set_layer_bits    ([Globalsv2.LAYER.PLAYER])
-	_set_mask_bits     ([Globalsv2.LAYER.ENEMY, Globalsv2.LAYER.COLLECTABLE, Globalsv2.LAYER.INTERACTABLE, Globalsv2.LAYER.WORLD])
+	add_to_group       (Globals.GROUP.PLAYER)
+	_set_layer_bits    ([Globals.LAYER.PLAYER])
+	_set_mask_bits     ([Globals.LAYER.ENEMY, Globals.LAYER.COLLECTABLE, Globals.LAYER.INTERACTABLE, Globals.LAYER.WORLD])
 	set_acceleration   (acceleration)
 	set_current_health (health)
 	set_damage         (damage)
@@ -233,7 +236,6 @@ func initialize_projectile(damage: int, speed: float, initiator: String, directi
 	add_to_group       (Globals.GROUP.PROJECTILE)
 	_set_layer_bits    ([Globals.LAYER.PROJECTILE])
 	_set_mask_bits     ([Globals.LAYER.WORLD])
-
 	set_acceleration   (turn_force)
 	set_damage         (damage)
 	set_life_time      (life_time)
@@ -242,20 +244,16 @@ func initialize_projectile(damage: int, speed: float, initiator: String, directi
 	
 	match initiator:
 		"player", "p":
-			add_to_group(Globalsv2.GROUP.PLAYER)
+			add_to_group(Globals.GROUP.PLAYER)
 		"enemy", "e":
-			add_to_group(Globalsv2.GROUP.ENEMY)
+			add_to_group(Globals.GROUP.ENEMY)
 
 # Cause the entity to jump
 func jump(height: float) -> void:
 	if height > 1.0 or height <= 0.0:
 		ProgramAlerts.add_warning("jump height should normally be between 1.0 and greater than 0.0")
-		
+	
 	_movement.current_velocity.y = _movement.initial_jump_velocity * -height
-
-# Create a jump array instruction
-func jump_inst(height: float) -> Array:
-	return ["jump", height]
 
 # Cause another entity to be knocked back
 # Based on the location of the entity in relation to the entity it is knocking back
@@ -281,11 +279,6 @@ func move() -> bool:
 			_move_duration(current_instruction)
 		elif current_instruction.has("end_point"):
 			_move_to_point(current_instruction)
-		elif current_instruction.has("jump_height"):
-			jump(current_instruction.jump_height)
-			current_instruction.is_completed = true
-		elif current_instruction.has("wait_duration"):
-			_wait(current_instruction)
 	
 	if current_instruction.is_completed:
 		_next_instruction()
@@ -306,8 +299,8 @@ func move_dynamically(direction: Vector2) -> void:
 	if _metadata.is_movement_smooth:
 		if get_obeys_gravity():
 			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, _movement.acceleration)
-			#vertical   = move_toward(_movement.current_velocity.y, Globalsv2.ORIENTATION.MAX_FALL_SPEED, _movement.gravity * get_physics_process_delta_time())
-			vertical   = move_toward(_movement.current_velocity.y, Globalsv2.ORIENTATION.MAX_FALL_SPEED, Globalsv2.ORIENTATION.MAX_FALL_SPEED * get_physics_process_delta_time())
+			#vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, _movement.gravity * get_physics_process_delta_time())
+			vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, Globals.ORIENTATION.MAX_FALL_SPEED * get_physics_process_delta_time())
 		else:
 			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, _movement.acceleration)
 			vertical   = move_toward(_movement.current_velocity.y, vertical * _movement.speed, _movement.acceleration)
@@ -322,11 +315,7 @@ func move_dynamically(direction: Vector2) -> void:
 		rotation = Vector2(horizontal, vertical).angle()
 	
 	# Perform the calculation to move the enitity
-	_movement.current_velocity = move_and_slide(Vector2(horizontal, vertical), Globalsv2.ORIENTATION.FLOOR_NORMAL)
-
-# Create a wait array instruction
-func wait(duration: float) -> Array:
-	return ["wait", duration]
+	_movement.current_velocity = move_and_slide(Vector2(horizontal, vertical), Globals.ORIENTATION.FLOOR_NORMAL)
 
 # Cause the entity to rotate about its center
 func spin(deg_per_second: float, direction: float) -> void:
@@ -338,9 +327,9 @@ func spin(deg_per_second: float, direction: float) -> void:
 # Try to automatically determine what direction the sprite should be facing
 func _auto_facing() -> void:
 	if _movement.current_velocity.x > 0.0:
-		set_direction_facing(Globalsv2.DIRECTION.RIGHT)
+		set_direction_facing(Globals.DIRECTION.RIGHT)
 	elif _movement.current_velocity.x < 0.0:
-		set_direction_facing(Globalsv2.DIRECTION.LEFT)
+		set_direction_facing(Globals.DIRECTION.LEFT)
 
 # Recursively flip the entire entity horizontally to face in the last direction
 func _flip_entity(parent: Node) -> void:
@@ -429,7 +418,7 @@ func _set_mask_bits(masks: Array) -> void:
 
 # Create a line in the direction of current velocity
 func _show_direction() -> void:
-	draw_line(Vector2.ZERO, _movement.current_velocity.normalized() * Globalsv2.ORIENTATION.TILE_SIZE, Color(255, 0, 0), 1.0, false)
+	draw_line(Vector2.ZERO, _movement.current_velocity.normalized() * Globals.ORIENTATION.TILE_SIZE, Color(255, 0, 0), 1.0, false)
 
 # Turn an instruction into a movement set
 func _to_movement_set(instruction: Array) -> Dictionary:
@@ -440,8 +429,8 @@ func _to_movement_set(instruction: Array) -> Dictionary:
 	match instruction[0]:
 		"distance", "dis":
 			new_movement_set.direction           = instruction[1].normalized()
-			new_movement_set.initial_distance    = Globalsv2.til2pix(instruction[2])
-			new_movement_set.distance_remaining  = Globalsv2.til2pix(instruction[2])
+			new_movement_set.initial_distance    = Globals.til2pix(instruction[2])
+			new_movement_set.distance_remaining  = Globals.til2pix(instruction[2])
 		"duration", "dur":
 			new_movement_set.direction          = instruction[1].normalized()
 			new_movement_set.initial_duration   = instruction[2]
@@ -452,11 +441,6 @@ func _to_movement_set(instruction: Array) -> Dictionary:
 					new_movement_set.end_point = _metadata.spawn_point
 			else:
 				new_movement_set.end_point = instruction[1]
-		"jump":
-			new_movement_set.jump_height = instruction[1]
-		"wait":
-			new_movement_set.wait_duration = instruction[1]
-			new_movement_set.wait_remaining = instruction[1]
 	
 	return new_movement_set
 
@@ -506,13 +490,7 @@ func _update_time_on_ground(delta: float) -> void:
 		else:
 			_metadata.time_on_ground = 0.0
 
-# Make the entity wait for a set time
-func _wait(instruction: Dictionary) -> void:
-	if instruction.wait_remaining > 0.0:
-		instruction.wait_remaining -= get_physics_process_delta_time()
-	else:
-		instruction.wait_remaining = instruction.wait_duration
-		instruction.is_completed  = true
+
 
 #-----------------------------------------------------------------------------#
 #                           Depreciated Functions                             #
@@ -520,28 +498,27 @@ func _wait(instruction: Dictionary) -> void:
 # Create the entity, set the layers, and set the group
 func create_entity(group: String) -> void:
 	ProgramAlerts.add_warning("create_entity() is being depreciated")
-
 	match group:
-		Globalsv2.GROUP.COLLECTABLE:
+		Globals.GROUP.COLLECTABLE:
 			add_to_group   (group)
-			_set_layer_bits([Globalsv2.LAYER.COLLECTABLE])
-			_set_mask_bits ([Globalsv2.LAYER.PLAYER])
-		Globalsv2.GROUP.ENEMY:
+			_set_layer_bits([Globals.LAYER.COLLECTABLE])
+			_set_mask_bits ([Globals.LAYER.PLAYER])
+		Globals.GROUP.ENEMY:
 			add_to_group   (group)
-			_set_layer_bits([Globalsv2.LAYER.ENEMY])
-			_set_mask_bits ([Globalsv2.LAYER.PLAYER, Globalsv2.LAYER.ENEMY, Globalsv2.LAYER.WORLD])
-		Globalsv2.GROUP.INTERACTABLE:
+			_set_layer_bits([Globals.LAYER.ENEMY])
+			_set_mask_bits ([Globals.LAYER.PLAYER, Globals.LAYER.ENEMY, Globals.LAYER.WORLD])
+		Globals.GROUP.INTERACTABLE:
 			add_to_group   (group)
-			_set_layer_bits([Globalsv2.LAYER.INTERACTABLE])
-			_set_mask_bits ([Globalsv2.LAYER.PLAYER])
-		Globalsv2.GROUP.PLAYER:
+			_set_layer_bits([Globals.LAYER.INTERACTABLE])
+			_set_mask_bits ([Globals.LAYER.PLAYER])
+		Globals.GROUP.PLAYER:
 			add_to_group   (group)
-			_set_layer_bits([Globalsv2.LAYER.PLAYER])
-			_set_mask_bits ([Globalsv2.LAYER.ENEMY, Globalsv2.LAYER.COLLECTABLE, Globalsv2.LAYER.INTERACTABLE, Globalsv2.LAYER.WORLD])
-		Globalsv2.GROUP.PROJECTILE:
+			_set_layer_bits([Globals.LAYER.PLAYER])
+			_set_mask_bits ([Globals.LAYER.ENEMY, Globals.LAYER.COLLECTABLE, Globals.LAYER.INTERACTABLE, Globals.LAYER.WORLD])
+		Globals.GROUP.PROJECTILE:
 			add_to_group   (group)
-			_set_layer_bits([Globalsv2.LAYER.PROJECTILE])
-			_set_mask_bits ([Globalsv2.LAYER.WORLD])
+			_set_layer_bits([Globals.LAYER.PROJECTILE])
+			_set_mask_bits ([Globals.LAYER.WORLD])
 		_:
 			push_error(group + " is not a valid group")
 			get_tree().quit()
