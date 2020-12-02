@@ -6,12 +6,11 @@
 # Date:        October 15, 2020
 #-----------------------------------------------------------------------------#
 
-extends Entity
+extends EntityV2
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	set_obeys_gravity   (false)
-	set_type            ("collectible")
+	initialize_collectable()
 	$AnimatedSprite.play("spin")

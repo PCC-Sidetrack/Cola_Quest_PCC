@@ -38,6 +38,10 @@ const ORIENTATION: Dictionary = {
 	TILE_SIZE      = 32.0,
 }
 
+# The position of the player
+# This is here only to aid in locating the player, considering the fact that many things will need the players location and that the player will probably not be in the same tree in every level
+var player_position = Vector2.ZERO
+
 # Initialize the random seed
 func _ready() -> void:
 	seed(OS.get_time().hour * (OS.get_time().minute + 1) * OS.get_time().second)

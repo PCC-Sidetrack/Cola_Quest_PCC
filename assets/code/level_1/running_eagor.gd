@@ -9,44 +9,42 @@
 #-----------------------------------------------------------------------------#
 #                               Inheiritance                                  #
 #-----------------------------------------------------------------------------#
-extends Entity
+extends EntityV2
 
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
 # Speed
-export var movement_speed:     Vector2 = Vector2(200, 700)
-# Start facing right?
-export var start_moving_right: bool    = false
+export var movement_speed: float = 200.0
+
+export var health:        int   = 10
+export var damage:        int   = 5
+export var acceleration:  float = 30.0
+export var jump_velocity: float = 0.0
+export var obeys_gravity: bool  = true
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # The direction the enemy is moving
-var _direction: float = _LEFT
+var _direction: Vector2 = Vector2.RIGHT
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	# Flip the direction of the sprite if it's set to start right
-	if start_moving_right:
-		_direction = _RIGHT
-		$AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
-		
-	set_obeys_gravity   (true)
-	set_speed           (movement_speed.x, movement_speed.y)
-	set_type            ("hostile")
+	initialize_enemy           (health, damage, movement_speed, acceleration, jump_velocity, obeys_gravity)
+	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
+	set_auto_facing            (true)
+	
 	$AnimatedSprite.play("run")
 	
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
-	# Calculate and move the enemy
-	set_velocity(move_and_slide(calculate_new_velocity(_direction), get_floor_normal()))
+	move_dynamically(_direction)
 	
-	# Change the direction the enemy is moving
+	# Change the direction if the entity hits a wall
 	if is_on_wall():
-		_direction             = -_direction
-		$AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
+		_direction = -_direction

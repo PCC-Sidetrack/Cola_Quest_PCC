@@ -17,10 +17,6 @@ const STUDY_CARD = preload("res://assets//sprite_scenes//level_1//study_card_pro
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
-
-#-----------------------------------------------------------------------------#
-#                           Exported Variables                                #
-#-----------------------------------------------------------------------------#
 # Boolean indicating if the sprite's ai is active
 export var ai_enabled:       bool  = true
 # Movement speed

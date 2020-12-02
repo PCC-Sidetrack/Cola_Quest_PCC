@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/code/common_scripts/projectile.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/level_1/spear.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S9_constellation_spear/S9_constellation_spear.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]

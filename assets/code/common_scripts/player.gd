@@ -6,7 +6,7 @@
 # Date:        October 1, 2020
 #-----------------------------------------------------------------------------#
 
-extends Entity
+extends Entityv2
 
 # This is the script for the player.
 # It allows the player to move the main character and jump when placed in a level.
