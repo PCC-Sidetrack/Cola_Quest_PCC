@@ -7,7 +7,7 @@
 #-----------------------------------------------------------------------------#
 
 extends    Node2D
-class_name globals
+class_name globalsv1
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
@@ -28,7 +28,7 @@ const LAYER_PROJECTILES:	int 	= 5
 var player_position: Vector2 = Vector2(0.0, 0.0)
 
 #-----------------------------------------------------------------------------#
-#                               On-Ready Code                                   #
+#                               On-Ready Code                                 #
 #-----------------------------------------------------------------------------#
 # Any code that should be run immediatly as the game starts should be placed here
 func _ready() -> void:

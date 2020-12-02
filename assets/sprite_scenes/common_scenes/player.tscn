@@ -3,7 +3,10 @@
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=3]
+
 [ext_resource path="res://assets/code/common_scripts/playerv2.gd" type="Script" id=4]
+
+
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
