@@ -19,7 +19,6 @@ const GROUP: Dictionary = {
 	PLAYER       = "player",
 	PROJECTILE   = "projectile",
 	WORLD        = "world",
-	SPAWNPOINT   = "spawnpoint"
 }
 
 # Layers

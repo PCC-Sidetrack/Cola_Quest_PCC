@@ -133,8 +133,8 @@ func set_sprite_facing_direction(direction: float) -> void:
 	if direction != _metadata.direction_facing:
 		_flip_entity(self)
 #func set_jump                   (new_jump_height: float = 1.0, new_jump_time: float = 0.05) -> void:
-#	_movement.gravity               = Globalsv2.til2pix(new_jump_height) / new_jump_time
-#	_movement.initial_jump_velocity = sqrt(2 * _movement.gravity * Globalsv2.til2pix(new_jump_height))
+#_movement.gravity               = Globalsv2.til2pix(new_jump_height) / new_jump_time
+#_movement.initial_jump_velocity = sqrt(2 * _movement.gravity * Globalsv2.til2pix(new_jump_height))
 func set_jump                   (velocity: float) -> void:
 	_movement.initial_jump_velocity = velocity
 func set_knockback_multiplier   (new_multiplier: float) -> void:
@@ -502,7 +502,7 @@ func _wait(instruction: Dictionary) -> void:
 # Create the entity, set the layers, and set the group
 func create_entity(group: String) -> void:
 	ProgramAlerts.add_warning("create_entity() is being depreciated")
-	
+
 	match group:
 		Globalsv2.GROUP.COLLECTABLE:
 			add_to_group   (group)
