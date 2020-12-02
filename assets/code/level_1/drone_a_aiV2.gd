@@ -11,7 +11,7 @@ extends EntityV2
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
 # Holds a reference to the 3x5_projectile scene
-#const STUDY_CARD = preload("res://assets//sprite_scenes//level_1//study_card_projectile.tscn")
+const STUDY_CARD = preload("res://assets//sprite_scenes//level_1//study_card_projectile.tscn")
 
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #
@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 # Create a new instance of a study card projectile and shoot it out of the drone
 func _shoot() -> void:
 	# Create, initialize, and add a new study card projectile to the drone
-	var study_card = load("res://assets//sprite_scenes//level_1//study_card_projectile.tscn").instance()
+	var study_card = STUDY_CARD.instance()
 	#study_card.get_node("AnimatedSprite").play("spin")
 	$StudyCardSpawn.add_child(study_card)
 	_shoot_update_time = 0.0

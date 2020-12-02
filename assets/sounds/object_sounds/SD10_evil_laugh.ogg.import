@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SD10_evil_laugh.ogg-2a963607dcbe945d40bb4ef7acdc9ce9.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD10_evil_laugh.ogg"
+dest_files=[ "res://.import/SD10_evil_laugh.ogg-2a963607dcbe945d40bb4ef7acdc9ce9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

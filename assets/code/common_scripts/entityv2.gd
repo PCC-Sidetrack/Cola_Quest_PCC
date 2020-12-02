@@ -161,8 +161,8 @@ func set_velocity               (new_velocity: Vector2) -> void:
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
-# Attack another entity
-func attack(other_entity: KinematicBody2D) -> void:
+# Deal damage to another entity
+func deal_damage(other_entity: KinematicBody2D) -> void:
 	other_entity.set_current_health(other_entity.get_current_health() - self.get_damage())
 	
 # Delete the entity
@@ -220,7 +220,7 @@ func initialize_instructions(movements: Array, is_looping: bool = false) -> void
 func initialize_player(health: int, damage: int, speed: float, acceleration: float, jump_velocity: float, obeys_gravity: bool = false, smooth_movement: bool = true) -> void:
 	add_to_group       (Globals.GROUP.PLAYER)
 	_set_layer_bits    ([Globals.LAYER.PLAYER])
-	_set_mask_bits     ([Globals.LAYER.ENEMY, Globals.LAYER.COLLECTABLE, Globals.LAYER.INTERACTABLE, Globals.LAYER.WORLD])
+	_set_mask_bits     ([Globals.LAYER.ENEMY, Globals.LAYER.COLLECTABLE, Globals.LAYER.INTERACTABLE, Globals.LAYER.WORLD, Globals.LAYER.SPAWNPOINT])
 	set_acceleration   (acceleration)
 	set_current_health (health)
 	set_damage         (damage)

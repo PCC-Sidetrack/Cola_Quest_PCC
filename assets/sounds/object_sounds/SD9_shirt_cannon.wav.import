@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SD9_shirt_cannon.wav-1e40040085bc67549e4f16864780c28a.sample"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD9_shirt_cannon.wav"
+dest_files=[ "res://.import/SD9_shirt_cannon.wav-1e40040085bc67549e4f16864780c28a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
