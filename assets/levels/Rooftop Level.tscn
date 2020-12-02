@@ -1560,7 +1560,9 @@ format = 1
 tile_data = PoolIntArray( -393001, 536870916, 0, -392991, 4, 0, 65590, 536870914, 0, 65700, 4, 0, 131076, 3, 0, 131077, 3, 1, 131078, 3, 1, 131079, 3, 2, 131098, 9, 4, 196612, 3, 65536, 196613, 3, 65537, 196614, 3, 65537, 196615, 3, 65538, 196634, 9, 2, 196635, 9, 6, 262148, 3, 65536, 262149, 3, 65537, 262150, 3, 65537, 262151, 3, 65538, 262169, 9, 5, 262170, 9, 1, 262171, 9, 3, 327684, 3, 65536, 327685, 3, 3, 327686, 3, 65537, 327687, 3, 65538, 327689, 0, 0, 327692, 8, 0, 327693, 8, 1, 327695, 8, 1, 327696, 8, 3, 327697, 8, 0, 327698, 8, 2, 327699, 8, 1, 327705, 9, 0, 393220, 3, 65536, 393221, 3, 65539, 393222, 3, 65537, 393223, 3, 65538, 393227, 8, 0, 393228, 8, 0, 393229, 8, 0, 393231, 8, 0, 393232, 8, 1, 393234, 8, 1, 393235, 8, 3, 393236, 8, 1, 393241, 9, 0, 393338, 8, 3, 458874, 8, 3, 458875, 8, 1, 524409, 8, 0, 524411, 8, 1, 524423, 1610612744, 0, 589948, 8, 1, 655484, 8, 0, 721019, 8, 0, 786553, 8, 1, 786554, 8, 0 )
 script = ExtResource( 4 )
 
-[node name="collidable_tiles_front" type="TileMap" parent="tiles"]
+
+[node name="collidable_tiles_front" type="TileMap" parent="."]
+
 tile_set = SubResource( 90 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -1630,30 +1632,24 @@ position = Vector2( 4078, 28 )
 
 [node name="drone_b" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 1521, -44 )
-start_moving_up = false
 
 [node name="drone_b4" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 3297, 2 )
 
 [node name="drone_b5" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 3547, -19 )
-start_moving_up = false
 
 [node name="drone_b6" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 3608, 57 )
 
 [node name="drone_b7" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 4787, 335 )
-start_moving_up = false
 
 [node name="drone_b2" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 2234, -211 )
-turnaround_time = 4
-start_moving_up = false
 
 [node name="drone_b3" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 2094, -25 )
-turnaround_time = 4
 
 [node name="drone_b8" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 6026, 80 )
@@ -1663,12 +1659,9 @@ position = Vector2( 7713, 33 )
 
 [node name="drone_b10" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 7846, -69 )
-turnaround_time = 5
-start_moving_up = false
 
 [node name="drone_b11" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 9556, 63 )
-start_moving_up = false
 
 [node name="Drone_a3" parent="enemies/drones" instance=ExtResource( 7 )]
 position = Vector2( 8488, 149 )
@@ -1690,12 +1683,9 @@ position = Vector2( 11180, 377 )
 
 [node name="drone_b16" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 13536, 320 )
-turnaround_time = 6
-start_moving_up = false
 
 [node name="drone_b18" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 13456, 365 )
-turnaround_time = 6
 
 [node name="drone_b15" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 12960, 372 )
@@ -1705,7 +1695,6 @@ position = Vector2( 13777, 448 )
 
 [node name="drone_b19" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 14048, 416 )
-turnaround_time = 4
 
 [node name="Drone_a7" parent="enemies/drones" instance=ExtResource( 7 )]
 position = Vector2( 13920, 320 )
@@ -1715,21 +1704,65 @@ position = Vector2( 15633, 249 )
 
 [node name="drone_b20" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 16297, 121 )
-turnaround_time = 6
 
 [node name="drone_b21" parent="enemies/drones" instance=ExtResource( 8 )]
 position = Vector2( 16678, 96 )
 movement_speed = 40.0
-turnaround_time = 7
 
-[node name="birds" type="Node2D" parent="enemies"]
+[node name="smoke" type="Node2D" parent="."]
 
-[node name="bird" parent="enemies/birds" instance=ExtResource( 13 )]
+[node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 6224, -75 )
+frame = 2
+
+[node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 6571, -102 )
+frame = 1
+
+[node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 848, 21 )
+frame = 1
+
+[node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10255, 118 )
+frame = 0
+
+[node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10416, 149 )
+frame = 0
+
+[node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10613, 218 )
+
+[node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10672, 310 )
+
+[node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10928, 246 )
+
+[node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 11056, 342 )
+frame = 2
+
+[node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 11920, 23 )
+frame = 2
+
+[node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 16784, 54 )
+frame = 1
+
+[node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
+position = Vector2( 16482, -28 )
+
+[node name="birds" type="Node2D" parent="."]
+
+[node name="bird" parent="birds" instance=ExtResource( 13 )]
+
 position = Vector2( 3920, 120 )
 
 [node name="bird2" parent="enemies/birds" instance=ExtResource( 13 )]
 position = Vector2( 4268, 61 )
-start_moving_right = false
 
 [node name="bird3" parent="enemies/birds" instance=ExtResource( 13 )]
 position = Vector2( 4383, 234 )
@@ -1756,7 +1789,6 @@ position = Vector2( 14976, 352 )
 
 [node name="S7_running_eagor2" parent="enemies/eagors" instance=ExtResource( 16 )]
 position = Vector2( 15872, 352 )
-start_moving_right = true
 
 [node name="S7_running_eagor3" parent="enemies/eagors" instance=ExtResource( 16 )]
 position = Vector2( 15776, 352 )

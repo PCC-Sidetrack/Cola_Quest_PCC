@@ -6,7 +6,8 @@
 # Date:        November 8, 2020
 #-----------------------------------------------------------------------------#
 
-class_name Entityv2
+class_name EntityV2
+
 extends    KinematicBody2D
 
 # An entity is any object that moves and interacts with the terrain
@@ -44,7 +45,8 @@ var _metadata: Dictionary = {
 	direction_facing    = Globalsv2.DIRECTION.RIGHT,
 	is_looking          = false,
 	is_movement_smooth  = true,
-	last_direction      = Vector2(Globalsv2.DIRECTION.RIGHT, Globalsv2.DIRECTION.UP),
+	last_direction      = Vector2(Globals.DIRECTION.RIGHT, Globals.DIRECTION.UP),
+	life_time           = -1.0,
 	movement            = {
 		current_instruction = 0,
 		instructions        = {},
@@ -70,6 +72,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_update_invulnerability(delta)
 	_update_last_direction ()
+	_update_life_time      (delta)
 	_update_time_in_air    (delta)
 	_update_time_on_ground (delta)
 	update()
@@ -139,6 +142,8 @@ func set_jump                   (velocity: float) -> void:
 	_movement.initial_jump_velocity = velocity
 func set_knockback_multiplier   (new_multiplier: float) -> void:
 	_damage.knockback_multiplier = new_multiplier
+func set_life_time              (new_life_time: float) -> void:
+	_metadata.life_time = new_life_time
 func set_looking                (is_looking: bool) -> void:
 	_metadata.is_looking = is_looking
 func set_max_health             (new_health: int) -> void:
@@ -215,6 +220,7 @@ func initialize_player(health: int, damage: int, speed: float, acceleration: flo
 	_set_mask_bits     ([Globalsv2.LAYER.ENEMY, Globalsv2.LAYER.COLLECTABLE, Globalsv2.LAYER.INTERACTABLE, Globalsv2.LAYER.WORLD])
 	set_acceleration   (acceleration)
 	set_current_health (health)
+	set_damage         (damage)
 	set_max_health     (health)
 	set_obeys_gravity  (obeys_gravity)
 	#set_jump           (jump_height, jump_duration)
@@ -223,13 +229,16 @@ func initialize_player(health: int, damage: int, speed: float, acceleration: flo
 	set_speed          (speed)
 
 # Initialize a projectile entity
-func initialize_projectile(damage: int, speed: float, initiator: String, direction: Vector2 = Vector2.RIGHT, turn_force: float = 1.0) -> void:
-	add_to_group       (Globalsv2.GROUP.PROJECTILE)
-	_set_layer_bits    ([Globalsv2.LAYER.PROJECTILE])
-	_set_mask_bits     ([Globalsv2.LAYER.WORLD])
+func initialize_projectile(damage: int, speed: float, initiator: String, direction: Vector2 = Vector2.RIGHT, turn_force: float = 1.0, life_time: float = -1.0) -> void:
+	add_to_group       (Globals.GROUP.PROJECTILE)
+	_set_layer_bits    ([Globals.LAYER.PROJECTILE])
+	_set_mask_bits     ([Globals.LAYER.WORLD])
+
 	set_acceleration   (turn_force)
-	set_velocity       (direction.normalized() * speed)
+	set_damage         (damage)
+	set_life_time      (life_time)
 	set_speed          (speed)
+	set_velocity       (direction.normalized() * speed)
 	
 	match initiator:
 		"player", "p":
@@ -250,7 +259,7 @@ func jump_inst(height: float) -> Array:
 
 # Cause another entity to be knocked back
 # Based on the location of the entity in relation to the entity it is knocking back
-func knockback(other_entity: Entity) -> void:
+func knockback(other_entity: KinematicBody2D) -> void:
 	other_entity.set_velocity(global_position.direction_to(other_entity.get_position()).normalized() * other_entity.get_speed() * _damage.knockback_multiplier)
 
 # A generic move function that determines what kind of movement the entity contains
@@ -458,6 +467,15 @@ func _update_invulnerability(delta: float) -> void:
 		_health.invulnerability_duration -= delta
 	elif _health.invulnerability_duration != -1.0:
 		_health.invulnerability_duration = 0.0
+
+# Update the life time of an entity, then deletes it when it reaches 0
+# Set to -1.0 for permanent life time
+func _update_life_time(delta: float) -> void:
+	if _metadata.life_time != -1.0:
+		if _metadata.life_time > 0.0:
+			_metadata.life_time -= delta
+		else:
+			self.delete()
 
 # Updates the last direction the entity has gone
 # Calculates for the vertical and horizontal directions

@@ -4,7 +4,9 @@
 # This is for letting other programmers know about upcoming changes in code
 # It will (hopefully) help them know which functions are being changed
 
-extends    Node
+
+extends Node
+
 
 # Used for keeping track of errors and warnings
 var alert: Dictionary = {
