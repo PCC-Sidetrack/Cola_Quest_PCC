@@ -1,11 +1,11 @@
 #-----------------------------------------------------------------------------#
 # File Name:   spear.gd
 # Description: The core for every spear projectile
-# Author:      Jeff Newell
+# Author:      Jeff Newell & Andrew Zedwick
 # Company:     Sidetrack
 # Date:        December 2, 2020
 #-----------------------------------------------------------------------------#
-extends EntityV2
+extends Entity
 
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #
@@ -28,3 +28,9 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 func _physics_process(delta: float) -> void:
 	move_dynamically(get_current_velocity())
+
+#-----------------------------------------------------------------------------#
+#                              Signal Functions                               #
+#-----------------------------------------------------------------------------#
+func _on_Area2D_body_entered(body):
+	delete()
