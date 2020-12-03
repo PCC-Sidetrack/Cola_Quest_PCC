@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SD6_boing.ogg-fc3950ba5b5cd2cecfdd366c2b62e262.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD6_boing.ogg"
+dest_files=[ "res://.import/SD6_boing.ogg-fc3950ba5b5cd2cecfdd366c2b62e262.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

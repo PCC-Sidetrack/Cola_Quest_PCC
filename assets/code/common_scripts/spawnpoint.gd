@@ -18,8 +18,8 @@ var _activated: bool = false
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	$Area2D.set_collision_layer_bit(Globalsv2.LAYER.SPAWNPOINT, true)
-	$Area2D.set_collision_mask_bit(Globalsv2.LAYER.PLAYER, true)
+	$Area2D.set_collision_layer_bit(Globals.LAYER.SPAWNPOINT, true)
+	$Area2D.set_collision_mask_bit(Globals.LAYER.PLAYER, true)
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #

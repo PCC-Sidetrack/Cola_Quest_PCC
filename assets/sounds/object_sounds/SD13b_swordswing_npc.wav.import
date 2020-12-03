@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SD13b_swordswing_npc.wav-4e133c81118c4441eadc307d4c473781.sample"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD13b_swordswing_npc.wav"
+dest_files=[ "res://.import/SD13b_swordswing_npc.wav-4e133c81118c4441eadc307d4c473781.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

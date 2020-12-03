@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SD2_dripping_water.ogg-eb70352e946f0c41148bf03099dee55f.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD2_dripping_water.ogg"
+dest_files=[ "res://.import/SD2_dripping_water.ogg-eb70352e946f0c41148bf03099dee55f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

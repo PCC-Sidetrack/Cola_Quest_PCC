@@ -1560,9 +1560,7 @@ format = 1
 tile_data = PoolIntArray( -393001, 536870916, 0, -392991, 4, 0, 65590, 536870914, 0, 65700, 4, 0, 131076, 3, 0, 131077, 3, 1, 131078, 3, 1, 131079, 3, 2, 131098, 9, 4, 196612, 3, 65536, 196613, 3, 65537, 196614, 3, 65537, 196615, 3, 65538, 196634, 9, 2, 196635, 9, 6, 262148, 3, 65536, 262149, 3, 65537, 262150, 3, 65537, 262151, 3, 65538, 262169, 9, 5, 262170, 9, 1, 262171, 9, 3, 327684, 3, 65536, 327685, 3, 3, 327686, 3, 65537, 327687, 3, 65538, 327689, 0, 0, 327692, 8, 0, 327693, 8, 1, 327695, 8, 1, 327696, 8, 3, 327697, 8, 0, 327698, 8, 2, 327699, 8, 1, 327705, 9, 0, 393220, 3, 65536, 393221, 3, 65539, 393222, 3, 65537, 393223, 3, 65538, 393227, 8, 0, 393228, 8, 0, 393229, 8, 0, 393231, 8, 0, 393232, 8, 1, 393234, 8, 1, 393235, 8, 3, 393236, 8, 1, 393241, 9, 0, 393338, 8, 3, 458874, 8, 3, 458875, 8, 1, 524409, 8, 0, 524411, 8, 1, 524423, 1610612744, 0, 589948, 8, 1, 655484, 8, 0, 721019, 8, 0, 786553, 8, 1, 786554, 8, 0 )
 script = ExtResource( 4 )
 
-
 [node name="collidable_tiles_front" type="TileMap" parent="."]
-
 tile_set = SubResource( 90 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -1574,6 +1572,50 @@ tile_data = PoolIntArray( -327461, 536870921, 0, -327459, 536870921, 0, -261926,
 script = ExtResource( 1 )
 
 [node name="smoke" type="Node2D" parent="."]
+
+[node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 6224, -75 )
+frame = 0
+
+[node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 6571, -102 )
+
+[node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 848, 21 )
+
+[node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10255, 118 )
+frame = 2
+
+[node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10416, 149 )
+frame = 2
+
+[node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10613, 218 )
+frame = 1
+
+[node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10672, 310 )
+frame = 1
+
+[node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10928, 246 )
+frame = 1
+
+[node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 11056, 342 )
+frame = 0
+
+[node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 11920, 23 )
+frame = 0
+
+[node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 16784, 54 )
+
+[node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
+position = Vector2( 16482, -28 )
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6224, -75 )
@@ -1618,7 +1660,6 @@ frame = 2
 
 [node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
 position = Vector2( 16482, -28 )
-start_moving_up = false
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -1709,79 +1750,6 @@ position = Vector2( 16297, 121 )
 position = Vector2( 16678, 96 )
 movement_speed = 40.0
 
-[node name="smoke" type="Node2D" parent="."]
-
-[node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 6224, -75 )
-frame = 2
-
-[node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 6571, -102 )
-frame = 1
-
-[node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 848, 21 )
-frame = 1
-
-[node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 10255, 118 )
-frame = 0
-
-[node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 10416, 149 )
-frame = 0
-
-[node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 10613, 218 )
-
-[node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 10672, 310 )
-
-[node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 10928, 246 )
-
-[node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 11056, 342 )
-frame = 2
-
-[node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 11920, 23 )
-frame = 2
-
-[node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
-position = Vector2( 16784, 54 )
-frame = 1
-
-[node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
-position = Vector2( 16482, -28 )
-
-[node name="birds" type="Node2D" parent="."]
-
-[node name="bird" parent="birds" instance=ExtResource( 13 )]
-
-position = Vector2( 3920, 120 )
-
-[node name="bird2" parent="enemies/birds" instance=ExtResource( 13 )]
-position = Vector2( 4268, 61 )
-
-[node name="bird3" parent="enemies/birds" instance=ExtResource( 13 )]
-position = Vector2( 4383, 234 )
-turnaround_time = 4.0
-
-[node name="bird4" parent="enemies/birds" instance=ExtResource( 13 )]
-position = Vector2( 7978, 67 )
-
-[node name="bird5" parent="enemies/birds" instance=ExtResource( 13 )]
-position = Vector2( 11516, 207 )
-
-[node name="bird6" parent="enemies/birds" instance=ExtResource( 13 )]
-position = Vector2( 12371, 122 )
-turnaround_time = 9.0
-
-[node name="bird7" parent="enemies/birds" instance=ExtResource( 13 )]
-position = Vector2( 13218, 397 )
-turnaround_time = 6.0
-
 [node name="eagors" type="Node2D" parent="enemies"]
 
 [node name="S7_running_eagor" parent="enemies/eagors" instance=ExtResource( 16 )]
@@ -1797,6 +1765,13 @@ position = Vector2( 15776, 352 )
 
 [node name="orion" parent="enemies/orions" instance=ExtResource( 15 )]
 position = Vector2( 8926, -93 )
+
+[node name="smoke" type="Node2D" parent="."]
+
+[node name="birds" type="Node2D" parent="."]
+
+[node name="bird" parent="birds" instance=ExtResource( 13 )]
+position = Vector2( 3920, 120 )
 
 [node name="spawnpoints" type="Node2D" parent="."]
 
