@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/code/level_1/drone_b_aiV2.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/level_1/drone_b_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S1_drone/S1b_drone.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -66,3 +66,6 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 9 )
+[connection signal="collision" from="." to="." method="_on_drone_b_collision"]
+[connection signal="death" from="." to="." method="_on_drone_b_death"]
+[connection signal="health_changed" from="." to="." method="_on_drone_b_health_changed"]

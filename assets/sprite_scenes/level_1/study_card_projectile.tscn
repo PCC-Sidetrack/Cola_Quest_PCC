@@ -11,36 +11,38 @@ region = Rect2( 0, 0, 32, 32 )
 animations = [ {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
-"name": "spin",
+"name": "idle",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 6.45975, 4.41818 )
+extents = Vector2( 5.60696, 3.88613 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 7.00511, 4.84483 )
+extents = Vector2( 6.06401, 4.05915 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "spin"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -0.400906, 0.489994 )
-shape = SubResource( 3 )
+animation = "idle"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
 process_parent = true
 physics_process_parent = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.503244, 0.476758 )
+scale = Vector2( 1.091, 1.05231 )
+shape = SubResource( 3 )
+
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -0.476758, 0.503245 )
+position = Vector2( -0.500565, 0.467194 )
 shape = SubResource( 4 )
+[connection signal="collision" from="." to="." method="_on_KinematicBody2D_collision"]
+[connection signal="death" from="." to="." method="_on_KinematicBody2D_death"]
+[connection signal="health_changed" from="." to="." method="_on_KinematicBody2D_health_changed"]
