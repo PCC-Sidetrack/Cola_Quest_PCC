@@ -20,24 +20,24 @@ _global_script_classes=[ {
 "path": "res://assets/code/common_scripts/entity.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "EntityV2",
+"class": "EntityOld",
 "language": "GDScript",
-"path": "res://assets/code/common_scripts/entityv2.gd"
+"path": "res://assets/code/common_scripts/old_scripts/entity_old.gd"
 }, {
-"base": "Entity",
+"base": "EntityOld",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://assets/code/common_scripts/projectile.gd"
+"path": "res://assets/code/level_1/old_scripts/3by5_projectile_old.gd"
 }, {
 "base": "Node2D",
 "class": "globalsv1",
 "language": "GDScript",
-"path": "res://assets/code/common_scripts/globals.gd"
+"path": "res://assets/code/common_scripts/old_scripts/globals_old.gd"
 } ]
 _global_script_class_icons={
 "Animate_Tiles": "",
 "Entity": "",
-"EntityV2": "",
+"EntityOld": "",
 "Projectile": "",
 "globalsv1": ""
 }
@@ -50,7 +50,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://assets/code/common_scripts/globalsv2.gd"
+Globals="*res://assets/code/common_scripts/globals.gd"
 ProgramAlerts="*res://assets/code/common_scripts/program_alerts.gd"
 
 [display]

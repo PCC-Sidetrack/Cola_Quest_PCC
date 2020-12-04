@@ -9,16 +9,16 @@
 #-----------------------------------------------------------------------------#
 #                               Inheiritance                                  #
 #-----------------------------------------------------------------------------#
-extends EntityV2
+extends Entity
 
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
 # Speed
-export var movement_speed: float = 200.0
+export var movement_speed: float = 5.0
 
-export var health:        int   = 10
-export var damage:        int   = 5
+export var health:        int   = 1
+export var damage:        int   = 1
 export var acceleration:  float = 30.0
 export var jump_velocity: float = 0.0
 export var obeys_gravity: bool  = true
@@ -48,3 +48,22 @@ func _physics_process(_delta: float) -> void:
 	# Change the direction if the entity hits a wall
 	if is_on_wall():
 		_direction = -_direction
+		
+
+#-----------------------------------------------------------------------------#
+#                            Trigger Functions                                #
+#-----------------------------------------------------------------------------#
+# Triggered whenever the entity detects a collision
+func _on_S7_running_eagor_collision(body):
+	# This is a workaround for an odd glitch. For some reason the player doesn't
+	# always detect a collision with projectiles. (Spent hours trying to figure
+	# out why but couldn't). So I perform a knockbapck in this collision code instead
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.knockback(self)
+		deal_damage(body)
+
+func _on_S7_running_eagor_death():
+	pass # Replace with function body.
+
+func _on_S7_running_eagor_health_changed(change):
+	pass # Replace with function body.

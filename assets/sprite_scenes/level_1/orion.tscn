@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://assets/code/level_1/orionV2.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/level_1/orion.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S8_orion_enemy/S8_orion_enemy_idle.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/level_1/sprites/S8_orion_enemy/S8_orion_enemy_attack.png" type="Texture" id=3]
 
@@ -110,10 +110,12 @@ disabled = true
 [node name="spear_spawn" type="Node2D" parent="."]
 position = Vector2( -14, -7 )
 
-
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.205231, 4.72041 )
 shape = SubResource( 19 )
+[connection signal="collision" from="." to="." method="_on_Orion_collision"]
+[connection signal="death" from="." to="." method="_on_Orion_death"]
+[connection signal="health_changed" from="." to="." method="_on_Orion_health_changed"]

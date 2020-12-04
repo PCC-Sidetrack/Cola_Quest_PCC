@@ -28,10 +28,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 12.6324, 15.5461 )
+extents = Vector2( 7.07079, 14.5706 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 11.4765, 10.4292 )
+extents = Vector2( 7.29511, 9.76154 )
 
 [node name="S7_running_eagor" type="KinematicBody2D"]
 collision_layer = 2
@@ -42,7 +42,7 @@ script = ExtResource( 1 )
 position = Vector2( -0.093895, -16.0562 )
 frames = SubResource( 5 )
 animation = "run"
-frame = 2
+frame = 3
 playing = true
 flip_h = true
 
@@ -70,3 +70,6 @@ modulate = Color( 0.160784, 0.0862745, 0.678431, 1 )
 position = Vector2( 0.347181, -0.0384931 )
 shape = SubResource( 7 )
 disabled = true
+[connection signal="collision" from="." to="." method="_on_S7_running_eagor_collision"]
+[connection signal="death" from="." to="." method="_on_S7_running_eagor_death"]
+[connection signal="health_changed" from="." to="." method="_on_S7_running_eagor_health_changed"]

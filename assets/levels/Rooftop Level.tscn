@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/sprite_scenes/level_1/S7_running_eagor.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/code/common_scripts/killzone.gd" type="Script" id=18]
 
 [sub_resource type="TileSet" id=1]
 0/name = "rooftop_background_tilesheet.png 0"
@@ -1466,6 +1467,9 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 22/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=91]
+extents = Vector2( 13952, 352 )
+
 [node name="rooftop_level" type="Node2D"]
 
 [node name="parallaxing" type="Node2D" parent="."]
@@ -1575,88 +1579,89 @@ script = ExtResource( 1 )
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6224, -75 )
-frame = 0
+frame = 2
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6571, -102 )
+frame = 1
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 848, 21 )
+frame = 1
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10255, 118 )
-frame = 2
+frame = 0
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10416, 149 )
-frame = 2
+frame = 0
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10613, 218 )
-frame = 1
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10672, 310 )
-frame = 1
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10928, 246 )
-frame = 1
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 11056, 342 )
-frame = 0
+frame = 2
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 11920, 23 )
-frame = 0
+frame = 2
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 16784, 54 )
+frame = 1
 
 [node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
 position = Vector2( 16482, -28 )
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6224, -75 )
+frame = 1
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6571, -102 )
-frame = 2
+frame = 0
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 848, 21 )
-frame = 2
+frame = 0
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10255, 118 )
-frame = 1
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10416, 149 )
-frame = 1
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10613, 218 )
-frame = 0
+frame = 2
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10672, 310 )
-frame = 0
+frame = 2
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10928, 246 )
-frame = 0
+frame = 2
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 11056, 342 )
+frame = 1
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 11920, 23 )
+frame = 1
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 16784, 54 )
-frame = 2
+frame = 0
 
 [node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
 position = Vector2( 16482, -28 )
@@ -1666,7 +1671,7 @@ position = Vector2( 16482, -28 )
 [node name="drones" type="Node2D" parent="enemies"]
 
 [node name="Drone_a" parent="enemies/drones" instance=ExtResource( 7 )]
-position = Vector2( 958, 53 )
+position = Vector2( 724, 133 )
 
 [node name="Drone_a2" parent="enemies/drones" instance=ExtResource( 7 )]
 position = Vector2( 4078, 28 )
@@ -1758,13 +1763,19 @@ position = Vector2( 14976, 352 )
 [node name="S7_running_eagor2" parent="enemies/eagors" instance=ExtResource( 16 )]
 position = Vector2( 15872, 352 )
 
-[node name="S7_running_eagor3" parent="enemies/eagors" instance=ExtResource( 16 )]
-position = Vector2( 15776, 352 )
-
 [node name="orions" type="Node2D" parent="enemies"]
 
 [node name="orion" parent="enemies/orions" instance=ExtResource( 15 )]
 position = Vector2( 8926, -93 )
+
+[node name="killzone" type="Area2D" parent="enemies"]
+visible = false
+position = Vector2( -288, 1408 )
+script = ExtResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/killzone"]
+position = Vector2( 10718, 1120 )
+shape = SubResource( 91 )
 
 [node name="smoke" type="Node2D" parent="."]
 
@@ -1776,7 +1787,38 @@ position = Vector2( 3920, 120 )
 [node name="spawnpoints" type="Node2D" parent="."]
 
 [node name="spawnpoint" parent="spawnpoints" instance=ExtResource( 17 )]
-position = Vector2( 160, 224 )
+position = Vector2( 1432, 18 )
+
+[node name="spawnpoint2" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 2976, 2 )
+
+[node name="spawnpoint4" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 5184, 63 )
+
+[node name="spawnpoint5" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 7232, -160 )
+
+[node name="spawnpoint6" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 8192, 137 )
+
+[node name="spawnpoint7" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 9184, 120 )
+
+[node name="spawnpoint9" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 11104, 458 )
+
+[node name="spawnpoint10" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 11648, 224 )
+
+[node name="spawnpoint11" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 12704, 273 )
+
+[node name="spawnpoint12" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 14400, 289 )
+
+[node name="spawnpoint14" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 17120, 61 )
 
 [node name="player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 608, 192 )
+position = Vector2( 160, 192 )
+[connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
