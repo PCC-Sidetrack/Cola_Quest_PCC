@@ -313,9 +313,8 @@ func jump(height: float) -> void:
 	_movement.current_velocity.y = _movement.initial_jump_velocity * -height
 
 # Cause the entity that calls this function to knockback based off of the entity's speed and the referenced entity's damage
-func knockback(other_entity: Object):
-	if other_entity.has_method("get_knockback_multiplier") and other_entity.has_method("get_position"):
-		set_velocity(other_entity.get_position().direction_to(global_position).normalized() * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
+func knockback(other_entity: Object) -> void:
+	set_velocity(other_entity.get_position().direction_to(global_position).normalized() * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
 
 
 # A generic move function that determines what kind of movement the entity contains

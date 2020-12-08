@@ -17,12 +17,23 @@ var alert: Dictionary = {
 # Gives warnings and erorrs to the programmer after the window has been closed
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		for warning in alert.warning:
-			push_warning(warning)
-		for error in alert.error:
-			push_error(error)
+		# Add push warnings and errors, and also print them to the console
+		if alert.error.size() > 0:
+			print("\n\nERORS: \n_____________")
+			for error in alert.error:
+				push_error(error)
+				print("\n* ", error)
 		
+		if alert.warning.size() > 0:
+			print("WARNINGS:\n_____________")
+			for warning in alert.warning:
+				push_warning(warning)
+				print("\n* ", warning)
+		
+		# print an extra couple of lines to make the console easier to read
+		print("\n\n\n")
 		get_tree().quit()
+		
 
 
 # Add error to be reported

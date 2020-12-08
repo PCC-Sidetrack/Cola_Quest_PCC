@@ -10,6 +10,11 @@ extends Node
 # The position of the player
 # This is here only to aid in locating the player, considering the fact that many things will need the players location and that the player will probably not be in the same tree in every level
 var player_position: Vector2 = Vector2.ZERO
+
+# Holds reference to the player node itself so it can be easily referenced
+# This variable is set by the player.gd ready() function
+var player:          Entity = null
+
 # Whether or not the player controls are currently locked (used for cutscenes)
 var game_locked:     bool    = false
 
