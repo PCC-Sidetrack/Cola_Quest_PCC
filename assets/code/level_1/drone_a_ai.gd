@@ -9,7 +9,11 @@
 extends Entity
 
 #-----------------------------------------------------------------------------#
+<<<<<<< Updated upstream
 #                           Exported Variables                                #
+=======
+#                           Constant Variables                                #
+>>>>>>> Stashed changes
 #-----------------------------------------------------------------------------#
 # Holds a reference to the 3x5_projectile scene
 const STUDY_CARD = preload("res://assets//sprite_scenes//level_1//study_card_projectile.tscn")
@@ -78,5 +82,9 @@ func _shoot() -> void:
 	# Create, initialize, and add a new study card projectile to the drone
 	var study_card = STUDY_CARD.instance()
 	study_card.initialize(false, projectile_speed, projectile_life)
+<<<<<<< Updated upstream
+=======
+	study_card.get_node("AnimatedSprite").play("spin")
+>>>>>>> Stashed changes
 	$StudyCardSpawn.add_child(study_card)
 	_shoot_update_time = 0.0

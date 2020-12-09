@@ -9,9 +9,24 @@
 #-----------------------------------------------------------------------------#
 #                               Inheiritance                                  #
 #-----------------------------------------------------------------------------#
-extends Entity
+extends EntityV2
 
 #-----------------------------------------------------------------------------#
+<<<<<<< Updated upstream
+=======
+#                           Exported Variables                                #
+#-----------------------------------------------------------------------------#
+# Speed
+export var movement_speed: float = 200.0
+
+export var health:        int   = 10
+export var damage:        int   = 5
+export var acceleration:  float = 30.0
+export var jump_velocity: float = 0.0
+export var obeys_gravity: bool  = true
+
+#-----------------------------------------------------------------------------#
+>>>>>>> Stashed changes
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # The direction the enemy is moving
@@ -35,5 +50,9 @@ func _physics_process(_delta: float) -> void:
 	
 	# Change the direction the enemy is moving
 	if is_on_wall():
+<<<<<<< Updated upstream
 		_direction             = -_direction
 		$AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
+=======
+		_direction = -_direction
+>>>>>>> Stashed changes

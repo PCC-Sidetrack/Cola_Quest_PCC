@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=96 format=2]
+=======
+[gd_scene load_steps=108 format=2]
+>>>>>>> Stashed changes
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=2]
@@ -13,6 +17,13 @@
 [ext_resource path="res://assets/art/level_1/parallaxing/background/PL3_crowne_centre/PL3_crowne_centre.png" type="Texture" id=11]
 [ext_resource path="res://assets/art/level_1/parallaxing/background/PL4_rooftop_boss_arena/PL4.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprite_scenes/level_1/bird.tscn" type="PackedScene" id=13]
+<<<<<<< Updated upstream
+=======
+[ext_resource path="res://assets/art/level_1/parallaxing/background/PL1_blue_sky_clouds/PL1b_blue_sky_clouds.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/sprite_scenes/level_1/S7_running_eagor.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=17]
+>>>>>>> Stashed changes
 
 [sub_resource type="TileSet" id=1]
 0/name = "rooftop_background_tilesheet.png 0"
@@ -1301,6 +1312,145 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 18/z_index = 0
+<<<<<<< Updated upstream
+=======
+19/name = "rooftop_level_tilesheet.png 19"
+19/texture = ExtResource( 2 )
+19/tex_offset = Vector2( 0, 0 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 0, 256, 64, 32 )
+19/tile_mode = 2
+19/autotile/icon_coordinate = Vector2( 0, 0 )
+19/autotile/tile_size = Vector2( 32, 32 )
+19/autotile/spacing = 0
+19/autotile/occluder_map = [  ]
+19/autotile/navpoly_map = [  ]
+19/autotile/priority_map = [  ]
+19/autotile/z_index_map = [  ]
+19/occluder_offset = Vector2( 0, 0 )
+19/navigation_offset = Vector2( 0, 0 )
+19/shape_offset = Vector2( 0, 0 )
+19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape = SubResource( 61 )
+19/shape_one_way = false
+19/shape_one_way_margin = 1.0
+19/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 61 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 62 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+19/z_index = 0
+20/name = "rooftop_level_tilesheet.png 20"
+20/texture = ExtResource( 2 )
+20/tex_offset = Vector2( 0, 0 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 64, 256, 64, 32 )
+20/tile_mode = 2
+20/autotile/icon_coordinate = Vector2( 0, 0 )
+20/autotile/tile_size = Vector2( 32, 32 )
+20/autotile/spacing = 0
+20/autotile/occluder_map = [  ]
+20/autotile/navpoly_map = [  ]
+20/autotile/priority_map = [  ]
+20/autotile/z_index_map = [  ]
+20/occluder_offset = Vector2( 0, 0 )
+20/navigation_offset = Vector2( 0, 0 )
+20/shape_offset = Vector2( 0, 0 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape = SubResource( 66 )
+20/shape_one_way = false
+20/shape_one_way_margin = 1.0
+20/shapes = [ {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 66 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 67 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+20/z_index = 0
+21/name = "rooftop_level_tilesheet.png 21"
+21/texture = ExtResource( 2 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 128, 256, 64, 32 )
+21/tile_mode = 2
+21/autotile/icon_coordinate = Vector2( 0, 0 )
+21/autotile/tile_size = Vector2( 32, 32 )
+21/autotile/spacing = 0
+21/autotile/occluder_map = [  ]
+21/autotile/navpoly_map = [  ]
+21/autotile/priority_map = [  ]
+21/autotile/z_index_map = [  ]
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape = SubResource( 68 )
+21/shape_one_way = false
+21/shape_one_way_margin = 1.0
+21/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 68 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 69 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+21/z_index = 0
+22/name = "rooftop_level_tilesheet.png 22"
+22/texture = ExtResource( 2 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 192, 256, 64, 32 )
+22/tile_mode = 2
+22/autotile/icon_coordinate = Vector2( 0, 0 )
+22/autotile/tile_size = Vector2( 32, 32 )
+22/autotile/spacing = 0
+22/autotile/occluder_map = [  ]
+22/autotile/navpoly_map = [  ]
+22/autotile/priority_map = [  ]
+22/autotile/z_index_map = [  ]
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape = SubResource( 70 )
+22/shape_one_way = false
+22/shape_one_way_margin = 1.0
+22/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 70 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 71 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+22/z_index = 0
+>>>>>>> Stashed changes
 
 [node name="rooftop_level" type="Node2D"]
 
@@ -1389,7 +1539,55 @@ script = ExtResource( 1 )
 [node name="Drone_a" parent="drones" instance=ExtResource( 7 )]
 position = Vector2( 958, 53 )
 
+<<<<<<< Updated upstream
 [node name="Drone_a2" parent="drones" instance=ExtResource( 7 )]
+=======
+[node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 848, 21 )
+frame = 0
+
+[node name="Smoke11" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10255, 118 )
+
+[node name="Smoke5" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10416, 149 )
+
+[node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10613, 218 )
+frame = 2
+
+[node name="Smoke7" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10672, 310 )
+frame = 2
+
+[node name="Smoke8" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 10928, 246 )
+frame = 2
+
+[node name="Smoke9" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 11056, 342 )
+frame = 1
+
+[node name="Smoke10" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 11920, 23 )
+frame = 1
+
+[node name="Smoke" parent="smoke" instance=ExtResource( 9 )]
+position = Vector2( 16784, 54 )
+frame = 0
+
+[node name="drone_b" parent="smoke" instance=ExtResource( 8 )]
+position = Vector2( 16482, -28 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="drones" type="Node2D" parent="enemies"]
+
+[node name="Drone_a" parent="enemies/drones" instance=ExtResource( 7 )]
+position = Vector2( 958, 53 )
+
+[node name="Drone_a2" parent="enemies/drones" instance=ExtResource( 7 )]
+>>>>>>> Stashed changes
 position = Vector2( 4078, 28 )
 
 [node name="drone_b" parent="drones" instance=ExtResource( 8 )]
@@ -1489,6 +1687,7 @@ position = Vector2( 16678, 96 )
 movement_speed = 40.0
 turnaround_time = 7
 
+<<<<<<< Updated upstream
 [node name="smoke" type="Node2D" parent="."]
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 9 )]
@@ -1497,6 +1696,25 @@ frame = 0
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 6571, -102 )
+=======
+[node name="eagors" type="Node2D" parent="enemies"]
+
+[node name="S7_running_eagor" parent="enemies/eagors" instance=ExtResource( 16 )]
+position = Vector2( 14976, 352 )
+
+[node name="S7_running_eagor2" parent="enemies/eagors" instance=ExtResource( 16 )]
+position = Vector2( 15872, 352 )
+
+[node name="S7_running_eagor3" parent="enemies/eagors" instance=ExtResource( 16 )]
+position = Vector2( 15776, 352 )
+
+[node name="orions" type="Node2D" parent="enemies"]
+
+[node name="orion" parent="enemies/orions" instance=ExtResource( 15 )]
+position = Vector2( 8926, -93 )
+
+[node name="smoke" type="Node2D" parent="."]
+>>>>>>> Stashed changes
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 848, 21 )
@@ -1509,6 +1727,7 @@ frame = 2
 position = Vector2( 10416, 149 )
 frame = 2
 
+<<<<<<< Updated upstream
 [node name="Smoke6" parent="smoke" instance=ExtResource( 9 )]
 position = Vector2( 10613, 218 )
 frame = 1
@@ -1551,3 +1770,10 @@ turnaround_time = 4.0
 
 [node name="player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 195, 192 )
+=======
+[node name="spawnpoint" parent="spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 160, 224 )
+
+[node name="player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 608, 192 )
+>>>>>>> Stashed changes

@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=3]
-[ext_resource path="res://assets/code/common_scripts/player.gd" type="Script" id=4]
+[ext_resource path="res://assets/code/common_scripts/playerv2.gd" type="Script" id=4]
 [ext_resource path="res://assets/art/level_1/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
@@ -109,7 +109,7 @@ shape = SubResource( 5 )
 
 [node name="hitbox" type="Area2D" parent="."]
 visible = false
-collision_mask = 6
+collision_mask = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 modulate = Color( 0.203922, 0.423529, 1, 1 )
@@ -150,10 +150,18 @@ frame = 2
 current = true
 zoom = Vector2( 1.25, 1.25 )
 limit_left = 0
+<<<<<<< Updated upstream
 limit_top = -512
+=======
+limit_top = -1024
+>>>>>>> Stashed changes
 limit_bottom = 1024
 limit_smoothed = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 editor_draw_screen = false
+<<<<<<< Updated upstream
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+=======
+[connection signal="body_entered" from="Area2D" to="." method="_on_hitbox_body_entered"]
+>>>>>>> Stashed changes

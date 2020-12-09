@@ -10,11 +10,14 @@ extends    Entity
 class_name Projectile
 
 #-----------------------------------------------------------------------------#
+<<<<<<< Updated upstream
 #                            Public Variables                                 #
 #-----------------------------------------------------------------------------#
 
 
 #-----------------------------------------------------------------------------#
+=======
+>>>>>>> Stashed changes
 #                            Private Variables                                #
 #-----------------------------------------------------------------------------#
 var _target_position: Vector2 = Globals.player_position
@@ -22,6 +25,15 @@ var _target_position: Vector2 = Globals.player_position
 var _target:          Node2D  = null
 # Whether the projectile targets the player
 var _homing:          bool    = false
+<<<<<<< Updated upstream
+=======
+# Whether the projectile rotates while hominb
+var _rot_homing:      bool    = false
+# False if rotation has not yet been initially set
+var _rot_init_set:	  bool    = false
+# Multiplied by the angle to allow simple flipping of rotations
+var _rot_multiplier:  float   = 1.0
+>>>>>>> Stashed changes
 # Holds the acceleration of the projectile
 var _acceleration: 	  Vector2 = Vector2.ZERO
 # Speed of the projectile
@@ -33,7 +45,11 @@ var _steer_force:  	  float   = 50.0
 # Timer controlling how long before the projectile is deleted
 var _proj_timer:      float  = 0.0
 # Life of the projectile in seconds
+<<<<<<< Updated upstream
 var _proj_life:       float  = 5.0
+=======
+var _proj_life:       float  = 1.0
+>>>>>>> Stashed changes
 
 #-----------------------------------------------------------------------------#
 #                               Constructor                                   #
@@ -42,13 +58,20 @@ func _ready() -> void:
 	# TODO: Add timer that deletes entity after timeout
 	set_obeys_gravity(true)
 	set_type("projectile")
+<<<<<<< Updated upstream
 	$AnimatedSprite.play("spin")
+=======
+>>>>>>> Stashed changes
 
 #-----------------------------------------------------------------------------#
 #                            Public Functions                                 #
 #-----------------------------------------------------------------------------#
 # Initialize the projectile
 func initialize(homing: bool, speed: float = _proj_speed, lifetime: float = _proj_life,
+<<<<<<< Updated upstream
+=======
+		rot_homing: bool = _rot_homing, rot_multiplier: float = _rot_multiplier,
+>>>>>>> Stashed changes
 		target: Node2D = self._target, target_position: Vector2 = _target_position,
 		init_velocity:   Vector2 = _velocity, steer_force: float  = _steer_force) -> void:
 	
@@ -56,14 +79,25 @@ func initialize(homing: bool, speed: float = _proj_speed, lifetime: float = _pro
 	_homing = homing
 	_proj_speed  	 = speed
 	_proj_life       = lifetime
+<<<<<<< Updated upstream
 	steer_force 	 = steer_force
 	_target_position = target_position
 	_target          = target
+=======
+	_rot_homing      = rot_homing
+	_rot_multiplier  = rot_multiplier
+	steer_force 	 = steer_force
+	_target_position = target_position
+	_target          = target	
+>>>>>>> Stashed changes
 		
 	# Only set the starting _velocity if it was given and homing is on
 	if init_velocity != null and homing == true:
 		_velocity = init_velocity
+<<<<<<< Updated upstream
 	
+=======
+>>>>>>> Stashed changes
 
 # Calculate the velocity needed to collide with the current position of the player
 func steer_at_target() -> Vector2:
@@ -77,6 +111,12 @@ func steer_at_target() -> Vector2:
 	else:
 		steer = desired_velocity
 		
+<<<<<<< Updated upstream
+=======
+	if _homing and _rot_homing:
+		rotation = (steer * _rot_multiplier).angle()
+		
+>>>>>>> Stashed changes
 	# Add the steer force to the acceleration vector of the projectile
 	_acceleration += steer
 	
@@ -181,9 +221,21 @@ func _physics_process(delta: float) -> void:
 			set_target_position(Globals.player_position)
 		
 	# Set the projectile's current velocity
+<<<<<<< Updated upstream
 	steer_at_target()
 	_velocity += _acceleration * delta
 	_velocity = _velocity.clamped(_proj_speed)
+=======
+	var steer: Vector2 =  steer_at_target()
+	
+	_velocity += _acceleration * delta
+	_velocity = _velocity.clamped(_proj_speed)
+	
+	# Set the initial rotation
+	if not _rot_init_set:
+		rotation = (steer * _rot_multiplier).angle()
+		_rot_init_set = true
+>>>>>>> Stashed changes
 		
 	# Move the projectile towards the current position using its velocity
 	var collision = self.move_and_collide(_velocity * delta)
@@ -197,4 +249,8 @@ func _physics_process(delta: float) -> void:
 	_proj_timer += delta
 	
 	if _proj_timer >= _proj_life:
+<<<<<<< Updated upstream
+=======
+		print("proj deleted")
+>>>>>>> Stashed changes
 		on_exceeds_lifetime()
