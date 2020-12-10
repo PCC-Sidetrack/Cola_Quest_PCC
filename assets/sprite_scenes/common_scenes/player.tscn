@@ -147,7 +147,7 @@ hframes = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 1.25, 1.25 )
+zoom = Vector2( 1.5, 1.5 )
 limit_left = -2048
 limit_top = -1024
 limit_bottom = 1024

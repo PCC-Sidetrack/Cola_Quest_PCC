@@ -35,7 +35,7 @@ position = Vector2( 0, 11.75 )
 scale = Vector2( 0.875, 2.7375 )
 frames = SubResource( 5 )
 animation = "smoke"
-frame = 3
+frame = 1
 playing = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

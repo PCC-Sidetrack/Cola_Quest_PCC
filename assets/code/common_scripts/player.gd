@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
-# File Name:   player.gd
-# Description: The controls and physics for the player entity
-# Author:      Jeff Newell (mostly) & Andrew Zedwick
-# Company:     Sidetrack
-# Date:        November 8, 2020
+# File Name:    player.gd
+# Description:  The controls and physics for the player entity
+# Author:       Jeff Newell (mostly) & Andrew Zedwick
+# Company:      Sidetrack
+# Last Updated: December 8, 2020
 #-----------------------------------------------------------------------------#
 
 extends Entity
@@ -14,27 +14,34 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                             Export Variables                                #
 #-----------------------------------------------------------------------------#
-export var accelleration:        float = 20.0
-export var damage:               int   = 1
-export var debug:                bool  = false
-export var health:               int   = 5
-export var invlunerability_time: float = 0.7
-#export var jump_height:         float = 4.5
-#export var jump_speed:          float = 0.05
-export var jump_speed:           float = 850.0
-export var knockback_multiplier: float = 3.0
-export var speed:                float = 8.0
+export var accelleration:        float   = 20.0
+export var camera_zoom:          Vector2 = Vector2(1.5, 1.5)
+export var damage:               int     = 1
+export var debug:                bool    = false
+export var health:               int     = 5
+export var invlunerability_time: float   = 0.7
+#export var jump_height:         float   = 4.5
+#export var jump_speed:          float   = 0.05
+export var jump_speed:           float   = 850.0
+export var knockback_multiplier: float   = 3.0
+export var speed:                float   = 8.0
 
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # Time between dashes
-var _dash_cooldown:    float = _DASH_REFRESH
+var _dash_cooldown:     float = _DASH_REFRESH
 # How many dashes the player has left in air
-var _remaining_dashes: int   = _MAX_DASHES
+var _remaining_dashes:  int   = _MAX_DASHES
 # How many jumps the player has left
-var _remaining_jumps:  int   = _MAX_JUMPS
+var _remaining_jumps:   int   = _MAX_JUMPS
+# Holds the inital zoom
+var _init_camera_zoom:  Vector2
+# Specifies the speed that the camera is zoomed to a new location
+var _camera_zoom_speed: int   = 5
+# Holds the current zoom of the camera. Used for smooth zoom changes
+var _current_zoom
 
 
 #-----------------------------------------------------------------------------#
@@ -66,6 +73,13 @@ const SPRITE: Dictionary = {
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
+	# Set the global player reference variable
+	Globals.player = get_node(self.get_path())
+	
+	# Save the initial and current camera zoom
+	_init_camera_zoom = camera_zoom
+	_current_zoom     = camera_zoom
+	
 	_check_configuration()
 	
 	initialize_player       (health, damage, speed, accelleration, jump_speed, true)
@@ -75,6 +89,26 @@ func _ready() -> void:
 	_switch_sprite          (SPRITE.IDLE)
 
 #-----------------------------------------------------------------------------#
+#                             Public Functions                                #
+#-----------------------------------------------------------------------------#
+# Set the speed that the camera is zoomed in and out
+func set_camera_zoom_speed(speed: int) -> void:
+	_camera_zoom_speed = speed
+	
+# Get the speed that the camera is zoomed in and out
+func get_camera_zoom_speed() -> int:
+	return _camera_zoom_speed
+	
+# Resets the zoom of the camera to the inital zoom
+func reset_camera_zoom() -> void:
+	camera_zoom = _init_camera_zoom
+	
+# Zooms the camera based on the multiplier given and returns the desired zoom vector
+func zoom(multiplier: float) -> Vector2:
+	camera_zoom = camera_zoom * multiplier
+	return camera_zoom
+
+#-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
 func _physics_process(delta: float) -> void:
@@ -82,6 +116,13 @@ func _physics_process(delta: float) -> void:
 	
 	move_dynamically(_get_input())
 	_refresh        (delta)
+	
+	# Set the camera's zoom smoothly
+	if _current_zoom != camera_zoom:
+		_current_zoom = lerp(_current_zoom, camera_zoom, _camera_zoom_speed * delta)
+	
+		$Camera2D.zoom = _current_zoom
+	
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
@@ -176,7 +217,6 @@ func _switch_sprite(new_sprite: String) -> void:
 # Triggered whenever the player collides with something
 func _on_player_collision(body):
 	if body.has_method("is_in_group"):
-		
 		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
 			take_damage(body.get_damage())
 			knockback(body)
@@ -189,6 +229,9 @@ func _on_player_health_changed(change):
 
 # Triggered whenever the player dies
 func _on_player_death():
+	
+	print("Player Died")
+	
 	# Lock the game and have a short cooldown before respawning
 	set_invulnerability(100000.0)
 	Globals.game_locked = true
