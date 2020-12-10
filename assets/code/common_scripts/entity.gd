@@ -16,14 +16,29 @@ extends    KinematicBody2D
 #                                 Signals                                     #
 #-----------------------------------------------------------------------------#
 # Emitted whenever the entity's health is changed
-signal health_changed
+signal health_changed(ammount)
 # Emitted whenever they entity's health falls to zero or below
-signal death
+signal death()
 # Emitted whenever the entity collides with something
-signal collision
+signal collision(body)
+# Emitted whenever an AI instruction set is executed
+signal instruction_executed(name, id)
 
 #-----------------------------------------------------------------------------#
-#                                Variables                                    #
+#                               Public Constants                              #
+#-----------------------------------------------------------------------------#
+# Holds the names for various AI instructions
+const INSTRUCTIONS: Dictionary = {
+	MOVE_DISTANCE = "distance",
+	MOVE_DURATION = "duration",
+	MOVE_TO_POINT = "end_point",
+	JUMP          = "jump",
+	WAIT          = "wait",
+	NONE          = "none",
+}
+
+#-----------------------------------------------------------------------------#
+#                              Private Variables                              #
 #-----------------------------------------------------------------------------#
 # The damage the entity does
 var _damage: Dictionary = {
@@ -58,6 +73,8 @@ var _metadata: Dictionary = {
 	life_time           = -1.0,
 	movement            = {
 		current_instruction = 0,
+		prev_instruction    = -1,
+		used_ids            = [-1],
 		instructions        = {},
 		is_looping          = false,
 	},
@@ -93,37 +110,57 @@ func _draw() -> void:
 #-----------------------------------------------------------------------------#
 #                             Getter Functions                                #
 #-----------------------------------------------------------------------------#
-func get_current_instruction () -> int:
+func get_current_instruction  () -> int:
 	return _metadata.movement.current_instruction
-func get_current_health      () -> int:
+func get_current_instruction_name() -> String:
+	var name: String = INSTRUCTIONS.NONE
+	if _metadata.movement.instructions != {}:
+		name = _metadata.movement.instructions[_metadata.movement.current_instruction].name
+	return name
+func get_current_instruction_id() -> int:
+	var id: int = -1
+	if _metadata.movement.instructions != {}:
+		id = _metadata.movement.instructions[_metadata.movement.current_instruction].id
+	return id
+func get_current_health       () -> int:
 	return round(_health.current) as int
-func get_current_velocity    () -> Vector2:
+func get_current_velocity     () -> Vector2:
 	return _movement.current_velocity
-func get_damage              () -> int:
+func get_damage               () -> int:
 	return round(_damage.amount) as int
-func get_invulnerability     () -> bool:
+func get_invulnerability      () -> bool:
 	return _health.invulnerability_duration > 0.0
-func get_last_direction      () -> Vector2:
+func get_last_direction       () -> Vector2:
 	return _metadata.last_direction
-func get_max_health          () -> int:
+func get_prev_instruction_name() -> String:
+	var name: String = INSTRUCTIONS.NONE
+	if _metadata.movement.instructions != {}:
+		name = _metadata.movement.instructions[_metadata.movement.prev_instruction].name
+	return name
+func get_prev_instruction_id() -> int:
+	var id: int = -1
+	if _metadata.movement.instructions != {} and _metadata.movement.prev_instruction >= 0:
+		id = _metadata.movement.instructions[_metadata.movement.prev_instruction].id
+	return id
+func get_max_health           () -> int:
 	return round(_health.maximum) as int
 func get_spawn_point          () -> Vector2:
 	return _metadata.spawn_point
-#func get_obeys_gravity      () -> bool:
+#func get_obeys_gravity       () -> bool:
 #	return _movement.gravity > 0.0
-func get_obeys_gravity       () -> bool:
+func get_obeys_gravity        () -> bool:
 	return _metadata.obeys_gravity
-func get_position            () -> Vector2:
+func get_position             () -> Vector2:
 	return global_position
-func get_speed               () -> float:
+func get_speed                () -> float:
 	return _movement.speed
-func get_time_in_air         () -> float:
+func get_time_in_air          () -> float:
 	return _metadata.time_in_air
-func get_time_in_direction   () -> Vector2:
+func get_time_in_direction    () -> Vector2:
 	return _metadata.time_in_direction
-func get_time_on_ground      () -> float:
+func get_time_on_ground       () -> float:
 	return _metadata.time_on_ground
-func get_knockback_multiplier() -> float:
+func get_knockback_multiplier () -> float:
 	return _damage.knockback_multiplier
 
 #-----------------------------------------------------------------------------#
@@ -226,18 +263,6 @@ func delete() -> void:
 	# Delete the entity
 	queue_free()
 
-# Create a distance array instruction
-func distance(direction: Vector2, distance: float) -> Array:
-	return ["distance", direction, distance]
-
-# Create a duration array instruction
-func duration(direction: Vector2, duration: float) -> Array:
-	return["duration", direction, duration]
-
-# Create an end point array instruction
-func end_point(destination: Vector2) -> Array:
-	return ["point", destination]
-
 # Initialize a collectable entity
 func initialize_collectable() -> void:
 	add_to_group   (Globals.GROUP.COLLECTABLE)
@@ -330,12 +355,26 @@ func move() -> bool:
 	
 	if not current_instruction.is_completed:
 		did_move = true
-		if current_instruction.has("distance_remaining"):
-			_move_distance(current_instruction)
-		elif current_instruction.has("duration_remaining"):
-			_move_duration(current_instruction)
-		elif current_instruction.has("end_point"):
-			_move_to_point(current_instruction)
+		
+		match current_instruction.name:
+			INSTRUCTIONS.MOVE_DISTANCE:
+				_move_distance(current_instruction)
+			INSTRUCTIONS.MOVE_DURATION:
+				_move_duration(current_instruction)
+			INSTRUCTIONS.MOVE_TO_POINT:
+				_move_to_point(current_instruction)
+			INSTRUCTIONS.JUMP:
+				jump(current_instruction.jump_height)
+			INSTRUCTIONS.WAIT:
+				_wait(current_instruction)
+				
+		# If the instruction id has changed since the last instruction, emit a signal
+		if get_current_instruction_id() != get_prev_instruction_id():
+			emit_signal("instruction_executed", current_instruction.name, current_instruction.id)
+	
+		
+		# Set the previous instruction executed to the current instruction
+		_metadata.movement.prev_instruction = _metadata.movement.current_instruction
 	
 	if current_instruction.is_completed:
 		_next_instruction()
@@ -383,7 +422,32 @@ func move_dynamically(direction: Vector2) -> void:
 func spin(deg_per_second: float, direction: float) -> void:
 	rotate(deg2rad(deg_per_second * direction))
 	
+#-----------------------------------------------------------------------------#
+#                         AI Instruction Set Methods                          #
+#-----------------------------------------------------------------------------#
 
+# Create a distance array instruction - used to move a certain distance
+func distance(direction: Vector2, distance: float, instr_id = -1) -> Array:
+	return [INSTRUCTIONS.MOVE_DISTANCE, instr_id, direction, distance]
+
+# Create a duration array instruction - used to move in a direction for a duration
+func duration(direction: Vector2, duration: float, instr_id: int = -1) -> Array:
+	return[INSTRUCTIONS.MOVE_DURATION, instr_id, direction, duration]
+
+# Create an end point array instruction - used to move to a specific point
+func end_point(destination: Vector2, instr_id: int = -1) -> Array:
+	return [INSTRUCTIONS.MOVE_TO_POINT, instr_id, destination]
+	
+func move_to_spawn(instr_id: int = -1) -> Array:
+	return [INSTRUCTIONS.MOVE_TO_POINT, instr_id, "spawn"]
+	
+# Create a jump array instruction - used to cause an entity to jump
+func jump_inst(height: float, instr_id: int = -1) -> Array:
+	return [INSTRUCTIONS.JUMP, instr_id, height]
+	
+# Create a wait array instruction - used to cause an entity to wait
+func wait(duration: float, instr_id: int = 0) -> Array:
+	return [INSTRUCTIONS.WAIT, instr_id, duration]
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -442,6 +506,8 @@ func _movement_reset(movement_set: Dictionary) -> void:
 # Move to the next instruction and if looping, loop to beginning
 func _next_instruction() -> void:
 	_movement_reset(_metadata.movement.instructions[_metadata.movement.current_instruction])
+	
+	# Move the current instruction to the next instruction
 	if _metadata.movement.current_instruction < _metadata.movement.instructions.size():
 		_metadata.movement.current_instruction += 1
 	
@@ -487,24 +553,45 @@ func _show_direction() -> void:
 # Turn an instruction into a movement set
 func _to_movement_set(instruction: Array) -> Dictionary:
 	var new_movement_set: Dictionary = {}
+	var used_ids:         Array      = _metadata.movement.used_ids
 	
 	new_movement_set.is_completed = false
 	
+	# Set the name and id for the instruction (which is set for every instruction
+	new_movement_set.name = instruction[0]
+	
+	# If the id given is -1, then pick the next unused id number (autogenerating an id)
+	if instruction[1] == -1:
+		var new_id: int     = used_ids[used_ids.size() - 1] + 1
+		new_movement_set.id = new_id
+		used_ids.append(new_id)
+	else:
+		# Check that the id given is not already used. If it is, issue a warning
+		if instruction[1] in used_ids:
+			ProgramAlerts.add_warning("The given instruction id (" + instruction[1].to_string() + ") is already being used. This could cause issues in differentiating between ai instructions.")
+		
+		new_movement_set.id   = instruction[1]
+	
 	match instruction[0]:
-		"distance", "dis":
-			new_movement_set.direction           = instruction[1].normalized()
-			new_movement_set.initial_distance    = Globals.til2pix(instruction[2])
-			new_movement_set.distance_remaining  = Globals.til2pix(instruction[2])
-		"duration", "dur":
-			new_movement_set.direction          = instruction[1].normalized()
-			new_movement_set.initial_duration   = instruction[2]
-			new_movement_set.duration_remaining = instruction[2]
-		"point", "pt":
-			if instruction[1] is String:
-				if instruction[1] == "sp" or instruction[1] =="spawn":
+		INSTRUCTIONS.MOVE_DISTANCE:
+			new_movement_set.direction           = instruction[2].normalized()
+			new_movement_set.initial_distance    = Globals.til2pix(instruction[3])
+			new_movement_set.distance_remaining  = Globals.til2pix(instruction[3])
+		INSTRUCTIONS.MOVE_DURATION:
+			new_movement_set.direction          = instruction[2].normalized()
+			new_movement_set.initial_duration   = instruction[3]
+			new_movement_set.duration_remaining = instruction[3]
+		INSTRUCTIONS.MOVE_TO_POINT:
+			if instruction[2] is String:
+				if instruction[2] == "sp" or instruction[2] =="spawn":
 					new_movement_set.end_point = _metadata.spawn_point
 			else:
-				new_movement_set.end_point = instruction[1]
+				new_movement_set.end_point = instruction[2]
+		INSTRUCTIONS.JUMP:
+			new_movement_set.jump_height = instruction[2]
+		INSTRUCTIONS.WAIT:
+			new_movement_set.wait_duration  = instruction[2]
+			new_movement_set.wait_remaining = instruction[2]
 	
 	return new_movement_set
 
@@ -553,6 +640,14 @@ func _update_time_on_ground(delta: float) -> void:
 			_metadata.time_on_ground += delta
 		else:
 			_metadata.time_on_ground = 0.0
+			
+# Make the entity wait for a set time
+func _wait(instruction: Dictionary) -> void:
+	if instruction.wait_remaining > 0.0:
+		instruction.wait_remaining -= get_physics_process_delta_time()
+	else:
+		instruction.wait_remaining = instruction.wait_duration
+		instruction.is_completed  = true
 
 #-----------------------------------------------------------------------------#
 #                           Depreciated Functions                             #

@@ -1,12 +1,12 @@
 #-----------------------------------------------------------------------------#
-# File Name:    player.gd
+# Class Name:    player.gd
 # Description:  The controls and physics for the player entity
 # Author:       Jeff Newell (mostly) & Andrew Zedwick
 # Company:      Sidetrack
 # Last Updated: December 8, 2020
 #-----------------------------------------------------------------------------#
 
-extends Entityv2
+extends Entity
 
 # The player is the main character in the game
 # The player can be controlled and interacts with the world around it

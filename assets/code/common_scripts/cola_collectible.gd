@@ -6,7 +6,7 @@
 # Date:        October 15, 2020
 #-----------------------------------------------------------------------------#
 
-extends EntityV2
+extends Entity
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
@@ -14,3 +14,12 @@ extends EntityV2
 func _ready() -> void:
 	initialize_collectable()
 	$AnimatedSprite.play("spin")
+
+#-----------------------------------------------------------------------------#
+#                                 Triggers                                    #
+#-----------------------------------------------------------------------------#
+# Because we don't want the player to actually collide with the collectible, we
+# need this trigger to deal with the collectible when the player's collision box
+# enters it. This is also why the CollisionShape2D outside the Area2D is disabled.
+func _on_Area2D_body_entered(body):
+	delete()
