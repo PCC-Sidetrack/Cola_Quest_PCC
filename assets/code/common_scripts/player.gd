@@ -6,7 +6,7 @@
 # Last Updated: December 8, 2020
 #-----------------------------------------------------------------------------#
 
-extends Entity
+extends Entityv2
 
 # The player is the main character in the game
 # The player can be controlled and interacts with the world around it
