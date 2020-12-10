@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/code/level_1/drone_a_aiV2.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/level_1/drone_a_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S1_drone/S1a_drone.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
