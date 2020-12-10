@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/gui/hud/game_UI.gd" type="Script" id=1]
+[ext_resource path="res://assets/gui/menus/failure/failure.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/gui/hud/player_healthbar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/gui/menus/cleared/cleared.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/gui/menus/pause/pause.tscn" type="PackedScene" id=5]
+
+[node name="game_UI" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player_healthbar" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="pause" parent="." instance=ExtResource( 5 )]
+
+[node name="cleared" parent="." instance=ExtResource( 4 )]
+
+[node name="failure" parent="." instance=ExtResource( 2 )]
+[connection signal="health_changed" from="." to="player_healthbar" method="_on_game_UI_health_changed"]
+[connection signal="level_cleared" from="." to="player_healthbar" method="_on_game_UI_level_cleared"]
+[connection signal="level_cleared" from="." to="pause" method="_on_game_UI_level_cleared"]
+[connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
+[connection signal="low_health" from="." to="player_healthbar" method="_on_game_UI_low_health"]
+[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="pause" method="_on_game_UI_player_killed"]
