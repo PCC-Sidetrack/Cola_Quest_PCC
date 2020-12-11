@@ -1105,6 +1105,7 @@ anims/walk_sword = SubResource( 24 )
 position = Vector2( -1, 0 )
 
 [node name="arm_wave" type="Sprite" parent="sprites"]
+visible = false
 texture = ExtResource( 1 )
 hframes = 2
 
@@ -1123,6 +1124,7 @@ hframes = 2
 visible = false
 texture = ExtResource( 4 )
 hframes = 6
+frame = 4
 
 [node name="jump_sword" type="Sprite" parent="sprites"]
 visible = false
@@ -1131,10 +1133,8 @@ texture = ExtResource( 9 )
 hframes = 6
 
 [node name="sword_attack" type="Sprite" parent="sprites"]
-visible = false
 texture = ExtResource( 5 )
 hframes = 6
-frame = 1
 
 [node name="throw" type="Sprite" parent="sprites"]
 visible = false
@@ -1153,12 +1153,10 @@ texture = ExtResource( 8 )
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -27, 5 )
 shape = SubResource( 13 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 0.262745, 0.262745, 0.262745, 1 )
@@ -1166,7 +1164,7 @@ position = Vector2( -27, 5 )
 shape = SubResource( 14 )
 
 [node name="melee" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
 shape = SubResource( 15 )
+[connection signal="instruction_executed" from="." to="." method="_on_zorro_boss_instruction_executed"]

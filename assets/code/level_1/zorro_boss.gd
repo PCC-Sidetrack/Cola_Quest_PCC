@@ -49,7 +49,7 @@ export var health:          int   = 30
 #-----------------------------------------------------------------------------#
 # Holds the positionary nodes for the boss fight
 onready var _nodes: Dictionary = {
-	start_point = self.get_node("boss_movement_points/boss_fight/start_point")
+		start_point = self.get_node("boss_movement_points/boss_fight/start_point")
 	}
 
 # Instruction set for the first stage of the boss fight
@@ -111,4 +111,21 @@ func _change_animation(animation: String, corresponding_sprite: String = "") -> 
 	
 	$AnimationPlayer.play(animation)
 
-
+#-----------------------------------------------------------------------------#
+#                                Trigger Methods                              #
+#-----------------------------------------------------------------------------#
+# Triggered whenever an instruction is executed by the entity
+# NOTE: Name is given automatically from the INSTRUCTIONS dictionary when each
+#       instruction is created using the initialize_instruction() method.
+#       The id can be specified as the last parameter of any instruction (such
+#       as in _stage1_instructions methods) or left blank. I left blank, ids
+#       will be assigned increasingly starting at 0 in the order that the
+#       initial instructions were specified.
+func _on_zorro_boss_instruction_executed(name, id):
+	match name:
+		INSTRUCTIONS.MOVE_DISTANCE:
+			_change_animation("walk_sword")
+		INSTRUCTIONS.WAIT:
+			_change_animation("idle_sword")
+		INSTRUCTIONS.NONE:
+			_change_animation("idle_sword")
