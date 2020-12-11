@@ -6,7 +6,7 @@
 # Last Updated: December 8, 2020
 #-----------------------------------------------------------------------------#
 
-extends EntityV2
+extends Entityv2
 
 # The player is the main character in the game
 # The player can be controlled and interacts with the world around it
@@ -218,7 +218,7 @@ func _switch_sprite(new_sprite: String) -> void:
 func _on_player_collision(body):
 	if body.has_method("is_in_group"):
 		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
-			#take_damage(body.get_damage())
+			take_damage(body.get_damage())
 			knockback(body)
 
 func _on_player_health_changed(change):
@@ -238,7 +238,7 @@ func _on_player_death():
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	# Respawn
-	#global_position = get_spawn_point()
+	global_position = get_spawn_point()
 	set_current_health(get_max_health())
 	Globals.game_locked = false
 	set_invulnerability(invlunerability_time)

@@ -1790,6 +1790,6 @@ position = Vector2( 17284, 224 )
 shape = SubResource( 92 )
 
 [node name="player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 17696, 703 )
+position = Vector2( 146.98, 191.336 )
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
 [connection signal="body_entered" from="triggers/camera_size_trigger" to="triggers/camera_size_trigger" method="_on_camera_size_trigger_body_entered"]
