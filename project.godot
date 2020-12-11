@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/old_scripts/entity_old.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "EntityV2",
+"language": "GDScript",
+"path": "res://assets/code/common_scripts/entityv2.gd"
+}, {
 "base": "EntityOld",
 "class": "Projectile",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Animate_Tiles": "",
 "Entity": "",
 "EntityOld": "",
+"EntityV2": "",
 "Projectile": "",
 "globalsv1": ""
 }
