@@ -462,7 +462,7 @@ func _auto_facing() -> void:
 # Recursively flip the entire entity horizontally to face in the last direction
 func _flip_entity(parent: Node) -> void:
 	for child in parent.get_children():
-		if child.get_child_count() > 0:
+		if child.get_child_count() > 0 and not (child is Control):
 			_flip_entity(child)
 		else:
 			if child is AnimatedSprite:
