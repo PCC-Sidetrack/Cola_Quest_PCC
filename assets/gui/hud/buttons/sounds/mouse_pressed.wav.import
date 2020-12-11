@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mouse_pressed.wav-5b17dd4e73222ff297304682ad73de70.sample"
+
+[deps]
+
+source_file="res://assets/gui/hud/buttons/sounds/mouse_pressed.wav"
+dest_files=[ "res://.import/mouse_pressed.wav-5b17dd4e73222ff297304682ad73de70.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
