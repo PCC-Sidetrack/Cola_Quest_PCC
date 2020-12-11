@@ -43,8 +43,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 8.17279, 10.5162 )
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 7, 10 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 9.72687, 11.4999 )
@@ -58,13 +58,14 @@ script = ExtResource( 1 )
 position = Vector2( 0, -16 )
 frames = SubResource( 9 )
 animation = "spin"
-frame = 4
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( -0.444023, -14.2086 )
-shape = SubResource( 10 )
+position = Vector2( 0, -14 )
+shape = SubResource( 12 )
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -73,6 +74,6 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 0.262745, 0.443137, 0.921569, 1 )
-position = Vector2( -0.333023, 1.44307 )
+position = Vector2( 0, 2 )
 shape = SubResource( 11 )
-disabled = true
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

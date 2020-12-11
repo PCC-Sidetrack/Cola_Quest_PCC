@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet_arm_wave.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet_draw_sword.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet_walking.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet_walking_no_sword.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sprite_sheet_jump_sword.png" type="Texture" id=9]
+[ext_resource path="res://assets/code/level_1/zorro_boss.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"
@@ -36,7 +37,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.08 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -48,7 +49,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.08 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/3/type = "value"
@@ -60,7 +61,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.08 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/4/type = "value"
@@ -72,8 +73,32 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.08 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.08 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 9 ), Vector2( -31, 9 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.08 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 16 ), Vector2( -31, 16 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -140,6 +165,30 @@ tracks/4/keys = {
 "update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 16 ), Vector2( 13, -16 ), Vector2( 13, -16 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 9 ), Vector2( -16, 6 ), Vector2( -16, 6 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "fall_no_sword"
@@ -177,7 +226,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ) ]
 }
 tracks/3/type = "value"
@@ -189,7 +238,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -28, -2 ) ]
 }
 tracks/4/type = "value"
@@ -201,11 +250,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( -31, 16 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( -31, 9 ) ]
+}
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 resource_name = "fall_sword"
 length = 0.08
 step = 0.8
@@ -230,7 +303,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -242,7 +315,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -28, -2 ) ]
 }
 tracks/3/type = "value"
@@ -254,7 +327,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -28, -2 ) ]
 }
 tracks/4/type = "value"
@@ -266,12 +339,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( -16, -2 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 12, -24 ) ]
+}
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle_sword"
+[sub_resource type="Animation" id=17]
 length = 0.4
 loop = true
 step = 0.01
@@ -296,7 +392,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -308,7 +404,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/3/type = "value"
@@ -320,7 +416,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/4/type = "value"
@@ -332,12 +428,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 13, -17 ), Vector2( 14, -16 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -17, 7 ), Vector2( -16, 8 ) ]
+}
 
-[sub_resource type="Animation" id=5]
-resource_name = "jump_no_sword"
+[sub_resource type="Animation" id=18]
 length = 0.48
 step = 0.08
 tracks/0/type = "value"
@@ -373,7 +492,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 23 ), Vector2( 10, 23 ), Vector2( 10, 23 ), Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/3/type = "value"
@@ -385,7 +504,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 8 ), Vector2( -27, 8 ), Vector2( -27, 8 ), Vector2( -28, -3 ), Vector2( -28, -6 ) ]
 }
 tracks/4/type = "value"
@@ -397,11 +516,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 23 ), Vector2( 10, 23 ), Vector2( 10, 23 ), Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 9 ), Vector2( -31, 9 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 16 ), Vector2( -31, 16 ) ]
+}
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=19]
 resource_name = "jump_sword"
 length = 0.48
 step = 0.08
@@ -450,7 +593,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 23 ), Vector2( 10, 23 ), Vector2( 10, 23 ), Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/4/type = "value"
@@ -462,11 +605,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 8 ), Vector2( -27, 8 ), Vector2( -27, 8 ), Vector2( -28, -5 ), Vector2( -28, -3 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.08, 0.32, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 13, -16 ), Vector2( 15, 11 ), Vector2( 12, -27 ), Vector2( 13, -24 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.08, 0.32, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -16, 6 ), Vector2( -18, 11 ), Vector2( -17, -5 ), Vector2( -17, -2 ) ]
+}
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=20]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -490,7 +657,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -502,7 +669,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/3/type = "value"
@@ -514,7 +681,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/4/type = "value"
@@ -526,12 +693,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.12, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -17, 6 ), Vector2( -31, 12 ), Vector2( -31, 12 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.12, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 13, -16 ), Vector2( -31, 19 ), Vector2( -31, 19 ) ]
+}
 
-[sub_resource type="Animation" id=7]
-resource_name = "sword_attack"
+[sub_resource type="Animation" id=21]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -579,7 +769,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 10, 26 ), Vector2( 11, 25 ), Vector2( 12, 25 ) ]
 }
 tracks/4/type = "value"
@@ -591,12 +781,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -30, 5 ), Vector2( -30, 5 ), Vector2( -30, 5 ), Vector2( -18, 6 ), Vector2( -9, 6 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.06, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -17, 6 ), Vector2( -21, 5 ), Vector2( -7, 8 ), Vector2( 3, 9 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.06, 0.24, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 13, -16 ), Vector2( 6, -23 ), Vector2( 33, 6 ), Vector2( 43, 9 ) ]
+}
 
-[sub_resource type="Animation" id=8]
-resource_name = "throw"
+[sub_resource type="Animation" id=22]
 length = 0.35
 step = 0.05
 tracks/0/type = "value"
@@ -620,7 +833,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -632,7 +845,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/3/type = "value"
@@ -644,7 +857,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/4/type = "value"
@@ -656,12 +869,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 16 ), Vector2( -31, 16 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 9 ), Vector2( -31, 9 ) ]
+}
 
-[sub_resource type="Animation" id=9]
-resource_name = "walk_no_sword"
+[sub_resource type="Animation" id=23]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -685,7 +921,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.101 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -697,7 +933,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/3/type = "value"
@@ -709,7 +945,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/4/type = "value"
@@ -721,12 +957,35 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 16 ), Vector2( -31, 16 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -31, 9 ), Vector2( -31, 9 ) ]
+}
 
-[sub_resource type="Animation" id=10]
-resource_name = "walk_sword"
+[sub_resource type="Animation" id=24]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -750,7 +1009,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
 tracks/2/type = "value"
@@ -762,7 +1021,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/3/type = "value"
@@ -774,7 +1033,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( -27, 5 ), Vector2( -27, 5 ) ]
 }
 tracks/4/type = "value"
@@ -786,49 +1045,77 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 10, 26 ), Vector2( 10, 26 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("melee/CollisionShape2D:shape:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 13, -16 ), Vector2( 14, -13 ), Vector2( 14, -13 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("melee/CollisionShape2D:shape:b")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -18, 7 ), Vector2( -18, 8 ), Vector2( -18, 8 ) ]
+}
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 10, 26 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 10, 26 )
+
+[sub_resource type="SegmentShape2D" id=15]
+a = Vector2( 13, -17 )
+b = Vector2( -17, 7 )
 
 [node name="zorro_boss" type="KinematicBody2D"]
+script = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle_sword"
 anims/arm_wave = SubResource( 1 )
 anims/draw_sword = SubResource( 2 )
 anims/fall_no_sword = SubResource( 3 )
-anims/fall_sword = SubResource( 14 )
-anims/idle_sword = SubResource( 4 )
-anims/jump_no_sword = SubResource( 5 )
-anims/jump_sword = SubResource( 13 )
-anims/sheath_sword = SubResource( 6 )
-anims/sword_attack = SubResource( 7 )
-anims/throw = SubResource( 8 )
-anims/walk_no_sword = SubResource( 9 )
-anims/walk_sword = SubResource( 10 )
+anims/fall_sword = SubResource( 16 )
+anims/idle_sword = SubResource( 17 )
+anims/jump_no_sword = SubResource( 18 )
+anims/jump_sword = SubResource( 19 )
+anims/sheath_sword = SubResource( 20 )
+anims/sword_attack = SubResource( 21 )
+anims/throw = SubResource( 22 )
+anims/walk_no_sword = SubResource( 23 )
+anims/walk_sword = SubResource( 24 )
 
 [node name="sprites" type="Node2D" parent="."]
 position = Vector2( -1, 0 )
 
 [node name="arm_wave" type="Sprite" parent="sprites"]
-visible = false
 texture = ExtResource( 1 )
 hframes = 2
-frame = 1
 
 [node name="draw_sword" type="Sprite" parent="sprites"]
 visible = false
 texture = ExtResource( 2 )
 hframes = 6
-frame = 5
+frame = 4
 
 [node name="idle_sword" type="Sprite" parent="sprites"]
+visible = false
 texture = ExtResource( 3 )
 hframes = 2
 
@@ -847,11 +1134,13 @@ hframes = 6
 visible = false
 texture = ExtResource( 5 )
 hframes = 6
+frame = 1
 
 [node name="throw" type="Sprite" parent="sprites"]
 visible = false
 texture = ExtResource( 6 )
 hframes = 7
+frame = 1
 
 [node name="walk_sword" type="Sprite" parent="sprites"]
 visible = false
@@ -864,12 +1153,20 @@ texture = ExtResource( 8 )
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -27, 5 )
-shape = SubResource( 11 )
+shape = SubResource( 13 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 0.262745, 0.262745, 0.262745, 1 )
 position = Vector2( -27, 5 )
-shape = SubResource( 12 )
+shape = SubResource( 14 )
+
+[node name="melee" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
+shape = SubResource( 15 )

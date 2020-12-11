@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------#
-# File Name:    drone_a_aiV2.gd                                               #
+# File Name:    drone_a_ai.gd                                                 #
 # Description:  Directs the animation and ai for the dronea sprite            #
-# Author:       Jeff Newell & Andrew                                          #
+# Author:       Jeff Newell & Andrew Zedwick                                  #
 # Company:      Sidetrack                                                     #
 # Last Updated: December 2, 2020                                              #
 #-----------------------------------------------------------------------------#
