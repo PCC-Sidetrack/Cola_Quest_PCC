@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/sprite_scenes/level_1/Smoke.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/sprite_scenes/level_1/zorro_boss.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/point.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "rooftop_background_tilesheet.png 0"
@@ -1588,47 +1589,44 @@ position = Vector2( 16482, -28 )
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 849, 21 )
-frame = 2
+frame = 0
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 6225, -73.25 )
-frame = 2
+frame = 0
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 6571, -105.25 )
-frame = 0
+frame = 2
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 10256, 118.75 )
-frame = 3
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 10416, 150.75 )
-frame = 3
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 10614, 219.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 10673, 310.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 10929, 246.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 11056, 342.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 11920, 22.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 19 )]
 position = Vector2( 16784, 54.75 )
-frame = 3
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -1805,6 +1803,8 @@ position = Vector2( 17284, 224 )
 shape = SubResource( 92 )
 
 [node name="player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 17664, 703 )
+position = Vector2( 100, 180 )
+
+[node name="game_UI" parent="player" instance=ExtResource( 22 )]
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
 [connection signal="body_entered" from="triggers/camera_size_trigger" to="triggers/camera_size_trigger" method="_on_camera_size_trigger_body_entered"]
