@@ -43,7 +43,7 @@ func launch(direction: float) -> void:
 func _physics_process(delta: float) -> void:
 	# TODO: CREATE A GLOBALS CLASS TO HOLD THINGS SUCH AS GRAVITY
 	var collision = move_and_collide(Vector2(0.0, 2000.0 * delta))
-	5
+	
 	#if collision != null:
 		#_on_impact(collision.normal)
 

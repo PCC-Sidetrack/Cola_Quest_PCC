@@ -18,7 +18,7 @@ export var accelleration:        float   = 20.0
 export var camera_zoom:          Vector2 = Vector2(1.5, 1.5)
 export var damage:               int     = 1
 export var debug:                bool    = false
-export var health:               int     = 5
+export var max_health:           int     = 5
 export var invlunerability_time: float   = 0.7
 #export var jump_height:         float   = 4.5
 #export var jump_speed:          float   = 0.05
@@ -82,9 +82,13 @@ func _ready() -> void:
 	
 	_check_configuration()
 	
-	initialize_player       (health, damage, speed, accelleration, jump_speed, true)
+	initialize_player       (max_health, damage, speed, accelleration, jump_speed, true)
 	set_knockback_multiplier(3.0)
 	set_debug               (debug)
+	
+	# Check that the player health bar has been added as a child of the player node
+	if not has_node("game_UI"):
+		ProgramAlerts.add_error("The player node doesn't have the \'game_UI\' node as a child. This node should be added with the given name assigned.")
 	
 	_switch_sprite          (SPRITE.IDLE)
 
@@ -221,11 +225,22 @@ func _on_player_collision(body):
 			take_damage(body.get_damage())
 			knockback(body)
 
+# Triggered whenever the player's health is changed
 func _on_player_health_changed(change):
-	if change < 0:
-		set_invulnerability(invlunerability_time)
+	if !get_invulnerability():
+		# Feed the percentage of health before and after the change to the GUI
+		var cur_health_perc:  float = float(get_current_health()) / float(get_max_health()) * 100.0
+		var prev_health_perc: float = float(get_current_health() - change) / float(get_max_health()) * 100.0
+		#get_node("game_UI").on_health_health_changed(cur_health_perc, prev_health_perc)
 		
-	print("Took ", -change, " damage")
+		print("Health Percentage: ", cur_health_perc, "%")
+		print("Took ", -change, " damage")
+		print("Current health: ", get_current_health())
+	
+		# If damage was taken (player wasn't healed) make the player invulnerable for a bit
+		if change < 0:
+			set_invulnerability(invlunerability_time)
+	
 
 # Triggered whenever the player dies
 func _on_player_death():
@@ -242,4 +257,6 @@ func _on_player_death():
 	set_current_health(get_max_health())
 	Globals.game_locked = false
 	set_invulnerability(invlunerability_time)
+	
+	print("Current health: ", get_current_health())
 

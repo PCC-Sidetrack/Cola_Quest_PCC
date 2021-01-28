@@ -170,8 +170,6 @@ func set_acceleration           (new_rate: float) -> void:
 	_movement.acceleration = new_rate
 func set_auto_facing            (is_auto_facing: bool) -> void:
 	_metadata.auto_facing = is_auto_facing
-func set_current_health         (new_health: int) -> void:
-	_health.current = new_health
 func set_damage                 (new_amount: int) -> void:
 	_damage.amount = new_amount
 func set_debug                  (is_showing: bool) -> void:
@@ -214,42 +212,65 @@ func set_velocity               (new_velocity: Vector2) -> void:
 #-----------------------------------------------------------------------------#			
 # Deal damage to another entity
 func deal_damage(other_entity: KinematicBody2D) -> void:
+	# Only run code if the other entity has the correct methods i.e. extend entity.gd
 	if other_entity.has_method("set_current_health") and other_entity.has_method("get_current_health"):
-		# Don't allow damage to take health below 0
-		if !other_entity.get_invulnerability():
-			# Variables to save on method calls
-			var damage              = _damage.amount
-			var other_entity_health = other_entity.get_current_health()
+		# Variable to save on method calls, holds the other entity's current health
+		var other_entity_health = other_entity.get_current_health()
+		# Holds the amount of damage that is being applied to the other entity
+		var damage_applied: int = _damage.amount
 			
-			if other_entity_health - damage >= 0:
-				other_entity.set_current_health(other_entity_health - damage)
+		# Only take damage if damage is not negative and player is not invulnerable
+		if _damage.amount > 0 and !other_entity.get_invulnerability():
+			if other_entity_health - _damage.amount >= 0:
+				other_entity.set_current_health(other_entity_health - _damage.amount)
+			# If the damage applied brings the entity's health below 0, set it to 0
 			else:
+				damage_applied = other_entity_health
 				other_entity.set_current_health(0)
+		# If the damage is negative, then heal the other entity
+		elif _damage.amount < 0:
+			if other_entity_health - _damage.amount <= other_entity.get_max_health():
+				other_entity.set_current_health(other_entity_health - _damage.amount)
+			# If damage applied brings the entity's health above max, set it to max
+			else:
+				damage_applied = other_entity_health - other_entity.get_max_health()
+				other_entity.set_current_health(other_entity.get_max_health())
 			
-			# Emit the health changed
-			if damage != 0:
-				other_entity.emit_signal("health_changed", -damage)
 			
-			# Check if the entity has died. If it has, call on_death()
-			if other_entity.get_current_health() <= 0:
-				other_entity.emit_signal("death")
+		# Emit the health changed
+		if damage_applied != 0:
+			other_entity.emit_signal("health_changed", -damage_applied)
+		
+		# Check if the entity has died. If it has, call on_death()
+		if other_entity.get_current_health() <= 0 and !other_entity.get_invulnerability():
+			other_entity.emit_signal("death")
 
-# Take damage from another entity
-func take_damage(damage: int) -> void:
-	# Don't allow damage to take health below 0
-	if !get_invulnerability():
+# Take damage from another entity (or heal if the damage is negative)
+func take_damage(damage: int) -> void:	
+	# Only take damage if damage is not negative and player is not invulnerable
+	if damage > 0 and !get_invulnerability():
 		if _health.current - damage >= 0:
 			_health.current -= damage
 		else:
+			damage = _health.current
 			_health.current = 0
 			
-		# If health was changed, emit a health changed trigger
-		if damage != 0:
-			emit_signal("health_changed", -damage)
+	# If damage is negative, then heal the player
+	elif damage < 0:
+		if _health.current - damage <= _health.maximum:
+			_health.current -= damage
+		else:
+			damage = _health.current - _health.maximum
+			_health.current = _health.maximum
 		
-		# If entity is dead, emit a death trigger
-		if _health.current <= 0:
-			emit_signal("death")
+	# If health was changed, emit a health changed trigger
+	if damage != 0:
+		emit_signal("health_changed", -damage)
+	
+	# If entity is dead, emit a death trigger
+	if _health.current <= 0 and !get_invulnerability():
+		emit_signal("death")
+	
 		
 # Sets the entity's health to 0 and emits a kill and health changed signal
 func kill() -> void:
@@ -276,7 +297,6 @@ func initialize_enemy(health: int, damage: int, speed: float, acceleration: floa
 	_set_layer_bits    ([Globals.LAYER.ENEMY])
 	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD])
 	set_acceleration   (acceleration)
-	set_current_health (health)
 	set_damage         (damage)
 	#set_jump           (jump_height, jump_duration)
 	set_jump           (jump_velocity)
@@ -284,6 +304,8 @@ func initialize_enemy(health: int, damage: int, speed: float, acceleration: floa
 	set_obeys_gravity  (obeys_gravity)
 	set_smooth_movement(smooth_movement)
 	set_speed          (speed)
+	
+	_health.current = health
 
 # Turn the given instructions into a movement set
 # Instruction template
@@ -304,7 +326,6 @@ func initialize_player(health: int, damage: int, speed: float, acceleration: flo
 	_set_layer_bits    ([Globals.LAYER.PLAYER])
 	_set_mask_bits     ([Globals.LAYER.ENEMY, Globals.LAYER.COLLECTABLE, Globals.LAYER.INTERACTABLE, Globals.LAYER.WORLD, Globals.LAYER.SPAWNPOINT])
 	set_acceleration   (acceleration)
-	set_current_health (health)
 	set_damage         (damage)
 	set_max_health     (health)
 	set_obeys_gravity  (obeys_gravity)
@@ -312,6 +333,8 @@ func initialize_player(health: int, damage: int, speed: float, acceleration: flo
 	set_jump           (jump_velocity)
 	set_smooth_movement(smooth_movement)
 	set_speed          (speed)
+	
+	_health.current = health
 
 # Initialize a projectile entity
 func initialize_projectile(damage: int, speed: float, initiator: String, direction: Vector2 = Vector2.RIGHT, turn_force: float = 1.0, life_time: float = -1.0) -> void:
@@ -437,7 +460,8 @@ func duration(direction: Vector2, duration: float, instr_id: int = -1) -> Array:
 # Create an end point array instruction - used to move to a specific point
 func end_point(destination: Vector2, instr_id: int = -1) -> Array:
 	return [INSTRUCTIONS.MOVE_TO_POINT, instr_id, destination]
-	
+
+# Moves to the entity's spawn point (usually where it was first placed in the level)
 func move_to_spawn(instr_id: int = -1) -> Array:
 	return [INSTRUCTIONS.MOVE_TO_POINT, instr_id, "spawn"]
 	

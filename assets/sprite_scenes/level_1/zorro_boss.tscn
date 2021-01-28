@@ -278,7 +278,7 @@ tracks/6/keys = {
 "values": [ Vector2( -31, 9 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=4]
 resource_name = "fall_sword"
 length = 0.08
 step = 0.8
@@ -367,7 +367,7 @@ tracks/6/keys = {
 "values": [ Vector2( 12, -24 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=5]
 length = 0.4
 loop = true
 step = 0.01
@@ -456,7 +456,7 @@ tracks/6/keys = {
 "values": [ Vector2( -17, 7 ), Vector2( -16, 8 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=6]
 length = 0.48
 step = 0.08
 tracks/0/type = "value"
@@ -544,7 +544,7 @@ tracks/6/keys = {
 "values": [ Vector2( -31, 16 ), Vector2( -31, 16 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=7]
 resource_name = "jump_sword"
 length = 0.48
 step = 0.08
@@ -633,7 +633,7 @@ tracks/6/keys = {
 "values": [ Vector2( -16, 6 ), Vector2( -18, 11 ), Vector2( -17, -5 ), Vector2( -17, -2 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=8]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -721,7 +721,7 @@ tracks/6/keys = {
 "values": [ Vector2( 13, -16 ), Vector2( -31, 19 ), Vector2( -31, 19 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=9]
 length = 0.36
 step = 0.06
 tracks/0/type = "value"
@@ -809,7 +809,7 @@ tracks/6/keys = {
 "values": [ Vector2( 13, -16 ), Vector2( 6, -23 ), Vector2( 33, 6 ), Vector2( 43, 9 ) ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=10]
 length = 0.35
 step = 0.05
 tracks/0/type = "value"
@@ -897,7 +897,7 @@ tracks/6/keys = {
 "values": [ Vector2( -31, 9 ), Vector2( -31, 9 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=11]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -985,7 +985,7 @@ tracks/6/keys = {
 "values": [ Vector2( -31, 9 ), Vector2( -31, 9 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=12]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -1091,15 +1091,15 @@ autoplay = "idle_sword"
 anims/arm_wave = SubResource( 1 )
 anims/draw_sword = SubResource( 2 )
 anims/fall_no_sword = SubResource( 3 )
-anims/fall_sword = SubResource( 16 )
-anims/idle_sword = SubResource( 17 )
-anims/jump_no_sword = SubResource( 18 )
-anims/jump_sword = SubResource( 19 )
-anims/sheath_sword = SubResource( 20 )
-anims/sword_attack = SubResource( 21 )
-anims/throw = SubResource( 22 )
-anims/walk_no_sword = SubResource( 23 )
-anims/walk_sword = SubResource( 24 )
+anims/fall_sword = SubResource( 4 )
+anims/idle_sword = SubResource( 5 )
+anims/jump_no_sword = SubResource( 6 )
+anims/jump_sword = SubResource( 7 )
+anims/sheath_sword = SubResource( 8 )
+anims/sword_attack = SubResource( 9 )
+anims/throw = SubResource( 10 )
+anims/walk_no_sword = SubResource( 11 )
+anims/walk_sword = SubResource( 12 )
 
 [node name="sprites" type="Node2D" parent="."]
 position = Vector2( -1, 0 )
