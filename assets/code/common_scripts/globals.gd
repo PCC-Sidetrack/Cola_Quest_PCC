@@ -37,6 +37,7 @@ const GROUP: Dictionary = {
 	PROJECTILE   = "projectile",
 	WORLD        = "world",
 	SPAWNPOINT   = "spawnpoint",
+	ENTITY       = "entity"
 }
 
 # Layers

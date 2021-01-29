@@ -73,7 +73,8 @@ margin_left = 11.0
 margin_top = 2.0
 margin_right = 46.0
 margin_bottom = 10.0
-value = 50.0
+max_value = 5.0
+value = 5.0
 texture_progress = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -84,7 +85,8 @@ margin_left = 11.0
 margin_top = 2.0
 margin_right = 46.0
 margin_bottom = 10.0
-value = 100.0
+max_value = 5.0
+value = 5.0
 texture_over = ExtResource( 3 )
 texture_progress = ExtResource( 1 )
 __meta__ = {
@@ -95,7 +97,7 @@ __meta__ = {
 position = Vector2( 6.4, 6 )
 frames = SubResource( 11 )
 animation = "idle"
-frame = 9
+frame = 3
 speed_scale = 2.0
 playing = true
 
@@ -106,7 +108,7 @@ texture = ExtResource( 7 )
 
 [node name="shake_duration" type="Timer" parent="."]
 
-[node name="shake_tween" type="Tween" parent="."]
+[node name="tween" type="Tween" parent="."]
 
 [node name="pulse" type="Tween" parent="."]
 

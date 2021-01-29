@@ -29,26 +29,9 @@ func on_player_killed() -> void:
 func on_player_level_cleared() -> void:
 	emit_signal("level_cleared")
 
-func on_health_health_changed(current_health, previous_health) -> void:
+func on_health_changed(current_health, previous_health) -> void:
 	emit_signal("health_changed", current_health, previous_health)
 
 func on_health_low_health() -> void:
-	emit_signal("low_health")
-
-
-#-----------------------------------------------------------------------------#
-#                             Private Functions                               #
-#-----------------------------------------------------------------------------#	
-func _on_Player_killed() -> void:
-	emit_signal("player_killed")
-
-func _on_Player_level_cleared() -> void:
-	emit_signal("level_cleared")
-
-func _on_Health_health_changed(current_health, previous_health) -> void:
-	emit_signal("health_changed", current_health, previous_health)
-
-func _on_Health_low_health() -> void:
-	emit_signal("low_health")
-	
+	emit_signal("low_health")	
 

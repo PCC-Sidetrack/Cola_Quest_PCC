@@ -209,11 +209,12 @@ func set_velocity               (new_velocity: Vector2) -> void:
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
-#-----------------------------------------------------------------------------#			
+#-----------------------------------------------------------------------------#
 # Deal damage to another entity
 func deal_damage(other_entity: KinematicBody2D) -> void:
-	# Only run code if the other entity has the correct methods i.e. extend entity.gd
-	if other_entity.has_method("set_current_health") and other_entity.has_method("get_current_health"):
+	print("deal damage called")
+	# If the other entity is in the ENTITY group then deal damage to it
+	if other_entity.is_in_group(Globals.GROUP.ENTITY):
 		# Variable to save on method calls, holds the other entity's current health
 		var other_entity_health = other_entity.get_current_health()
 		# Holds the amount of damage that is being applied to the other entity
@@ -222,19 +223,19 @@ func deal_damage(other_entity: KinematicBody2D) -> void:
 		# Only take damage if damage is not negative and player is not invulnerable
 		if _damage.amount > 0 and !other_entity.get_invulnerability():
 			if other_entity_health - _damage.amount >= 0:
-				other_entity.set_current_health(other_entity_health - _damage.amount)
+				other_entity._set_health(other_entity_health - _damage.amount)
 			# If the damage applied brings the entity's health below 0, set it to 0
 			else:
 				damage_applied = other_entity_health
-				other_entity.set_current_health(0)
+				other_entity._set_health(0)
 		# If the damage is negative, then heal the other entity
 		elif _damage.amount < 0:
 			if other_entity_health - _damage.amount <= other_entity.get_max_health():
-				other_entity.set_current_health(other_entity_health - _damage.amount)
+				other_entity._set_health(other_entity_health - _damage.amount)
 			# If damage applied brings the entity's health above max, set it to max
 			else:
 				damage_applied = other_entity_health - other_entity.get_max_health()
-				other_entity.set_current_health(other_entity.get_max_health())
+				other_entity._set_health(other_entity.get_max_health())
 			
 			
 		# Emit the health changed
@@ -242,7 +243,7 @@ func deal_damage(other_entity: KinematicBody2D) -> void:
 			other_entity.emit_signal("health_changed", -damage_applied)
 		
 		# Check if the entity has died. If it has, call on_death()
-		if other_entity.get_current_health() <= 0 and !other_entity.get_invulnerability():
+		if other_entity.get_current_health() <= 0:
 			other_entity.emit_signal("death")
 
 # Take damage from another entity (or heal if the damage is negative)
@@ -268,8 +269,32 @@ func take_damage(damage: int) -> void:
 		emit_signal("health_changed", -damage)
 	
 	# If entity is dead, emit a death trigger
-	if _health.current <= 0 and !get_invulnerability():
+	if _health.current <= 0:
 		emit_signal("death")
+		
+func set_current_health(new_health: int) -> void:
+	# Holds the health change. Health is only changed up to the max and min
+	# allowed values.
+	var health_change: int = new_health
+	
+	# Change the health of the entity
+	if new_health >= 0 and new_health <= _health.maximum:
+		_health.current = new_health
+	elif new_health < 0:
+		health_change   = -_health.current
+		_health.current = 0
+	elif new_health > _health.maximum:
+		health_change   = _health.maximum - _health.current
+		_health.current = _health.maximum
+		
+	# If health was changed, emit a health changed trigger
+	if health_change != 0:
+		emit_signal("health_changed", health_change)
+	
+	# If entity is dead, emit a death trigger
+	if _health.current <= 0:
+		emit_signal("death")
+		
 	
 		
 # Sets the entity's health to 0 and emits a kill and health changed signal
@@ -287,6 +312,7 @@ func delete() -> void:
 # Initialize a collectable entity
 func initialize_collectable() -> void:
 	add_to_group   (Globals.GROUP.COLLECTABLE)
+	add_to_group   (Globals.GROUP.ENTITY)
 	_set_layer_bits([Globals.LAYER.COLLECTABLE])
 	_set_mask_bits ([Globals.LAYER.PLAYER])
 
@@ -294,6 +320,7 @@ func initialize_collectable() -> void:
 #func initialize_enemy(health: int, damage: int, speed: float, acceleration: float = 20.0, jump_height:float = 0.0, jump_duration: float = 1.0, smooth_movement: bool = true) -> void:
 func initialize_enemy(health: int, damage: int, speed: float, acceleration: float = 20.0, jump_velocity: float = 1.0, obeys_gravity: bool = false, smooth_movement: bool = true) -> void:
 	add_to_group       (Globals.GROUP.ENEMY)
+	add_to_group       (Globals.GROUP.ENTITY)
 	_set_layer_bits    ([Globals.LAYER.ENEMY])
 	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD])
 	set_acceleration   (acceleration)
@@ -323,6 +350,7 @@ func initialize_instructions(movements: Array, is_looping: bool = false) -> void
 #func initialize_player(health: int, damage: int, speed: float, acceleration: float, jump_height:float, jump_duration: float, smooth_movement: bool = true) -> void:
 func initialize_player(health: int, damage: int, speed: float, acceleration: float, jump_velocity: float, obeys_gravity: bool = false, smooth_movement: bool = true) -> void:
 	add_to_group       (Globals.GROUP.PLAYER)
+	add_to_group       (Globals.GROUP.ENTITY)
 	_set_layer_bits    ([Globals.LAYER.PLAYER])
 	_set_mask_bits     ([Globals.LAYER.ENEMY, Globals.LAYER.COLLECTABLE, Globals.LAYER.INTERACTABLE, Globals.LAYER.WORLD, Globals.LAYER.SPAWNPOINT])
 	set_acceleration   (acceleration)
@@ -339,6 +367,7 @@ func initialize_player(health: int, damage: int, speed: float, acceleration: flo
 # Initialize a projectile entity
 func initialize_projectile(damage: int, speed: float, initiator: String, direction: Vector2 = Vector2.RIGHT, turn_force: float = 1.0, life_time: float = -1.0) -> void:
 	add_to_group       (Globals.GROUP.PROJECTILE)
+	add_to_group       (Globals.GROUP.ENTITY)
 	_set_layer_bits    ([Globals.LAYER.PROJECTILE])
 	_set_mask_bits     ([Globals.LAYER.WORLD, Globals.LAYER.PLAYER])
 	set_acceleration   (turn_force)
@@ -537,6 +566,16 @@ func _next_instruction() -> void:
 	
 	if _metadata.movement.current_instruction >= _metadata.movement.instructions.size():
 		_metadata.movement.current_instruction = 0
+
+# Directly sets the health bar to a value. Doesn't trigger any updates (such
+# as GUI)
+func _set_health         (new_health: int) -> void:
+	if new_health <= _health.maximum and new_health >= 0:
+		_health.current = new_health
+	elif new_health < 0:
+		_health.current = 0
+	elif new_health > _health.maximum:
+		_health.current = _health.maximum
 
 # Set the layer bit flags for the entity
 func _set_layer_bits(layers: Array) -> void:
