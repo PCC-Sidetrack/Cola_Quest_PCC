@@ -29,6 +29,6 @@ transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 [connection signal="level_cleared" from="." to="pause" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
 [connection signal="low_health" from="." to="player_healthbar" method="_on_game_UI_low_health"]
-[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="pause" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
