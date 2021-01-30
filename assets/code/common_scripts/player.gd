@@ -42,6 +42,8 @@ var _init_camera_zoom:  Vector2
 var _camera_zoom_speed: int   = 5
 # Holds the current zoom of the camera. Used for smooth zoom changes
 var _current_zoom
+# Indicates if the player is currently dead and respawning
+var _dead:              bool  = false
 
 
 #-----------------------------------------------------------------------------#
@@ -84,11 +86,13 @@ func _ready() -> void:
 	
 	initialize_player       (max_health, damage, speed, accelleration, jump_speed, true)
 	set_knockback_multiplier(3.0)
+	set_is_dead             (false)
 	set_debug               (debug)
 	
 	# Check that the player health bar has been added as a child of the player node
 	if not has_node("game_UI"):
 		ProgramAlerts.add_error("The player node doesn't have the \'game_UI\' node as a child. This node should be added with the given name assigned.")
+		
 	
 	_switch_sprite          (SPRITE.IDLE)
 
@@ -111,6 +115,14 @@ func reset_camera_zoom() -> void:
 func zoom(multiplier: float) -> Vector2:
 	camera_zoom = camera_zoom * multiplier
 	return camera_zoom
+	
+# Returns a boolean based on whether the player is currently respawing from a death
+func is_dead() -> bool:
+	return _dead
+	
+# Sets the value of the 'dead' boolean. When dead, the player can't take damage.
+func set_is_dead(value: bool) -> void:
+	_dead = value
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
@@ -227,36 +239,40 @@ func _on_player_collision(body):
 
 # Triggered whenever the player's health is changed
 func _on_player_health_changed(change):
-	if !get_invulnerability():
-		# Feed the percentage of health before and after the change to the GUI
-		var cur_health_perc:  float = float(get_current_health()) / float(get_max_health()) * 100.0
-		var prev_health_perc: float = float(get_current_health() - change) / float(get_max_health()) * 100.0
-		#get_node("game_UI").on_health_health_changed(cur_health_perc, prev_health_perc)
-		
-		print("Health Percentage: ", cur_health_perc, "%")
+	# If the player would be damaged, isn't invunerable, and isn't already dead,
+	# then process the damage
+	if change < 0 and !get_invulnerability() and !is_dead():
+		# Update the GUI, print out the damage taken, and make the player invunerable for a bit
+		get_node("game_UI").on_health_changed(get_current_health(), get_current_health() - change)
 		print("Took ", -change, " damage")
-		print("Current health: ", get_current_health())
+		set_invulnerability(invlunerability_time)
+	# If the player would be healed, then update the GUI
+	elif change > 0:
+		get_node("game_UI").on_health_changed(get_current_health(), get_current_health() - change)
 	
-		# If damage was taken (player wasn't healed) make the player invulnerable for a bit
-		if change < 0:
-			set_invulnerability(invlunerability_time)
+	print("Current health: ", get_current_health(), "\n")
 	
 
 # Triggered whenever the player dies
 func _on_player_death():
-	
-	print("Player Died")
-	
-	# Lock the game and have a short cooldown before respawning
-	set_invulnerability(100000.0)
-	Globals.game_locked = true
-	yield(get_tree().create_timer(1.0), "timeout")
-	
-	# Respawn
-	global_position = get_spawn_point()
-	set_current_health(get_max_health())
-	Globals.game_locked = false
-	set_invulnerability(invlunerability_time)
-	
-	print("Current health: ", get_current_health())
+	if !is_dead():
+		set_is_dead(true)
+		print("Player Died")
+		
+		# Lock the game and have a short cooldown before respawning
+		set_invulnerability(100000.0)
+		Globals.game_locked = true
+		yield(get_tree().create_timer(1.0), "timeout")
+		
+		# Respawn
+		global_position = get_spawn_point()
+		set_invulnerability(invlunerability_time)
+		set_is_dead(false)
+		print("\nPlayer Respawning...")
+		set_current_health(max_health)
+		take_damage(-max_health)
+		Globals.game_locked = false
+		
+		
+		
 
