@@ -21,9 +21,9 @@ script = ExtResource( 15 )
 
 [node name="ButtonScreen" type="CenterContainer" parent="."]
 margin_left = 230.419
-margin_top = 100.0
+margin_top = 137.418
 margin_right = 263.419
-margin_bottom = 168.0
+margin_bottom = 205.418
 rect_scale = Vector2( 1.5, 1.5 )
 mouse_filter = 2
 __meta__ = {
@@ -69,9 +69,8 @@ texture_hover = ExtResource( 6 )
 
 [node name="Exit" type="TextureButton" parent="ButtonScreen/Buttons"]
 visible = false
-margin_top = 18.0
 margin_right = 33.0
-margin_bottom = 32.0
+margin_bottom = 14.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )

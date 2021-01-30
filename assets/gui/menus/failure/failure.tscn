@@ -109,6 +109,7 @@ animations = [ {
 } ]
 
 [node name="failure" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 5 )
 
 [node name="buttons" parent="." instance=ExtResource( 6 )]
@@ -154,4 +155,5 @@ speed_scale = 2.0
 
 [node name="failure" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+[connection signal="respawn_player" from="buttons" to="." method="_on_buttons_respawn_player"]
 [connection signal="animation_finished" from="FailureScreen/FailureTextContainer/FailureText" to="." method="_on_FailureText_animation_finished"]

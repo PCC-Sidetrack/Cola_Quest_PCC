@@ -44,3 +44,4 @@ margin_right = 103.0
 margin_bottom = 18.0
 texture = ExtResource( 1 )
 stretch_mode = 4
+[connection signal="respawn_player" from="buttons" to="." method="_on_buttons_respawn_player"]

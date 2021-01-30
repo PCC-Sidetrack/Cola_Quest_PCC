@@ -27,7 +27,7 @@ var _max_time: int  = 1000
 #                            Built-In Functions                               #
 #-----------------------------------------------------------------------------#
 #  Process func that handles animations of tiles in the collidable tilesheet
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Only perform animation processes if animation is set to occur
 	if animate:
 		# Animate all choosen tiles

@@ -57,7 +57,7 @@ func _ready() -> void:
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
 # Overwritten function in Entity.gd that is called whenever a collision occurs
-func on_collision(body: Object):
+func on_collision(_body: Object):
 	pass
 
 #-----------------------------------------------------------------------------#
@@ -86,11 +86,11 @@ func _shoot() -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_drone_a_collision(body):
+func _on_drone_a_collision(_body):
 	pass # Replace with function body.
 
 func _on_drone_a_death():
 	pass # Replace with function body.
 
-func _on_drone_a_health_changed(change):
+func _on_drone_a_health_changed(_change):
 	pass # Replace with function body.

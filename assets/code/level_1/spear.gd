@@ -26,7 +26,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_dynamically(get_current_velocity())
 
 
@@ -48,5 +48,5 @@ func _on_Entity_collision(body):
 func _on_Entity_death():
 	pass # Replace with function body.
 
-func _on_Entity_health_changed(change):
+func _on_Entity_health_changed(_change):
 	pass # Replace with function body.

@@ -65,5 +65,5 @@ func _on_S7_running_eagor_collision(body):
 func _on_S7_running_eagor_death():
 	pass # Replace with function body.
 
-func _on_S7_running_eagor_health_changed(change):
+func _on_S7_running_eagor_health_changed(_change):
 	pass # Replace with function body.

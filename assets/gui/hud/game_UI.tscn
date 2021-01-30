@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/gui/hud/game_UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/gui/menus/failure/failure.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/gui/hud/player_healthbar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/gui/menus/cleared/cleared.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/gui/menus/pause/pause.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/gui/hud/ui_statistics.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/gui/fonts/DungeonFont.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
 
 [node name="game_UI" type="Control"]
 margin_right = 40.0
@@ -24,11 +31,46 @@ transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 [node name="cleared" parent="." instance=ExtResource( 4 )]
 
 [node name="failure" parent="." instance=ExtResource( 2 )]
+
+[node name="ui_statistics" type="CanvasLayer" parent="."]
+script = ExtResource( 6 )
+
+[node name="fps_counter" type="Label" parent="ui_statistics"]
+margin_left = 8.09406
+margin_top = 31.2894
+margin_right = 48.0941
+margin_bottom = 45.2894
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="respawn_counter" type="Label" parent="ui_statistics"]
+anchor_left = 0.378419
+anchor_top = 0.485939
+anchor_right = 0.456419
+anchor_bottom = 0.485939
+margin_left = 0.0875092
+margin_top = -7.12299
+margin_right = 0.151505
+margin_bottom = 6.877
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 [connection signal="health_changed" from="." to="player_healthbar" method="_on_game_UI_health_changed"]
-[connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
+[connection signal="initialize" from="." to="player_healthbar" method="_on_game_UI_initialize"]
 [connection signal="level_cleared" from="." to="pause" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="player_healthbar" method="_on_game_UI_level_cleared"]
+[connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
 [connection signal="low_health" from="." to="player_healthbar" method="_on_game_UI_low_health"]
 [connection signal="player_killed" from="." to="pause" method="_on_game_UI_player_killed"]
-[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="ui_statistics" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
+[connection signal="respawn_player" from="." to="ui_statistics" method="_on_game_UI_respawn_player"]
+[connection signal="respawn_player" from="pause" to="." method="_on_pause_respawn_player"]
+[connection signal="respawn_player" from="failure" to="." method="_on_failure_respawn_player"]
