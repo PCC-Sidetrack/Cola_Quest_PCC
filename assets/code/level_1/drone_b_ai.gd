@@ -26,7 +26,7 @@ export var acceleration: float = 20.0
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
 # Overwritten function in Entity.gd that is called whenever a collision occurs
-func on_collision(body: Object):
+func on_collision(_body: Object):
 	pass
 
 #-----------------------------------------------------------------------------#
@@ -47,7 +47,7 @@ func _ready() -> void:
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
 # Built in function is called every physics frame
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ai_enabled:
 		move()
 		
@@ -55,11 +55,11 @@ func _physics_process(delta: float) -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_drone_b_collision(body):
+func _on_drone_b_collision(_body):
 	pass # Replace with function body.
 
 func _on_drone_b_death():
 	pass # Replace with function body.
 
-func _on_drone_b_health_changed(change):
+func _on_drone_b_health_changed(_change):
 	pass # Replace with function body.

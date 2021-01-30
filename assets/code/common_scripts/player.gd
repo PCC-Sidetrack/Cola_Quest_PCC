@@ -89,6 +89,9 @@ func _ready() -> void:
 	set_is_dead             (false)
 	set_debug               (debug)
 	
+	# Sends the maximum health to the game_UI
+	get_node("game_UI").on_initialize(get_max_health())
+	
 	# Check that the player health bar has been added as a child of the player node
 	if not has_node("game_UI"):
 		ProgramAlerts.add_error("The player node doesn't have the \'game_UI\' node as a child. This node should be added with the given name assigned.")
@@ -100,8 +103,8 @@ func _ready() -> void:
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
 # Set the speed that the camera is zoomed in and out
-func set_camera_zoom_speed(speed: int) -> void:
-	_camera_zoom_speed = speed
+func set_camera_zoom_speed(cam_speed: int) -> void:
+	_camera_zoom_speed = cam_speed
 	
 # Get the speed that the camera is zoomed in and out
 func get_camera_zoom_speed() -> int:
@@ -129,7 +132,6 @@ func set_is_dead(value: bool) -> void:
 #-----------------------------------------------------------------------------#
 func _physics_process(delta: float) -> void:
 	Globals.player_position = self.global_position
-	
 	move_dynamically(_get_input())
 	_refresh        (delta)
 	
@@ -231,14 +233,14 @@ func _switch_sprite(new_sprite: String) -> void:
 #                             Trigger Functions                               #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the player collides with something
-func _on_player_collision(body):
+func _on_player_collision(body) -> void:
 	if body.has_method("is_in_group"):
 		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
 			take_damage(body.get_damage())
 			knockback(body)
 
 # Triggered whenever the player's health is changed
-func _on_player_health_changed(change):
+func _on_player_health_changed(change) -> void:
 	# If the player would be damaged, isn't invunerable, and isn't already dead,
 	# then process the damage
 	if change < 0 and !get_invulnerability() and !is_dead():
@@ -251,10 +253,9 @@ func _on_player_health_changed(change):
 		get_node("game_UI").on_health_changed(get_current_health(), get_current_health() - change)
 	
 	print("Current health: ", get_current_health(), "\n")
-	
 
 # Triggered whenever the player dies
-func _on_player_death():
+func _on_player_death() -> void:
 	if !is_dead():
 		set_is_dead(true)
 		print("Player Died")
@@ -264,15 +265,17 @@ func _on_player_death():
 		Globals.game_locked = true
 		yield(get_tree().create_timer(1.0), "timeout")
 		
-		# Respawn
-		global_position = get_spawn_point()
-		set_invulnerability(invlunerability_time)
-		set_is_dead(false)
-		print("\nPlayer Respawning...")
-		set_current_health(max_health)
-		take_damage(-max_health)
-		Globals.game_locked = false
-		
-		
-		
+		# Display failure screen on player death 
+		$game_UI.on_player_killed(true)
 
+# Triggered whenever the player respawns
+func _on_game_UI_respawn_player() -> void:
+	# Respawn
+	$game_UI.on_player_killed(false)
+	global_position = get_spawn_point()
+	set_invulnerability(invlunerability_time)
+	set_is_dead(false)
+	print("\nPlayer Respawning...")
+	set_current_health(max_health)
+	take_damage(-max_health)
+	Globals.game_locked = false

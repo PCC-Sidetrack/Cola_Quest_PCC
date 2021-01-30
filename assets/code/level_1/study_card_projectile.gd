@@ -26,7 +26,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_dynamically(get_current_velocity())
 	spin            (Globals.DIRECTION.CLOCKWISE, 10.0)
 	
@@ -46,8 +46,9 @@ func _on_KinematicBody2D_collision(body):
 	# Delete the projectile
 	delete()
 
+
 func _on_KinematicBody2D_death():
 	pass # Replace with function body.
 
-func _on_KinematicBody2D_health_changed(change):
+func _on_KinematicBody2D_health_changed(_change):
 	pass # Replace with function body.

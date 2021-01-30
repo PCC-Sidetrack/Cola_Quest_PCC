@@ -1,29 +1,54 @@
+#-----------------------------------------------------------------------------#
+# Class Name:   buttons.gd
+# Description:  GUI menu buttons that are used on every menu
+# Author:       Rightin Yamada
+# Company:      Sidetrack
+# Last Updated: January 30, 2021
+#-----------------------------------------------------------------------------#
+
 extends CanvasLayer
 
-func _on_Resume_pressed():
+#-----------------------------------------------------------------------------#
+#                                 Signals                                     #
+#-----------------------------------------------------------------------------#
+# Emits respawn signal when "retry" buttons have been pressed
+signal respawn_player()
+
+#-----------------------------------------------------------------------------#
+#                             Trigger Functions                               #
+#-----------------------------------------------------------------------------#
+# On resume button pressed
+func _on_Resume_pressed() -> void:
 	$mouse_pressed.play()
 	get_tree().paused = false
 
-func _on_Retry_pressed():
+# On retry button pressed
+func _on_Retry_pressed() -> void:
 	$mouse_pressed.play()
 	get_tree().paused = false
-#	return get_tree().change_scene("res://stages/christmas_stage/christmas_stage_dark.tscn")
+	emit_signal("respawn_player")
 
-func _on_Exit_pressed():
+# On exit button pressed
+func _on_Exit_pressed() -> void:
 	$mouse_pressed.play()
 	get_tree().quit()
 
-func _on_Resume_mouse_entered():
+# On resume button mouse hover
+func _on_Resume_mouse_entered() -> void:
 	$mouse_hover.play()
 
-func _on_Retry_mouse_entered():
+# On retry button mouse hover
+func _on_Retry_mouse_entered() -> void:
 	$mouse_hover.play()
 
-func _on_Exit_mouse_entered():
+# On exit button mouse hover
+func _on_Exit_mouse_entered() -> void:
 	$mouse_hover.play()
 
+# On restart button pressed
 func _on_Restart_pressed():
-	pass # Replace with function body.
+	return get_tree().reload_current_scene()
 
-func _on_Restart_mouse_entered():
-	pass # Replace with function body.
+# On restart button mouse hover
+func _on_Restart_mouse_entered() -> void:
+	pass
