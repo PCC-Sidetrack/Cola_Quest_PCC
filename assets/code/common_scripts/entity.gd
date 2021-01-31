@@ -300,7 +300,8 @@ func set_current_health(new_health: int) -> void:
 # Sets the entity's health to 0 and emits a kill and health changed signal
 func kill() -> void:
 	# Holds the last health for use in emitting a health changed signal
-	var last_health: int = _health.current
+	# Commented out below line until "last_health" is used, to avoid errors
+	#var last_health: int = _health.current
 	
 	take_damage(_health.current)
 
@@ -398,15 +399,16 @@ func knockback(other_entity: Object) -> void:
 # This is intended for more automation, but should not be considered lazy coding
 # Provides minimal control over entities
 # Returns whether the entity has moved
-func move() -> bool:
+func move() -> void:
 	var current_instruction: Dictionary = _metadata.movement.instructions[_metadata.movement.current_instruction]
-	var did_move:            bool       = false
+	# Commented out below variable "did_move" as it no logner serves a purpose
+	#var did_move:            bool       = false
 	
 	if _metadata.auto_facing:
 		_auto_facing()
 	
 	if not current_instruction.is_completed:
-		did_move = true
+		#did_move = true
 		
 		match current_instruction.name:
 			INSTRUCTIONS.MOVE_DISTANCE:
@@ -431,7 +433,7 @@ func move() -> bool:
 	if current_instruction.is_completed:
 		_next_instruction()
 	
-	return did_move
+	#return did_move
 
 # Move based on a dynamically changing horizontal direction
 # Provides the finest control of entities

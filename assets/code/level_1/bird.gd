@@ -50,7 +50,7 @@ func _ready() -> void:
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
 # Built in function is called every physics frame
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ai_enabled:
 		move()
 
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_bird_collision(body):
+func _on_bird_collision(_body):
 	pass # Replace with function body.
 
 # Triggered whenever the entity dies	
@@ -66,5 +66,5 @@ func _on_bird_death():
 	pass # Replace with function body.
 
 # Triggered whenever the entity's health is changed
-func _on_bird_health_changed(change):
+func _on_bird_health_changed(_change):
 	pass # Replace with function body.

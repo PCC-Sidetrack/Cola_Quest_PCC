@@ -71,11 +71,11 @@ func _spawn_spear() -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_Orion_collision(body):
+func _on_Orion_collision(_body):
 	pass # Replace with function body.
 
 func _on_Orion_death():
 	pass # Replace with function body.
 
-func _on_Orion_health_changed(change):
+func _on_Orion_health_changed(_change):
 	pass # Replace with function body.

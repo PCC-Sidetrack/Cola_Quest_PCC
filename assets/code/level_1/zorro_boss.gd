@@ -85,7 +85,7 @@ func _ready() -> void:
 	_change_animation("walk_sword")
 	
 # Runs every physics engine update
-func _physics_process(delta) -> void:
+func _physics_process(_delta) -> void:
 	move()
 
 #-----------------------------------------------------------------------------#
