@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/B4_damaged_water_silo-sheet.png-e3dd96519243c0bf9823dc3868ea03a0.stex"
+path="res://.import/T14c_glitched_concrete_tile13.png-720322dbde43f1ea77c0b7073d72ea91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/level_1/tiles/B4_damaged_water_silo/B4_damaged_water_silo-sheet.png"
-dest_files=[ "res://.import/B4_damaged_water_silo-sheet.png-e3dd96519243c0bf9823dc3868ea03a0.stex" ]
+source_file="res://assets/art/level_1/tiles/T14_glitched_concrete/T14_glitched_concrete/T14c_glitched_concrete_tile13.png"
+dest_files=[ "res://.import/T14c_glitched_concrete_tile13.png-720322dbde43f1ea77c0b7073d72ea91.stex" ]
 
 [params]
 
