@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "Animate_Tiles",
 "language": "GDScript",
-"path": "res://assets/code/common_scripts/animate_tiles.gd"
+"path": "res://assets/code/common_scripts/old_scripts/animate_tiles.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Entity",
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sidetrack"
-run/main_scene="res://assets/levels/Rooftop Level.tscn"
+run/main_scene="res://assets/levels/rooftop_level.tscn"
 config/icon="res://icon.png"
 
 [autoload]

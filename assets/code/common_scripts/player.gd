@@ -16,6 +16,7 @@ extends Entity
 #-----------------------------------------------------------------------------#
 export var accelleration:        float   = 20.0
 export var camera_zoom:          Vector2 = Vector2(1.5, 1.5)
+export var original_zoom:        float   = 1.0
 export var damage:               int     = 1
 export var debug:                bool    = false
 export var max_health:           int     = 5
@@ -267,7 +268,8 @@ func _on_player_death() -> void:
 		
 		# Display failure screen on player death 
 		$game_UI.on_player_killed(true)
-
+		
+		
 # Triggered whenever the player respawns
 func _on_game_UI_respawn_player() -> void:
 	# Respawn
