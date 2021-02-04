@@ -55,9 +55,6 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
 func _on_S7_running_eagor_collision(body):
-	# This is a workaround for an odd glitch. For some reason the player doesn't
-	# always detect a collision with projectiles. (Spent hours trying to figure
-	# out why but couldn't). So I perform a knockbapck in this collision code instead
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.knockback(self)
 		deal_damage(body)
