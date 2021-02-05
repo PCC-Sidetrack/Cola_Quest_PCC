@@ -25,21 +25,19 @@ var _can_pause: bool = true
 #-----------------------------------------------------------------------------#
 # Hide/Show pause menu and pause game if menu is shown
 func _pause_unpause() -> void:
-	var new_pause_state                           = not get_tree().paused
-	get_tree().paused                             = new_pause_state
-	$PausedScreen.visible                         = new_pause_state
-	$buttons/ButtonScreen/Buttons/Resume.visible  = new_pause_state
-	$buttons/ButtonScreen/Buttons/Restart.visible = new_pause_state
-	$buttons/ButtonScreen/Buttons/Retry.visible   = new_pause_state
-	$buttons/ButtonScreen/Buttons/Exit.visible    = new_pause_state
+	var new_pause_state                          = not get_tree().paused
+	get_tree().paused                            = new_pause_state
+	$PausedScreen.visible                        = new_pause_state
+	$buttons/ButtonScreen/Buttons/Resume.visible = new_pause_state
+	$buttons/ButtonScreen/Buttons/Retry.visible  = new_pause_state
+	$buttons/ButtonScreen/Buttons/Exit.visible   = new_pause_state
 
 # Pause/Unpause if pause button is pressed
 func _input(event) -> void:
 	if _can_pause == true:
 		if event.is_action_pressed("ui_pause")        or \
 		$buttons/ButtonScreen/Buttons/Resume.pressed  or \
-		$buttons/ButtonScreen/Buttons/Retry.pressed   or \
-		$buttons/ButtonScreen/Buttons/Restart.pressed:
+		$buttons/ButtonScreen/Buttons/Retry.pressed:
 			_pause_unpause()
 
 #-----------------------------------------------------------------------------#

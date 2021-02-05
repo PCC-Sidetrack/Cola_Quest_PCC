@@ -19,7 +19,7 @@ export var life_time:    float = 10.0
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	initialize_projectile      (damage, speed, "enemy", global_position.direction_to(Globals.player_position), acceleration, life_time)
+	initialize_projectile      (damage, speed, "enemy", global_position.direction_to(Globals.player.global_position), acceleration, life_time)
 	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
 	set_looking                (true)
 

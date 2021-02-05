@@ -29,8 +29,8 @@ func _hud_shake() -> void:
 
 # Animate healthar change
 func animate_value(start, end) -> void:
-	$healthbar/health_over.value = end
-	$tween.interpolate_property($healthbar/health_under, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	$health_over.value = end
+	$tween.interpolate_property($health_under, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$tween.start()
 
 #-----------------------------------------------------------------------------#
@@ -40,12 +40,12 @@ func animate_value(start, end) -> void:
 func _on_pulse_tween_all_completed() -> void:
 	if can_pulse == true:
 		$low_health.play()
-		$pulse.interpolate_property($healthbar/health_over, "tint_progress", Color.black , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$pulse.interpolate_property($health_over, "tint_progress", Color.black , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.interpolate_property($low_health_border, "modulate", Color.white , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.start()
 
 # On health change, animate healthbar
-func _on_game_UI_player_health_changed(current_health, previous_health) -> void:
+func _on_game_UI_health_changed(current_health, previous_health) -> void:
 	animate_value(previous_health, current_health)
 	_hud_shake()
 
@@ -57,23 +57,20 @@ func _on_game_UI_low_health() -> void:
 func _on_game_UI_player_killed(is_dead) -> void:
 	if is_dead == true:
 		can_pulse              = false
-		$healthbar/heart.visible         = false
-		$healthbar/heart_cracked.visible = true
+		$heart.visible         = false
+		$heart_cracked.visible = true
 	else:
-		can_pulse                        = true
-		$healthbar/heart.visible         = true
-		$healthbar/heart_cracked.visible = false
+		can_pulse              = true
+		$heart.visible         = true
+		$heart_cracked.visible = false
 
 # On level leared, disable healthbar pulsing
 func _on_game_UI_level_cleared() -> void:
 	can_pulse = false
 
 # On UI intialize, set healthbar max health
-func _on_game_UI_initialize_player(max_health) -> void:
-	$healthbar/health_over.max_value  = max_health
-	$healthbar/health_under.max_value = max_health
-	$healthbar/health_over.value      = max_health
-	$healthbar/health_under.value     = max_health
-
-
-
+func _on_game_UI_initialize(max_health) -> void:
+	$health_over.max_value  = max_health
+	$health_under.max_value = max_health
+	$health_over.value      = max_health
+	$health_under.value     = max_health

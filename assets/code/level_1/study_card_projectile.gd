@@ -20,7 +20,7 @@ export var life_time:    float = 10.0
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	initialize_projectile(damage, speed, "enemy", (Globals.player_position - global_position).normalized(), acceleration, life_time)
+	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
 	set_knockback_multiplier(0.6)
 
 #-----------------------------------------------------------------------------#

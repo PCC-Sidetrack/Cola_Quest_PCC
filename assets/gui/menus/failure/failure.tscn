@@ -138,11 +138,11 @@ frames = SubResource( 6 )
 centered = false
 
 [node name="FailureTextContainer" type="CenterContainer" parent="FailureScreen"]
-margin_left = 416.549
-margin_top = 140.259
-margin_right = 560.549
-margin_bottom = 180.259
-rect_scale = Vector2( 3, 3 )
+margin_left = 336.0
+margin_top = 72.0
+margin_right = 480.0
+margin_bottom = 112.0
+rect_scale = Vector2( 4.4, 4.4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

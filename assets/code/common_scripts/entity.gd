@@ -55,7 +55,7 @@ var _health: Dictionary = {
 
 # The movement information for the entity
 var _movement: Dictionary = {
-	acceleration          = 20.0,
+	acceleration          = 10.0,
 	current_velocity      = Vector2.ZERO,
 	#gravity               = 0.0,
 	initial_jump_velocity = 0.0,
@@ -212,7 +212,6 @@ func set_velocity               (new_velocity: Vector2) -> void:
 #-----------------------------------------------------------------------------#
 # Deal damage to another entity
 func deal_damage(other_entity: KinematicBody2D) -> void:
-	print("deal damage called")
 	# If the other entity is in the ENTITY group then deal damage to it
 	if other_entity.is_in_group(Globals.GROUP.ENTITY):
 		# Variable to save on method calls, holds the other entity's current health
@@ -375,7 +374,7 @@ func initialize_projectile(damage: int, speed: float, initiator: String, directi
 	set_damage         (damage)
 	set_life_time      (life_time)
 	set_speed          (speed)
-	set_velocity       (direction.normalized() * speed)
+	set_velocity       (direction)
 	
 	match initiator:
 		"player", "p":
