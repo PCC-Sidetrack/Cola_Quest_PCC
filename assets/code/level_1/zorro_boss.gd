@@ -50,6 +50,9 @@ var _stage_three_hp: int = _stage_two_hp - (_stage_two_hp / 2)
 # Health amount to run away at
 var _run_away_hp:    int = 3
 
+# Current movement direction
+var _h_direction: Vector2 = Vector2.LEFT
+
 #-----------------------------------------------------------------------------#
 #                              On-Ready Variables                             #
 #-----------------------------------------------------------------------------#
@@ -67,7 +70,9 @@ onready var _nodes: Dictionary = {
 func _ready() -> void:
 	# Initialize zorro as an enemy
 	initialize_enemy(health, damage, speed, acceleration, jump_velocity, obeys_gravity, smooth_movement)
-	set_auto_facing(true)
+	# Note: because the entiy has a collision shape for the sword, automatically
+	#       flipping the entity will glitch the entity into the wall
+	set_auto_facing(false)
 
 	_change_animation("walk_sword")
 	
@@ -108,8 +113,13 @@ func _change_animation(animation: String, corresponding_sprite: String = "") -> 
 	
 	$AnimationPlayer.play(animation)
 	
+# Flip the zorro entity. Can't use entity code because it doesn't properly flip
+# an entity that isn't centered.
+func _flip() -> void:
+	pass
+	
 # Instructions for the first stage of the boss fight
-func _run_stage_one_ai():
+func _run_stage_one_ai() -> void:
 	# STAGE ONE INSTRUCTIONS:
 	# Move left and right (bouncing off the wall) until near the player's x value
 	# If player's y value is within a range of enemy's own y value, then perform
@@ -118,10 +128,16 @@ func _run_stage_one_ai():
 	# and check again at the top of the jump for the x and y locations. Repeat top steps
 	# until close to the player. When y value and x value are close to the player, make
 	# a sword attack.
-	pass
+	
+	move_dynamically(_h_direction)
+	
+	# Switch directions if a wall was run into
+	if is_on_wall():
+		_h_direction = -_h_direction
+		_flip()
 	
 # Instructions for the second stage of the boss fight
-func _run_stage_two_ai():
+func _run_stage_two_ai() -> void:
 	# STAGE TWO INSTRUCTIONS:
 	# Steal some of the player's hp (one hit point which will translate to 3 for him)
 	# Spawn in some moving drones to make the parkour more difficult for the player.
@@ -133,7 +149,7 @@ func _run_stage_two_ai():
 	pass
 	
 # Instructions for the thrid stage of the boss fight
-func _run_stage_three_ai():
+func _run_stage_three_ai() -> void:
 	# STAGE THREE INSTRUCTIONS:
 	# If drone's aren't still there, respawn them. Also spawn in a few 3x5 shooting
 	# drones.
@@ -142,28 +158,18 @@ func _run_stage_three_ai():
 	pass
 	
 # Steals health from the player, adds a multiplier, and adds it to the boss hp
-func _steal_health_protocol():
+func _steal_health_protocol() -> void:
 	pass
 	
 # Causes the game to freeze while the boss escapes
-func _run_away_protocol():
+func _run_away_protocol() -> void:
 	pass
 
 #-----------------------------------------------------------------------------#
 #                                Trigger Methods                              #
 #-----------------------------------------------------------------------------#
-# Triggered whenever an instruction is executed by the entity
-# NOTE: Name is given automatically from the INSTRUCTIONS dictionary when each
-#       instruction is created using the initialize_instruction() method.
-#       The id can be specified as the last parameter of any instruction (such
-#       as in _stage1_instructions methods) or left blank. I left blank, ids
-#       will be assigned increasingly starting at 0 in the order that the
-#       initial instructions were specified.
-func _on_zorro_boss_instruction_executed(name, _id):
-	match name:
-		INSTRUCTIONS.MOVE_DISTANCE:
-			_change_animation("walk_sword")
-		INSTRUCTIONS.WAIT:
-			_change_animation("idle_sword")
-		INSTRUCTIONS.NONE:
-			_change_animation("idle_sword")
+# Deal damage to the player if the entity collides with it
+func _on_zorro_boss_collision(body) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.knockback(self)
+		deal_damage(body)

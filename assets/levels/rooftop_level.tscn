@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=143 format=2]
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_background_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprite_scenes/level_1/bird.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sprite_scenes/level_1/zorro_boss.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sprite_scenes/common_scenes/point.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=11]
 [ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/art/level_1/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png" type="Texture" id=13]
@@ -1753,7 +1752,7 @@ texture = ExtResource( 19 )
 [node name="ParallaxLayer" type="ParallaxLayer" parent="parallaxing/boss_fight_background"]
 
 [node name="Sprite" type="Sprite" parent="parallaxing/boss_fight_background/ParallaxLayer"]
-position = Vector2( 17952, 415 )
+position = Vector2( 17952, 415.8 )
 texture = ExtResource( 18 )
 
 [node name="tiles" type="Node2D" parent="."]
@@ -1812,7 +1811,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 106 )
-frame = 3
+frame = 11
 speed_scale = 3.0
 playing = true
 
@@ -1983,15 +1982,7 @@ position = Vector2( 10718, 1120 )
 shape = SubResource( 107 )
 
 [node name="zorro_boss" parent="enemies" instance=ExtResource( 9 )]
-position = Vector2( 17792, 640 )
-
-[node name="boss_movement_points" type="Node2D" parent="enemies/zorro_boss"]
-position = Vector2( -17792, -640 )
-
-[node name="boss_fight" type="Node2D" parent="enemies/zorro_boss/boss_movement_points"]
-
-[node name="start_point" parent="enemies/zorro_boss/boss_movement_points/boss_fight" instance=ExtResource( 10 )]
-position = Vector2( 17952, 704 )
+position = Vector2( 17772.6, 703.361 )
 
 [node name="triggers" type="Node2D" parent="."]
 
@@ -2054,7 +2045,7 @@ position = Vector2( 16970.2, 19.2734 )
 shape = SubResource( 110 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 132.498, 192.268 )
+position = Vector2( 17056.7, 93.8884 )
 
 [node name="game_UI" parent="player" instance=ExtResource( 32 )]
 margin_left = -16.0459
@@ -2062,6 +2053,7 @@ margin_top = 0.943878
 margin_right = 23.9541
 margin_bottom = 40.9439
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
+[connection signal="collision" from="enemies/zorro_boss" to="enemies/zorro_boss" method="_on_zorro_boss_collision"]
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/cloud_trigger" to="triggers/other_triggers/cloud_trigger" method="_on_cloud_trigger_body_entered"]

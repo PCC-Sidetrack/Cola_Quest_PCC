@@ -442,6 +442,9 @@ func move_dynamically(direction: Vector2) -> void:
 	var horizontal: float = direction.normalized().x
 	var vertical:   float = direction.normalized().y
 	
+	if _metadata.auto_facing:
+		_auto_facing()
+	
 	# Determine what kind of movement is being used
 	# NOTE:
 	#  - Entities that obey gravity must move smoothy
@@ -528,7 +531,7 @@ func _flip_entity(parent: Node) -> void:
 				child.position.x *= -1
 			elif child is LightOccluder2D:
 				for index in range(child.occluder.polygon.size()):
-						child.occluder.polygon[index].x *= -1
+					child.occluder.polygon[index].x *= -1
 
 # Move the entity in a straight line a certain distance in a certain direction, then stop
 func _move_distance(movement: Dictionary) -> void:
