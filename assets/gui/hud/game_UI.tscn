@@ -1,34 +1,17 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/gui/hud/game_UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/gui/menus/failure/failure.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/gui/hud/player_healthbar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/gui/menus/cleared/cleared.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/gui/menus/pause/pause.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/gui/hud/ui_statistics/assets/ui_statistics.gd" type="Script" id=6]
-[ext_resource path="res://assets/gui/hud/boss_healthbar/assets/boss_health_border.png" type="Texture" id=7]
-[ext_resource path="res://assets/gui/hud/boss_healthbar/assets/boss_health_normal.png" type="Texture" id=8]
-[ext_resource path="res://assets/gui/hud/boss_healthbar/assets/boss_health_background.png" type="Texture" id=9]
-[ext_resource path="res://assets/gui/hud/boss_healthbar/assets/boss_health_loss.png" type="Texture" id=10]
-[ext_resource path="res://assets/gui/hud/boss_healthbar/scripts/boss_healthbar.gd" type="Script" id=11]
+[ext_resource path="res://assets/gui/hud/ui_statistics.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://assets/gui/fonts/DungeonFont.ttf"
 
 [sub_resource type="DynamicFont" id=2]
 font_data = SubResource( 1 )
-
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://assets/gui/fonts/m5x7.ttf"
-
-[sub_resource type="DynamicFont" id=4]
-font_data = SubResource( 3 )
-
-[sub_resource type="DynamicFontData" id=5]
-font_path = "res://assets/gui/fonts/DungeonFont.ttf"
-
-[sub_resource type="DynamicFont" id=6]
-font_data = SubResource( 5 )
 
 [node name="game_UI" type="Control"]
 margin_right = 40.0
@@ -40,71 +23,8 @@ __meta__ = {
 }
 
 [node name="player_healthbar" parent="." instance=ExtResource( 3 )]
-
-[node name="boss_healthbar" type="CanvasLayer" parent="."]
-script = ExtResource( 11 )
-
-[node name="boss_healthbar" type="Control" parent="boss_healthbar"]
-anchor_left = 0.5
-anchor_top = 0.034
-anchor_right = 0.938
-anchor_bottom = 0.167
-margin_top = -0.0978012
-margin_right = -224.256
-margin_bottom = -39.9978
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="boss_health_loss" type="TextureProgress" parent="boss_healthbar/boss_healthbar"]
-margin_right = 224.0
-margin_bottom = 17.0
-max_value = 50.0
-value = 41.0
-texture_under = ExtResource( 9 )
-texture_progress = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="boss_health_normal" type="TextureProgress" parent="boss_healthbar/boss_healthbar"]
-margin_right = 224.0
-margin_bottom = 40.0
-max_value = 50.0
-value = 35.0
-texture_over = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="hbox" type="HBoxContainer" parent="boss_healthbar/boss_healthbar"]
-anchor_right = 0.707
-margin_left = 10.3794
-margin_top = 8.12571
-margin_right = 216.379
-margin_bottom = 48.1257
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="boss_name" type="Label" parent="boss_healthbar/boss_healthbar/hbox"]
-margin_left = 73.0
-margin_top = 11.0
-margin_right = 132.0
-margin_bottom = 28.0
-custom_fonts/font = SubResource( 2 )
-text = "boss_name"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="tween" type="Tween" parent="boss_healthbar/boss_healthbar"]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
 [node name="pause" parent="." instance=ExtResource( 5 )]
 
@@ -117,42 +37,40 @@ script = ExtResource( 6 )
 
 [node name="fps_counter" type="Label" parent="ui_statistics"]
 margin_left = 8.09406
-margin_top = 52.3131
+margin_top = 31.2894
 margin_right = 48.0941
-margin_bottom = 66.3131
-custom_fonts/font = SubResource( 4 )
+margin_bottom = 45.2894
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="respawn_counter" type="Label" parent="ui_statistics"]
 anchor_left = 0.378419
-anchor_top = 0.465916
+anchor_top = 0.485939
 anchor_right = 0.456419
-anchor_bottom = 0.475916
+anchor_bottom = 0.485939
 margin_left = 0.0875092
 margin_top = -7.12299
 margin_right = 0.151505
 margin_bottom = 6.877
 rect_pivot_offset = Vector2( 18.553, 0 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
-[connection signal="boss_health_changed" from="." to="boss_healthbar" method="_on_game_UI_boss_health_changed"]
-[connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
+[connection signal="health_changed" from="." to="player_healthbar" method="_on_game_UI_health_changed"]
+[connection signal="initialize" from="." to="player_healthbar" method="_on_game_UI_initialize"]
 [connection signal="level_cleared" from="." to="pause" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="player_healthbar" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
 [connection signal="low_health" from="." to="player_healthbar" method="_on_game_UI_low_health"]
-[connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_killed" from="." to="pause" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="ui_statistics" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
-[connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
 [connection signal="respawn_player" from="." to="ui_statistics" method="_on_game_UI_respawn_player"]
 [connection signal="respawn_player" from="pause" to="." method="_on_pause_respawn_player"]
 [connection signal="respawn_player" from="failure" to="." method="_on_failure_respawn_player"]

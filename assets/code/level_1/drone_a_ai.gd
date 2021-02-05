@@ -76,6 +76,10 @@ func _physics_process(delta: float) -> void:
 
 # Create a new instance of a study card projectile and shoot it out of the drone
 func _shoot() -> void:
+	# Save the position of the drone to the misc_loc vector in Globals. It will
+	# be used by the study card.
+	Globals.misc_loc = global_position
+	
 	# Create, initialize, and add a new study card projectile to the drone
 	var study_card = STUDY_CARD.instance()
 	#study_card.get_node("AnimatedSprite").play("spin")

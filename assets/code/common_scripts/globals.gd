@@ -18,6 +18,9 @@ var player:          Entity = null
 # Whether or not the player controls are currently locked (used for cutscenes)
 var game_locked:     bool    = false
 
+# Holds a vector for miscellanious use (especially when initializing projectiles)
+var misc_loc:        Vector2 = Vector2(0, 0)
+
 # Directions
 const DIRECTION: Dictionary = {
 	DOWN              = 1.0,

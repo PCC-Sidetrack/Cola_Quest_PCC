@@ -50,8 +50,16 @@ var _stage_three_hp: int = _stage_two_hp - (_stage_two_hp / 2)
 # Health amount to run away at
 var _run_away_hp:    int = 3
 
+# Tracks whether the boss fight is on-going
+var _fight_started:  bool = false
+# Tracks whether the sprite is currently flipped to the left
+var _sprite_flipped: bool = false
+
 # Current movement direction
 var _h_direction: Vector2 = Vector2.LEFT
+
+# Saves the name of the current sprite being shown
+var _current_sprite: String = ""
 
 #-----------------------------------------------------------------------------#
 #                              On-Ready Variables                             #
@@ -73,11 +81,19 @@ func _ready() -> void:
 	# Note: because the entiy has a collision shape for the sword, automatically
 	#       flipping the entity will glitch the entity into the wall
 	set_auto_facing(false)
-
-	_change_animation("walk_sword")
+	set_direction_facing(Globals.DIRECTION.LEFT)
+	# flip the entity to make sure it's facing the correct direction
+	_flip()
+	_change_animation("draw_sword", "draw_sword")
 	
 # Runs every physics engine update
 func _physics_process(_delta: float) -> void:
+	# Flip the entity if needed
+	if _h_direction == Vector2.RIGHT and !_sprite_flipped:
+		_flip()
+	elif _h_direction == Vector2.LEFT and _sprite_flipped:
+		_flip()
+	
 	# Check the boss's health level to see if the next stage should begin
 	if get_current_health() <= _stage_two_hp && _current_stage == 1:
 		_current_stage = 2
@@ -94,6 +110,14 @@ func _physics_process(_delta: float) -> void:
 		_run_stage_three_ai()
 	else:
 		_run_stage_one_ai()
+		
+
+#-----------------------------------------------------------------------------#
+#                                Public Methods                               #
+#-----------------------------------------------------------------------------#
+# Setter and Getter Methods
+func get_fight_started() -> bool: return _fight_started
+
 
 #-----------------------------------------------------------------------------#
 #                                Private Methods                              #
@@ -108,15 +132,52 @@ func _change_animation(animation: String, corresponding_sprite: String = "") -> 
 	# Set the correct sprite to visible and play the animation
 	if corresponding_sprite == "":
 		$sprites.get_node(animation).visible = true
+		_current_sprite = animation
 	else:
 		$sprites.get_node(corresponding_sprite).visible = true
+		_current_sprite = corresponding_sprite
 	
 	$AnimationPlayer.play(animation)
 	
-# Flip the zorro entity. Can't use entity code because it doesn't properly flip
-# an entity that isn't centered.
+# Flip the zorro entity. Can't use entity code because it doesn't properly
+# flip the sword
 func _flip() -> void:
-	pass
+	# Store the current sprite for later use
+	var current_sprite = $sprites.get_node(_current_sprite)
+	
+	# Flip all dr. geary sprites
+	for child in get_node("sprites").get_children():
+		if child is Sprite:
+			child.flip_h = !child.flip_h
+				
+	# Flip the sword sprite and collision shape
+	$sword/Sprite.scale *= -1
+	$sword/CollisionShape2D.scale.x *= -1
+	
+	if _sprite_flipped:
+		$sword/Sprite.rotation_degrees = $sword.rotation_degrees
+		$sword/CollisionShape2D.rotation_degrees = $sword.rotation_degrees
+		
+		$sword/Sprite.position.x -= $sprites.global_position.x - $sword/Sprite.global_position.x
+		
+		# Calculate the position to move the sword to (based on the position
+		# of the current sprite's globol position)
+		#if current_sprite is Sprite:
+			#center_curr_sprite = current_sprite.global_position.x + (current_sprite.texture.get_size().x / (2 * current_sprite.hframes)) * current_sprite.scale.x
+			#center_sword       = $sword/Sprite.global_position.x  + ($sword/Sprite.texture.get_size().x) * $sword.scale.x
+			
+			##$sword/Sprite.global_position.x += current_sprite.global_position.x + (current_sprite.texture.get_size().x / (2 * current_sprite.hframes)) - $sword/Sprite.global_position.x
+			#$sword/Sprite.global_position.x += (center_curr_sprite - center_sword)
+			#$sword/Sprite.position.x -= (current_sprite.global_position.x - $sword/Sprite.global_position.x)
+	else:
+		$sword/Sprite.rotation_degrees = 0
+		$sword/Sprite.position = Vector2(0, 0)
+		$sword/CollisionShape2D.rotation_degrees = 0
+		$sword/CollisionShape2D.position = Vector2(0, 0)
+	
+	# Remember that the sprite is flipped to the right
+	_sprite_flipped = !_sprite_flipped
+				
 	
 # Instructions for the first stage of the boss fight
 func _run_stage_one_ai() -> void:
@@ -129,12 +190,14 @@ func _run_stage_one_ai() -> void:
 	# until close to the player. When y value and x value are close to the player, make
 	# a sword attack.
 	
+	# Lock the character movement for a moment while Dr. Geary appears.
+	
+	#_change_animation("")
 	move_dynamically(_h_direction)
 	
-	# Switch directions if a wall was run into
 	if is_on_wall():
 		_h_direction = -_h_direction
-		_flip()
+	
 	
 # Instructions for the second stage of the boss fight
 func _run_stage_two_ai() -> void:
