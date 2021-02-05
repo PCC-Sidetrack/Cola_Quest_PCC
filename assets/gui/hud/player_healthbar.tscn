@@ -58,17 +58,23 @@ animations = [ {
 } ]
 
 [node name="player_healthbar" type="CanvasLayer"]
-scale = Vector2( 5, 5 )
-transform = Transform2D( 5, 0, 0, 5, 0, 0 )
 script = ExtResource( 10 )
 
 [node name="low_health_border" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 128.4, 72 )
-scale = Vector2( 2.66667, 1.5 )
+visible = false
+position = Vector2( 256.036, 150.014 )
 texture = ExtResource( 2 )
 
-[node name="health_under" type="TextureProgress" parent="."]
+[node name="healthbar" type="Control" parent="."]
+margin_left = 2.23924
+margin_top = 7.21341
+margin_right = 2.23924
+margin_bottom = 7.21341
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health_under" type="TextureProgress" parent="healthbar"]
 margin_left = 11.0
 margin_top = 2.0
 margin_right = 46.0
@@ -80,7 +86,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="health_over" type="TextureProgress" parent="."]
+[node name="health_over" type="TextureProgress" parent="healthbar"]
 margin_left = 11.0
 margin_top = 2.0
 margin_right = 46.0
@@ -93,15 +99,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="heart" type="AnimatedSprite" parent="."]
+[node name="heart" type="AnimatedSprite" parent="healthbar"]
+visible = false
 position = Vector2( 6.4, 6 )
 frames = SubResource( 11 )
 animation = "idle"
-frame = 9
+frame = 5
 speed_scale = 2.0
 playing = true
 
-[node name="heart_cracked" type="Sprite" parent="."]
+[node name="heart_cracked" type="Sprite" parent="healthbar"]
 visible = false
 position = Vector2( 7.4, 6.8 )
 texture = ExtResource( 7 )
