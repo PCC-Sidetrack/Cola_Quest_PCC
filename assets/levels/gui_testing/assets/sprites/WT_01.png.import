@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/healthbar_background_player.png-3a0afac431c91e06c9d4113d9a112d05.stex"
+path="res://.import/WT_01.png-89ffa47eead19ef2590d26eeef5b26ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/hud/player_healthbar/assets/healthbar_background_player.png"
-dest_files=[ "res://.import/healthbar_background_player.png-3a0afac431c91e06c9d4113d9a112d05.stex" ]
+source_file="res://assets/levels/gui_testing/assets/sprites/WT_01.png"
+dest_files=[ "res://.import/WT_01.png-89ffa47eead19ef2590d26eeef5b26ab.stex" ]
 
 [params]
 
