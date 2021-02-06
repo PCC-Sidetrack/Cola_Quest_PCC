@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SD13_sloshing_water.wav-a9d2addd96fa40b2917cd6f8780a605f.sample"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD13_sloshing_water.wav"
+dest_files=[ "res://.import/SD13_sloshing_water.wav-a9d2addd96fa40b2917cd6f8780a605f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
