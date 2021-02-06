@@ -1811,7 +1811,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 106 )
-frame = 8
+frame = 9
 speed_scale = 3.0
 playing = true
 
@@ -1819,44 +1819,47 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
-frame = 0
+frame = 2
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
-frame = 0
+frame = 2
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
-frame = 2
+frame = 0
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
+frame = 3
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
+frame = 3
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
+frame = 3
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -2044,17 +2047,11 @@ position = Vector2( 16970.2, 19.2734 )
 shape = SubResource( 110 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 506.36, 188.447 )
+position = Vector2( 17249.4, 138.287 )
 
 [node name="game_UI" parent="player" instance=ExtResource( 32 )]
-margin_left = -16.0459
-margin_top = 0.943878
-margin_right = 23.9541
-margin_bottom = 40.9439
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
 [connection signal="collision" from="enemies/zorro_boss" to="enemies/zorro_boss" method="_on_zorro_boss_collision"]
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/cloud_trigger" to="triggers/other_triggers/cloud_trigger" method="_on_cloud_trigger_body_entered"]
-[connection signal="instruction_executed" from="player" to="enemies/zorro_boss" method="_on_player_instruction_executed"]
-[connection signal="respawn_player" from="player/game_UI" to="player" method="_on_game_UI_respawn_player"]

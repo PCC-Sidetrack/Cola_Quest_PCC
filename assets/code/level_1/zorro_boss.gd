@@ -52,7 +52,7 @@ var _run_away_hp:    int = 3
 
 # Tracks whether the boss fight is on-going
 var _fight_started:  bool = false
-# Tracks whether the sprite is currently flipped to the left
+# Tracks whether the sprite is currently flipped
 var _sprite_flipped: bool = false
 
 # Current movement direction
@@ -81,17 +81,15 @@ func _ready() -> void:
 	# Note: because the entiy has a collision shape for the sword, automatically
 	#       flipping the entity will glitch the entity into the wall
 	set_auto_facing(false)
-	set_direction_facing(Globals.DIRECTION.LEFT)
 	# flip the entity to make sure it's facing the correct direction
-	_flip()
 	_change_animation("draw_sword", "draw_sword")
 	
 # Runs every physics engine update
 func _physics_process(_delta: float) -> void:
 	# Flip the entity if needed
-	if _h_direction == Vector2.RIGHT and !_sprite_flipped:
+	if _h_direction == Vector2.RIGHT and _sprite_flipped:
 		_flip()
-	elif _h_direction == Vector2.LEFT and _sprite_flipped:
+	elif _h_direction == Vector2.LEFT and !_sprite_flipped:
 		_flip()
 	
 	# Check the boss's health level to see if the next stage should begin
@@ -148,17 +146,18 @@ func _flip() -> void:
 	# Flip all dr. geary sprites
 	for child in get_node("sprites").get_children():
 		if child is Sprite:
-			child.flip_h = !child.flip_h
+			child.scale.x *= -1
 				
 	# Flip the sword sprite and collision shape
-	$sword/Sprite.scale *= -1
-	$sword/CollisionShape2D.scale.x *= -1
+	$sword.scale.x *= -1
 	
-	if _sprite_flipped:
-		$sword/Sprite.rotation_degrees = $sword.rotation_degrees
-		$sword/CollisionShape2D.rotation_degrees = $sword.rotation_degrees
+	#if !_sprite_flipped:
+		#$sword/Sprite.rotation_degrees = $sword.rotation_degrees
+		#$sword/CollisionShape2D.rotation_degrees = $sword.rotation_degrees
 		
-		$sword/Sprite.position.x -= $sprites.global_position.x - $sword/Sprite.global_position.x
+		#$sword/Sprite.position.x -= $sprites.global_position.x - $sword/Sprite.global_position.x
+		
+		#$sword.global_position.x += 10
 		
 		# Calculate the position to move the sword to (based on the position
 		# of the current sprite's globol position)
@@ -169,11 +168,9 @@ func _flip() -> void:
 			##$sword/Sprite.global_position.x += current_sprite.global_position.x + (current_sprite.texture.get_size().x / (2 * current_sprite.hframes)) - $sword/Sprite.global_position.x
 			#$sword/Sprite.global_position.x += (center_curr_sprite - center_sword)
 			#$sword/Sprite.position.x -= (current_sprite.global_position.x - $sword/Sprite.global_position.x)
-	else:
-		$sword/Sprite.rotation_degrees = 0
-		$sword/Sprite.position = Vector2(0, 0)
-		$sword/CollisionShape2D.rotation_degrees = 0
-		$sword/CollisionShape2D.position = Vector2(0, 0)
+	#else:
+		#$sword.rotation_degrees = 0
+		#$sword.global_position.x -= 10
 	
 	# Remember that the sprite is flipped to the right
 	_sprite_flipped = !_sprite_flipped
