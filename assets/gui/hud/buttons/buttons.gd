@@ -47,6 +47,7 @@ func _on_Exit_mouse_entered() -> void:
 
 # On restart button pressed
 func _on_Restart_pressed():
+	Globals.game_locked = false
 	return get_tree().reload_current_scene()
 
 # On restart button mouse hover

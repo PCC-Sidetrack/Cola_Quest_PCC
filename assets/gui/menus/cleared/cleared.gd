@@ -26,14 +26,15 @@ onready var _completion_text = $CompletionScreen/CompletionBackgroundContainer/C
 # Show level cleared menu after the text animation finishes
 func _on_CompletionSign_animation_finished() -> void:
 	$cleared.play()
-	_completion_sign.visible                     = false
-	_completion_text.visible                     = true
-	_completion_text.animation                   = "glow"
-	_completion_text.playing                     = true
-	$buttons/ButtonScreen/Buttons/Retry.visible = true
-	$buttons/ButtonScreen/Buttons/Exit.visible  = true
-	_confetti_left.emitting                      = true
-	_confetti_right.emitting                     = true
+	_completion_sign.visible                      = false
+	_completion_text.visible                      = true
+	_completion_text.animation                    = "glow"
+	_completion_text.playing                      = true
+	$buttons/ButtonScreen/Buttons/Retry.visible   = true
+	$buttons/ButtonScreen/Buttons/Restart.visible = true
+	$buttons/ButtonScreen/Buttons/Exit.visible    = true
+	_confetti_left.emitting                       = true
+	_confetti_right.emitting                      = true
 
 # Repeat text animation each time it finishes
 func _on_CompletionText_animation_finished() -> void:

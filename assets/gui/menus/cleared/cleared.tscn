@@ -27,13 +27,13 @@ curve = SubResource( 3 )
 flag_align_y = true
 flag_disable_z = true
 spread = 24.15
-gravity = Vector3( 0, 98, 0 )
+gravity = Vector3( 0, 90, 0 )
 initial_velocity = 628.04
 initial_velocity_random = 0.61
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 68.91
-scale = 20.0
+scale = 10.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 hue_variation = 0.7
@@ -279,6 +279,7 @@ __meta__ = {
 }
 
 [node name="confetti_left" parent="CompletionScreen/BlackOverlay" instance=ExtResource( 4 )]
+modulate = Color( 1, 1, 1, 0.231373 )
 position = Vector2( 0, 512 )
 rotation = -1.0472
 emitting = false
@@ -286,6 +287,7 @@ one_shot = true
 process_material = SubResource( 5 )
 
 [node name="confetti_right" parent="CompletionScreen/BlackOverlay" instance=ExtResource( 4 )]
+modulate = Color( 2, 2, 1, 0.231373 )
 position = Vector2( 1280, 512 )
 rotation = -2.26893
 emitting = false
@@ -313,8 +315,8 @@ __meta__ = {
 
 [node name="CompletionText" type="AnimatedSprite" parent="CompletionScreen/CompletionBackgroundContainer"]
 visible = false
-position = Vector2( 336, 144 )
-scale = Vector2( 2.5822, 2.5822 )
+position = Vector2( 411.542, 190.798 )
+scale = Vector2( 1.78202, 1.78202 )
 frames = SubResource( 56 )
 animation = "glow"
 centered = false
