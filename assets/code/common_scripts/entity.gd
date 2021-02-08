@@ -211,39 +211,37 @@ func set_velocity               (new_velocity: Vector2) -> void:
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
 # Deal damage to another entity
-func deal_damage(other_entity: KinematicBody2D) -> void:
-	# If the other entity is in the ENTITY group then deal damage to it
-	if other_entity.is_in_group(Globals.GROUP.ENTITY):
-		# Variable to save on method calls, holds the other entity's current health
-		var other_entity_health = other_entity.get_current_health()
-		# Holds the amount of damage that is being applied to the other entity
-		var damage_applied: int = _damage.amount
-			
-		# Only take damage if damage is not negative and player is not invulnerable
-		if _damage.amount > 0 and !other_entity.get_invulnerability():
-			if other_entity_health - _damage.amount >= 0:
-				other_entity._set_health(other_entity_health - _damage.amount)
-			# If the damage applied brings the entity's health below 0, set it to 0
-			else:
-				damage_applied = other_entity_health
-				other_entity._set_health(0)
-		# If the damage is negative, then heal the other entity
-		elif _damage.amount < 0:
-			if other_entity_health - _damage.amount <= other_entity.get_max_health():
-				other_entity._set_health(other_entity_health - _damage.amount)
-			# If damage applied brings the entity's health above max, set it to max
-			else:
-				damage_applied = other_entity_health - other_entity.get_max_health()
-				other_entity._set_health(other_entity.get_max_health())
-			
-			
-		# Emit the health changed
-		if damage_applied != 0:
-			other_entity.emit_signal("health_changed", -damage_applied)
+func deal_damage(other_entity: Entity) -> void:
+	# Variable to save on method calls, holds the other entity's current health
+	var other_entity_health = other_entity.get_current_health()
+	# Holds the amount of damage that is being applied to the other entity
+	var damage_applied: int = _damage.amount
 		
-		# Check if the entity has died. If it has, call on_death()
-		if other_entity.get_current_health() <= 0:
-			other_entity.emit_signal("death")
+	# Only take damage if damage is not negative and player is not invulnerable
+	if _damage.amount > 0 and !other_entity.get_invulnerability():
+		if other_entity_health - _damage.amount >= 0:
+			other_entity._set_health(other_entity_health - _damage.amount)
+		# If the damage applied brings the entity's health below 0, set it to 0
+		else:
+			damage_applied = other_entity_health
+			other_entity._set_health(0)
+	# If the damage is negative, then heal the other entity
+	elif _damage.amount < 0:
+		if other_entity_health - _damage.amount <= other_entity.get_max_health():
+			other_entity._set_health(other_entity_health - _damage.amount)
+		# If damage applied brings the entity's health above max, set it to max
+		else:
+			damage_applied = other_entity_health - other_entity.get_max_health()
+			other_entity._set_health(other_entity.get_max_health())
+		
+		
+	# Emit the health changed
+	if damage_applied != 0:
+		other_entity.emit_signal("health_changed", -damage_applied)
+	
+	# Check if the entity has died. If it has, call on_death()
+	if other_entity.get_current_health() <= 0:
+		other_entity.emit_signal("death")
 
 # Take damage from another entity (or heal if the damage is negative)
 func take_damage(damage: int) -> void:	

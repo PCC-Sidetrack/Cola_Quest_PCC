@@ -33,6 +33,7 @@ export var damage:          int   = 1
 # Amount of damage zorro can take before dying
 export var health:          int   = 16
 
+
 #-----------------------------------------------------------------------------#
 #                               Public Variables                              #
 #-----------------------------------------------------------------------------#
@@ -42,24 +43,33 @@ export var health:          int   = 16
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
 # Tracks the current stage of the boss fight
-var _current_stage:  int = 1
+var _current_stage:         int = 1
 # Health amount to activate stage two at
-var _stage_two_hp:   int = health - (health / 4)
+var _stage_two_hp:          int = 11
 # Health amount to activate stage three at
-var _stage_three_hp: int = _stage_two_hp - (_stage_two_hp / 2)
+var _stage_three_hp:        int = 6
 # Health amount to run away at
-var _run_away_hp:    int = 3
+var _run_away_hp:           int = 1
+# How far away from the player before zorro attempts an attack
+var _distance_to_attack:    int = 100
 
 # Tracks whether the boss fight is on-going
 var _fight_started:  bool = false
 # Tracks whether the sprite is currently flipped
 var _sprite_flipped: bool = false
+# Tracks whether the sprite is currently in an fixed animation (not desiring to be interupted)
+var _in_fixed_anim:  bool = false
 
 # Current movement direction
-var _h_direction: Vector2 = Vector2.LEFT
+var _h_vdirection: Vector2 = Vector2.LEFT
+# Current movement direction as a float
+var _h_fdirection: float   = Globals.DIRECTION.LEFT
 
 # Saves the name of the current sprite being shown
 var _current_sprite: String = ""
+
+# Animation timer
+var _anim_timer: Timer = Timer.new()
 
 #-----------------------------------------------------------------------------#
 #                              On-Ready Variables                             #
@@ -69,7 +79,6 @@ onready var _nodes: Dictionary = {
 		start_point = self.get_node("boss_movement_points/boss_fight/start_point")
 	}
 	
-	
 #-----------------------------------------------------------------------------#
 #                           Built-In Virtual Methods                          #
 #-----------------------------------------------------------------------------#	
@@ -78,19 +87,31 @@ onready var _nodes: Dictionary = {
 func _ready() -> void:
 	# Initialize zorro as an enemy
 	initialize_enemy(health, damage, speed, acceleration, jump_velocity, obeys_gravity, smooth_movement)
+	
 	# Note: because the entiy has a collision shape for the sword, automatically
 	#       flipping the entity will glitch the entity into the wall
 	set_auto_facing(false)
+	
 	# flip the entity to make sure it's facing the correct direction
-	_change_animation("draw_sword", "draw_sword")
+	_change_animation("idle_sword", "idle")
+	
+	# Setup the animation timer
+	add_child(_anim_timer)
+	_anim_timer.set_one_shot(true)
 	
 # Runs every physics engine update
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Flip the entity if needed
-	if _h_direction == Vector2.RIGHT and _sprite_flipped:
+	if _h_vdirection == Vector2.RIGHT and _sprite_flipped:
 		_flip()
-	elif _h_direction == Vector2.LEFT and !_sprite_flipped:
+	elif _h_vdirection == Vector2.LEFT and !_sprite_flipped:
 		_flip()
+		
+	# Set the floating point direction to the right value
+	if _h_vdirection == Vector2.RIGHT:
+		_h_fdirection = Globals.DIRECTION.RIGHT
+	elif _h_vdirection == Vector2.LEFT:
+		_h_fdirection = Globals.DIRECTION.LEFT
 	
 	# Check the boss's health level to see if the next stage should begin
 	if get_current_health() <= _stage_two_hp && _current_stage == 1:
@@ -100,14 +121,19 @@ func _physics_process(_delta: float) -> void:
 		_current_stage = 3
 	elif get_current_health() <= _run_away_hp:
 		_run_away_protocol()
+		
+	# Do any movement indicated
+	move_dynamically(get_current_velocity())
 	
 	# Check which stage instructions should be executed
-	if _current_stage == 2:
-		_run_stage_two_ai()
-	elif _current_stage == 3:
-		_run_stage_three_ai()
-	else:
-		_run_stage_one_ai()
+	# Only run the ai if not currently in a fixed animation
+	if !_in_fixed_anim:
+		if _current_stage == 2:
+			_run_stage_two_ai()
+		elif _current_stage == 3:
+			_run_stage_three_ai()
+		else:
+			_run_stage_one_ai()
 		
 
 #-----------------------------------------------------------------------------#
@@ -120,6 +146,37 @@ func get_fight_started() -> bool: return _fight_started
 #-----------------------------------------------------------------------------#
 #                                Private Methods                              #
 #-----------------------------------------------------------------------------#
+
+# Attacks the player if the cooldown is ready
+func _attack() -> void:
+	# Save the sword attack animation for easy reference
+	var sword_attack: Animation = $AnimationPlayer.get_animation("sword_attack")
+
+	# Now in a fixed animation
+	_in_fixed_anim = true
+	
+	# Change the animation
+	_change_animation("sword_attack")
+	
+	# Wait until the desired frame
+	yield($AnimationPlayer, "animation_finished")
+	
+	# Change the animation to idle for a moment
+	_change_animation("idle_sword", "idle")
+	set_velocity(Vector2(0.0, 0.0))
+	_anim_timer.start(1.0)
+	yield(_anim_timer, "timeout")
+	
+	# Change movement direction
+	_h_vdirection = -_h_vdirection
+	
+	# No longer in a fixed animation
+	_in_fixed_anim = false
+	
+# Performs a dash
+func _dash() -> void:
+	set_velocity(Vector2(get_last_direction().x * get_speed() * 3.0, get_current_velocity().y))
+
 # Change the animation of the sprite
 func _change_animation(animation: String, corresponding_sprite: String = "") -> void:
 	# First set all the sprites to invisible
@@ -140,9 +197,6 @@ func _change_animation(animation: String, corresponding_sprite: String = "") -> 
 # Flip the zorro entity. Can't use entity code because it doesn't properly
 # flip the sword
 func _flip() -> void:
-	# Store the current sprite for later use
-	var current_sprite = $sprites.get_node(_current_sprite)
-	
 	# Flip all dr. geary sprites
 	for child in get_node("sprites").get_children():
 		if child is Sprite:
@@ -150,28 +204,7 @@ func _flip() -> void:
 				
 	# Flip the sword sprite and collision shape
 	$sword.scale.x *= -1
-	
-	#if !_sprite_flipped:
-		#$sword/Sprite.rotation_degrees = $sword.rotation_degrees
-		#$sword/CollisionShape2D.rotation_degrees = $sword.rotation_degrees
-		
-		#$sword/Sprite.position.x -= $sprites.global_position.x - $sword/Sprite.global_position.x
-		
-		#$sword.global_position.x += 10
-		
-		# Calculate the position to move the sword to (based on the position
-		# of the current sprite's globol position)
-		#if current_sprite is Sprite:
-			#center_curr_sprite = current_sprite.global_position.x + (current_sprite.texture.get_size().x / (2 * current_sprite.hframes)) * current_sprite.scale.x
-			#center_sword       = $sword/Sprite.global_position.x  + ($sword/Sprite.texture.get_size().x) * $sword.scale.x
-			
-			##$sword/Sprite.global_position.x += current_sprite.global_position.x + (current_sprite.texture.get_size().x / (2 * current_sprite.hframes)) - $sword/Sprite.global_position.x
-			#$sword/Sprite.global_position.x += (center_curr_sprite - center_sword)
-			#$sword/Sprite.position.x -= (current_sprite.global_position.x - $sword/Sprite.global_position.x)
-	#else:
-		#$sword.rotation_degrees = 0
-		#$sword.global_position.x -= 10
-	
+
 	# Remember that the sprite is flipped to the right
 	_sprite_flipped = !_sprite_flipped
 				
@@ -187,13 +220,38 @@ func _run_stage_one_ai() -> void:
 	# until close to the player. When y value and x value are close to the player, make
 	# a sword attack.
 	
-	# Lock the character movement for a moment while Dr. Geary appears.
+	# Set the velocity of Zoroo
+	set_velocity(Vector2(_h_fdirection * get_speed(), 0.0))
+
+	#move_dynamically(_h_vdirection)
+	_change_animation("walk_sword", "walk")
+
+	# Distance between Zorro and the player
+	var distance: float = global_position.x - Globals.player_position.x
 	
-	#_change_animation("")
-	move_dynamically(_h_direction)
+	# Check if near the x value of the player
+	if _h_vdirection == Vector2.LEFT:
+		if distance > 0 and distance < _distance_to_attack:
+			_attack()
+		elif distance < 0 and distance > -_distance_to_attack:
+			_flip()
+			_change_animation("idle_sword", "idle")
+			_anim_timer.start(0.3)
+			yield(_anim_timer, "timeout")
+			_attack()
+	else:
+		if distance < 0 and distance > -_distance_to_attack:
+			_attack()
+		elif distance > 0 and distance < _distance_to_attack:
+			_flip()
+			_change_animation("idle_sword", "idle")
+			_anim_timer.start(0.3)
+			yield(_anim_timer, "timeout")
+			_attack()
 	
 	if is_on_wall():
-		_h_direction = -_h_direction
+		_h_vdirection = -_h_vdirection
+		
 	
 	
 # Instructions for the second stage of the boss fight
@@ -231,5 +289,5 @@ func _run_away_protocol() -> void:
 # Deal damage to the player if the entity collides with it
 func _on_zorro_boss_collision(body) -> void:
 	if body.is_in_group(Globals.GROUP.PLAYER):
-		body.knockback(self)
 		deal_damage(body)
+		body.knockback(self)

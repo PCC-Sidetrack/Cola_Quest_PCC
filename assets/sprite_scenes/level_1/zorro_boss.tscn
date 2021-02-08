@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_arm_wave.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_draw_sword.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_throw_item.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_walk.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sword.png" type="Texture" id=8]
+[ext_resource path="res://assets/code/level_1/zorro_sword.gd" type="Script" id=9]
 [ext_resource path="res://assets/code/level_1/zorro_boss.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
@@ -222,7 +223,6 @@ tracks/16/keys = {
 [sub_resource type="Animation" id=2]
 resource_name = "draw_sword"
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/draw_sword:position")
 tracks/0/interp = 1
@@ -803,7 +803,6 @@ tracks/16/keys = {
 [sub_resource type="Animation" id=5]
 resource_name = "jump_no_sword"
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/jump:position")
 tracks/0/interp = 1
@@ -988,7 +987,6 @@ tracks/14/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "jump_sword"
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/jump:frame")
 tracks/0/interp = 1
@@ -1173,7 +1171,6 @@ tracks/14/keys = {
 [sub_resource type="Animation" id=7]
 resource_name = "sheath_sword"
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/draw_sword:position")
 tracks/0/interp = 1
@@ -1358,7 +1355,6 @@ tracks/14/keys = {
 [sub_resource type="Animation" id=8]
 resource_name = "sword_attack"
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/sword_attack:position")
 tracks/0/interp = 1
@@ -1378,10 +1374,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0.0 ]
+"values": [ 0.0, 0.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("sprites/sword_attack:frame")
@@ -1503,11 +1499,60 @@ tracks/11/keys = {
 "update": 1,
 "values": [ -36.0503, -44.0344, -40.0753, -1.88362 ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("sword/CollisionShape2D:shape:extents")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("sword/CollisionShape2D:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 31.6419, -19.7862 ), Vector2( 29.2663, -21.2709 ), Vector2( 31.7225, -20.5602 ), Vector2( 38.3627, -4.45906 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("sword/CollisionShape2D:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 144.117, 135.956, 140.045, 178.064 ]
+}
+tracks/15/type = "method"
+tracks/15/path = NodePath(".")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_dash"
+} ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "throw"
 length = 0.7
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/throw:position")
 tracks/0/interp = 1
@@ -1651,6 +1696,42 @@ tracks/11/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 115.0, 131.52 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("sword/CollisionShape2D:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -8.55, 14.3 ), Vector2( -12.65, 13.6 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("sword/CollisionShape2D:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 115.0, 131.283 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("sword/CollisionShape2D:shape:extents")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -1802,6 +1883,42 @@ tracks/11/keys = {
 "update": 1,
 "values": [ 115.0, 119.28 ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("sword/CollisionShape2D:shape:extents")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("sword/CollisionShape2D:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -8.51875, 14.3469 ), Vector2( -8.56702, 15.2303 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("sword/CollisionShape2D:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 114.841, 119.264 ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "walk_sword"
@@ -1952,6 +2069,42 @@ tracks/11/keys = {
 "update": 1,
 "values": [ -36.0503, -81.805 ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("sword/CollisionShape2D:shape:extents")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("sword/CollisionShape2D:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 31.5461, -19.7706 ), Vector2( 17.8129, -31.0757 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("sword/CollisionShape2D:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 143.849, 98.0779 ]
+}
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 6.68082, 0.2157 )
@@ -1984,6 +2137,7 @@ visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 3 )
 hframes = 2
+frame = 1
 
 [node name="arm_wave" type="Sprite" parent="sprites"]
 visible = false
@@ -1996,18 +2150,19 @@ visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 2 )
 hframes = 5
+frame = 4
 
 [node name="jump" type="Sprite" parent="sprites"]
+visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 4 )
 hframes = 5
-frame = 4
 
 [node name="sword_attack" type="Sprite" parent="sprites"]
-visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 5 )
 hframes = 5
+frame = 1
 
 [node name="throw" type="Sprite" parent="sprites"]
 visible = false
@@ -2022,18 +2177,16 @@ texture = ExtResource( 7 )
 hframes = 2
 
 [node name="sword" type="Area2D" parent="."]
-__meta__ = {
-"_editor_description_": "1"
-}
+script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( 28.9524, -21.5238 )
-rotation = -0.773574
+position = Vector2( 27.9364, -19.2699 )
+rotation = -0.768545
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
-position = Vector2( 30.2671, -23.569 )
-rotation = 2.36548
+position = Vector2( 29.2663, -21.2709 )
+rotation = 2.37288
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
@@ -2052,3 +2205,4 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 13 )
 [connection signal="instruction_executed" from="." to="." method="_on_zorro_boss_instruction_executed"]
+[connection signal="body_entered" from="sword" to="sword" method="_on_sword_body_entered"]
