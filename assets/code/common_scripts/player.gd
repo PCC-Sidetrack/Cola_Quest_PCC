@@ -247,20 +247,15 @@ func _on_player_health_changed(change) -> void:
 	if change < 0 and !get_invulnerability() and !is_dead():
 		# Update the GUI, print out the damage taken, and make the player invunerable for a bit
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
-		print("Took ", -change, " damage")
 		set_invulnerability(invlunerability_time)
 	# If the player would be healed, then update the GUI
 	elif change > 0:
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
-	
-	print("Current health: ", get_current_health(), "\n")
 
 # Triggered whenever the player dies
 func _on_player_death() -> void:
 	if !is_dead():
-
 		set_is_dead(true)
-		print("Player Died")
 		
 		# Lock the game and have a short cooldown before respawning
 		set_invulnerability(100000.0)
@@ -275,7 +270,6 @@ func _on_game_UI_respawn_player() -> void:
 	global_position = get_spawn_point()
 	set_invulnerability(invlunerability_time)
 	set_is_dead(false)
-	print("\nPlayer Respawning...")
 	set_current_health(max_health)
 	take_damage(-max_health)
 	Globals.game_locked = false
