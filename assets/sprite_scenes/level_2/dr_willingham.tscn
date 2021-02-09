@@ -1,7 +1,8 @@
 [gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://assets/code/common_scripts/entity.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_2/sprites/S15_dr_willingham/S15_dr_willingham-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/vpa_level/sprites/S15_dr_willingham/S15_dr_willingham-Sheet.png" type="Texture" id=2]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

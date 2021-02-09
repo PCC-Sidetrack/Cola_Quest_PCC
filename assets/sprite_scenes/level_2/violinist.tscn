@@ -1,9 +1,10 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/level_2/violinist.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_2/sprites/S13_Violinist/S13_violinist_idle.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/level_2/sprites/S13_Violinist/S13_violinist_attack.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/level_2/sprites/S13_Violinist/S13_violinist_notice.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/vpa_level/sprites/S13_Violinist/S13_violinist_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/vpa_level/sprites/S13_Violinist/S13_violinist_attack.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/vpa_level/sprites/S13_Violinist/S13_violinist_notice.png" type="Texture" id=4]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
