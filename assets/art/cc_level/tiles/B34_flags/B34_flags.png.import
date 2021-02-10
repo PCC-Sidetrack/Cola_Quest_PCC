@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png.import
-path="res://.import/S1b_drone.png-a4aa77f9a2f111cdafa2d3cd53a591cb.stex"
-=======
 path="res://.import/B34_flags.png-c9a74860830c5da5d9418b7700724192.stex"
->>>>>>> cc_artwork_2_andrew:assets/art/cc_level/tiles/B34_flags/B34_flags.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png.import
-source_file="res://assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png"
-dest_files=[ "res://.import/S1b_drone.png-a4aa77f9a2f111cdafa2d3cd53a591cb.stex" ]
-=======
 source_file="res://assets/art/cc_level/tiles/B34_flags/B34_flags.png"
 dest_files=[ "res://.import/B34_flags.png-c9a74860830c5da5d9418b7700724192.stex" ]
->>>>>>> cc_artwork_2_andrew:assets/art/cc_level/tiles/B34_flags/B34_flags.png.import
 
 [params]
 

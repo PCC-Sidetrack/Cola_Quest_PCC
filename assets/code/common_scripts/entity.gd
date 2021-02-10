@@ -758,3 +758,32 @@ func _check_movements(movements: Array) -> void:
 # Based on the location of the entity in relation to the entity it is knocking back
 func _knockback_old(other_entity: KinematicBody2D) -> void:
 	other_entity.set_velocity(global_position.direction_to(other_entity.get_position()).normalized() * other_entity.get_speed() * _damage.knockback_multiplier)
+
+
+func flash_damaged():
+	print("\nPlaying damage flash")
+	var t = Timer.new()
+	t.set_wait_time(.03)
+	t.set_one_shot(true)
+	self.add_child(t)
+	while get_invulnerability():
+		t.start()
+		yield(t, "timeout")
+		set_modulate(Color(1, 0.3, 0.3, 0.3))
+		t.start()
+		yield(t, "timeout")
+		set_modulate(Color(1, 1, 1, .5))
+	set_modulate(Color(1, 1, 1, 1))
+
+func death_anim():
+	print("\nPlaying Death Anim")
+	var j = 1.0
+	var t = Timer.new()
+	t.set_wait_time(.03)
+	t.set_one_shot(true)
+	self.add_child(t)
+	while j > 0:
+		t.start()
+		yield(t, "timeout")
+		set_modulate(Color(1, 0.3, 0.3, j))
+		j -= 0.1
