@@ -1,7 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/art/level_1/sprites/S2_3x5_card/S2_3x5_card.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S2_3x5_card/S2_3x5_card.png" type="Texture" id=1]
 [ext_resource path="res://assets/code/level_1/study_card_projectile.gd" type="Script" id=2]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )

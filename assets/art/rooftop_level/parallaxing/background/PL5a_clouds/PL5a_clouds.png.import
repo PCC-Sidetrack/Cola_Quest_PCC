@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/PL5a_clouds.png-6df5b466f1fa565c10f58c9dd6e58295.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/art/rooftop_level/parallaxing/background/PL5a_clouds/PL5a_clouds.png"
+dest_files=[ "res://.import/PL5a_clouds.png-6df5b466f1fa565c10f58c9dd6e58295.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/code/level_1/running_eagor.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_1/sprites/S7_running_eagor/S7_running_eagor.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S7_running_eagor/S7_running_eagor.png" type="Texture" id=2]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

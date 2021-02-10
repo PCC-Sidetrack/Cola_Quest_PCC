@@ -1,9 +1,10 @@
 [gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/code/common_scripts/entity.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_2/sprites/S17_Handbell_Player/Handbell_Player_Throw-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/level_2/sprites/S17_Handbell_Player/Handbell_Player_Walk-Sheet.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/level_2/sprites/S17_Handbell_Player/Handbell_Player_Idle-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/vpa_level/sprites/S17_Handbell_Player/Handbell_Player_Throw-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/vpa_level/sprites/S17_Handbell_Player/Handbell_Player_Walk-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/vpa_level/sprites/S17_Handbell_Player/Handbell_Player_Idle-Sheet.png" type="Texture" id=4]
+
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4

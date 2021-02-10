@@ -1,10 +1,11 @@
 [gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/code/common_scripts/entity.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_2/sprites/S14_artist/S14_artist_idle.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/level_2/sprites/S14_artist/S14_artist_attack.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/level_2/sprites/S14_artist/S14_artist_walk.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/level_2/sprites/S14_artist/S14_artist_death.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/vpa_level/sprites/S14_artist/S14_artist_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/vpa_level/sprites/S14_artist/S14_artist_attack.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/vpa_level/sprites/S14_artist/S14_artist_walk.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/vpa_level/sprites/S14_artist/S14_artist_death.png" type="Texture" id=5]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

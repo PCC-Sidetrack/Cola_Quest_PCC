@@ -1,15 +1,16 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_arm_wave.png" type="Texture" id=1]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_draw_sword.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_resting_sword.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_jump.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_sword_attack.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_throw_item.png" type="Texture" id=6]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_walk.png" type="Texture" id=7]
-[ext_resource path="res://assets/art/level_1/sprites/S6_dr_geary_zorro_boss/S6_sword.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_arm_wave.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_draw_sword.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_resting_sword.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_jump.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_sword_attack.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_throw_item.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_walk.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_sword.png" type="Texture" id=8]
 [ext_resource path="res://assets/code/level_1/zorro_sword.gd" type="Script" id=9]
 [ext_resource path="res://assets/code/level_1/zorro_boss.gd" type="Script" id=10]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"
