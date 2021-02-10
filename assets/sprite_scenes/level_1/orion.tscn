@@ -1,8 +1,9 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/code/level_1/orion.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_1/sprites/S8_orion_enemy/S8_orion_enemy_idle.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/level_1/sprites/S8_orion_enemy/S8_orion_enemy_attack.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S8_orion_enemy/S8_orion_enemy_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S8_orion_enemy/S8_orion_enemy_attack.png" type="Texture" id=3]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

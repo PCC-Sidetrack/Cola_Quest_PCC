@@ -1,12 +1,13 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://assets/art/level_2/tiles/T20_Light_Wooden_Floor/T20_Light_Wooden_Floor_Tilemap.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/vpa_level/tiles/T20_Light_Wooden_Floor/T20_Light_Wooden_Floor_Tilemap.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprite_scenes/level_2/door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/art/level_2/parallaxing/background/PL7_vpa_second_floor/PL7a_vpa_second_floor.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/vpa_level/parallaxing/background/PL7_vpa_second_floor/PL7a_vpa_second_floor.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprite_scenes/level_2/violinist.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprite_scenes/level_2/bassist.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=7]
+
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )

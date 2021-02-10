@@ -9,25 +9,25 @@
 [ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprite_scenes/level_1/bird.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sprite_scenes/level_1/zorro_boss.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=11]
-[ext_resource path="res://assets/art/level_1/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png" type="Texture" id=12]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png" type="Texture" id=13]
+[ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=11]
+[ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png" type="Texture" id=12]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png" type="Texture" id=13]
 [ext_resource path="res://assets/code/level_1/cloud_activation.gd" type="Script" id=14]
 [ext_resource path="res://assets/code/level_1/boss_fight_trigger.gd" type="Script" id=15]
 [ext_resource path="res://assets/code/common_scripts/killzone.gd" type="Script" id=16]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL1_blue_sky_clouds/PL1b_blue_sky_clouds.png" type="Texture" id=17]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL4_rooftop_boss_arena/PL4.png" type="Texture" id=18]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL3_crowne_centre/PL3_crowne_centre.png" type="Texture" id=19]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL2_mackenzie_boss/PL2b_mackenzie_parallaxing.png" type="Texture" id=20]
-[ext_resource path="res://assets/art/level_1/tiles/B4_damaged_water_silo/B4_damaged_water_silo-sheet.png" type="Texture" id=21]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL6_buildings/PL6a_buildings.png" type="Texture" id=22]
-[ext_resource path="res://assets/art/level_1/parallaxing/background/PL5a_clouds/PL5a_clouds.png" type="Texture" id=23]
-[ext_resource path="res://assets/art/level_1/tiles/T9_fan/T9_fan/T9d_fan.tres" type="Texture" id=24]
-[ext_resource path="res://assets/art/level_1/tiles/T11_small_air_vent/T11_small_air_vent/T11a_medium_air_vent.tres" type="Texture" id=25]
-[ext_resource path="res://assets/art/level_1/tiles/T9_fan/T9_fan/T9b_fan.tres" type="Texture" id=26]
-[ext_resource path="res://assets/art/level_1/tiles/T9_fan/T9_fan/T9c_fan.tres" type="Texture" id=27]
-[ext_resource path="res://assets/art/level_1/tiles/T14_glitched_concrete/T14_glitched_concrete.tres" type="Texture" id=28]
-[ext_resource path="res://assets/art/level_1/tiles/T9_fan/T9_fan/T9e_fan.tres" type="Texture" id=29]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1b_blue_sky_clouds.png" type="Texture" id=17]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL4_rooftop_boss_arena/PL4.png" type="Texture" id=18]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL3_crowne_centre/PL3_crowne_centre.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL2_mackenzie_boss/PL2b_mackenzie_parallaxing.png" type="Texture" id=20]
+[ext_resource path="res://assets/art/rooftop_level/tiles/B4_damaged_water_silo/B4_damaged_water_silo-sheet.png" type="Texture" id=21]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL6_buildings/PL6a_buildings.png" type="Texture" id=22]
+[ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL5a_clouds/PL5a_clouds.png" type="Texture" id=23]
+[ext_resource path="res://assets/art/rooftop_level/tiles/T9_fan/T9_fan/T9d_fan.tres" type="Texture" id=24]
+[ext_resource path="res://assets/art/rooftop_level/tiles/T11_small_air_vent/T11_small_air_vent/T11a_medium_air_vent.tres" type="Texture" id=25]
+[ext_resource path="res://assets/art/rooftop_level/tiles/T9_fan/T9_fan/T9b_fan.tres" type="Texture" id=26]
+[ext_resource path="res://assets/art/rooftop_level/tiles/T9_fan/T9_fan/T9c_fan.tres" type="Texture" id=27]
+[ext_resource path="res://assets/art/rooftop_level/tiles/T14_glitched_concrete/T14_glitched_concrete.tres" type="Texture" id=28]
+[ext_resource path="res://assets/art/rooftop_level/tiles/T9_fan/T9_fan/T9e_fan.tres" type="Texture" id=29]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/code/level_1/cloud_deactivation.gd" type="Script" id=33]
@@ -1567,72 +1567,58 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 5/z_index = 0
 
 [sub_resource type="AtlasTexture" id=92]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 0, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=93]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 64, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=94]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 128, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=95]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 192, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=96]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 256, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=97]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 320, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=98]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 384, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=99]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 448, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=100]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 512, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=101]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 576, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=102]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 640, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=103]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 704, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=104]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 768, 0, 64, 96 )
 
 [sub_resource type="AtlasTexture" id=105]
-flags = 4
 atlas = ExtResource( 21 )
 region = Rect2( 832, 0, 64, 96 )
 
@@ -1810,7 +1796,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 106 )
-frame = 9
+frame = 6
 speed_scale = 3.0
 playing = true
 
@@ -1818,41 +1804,44 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
+frame = 0
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
+frame = 0
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
-frame = 3
+frame = 2
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
-frame = 2
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
-frame = 2
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
+frame = 0
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
+frame = 0
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
+frame = 0
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
+frame = 0
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
-frame = 3
+frame = 2
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
-frame = 2
 
 [node name="enemies" type="Node2D" parent="."]
 
