@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/PL13_cc_stage10.png-0ca3e7f3182e2ed8e4bdb0c0672e93a4.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/art/cc_level/parallaxing/background/PL13_cc_stage/PL13_spritesheet_cc_stage/PL13_cc_stage10.png"
+dest_files=[ "res://.import/PL13_cc_stage10.png-0ca3e7f3182e2ed8e4bdb0c0672e93a4.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
