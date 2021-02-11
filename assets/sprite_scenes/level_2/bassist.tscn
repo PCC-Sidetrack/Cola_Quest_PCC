@@ -1,7 +1,8 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/code/common_scripts/entity.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_1/sprites/S10_bassist/S10_bassist.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S10_bassist/S10_bassist.png" type="Texture" id=2]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

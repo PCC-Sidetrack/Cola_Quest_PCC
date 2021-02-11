@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/T20_Light_Wooden_Floor_Tile.png-904621c27c1cb5856c6c3f673d2827aa.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/art/vpa_level/tiles/T20_Light_Wooden_Floor/T20_Light_Wooden_Floor_Tile.png"
+dest_files=[ "res://.import/T20_Light_Wooden_Floor_Tile.png-904621c27c1cb5856c6c3f673d2827aa.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
