@@ -37,6 +37,9 @@ func _on_pulse_tween_all_completed() -> void:
 		$pulse.interpolate_property($healthbar/health_over, "tint_progress", Color.black , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.interpolate_property($low_health_border, "modulate", Color.white , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.start()
+	else:
+		$healthbar/health_over.modulate = Color.white
+		$pulse.stop_all()
 
 # On health change, animate healthbar
 func _on_game_UI_player_health_changed(current_health, previous_health) -> void:
@@ -44,7 +47,7 @@ func _on_game_UI_player_health_changed(current_health, previous_health) -> void:
 	_hud_shake()
 
 # On low health, pulse healthbar
-func _on_game_UI_low_health() -> void:
+func _on_game_UI_player_low_health() -> void:
 	_on_pulse_tween_all_completed()
 
 # On player killed, disable healthbar pulsing and show cracked heart
@@ -62,6 +65,3 @@ func _on_game_UI_initialize_player(max_health) -> void:
 	$healthbar/health_under.max_value = max_health
 	$healthbar/health_over.value      = max_health
 	$healthbar/health_under.value     = max_health
-
-
-

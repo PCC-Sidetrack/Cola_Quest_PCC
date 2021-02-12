@@ -1,10 +1,27 @@
+#-----------------------------------------------------------------------------#
+# Class Name:   flash.gd                                          
+# Description:  Flash the screen for a given duration and color
+# Author:       Rightin Yamada                
+# Company:      Sidetrack
+# Last Updated: February 10, 2021
+#-----------------------------------------------------------------------------#
+
 extends Control
 
-# EXTREMELY  WIP 
-var flash_amount  = 5   # number of flashes
-var flash_counter = 0  
-var flash_speed   = 0.1 # lower is faster
+#-----------------------------------------------------------------------------#
+#                                Variables                                    #
+#-----------------------------------------------------------------------------#
+# Amount of flashes
+var flash_amount:  int   = 5  
+# Flash counter 
+var flash_counter: int   = 1   
+# Speed of the flashes
+var flash_speed:   float = 0.1 
 
+#-----------------------------------------------------------------------------#
+#                             Private Functions                               #
+#-----------------------------------------------------------------------------#
+# On being called, flash the screen given a color
 func _on_game_UI_flash_screen(color):
 	if Globals.game_locked == false and flash_counter < flash_amount:
 		$screen_flash.visible = true

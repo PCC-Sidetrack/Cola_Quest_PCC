@@ -34,7 +34,7 @@ func animate_value(start, end) -> void:
 	$boss_healthbar/tween.interpolate_property($boss_healthbar/boss_health_loss, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$boss_healthbar/tween.start()
 
-#-----------------------------------------------------------------------------#
+#------------------	-----------------------------------------------------------#
 #                             Trigger Functions                               #
 #-----------------------------------------------------------------------------#
 # On boss heatlh changed, animate value and shake 

@@ -104,7 +104,7 @@ visible = false
 position = Vector2( 6.4, 6 )
 frames = SubResource( 11 )
 animation = "idle"
-frame = 7
+frame = 9
 speed_scale = 2.0
 playing = true
 
@@ -118,8 +118,11 @@ texture = ExtResource( 7 )
 [node name="tween" type="Tween" parent="."]
 
 [node name="pulse" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
 
 [node name="low_health" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -12.162
 pitch_scale = 0.62
+[connection signal="tween_all_completed" from="pulse" to="." method="_on_pulse_tween_all_completed"]

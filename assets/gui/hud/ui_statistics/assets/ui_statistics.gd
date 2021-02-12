@@ -3,7 +3,7 @@
 # Description:  Controls statistics displayed on UI
 # Author:       Rightin Yamada                
 # Company:      Sidetrack
-# Last Updated: January 30, 2021
+# Last Updated: February 10, 2021
 #-----------------------------------------------------------------------------#
 
 extends Control
@@ -14,8 +14,8 @@ extends Control
 # Counts the amount of respawns
 var _respawn_count: int = 0
 
-# COMMENT NEEDED
-var _cola_count: int = 0
+# Counts the amount of cola collected 
+var _cola_count:    int = 0
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #

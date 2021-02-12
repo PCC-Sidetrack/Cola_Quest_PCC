@@ -315,11 +315,12 @@ __meta__ = {
 
 [node name="CompletionText" type="AnimatedSprite" parent="CompletionScreen/CompletionBackgroundContainer"]
 visible = false
-position = Vector2( 411.542, 190.798 )
+position = Vector2( 547.626, 252.275 )
 scale = Vector2( 1.78202, 1.78202 )
 frames = SubResource( 56 )
 animation = "glow"
 centered = false
+offset = Vector2( -69.3489, -34.4983 )
 
 [node name="completed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

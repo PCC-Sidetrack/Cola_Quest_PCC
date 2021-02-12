@@ -1,38 +1,38 @@
 [gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://assets/gui/menus/failure/assets/sprites/failure_background_ss.png" type="Texture" id=1]
 [ext_resource path="res://assets/gui/menus/failure/assets/sprites/failuretext_ss.png" type="Texture" id=2]
 [ext_resource path="res://assets/gui/menus/failure/assets/sprites/failuretext_drop_ss.png" type="Texture" id=3]
 [ext_resource path="res://assets/gui/menus/failure/assets/sounds/failure_sound.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/gui/menus/failure/failure.gd" type="Script" id=5]
 [ext_resource path="res://assets/gui/hud/buttons/buttons.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/gui/menus/failure/assets/sprites/failure_background_ss2.png" type="Texture" id=7]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 200, 200 )
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 512, 300 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 200, 0, 200, 200 )
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 7 )
+region = Rect2( 512, 0, 512, 300 )
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 400, 0, 200, 200 )
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 7 )
+region = Rect2( 1024, 0, 512, 300 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 600, 0, 200, 200 )
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 7 )
+region = Rect2( 1536, 0, 512, 300 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 800, 0, 200, 200 )
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 7 )
+region = Rect2( 2048, 0, 512, 300 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
 "loop": false,
 "name": "default",
-"speed": 20.0
+"speed": 18.0
 } ]
 
 [sub_resource type="AtlasTexture" id=7]
@@ -116,9 +116,6 @@ script = ExtResource( 5 )
 
 [node name="FailureScreen" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-rect_scale = Vector2( 0.399925, 0.417054 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -126,9 +123,6 @@ __meta__ = {
 [node name="FailureBackgroundContainer" type="CenterContainer" parent="FailureScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 160.0
-margin_bottom = 160.0
-rect_scale = Vector2( 6.4, 3.6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -138,17 +132,15 @@ frames = SubResource( 6 )
 centered = false
 
 [node name="FailureTextContainer" type="CenterContainer" parent="FailureScreen"]
-margin_left = 416.549
-margin_top = 140.259
-margin_right = 560.549
-margin_bottom = 180.259
-rect_scale = Vector2( 3, 3 )
+margin_left = 246.0
+margin_top = 108.0
+margin_right = 246.0
+margin_bottom = 108.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FailureText" type="AnimatedSprite" parent="FailureScreen/FailureTextContainer"]
-position = Vector2( 69.0909, 39.7727 )
 frames = SubResource( 22 )
 animation = "drop"
 speed_scale = 2.0
