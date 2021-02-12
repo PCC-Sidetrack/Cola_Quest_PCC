@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:assets/art/rooftop_level/parallaxing/background/PL6_buildings/PL6a_buildings.png.import
-path="res://.import/PL6a_buildings.png-8bd206a295549eb254e0a53ae5530d79.stex"
-=======
 path="res://.import/PL13_cc_stage_lights.png-9117131b93e4359bdbce7be671893435.stex"
->>>>>>> origin/cc_artwork_3_andrew:assets/art/cc_level/parallaxing/background/PL13_cc_stage_lights.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:assets/art/rooftop_level/parallaxing/background/PL6_buildings/PL6a_buildings.png.import
-source_file="res://assets/art/rooftop_level/parallaxing/background/PL6_buildings/PL6a_buildings.png"
-dest_files=[ "res://.import/PL6a_buildings.png-8bd206a295549eb254e0a53ae5530d79.stex" ]
-=======
 source_file="res://assets/art/cc_level/parallaxing/background/PL13_cc_stage_lights.png"
 dest_files=[ "res://.import/PL13_cc_stage_lights.png-9117131b93e4359bdbce7be671893435.stex" ]
->>>>>>> origin/cc_artwork_3_andrew:assets/art/cc_level/parallaxing/background/PL13_cc_stage_lights.png.import
 
 [params]
 

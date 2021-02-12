@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/code/common_scripts/player.gd" type="Script" id=4]
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack.png" type="Texture" id=5]
 [ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=6]
-
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -93,6 +92,9 @@ extents = Vector2( 12, 30 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.7287, 30.4121 )
 
+[sub_resource type="OccluderPolygon2D" id=8]
+polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
+
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
 collision_mask = 10
@@ -150,8 +152,8 @@ hframes = 4
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.5, 1.5 )
-limit_left = -2048
-limit_top = -1024
+limit_left = -10240
+limit_top = -5120
 limit_bottom = 1024
 limit_smoothed = true
 drag_margin_v_enabled = true
@@ -165,6 +167,9 @@ editor_draw_screen = false
 [node name="game_UI" parent="." instance=ExtResource( 6 )]
 margin_left = -5.66968
 margin_right = 34.3303
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 8 )
 [connection signal="collision" from="." to="." method="_on_player_collision"]
 [connection signal="death" from="." to="." method="_on_player_death"]
 [connection signal="health_changed" from="." to="." method="_on_player_health_changed"]

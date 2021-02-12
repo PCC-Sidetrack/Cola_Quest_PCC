@@ -77,10 +77,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 32, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=8]
+[sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
-[sub_resource type="TileSet" id=6]
+[sub_resource type="TileSet" id=7]
 0/name = "tilesetOpenGame.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -189,22 +189,22 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 5/navigation_offset = Vector2( 0, 0 )
 5/shape_offset = Vector2( 0, 0 )
 5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 8 )
+5/shape = SubResource( 6 )
 5/shape_one_way = false
 5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 6 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
+[sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
-[sub_resource type="TileSet" id=10]
+[sub_resource type="TileSet" id=9]
 0/name = "cream_floor.png 0"
 0/texture = ExtResource( 56 )
 0/tex_offset = Vector2( 0, 0 )
@@ -215,19 +215,19 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 9 )
+0/shape = SubResource( 8 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 
-[sub_resource type="SegmentShape2D" id=7]
+[sub_resource type="SegmentShape2D" id=10]
 a = Vector2( 8.20285, -631.588 )
 b = Vector2( 2.33203, 141.448 )
 
@@ -242,7 +242,7 @@ motion_scale = Vector2( 0.9, 0.95 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="stage/stage"]
 frames = SubResource( 1 )
 animation = "cc_background"
-frame = 20
+frame = 26
 speed_scale = 2.0
 playing = true
 
@@ -257,7 +257,7 @@ __meta__ = {
 texture = ExtResource( 53 )
 
 [node name="terrain" type="TileMap" parent="."]
-tile_set = SubResource( 6 )
+tile_set = SubResource( 7 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 8
 collision_mask = 0
@@ -270,7 +270,7 @@ __meta__ = {
 [node name="background_terrain" type="TileMap" parent="."]
 visible = false
 z_index = -1
-tile_set = SubResource( 10 )
+tile_set = SubResource( 9 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 format = 1
@@ -293,7 +293,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zoom_camera_trigger"]
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 
 [node name="collectables" type="Node2D" parent="."]
 

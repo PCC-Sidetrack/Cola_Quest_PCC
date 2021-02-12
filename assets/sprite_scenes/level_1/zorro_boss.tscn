@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/code/level_1/zorro_sword.gd" type="Script" id=9]
 [ext_resource path="res://assets/code/level_1/zorro_boss.gd" type="Script" id=10]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"
 length = 0.2
@@ -2134,11 +2133,9 @@ anims/walk_sword = SubResource( 11 )
 [node name="sprites" type="Node2D" parent="."]
 
 [node name="idle" type="Sprite" parent="sprites"]
-visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 3 )
 hframes = 2
-frame = 1
 
 [node name="arm_wave" type="Sprite" parent="sprites"]
 visible = false
@@ -2160,10 +2157,10 @@ texture = ExtResource( 4 )
 hframes = 5
 
 [node name="sword_attack" type="Sprite" parent="sprites"]
+visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 5 )
 hframes = 5
-frame = 1
 
 [node name="throw" type="Sprite" parent="sprites"]
 visible = false
@@ -2181,13 +2178,14 @@ hframes = 2
 script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( 27.9364, -19.2699 )
-rotation = -0.768545
+position = Vector2( 30, -18 )
+rotation = -0.629196
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
-position = Vector2( 29.2663, -21.2709 )
-rotation = 2.37288
+visible = false
+position = Vector2( 31.5461, -19.7706 )
+rotation = 2.51064
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
