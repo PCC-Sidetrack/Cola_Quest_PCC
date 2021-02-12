@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=2]
+[gd_scene load_steps=141 format=2]
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_background_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/sprite_scenes/level_1/S7_running_eagor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprite_scenes/level_1/bird.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/sprite_scenes/level_1/zorro_boss.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=11]
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png" type="Texture" id=13]
@@ -1796,7 +1795,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 106 )
-frame = 8
+frame = 11
 speed_scale = 3.0
 playing = true
 
@@ -1804,47 +1803,41 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
-frame = 2
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
-frame = 2
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
-frame = 0
+frame = 3
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
-frame = 3
+frame = 2
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
-frame = 3
+frame = 2
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
-frame = 2
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
-frame = 2
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
-frame = 2
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
-frame = 2
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
-frame = 0
+frame = 3
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
-frame = 3
+frame = 2
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -1968,9 +1961,6 @@ script = ExtResource( 16 )
 position = Vector2( 10718, 1120 )
 shape = SubResource( 107 )
 
-[node name="zorro_boss" parent="enemies" instance=ExtResource( 9 )]
-position = Vector2( 17772.6, 703.361 )
-
 [node name="triggers" type="Node2D" parent="."]
 
 [node name="spawnpoints" type="Node2D" parent="triggers"]
@@ -2034,7 +2024,6 @@ shape = SubResource( 110 )
 [node name="player" parent="." instance=ExtResource( 30 )]
 position = Vector2( 17088.5, 94.3321 )
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
-[connection signal="collision" from="enemies/zorro_boss" to="enemies/zorro_boss" method="_on_zorro_boss_collision"]
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/cloud_trigger" to="triggers/other_triggers/cloud_trigger" method="_on_cloud_trigger_body_entered"]
