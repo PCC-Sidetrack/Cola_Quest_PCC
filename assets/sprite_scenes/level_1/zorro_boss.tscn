@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_walk.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_sword.png" type="Texture" id=8]
 [ext_resource path="res://assets/code/level_1/zorro_sword.gd" type="Script" id=9]
-[ext_resource path="res://assets/code/level_1/zorro_boss.gd" type="Script" id=10]
+[ext_resource path="res://assets/code/level_1/zorro_ai2.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"
@@ -2178,14 +2178,14 @@ hframes = 2
 script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( 30, -18 )
-rotation = -0.629196
+position = Vector2( -8, 12 )
+rotation = 2.00713
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
 visible = false
-position = Vector2( 31.5461, -19.7706 )
-rotation = 2.51064
+position = Vector2( -8.55, 14.3 )
+rotation = 2.00713
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
@@ -2203,5 +2203,8 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 13 )
-[connection signal="instruction_executed" from="." to="." method="_on_zorro_boss_instruction_executed"]
+[connection signal="death" from="." to="." method="_on_zorro_boss_death"]
+[connection signal="health_changed" from="." to="." method="_on_zorro_boss_health_changed"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_sword_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -23,6 +23,7 @@ var misc_loc:        Vector2 = Vector2(0, 0)
 
 # Directions
 const DIRECTION: Dictionary = {
+	NONE              = 0.0,
 	DOWN              = 1.0,
 	CLOCKWISE         = 1.0,
 	COUNTER_CLOCKWISE = -1.0,

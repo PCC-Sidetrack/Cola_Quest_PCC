@@ -12,3 +12,4 @@ extends Area2D
 func _on_sword_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
 		body.take_damage(1)
+		body.knockback(self)

@@ -110,6 +110,8 @@ func _draw() -> void:
 #-----------------------------------------------------------------------------#
 #                             Getter Functions                                #
 #-----------------------------------------------------------------------------#
+func get_auto_facing() -> bool:
+	return _metadata.auto_facing
 func get_current_instruction  () -> int:
 	return _metadata.movement.current_instruction
 func get_current_instruction_name() -> String:
@@ -128,6 +130,8 @@ func get_current_velocity     () -> Vector2:
 	return _movement.current_velocity
 func get_damage               () -> int:
 	return round(_damage.amount) as int
+func get_direction_facing     () -> float:
+	return _metadata.direction_facing
 func get_invulnerability      () -> bool:
 	return _health.invulnerability_duration > 0.0
 func get_last_direction       () -> Vector2:
