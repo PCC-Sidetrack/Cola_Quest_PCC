@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex"
+path="res://.import/T40_CC_Carpet.png-31e85ea9a04b8da6f5b20c8b6d17ea75.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/rooftop_level/tiles/B8_rooftop_stair_access/B8_rooftop_stair_access.png"
-dest_files=[ "res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex" ]
+source_file="res://assets/art/cc_level/tiles/T40_CC_Carpet_W_Concrete/T40_CC_Carpet.png"
+dest_files=[ "res://.import/T40_CC_Carpet.png-31e85ea9a04b8da6f5b20c8b6d17ea75.stex" ]
 
 [params]
 

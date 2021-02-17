@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex"
+path="res://.import/B37_CC_Trash_Can.png-f2c664f2665cefb8d1397ef36da3da9e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/rooftop_level/tiles/B8_rooftop_stair_access/B8_rooftop_stair_access.png"
-dest_files=[ "res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex" ]
+source_file="res://assets/art/cc_level/parallaxing/background/B37_Trash_Can/B37_CC_Trash_Can.png"
+dest_files=[ "res://.import/B37_CC_Trash_Can.png-f2c664f2665cefb8d1397ef36da3da9e.stex" ]
 
 [params]
 
