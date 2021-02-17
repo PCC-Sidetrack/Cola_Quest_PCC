@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://platform_particles.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 13
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0.0848389, 0.542969, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=2]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, -19.0909 ), 0.0, 0.0, 0, 0, Vector2( 1, 200 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, -73.1134 ), 0.0, 0.0, 0, 0, Vector2( 1, -200 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+gravity = Vector3( 0, 98, 0 )
+linear_accel_curve = SubResource( 3 )
+radial_accel_curve = SubResource( 5 )
+color_ramp = SubResource( 8 )
+anim_speed = 1.0
+
+[node name="platform_particles" type="Particles2D"]
+material = SubResource( 1 )
+amount = 3
+speed_scale = 0.5
+explosiveness = 0.11
+local_coords = false
+process_material = SubResource( 6 )
+texture = ExtResource( 1 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SD12_reload_3x5card.ogg-71390b0f1491ba3a61cafbc8800bb93e.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/object_sounds/SD12_reload_3x5card.ogg"
+dest_files=[ "res://.import/SD12_reload_3x5card.ogg-71390b0f1491ba3a61cafbc8800bb93e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/gui/hud/enemy_healthbar/scripts/enemy_healthbar.gd" type="Script" id=1]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar/assets/healthbar_progress.png" type="Texture" id=2]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar/assets/healthbar_border.png" type="Texture" id=3]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar/assets/healthbar_background.png" type="Texture" id=4]
+
+[node name="healthbar" type="TextureProgress"]
+margin_left = -8.0
+margin_top = -24.0
+margin_right = 8.0
+margin_bottom = -18.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 0.258824, 0.258824, 0.258824, 1 )
+tint_over = Color( 0, 0, 0, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

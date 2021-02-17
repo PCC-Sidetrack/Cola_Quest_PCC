@@ -1,7 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/code/level_1/bird.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/level_1/sprites/S3_flying_bird/S3_flying_bird.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S3_flying_bird/S3_flying_bird.png" type="Texture" id=2]
+
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -52,3 +53,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 1, 4 )
 shape = SubResource( 5 )
+[connection signal="collision" from="." to="." method="_on_bird_collision"]
+[connection signal="death" from="." to="." method="_on_bird_death"]
+[connection signal="health_changed" from="." to="." method="_on_bird_health_changed"]

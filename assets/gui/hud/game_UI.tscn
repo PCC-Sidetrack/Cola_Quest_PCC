@@ -1,0 +1,139 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/gui/hud/game_UI.gd" type="Script" id=1]
+[ext_resource path="res://assets/gui/menus/failure/failure.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/gui/hud/player_healthbar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/gui/menus/cleared/cleared.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/gui/menus/pause/pause.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/gui/hud/ui_statistics/assets/ui_statistics.gd" type="Script" id=6]
+[ext_resource path="res://assets/gui/hud/boss_healthbar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/gui/hud/screen_flash/screen_flash.png" type="Texture" id=8]
+[ext_resource path="res://assets/gui/hud/flash.gd" type="Script" id=9]
+[ext_resource path="res://assets/gui/fonts/m5x7.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/gui/fonts/m5x7.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+font_data = ExtResource( 10 )
+
+[node name="game_UI" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player_healthbar" parent="." instance=ExtResource( 3 )]
+
+[node name="boss_healthbar" parent="." instance=ExtResource( 7 )]
+
+[node name="pause" parent="." instance=ExtResource( 5 )]
+
+[node name="cleared" parent="." instance=ExtResource( 4 )]
+
+[node name="failure" parent="." instance=ExtResource( 2 )]
+
+[node name="other_hud" type="CanvasLayer" parent="."]
+
+[node name="ui_statistics" type="Control" parent="other_hud"]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fps_counter" type="Label" parent="other_hud/ui_statistics"]
+margin_left = 8.09406
+margin_top = 52.3131
+margin_right = 48.0941
+margin_bottom = 66.3131
+custom_fonts/font = SubResource( 2 )
+text = "fps_counter"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="respawn_counter" type="Label" parent="other_hud/ui_statistics"]
+anchor_left = 0.378419
+anchor_top = 0.465916
+anchor_right = 0.456419
+anchor_bottom = 0.475916
+margin_left = 204.753
+margin_top = 124.864
+margin_right = 306.753
+margin_bottom = 141.864
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Respawn Counter"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cola_collected" type="Label" parent="other_hud/ui_statistics"]
+anchor_left = 0.378419
+anchor_top = 0.465916
+anchor_right = 0.456419
+anchor_bottom = 0.475916
+margin_left = 204.753
+margin_top = 116.685
+margin_right = 283.753
+margin_bottom = 133.685
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 0.94902, 0.384314, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Cola Collected"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="flash" type="Control" parent="other_hud"]
+anchor_left = 0.014
+anchor_top = 0.00836711
+anchor_right = 0.377047
+anchor_bottom = 0.00836711
+margin_left = 0.832
+margin_right = 42.1392
+margin_bottom = 40.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="tween" type="Tween" parent="other_hud/flash"]
+playback_speed = 0.5
+playback/speed = 0.5
+
+[node name="screen_flash" type="Sprite" parent="other_hud/flash"]
+visible = false
+position = Vector2( -8, -2.51013 )
+texture = ExtResource( 8 )
+centered = false
+[connection signal="boss_health_changed" from="." to="boss_healthbar" method="_on_game_UI_boss_health_changed"]
+[connection signal="boss_healthbar_visible" from="." to="boss_healthbar" method="_on_game_UI_boss_healthbar_visible"]
+[connection signal="cola_collect" from="." to="other_hud/ui_statistics" method="_on_game_UI_cola_collect"]
+[connection signal="flash_screen" from="." to="other_hud/flash" method="_on_game_UI_flash_screen"]
+[connection signal="initialize_boss" from="." to="boss_healthbar" method="_on_game_UI_initialize_boss"]
+[connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
+[connection signal="level_cleared" from="." to="other_hud/ui_statistics" method="_on_game_UI_level_cleared"]
+[connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
+[connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
+[connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="other_hud/ui_statistics" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
+[connection signal="player_low_health" from="." to="player_healthbar" method="_on_game_UI_player_low_health"]
+[connection signal="respawn_player" from="." to="other_hud/ui_statistics" method="_on_game_UI_respawn_player"]
+[connection signal="respawn_player" from="pause" to="." method="_on_pause_respawn_player"]
+[connection signal="respawn_player" from="failure" to="." method="_on_failure_respawn_player"]

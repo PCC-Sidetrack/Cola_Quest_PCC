@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/gui/menus/pause/assets/sprites/pause.png" type="Texture" id=1]
+[ext_resource path="res://assets/gui/menus/pause/pause.gd" type="Script" id=2]
+[ext_resource path="res://assets/gui/hud/buttons/buttons.tscn" type="PackedScene" id=3]
+
+[node name="pause" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="buttons" parent="." instance=ExtResource( 3 )]
+
+[node name="PausedScreen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="PausedScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.533333 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseContainer" type="CenterContainer" parent="PausedScreen"]
+anchor_left = 0.488164
+anchor_top = 0.132284
+anchor_right = 0.488164
+anchor_bottom = 0.132284
+margin_left = -54.0
+margin_top = 50.0
+margin_right = 49.0
+margin_bottom = 68.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 50.03, 0 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="PauseText" type="TextureRect" parent="PausedScreen/PauseContainer"]
+margin_right = 103.0
+margin_bottom = 18.0
+texture = ExtResource( 1 )
+stretch_mode = 4
+[connection signal="respawn_player" from="buttons" to="." method="_on_buttons_respawn_player"]

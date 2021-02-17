@@ -12,4 +12,5 @@ extends Animate_Tiles
 #-----------------------------------------------------------------------------#
 # Overwrite the animate_tiles() function to animate specific background tiles
 func animate_tiles():
-	animate_tile(6, 16,  1, 3) # Animate water silo tiles - code 6
+	#animate_tile(6, 16,  1, 3) # Animate water silo tiles - code 6
+	pass

@@ -1,6 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/art/level_1/particles/P1_smoke/P1_smoke-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/rooftop_level/particles/P1_smoke/P1_smoke-Sheet.png" type="Texture" id=1]
+
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -35,7 +36,7 @@ position = Vector2( 0, 11.75 )
 scale = Vector2( 0.875, 2.7375 )
 frames = SubResource( 5 )
 animation = "smoke"
-frame = 3
+frame = 1
 playing = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
