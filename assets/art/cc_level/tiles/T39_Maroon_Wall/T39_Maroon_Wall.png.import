@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex"
+path="res://.import/T39_Maroon_Wall.png-b3ed6031bd4abd7cc0d9a7cc70b59744.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/rooftop_level/tiles/B8_rooftop_stair_access/B8_rooftop_stair_access.png"
-dest_files=[ "res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex" ]
+source_file="res://assets/art/cc_level/tiles/T39_Maroon_Wall/T39_Maroon_Wall.png"
+dest_files=[ "res://.import/T39_Maroon_Wall.png-b3ed6031bd4abd7cc0d9a7cc70b59744.stex" ]
 
 [params]
 

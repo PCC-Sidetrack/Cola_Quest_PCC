@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=2]
+[gd_scene load_steps=143 format=2]
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_background_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprite_scenes/level_1/bird.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sprite_scenes/level_1/zorro_boss.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/point.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=11]
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png" type="Texture" id=13]
@@ -1796,7 +1797,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 106 )
-frame = 11
+frame = 3
 speed_scale = 3.0
 playing = true
 
@@ -1969,7 +1970,12 @@ position = Vector2( 10718, 1120 )
 shape = SubResource( 107 )
 
 [node name="zorro_boss" parent="enemies" instance=ExtResource( 9 )]
-position = Vector2( 17795.6, 675.892 )
+position = Vector2( 17523.3, 697.124 )
+
+[node name="points" type="Node2D" parent="."]
+
+[node name="point1" parent="points" instance=ExtResource( 10 )]
+position = Vector2( 17915, 696.824 )
 
 [node name="triggers" type="Node2D" parent="."]
 
@@ -2032,7 +2038,7 @@ position = Vector2( 16970.2, 19.2734 )
 shape = SubResource( 110 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 17089.1, 35.5986 )
+position = Vector2( 17223.4, 124.8 )
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]

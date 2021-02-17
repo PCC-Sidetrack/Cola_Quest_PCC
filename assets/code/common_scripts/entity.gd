@@ -128,6 +128,11 @@ func get_current_health       () -> int:
 	return round(_health.current) as int
 func get_current_velocity     () -> Vector2:
 	return _movement.current_velocity
+func get_collision_box_size   () -> Vector2:
+	if has_node("Area2D/CollisionShape2D"):
+		return get_node("Area2D/CollisionShape2D").get_shape().extents
+	else:
+		return Vector2(0.0, 0.0)
 func get_damage               () -> int:
 	return round(_damage.amount) as int
 func get_direction_facing     () -> float:

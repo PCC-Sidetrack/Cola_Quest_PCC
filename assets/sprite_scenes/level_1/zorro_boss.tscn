@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_walk.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_sword.png" type="Texture" id=8]
 [ext_resource path="res://assets/code/level_1/zorro_sword.gd" type="Script" id=9]
-[ext_resource path="res://assets/code/level_1/zorro_ai2.gd" type="Script" id=10]
+[ext_resource path="res://assets/code/level_1/zorro_ai.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"
@@ -1542,11 +1542,11 @@ tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "_dash"
+"method": "dash"
 } ]
 }
 
@@ -2133,6 +2133,7 @@ anims/walk_sword = SubResource( 11 )
 [node name="sprites" type="Node2D" parent="."]
 
 [node name="idle" type="Sprite" parent="sprites"]
+visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 3 )
 hframes = 2
@@ -2157,10 +2158,10 @@ texture = ExtResource( 4 )
 hframes = 5
 
 [node name="sword_attack" type="Sprite" parent="sprites"]
-visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 5 )
 hframes = 5
+frame = 3
 
 [node name="throw" type="Sprite" parent="sprites"]
 visible = false
@@ -2178,14 +2179,14 @@ hframes = 2
 script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( -8, 12 )
-rotation = 2.00713
+position = Vector2( 30.1587, -18.635 )
+rotation = -0.699446
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
 visible = false
-position = Vector2( -8.55, 14.3 )
-rotation = 2.00713
+position = Vector2( 31.7225, -20.5602 )
+rotation = 2.44425
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
@@ -2207,4 +2208,5 @@ shape = SubResource( 13 )
 [connection signal="health_changed" from="." to="." method="_on_zorro_boss_health_changed"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_sword_body_entered"]
+[connection signal="body_entered" from="sword" to="." method="_on_sword_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
