@@ -34,6 +34,9 @@ signal flash_screen          (color)
 # Signal that is activated when a cola is collected
 signal cola_collect          (amount)
 
+# Signal that is activated when total cola is set
+signal cola_total            (total)
+
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#	
@@ -77,6 +80,9 @@ func on_flash_screen(color) -> void:
 # Emit signal when cola is collected
 func on_cola_collect(amount) -> void:
 	emit_signal("cola_collect", amount)
+	
+func on_total_cola(total) -> void:
+	emit_signal("cola_total", total)
 	
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
