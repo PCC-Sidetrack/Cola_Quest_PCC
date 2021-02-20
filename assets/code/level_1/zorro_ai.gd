@@ -85,14 +85,22 @@ export var standard_distance_from_player: int = 130
 #                              Public Constants                               #
 #-----------------------------------------------------------------------------#
 # Enums for current AI state
+# This dictionary is meant to allow the class inheriting this class to track
+# various states of the ai. The state is not updated in this class, but must be
+# done by the inheriting class through the getter and setter methods.
 const STATE: Dictionary = {
-	NONE      = -1,
-	MOVING1   = 0,
-	MOVING2   = 1,
-	MOVING3   = 2,
-	JUMPING   = 3,
-	ATTACKING = 4,
-	WAITING   = 5
+	NONE       = -1,
+	MOVING1    = 0,
+	MOVING2    = 1,
+	MOVING3    = 2,
+	JUMPING    = 3,
+	ATTACKING1 = 4,
+	ATTACKING2 = 5,
+	ATTACKING3 = 6,
+	WAITING    = 7,
+	CUSTOM1    = 8,
+	CUSTOM2    = 9,
+	CUSTOM3    = 10
 }
 
 #-----------------------------------------------------------------------------#
@@ -126,8 +134,8 @@ var _current_sprite:    String = ""
 var _uninterrupted_action: bool = false
 # Tracks whether the sprite is currently flipped
 var _sprite_flipped:       bool = false
-# Indicates if a last direction is currently saved and shouldn't be updated
-var _is_direction_saved:   bool = false
+# Indicates if movement is currently enabled
+var _movement_enabled:     bool = false
 
 # Holds a Timer that can be used throughout the class
 var _timer: Timer = Timer.new()
@@ -135,11 +143,6 @@ var _timer: Timer = Timer.new()
 # Holds the current movement direction in a vector. 
 # This is automatically taken care of.
 var _current_direction: Vector2
-# Holds the last recorded _current_direction. Should only be edited
-# through set_last_direction and get_last_direction
-var _last_direction: Vector2
-
-
 
 #-----------------------------------------------------------------------------#
 #                           Built-In Virtual Methods                          #
@@ -147,7 +150,6 @@ var _last_direction: Vector2
 func _ready() -> void:
 	# Initialze class variables
 	_current_direction = _DIRECTION.LEFT
-	_last_direction    = _current_direction
 	
 	# Initialize the boss
 	initialize_enemy(max_health, damage, speed, acceleration, jump_speed, obeys_gravity, smooth_movement)
@@ -206,6 +208,9 @@ func _physics_process(delta) -> void:
 
 	# If the ai is not doing an uninterruptable action, then perform the boss ai
 	if !_uninterrupted_action:
+		# Disable movement before ai is called (allowing the ai to determine if movement should occur
+		_movement_enabled = false
+		
 		# Perform the tasks in the current ai stage
 		match _current_ai_stage:
 			_AI_STAGE.STAGE_ONE:
@@ -216,6 +221,14 @@ func _physics_process(delta) -> void:
 				_run_ai_stage_three()
 			_:
 				_run_ai_none()
+
+	# Update the boss movement, but update it towards no movement if movement isn't enabled
+	# Note: this is done regardless of whether or not an uninteruptable action is occuring
+	#       which enables an uninteruptable action to cause movement to or not to occur
+	if _movement_enabled:
+		move_dynamically(_current_direction)
+	else:
+		move_dynamically(Vector2(0.0, 0.0))
 
 
 #-----------------------------------------------------------------------------#
@@ -268,42 +281,15 @@ func change_animation(animation: String) -> void:
 		else:	
 			ProgramAlerts.add_warning("In boss fight AI, attempted to change an animation to non-existant animation id.")
 
-# Locks the saving of the last direction. Calling save_last_direction() doesn't work
-# when this is locked.
-func lock_last_saved_direction() -> void:
-	_is_direction_saved = true
-
-# Unlocks the saving of the last direction. Calling save_last_direction() doesn't work
-# when this is locked.
-func unlock_last_saved_direction() -> void:
-	_is_direction_saved = true
-	
-# Returns whether the changing the last direction is locked or not
-func is_save_last_direction_locked() -> bool:
-	return _is_direction_saved
-	
-# Note: the _last_direction is only saved if _is_direction_saved is false
-# Calling this method will set _is_direction_saved to true, so it must be unlocked
-# After done using the _last_direction variable (after calling get_last_saved_direction())
-# To do this, call the method unlock_last_direction
-func save_last_direction() -> void:
-	if !_is_direction_saved:
-		lock_last_saved_direction()
-		_last_direction = _current_direction
-
 #=============================
 # AI Actions
 #=============================
 
 # Attack action
-# TESTED: WORKING
 func attack(uninterruptable_action: bool = true) -> void:
 	# Before executing any atacking code, check that the attack cooldown is
 	# not in progress
-	if _attack_cooldown_timer >= attack_cooldown:
-		# Set the current state of the AI
-		_current_state = STATE.ATTACKING
-			
+	if _attack_cooldown_timer >= attack_cooldown:		
 		# Let the ai know that an uninterruptable action is occuring
 		if uninterruptable_action:
 			_uninterrupted_action = true
@@ -312,149 +298,53 @@ func attack(uninterruptable_action: bool = true) -> void:
 		# Attack Code
 		#=============================
 		
-		# For this action, movement should be enabled (for dash()), but the boss should stop moving
-		# before performing the action
-		save_last_direction()
-		_current_direction = _DIRECTION.NONE
-		
 		# Play attack animation
 		change_animation(_ANIMATION.ATTACK)
-		print("here")
+		
 		# Note: the dash() function is called in the AnimationPlayer for the attack animation
 		
 		# Wait until the attack animation is complete
 		yield($AnimationPlayer, "animation_finished")
 		
 		change_animation(_ANIMATION.IDLE)
+		_movement_enabled = false
 		_timer.start(1.0)
 		yield(_timer, "timeout")
 		
-		# Set the current direction (indicating movement) back to what it was before attacking
-		_current_direction = get_last_direction()
-		unlock_last_saved_direction()
-		
 		#=============================
 		# End of Attack Code
-		#=============================
-		
-		# Reset the attack cooldown timer
-		_attack_cooldown_timer = 0.0
+		#============================+
 		
 		# Let the ai know that the uninterruptable action is complete
 		_uninterrupted_action = false
+		
+		# Reset the attack cooldown timer
+		_attack_cooldown_timer = 0.0
 	
 # Sets the direction facing to the opposite of it's current direction
-# TESTED: WORKING
 func turn_around() -> void:
 	_current_direction.x *= -1
 	
-# Move in the given direction
-# The given direction is a vector of any values. Doesn't have to be contained in the _DIRECTION dictionary
-func move_in_direction(direction: Vector2, uninterruptable_action: bool = false) -> void:
-	# Set the current state of the AI
-	_current_state = STATE.MOVING1
-	
-	# Let the ai know that an uninterruptable action is occuring
-	if uninterruptable_action:
-		_uninterrupted_action = true
-	
-	move_dynamically(direction)
-	
-	# Let the ai know that the uninterruptable action is complete
-	_uninterrupted_action = false
-	
-# Moves at the boss's movement speed until the boss has gone past the x value given
-# Returns true if the boss has reached/passed the point
-# TESTED: WORKING
-func move_towards_x(x: float, uninterruptable_action: bool = false) -> bool:
-	# Saves the direction (left or right) that the boss needs to go to get to the 
-	# point given
-	var direction_to_point: Vector2
-	# Once calculated, indicates if the boss has moved past the point x
-	var moved_past_x:       bool = false
-	
-	# Set the current state of the AI
-	_current_state = STATE.MOVING2
-	
-	# Let the ai know that an uninterruptable action is occuring
-	if uninterruptable_action:
-		_uninterrupted_action = true
-		
-	# Movement Code
-	if global_position.x - x > 0:
-		_current_direction.x = _DIRECTION.LEFT.x
-		direction_to_point   = _DIRECTION.LEFT
-	elif global_position.x - x < 0:
-		_current_direction.x = _DIRECTION.RIGHT.x
-		direction_to_point   = _DIRECTION.RIGHT
-	
-	# Let the ai know that the uninterruptable action is complete
-	_uninterrupted_action = false
-	
-	move_dynamically(_current_direction)
-	
-	# Check if the boss has moved past the x point given
-	if direction_to_point == _DIRECTION.LEFT:
-		if global_position.x - x <= 0:
-			moved_past_x = true
-	elif direction_to_point == _DIRECTION.RIGHT:
-		if global_position.x - x >= 0:
-			moved_past_x = true
-	
-	return moved_past_x
-	
-
-# Moves at the boss's movement speed until the boss has gone past the y value given
-func move_towards_y(y: float, uninterruptable_action: bool = true) -> void:
-	# Set the current state of the AI
-	_current_state = STATE.MOVING2
-	
-	# Let the ai know that an uninterruptable action is occuring
-	if uninterruptable_action:
-		_uninterrupted_action = true
-	
-	# Movement Code
-	
-	# Let the ai know that the uninterruptable action is complete
-	_uninterrupted_action = false
-	
-	move_dynamically(_current_direction)
-	
 # Causes the boss to dash forward based on speed multiplier given
-# TESTED: WORKING
 func dash(speed_multiplier: float = dash_multiplier) -> void:
 	if _dash_cooldown_timer >= dash_cooldown:
-		# Set the current state of the AI
-		_current_state = STATE.MOVING3
-	
+		# Allow movement
+		_movement_enabled = true
+		# Set the velocity (simialar to how it's done in entity.gd)
 		set_velocity(Vector2(get_last_direction().x * get_speed() * speed_multiplier, get_current_velocity().y))
-		move_dynamically(_current_direction)
-		
-# Sets a boolean and cycles a thread until the given time (in seconds) is finished.
-# Does not allowing physics process to call AI methods
-# TESTED: WORKING
-func uninterrupted_wait(seconds: float, stop_moving: bool = true) -> void:
-		# Set the current state of the AI
-		_current_state = STATE.WAITING
-	
-		_uninterrupted_action = true
-		
-		# If desired, save the last direction and stop movement
-		if stop_moving:
-			save_last_direction() # Also locks the ability to save the last direction
-			_current_direction = _DIRECTION.NONE
-		
-		_timer.start(seconds)
-		yield(_timer, "timeout")
-		
-		# If movement was stopped, then reset it back to the last
-		# movement direction and unlock the ability to save the
-		# last direction again.
-		if stop_moving:
-			_current_direction = get_last_saved_direction()
-			unlock_last_saved_direction()
 
-		_uninterrupted_action = false
+# Stops AI from running for a given time
+func pause_ai(seconds: float, stop_moving: bool = true) -> void:
+	_uninterrupted_action = true
+	
+	# If desired, save the last direction and stop movement
+	if stop_moving:
+		_movement_enabled = false
+	
+	_timer.start(seconds)
+	yield(_timer, "timeout")
+
+	_uninterrupted_action = false
 
 #=============================
 # Getters
@@ -462,7 +352,6 @@ func uninterrupted_wait(seconds: float, stop_moving: bool = true) -> void:
 func get_current_animation()    -> String:  return _current_animation
 func get_current_ai_stage()     -> int:     return _current_ai_stage
 func get_current_state()        -> int:     return _current_state
-func get_last_saved_direction() -> Vector2: return _last_direction
 
 #=============================
 # Setters
@@ -478,6 +367,12 @@ func set_current_ai_stage(id: int) -> void:
 		_current_ai_stage = id
 	else:
 		_current_ai_stage = _AI_STAGE.NONE
+		
+func set_current_state(state: int) -> void:
+	if state in STATE.values():
+		_current_state = state
+	else:
+		_current_state = STATE.NONE
 
 #-----------------------------------------------------------------------------#
 #                                Private Methods                              #
@@ -531,6 +426,12 @@ func _run_ai_stage_one() -> void:
 	# until close to the player. When y value and x value are close to the player, make
 	# a sword attack.
 	
+	# Allow movement
+	_movement_enabled = true
+	
+	# Set the animation for movement
+	change_animation(_ANIMATION.WALK)
+	
 	# Check to see if boss is within attack range
 	if global_position.x - Globals.player_position.x <= standard_distance_from_player and global_position.x - Globals.player_position.x >= 0:
 		if _current_direction.x == _DIRECTION.LEFT.x or _current_direction.x == _DIRECTION.NONE.x:
@@ -540,25 +441,11 @@ func _run_ai_stage_one() -> void:
 		if _current_direction.x == _DIRECTION.RIGHT.x or _current_direction.x == _DIRECTION.NONE.x:
 			if abs(global_position.y - Globals.player_position.y) <= Globals.player.get_collision_box_size().y / 2:
 				attack()
-			
-	# Set the animation for movement
-	change_animation(_ANIMATION.WALK)
-	
-	#if _current_state == STATE.MOVING2 or _current_state == STATE.NONE:
-	#	if move_towards_x(get_node("../../points/point1").get_position().x):
-	#		_current_state = STATE.MOVING1
-	#else:
-	#	move_in_direction(_current_direction)
-		
-	move_in_direction(_current_direction)
 		
 	# If on a wall, switch the state to moving1
 	if is_on_wall():
 		turn_around()
-		
-		
-	
-	
+		jump(1.0)
 	
 # Stage two AI
 func _run_ai_stage_two() -> void:
@@ -592,9 +479,9 @@ func _on_Area2D_body_entered(body):
 		body.knockback(self)
 		
 		# Pause the boss for a second to allow the player time to regain themselves
-		change_animation(_ANIMATION.IDLE)
-		uninterrupted_wait(1.0)
-		change_animation(_ANIMATION.WALK)
+		#change_animation(_ANIMATION.IDLE)
+		#pause_ai(1.0)
+		#change_animation(_ANIMATION.WALK)
 		
 # Triggered when boss dies
 func _on_zorro_boss_death():
@@ -607,10 +494,3 @@ func _on_zorro_boss_health_changed(amount):
 # Triggered when the object this script is attached to is being removed from the game
 func _on_tree_exiting():
 	_timer.free()
-
-# Triggered when the boss's sword hits something
-func _on_sword_body_entered(body):
-	if body.is_in_group(Globals.GROUP.PLAYER) and body is Entity:
-		change_animation(_ANIMATION.IDLE)
-		uninterrupted_wait(1.0)
-		change_animation(_ANIMATION.WALK)

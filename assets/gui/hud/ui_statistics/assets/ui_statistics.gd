@@ -17,9 +17,6 @@ var _respawn_count: int = 0
 # Counts the amount of cola collected 
 var _cola_count:    int = 0
 
-# Total amount of cola collected
-var _cola_total:    int = 0
-
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
@@ -34,7 +31,7 @@ func _ready() -> void:
 # Prints the fps onto a label
 func _physics_process(_delta: float) -> void:
 	$fps_counter.set_text    ("FPS: " + str(Engine.get_frames_per_second()))
-	$cola_collected.set_text ("Cola Collected : " + str(_cola_count) + "/" + str(_cola_total))
+	$cola_collected.set_text ("Cola Collected : " + str(_cola_count))
 	$respawn_counter.set_text("Respawn Counter: " + str(_respawn_count))
 
 
@@ -51,17 +48,11 @@ func _on_game_UI_respawn_player() -> void:
 	_respawn_count += 1
 	$respawn_counter.visible = false
 	$cola_collected.visible  = false
-
-# On level cleared, show respawn and cola counter
-func _on_game_UI_level_cleared() -> void:
+	
+func _on_game_UI_level_cleared():
 	yield(get_tree().create_timer(3.0), "timeout")
 	$cola_collected.visible  = true
 	$respawn_counter.visible = true
 
-# On cola collected
-func _on_game_UI_cola_collect(amount) -> void:
+func _on_game_UI_cola_collect(amount):
 	_cola_count += amount
-
-# On total cola calculated
-func _on_game_UI_cola_total(total) -> void:
-	_cola_total = total
