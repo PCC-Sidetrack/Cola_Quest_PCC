@@ -66,23 +66,23 @@ signal init()
 # Signal is sent whenever the direction being moved in is changed and allows
 # inheriting classes to create custom code for flipping an entity. h_direction_facing
 # will be either DIRECTION.LEFT or DIRECTION.RIGHT
-signal fliped(h_direction_facing)
+signal flipped(h_direction_facing)
 # Signal is sent whenever a change in the stage of the ai is made through set_current_ai_stage()
 signal stage_changed(previous_stage, new_stage)
 # Signal emitted when no ai stage is currently set (called by _physics_process)
-signal run_no_stage()
+signal stage_none_ran()
 # Signal emitted when a call to the stage one ai is made by _physics_process
-signal run_stage_one()
+signal stage_one_ran()
 # Signal emitted when a call to the stage two ai is made by _physics_process
-signal run_stage_two()
+signal stage_two_ran()
 # Signal emitted when a call to the stage three ai is made by _physics_process
-signal run_stage_three()
+signal stage_three_ran()
 # Signal emitted when a call to the stage four ai is made by _physics_process
-signal run_stage_four()
+signal stage_four_ran()
 # Signal emitted when the fight is ended ai is made by _physics_process
 signal fight_ended()
 # Signal emitted whenever the attack() method is called
-signal attack()
+signal attacked()
 # Signal emitted whenever the turn_around() method is called
 signal turned_around()
 # Signal emitted whenever a dash() is performed
@@ -152,10 +152,6 @@ const STATE: Dictionary = {
 var _current_ai_stage: int = STAGE.NONE
 # Holds the current state of the boss fight
 var _current_ai_state: int = STATE.NONE
-# Damage that the ai deals to entities
-var _ai_damage:        int = 1
-# Max health of boss
-var _max_health:       int = 16
 
 #=============================
 # Floats
@@ -170,12 +166,6 @@ var _dash_cooldown:         float = _attack_cooldown
 var _attack_cooldown_timer: float = 0.0
 # Tracks the cooldown for dashing
 var _dash_cooldown_timer:   float = 0.0
-# Controls the acceleration of movement if smooth_movement is turned on
-var _acceleration:          float = 20.0
-# Speed at which the ai jumps
-var _jump_speed:            float = 850.0
-# Speed at which the ai moves
-var _speed:                 float = 5.0
 # Multiplier applied to speed for dashing
 var _dash_multiplier:       float = 3.0
 
@@ -192,10 +182,6 @@ var _uninterrupted_action: bool = false
 var _sprite_flipped:       bool = false
 # Tracks whether the ai is currently paused
 var _ai_paused:            bool = false
-# Controls whether the ai obeys gravity
-var _obeys_gravity:        bool = true
-# Controls whether the ai accelerates into movement or not
-var _smooth_movement:      bool = true
 
 #=============================
 # Vectors
@@ -249,17 +235,17 @@ func _physics_process(delta) -> void:
 		# Perform the tasks in the current ai stage
 		match _current_ai_stage:
 			STAGE.ONE:
-				emit_signal("run_stage_one")
+				emit_signal("stage_one_ran")
 			STAGE.TWO:
-				emit_signal("run_stage_two")
+				emit_signal("stage_two_ran")
 			STAGE.THREE:
-				emit_signal("run_stage_three")
+				emit_signal("stage_three_ran")
 			STAGE.FOUR:
-				emit_signal("run_stage_four")
+				emit_signal("stage_four_ran")
 			STAGE.FINISHED:
 				emit_signal("fight_ended")
 			_:
-				emit_signal("run_no_stage")
+				emit_signal("stage_none_ran")
 
 	# Update the boss movement, but update it towards no movement if movement isn't enabled
 	# Note: this is done regardless of whether or not an uninteruptable action is occuring
@@ -291,7 +277,7 @@ func attack(uninterruptable: bool = true) -> void:
 		#=============================
 		
 		# Emit a signal to allow custom code to occur before the action is finished
-		emit_signal("attack")
+		emit_signal("attacked")
 		
 		#=============================
 		# End of Attack Code
@@ -361,15 +347,8 @@ func resume_ai() -> void:
 # Must be called in inheriting class's _ready()
 #=============================
 func initialize(max_health: int, damage: int, speed: float, acceleration: float, jump_speed: float, attack_cooldown: float, dash_cooldown: float, obeys_gravity: bool, smooth_movement: bool, auto_facing: bool):
-	self._max_health      = max_health
-	self._ai_damage       = damage
-	self._speed           = speed
-	self._acceleration    = acceleration
-	self._jump_speed      = jump_speed
 	self._attack_cooldown = attack_cooldown
 	self._dash_cooldown   = dash_cooldown
-	self._obeys_gravity   = obeys_gravity
-	self._smooth_movement = smooth_movement
 	
 	initialize_enemy(max_health, damage, speed, acceleration, jump_speed, obeys_gravity, smooth_movement)
 	set_auto_facing (auto_facing)
