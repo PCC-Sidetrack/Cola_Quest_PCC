@@ -263,10 +263,14 @@ func _on_player_health_changed(change) -> void:
 	# If the player would be healed, then update the GUI
 	elif change > 0:
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
+		
+	if change < 0 && get_current_health():
+		flash_damaged()	
 
 # Triggered whenever the player dies
 func _on_player_death() -> void:
 	if !is_dead():
+		death_anim()
 		set_is_dead(true)
 		
 		# Lock the game and have a short cooldown before respawning

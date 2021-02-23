@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Entity",
+"class": "AI",
+"language": "GDScript",
+"path": "res://assets/code/common_scripts/ai.gd"
+}, {
 "base": "TileMap",
 "class": "Animate_Tiles",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://assets/code/common_scripts/old_scripts/globals_old.gd"
 } ]
 _global_script_class_icons={
+"AI": "",
 "Animate_Tiles": "",
 "Entity": "",
 "EntityOld": "",
