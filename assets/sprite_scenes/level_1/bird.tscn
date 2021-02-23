@@ -3,7 +3,6 @@
 [ext_resource path="res://assets/code/level_1/bird.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S3_flying_bird/S3_flying_bird.png" type="Texture" id=2]
 
-
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 2 )
@@ -43,7 +42,7 @@ shape = SubResource( 4 )
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
 position = Vector2( 1, -0.5 )
-scale = Vector2( 1.7, 1.65 )
+scale = Vector2( 20, 20 )
 process_parent = true
 physics_process_parent = true
 

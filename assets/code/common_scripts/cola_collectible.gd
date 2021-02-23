@@ -9,10 +9,18 @@
 extends Entity
 
 #-----------------------------------------------------------------------------#
+#                               Private Variables                             #
+#-----------------------------------------------------------------------------#
+# Random number generator
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+#-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	initialize_collectable()
+	_rng.randomize()
+	$AnimatedSprite.frame = _rng.randi_range(0, $AnimatedSprite.frames.get_frame_count("spin") - 1)
 	$AnimatedSprite.play("spin")
 
 #-----------------------------------------------------------------------------#

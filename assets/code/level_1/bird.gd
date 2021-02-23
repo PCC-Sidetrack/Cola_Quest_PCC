@@ -58,8 +58,10 @@ func _physics_process(_delta: float) -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_bird_collision(_body):
-	pass # Replace with function body.
+func _on_bird_collision(body):
+	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
+		body.deal_damage(self)
+		body.knockback(self)
 
 # Triggered whenever the entity dies	
 func _on_bird_death():

@@ -23,13 +23,6 @@ export var damage:       int   = 1
 export var acceleration: float = 20.0
 
 #-----------------------------------------------------------------------------#
-#                             Public Functions                                #
-#-----------------------------------------------------------------------------#
-# Overwritten function in Entity.gd that is called whenever a collision occurs
-func on_collision(_body: Object):
-	pass
-
-#-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
@@ -55,8 +48,10 @@ func _physics_process(_delta: float) -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_drone_b_collision(_body):
-	pass # Replace with function body.
+func _on_drone_b_collision(body):
+	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
+		body.deal_damage(self)
+		body.knockback(self)
 
 func _on_drone_b_death():
 	pass # Replace with function body.

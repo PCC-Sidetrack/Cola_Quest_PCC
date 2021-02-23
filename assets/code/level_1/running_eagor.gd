@@ -15,19 +15,22 @@ extends Entity
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
 # Speed
-export var movement_speed: float = 5.0
+export var movement_speed:    float   = 5.0
+export var acceleration:      float   = 30.0
+export var jump_velocity:     float   = 0.0
 
-export var health:        int   = 1
-export var damage:        int   = 1
-export var acceleration:  float = 30.0
-export var jump_velocity: float = 0.0
-export var obeys_gravity: bool  = true
+export var health:            int     = 1
+export var damage:            int     = 1
+
+export var obeys_gravity:     bool    = true
+
+export var initial_direction: Vector2 = Vector2.RIGHT
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # The direction the enemy is moving
-var _direction: Vector2 = Vector2.RIGHT
+var _direction: Vector2 = initial_direction
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
