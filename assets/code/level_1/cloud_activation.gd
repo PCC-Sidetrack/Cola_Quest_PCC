@@ -12,4 +12,5 @@ extends Area2D
 func _on_cloud_trigger_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 			get_node("/root/rooftop_level/parallaxing/clouds_below/ParallaxLayer").visible = true
+			get_node("/root/rooftop_level/parallaxing/clouds_below/ParallaxLayer2").visible = true
 

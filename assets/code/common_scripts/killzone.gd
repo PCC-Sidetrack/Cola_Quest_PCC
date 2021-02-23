@@ -8,9 +8,7 @@
 
 extends Area2D
 
-#-----------------------------------------------------------------------------#
-#                            Trigger Functions                                #
-#-----------------------------------------------------------------------------#
-func _on_killzone_body_entered(body):
-	if body.has_method("kill"):
-		body.kill()
+# Runs every physics engine update
+func _physics_process(delta) -> void:
+	if Globals.player_position.y >= global_position.y:
+		Globals.player.take_damage(Globals.player.get_max_health())

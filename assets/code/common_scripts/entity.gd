@@ -397,9 +397,11 @@ func jump(height: float) -> void:
 	_movement.current_velocity.y = _movement.initial_jump_velocity * -height
 
 # Cause the entity that calls this function to knockback based off of the entity's speed and the referenced entity's damage
-func knockback(other_entity: Object) -> void:
-	set_velocity(other_entity.get_position().direction_to(global_position).normalized() * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
-
+func knockback(other_entity: Object, direction: Vector2 = Vector2(0.0, 0.0)) -> void:
+	if direction == Vector2(0.0, 0.0):
+		set_velocity(other_entity.get_position().direction_to(global_position).normalized() * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
+	else:
+		set_velocity(direction * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
 
 # A generic move function that determines what kind of movement the entity contains
 # This is intended for more automation, but should not be considered lazy coding
@@ -443,7 +445,7 @@ func move() -> void:
 
 # Move based on a dynamically changing horizontal direction
 # Provides the finest control of entities
-func move_dynamically(direction: Vector2) -> void:
+func move_dynamically(direction: Vector2, custom_acceleration: float = _movement.acceleration) -> void:
 	# Normalize the direction vector to reduce it to purely a direction and not a magnitude
 	var horizontal: float = direction.normalized().x
 	var vertical:   float = direction.normalized().y
@@ -457,12 +459,12 @@ func move_dynamically(direction: Vector2) -> void:
 	#  - Entities cannot obey gravity if they do not move smoothly
 	if _metadata.is_movement_smooth:
 		if get_obeys_gravity():
-			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, _movement.acceleration)
+			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, custom_acceleration)
 			#vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, _movement.gravity * get_physics_process_delta_time())
 			vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, Globals.ORIENTATION.MAX_FALL_SPEED * get_physics_process_delta_time())
 		else:
-			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, _movement.acceleration)
-			vertical   = move_toward(_movement.current_velocity.y, vertical * _movement.speed, _movement.acceleration)
+			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, custom_acceleration)
+			vertical   = move_toward(_movement.current_velocity.y, vertical * _movement.speed, custom_acceleration)
 	else:
 		if get_obeys_gravity():
 			ProgramAlerts.add_error(name + " cannot obey gravity if it does not move smoothly")

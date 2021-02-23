@@ -36,12 +36,17 @@ export var acceleration: float = 20.0
 var _movement_update_time: float = 0.0
 # Number of seconds since last 3x5 card was shot
 var _shoot_update_time:    float = 0.0
+# Used to add a randomness to when the first shot occurs
+var _rng:                  RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
+	# Give a random starting time to _shoot_update_time
+	_shoot_update_time = _rng.randf_range(0.0, shoot_cooldown)
+	
 	var instructions = [
 		duration (Vector2.UP, turnaround_time),
 		end_point(global_position)
@@ -51,14 +56,6 @@ func _ready() -> void:
 	initialize_enemy           (health, damage, movement_speed, acceleration)
 	
 	$AnimatedSprite.play("fly")
-
-
-#-----------------------------------------------------------------------------#
-#                             Public Functions                                #
-#-----------------------------------------------------------------------------#
-# Overwritten function in Entity.gd that is called whenever a collision occurs
-func on_collision(_body: Object):
-	pass
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -90,8 +87,10 @@ func _shoot() -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_drone_a_collision(_body):
-	pass # Replace with function body.
+func _on_drone_a_collision(body):
+	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
+		body.deal_damage(self)
+		body.knockback(self)
 
 func _on_drone_a_death():
 	pass # Replace with function body.
