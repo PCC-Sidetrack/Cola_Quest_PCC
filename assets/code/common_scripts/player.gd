@@ -286,6 +286,9 @@ func _on_game_UI_respawn_player() -> void:
 	global_position = get_spawn_point()
 	set_invulnerability(invlunerability_time)
 	set_is_dead(false)
+	print("\nPlayer Respawning...")
+	set_modulate(Color(1, 1, 1, 1))
+	print("\nColor Modulated")
 	set_current_health(max_health)
 	take_damage(-max_health)
 	Globals.game_locked = false
