@@ -1485,13 +1485,13 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 22/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=111]
+[sub_resource type="ConvexPolygonShape2D" id=91]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=112]
+[sub_resource type="ConvexPolygonShape2D" id=92]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
-[sub_resource type="TileSet" id=91]
+[sub_resource type="TileSet" id=93]
 0/name = "glitched_concrete.tres 0"
 0/texture = ExtResource( 28 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1586,14 +1586,14 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 6/navigation_offset = Vector2( 0, 0 )
 6/shape_offset = Vector2( 0, 0 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape = SubResource( 111 )
+6/shape = SubResource( 91 )
 6/shape_one_way = false
 6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 111 ),
+"shape": SubResource( 91 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 6/z_index = 0
@@ -1607,93 +1607,93 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shape_offset = Vector2( 0, 0 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape = SubResource( 112 )
+7/shape = SubResource( 92 )
 7/shape_one_way = false
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 112 ),
+"shape": SubResource( 92 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 7/z_index = 0
 
-[sub_resource type="AtlasTexture" id=92]
+[sub_resource type="AtlasTexture" id=94]
 atlas = ExtResource( 21 )
 region = Rect2( 0, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=93]
+[sub_resource type="AtlasTexture" id=95]
 atlas = ExtResource( 21 )
 region = Rect2( 64, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=94]
+[sub_resource type="AtlasTexture" id=96]
 atlas = ExtResource( 21 )
 region = Rect2( 128, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=95]
+[sub_resource type="AtlasTexture" id=97]
 atlas = ExtResource( 21 )
 region = Rect2( 192, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=96]
+[sub_resource type="AtlasTexture" id=98]
 atlas = ExtResource( 21 )
 region = Rect2( 256, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=97]
+[sub_resource type="AtlasTexture" id=99]
 atlas = ExtResource( 21 )
 region = Rect2( 320, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=98]
+[sub_resource type="AtlasTexture" id=100]
 atlas = ExtResource( 21 )
 region = Rect2( 384, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=99]
+[sub_resource type="AtlasTexture" id=101]
 atlas = ExtResource( 21 )
 region = Rect2( 448, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=100]
+[sub_resource type="AtlasTexture" id=102]
 atlas = ExtResource( 21 )
 region = Rect2( 512, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=101]
+[sub_resource type="AtlasTexture" id=103]
 atlas = ExtResource( 21 )
 region = Rect2( 576, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=102]
+[sub_resource type="AtlasTexture" id=104]
 atlas = ExtResource( 21 )
 region = Rect2( 640, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=103]
+[sub_resource type="AtlasTexture" id=105]
 atlas = ExtResource( 21 )
 region = Rect2( 704, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=104]
+[sub_resource type="AtlasTexture" id=106]
 atlas = ExtResource( 21 )
 region = Rect2( 768, 0, 64, 96 )
 
-[sub_resource type="AtlasTexture" id=105]
+[sub_resource type="AtlasTexture" id=107]
 atlas = ExtResource( 21 )
 region = Rect2( 832, 0, 64, 96 )
 
-[sub_resource type="SpriteFrames" id=106]
+[sub_resource type="SpriteFrames" id=108]
 animations = [ {
-"frames": [ SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ), SubResource( 103 ), SubResource( 104 ), SubResource( 105 ) ],
+"frames": [ SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ), SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=107]
+[sub_resource type="RectangleShape2D" id=109]
 extents = Vector2( 13952, 1427.35 )
 
-[sub_resource type="RectangleShape2D" id=108]
+[sub_resource type="RectangleShape2D" id=110]
 extents = Vector2( 10, 659 )
 
-[sub_resource type="SegmentShape2D" id=109]
+[sub_resource type="SegmentShape2D" id=111]
 a = Vector2( 1240.3, 58.8068 )
 b = Vector2( -282.33, 66.4264 )
 
-[sub_resource type="SegmentShape2D" id=110]
+[sub_resource type="SegmentShape2D" id=112]
 a = Vector2( -51.0977, -442.361 )
 b = Vector2( -51.098, 155.61 )
 
@@ -1864,15 +1864,15 @@ tile_data = PoolIntArray( -327461, 536870921, 0, -327459, 536870921, 0, -261926,
 script = ExtResource( 2 )
 
 [node name="animated_tiles" type="TileMap" parent="tiles"]
-tile_set = SubResource( 91 )
+tile_set = SubResource( 93 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65603, 3, 0, 65604, 4, 0, 196780, 2, 0, 196781, 3, 0, 196782, 3, 0, 196783, 4, 0, 196792, 2, 0, 196793, 3, 0, 196794, 3, 0, 196795, 3, 0, 196796, 3, 0, 196797, 3, 0, 196798, 3, 0, 196799, 4, 0, 196801, 2, 0, 196802, 3, 0, 196803, 3, 0, 196804, 4, 0, 196806, 2, 0, 196807, 3, 0, 196808, 3, 0, 196809, 4, 0, 196811, 2, 0, 196812, 3, 0, 196813, 3, 0, 196814, 4, 0, 196816, 2, 0, 196817, 3, 0, 196818, 3, 0, 196819, 4, 0, 262192, 0, 0, 262197, 7, 0, 262204, 6, 0, 262206, 7, 0, 262216, 6, 0, 262235, 6, 0, 262412, 1, 0, 262432, 1, 0, 262453, 1, 0, 327726, 6, 0, 327736, 0, 0, 327745, 0, 0, 327757, 0, 0, 327762, 7, 0, 327763, 6, 0, 327764, 0, 0, 327768, 0, 0, 327942, 2, 0, 327943, 3, 0, 327944, 3, 0, 327945, 3, 0, 327946, 3, 0, 327947, 4, 0, 327970, 2, 0, 327971, 3, 0, 327972, 3, 0, 327973, 4, 0, 327977, 2, 0, 327978, 3, 0, 327979, 3, 0, 327980, 4, 0, 327985, 2, 0, 327986, 3, 0, 327987, 3, 0, 327988, 4, 0, 393250, 2, 0, 393251, 3, 0, 393252, 4, 0, 393269, 6, 0, 393284, 6, 0, 393296, 6, 0, 393308, 6, 0, 524381, 7, 0, 589834, 7, 0, 589837, 6, 0, 589842, 0, 0, 589847, 7, 0, 589853, 6, 0, 589857, 0, 0, 589861, 7, 0, 655368, 6, 0, 655400, 0, 0, 655401, 6, 0, 655449, 7, 0, 655820, 2, 0, 655821, 3, 0, 655822, 3, 0, 655823, 4, 0, 655839, 2, 0, 655840, 3, 0, 655841, 3, 0, 655842, 4, 0, 655847, 2, 0, 655848, 3, 0, 655849, 4, 0, 655867, 2, 0, 655868, 3, 0, 655869, 3, 0, 655870, 3, 0, 655871, 4, 0, 655874, 2, 0, 655875, 3, 0, 655876, 3, 0, 655877, 4, 0, 655880, 2, 0, 655881, 4, 0, 655883, 2, 0, 655884, 3, 0, 655885, 3, 0, 655886, 4, 0, 720916, 6, 0, 721212, 2, 0, 721213, 3, 0, 721214, 3, 0, 721215, 3, 0, 721216, 3, 0, 721217, 4, 0, 721219, 5, 0, 721221, 2, 0, 721222, 3, 0, 721223, 3, 0, 721224, 4, 0, 786443, 0, 0, 852061, 0, 0, 983124, 7, 0, 983372, 2, 0, 983373, 3, 0, 983374, 4, 0, 983376, 2, 0, 983377, 3, 0, 983378, 4, 0, 983380, 2, 0, 983381, 3, 0, 983382, 3, 0, 983383, 3, 0, 983384, 4, 0, 1048664, 7, 0, 1114204, 6, 0, 1310805, 6, 0, 1310809, 0, 0 )
 
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
-frames = SubResource( 106 )
-frame = 2
+frames = SubResource( 108 )
+frame = 5
 speed_scale = 3.0
 playing = true
 
@@ -1880,41 +1880,45 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
+frame = 3
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
+frame = 3
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
-frame = 3
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
+frame = 3
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
+frame = 3
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
+frame = 3
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
+frame = 3
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
-frame = 3
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
-frame = 2
+frame = 0
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -2036,7 +2040,6 @@ position = Vector2( 4080.74, 118.552 )
 [node name="bird2" parent="enemies/birds" instance=ExtResource( 8 )]
 position = Vector2( 12193.8, 298.336 )
 movement_speed = 5.0
-turnaround_time = 3.0
 
 [node name="killzone" type="Area2D" parent="enemies"]
 visible = false
@@ -2046,7 +2049,7 @@ script = ExtResource( 16 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemies/killzone"]
 position = Vector2( 10954.8, -477.572 )
 scale = Vector2( 1.06332, 0.103082 )
-shape = SubResource( 107 )
+shape = SubResource( 109 )
 
 [node name="zorro_boss" parent="enemies" instance=ExtResource( 9 )]
 position = Vector2( 17523.3, 697.124 )
@@ -2172,21 +2175,21 @@ script = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/other_triggers/boss_fight_trigger"]
 position = Vector2( 17210.3, 217.059 )
-shape = SubResource( 108 )
+shape = SubResource( 110 )
 
 [node name="decloud_trigger" type="Area2D" parent="triggers/other_triggers"]
 script = ExtResource( 33 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/other_triggers/decloud_trigger"]
 position = Vector2( 17455.8, 110.709 )
-shape = SubResource( 109 )
+shape = SubResource( 111 )
 
 [node name="cloud_trigger" type="Area2D" parent="triggers/other_triggers"]
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/other_triggers/cloud_trigger"]
 position = Vector2( 16970.2, 19.2734 )
-shape = SubResource( 110 )
+shape = SubResource( 112 )
 
 [node name="colas" type="Node2D" parent="."]
 __meta__ = {
