@@ -11,7 +11,7 @@ extends Entity
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
 # Holds a reference to the 3x5_projectile scene
-const STUDY_CARD = preload("res://assets//sprite_scenes//level_1//study_card_projectile.tscn")
+const STUDY_CARD = preload("res://assets//sprite_scenes//rooftop_scenes//study_card_projectile.tscn")
 
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #

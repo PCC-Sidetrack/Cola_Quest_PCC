@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/code/level_1/drone_b_ai.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/rooftop_level/drone_b_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/SD8_drone.ogg" type="AudioStream" id=3]
 

@@ -8,8 +8,8 @@
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_throw_item.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_walk.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_sword.png" type="Texture" id=8]
-[ext_resource path="res://assets/code/level_1/zorro_sword.gd" type="Script" id=9]
-[ext_resource path="res://assets/code/level_1/zorro_ai.gd" type="Script" id=10]
+[ext_resource path="res://assets/code/rooftop_level/zorro_sword.gd" type="Script" id=9]
+[ext_resource path="res://assets/code/rooftop_level/zorro_ai.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"

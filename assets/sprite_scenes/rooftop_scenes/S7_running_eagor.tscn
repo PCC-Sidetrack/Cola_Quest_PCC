@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/code/level_1/running_eagor.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/rooftop_level/running_eagor.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S7_running_eagor/S7_running_eagor.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -45,6 +45,7 @@ script = ExtResource( 1 )
 position = Vector2( -0.093895, -16.0562 )
 frames = SubResource( 5 )
 animation = "run"
+frame = 1
 playing = true
 flip_h = true
 

@@ -1,20 +1,20 @@
-[gd_scene load_steps=151 format=2]
+[gd_scene load_steps=149 format=2]
 
-[ext_resource path="res://assets/code/level_1/lvl1_animate_background_tiles.gd" type="Script" id=1]
-[ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprite_scenes/level_1/Smoke.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprite_scenes/level_1/drone_a.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/sprite_scenes/level_1/drone_b.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/sprite_scenes/level_1/S7_running_eagor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprite_scenes/level_1/orion.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/sprite_scenes/level_1/bird.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/sprite_scenes/level_1/zorro_boss.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/code/rooftop_level/lvl1_animate_background_tiles.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/rooftop_level/lvl1_animate_col_tiles.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/Smoke.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/drone_a.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/drone_b.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/S7_running_eagor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/orion.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/bird.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/zorro_boss.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/point.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=11]
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_background_tilesheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png" type="Texture" id=13]
-[ext_resource path="res://assets/code/level_1/cloud_activation.gd" type="Script" id=14]
-[ext_resource path="res://assets/code/level_1/boss_fight_trigger.gd" type="Script" id=15]
+[ext_resource path="res://assets/code/rooftop_level/cloud_activation.gd" type="Script" id=14]
+[ext_resource path="res://assets/code/rooftop_level/boss_fight_trigger.gd" type="Script" id=15]
 [ext_resource path="res://assets/code/common_scripts/killzone.gd" type="Script" id=16]
 [ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1b_blue_sky_clouds.png" type="Texture" id=17]
 [ext_resource path="res://assets/art/rooftop_level/parallaxing/background/PL4_rooftop_boss_arena/PL4.png" type="Texture" id=18]
@@ -31,13 +31,11 @@
 [ext_resource path="res://assets/art/rooftop_level/tiles/T9_fan/T9_fan/T9e_fan.tres" type="Texture" id=29]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=31]
-[ext_resource path="res://assets/sprite_scenes/level_1/fan_damage_box.tscn" type="PackedScene" id=32]
-[ext_resource path="res://assets/code/level_1/cloud_deactivation.gd" type="Script" id=33]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/fan_damage_box.tscn" type="PackedScene" id=32]
+[ext_resource path="res://assets/code/rooftop_level/cloud_deactivation.gd" type="Script" id=33]
 [ext_resource path="res://assets/art/rooftop_level/tiles/T14_glitched_concrete/T14_glitched_concrete2.tres" type="Texture" id=34]
 [ext_resource path="res://assets/art/rooftop_level/tiles/T14_glitched_concrete/T14_glitched_concrete3.tres" type="Texture" id=35]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=36]
-[ext_resource path="res://assets/particles/ac_level/P14_glitch_trail.tscn" type="PackedScene" id=37]
-[ext_resource path="res://assets/particles/ac_level/P15_ones_zeros_trail.tscn" type="PackedScene" id=38]
 
 [sub_resource type="TileSet" id=1]
 0/name = "rooftop_background_tilesheet.png 0"
@@ -1874,7 +1872,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 108 )
-frame = 2
+frame = 11
 speed_scale = 3.0
 playing = true
 
@@ -1996,7 +1994,6 @@ position = Vector2( 16297, 121 )
 
 [node name="drone_b21" parent="enemies/drones" instance=ExtResource( 5 )]
 position = Vector2( 16678, 96 )
-movement_speed = 1.2
 
 [node name="drone_b17" parent="enemies/drones" instance=ExtResource( 5 )]
 position = Vector2( 16482, -28 )
@@ -2026,7 +2023,6 @@ position = Vector2( 15872, 352 )
 
 [node name="S7_running_eagor3" parent="enemies/eagors" instance=ExtResource( 6 )]
 position = Vector2( 14919.5, 348.462 )
-initial_direction = Vector2( -1, 0 )
 
 [node name="orions" type="Node2D" parent="enemies"]
 
@@ -2040,7 +2036,6 @@ position = Vector2( 4080.74, 118.552 )
 
 [node name="bird2" parent="enemies/birds" instance=ExtResource( 8 )]
 position = Vector2( 12193.8, 298.336 )
-movement_speed = 5.0
 
 [node name="killzone" type="Area2D" parent="enemies"]
 visible = false
@@ -2438,15 +2433,8 @@ position = Vector2( 17040, -8 )
 position = Vector2( 6632, 32 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 11552, 215.72 )
+position = Vector2( 130.33, 189.418 )
 z_index = 1
-
-[node name="P15_ones_zeros_trail" parent="player" instance=ExtResource( 38 )]
-visible = false
-position = Vector2( -5.66968, 16.582 )
-
-[node name="P14_glitch_trail" parent="player" instance=ExtResource( 37 )]
-position = Vector2( -6, 24.302 )
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/cloud_trigger" to="triggers/other_triggers/cloud_trigger" method="_on_cloud_trigger_body_entered"]

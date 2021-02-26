@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/code/level_1/bird.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/rooftop_level/bird.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S3_flying_bird/S3_flying_bird.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
