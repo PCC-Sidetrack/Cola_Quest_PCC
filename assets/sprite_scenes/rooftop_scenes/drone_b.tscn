@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/code/level_1/drone_b_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png" type="Texture" id=2]
-
+[ext_resource path="res://assets/sounds/object_sounds/SD8_drone.ogg" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -67,6 +67,12 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 9 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+max_distance = 500.0
+attenuation = 2.0
 [connection signal="collision" from="." to="." method="_on_drone_b_collision"]
 [connection signal="death" from="." to="." method="_on_drone_b_death"]
 [connection signal="health_changed" from="." to="." method="_on_drone_b_health_changed"]

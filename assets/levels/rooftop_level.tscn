@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=2]
+[gd_scene load_steps=151 format=2]
 
 [ext_resource path="res://assets/code/level_1/lvl1_animate_background_tiles.gd" type="Script" id=1]
 [ext_resource path="res://assets/code/level_1/lvl1_animate_col_tiles.gd" type="Script" id=2]
@@ -31,11 +31,13 @@
 [ext_resource path="res://assets/art/rooftop_level/tiles/T9_fan/T9_fan/T9e_fan.tres" type="Texture" id=29]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=31]
-[ext_resource path="res://assets/sprite_scenes/common_scenes/damage_box.tscn" type="PackedScene" id=32]
+[ext_resource path="res://assets/sprite_scenes/level_1/fan_damage_box.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/code/level_1/cloud_deactivation.gd" type="Script" id=33]
 [ext_resource path="res://assets/art/rooftop_level/tiles/T14_glitched_concrete/T14_glitched_concrete2.tres" type="Texture" id=34]
 [ext_resource path="res://assets/art/rooftop_level/tiles/T14_glitched_concrete/T14_glitched_concrete3.tres" type="Texture" id=35]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=36]
+[ext_resource path="res://assets/particles/ac_level/P14_glitch_trail.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/particles/ac_level/P15_ones_zeros_trail.tscn" type="PackedScene" id=38]
 
 [sub_resource type="TileSet" id=1]
 0/name = "rooftop_background_tilesheet.png 0"
@@ -1804,7 +1806,7 @@ texture = ExtResource( 20 )
 [node name="ParallaxLayer" type="ParallaxLayer" parent="parallaxing/crowne_centre_background"]
 
 [node name="Sprite" type="Sprite" parent="parallaxing/crowne_centre_background/ParallaxLayer"]
-modulate = Color( 0.705882, 0.705882, 0.705882, 0.941176 )
+modulate = Color( 0.705882, 0.705882, 0.705882, 1 )
 position = Vector2( 12592, 384 )
 texture = ExtResource( 19 )
 
@@ -1872,7 +1874,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 108 )
-frame = 5
+frame = 2
 speed_scale = 3.0
 playing = true
 
@@ -1880,45 +1882,44 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
-frame = 3
+frame = 0
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
-frame = 3
+frame = 0
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
+frame = 2
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
-frame = 0
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
-frame = 0
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
-frame = 3
+frame = 0
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
-frame = 3
+frame = 0
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
-frame = 3
+frame = 0
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
-frame = 3
+frame = 0
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
+frame = 2
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
-frame = 0
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -2054,58 +2055,58 @@ shape = SubResource( 109 )
 [node name="zorro_boss" parent="enemies" instance=ExtResource( 9 )]
 position = Vector2( 17523.3, 697.124 )
 
-[node name="damage_boxes" type="Node2D" parent="."]
+[node name="fan_damage_boxes" type="Node2D" parent="."]
 position = Vector2( 200, -20 )
 
-[node name="damage_box" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 1911.85, 72.1514 )
 scale = Vector2( 9.64002, 1.16 )
 
-[node name="damage_box2" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box2" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 935.457, 230.072 )
 scale = Vector2( 4.95313, 1 )
 tp_to_spawn = false
 
-[node name="damage_box3" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box3" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 5367.99, 134.809 )
 scale = Vector2( 6.68, 1 )
 tp_to_spawn = false
 
-[node name="damage_box4" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box4" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 5895.35, 135.011 )
 scale = Vector2( 21.04, 1 )
 
-[node name="damage_box5" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box5" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 6358.69, 135.602 )
 scale = Vector2( 22.84, 1 )
 
-[node name="damage_box6" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box6" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 8279.53, 198.759 )
 scale = Vector2( 9.72, 1 )
 tp_to_spawn = false
 
-[node name="damage_box7" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box7" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 9382.55, 198.703 )
 scale = Vector2( 30.8, 1 )
 
-[node name="damage_box8" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box8" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 10126.4, 391.123 )
 scale = Vector2( 20.8094, 1.13577 )
 
-[node name="damage_box9" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box9" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 10638.9, 519.178 )
 scale = Vector2( 20.4421, 1.08309 )
 
-[node name="damage_box10" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box10" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 14583.8, 359.384 )
 scale = Vector2( 6.56, 1 )
 tp_to_spawn = false
 
-[node name="damage_box11" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box11" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 15304.5, 359.423 )
 scale = Vector2( 17.84, 1 )
 
-[node name="damage_box12" parent="damage_boxes" instance=ExtResource( 32 )]
+[node name="damage_box12" parent="fan_damage_boxes" instance=ExtResource( 32 )]
 position = Vector2( 16345.9, 359.109 )
 scale = Vector2( 32.3199, 1 )
 
@@ -2437,7 +2438,15 @@ position = Vector2( 17040, -8 )
 position = Vector2( 6632, 32 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 112, 189.418 )
+position = Vector2( 11552, 215.72 )
+z_index = 1
+
+[node name="P15_ones_zeros_trail" parent="player" instance=ExtResource( 38 )]
+visible = false
+position = Vector2( -5.66968, 16.582 )
+
+[node name="P14_glitch_trail" parent="player" instance=ExtResource( 37 )]
+position = Vector2( -6, 24.302 )
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/cloud_trigger" to="triggers/other_triggers/cloud_trigger" method="_on_cloud_trigger_body_entered"]

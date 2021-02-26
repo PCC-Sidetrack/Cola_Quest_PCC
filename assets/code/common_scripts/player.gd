@@ -33,19 +33,21 @@ export var speed:                float   = 8.0
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # Time between dashes
-var _dash_cooldown:     float = _DASH_REFRESH
+var _dash_cooldown:     float  = _DASH_REFRESH
 # How many dashes the player has left in air
-var _remaining_dashes:  int   = _MAX_DASHES
+var _remaining_dashes:  int    = _MAX_DASHES
 # How many jumps the player has left
-var _remaining_jumps:   int   = _MAX_JUMPS
-# Holds the inital zoom
-var _init_camera_zoom:  Vector2
+var _remaining_jumps:   int    = _MAX_JUMPS
 # Specifies the speed that the camera is zoomed to a new location
-var _camera_zoom_speed: int   = 5
+var _camera_zoom_speed: int    = 5
 # Holds the current zoom of the camera. Used for smooth zoom changes
 var _current_zoom
 # Indicates if the player is currently dead and respawning
-var _dead:              bool  = false
+var _dead:              bool   = false
+# Holds the inital zoom
+var _init_camera_zoom:  Vector2
+# Indicates the current sprite that is visible
+var _current_sprite:    String = "idle"
 
 
 #-----------------------------------------------------------------------------#
@@ -235,12 +237,16 @@ func _set_sprite(direction: float) -> void:
 
 # Change what the currently displaying sprite is
 func _switch_sprite(new_sprite: String) -> void:
-	var sprites: Array = $sprites.get_children()
-	for sprite in sprites:
-		sprite.visible = false
+	if new_sprite != _current_sprite:
+		var sprites: Array = $sprites.get_children()
+		
+		_current_sprite = new_sprite
+		
+		for sprite in sprites:
+			sprite.visible = false
 	
-	$sprites.get_node(new_sprite).visible = true
-	$AnimationPlayer.play(new_sprite)
+		$sprites.get_node(new_sprite).visible = true
+		$AnimationPlayer.play(new_sprite)
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -260,12 +266,14 @@ func _on_player_health_changed(change) -> void:
 		# Update the GUI, print out the damage taken, and make the player invunerable for a bit
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
 		set_invulnerability(invlunerability_time)
+		
+	
 	# If the player would be healed, then update the GUI
 	elif change > 0:
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
-		
-	if change < 0 && get_current_health():
-		flash_damaged()	
+
+	if change < 0 and !is_dead():
+		flash_damaged()
 
 # Triggered whenever the player dies
 func _on_player_death() -> void:
