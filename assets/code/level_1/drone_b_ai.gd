@@ -34,6 +34,7 @@ func _ready() -> void:
 	initialize_enemy(health, damage, movement_speed, acceleration)
 	
 	$AnimatedSprite.play("fly")
+	$AudioStreamPlayer2D.play()
 
 
 #-----------------------------------------------------------------------------#
