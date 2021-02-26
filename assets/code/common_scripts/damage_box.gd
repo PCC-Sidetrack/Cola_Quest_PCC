@@ -23,6 +23,11 @@ export var causes_knockback: bool  = true
 # Determines if the player is sent to the previous spawn point
 export var tp_to_spawn:      bool  = true
 
+# _ready method (called when the node and child nodes this script is connected to
+# are initialized and ready to be used)
+func _ready() -> void:
+	$AudioStreamPlayer2D.play()
+
 # Returns the knockback multiplier of the sword
 # Used in the knockback function called in _on_sword_body_entered to tell the player how
 # far to be knocked back.
