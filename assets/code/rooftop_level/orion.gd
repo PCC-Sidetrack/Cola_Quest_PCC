@@ -12,7 +12,7 @@ extends Entity
 #                           Constant Variables                                #
 #-----------------------------------------------------------------------------#
 # Holds a reference to the 3x5_projectile scene
-const SPEAR = preload("res://assets//sprite_scenes//level_1//spear.tscn")
+const SPEAR = preload("res://assets//sprite_scenes//rooftop_scenes//spear.tscn")
 
 
 #-----------------------------------------------------------------------------#
