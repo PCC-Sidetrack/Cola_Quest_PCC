@@ -22,6 +22,7 @@ export var start_moving_right: bool  = true
 export var health:			   int   = 1
 export var damage: 			   int   = 1
 export var accelertion: 	   float = 20.0
+export var knockback:          float = 0.8
 
 
 #-----------------------------------------------------------------------------#
@@ -40,10 +41,11 @@ func _ready() -> void:
 	
 	initialize_instructions    (instructions, true)
 	initialize_enemy           (health, damage, movement_speed, accelertion)
+	set_knockback_multiplier   (knockback)
 	set_sprite_facing_direction(Globals.DIRECTION.RIGHT)
 	set_auto_facing            (true)
 	
-	$AnimatedSprite.play("fly")
+	$AnimationPlayer.play("fly")
 
 
 #-----------------------------------------------------------------------------#

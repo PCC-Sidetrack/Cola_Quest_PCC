@@ -17,11 +17,15 @@ export var ai_enabled:      bool  = true
 export var movement_speed:  float = 1.5625
 # Seconds of movement before changing directions
 export var turnaround_time: float = 2
+# Acceleration applied to drone's movement
+export var acceleration:    float = 20.0
+# Knockback multiplier for drone
+export var knockback:       float = 0.8
 
+# Stores how much health the drone has
 export var health:       int   = 2
+# Amount of damage the drone deals
 export var damage:       int   = 1
-export var acceleration: float = 20.0
-
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
@@ -30,8 +34,9 @@ func _ready() -> void:
 		duration (Vector2.UP, turnaround_time),
 		end_point(global_position)
 	]
-	initialize_instructions(instructions, true)
-	initialize_enemy(health, damage, movement_speed, acceleration)
+	initialize_instructions (instructions, true)
+	initialize_enemy        (health, damage, movement_speed, acceleration)
+	set_knockback_multiplier(knockback)
 	
 	$AnimatedSprite.play("fly")
 	$AudioStreamPlayer2D.play()

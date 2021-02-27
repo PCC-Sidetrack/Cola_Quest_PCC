@@ -14,6 +14,7 @@ export var damage:       int   = 1
 export var speed:        float = 5.0
 export var acceleration: float = 50.0
 export var life_time:    float = 10.0
+export var knockback:    float = 0.6
 
 
 #-----------------------------------------------------------------------------#
@@ -21,7 +22,7 @@ export var life_time:    float = 10.0
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
-	set_knockback_multiplier(0.6)
+	set_knockback_multiplier(knockback)
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #

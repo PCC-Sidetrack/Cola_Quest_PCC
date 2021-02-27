@@ -18,16 +18,23 @@ const STUDY_CARD = preload("res://assets//sprite_scenes//rooftop_scenes//study_c
 #-----------------------------------------------------------------------------#
 # Boolean indicating if the sprite's ai is active
 export var ai_enabled:      bool  = true
+
 # Movement speed
 export var movement_speed:  float = 0.1875
 # Seconds before drone shoots a 3x5 card
 export var shoot_cooldown:  float = 3.0
 # Seconds of movement before changing directions
 export var turnaround_time: float = 1
+# Acceleration applied to drone's movement
+export var acceleration:    float = 20.0
+# Knockback multiplier for drone
+export var knockback:       float = 0.8
 
+# Stores how much health the drone has
 export var health:       int   = 2
+# Amount of damage the drone deals
 export var damage:       int   = 1
-export var acceleration: float = 20.0
+
 
 #-----------------------------------------------------------------------------#
 #                            Private Variables                                #
@@ -52,8 +59,9 @@ func _ready() -> void:
 		end_point(global_position)
 	]
 	
-	initialize_instructions    (instructions, true)
-	initialize_enemy           (health, damage, movement_speed, acceleration)
+	initialize_instructions (instructions, true)
+	initialize_enemy        (health, damage, movement_speed, acceleration)
+	set_knockback_multiplier(knockback)
 	
 	$AnimatedSprite.play("fly")
 	$AudioStreamPlayer2D.play()

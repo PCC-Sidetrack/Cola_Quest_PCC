@@ -88,7 +88,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -96,11 +96,11 @@ tracks/6/enabled = true
 tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"update": 1,
+"values": [ Vector2( -8, 12 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -108,11 +108,11 @@ tracks/7/enabled = true
 tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"update": 1,
+"values": [ 115.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -120,11 +120,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"update": 1,
+"values": [ Vector2( -8.55, 14.3 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -132,76 +132,16 @@ tracks/9/enabled = true
 tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"update": 1,
+"values": [ 115.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Area2D/CollisionShape2D:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/Sprite:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( -8, 12 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/Sprite:rotation_degrees")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 115.0 ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:position")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( -8.55, 14.3 ) ]
-}
-tracks/14/type = "value"
-tracks/14/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 115.0 ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -272,55 +212,55 @@ tracks/4/keys = {
 "values": [ 0.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Area2D:position")
+tracks/5/path = NodePath("sprites/draw_sword:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:rotation_degrees")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D/CollisionShape2D:shape:extents")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("sprites/draw_sword:frame")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("sword/Sprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -8, 12 ), Vector2( -9.76501, 10.8228 ), Vector2( 30, -18 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 115.0, 129.805, -36.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("sword/CollisionShape2D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 115.0, 129.685, 144.117 ]
+}
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -329,51 +269,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -8, 12 ), Vector2( -9.76501, 10.8228 ), Vector2( 30, -18 ) ]
+"values": [ Vector2( -8.55, 14.3 ), Vector2( -10.9125, 12.9678 ), Vector2( 31.6419, -19.7862 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 115.0, 129.805, -36.0 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 115.0, 129.685, 144.117 ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -8.55, 14.3 ), Vector2( -10.9125, 12.9678 ), Vector2( 31.6419, -19.7862 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -458,19 +362,19 @@ tracks/5/keys = {
 "values": [ Vector2( 14.8607, 38.2931 ), Vector2( 14.8607, 38.2931 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ), Vector2( 6.68082, 0.2157 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -478,11 +382,11 @@ tracks/7/enabled = true
 tracks/7/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0 ]
+"update": 1,
+"values": [ Vector2( -8, 12 ), Vector2( -8.56123, 13.6837 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -490,11 +394,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ), Vector2( 14.8607, 38.2931 ) ]
+"update": 1,
+"values": [ 115.0, 117.368 ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/CollisionShape2D:shape:extents")
+tracks/9/path = NodePath("sword/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -503,51 +407,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 6.68082, 0.2157 ), Vector2( 6.68082, 0.2157 ) ]
+"values": [ Vector2( -8.55, 14.3 ), Vector2( -9.14933, 15.9481 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:position")
+tracks/10/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( -8, 12 ), Vector2( -8.56123, 13.6837 ) ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/Sprite:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 115.0, 117.368 ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( -8.55, 14.3 ), Vector2( -9.14933, 15.9481 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -632,7 +500,7 @@ tracks/5/keys = {
 "values": [ Vector2( 14.8607, 38.2931 ), Vector2( 14.8607, 38.2931 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -640,112 +508,52 @@ tracks/6/enabled = true
 tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ), Vector2( 14.8607, 38.2931 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Area2D/CollisionShape2D:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("Area2D/CollisionShape2D:rotation_degrees")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 6.68082, 0.2157 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/Sprite:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( 30, -18 ), Vector2( 30.1587, -16.3413 ) ]
 }
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/Sprite:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
+tracks/8/type = "value"
+tracks/8/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ -36.0503, -33.3651 ]
 }
-tracks/14/type = "value"
-tracks/14/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
+tracks/9/type = "value"
+tracks/9/path = NodePath("sword/CollisionShape2D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 143.849, 146.5 ]
 }
-tracks/15/type = "value"
-tracks/15/path = NodePath("sword/CollisionShape2D:position")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
+tracks/10/type = "value"
+tracks/10/path = NodePath("sword/CollisionShape2D:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -828,43 +636,43 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, -7.6562 ) ]
+"values": [ Vector2( -8, 12 ), Vector2( -10.4945, 15.3854 ), Vector2( -9.95998, 16.0981 ), Vector2( -6.93092, 11.2873 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0.0 ]
+"values": [ 115.0, 126.823, 129.367, 112.641 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -8.55, 14.3 ), Vector2( -11.5198, 17.5527 ), Vector2( -11.0477, 18.2447 ), Vector2( -7.34506, 13.666 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -873,51 +681,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -8, 12 ), Vector2( -10.4945, 15.3854 ), Vector2( -9.95998, 16.0981 ), Vector2( -6.93092, 11.2873 ) ]
+"values": [ 115.0, 126.89, 129.294, 112.48 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 115.0, 126.823, 129.367, 112.641 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -8.55, 14.3 ), Vector2( -11.5198, 17.5527 ), Vector2( -11.0477, 18.2447 ), Vector2( -7.34506, 13.666 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 115.0, 126.89, 129.294, 112.48 ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -976,19 +748,19 @@ tracks/3/keys = {
 "values": [ Vector2( 14.8607, 38.2931 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Area2D:position")
+tracks/4/path = NodePath("sprites/jump:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"values": [ Vector2( 0, -15.6562 ), Vector2( 0, -15.6562 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Area2D:rotation_degrees")
+tracks/5/path = NodePath("sprites/jump:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1000,43 +772,43 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("sprites/jump:position")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -15.6562 ), Vector2( 0, -15.6562 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 30, -18 ), Vector2( 21.6768, 13.598 ), Vector2( 20.1935, 14.6574 ), Vector2( 20.4054, 15.2931 ), Vector2( 28.9524, -21.5238 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("sprites/jump:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ -36.0503, 55.7383, 63.0864, -44.3225 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 31.5461, -19.7706 ), Vector2( 23.4198, 15.2645 ), Vector2( 21.6998, 16.5446 ), Vector2( 21.912, 17.181 ), Vector2( 30.2671, -23.569 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -1045,51 +817,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 30, -18 ), Vector2( 21.6768, 13.598 ), Vector2( 20.1935, 14.6574 ), Vector2( 20.4054, 15.2931 ), Vector2( 28.9524, -21.5238 ) ]
+"values": [ 143.849, 235.789, 243.152, 243.115, 135.532 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ -36.0503, 55.7383, 63.0864, -44.3225 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 31.5461, -19.7706 ), Vector2( 23.4198, 15.2645 ), Vector2( 21.6998, 16.5446 ), Vector2( 21.912, 17.181 ), Vector2( 30.2671, -23.569 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 143.849, 235.789, 243.152, 243.115, 135.532 ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -1172,43 +908,43 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 30, -18 ), Vector2( -9.765, 10.823 ), Vector2( -8, 12 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ -36.0, 129.8, 115.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 144.117, 129.789, 114.985 ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -1217,51 +953,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 30, -18 ), Vector2( -9.765, 10.823 ), Vector2( -8, 12 ) ]
+"values": [ Vector2( 31.6419, -19.7862 ), Vector2( -10.8816, 12.969 ), Vector2( -8.54123, 14.3609 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ -36.0, 129.8, 115.0 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 144.117, 129.789, 114.985 ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 31.6419, -19.7862 ), Vector2( -10.8816, 12.969 ), Vector2( -8.54123, 14.3609 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0, 0.1, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
@@ -1344,31 +1044,31 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, -7.6562 ) ]
+"values": [ Vector2( 30, -18 ), Vector2( 27.9364, -19.2699 ), Vector2( 30.1587, -18.635 ), Vector2( 36.0321, -3.87213 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0.0 ]
+"values": [ -36.0503, -44.0344, -40.0753, -1.88362 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -1376,11 +1076,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -1389,10 +1089,10 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 30, -18 ), Vector2( 27.9364, -19.2699 ), Vector2( 30.1587, -18.635 ), Vector2( 36.0321, -3.87213 ) ]
+"values": [ Vector2( 31.6419, -19.7862 ), Vector2( 29.2663, -21.2709 ), Vector2( 31.7225, -20.5602 ), Vector2( 38.3627, -4.45906 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -1401,51 +1101,15 @@ tracks/10/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ -36.0503, -44.0344, -40.0753, -1.88362 ]
+"values": [ 144.117, 135.956, 140.045, 178.064 ]
 }
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:shape:extents")
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 6.68082, 0.2157 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 31.6419, -19.7862 ), Vector2( 29.2663, -21.2709 ), Vector2( 31.7225, -20.5602 ), Vector2( 38.3627, -4.45906 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 144.117, 135.956, 140.045, 178.064 ]
-}
-tracks/14/type = "method"
-tracks/14/path = NodePath(".")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
 "times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -1494,7 +1158,7 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Area2D:position")
+tracks/3/path = NodePath("CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1506,7 +1170,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -7.6562 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Area2D:rotation_degrees")
+tracks/4/path = NodePath("CollisionShape2D:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -1518,7 +1182,7 @@ tracks/4/keys = {
 "values": [ 0.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:position")
+tracks/5/path = NodePath("CollisionShape2D:shape:extents")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1527,46 +1191,46 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"values": [ Vector2( 14.8607, 38.2931 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -8, 12 ), Vector2( -11.4949, 11.4333 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("CollisionShape2D:shape:extents")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 115.0, 131.52 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -8.55, 14.3 ), Vector2( -12.65, 13.6 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -1575,51 +1239,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( -8, 12 ), Vector2( -11.4949, 11.4333 ) ]
+"values": [ 115.0, 131.283 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 115.0, 131.52 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( -8.55, 14.3 ), Vector2( -12.65, 13.6 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 115.0, 131.283 ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -1632,7 +1260,7 @@ length = 0.4
 loop = true
 step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D:position")
+tracks/0/path = NodePath("CollisionShape2D:shape:extents")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1641,10 +1269,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"values": [ Vector2( 14.8607, 38.2931 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Area2D:rotation_degrees")
+tracks/1/path = NodePath("sprites/walk:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1653,10 +1281,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ Vector2( 0, -15.6562 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/2/path = NodePath("sprites/walk:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1665,22 +1293,22 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionShape2D:shape:extents")
+tracks/3/path = NodePath("sprites/walk:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("sprites/walk:position")
+tracks/4/path = NodePath("CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -1689,10 +1317,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -15.6562 ) ]
+"values": [ Vector2( 0, -7.6562 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("sprites/walk:rotation_degrees")
+tracks/5/path = NodePath("CollisionShape2D:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1704,7 +1332,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("sprites/walk:frame")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -1713,22 +1341,22 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ Vector2( -8, 12 ), Vector2( -7.84126, 12.9524 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("CollisionShape2D:position")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 115.0, 119.28 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/8/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -1736,11 +1364,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -1749,51 +1377,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( -8, 12 ), Vector2( -7.84126, 12.9524 ) ]
+"values": [ Vector2( -8.51875, 14.3469 ), Vector2( -8.56702, 15.2303 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 115.0, 119.28 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 6.68082, 0.2157 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( -8.51875, 14.3469 ), Vector2( -8.56702, 15.2303 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -1878,31 +1470,31 @@ tracks/5/keys = {
 "values": [ Vector2( 14.8607, 38.2931 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D:position")
+tracks/6/path = NodePath("sword/Sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -7.6562 ) ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 30, -18 ), Vector2( 17.9864, -28.6787 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Area2D:rotation_degrees")
+tracks/7/path = NodePath("sword/Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -36.0503, -81.805 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Area2D/CollisionShape2D:shape:extents")
+tracks/8/path = NodePath("sword/CollisionShape2D:shape:extents")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -1910,11 +1502,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 14.8607, 38.2931 ) ]
+"update": 1,
+"values": [ Vector2( 6.68082, 0.2157 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("sword/Sprite:position")
+tracks/9/path = NodePath("sword/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -1923,51 +1515,15 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 30, -18 ), Vector2( 17.9864, -28.6787 ) ]
+"values": [ Vector2( 31.5461, -19.7706 ), Vector2( 17.8129, -31.0757 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("sword/Sprite:rotation_degrees")
+tracks/10/path = NodePath("sword/CollisionShape2D:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ -36.0503, -81.805 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("sword/CollisionShape2D:shape:extents")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 6.68082, 0.2157 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("sword/CollisionShape2D:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 31.5461, -19.7706 ), Vector2( 17.8129, -31.0757 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("sword/CollisionShape2D:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -2061,16 +1617,6 @@ shape = SubResource( 12 )
 visible = false
 position = Vector2( 0, -7.6562 )
 shape = SubResource( 13 )
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, -7.6562 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 13 )
 [connection signal="ai_paused" from="." to="." method="_on_zorro_boss_ai_paused"]
 [connection signal="ai_resumed" from="." to="." method="_on_zorro_boss_ai_resumed"]
 [connection signal="attacked" from="." to="." method="_on_zorro_boss_attacked"]
@@ -2090,4 +1636,3 @@ shape = SubResource( 13 )
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="turned_around" from="." to="." method="_on_zorro_boss_turned_around"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_sword_body_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
