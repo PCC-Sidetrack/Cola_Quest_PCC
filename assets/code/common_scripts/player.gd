@@ -22,8 +22,6 @@ export var damage:               int     = 1
 export var debug:                bool    = false
 export var max_health:           int     = 5
 export var invlunerability_time: float   = 1.5
-#export var jump_height:         float   = 4.5
-#export var jump_speed:          float   = 0.05
 export var jump_speed:           float   = 850.0
 export var knockback_multiplier: float   = 3.0
 export var speed:                float   = 8.0
@@ -48,6 +46,9 @@ var _dead:              bool   = false
 var _init_camera_zoom:  Vector2
 # Indicates the current sprite that is visible
 var _current_sprite:    String = "idle"
+# Allows code to use random numbers
+var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
+
 
 
 #-----------------------------------------------------------------------------#
@@ -181,9 +182,15 @@ func _get_input() -> Vector2:
 		
 		# If the player can jump, then jump
 		if (Input.is_action_just_pressed(CONTROLS.JUMP) and _remaining_jumps > 0):
+			
 			if get_time_in_air() < _COYOTE_TIME:
+				_rng.randomize()
+				$sounds/SD5a_player_jump.pitch_scale = _rng.randf_range(0.9, 1.1)
+				$sounds/SD5a_player_jump.play()
 				jump(1.0)
 			else:
+				$sounds/SD5a_player_jump.pitch_scale = _rng.randf_range(1.2, 1.3)
+				$sounds/SD5a_player_jump.play()
 				jump(0.75)
 			_remaining_jumps -= 1
 		
@@ -247,6 +254,13 @@ func _switch_sprite(new_sprite: String) -> void:
 	
 		$sprites.get_node(new_sprite).visible = true
 		$AnimationPlayer.play(new_sprite)
+		
+# Change the pitch of the footsteps
+func _change_footstep_pitch() -> void:
+	if $sounds/SD4_footsteps.get_pitch_scale() <= 1.1:
+		$sounds/SD4_footsteps.set_pitch_scale(1.1)
+	else:
+		$sounds/SD4_footsteps.set_pitch_scale(0.8)
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -262,18 +276,22 @@ func _on_player_collision(body) -> void:
 func _on_player_health_changed(change) -> void:
 	# If the player would be damaged, isn't invunerable, and isn't already dead,
 	# then process the damage
-	if change < 0 and !get_invulnerability() and !is_dead():
+	if change < 0 and !is_dead():
 		# Update the GUI, print out the damage taken, and make the player invunerable for a bit
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
+		
+		# Play the player_hurt sound with a randomized pitch
+		_rng.randomize()
+		$sounds/SD19_player_hurt.pitch_scale = _rng.randf_range(0.5, 1.5)
+		$sounds/SD19_player_hurt.play()
+		
 		set_invulnerability(invlunerability_time)
+		flash_damaged()
 		
 	
 	# If the player would be healed, then update the GUI
 	elif change > 0:
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
-
-	if change < 0 and !is_dead():
-		flash_damaged()
 
 # Triggered whenever the player dies
 func _on_player_death() -> void:
@@ -294,9 +312,7 @@ func _on_game_UI_respawn_player() -> void:
 	global_position = get_spawn_point()
 	set_invulnerability(invlunerability_time)
 	set_is_dead(false)
-	print("\nPlayer Respawning...")
 	set_modulate(Color(1, 1, 1, 1))
-	print("\nColor Modulated")
 	set_current_health(max_health)
 	take_damage(-max_health)
 	Globals.game_locked = false

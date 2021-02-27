@@ -234,6 +234,9 @@ func deal_damage(other_entity: Entity) -> void:
 		else:
 			damage_applied = other_entity_health
 			other_entity._set_health(0)
+		
+		other_entity.emit_signal("health_changed", -damage_applied)	
+		
 	# If the damage is negative, then heal the other entity
 	elif _damage.amount < 0:
 		if other_entity_health - _damage.amount <= other_entity.get_max_health():
@@ -242,10 +245,7 @@ func deal_damage(other_entity: Entity) -> void:
 		else:
 			damage_applied = other_entity_health - other_entity.get_max_health()
 			other_entity._set_health(other_entity.get_max_health())
-		
-		
-	# Emit the health changed
-	if damage_applied != 0:
+			
 		other_entity.emit_signal("health_changed", -damage_applied)
 	
 	# Check if the entity has died. If it has, call on_death()
@@ -253,7 +253,7 @@ func deal_damage(other_entity: Entity) -> void:
 		other_entity.emit_signal("death")
 
 # Take damage from another entity (or heal if the damage is negative)
-func take_damage(damage: int) -> void:	
+func take_damage(damage: int) -> void:
 	# Only take damage if damage is not negative and player is not invulnerable
 	if damage > 0 and !get_invulnerability():
 		if _health.current - damage >= 0:
@@ -262,6 +262,8 @@ func take_damage(damage: int) -> void:
 			damage = _health.current
 			_health.current = 0
 			
+		emit_signal("health_changed", -damage)
+			
 	# If damage is negative, then heal the player
 	elif damage < 0:
 		if _health.current - damage <= _health.maximum:
@@ -269,9 +271,7 @@ func take_damage(damage: int) -> void:
 		else:
 			damage = _health.current - _health.maximum
 			_health.current = _health.maximum
-		
-	# If health was changed, emit a health changed trigger
-	if damage != 0:
+			
 		emit_signal("health_changed", -damage)
 	
 	# If entity is dead, emit a death trigger
@@ -329,7 +329,7 @@ func initialize_enemy(health: int, damage: int, speed: float, acceleration: floa
 	add_to_group       (Globals.GROUP.ENEMY)
 	add_to_group       (Globals.GROUP.ENTITY)
 	_set_layer_bits    ([Globals.LAYER.ENEMY])
-	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD])
+	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD, Globals.LAYER.COLLECTABLE])
 	set_acceleration   (acceleration)
 	set_damage         (damage)
 	#set_jump           (jump_height, jump_duration)
@@ -393,7 +393,7 @@ func initialize_projectile(damage: int, speed: float, initiator: String, directi
 func jump(height: float) -> void:
 	if height > 1.0 or height <= 0.0:
 		ProgramAlerts.add_warning("jump height should normally be between 1.0 and greater than 0.0")
-	
+
 	_movement.current_velocity.y = _movement.initial_jump_velocity * -height
 
 # Cause the entity that calls this function to knockback based off of the entity's speed and the referenced entity's damage
@@ -409,15 +409,11 @@ func knockback(other_entity: Object, direction: Vector2 = Vector2(0.0, 0.0)) -> 
 # Returns whether the entity has moved
 func move() -> void:
 	var current_instruction: Dictionary = _metadata.movement.instructions[_metadata.movement.current_instruction]
-	# Commented out below variable "did_move" as it no logner serves a purpose
-	#var did_move:            bool       = false
 	
 	if _metadata.auto_facing:
 		_auto_facing()
 	
 	if not current_instruction.is_completed:
-		#did_move = true
-		
 		match current_instruction.name:
 			INSTRUCTIONS.MOVE_DISTANCE:
 				_move_distance(current_instruction)
@@ -440,8 +436,6 @@ func move() -> void:
 	
 	if current_instruction.is_completed:
 		_next_instruction()
-	
-	#return did_move
 
 # Move based on a dynamically changing horizontal direction
 # Provides the finest control of entities
@@ -460,7 +454,6 @@ func move_dynamically(direction: Vector2, custom_acceleration: float = _movement
 	if _metadata.is_movement_smooth:
 		if get_obeys_gravity():
 			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, custom_acceleration)
-			#vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, _movement.gravity * get_physics_process_delta_time())
 			vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, Globals.ORIENTATION.MAX_FALL_SPEED * get_physics_process_delta_time())
 		else:
 			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, custom_acceleration)
@@ -470,7 +463,7 @@ func move_dynamically(direction: Vector2, custom_acceleration: float = _movement
 			ProgramAlerts.add_error(name + " cannot obey gravity if it does not move smoothly")
 		
 		horizontal = horizontal * _movement.speed
-		vertical   = vertical * _movement.speed
+		vertical   = vertical   * _movement.speed
 	
 	if _metadata.is_looking:
 		rotation = Vector2(horizontal, vertical).angle()
@@ -593,33 +586,33 @@ func _set_health         (new_health: int) -> void:
 # Set the layer bit flags for the entity
 func _set_layer_bits(layers: Array) -> void:
 	# Does the entity have an Area2D collision shape
-	if not has_node("Area2D/CollisionShape2D"):
-		push_error("Cannot modify layers.\nEntity does not contain an Area2D/CollisionShape2D.")
-		get_tree().quit(-1)
+	#if not has_node("Area2D/CollisionShape2D"):
+		#push_error("Cannot modify layers.\nEntity does not contain an Area2D/CollisionShape2D.")
+		#get_tree().quit(-1)
 	
 	for current_layer in range(32):
 		set_collision_layer_bit(current_layer, false)
-		$Area2D.set_collision_layer_bit(current_layer, false)
+		#$Area2D.set_collision_layer_bit(current_layer, false)
 		for given_layer in range(layers.size()):
 			if current_layer == layers[given_layer]:
 				set_collision_layer_bit(current_layer, true)
-				$Area2D.set_collision_layer_bit(current_layer, true)
+				#$Area2D.set_collision_layer_bit(current_layer, true)
 				break
 
 # Set the mask bit flags for the entity
 func _set_mask_bits(masks: Array) -> void:
 	# Does the entity have an Area2D collision shape
-	if not has_node("Area2D/CollisionShape2D"):
-		push_error("Cannot modify masks.\nEntity does not contain an Area2D/CollisionShape2D.")
-		get_tree().quit(-1)
+	#if not has_node("Area2D/CollisionShape2D"):
+		#push_error("Cannot modify masks.\nEntity does not contain an Area2D/CollisionShape2D.")
+		#get_tree().quit(-1)
 	
 	for current_mask in range(32):
 		set_collision_mask_bit(current_mask, false)
-		$Area2D.set_collision_mask_bit(current_mask, false)
+		#$Area2D.set_collision_mask_bit(current_mask, false)
 		for given_mask in range(masks.size()):
 			if current_mask == masks[given_mask]:
 				set_collision_mask_bit(current_mask, true)
-				$Area2D.set_collision_mask_bit(current_mask, true)
+				#$Area2D.set_collision_mask_bit(current_mask, true)
 				break
 
 # Create a line in the direction of current velocity
@@ -672,12 +665,9 @@ func _to_movement_set(instruction: Array) -> Dictionary:
 	return new_movement_set
 
 # Decrease the invulnerability duration
-# Set to -1.0 for permanent invulnerability
 func _update_invulnerability(delta: float) -> void:
 	if _health.invulnerability_duration > 0.0:
 		_health.invulnerability_duration -= delta
-	elif _health.invulnerability_duration != -1.0:
-		_health.invulnerability_duration = 0.0
 
 # Update the life time of an entity, then deletes it when it reaches 0
 # Set to -1.0 for permanent life time
@@ -772,11 +762,12 @@ func _knockback_old(other_entity: KinematicBody2D) -> void:
 
 # Flash a sprite when it takes damage
 func flash_damaged():
-	print("\nPlaying damage flash")
 	var t = Timer.new()
+	
 	t.set_wait_time(.03)
 	t.set_one_shot(true)
 	self.add_child(t)
+	
 	while get_invulnerability():
 		t.start()
 		yield(t, "timeout")
@@ -784,16 +775,18 @@ func flash_damaged():
 		t.start()
 		yield(t, "timeout")
 		set_modulate(Color(1, 1, 1, .5))
+		
 	set_modulate(Color(1, 1, 1, 1))
 
 # Cause a sprite to flash red then fade out when it dies
 func death_anim():
-	print("\nPlaying Death Anim")
 	var j = 1.0
 	var t = Timer.new()
+	
 	t.set_wait_time(.03)
 	t.set_one_shot(true)
 	self.add_child(t)
+	
 	while j > 0:
 		t.start()
 		yield(t, "timeout")

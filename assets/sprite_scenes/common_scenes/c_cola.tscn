@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/code/common_scripts/cola_collectible.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/C2_cola_collectible/C2_cola_collectible.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/object_sounds/SD20_coke_collect.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -81,4 +82,7 @@ shape = SubResource( 11 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 12 )
+
+[node name="SD20_coke_collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

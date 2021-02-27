@@ -38,7 +38,9 @@ func get_knockback_multiplier() -> float:
 # damage.
 func _on_damage_box_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
-		if deals_damage:     body.take_damage(damage)
+		if deals_damage:
+			body.take_damage(damage)
+		
 		if causes_knockback: body.knockback  (self, Vector2.UP)
 		if tp_to_spawn:
 			# Wait to respawn for a moment
@@ -48,4 +50,4 @@ func _on_damage_box_body_entered(body):
 			yield(get_tree().create_timer(0.3), "timeout")
 			Globals.game_locked = false
 		
-		body.set_invulnerability(body.invlunerability_time)
+		

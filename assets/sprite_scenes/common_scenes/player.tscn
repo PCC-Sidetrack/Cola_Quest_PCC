@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack.png" type="Texture" id=5]
 [ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sounds/object_sounds/SD4_footsteps.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/object_sounds/SD19_player_hurt.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/object_sounds/SD5a_jump_player.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -85,7 +87,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 tracks/1/type = "audio"
-tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/path = NodePath("sounds/SD4_footsteps")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -96,14 +98,25 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource( 7 )
 } ],
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0.15 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_change_footstep_pitch"
+} ]
 }
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10, 29 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 12, 30 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.7287, 30.4121 )
@@ -126,15 +139,6 @@ anims/walk = SubResource( 4 )
 visible = false
 position = Vector2( -6, 2 )
 shape = SubResource( 5 )
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-collision_mask = 6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-modulate = Color( 0.203922, 0.423529, 1, 1 )
-position = Vector2( -6, 2 )
-shape = SubResource( 6 )
 
 [node name="melee" type="Area2D" parent="."]
 visible = false
@@ -188,8 +192,18 @@ margin_right = 34.3303
 visible = false
 occluder = SubResource( 8 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="sounds" type="Node2D" parent="."]
+
+[node name="SD4_footsteps" type="AudioStreamPlayer" parent="sounds"]
 stream = ExtResource( 7 )
+volume_db = -5.0
+
+[node name="SD19_player_hurt" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 8 )
+
+[node name="SD5a_player_jump" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 9 )
+volume_db = -5.0
 [connection signal="collision" from="." to="." method="_on_player_collision"]
 [connection signal="death" from="." to="." method="_on_player_death"]
 [connection signal="health_changed" from="." to="." method="_on_player_health_changed"]
