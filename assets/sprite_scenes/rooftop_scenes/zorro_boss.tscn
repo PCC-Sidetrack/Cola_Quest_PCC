@@ -1615,7 +1615,7 @@ shape = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, -7.6562 )
+position = Vector2( 0, -6.45756 )
 shape = SubResource( 13 )
 [connection signal="ai_paused" from="." to="." method="_on_zorro_boss_ai_paused"]
 [connection signal="ai_resumed" from="." to="." method="_on_zorro_boss_ai_resumed"]
@@ -1623,16 +1623,11 @@ shape = SubResource( 13 )
 [connection signal="collision" from="." to="." method="_on_zorro_boss_collision"]
 [connection signal="dashed" from="." to="." method="_on_zorro_boss_dashed"]
 [connection signal="death" from="." to="." method="_on_zorro_boss_death"]
-[connection signal="fight_ended" from="." to="." method="_on_zorro_boss_fight_ended"]
 [connection signal="flipped" from="." to="." method="_on_zorro_boss_flipped"]
 [connection signal="health_changed" from="." to="." method="_on_zorro_boss_health_changed"]
 [connection signal="init" from="." to="." method="_on_zorro_boss_init"]
 [connection signal="stage_changed" from="." to="." method="_on_zorro_boss_stage_changed"]
-[connection signal="stage_four_ran" from="." to="." method="_on_zorro_boss_stage_four_ran"]
-[connection signal="stage_none_ran" from="." to="." method="_on_zorro_boss_stage_none_ran"]
-[connection signal="stage_one_ran" from="." to="." method="_on_zorro_boss_stage_one_ran"]
-[connection signal="stage_three_ran" from="." to="." method="_on_zorro_boss_stage_three_ran"]
-[connection signal="stage_two_ran" from="." to="." method="_on_zorro_boss_stage_two_ran"]
+[connection signal="stage_ran" from="." to="." method="_on_zorro_boss_stage_ran"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="turned_around" from="." to="." method="_on_zorro_boss_turned_around"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_sword_body_entered"]
