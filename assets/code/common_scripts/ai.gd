@@ -69,22 +69,12 @@ signal init()
 signal flipped(h_direction_facing)
 # Signal is sent whenever a change in the stage of the ai is made through set_current_ai_stage()
 signal stage_changed(previous_stage, new_stage)
-# Signal emitted when no ai stage is currently set (called by _physics_process)
-signal stage_none_ran()
-# Signal emitted when a call to the stage one ai is made by _physics_process
-signal stage_one_ran()
-# Signal emitted when a call to the stage two ai is made by _physics_process
-signal stage_two_ran()
-# Signal emitted when a call to the stage three ai is made by _physics_process
-signal stage_three_ran()
-# Signal emitted when a call to the stage four ai is made by _physics_process
-signal stage_four_ran()
-# Signal emitted when the fight is ended ai is made by _physics_process
-signal fight_ended()
+# Signal is sent whenever any ai stage is run
+signal stage_ran(stage_number)
 # Signal emitted whenever the attack() method is called
 signal attacked()
 # Signal emitted whenever the turn_around() method is called
-signal turned_around()
+signal turned_around(h_new_direction)
 # Signal emitted whenever a dash() is performed
 signal dashed(multiplier)
 # Signal emitted whenever the ai was just paused. Pausing the ai doesn't stop all
@@ -130,14 +120,25 @@ const STATE: Dictionary = {
 	MOVING1    = 0,
 	MOVING2    = 1,
 	MOVING3    = 2,
-	JUMPING    = 3,
-	ATTACKING1 = 4,
-	ATTACKING2 = 5,
-	ATTACKING3 = 6,
-	WAITING    = 7,
-	CUSTOM1    = 8,
-	CUSTOM2    = 9,
-	CUSTOM3    = 10
+	MOVING4    = 3,
+	MOVING5    = 4,
+	MOVING6    = 5,
+	JUMPING    = 6,
+	ATTACKING1 = 7,
+	ATTACKING2 = 8,
+	ATTACKING3 = 9,
+	ATTACKING4 = 10,
+	ATTACKING5 = 11,
+	ATTACKING6 = 12,
+	WAITING1   = 13,
+	WAITING2   = 14,
+	WAITING3   = 15,
+	CUSTOM1    = 16,
+	CUSTOM2    = 17,
+	CUSTOM3    = 18,
+	CUSTOM4    = 19,
+	CUSTOM5    = 20,
+	CUSTOM6    = 21
 }
 
 #-----------------------------------------------------------------------------#
@@ -157,13 +158,9 @@ var _current_ai_state: int = STATE.NONE
 # Floats
 #=============================
 
-# Indicates the cooldown for attacking (in seconds)
-var _attack_cooldown:       float = 1.0
 # Indicates the cooldown for dashing (in seconds)
 # Should be same as or less than attack cooldown if used in an attack action
-var _dash_cooldown:         float = _attack_cooldown
-# Tracks the cooldown for attacking
-var _attack_cooldown_timer: float = 0.0
+var _dash_cooldown:         float = 1.0
 # Tracks the cooldown for dashing
 var _dash_cooldown_timer:   float = 0.0
 # Multiplier applied to speed for dashing
@@ -214,8 +211,6 @@ func _ready() -> void:
 # Runs every physics engine update
 func _physics_process(delta) -> void:
 	# Update timers that rely on delta
-	if _attack_cooldown_timer < _attack_cooldown:
-		_attack_cooldown_timer += delta
 	if _dash_cooldown_timer < _dash_cooldown:
 		_dash_cooldown_timer += delta
 		
@@ -233,19 +228,20 @@ func _physics_process(delta) -> void:
 		_movement_enabled = false
 		
 		# Perform the tasks in the current ai stage
-		match _current_ai_stage:
-			STAGE.ONE:
-				emit_signal("stage_one_ran")
-			STAGE.TWO:
-				emit_signal("stage_two_ran")
-			STAGE.THREE:
-				emit_signal("stage_three_ran")
-			STAGE.FOUR:
-				emit_signal("stage_four_ran")
-			STAGE.FINISHED:
-				emit_signal("fight_ended")
-			_:
-				emit_signal("stage_none_ran")
+		if !_ai_paused:
+			match _current_ai_stage:
+				STAGE.ONE:
+					emit_signal("stage_ran", STAGE.ONE)
+				STAGE.TWO:
+					emit_signal("stage_ran", STAGE.TWO)
+				STAGE.THREE:
+					emit_signal("stage_ran", STAGE.THREE)
+				STAGE.FOUR:
+					emit_signal("stage_ran", STAGE.FOUR)
+				STAGE.FINISHED:
+					emit_signal("stage_ran", STAGE.FIVE)
+				_:
+					emit_signal("stage_ran", STAGE.NONE)
 
 	# Update the boss movement, but update it towards no movement if movement isn't enabled
 	# Note: this is done regardless of whether or not an uninteruptable action is occuring
@@ -265,30 +261,26 @@ func _physics_process(delta) -> void:
 #=============================
 # Attack action
 func attack(uninterruptable: bool = true) -> void:
-	# Before executing any atacking code, check that the attack cooldown is
-	# not in progress
-	if _attack_cooldown_timer >= _attack_cooldown:		
-		# Let the ai know that an uninterruptable action is occuring
-		if uninterruptable:
-			_uninterrupted_action = true
-		
-		#=============================	
-		# Attack Code
-		#=============================
-		
-		# Emit a signal to allow custom code to occur before the action is finished
-		emit_signal("attacked")
-		
-		#=============================
-		# End of Attack Code
-		#=============================
-		
-		# Let the ai know that the uninterruptable action is complete
-		_uninterrupted_action = false
-		
-		# Reset the attack cooldown timer
-		_attack_cooldown_timer = 0.0
+	# Let the ai know that an uninterruptable action is occuring
+	if uninterruptable:
+		_uninterrupted_action = true
 	
+	#=============================	
+	# Attack Code
+	#=============================
+	
+	# Emit a signal to allow custom code to occur before the action is finished
+	emit_signal("attacked")
+	
+	# NOTE: emit_signal does not wait until code connected to the signal is finished
+	#       before moving on.
+	#=============================
+	# End of Attack Code
+	#=============================
+	
+	# Let the ai know that the uninterruptable action is complete
+	_uninterrupted_action = false
+
 # Sets the direction facing to the opposite of it's current direction
 func turn_around() -> void:
 	_current_direction.x *= -1
@@ -346,8 +338,7 @@ func resume_ai() -> void:
 # Initializes the boss AI as an entity
 # Must be called in inheriting class's _ready()
 #=============================
-func initialize(max_health: int, damage: int, speed: float, acceleration: float, jump_speed: float, attack_cooldown: float, dash_cooldown: float, obeys_gravity: bool, smooth_movement: bool, auto_facing: bool):
-	self._attack_cooldown = attack_cooldown
+func initialize(max_health: int, damage: int, speed: float, acceleration: float, jump_speed: float, dash_cooldown: float, obeys_gravity: bool, smooth_movement: bool, auto_facing: bool):
 	self._dash_cooldown   = dash_cooldown
 	
 	initialize_enemy(max_health, damage, speed, acceleration, jump_speed, obeys_gravity, smooth_movement)
@@ -364,12 +355,12 @@ func initialize(max_health: int, damage: int, speed: float, acceleration: float,
 func get_current_ai_stage()   -> int:     return _current_ai_stage
 # Returns the current state of the ai (from the STATE dictionary)
 func get_current_state()      -> int:     return _current_ai_state
-# Returns the attack cooldown
-func get_attack_cooldown()    -> float:   return _attack_cooldown
 # Returns the dash cooldown
 func get_dash_cooldown()      -> float:   return _dash_cooldown
 # Returns the current direction the ai is facing
 func get_current_direction()  -> Vector2: return _current_direction
+# Returns whether the ai is currently paused
+func get_ai_paused()          -> bool:    return _ai_paused
 # Returns the value of _movement_enabled
 func get_movement_enabled()   -> bool:    return _movement_enabled
 # Returns whether the ai is curently moving
@@ -397,11 +388,6 @@ func set_current_state(state: int) -> void:
 		_current_ai_state = state
 	else:
 		_current_ai_state = STATE.NONE
-		
-# Sets the cooldown for an attack
-func set_attack_cooldown(cooldown: float) -> void:
-	if cooldown >= 0.0:
-		_attack_cooldown = cooldown
 	
 # Sets the cooldown for a dash
 func set_dash_cooldown(cooldown: float) -> void:
@@ -445,4 +431,4 @@ func set_movement_enabled(enabled: bool):
 func _flip() -> void:
 	# Remember that the sprite is flipped to the right
 	_sprite_flipped = !_sprite_flipped
-	emit_signal("flip", Vector2(_current_direction.x, 0.0))
+	emit_signal("turned_around", Vector2(_current_direction.x, 0.0))
