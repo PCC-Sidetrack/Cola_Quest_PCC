@@ -19,17 +19,23 @@ extends    Entity
 #      method of the inheriting script.
 #    - Several basic actions that can be utilized by the ai: attack(), turn_around(),
 #      dash(multiplier), pause_ai(seconds), and resume_ai()
-#    - Movement: Handled by jump(multiplier), get_movement_direction(), set_movement_direction(),
-#                is_currently_moving(), get_movement_enabled(), and set_movement_enabled()
-#                Use these methods to control when and where the entiy is moving.
-#                Movement occurs automatically every physics process.
-#    - AI:       AI is handled through custom stage triggers. Use the STAGE
-#                dictionary to call set_current_ai_stage(). A function for each
-#                stage is called depending upon th current stage. Signals are
-#                used to create your custom stage.
-#                get_current_ai_stage() allows you to detect when the ai is in
-#                a current stage. A signal is emitted with the last and new stage
-#                when a stage change occurs.
+#    - Movement:   Handled by jump(multiplier), get_movement_direction(), set_movement_direction(),
+#                  is_currently_moving(), get_movement_enabled(), and set_movement_enabled()
+#                  Use these methods to control when and where the entiy is moving.
+#                  Movement occurs automatically every physics process.
+#    - AI:         AI is handled through custom stage triggers. Use the STAGE
+#                  dictionary to call set_current_ai_stage(). A function for each
+#                  stage is called depending upon th current stage. Signals are
+#                  used to create your custom stage.
+#                  get_current_ai_stage() allows you to detect when the ai is in
+#                  a current stage. A signal is emitted with the last and new stage
+#                  when a stage change occurs.
+#   - State Stack: The push_state_stack() and pop_state_stack() methods manipulate a 
+#                  stack that can only contain values from the STATE dictionary. This
+#                  stack can be used by inheriting scripts for various purposes. For
+#                  example, you may want to add a state which your ai should be in at a
+#                  future cycle of your script. You could save it for later by using this
+#                  stack.
 #   - Class Setup Notes:
 #                * If you initialize() the ai without autofacing then the flip signal
 #                  needs to be used to add custom code for flipping the entity.
@@ -69,22 +75,12 @@ signal init()
 signal flipped(h_direction_facing)
 # Signal is sent whenever a change in the stage of the ai is made through set_current_ai_stage()
 signal stage_changed(previous_stage, new_stage)
-# Signal emitted when no ai stage is currently set (called by _physics_process)
-signal stage_none_ran()
-# Signal emitted when a call to the stage one ai is made by _physics_process
-signal stage_one_ran()
-# Signal emitted when a call to the stage two ai is made by _physics_process
-signal stage_two_ran()
-# Signal emitted when a call to the stage three ai is made by _physics_process
-signal stage_three_ran()
-# Signal emitted when a call to the stage four ai is made by _physics_process
-signal stage_four_ran()
-# Signal emitted when the fight is ended ai is made by _physics_process
-signal fight_ended()
+# Signal is sent whenever any ai stage is run
+signal stage_ran(stage_number)
 # Signal emitted whenever the attack() method is called
 signal attacked()
 # Signal emitted whenever the turn_around() method is called
-signal turned_around()
+signal turned_around(h_new_direction)
 # Signal emitted whenever a dash() is performed
 signal dashed(multiplier)
 # Signal emitted whenever the ai was just paused. Pausing the ai doesn't stop all
@@ -93,7 +89,7 @@ signal dashed(multiplier)
 signal ai_paused(num_seconds)
 # Signal emitted whenever the ai is unpaused (either at the end of the pause_ai()
 # mehtod or when the resume_ai() mehtod is called)
-signal ai_resumed()
+signal ai_resumed(was_waiting)
 
 #-----------------------------------------------------------------------------#
 #                               Public Constants                              #
@@ -130,20 +126,30 @@ const STATE: Dictionary = {
 	MOVING1    = 0,
 	MOVING2    = 1,
 	MOVING3    = 2,
-	JUMPING    = 3,
-	ATTACKING1 = 4,
-	ATTACKING2 = 5,
-	ATTACKING3 = 6,
-	WAITING    = 7,
-	CUSTOM1    = 8,
-	CUSTOM2    = 9,
-	CUSTOM3    = 10
+	MOVING4    = 3,
+	MOVING5    = 4,
+	MOVING6    = 5,
+	JUMPING    = 6,
+	ATTACKING1 = 7,
+	ATTACKING2 = 8,
+	ATTACKING3 = 9,
+	ATTACKING4 = 10,
+	ATTACKING5 = 11,
+	ATTACKING6 = 12,
+	WAITING1   = 13,
+	WAITING2   = 14,
+	WAITING3   = 15,
+	CUSTOM1    = 16,
+	CUSTOM2    = 17,
+	CUSTOM3    = 18,
+	CUSTOM4    = 19,
+	CUSTOM5    = 20,
+	CUSTOM6    = 21
 }
 
 #-----------------------------------------------------------------------------#
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
-
 #=============================
 # Integers
 #=============================
@@ -157,13 +163,9 @@ var _current_ai_state: int = STATE.NONE
 # Floats
 #=============================
 
-# Indicates the cooldown for attacking (in seconds)
-var _attack_cooldown:       float = 1.0
 # Indicates the cooldown for dashing (in seconds)
 # Should be same as or less than attack cooldown if used in an attack action
-var _dash_cooldown:         float = _attack_cooldown
-# Tracks the cooldown for attacking
-var _attack_cooldown_timer: float = 0.0
+var _dash_cooldown:         float = 1.0
 # Tracks the cooldown for dashing
 var _dash_cooldown_timer:   float = 0.0
 # Multiplier applied to speed for dashing
@@ -180,8 +182,11 @@ var _movement_enabled:     bool = false
 var _uninterrupted_action: bool = false
 # Tracks whether the sprite is currently flipped
 var _sprite_flipped:       bool = false
-# Tracks whether the ai is currently paused
+# Tracks whether the ai is permanantly paused until resumed through resume_ai()
 var _ai_paused:            bool = false
+# Tracks whether ai_wait() is currently in action (ai is paused temporarily. _ai_paused
+# tracks if it is permanantly paused until resumed.)
+var _ai_waiting:           bool = false
 
 #=============================
 # Vectors
@@ -196,7 +201,10 @@ var _current_direction: Vector2
 #=============================
 
 # Holds a Timer that can be used throughout the class
-var _timer: Timer = Timer.new()
+var _ai_timer:    Timer = Timer.new()
+# Stack which holds ai states. This is for use, if desired, in any script extending
+# ai.gd.
+var _state_stack: Array = []
 
 #-----------------------------------------------------------------------------#
 #                           Built-In Virtual Methods                          #
@@ -208,14 +216,12 @@ func _ready() -> void:
 	_current_direction = DIRECTION.NONE
 
 	# Setup the timer
-	add_child(_timer)
-	_timer.set_one_shot(true)
+	add_child(_ai_timer)
+	_ai_timer.set_one_shot(true)
 	
 # Runs every physics engine update
 func _physics_process(delta) -> void:
 	# Update timers that rely on delta
-	if _attack_cooldown_timer < _attack_cooldown:
-		_attack_cooldown_timer += delta
 	if _dash_cooldown_timer < _dash_cooldown:
 		_dash_cooldown_timer += delta
 		
@@ -233,19 +239,20 @@ func _physics_process(delta) -> void:
 		_movement_enabled = false
 		
 		# Perform the tasks in the current ai stage
-		match _current_ai_stage:
-			STAGE.ONE:
-				emit_signal("stage_one_ran")
-			STAGE.TWO:
-				emit_signal("stage_two_ran")
-			STAGE.THREE:
-				emit_signal("stage_three_ran")
-			STAGE.FOUR:
-				emit_signal("stage_four_ran")
-			STAGE.FINISHED:
-				emit_signal("fight_ended")
-			_:
-				emit_signal("stage_none_ran")
+		if !_ai_paused:
+			match _current_ai_stage:
+				STAGE.ONE:
+					emit_signal("stage_ran", STAGE.ONE)
+				STAGE.TWO:
+					emit_signal("stage_ran", STAGE.TWO)
+				STAGE.THREE:
+					emit_signal("stage_ran", STAGE.THREE)
+				STAGE.FOUR:
+					emit_signal("stage_ran", STAGE.FOUR)
+				STAGE.FINISHED:
+					emit_signal("stage_ran", STAGE.FIVE)
+				_:
+					emit_signal("stage_ran", STAGE.NONE)
 
 	# Update the boss movement, but update it towards no movement if movement isn't enabled
 	# Note: this is done regardless of whether or not an uninteruptable action is occuring
@@ -260,35 +267,41 @@ func _physics_process(delta) -> void:
 #                                Public Methods                               #
 #-----------------------------------------------------------------------------#
 
+# Add a STATE to the state stack
+func push_state_stack(state: int) -> void:
+	if state in STATE.values():
+		_state_stack.push_front(state)
+		
+# Pop a STATE off the state stack
+func pop_state_stack() -> int:
+	return _state_stack.pop_front()
+
+
 #=============================
 # AI Actions
 #=============================
 # Attack action
 func attack(uninterruptable: bool = true) -> void:
-	# Before executing any atacking code, check that the attack cooldown is
-	# not in progress
-	if _attack_cooldown_timer >= _attack_cooldown:		
-		# Let the ai know that an uninterruptable action is occuring
-		if uninterruptable:
-			_uninterrupted_action = true
-		
-		#=============================	
-		# Attack Code
-		#=============================
-		
-		# Emit a signal to allow custom code to occur before the action is finished
-		emit_signal("attacked")
-		
-		#=============================
-		# End of Attack Code
-		#=============================
-		
-		# Let the ai know that the uninterruptable action is complete
-		_uninterrupted_action = false
-		
-		# Reset the attack cooldown timer
-		_attack_cooldown_timer = 0.0
+	# Let the ai know that an uninterruptable action is occuring
+	if uninterruptable:
+		_uninterrupted_action = true
 	
+	#=============================	
+	# Attack Code
+	#=============================
+	
+	# Emit a signal to allow custom code to occur before the action is finished
+	emit_signal("attacked")
+	
+	# NOTE: emit_signal does not wait until code connected to the signal is finished
+	#       before moving on.
+	#=============================
+	# End of Attack Code
+	#=============================
+	
+	# Let the ai know that the uninterruptable action is complete
+	_uninterrupted_action = false
+
 # Sets the direction facing to the opposite of it's current direction
 func turn_around() -> void:
 	_current_direction.x *= -1
@@ -300,13 +313,14 @@ func dash(speed_multiplier: float = _dash_multiplier) -> void:
 		# Allow movement
 		_movement_enabled = true
 		# Set the velocity (simialar to how it's done in entity.gd)
-		set_velocity(Vector2(get_last_direction().x * get_speed() * speed_multiplier, get_current_velocity().y))
+		set_velocity(Vector2(_current_direction.x * get_speed() * speed_multiplier, _current_direction.y))
 		emit_signal("dash", speed_multiplier)
 
 # Stops AI from running for a given time
 func ai_wait(seconds: float, stop_moving: bool = true) -> void:
 	_uninterrupted_action = true
-	_ai_paused = true
+	_ai_paused  = true
+	_ai_waiting = true
 	
 	emit_signal("ai_paused", seconds)
 	
@@ -314,11 +328,12 @@ func ai_wait(seconds: float, stop_moving: bool = true) -> void:
 	if stop_moving:
 		_movement_enabled = false
 	
-	_timer.start(seconds)
-	yield(_timer, "timeout")
+	_ai_timer.start(seconds)
+	yield(_ai_timer, "timeout")
 	
-	_ai_paused = false
-	emit_signal("ai_resumed")
+	_ai_paused  = false
+	_ai_waiting = false
+	emit_signal("ai_resumed", true)
 
 	_uninterrupted_action = false
 	
@@ -334,20 +349,21 @@ func pause_ai(stop_moving: bool = true) -> void:
 		_movement_enabled = false
 	
 # Unpauses the AI (if it was paused)
-func resume_ai() -> void:
+# Doesn't unpause the wait timer from ai_wait() unless force parameter is true
+func resume_ai(force: bool = false) -> void:
 	if _ai_paused:
-		_timer.stop()
+		if force or !_ai_waiting:
+			_ai_timer.stop()
+			_ai_paused = false
+		
 		_uninterrupted_action = false
-		_ai_paused = false
-		emit_signal("ai_resumed")
-
+		emit_signal("ai_resumed", false)
 
 #=============================
 # Initializes the boss AI as an entity
 # Must be called in inheriting class's _ready()
 #=============================
-func initialize(max_health: int, damage: int, speed: float, acceleration: float, jump_speed: float, attack_cooldown: float, dash_cooldown: float, obeys_gravity: bool, smooth_movement: bool, auto_facing: bool):
-	self._attack_cooldown = attack_cooldown
+func initialize(max_health: int, damage: int, speed: float, acceleration: float, jump_speed: float, dash_cooldown: float, obeys_gravity: bool, smooth_movement: bool, auto_facing: bool):
 	self._dash_cooldown   = dash_cooldown
 	
 	initialize_enemy(max_health, damage, speed, acceleration, jump_speed, obeys_gravity, smooth_movement)
@@ -364,14 +380,16 @@ func initialize(max_health: int, damage: int, speed: float, acceleration: float,
 func get_current_ai_stage()   -> int:     return _current_ai_stage
 # Returns the current state of the ai (from the STATE dictionary)
 func get_current_state()      -> int:     return _current_ai_state
-# Returns the attack cooldown
-func get_attack_cooldown()    -> float:   return _attack_cooldown
 # Returns the dash cooldown
 func get_dash_cooldown()      -> float:   return _dash_cooldown
 # Returns the current direction the ai is facing
 func get_current_direction()  -> Vector2: return _current_direction
+# Returns whether the ai is currently paused
+func get_ai_paused()          -> bool:    return _ai_paused
 # Returns the value of _movement_enabled
 func get_movement_enabled()   -> bool:    return _movement_enabled
+# Returns the ai STATE stack
+func get_state_stack()        -> Array:   return _state_stack
 # Returns whether the ai is curently moving
 func is_currently_moving()    -> bool:		
 	return false if _current_direction == DIRECTION.NONE else true
@@ -397,11 +415,6 @@ func set_current_state(state: int) -> void:
 		_current_ai_state = state
 	else:
 		_current_ai_state = STATE.NONE
-		
-# Sets the cooldown for an attack
-func set_attack_cooldown(cooldown: float) -> void:
-	if cooldown >= 0.0:
-		_attack_cooldown = cooldown
 	
 # Sets the cooldown for a dash
 func set_dash_cooldown(cooldown: float) -> void:
@@ -445,4 +458,4 @@ func set_movement_enabled(enabled: bool):
 func _flip() -> void:
 	# Remember that the sprite is flipped to the right
 	_sprite_flipped = !_sprite_flipped
-	emit_signal("flip", Vector2(_current_direction.x, 0.0))
+	emit_signal("turned_around", Vector2(_current_direction.x, 0.0))

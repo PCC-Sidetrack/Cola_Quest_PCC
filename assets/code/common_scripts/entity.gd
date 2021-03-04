@@ -171,6 +171,8 @@ func get_time_on_ground       () -> float:
 	return _metadata.time_on_ground
 func get_knockback_multiplier () -> float:
 	return _damage.knockback_multiplier
+func get_jump_speed           () -> float:
+	return _movement.initial_jump_velocity
 
 #-----------------------------------------------------------------------------#
 #                             Setter Functions                                #
@@ -390,7 +392,7 @@ func initialize_projectile(damage: int, speed: float, initiator: String, directi
 			add_to_group(Globals.GROUP.ENEMY)
 
 # Cause the entity to jump
-func jump(height: float) -> void:
+func jump(height: float = 1.0) -> void:
 	if height > 1.0 or height <= 0.0:
 		ProgramAlerts.add_warning("jump height should normally be between 1.0 and greater than 0.0")
 
