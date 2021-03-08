@@ -16,24 +16,40 @@ export var acceleration: float = 50.0
 export var life_time:    float = 10.0
 export var knockback:    float = 0.6
 
+#-----------------------------------------------------------------------------#
+#                               Private Variables                             #
+#-----------------------------------------------------------------------------#
+# Tracks whether the study card has been initialized yet
+var _initialized: bool = false
+
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
-func _ready() -> void:
-	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
-	set_knockback_multiplier(knockback)
+#func _ready() -> void:
+	#initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
+	#set_knockback_multiplier(knockback)
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
-	move_dynamically(get_current_velocity())
-	spin            (Globals.DIRECTION.CLOCKWISE, 10.0)
-	
+	if _initialized:
+		move_dynamically(get_current_velocity())
+		spin            (Globals.DIRECTION.CLOCKWISE, 10.0)
 
 #-----------------------------------------------------------------------------#
-#                            Trigger Functions                                #
+#                                Public Methods                               #
+#-----------------------------------------------------------------------------#
+# Instead of initializing with the _ready() function, this must be called.
+# This method allows initialization to be done at a variable time.
+func initialize() -> void:
+	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
+	set_knockback_multiplier(knockback)
+	_initialized = true
+
+#-----------------------------------------------------------------------------#
+#                             Signal Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
 func _on_KinematicBody2D_collision(body):
