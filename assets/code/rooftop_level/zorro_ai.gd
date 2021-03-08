@@ -3,9 +3,9 @@
 # Description:  Holds the code used to control the ai for the Zorro boss.
 #               Also holds comments to give an understanding of using the AI class
 #               that this code inherits.
-# Author:       AUTH HERE
+# Author:       Andrew
 # Company:      Sidetrack
-# Last Updated: DATE HERE
+# Last Updated: 3/5/2021
 #-----------------------------------------------------------------------------#
 
 extends AI
@@ -68,18 +68,18 @@ export var standard_distance_from_player: int = 130
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
 # Holds the current animation being shown
-var _current_animation:     Array = _ANIMATION.IDLE
+var _current_animation:          Array = _ANIMATION.IDLE
 
 # Tracks attack cooldown using delta (time in seconds)
-var _attack_cooldown_timer:       float = 0.0
+var _attack_cooldown_timer:      float = 0.0
 # Wait cooldown
-var _wait_cooldown:               float = 7.0
+var _wait_cooldown:              float = 7.0
 # Tracks the wait cooldown
-var _wait_cooldown_timer:         float = 0.0
+var _wait_cooldown_timer:        float = 0.0
 # Jump cooldown
-var _jump_cooldown:               float = 0.5
+var _jump_cooldown:              float = 0.5
 # Tracks jump cooldown
-var _jump_cooldown_timer:         float = 0.0
+var _jump_cooldown_timer:        float = 0.0
 # Turnaround cooldown for when player is behind ai
 var _attack_turnaround_cooldown: float = 1.0
 # Tracks turnaround timer for when player is behind ai
@@ -97,17 +97,17 @@ var _jump_attack_timer:          float = 0.0
 # id 2: ai is within scaffolding_middle_left
 # id 3: ai is within scaffolding_middle_right
 # id 4: ai is within scaffolding_right
-var _scaffolding_id:        int = 0
+var _scaffolding_id:             int = 0
 
 # Tracks whether the ai has already decided (while within a scaffolding position)
 # to jump or not
-var _decided_jump:          bool = false
+var _decided_jump:               bool = false
 
 # Used for generating random numbers
-var _rng:                   RandomNumberGenerator = RandomNumberGenerator.new()
+var _rng:                        RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Holds a Timer that can be used throughout the class
-var _timer:                 Timer = Timer.new()
+var _timer:                      Timer = Timer.new()
 
 #-----------------------------------------------------------------------------#
 #                              On-Ready Variables                             #
@@ -149,10 +149,6 @@ func _physics_process(delta) -> void:
 		_jump_attack_timer += delta
 
 #-----------------------------------------------------------------------------#
-#                                Public Methods                               #
-#-----------------------------------------------------------------------------#
-
-#-----------------------------------------------------------------------------#
 #                                Private Methods                              #
 #-----------------------------------------------------------------------------#
 
@@ -178,7 +174,7 @@ func _change_animation(animation: Array) -> void:
 
 # Detects and sets the current state of the ai
 func _detect_state() -> int:
-	# Used to decide whether to detect the state of the ai or use the state stake
+	# Used to decide whether to detect the state of the ai or use the state stack
 	var detect_state:        bool = true
 	# Used to hold the detected state of the ai
 	var state_detected:      int  = STATE.NONE
@@ -203,7 +199,7 @@ func _detect_state() -> int:
 		if temp_state_detected == STATE.JUMPING:
 			if _jump_cooldown_timer >= _jump_cooldown:
 				state_detected = temp_state_detected
-				detect_state = false
+				detect_state   = false
 			# If the cooldown isn't ready and the ai hasn't left the scaffolding area,
 			# then re-add the command to the stack and continue detecting the state of the ai
 			elif _scaffolding_id != 0:
@@ -211,7 +207,7 @@ func _detect_state() -> int:
 		# If the state popped is not jumping, set the state detected to the temp_state_detected
 		else:
 			state_detected = temp_state_detected
-			detect_state = false
+			detect_state   = false
 			
 	# If while looking at the state stack the decision to detect the state was not
 	# set to false, then detect the state of the ai.
@@ -219,7 +215,7 @@ func _detect_state() -> int:
 		# Check for attack state
 		state_detected = _detect_attack_state()
 		
-		# If the current state isn't one fo the attacking states, then determine other possible states
+		# If the current state isn't one of the attacking states, then determine other possible states
 		if state_detected == STATE.NONE:
 			# Detect what movement state should be set
 			state_detected = _detect_movement_state()
@@ -227,7 +223,7 @@ func _detect_state() -> int:
 			# If returns a jumping state, then state_detected will change from the movement state to jumping state
 			temp_state_detected = _detect_jumping_state()
 			if temp_state_detected != STATE.NONE:
-				state_detected = temp_state_detected
+				state_detected      = temp_state_detected
 				temp_state_detected = STATE.NONE
 			
 			# If not jumping, then detect whether a wait should occur
@@ -244,7 +240,7 @@ func _detect_attack_state() -> int:
 	# Holds the height of the collision shape of the player
 	var player_height:  float = Globals.player.get_node("CollisionShape2D").get_shape().extents.y
 	# Used to determine if the current state of the ai has been detected or not
-	var state_detected: int = STATE.NONE
+	var state_detected: int   = STATE.NONE
 	
 	# Custom key:
 	# ATTACKING1: player is directly in front of ai
@@ -323,7 +319,7 @@ func _detect_attack_state() -> int:
 					state_detected = STATE.ATTACKING5
 	
 	return state_detected
-	
+
 # Returns a movement state based on location and current state of the ai
 func _detect_movement_state() -> int:
 	# Used to determine if the current state of the ai has been detected or not
@@ -339,7 +335,7 @@ func _detect_movement_state() -> int:
 		if get_current_direction().x == DIRECTION.RIGHT.x:
 			state_detected = STATE.MOVING1
 		# If currently moving to the left, move right
-		elif get_current_direction().x == DIRECTION.LEFT.x:
+		else:
 			state_detected = STATE.MOVING2
 	# If not moving in any direction, pick a random direction
 	elif get_current_state() == STATE.NONE:
@@ -369,7 +365,7 @@ func _detect_jumping_state() -> int:
 		if !(_rng.randi_range(0, 2)):
 			state_detected = STATE.JUMPING
 			
-		_decided_jump        = true
+		_decided_jump = true
 			
 	return state_detected
 
@@ -554,7 +550,7 @@ func _run_ai_stage_three() -> void:
 # Code for the ai run during stage four of the fight
 func _run_ai_stage_four() -> void:
 	pass
-	
+
 # Code called when the boss fight is finished
 func _finish_fight() -> void:
 	pass
@@ -634,8 +630,6 @@ func _on_zorro_boss_attacked() -> void:
 			set_movement_direction(DIRECTION.LEFT)
 		else:
 			set_movement_direction(DIRECTION.RIGHT)
-			
-		var current_animation: Animation = $AnimationPlayer.get_animation($AnimationPlayer.current_animation)
 		
 		# Wait for 0.2 seconds
 		_timer.start(0.2)
