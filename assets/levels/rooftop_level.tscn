@@ -2106,7 +2106,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 115 )
-frame = 4
+frame = 2
 speed_scale = 3.0
 playing = true
 
@@ -2290,7 +2290,7 @@ scale = Vector2( 1.06332, 0.103082 )
 shape = SubResource( 116 )
 
 [node name="zorro_boss" parent="enemies" instance=ExtResource( 9 )]
-position = Vector2( 17616, 634 )
+position = Vector2( 17280, 688 )
 
 [node name="fan_damage_boxes" type="Node2D" parent="."]
 position = Vector2( 200, -20 )

@@ -19,17 +19,23 @@ extends    Entity
 #      method of the inheriting script.
 #    - Several basic actions that can be utilized by the ai: attack(), turn_around(),
 #      dash(multiplier), pause_ai(seconds), and resume_ai()
-#    - Movement: Handled by jump(multiplier), get_movement_direction(), set_movement_direction(),
-#                is_currently_moving(), get_movement_enabled(), and set_movement_enabled()
-#                Use these methods to control when and where the entiy is moving.
-#                Movement occurs automatically every physics process.
-#    - AI:       AI is handled through custom stage triggers. Use the STAGE
-#                dictionary to call set_current_ai_stage(). A function for each
-#                stage is called depending upon th current stage. Signals are
-#                used to create your custom stage.
-#                get_current_ai_stage() allows you to detect when the ai is in
-#                a current stage. A signal is emitted with the last and new stage
-#                when a stage change occurs.
+#    - Movement:   Handled by jump(multiplier), get_movement_direction(), set_movement_direction(),
+#                  is_currently_moving(), get_movement_enabled(), and set_movement_enabled()
+#                  Use these methods to control when and where the entiy is moving.
+#                  Movement occurs automatically every physics process.
+#    - AI:         AI is handled through custom stage triggers. Use the STAGE
+#                  dictionary to call set_current_ai_stage(). A function for each
+#                  stage is called depending upon th current stage. Signals are
+#                  used to create your custom stage.
+#                  get_current_ai_stage() allows you to detect when the ai is in
+#                  a current stage. A signal is emitted with the last and new stage
+#                  when a stage change occurs.
+#   - State Stack: The push_state_stack() and pop_state_stack() methods manipulate a 
+#                  stack that can only contain values from the STATE dictionary. This
+#                  stack can be used by inheriting scripts for various purposes. For
+#                  example, you may want to add a state which your ai should be in at a
+#                  future cycle of your script. You could save it for later by using this
+#                  stack.
 #   - Class Setup Notes:
 #                * If you initialize() the ai without autofacing then the flip signal
 #                  needs to be used to add custom code for flipping the entity.
@@ -83,7 +89,7 @@ signal dashed(multiplier)
 signal ai_paused(num_seconds)
 # Signal emitted whenever the ai is unpaused (either at the end of the pause_ai()
 # mehtod or when the resume_ai() mehtod is called)
-signal ai_resumed()
+signal ai_resumed(was_waiting)
 
 #-----------------------------------------------------------------------------#
 #                               Public Constants                              #
@@ -144,7 +150,6 @@ const STATE: Dictionary = {
 #-----------------------------------------------------------------------------#
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
-
 #=============================
 # Integers
 #=============================
@@ -177,8 +182,11 @@ var _movement_enabled:     bool = false
 var _uninterrupted_action: bool = false
 # Tracks whether the sprite is currently flipped
 var _sprite_flipped:       bool = false
-# Tracks whether the ai is currently paused
+# Tracks whether the ai is permanantly paused until resumed through resume_ai()
 var _ai_paused:            bool = false
+# Tracks whether ai_wait() is currently in action (ai is paused temporarily. _ai_paused
+# tracks if it is permanantly paused until resumed.)
+var _ai_waiting:           bool = false
 
 #=============================
 # Vectors
@@ -193,7 +201,10 @@ var _current_direction: Vector2
 #=============================
 
 # Holds a Timer that can be used throughout the class
-var _timer: Timer = Timer.new()
+var _ai_timer:    Timer = Timer.new()
+# Stack which holds ai states. This is for use, if desired, in any script extending
+# ai.gd.
+var _state_stack: Array = []
 
 #-----------------------------------------------------------------------------#
 #                           Built-In Virtual Methods                          #
@@ -205,8 +216,8 @@ func _ready() -> void:
 	_current_direction = DIRECTION.NONE
 
 	# Setup the timer
-	add_child(_timer)
-	_timer.set_one_shot(true)
+	add_child(_ai_timer)
+	_ai_timer.set_one_shot(true)
 	
 # Runs every physics engine update
 func _physics_process(delta) -> void:
@@ -256,6 +267,16 @@ func _physics_process(delta) -> void:
 #                                Public Methods                               #
 #-----------------------------------------------------------------------------#
 
+# Add a STATE to the state stack
+func push_state_stack(state: int) -> void:
+	if state in STATE.values():
+		_state_stack.push_front(state)
+		
+# Pop a STATE off the state stack
+func pop_state_stack() -> int:
+	return _state_stack.pop_front()
+
+
 #=============================
 # AI Actions
 #=============================
@@ -292,13 +313,14 @@ func dash(speed_multiplier: float = _dash_multiplier) -> void:
 		# Allow movement
 		_movement_enabled = true
 		# Set the velocity (simialar to how it's done in entity.gd)
-		set_velocity(Vector2(get_last_direction().x * get_speed() * speed_multiplier, get_current_velocity().y))
+		set_velocity(Vector2(_current_direction.x * get_speed() * speed_multiplier, _current_direction.y))
 		emit_signal("dash", speed_multiplier)
 
 # Stops AI from running for a given time
 func ai_wait(seconds: float, stop_moving: bool = true) -> void:
 	_uninterrupted_action = true
-	_ai_paused = true
+	_ai_paused  = true
+	_ai_waiting = true
 	
 	emit_signal("ai_paused", seconds)
 	
@@ -306,11 +328,12 @@ func ai_wait(seconds: float, stop_moving: bool = true) -> void:
 	if stop_moving:
 		_movement_enabled = false
 	
-	_timer.start(seconds)
-	yield(_timer, "timeout")
+	_ai_timer.start(seconds)
+	yield(_ai_timer, "timeout")
 	
-	_ai_paused = false
-	emit_signal("ai_resumed")
+	_ai_paused  = false
+	_ai_waiting = false
+	emit_signal("ai_resumed", true)
 
 	_uninterrupted_action = false
 	
@@ -326,13 +349,15 @@ func pause_ai(stop_moving: bool = true) -> void:
 		_movement_enabled = false
 	
 # Unpauses the AI (if it was paused)
-func resume_ai() -> void:
+# Doesn't unpause the wait timer from ai_wait() unless force parameter is true
+func resume_ai(force: bool = false) -> void:
 	if _ai_paused:
-		_timer.stop()
+		if force or !_ai_waiting:
+			_ai_timer.stop()
+			_ai_paused = false
+		
 		_uninterrupted_action = false
-		_ai_paused = false
-		emit_signal("ai_resumed")
-
+		emit_signal("ai_resumed", false)
 
 #=============================
 # Initializes the boss AI as an entity
@@ -363,6 +388,8 @@ func get_current_direction()  -> Vector2: return _current_direction
 func get_ai_paused()          -> bool:    return _ai_paused
 # Returns the value of _movement_enabled
 func get_movement_enabled()   -> bool:    return _movement_enabled
+# Returns the ai STATE stack
+func get_state_stack()        -> Array:   return _state_stack
 # Returns whether the ai is curently moving
 func is_currently_moving()    -> bool:		
 	return false if _current_direction == DIRECTION.NONE else true
