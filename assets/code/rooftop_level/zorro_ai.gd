@@ -76,26 +76,30 @@ var fight_enabled: bool  = false
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
 # Holds the current animation being shown
-var _current_animation:          Array = _ANIMATION.IDLE
+var _current_animation:             Array = _ANIMATION.IDLE
 
 # Tracks attack cooldown using delta (time in seconds)
-var _attack_cooldown_timer:      float = 0.0
+var _attack_cooldown_timer:         float = 0.0
 # Wait cooldown
-var _wait_cooldown:              float = 7.0
+var _wait_cooldown:                 float = 7.0
 # Tracks the wait cooldown
-var _wait_cooldown_timer:        float = 0.0
+var _wait_cooldown_timer:           float = 0.0
 # Jump cooldown
-var _jump_cooldown:              float = 0.5
+var _jump_cooldown:                 float = 0.5
 # Tracks jump cooldown
-var _jump_cooldown_timer:        float = 0.0
+var _jump_cooldown_timer:           float = 0.0
+# Second, longer jump cooldown
+var _secondary_jump_cooldown:       float = 1.5
+# Tracks second, longer jump cooldown
+var _secondary_jump_cooldown_timer: float = 0.0
 # Turnaround cooldown for when player is behind ai
-var _attack_turnaround_cooldown: float = 1.0
+var _attack_turnaround_cooldown:    float = 1.0
 # Tracks turnaround timer for when player is behind ai
-var _attack_turnaround_timer:    float = 0.0
+var _attack_turnaround_timer:       float = 0.0
 # Jump attack cooldown for when player is behind ai
-var _jump_attack_cooldown:       float = 1.0
+var _jump_attack_cooldown:          float = 1.0
 # Tracks Jump attack timer for when player is behind ai
-var _jump_attack_timer:          float = 0.0
+var _jump_attack_timer:             float = 0.0
 
 
 
@@ -105,23 +109,23 @@ var _jump_attack_timer:          float = 0.0
 # id 2: ai is within scaffolding_middle_left
 # id 3: ai is within scaffolding_middle_right
 # id 4: ai is within scaffolding_right
-var _scaffolding_id:             int = 0
+var _scaffolding_id:                int = 0
 
 # Tracks whether the ai has already decided (while within a scaffolding position)
 # to jump or not
-var _decided_jump:               bool = false
+var _decided_jump:                  bool = false
 
 # Used for generating random numbers
-var _rng:                        RandomNumberGenerator = RandomNumberGenerator.new()
+var _rng:                           RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Holds a Timer that can be used throughout the class
-var _timer:                      Timer = Timer.new()
+var _timer:                         Timer = Timer.new()
 
 #-----------------------------------------------------------------------------#
 #                              On-Ready Variables                             #
 #-----------------------------------------------------------------------------#
 # Used to hold the points for the boss fight
-onready var _points: Node = get_node("../../points/boss_fight")
+onready var _points:                Node = get_node("../../points/boss_fight")
 
 
 #-----------------------------------------------------------------------------#
@@ -151,6 +155,8 @@ func _physics_process(delta) -> void:
 		_wait_cooldown_timer += delta
 	if _jump_cooldown_timer < _jump_cooldown:
 		_jump_cooldown_timer += delta
+	if _secondary_jump_cooldown_timer < _secondary_jump_cooldown:
+		_secondary_jump_cooldown_timer += delta
 	if _attack_turnaround_timer < _attack_turnaround_cooldown:
 		_attack_turnaround_timer += delta
 	if _jump_attack_timer < _jump_attack_cooldown:
@@ -560,6 +566,58 @@ func _run_ai_stage_two() -> void:
 	# Perform actions depending upon the current state
 	match get_current_state():
 		STATE.ATTACKING1: # ATTACKING1: player is directly in front of ai
+			if _rng.randi_range(0, 1) and _attack_turnaround_timer >= _attack_turnaround_cooldown:
+				turn_around()
+				_attack_turnaround_timer = 0.0
+			else:
+				_throw_card()
+		STATE.ATTACKING2: # ATTACKING2: player is directly behind ai
+			# 66% chance to jump
+			if _rng.randi_range(0, 2):
+				_zorro_jump(true)
+				_timer.start(0.2)
+				yield(_timer, "timeout")
+			else:
+				_secondary_jump_cooldown_timer = 0.0
+			
+			# Randomly decide to jump and/or dash
+			if !_rng.randi_range(0, 1):
+				if _dash_cooldown_timer >= _dash_cooldown:
+					# Set the velocity (simialar to how it's done in entity.gd)
+					_change_animation(_ANIMATION.JUMP)
+					set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
+					_timer.start(0.2)
+					yield(_timer, "timeout")
+					_dash_cooldown_timer = 0.0
+					_change_animation(_ANIMATION.WALK)
+		STATE.MOVING1: # MOVING1:  moving left
+			_change_animation(_ANIMATION.WALK)
+			set_movement_direction(DIRECTION.LEFT)
+		STATE.MOVING2: # MOVING2:  moving right
+			_change_animation(_ANIMATION.WALK)
+			set_movement_direction(DIRECTION.RIGHT)
+		STATE.JUMPING:
+			pass
+		STATE.WAITING1:
+			_throw_card()
+		_:
+			pass
+
+# Code for the ai run during stage three of the fight
+func _run_ai_stage_three() -> void:
+	# STAGE THREE INSTRUCTIONS:
+	# If drone's aren't still there, respawn them. Also spawn in a few 3x5 shooting
+	# drones.
+	# Combine the ai from stages one and two so that Dr. Geary is trying to 
+	# attack with the sword and occasionally throw's 3x5 cards as well.
+	
+	# If the current state isn't none, then enable movement
+	if get_current_state() != STATE.NONE:
+		set_movement_enabled(true)
+	
+	# Perform actions depending upon the current state
+	match get_current_state():
+		STATE.ATTACKING1: # ATTACKING1: player is directly in front of ai
 			attack()
 		STATE.ATTACKING2: # ATTACKING2: player is directly behind ai
 			# Within intervals of time, randomly decide to turn around
@@ -578,7 +636,7 @@ func _run_ai_stage_two() -> void:
 					_zorro_jump()
 					turn_around()
 				_attack_turnaround_timer = 0.0
-				_jump_attack_timer = 0.0
+				_jump_attack_timer       = 0.0
 		STATE.ATTACKING5: # ATTACKING5: player is in front and below ai
 			pass
 		STATE.ATTACKING6: # ATTACKING6: player is behind and below ai
@@ -593,21 +651,8 @@ func _run_ai_stage_two() -> void:
 			_zorro_jump()
 		STATE.WAITING1:
 			_throw_card()
-			
-			# Randomly decide to taunt player after throwing card
-			#if !_rng.randi_range(0, 2):
-				#_taunt()
 		_:
 			pass
-
-# Code for the ai run during stage three of the fight
-func _run_ai_stage_three() -> void:
-	# STAGE THREE INSTRUCTIONS:
-	# If drone's aren't still there, respawn them. Also spawn in a few 3x5 shooting
-	# drones.
-	# Combine the ai from stages one and two so that Dr. Geary is trying to 
-	# attack with the sword and occasionally throw's 3x5 cards as well.
-	pass
 
 # Code for the ai run during stage four of the fight
 func _run_ai_stage_four() -> void:
@@ -618,12 +663,12 @@ func _finish_fight() -> void:
 	pass
 	
 # Code for the ai jumping
-func _zorro_jump() -> void:
+func _zorro_jump(secondary_cooldown: bool = false) -> void:
 	# Holds the number of floors on the scaffolding
 	var num_floors = 0
 	
 	# Only check for a jump if the cooldown is not still counting
-	if _jump_cooldown_timer >= _jump_cooldown:
+	if (_jump_cooldown_timer >= _jump_cooldown and !secondary_cooldown) or _secondary_jump_cooldown_timer >= _secondary_jump_cooldown and secondary_cooldown:
 		# If jumping within scaffolding
 		if _scaffolding_id != 0:
 			# Determine the number of floors in the scaffolding
@@ -642,7 +687,10 @@ func _zorro_jump() -> void:
 		_change_animation(_ANIMATION.JUMP)
 		jump()
 		
-		_jump_cooldown_timer = 0.0
+		if secondary_cooldown:
+			_secondary_jump_cooldown_timer = 0.0
+		else:
+			_jump_cooldown_timer = 0.0
 
 # Draws or Sheaths the ai's sword
 func _draw_sword(sheath: bool = false, ai_wait_add_time: bool = true) -> void:
@@ -671,7 +719,7 @@ func _taunt() -> void:
 		turned_around = true
 	
 	# Have ai sheath sword
-	_draw_sword(true)
+	_draw_sword(true, false)
 	
 	# Set the ai to wait for the given amount of time while playing a taunting animation
 	_change_animation(_ANIMATION.ARM_WAVE)
@@ -724,13 +772,18 @@ func _throw_card() -> void:
 	study_card.set_collision_mask_bit(Globals.LAYER.WORLD, false)
 	study_card.initialize()
 	
+	# Have the ai taunt the player briefly
+	_change_animation(_ANIMATION.ARM_WAVE)
+	_timer.start(1.0)
+	yield(_timer, "timeout")
+	_change_animation(_ANIMATION.IDLE)
+	
+	# Have ai draw sword
+	_draw_sword()
+	
 	# If the ai turned around, turn it back around after the animation is done
 	if turned_around:
 		turn_around()
-		
-	# Have ai draw sword
-	_draw_sword()
-	_change_animation(_ANIMATION.IDLE)
 
 #-----------------------------------------------------------------------------#
 #                                Signal Methods                               #
