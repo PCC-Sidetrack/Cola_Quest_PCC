@@ -318,7 +318,7 @@ func dash(speed_multiplier: float = _dash_multiplier) -> void:
 		_movement_enabled = true
 		# Set the velocity (simialar to how it's done in entity.gd)
 		set_velocity(Vector2(_current_direction.x * get_speed() * speed_multiplier, _current_direction.y))
-		emit_signal("dash", speed_multiplier)	
+		emit_signal("dash", speed_multiplier)
 
 # Stops AI from running for a given time
 func ai_wait(seconds: float, add_to_wait_time: bool = true, stop_moving: bool = true) -> void:
@@ -364,10 +364,19 @@ func resume_ai(force: bool = false) -> void:
 	if _ai_paused:
 		if force or !_ai_waiting:
 			_ai_timer.stop()
-			_ai_paused = false
-		
+			_ai_paused  = false
+			_wait_time  = 0.0
+			_ai_waiting = false
+			
 		_uninterrupted_action = false
 		emit_signal("ai_resumed", false)
+		
+# Stops the ai wait timer, but doesn't resume the ai
+func stop_wait_time() -> void:
+	_ai_timer.start(0.0)
+	_ai_paused  = false
+	_wait_time  = 0.0
+	_ai_waiting = false
 
 #=============================
 # Initializes the boss AI as an entity
@@ -394,6 +403,10 @@ func get_current_state()      -> int:     return _current_ai_state
 func get_dash_cooldown()      -> float:   return _dash_cooldown
 # Returns the current number of seconds before the ai becomes unpaused
 func get_wait_time()          -> float:   return _wait_time if _wait_time >= 0.0 else 0.0
+# Returns the speed of the ai from entity.gd
+func get_ai_speed()           -> float:   return get_speed()
+# Returns the velocity of the ai
+func get_ai_velocity()        -> Vector2: return get_current_velocity()
 # Returns the current direction the ai is facing
 func get_movement_direction() -> Vector2: return _current_direction
 # Returns whether the ai is currently paused
@@ -432,6 +445,10 @@ func set_current_state(state: int) -> void:
 func set_dash_cooldown(cooldown: float) -> void:
 	if cooldown >= 0.0:
 		_dash_cooldown = cooldown
+		
+# Sets the velocity using entity.gd
+func set_ai_velocity(velocity: Vector2) -> void:
+	set_velocity(velocity)
 		
 # Set the curent direction moving
 func set_movement_direction(direction: Vector2):
