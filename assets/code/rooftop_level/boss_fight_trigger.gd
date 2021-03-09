@@ -15,4 +15,10 @@ extends Area2D
 func _on_boss_fight_trigger_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.zoom(1.25)
+		
+		# Enable the boss
+		get_node("../../../enemies/zorro_boss").fight_enabled = true
+		
 		queue_free()
+		
+	

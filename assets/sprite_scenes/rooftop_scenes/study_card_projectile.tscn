@@ -13,13 +13,6 @@ script = ExtResource( 2 )
 position = Vector2( 0, 0.476758 )
 texture = ExtResource( 1 )
 
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
-position = Vector2( 1.90735e-06, 1.90735e-06 )
-scale = Vector2( 4.8, 4.8 )
-process_parent = true
-physics_process_parent = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 1.091, 1.05231 )
 shape = SubResource( 1 )

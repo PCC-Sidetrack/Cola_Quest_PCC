@@ -331,7 +331,7 @@ func initialize_enemy(health: int, damage: int, speed: float, acceleration: floa
 	add_to_group       (Globals.GROUP.ENEMY)
 	add_to_group       (Globals.GROUP.ENTITY)
 	_set_layer_bits    ([Globals.LAYER.ENEMY])
-	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD, Globals.LAYER.COLLECTABLE])
+	_set_mask_bits     ([Globals.LAYER.PLAYER, Globals.LAYER.WORLD])
 	set_acceleration   (acceleration)
 	set_damage         (damage)
 	#set_jump           (jump_height, jump_duration)

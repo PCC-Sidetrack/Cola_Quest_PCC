@@ -1543,12 +1543,12 @@ anims/walk_sword = SubResource( 11 )
 [node name="sprites" type="Node2D" parent="."]
 
 [node name="idle" type="Sprite" parent="sprites"]
-visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 3 )
 hframes = 2
 
 [node name="arm_wave" type="Sprite" parent="sprites"]
+visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 1 )
 hframes = 2
@@ -1558,7 +1558,6 @@ visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 2 )
 hframes = 5
-frame = 4
 
 [node name="jump" type="Sprite" parent="sprites"]
 visible = false
@@ -1577,6 +1576,7 @@ visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 6 )
 hframes = 7
+frame = 5
 
 [node name="walk" type="Sprite" parent="sprites"]
 visible = false
@@ -1588,21 +1588,24 @@ hframes = 2
 script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( 30, -18 )
-rotation = -0.629196
+position = Vector2( -8, 12 )
+rotation = 2.00713
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
 visible = false
-position = Vector2( 31.6419, -19.7862 )
-rotation = 2.51532
+position = Vector2( -8.54123, 14.3609 )
+rotation = 2.00687
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, -6.45756 )
+position = Vector2( 0, -7.6562 )
 shape = SubResource( 13 )
+
+[node name="throw_point" type="Node2D" parent="."]
+position = Vector2( 3.44101, -24.7224 )
 [connection signal="ai_paused" from="." to="." method="_on_zorro_boss_ai_paused"]
 [connection signal="ai_resumed" from="." to="." method="_on_zorro_boss_ai_resumed"]
 [connection signal="attacked" from="." to="." method="_on_zorro_boss_attacked"]
