@@ -1919,7 +1919,7 @@ extents = Vector2( 13952, 1427.35 )
 [sub_resource type="RectangleShape2D" id=117]
 extents = Vector2( 352, 251 )
 
-[sub_resource type="RectangleShape2D" id=120]
+[sub_resource type="RectangleShape2D" id=118]
 extents = Vector2( 784, 250 )
 
 [sub_resource type="SegmentShape2D" id=119]
@@ -2105,7 +2105,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 115 )
-frame = 12
+frame = 1
 speed_scale = 3.0
 playing = true
 
@@ -2540,7 +2540,7 @@ script = ExtResource( 33 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/other_triggers/decloud_trigger"]
 position = Vector2( 17920, 490 )
-shape = SubResource( 120 )
+shape = SubResource( 118 )
 
 [node name="cloud_trigger" type="Area2D" parent="triggers/other_triggers"]
 script = ExtResource( 14 )
