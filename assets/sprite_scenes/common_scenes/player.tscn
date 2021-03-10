@@ -44,6 +44,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
 tracks/0/interp = 1
@@ -51,7 +52,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.367732, 0.541166 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -63,7 +64,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
 "update": 0,
 "values": [ 0, 1, 6 ]
@@ -119,7 +120,7 @@ tracks/2/keys = {
 extents = Vector2( 10, 29 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 12.7287, 30.4121 )
+extents = Vector2( 26.8621, 30.4121 )
 
 [sub_resource type="OccluderPolygon2D" id=7]
 polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
@@ -145,7 +146,7 @@ visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
-position = Vector2( 17.2893, 2 )
+position = Vector2( 26.7659, 2 )
 shape = SubResource( 6 )
 disabled = true
 
@@ -207,4 +208,6 @@ volume_db = -10.0
 [connection signal="collision" from="." to="." method="_on_player_collision"]
 [connection signal="death" from="." to="." method="_on_player_death"]
 [connection signal="health_changed" from="." to="." method="_on_player_health_changed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="melee" to="." method="_on_melee_body_entered"]
 [connection signal="respawn_player" from="game_UI" to="." method="_on_game_UI_respawn_player"]

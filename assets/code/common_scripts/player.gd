@@ -44,6 +44,8 @@ var _current_zoom
 var _dead:              bool   = false
 # Holds the inital zoom
 var _init_camera_zoom:  Vector2
+# Is the player currently attacking
+var _is_attacking:      bool   = false
 # Indicates the current sprite that is visible
 var _current_sprite:    String = "idle"
 # Allows code to use random numbers
@@ -70,10 +72,11 @@ const CONTROLS: Dictionary = {
 	#"RANGED":     "ranged",
 }
 const SPRITE: Dictionary = {
-	"DASH": "dash",
-	"IDLE": "idle",
-	"JUMP": "jump",
-	"WALK": "walk",
+	"DASH":  "dash",
+	"IDLE":  "idle",
+	"JUMP":  "jump",
+	"MELEE": "melee",
+	"WALK":  "walk"
 }
 
 #-----------------------------------------------------------------------------#
@@ -199,7 +202,12 @@ func _get_input() -> Vector2:
 			_dash_cooldown     = 0.0
 			_remaining_dashes -= 1
 		
-		_set_sprite(direction)
+		if Input.is_action_just_pressed("melee_attack"):
+			_is_attacking = true
+			_switch_sprite(SPRITE.MELEE)
+		
+		if not _is_attacking:
+			_set_sprite(direction)
 		velocity.x = direction
 	
 	return velocity
@@ -316,3 +324,14 @@ func _on_game_UI_respawn_player() -> void:
 	set_current_health(max_health)
 	take_damage(-max_health)
 	Globals.game_locked = false
+
+
+func _on_melee_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.ENEMY):
+		body.take_damage(get_damage())
+		body.knockback(self)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "melee":
+		_is_attacking = false
