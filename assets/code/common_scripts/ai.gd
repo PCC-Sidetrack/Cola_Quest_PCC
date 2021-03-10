@@ -170,6 +170,8 @@ var _dash_cooldown:         float = 1.0
 var _dash_cooldown_timer:   float = 0.0
 # Multiplier applied to speed for dashing
 var _dash_multiplier:       float = 3.0
+# Holds the current wait time for the ai before resuming
+var _wait_time:             float = 0.0
 
 
 #=============================
@@ -224,6 +226,8 @@ func _physics_process(delta) -> void:
 	# Update timers that rely on delta
 	if _dash_cooldown_timer < _dash_cooldown:
 		_dash_cooldown_timer += delta
+	if _wait_time > 0.0:
+		_wait_time -= delta
 		
 	# Flip the boss sprites if needed
 	if !get_auto_facing():
@@ -317,10 +321,15 @@ func dash(speed_multiplier: float = _dash_multiplier) -> void:
 		emit_signal("dash", speed_multiplier)
 
 # Stops AI from running for a given time
-func ai_wait(seconds: float, stop_moving: bool = true) -> void:
+func ai_wait(seconds: float, add_to_wait_time: bool = true, stop_moving: bool = true) -> void:
 	_uninterrupted_action = true
 	_ai_paused  = true
 	_ai_waiting = true
+	
+	if add_to_wait_time:
+		_wait_time += seconds
+	else:
+		_wait_time =  seconds
 	
 	emit_signal("ai_paused", seconds)
 	
@@ -328,7 +337,8 @@ func ai_wait(seconds: float, stop_moving: bool = true) -> void:
 	if stop_moving:
 		_movement_enabled = false
 	
-	_ai_timer.start(seconds)
+	_ai_timer.stop()
+	_ai_timer.start(_wait_time)
 	yield(_ai_timer, "timeout")
 	
 	_ai_paused  = false
@@ -354,10 +364,19 @@ func resume_ai(force: bool = false) -> void:
 	if _ai_paused:
 		if force or !_ai_waiting:
 			_ai_timer.stop()
-			_ai_paused = false
-		
+			_ai_paused  = false
+			_wait_time  = 0.0
+			_ai_waiting = false
+			
 		_uninterrupted_action = false
 		emit_signal("ai_resumed", false)
+		
+# Stops the ai wait timer, but doesn't resume the ai
+func stop_wait_time() -> void:
+	_ai_timer.start(0.0)
+	_ai_paused  = false
+	_wait_time  = 0.0
+	_ai_waiting = false
 
 #=============================
 # Initializes the boss AI as an entity
@@ -382,8 +401,14 @@ func get_current_ai_stage()   -> int:     return _current_ai_stage
 func get_current_state()      -> int:     return _current_ai_state
 # Returns the dash cooldown
 func get_dash_cooldown()      -> float:   return _dash_cooldown
+# Returns the current number of seconds before the ai becomes unpaused
+func get_wait_time()          -> float:   return _wait_time if _wait_time >= 0.0 else 0.0
+# Returns the speed of the ai from entity.gd
+func get_ai_speed()           -> float:   return get_speed()
+# Returns the velocity of the ai
+func get_ai_velocity()        -> Vector2: return get_current_velocity()
 # Returns the current direction the ai is facing
-func get_current_direction()  -> Vector2: return _current_direction
+func get_movement_direction() -> Vector2: return _current_direction
 # Returns whether the ai is currently paused
 func get_ai_paused()          -> bool:    return _ai_paused
 # Returns the value of _movement_enabled
@@ -420,6 +445,10 @@ func set_current_state(state: int) -> void:
 func set_dash_cooldown(cooldown: float) -> void:
 	if cooldown >= 0.0:
 		_dash_cooldown = cooldown
+		
+# Sets the velocity using entity.gd
+func set_ai_velocity(velocity: Vector2) -> void:
+	set_velocity(velocity)
 		
 # Set the curent direction moving
 func set_movement_direction(direction: Vector2):

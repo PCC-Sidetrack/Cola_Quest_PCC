@@ -3,9 +3,9 @@
 # Description:  Holds the code used to control the ai for the Zorro boss.
 #               Also holds comments to give an understanding of using the AI class
 #               that this code inherits.
-# Author:       AUTH HERE
+# Author:       Andrew
 # Company:      Sidetrack
-# Last Updated: DATE HERE
+# Last Updated: 3/5/2021
 #-----------------------------------------------------------------------------#
 
 extends AI
@@ -13,9 +13,6 @@ extends AI
 #-----------------------------------------------------------------------------#
 #                              Private Constants                              #
 #-----------------------------------------------------------------------------#
-#=============================
-# Dictionaries
-#=============================
 
 # Enums for animations - Array Structure: [animation_name, corresponding_sprite_name]
 var _ANIMATION: Dictionary = {
@@ -31,6 +28,10 @@ var _ANIMATION: Dictionary = {
 	WALK          = ["walk_sword", "walk"],
 	WALK_NO_SWORD = ["walk_no_sword", "walk"]
 }
+
+# Holds a reference to the 3x5_projectile scene
+const _STUDY_CARD = preload("res://assets//sprite_scenes//rooftop_scenes//study_card_projectile.tscn")
+
 
 #-----------------------------------------------------------------------------#
 #                              Exported Variables                             #
@@ -64,30 +65,41 @@ export var max_health:                    int = 16
 # Distance of boss from player before an action occurs (such as an attack)
 export var standard_distance_from_player: int = 130
 
+
+#-----------------------------------------------------------------------------#
+#                               Public Variables                              #
+#-----------------------------------------------------------------------------#
+# Used to determine if the boss fight is currently enabled (for performance)
+var fight_enabled: bool  = false
+
 #-----------------------------------------------------------------------------#
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
 # Holds the current animation being shown
-var _current_animation:     Array = _ANIMATION.IDLE
+var _current_animation:             Array = _ANIMATION.IDLE
 
 # Tracks attack cooldown using delta (time in seconds)
-var _attack_cooldown_timer:       float = 0.0
+var _attack_cooldown_timer:         float = 0.0
 # Wait cooldown
-var _wait_cooldown:               float = 7.0
+var _wait_cooldown:                 float = 7.0
 # Tracks the wait cooldown
-var _wait_cooldown_timer:         float = 0.0
+var _wait_cooldown_timer:           float = 0.0
 # Jump cooldown
-var _jump_cooldown:               float = 0.5
+var _jump_cooldown:                 float = 0.5
 # Tracks jump cooldown
-var _jump_cooldown_timer:         float = 0.0
+var _jump_cooldown_timer:           float = 0.0
+# Second, longer jump cooldown
+var _secondary_jump_cooldown:       float = 1.5
+# Tracks second, longer jump cooldown
+var _secondary_jump_cooldown_timer: float = 0.0
 # Turnaround cooldown for when player is behind ai
-var _attack_turnaround_cooldown: float = 1.0
+var _attack_turnaround_cooldown:    float = 1.0
 # Tracks turnaround timer for when player is behind ai
-var _attack_turnaround_timer:    float = 0.0
+var _attack_turnaround_timer:       float = 0.0
 # Jump attack cooldown for when player is behind ai
-var _jump_attack_cooldown:       float = 1.0
+var _jump_attack_cooldown:          float = 1.0
 # Tracks Jump attack timer for when player is behind ai
-var _jump_attack_timer:          float = 0.0
+var _jump_attack_timer:             float = 0.0
 
 
 
@@ -97,23 +109,23 @@ var _jump_attack_timer:          float = 0.0
 # id 2: ai is within scaffolding_middle_left
 # id 3: ai is within scaffolding_middle_right
 # id 4: ai is within scaffolding_right
-var _scaffolding_id:        int = 0
+var _scaffolding_id:                int = 0
 
 # Tracks whether the ai has already decided (while within a scaffolding position)
 # to jump or not
-var _decided_jump:          bool = false
+var _decided_jump:                  bool = false
 
 # Used for generating random numbers
-var _rng:                   RandomNumberGenerator = RandomNumberGenerator.new()
+var _rng:                           RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Holds a Timer that can be used throughout the class
-var _timer:                 Timer = Timer.new()
+var _timer:                         Timer = Timer.new()
 
 #-----------------------------------------------------------------------------#
 #                              On-Ready Variables                             #
 #-----------------------------------------------------------------------------#
 # Used to hold the points for the boss fight
-onready var _points: Node = get_node("../../points/boss_fight")
+onready var _points:                Node = get_node("../../points/boss_fight")
 
 
 #-----------------------------------------------------------------------------#
@@ -143,14 +155,12 @@ func _physics_process(delta) -> void:
 		_wait_cooldown_timer += delta
 	if _jump_cooldown_timer < _jump_cooldown:
 		_jump_cooldown_timer += delta
+	if _secondary_jump_cooldown_timer < _secondary_jump_cooldown:
+		_secondary_jump_cooldown_timer += delta
 	if _attack_turnaround_timer < _attack_turnaround_cooldown:
 		_attack_turnaround_timer += delta
 	if _jump_attack_timer < _jump_attack_cooldown:
 		_jump_attack_timer += delta
-
-#-----------------------------------------------------------------------------#
-#                                Public Methods                               #
-#-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
 #                                Private Methods                              #
@@ -176,9 +186,23 @@ func _change_animation(animation: Array) -> void:
 		else:	
 			ProgramAlerts.add_warning("In boss fight AI, attempted to change an animation to non-existant animation id.")
 
+# Detects if the ai is currently facing the player
+func _ai_facing_player() -> bool:
+	# Holds the return value
+	var facing_player: bool = false
+	
+	# If moving right and player is to the right then ai is facing player
+	if get_movement_direction().x == DIRECTION.RIGHT.x and global_position.x < Globals.player_position.x:
+		facing_player = true
+	# Else if moving left and player is to the left then ai is facing player
+	if get_movement_direction().x == DIRECTION.LEFT.x and global_position.x > Globals.player_position.x:
+		facing_player = true
+	
+	return facing_player
+
 # Detects and sets the current state of the ai
 func _detect_state() -> int:
-	# Used to decide whether to detect the state of the ai or use the state stake
+	# Used to decide whether to detect the state of the ai or use the state stack
 	var detect_state:        bool = true
 	# Used to hold the detected state of the ai
 	var state_detected:      int  = STATE.NONE
@@ -203,7 +227,7 @@ func _detect_state() -> int:
 		if temp_state_detected == STATE.JUMPING:
 			if _jump_cooldown_timer >= _jump_cooldown:
 				state_detected = temp_state_detected
-				detect_state = false
+				detect_state   = false
 			# If the cooldown isn't ready and the ai hasn't left the scaffolding area,
 			# then re-add the command to the stack and continue detecting the state of the ai
 			elif _scaffolding_id != 0:
@@ -211,7 +235,7 @@ func _detect_state() -> int:
 		# If the state popped is not jumping, set the state detected to the temp_state_detected
 		else:
 			state_detected = temp_state_detected
-			detect_state = false
+			detect_state   = false
 			
 	# If while looking at the state stack the decision to detect the state was not
 	# set to false, then detect the state of the ai.
@@ -219,7 +243,7 @@ func _detect_state() -> int:
 		# Check for attack state
 		state_detected = _detect_attack_state()
 		
-		# If the current state isn't one fo the attacking states, then determine other possible states
+		# If the current state isn't one of the attacking states, then determine other possible states
 		if state_detected == STATE.NONE:
 			# Detect what movement state should be set
 			state_detected = _detect_movement_state()
@@ -227,7 +251,7 @@ func _detect_state() -> int:
 			# If returns a jumping state, then state_detected will change from the movement state to jumping state
 			temp_state_detected = _detect_jumping_state()
 			if temp_state_detected != STATE.NONE:
-				state_detected = temp_state_detected
+				state_detected      = temp_state_detected
 				temp_state_detected = STATE.NONE
 			
 			# If not jumping, then detect whether a wait should occur
@@ -244,7 +268,7 @@ func _detect_attack_state() -> int:
 	# Holds the height of the collision shape of the player
 	var player_height:  float = Globals.player.get_node("CollisionShape2D").get_shape().extents.y
 	# Used to determine if the current state of the ai has been detected or not
-	var state_detected: int = STATE.NONE
+	var state_detected: int   = STATE.NONE
 	
 	# Custom key:
 	# ATTACKING1: player is directly in front of ai
@@ -257,7 +281,7 @@ func _detect_attack_state() -> int:
 	# If player is to the right of the ai
 	if global_position.x - Globals.player_position.x <= standard_distance_from_player and global_position.x - Globals.player_position.x >= 0:
 		# If ai is facing left
-		if get_current_direction().x == DIRECTION.LEFT.x:
+		if get_movement_direction().x == DIRECTION.LEFT.x:
 			# If player is within attacking range vertically
 			if global_position.y - Globals.player_position.y <= player_height and global_position.y - Globals.player_position.y >= 0:
 				state_detected = STATE.ATTACKING1
@@ -291,7 +315,7 @@ func _detect_attack_state() -> int:
 	# If player is to the left of the ai
 	elif global_position.x - Globals.player_position.x >= -standard_distance_from_player and global_position.x - Globals.player_position.x <= 0:
 		# If ai is facing left
-		if get_current_direction().x == DIRECTION.LEFT.x:
+		if get_movement_direction().x == DIRECTION.LEFT.x:
 			# If player is within attacking range vertically
 			if global_position.y - Globals.player_position.y <= player_height and global_position.y - Globals.player_position.y >= 0:
 				state_detected = STATE.ATTACKING2
@@ -323,7 +347,7 @@ func _detect_attack_state() -> int:
 					state_detected = STATE.ATTACKING5
 	
 	return state_detected
-	
+
 # Returns a movement state based on location and current state of the ai
 func _detect_movement_state() -> int:
 	# Used to determine if the current state of the ai has been detected or not
@@ -336,10 +360,10 @@ func _detect_movement_state() -> int:
 	# Check for a condition that would cause movement direction to change
 	if is_on_wall():
 		# If currently moving to the right, move left
-		if get_current_direction().x == DIRECTION.RIGHT.x:
+		if get_movement_direction().x == DIRECTION.RIGHT.x:
 			state_detected = STATE.MOVING1
 		# If currently moving to the left, move right
-		elif get_current_direction().x == DIRECTION.LEFT.x:
+		else:
 			state_detected = STATE.MOVING2
 	# If not moving in any direction, pick a random direction
 	elif get_current_state() == STATE.NONE:
@@ -350,7 +374,7 @@ func _detect_movement_state() -> int:
 	# If not on a wall and is moving left or right, then set the detected state to
 	# whatever the state currently is.
 	else:
-		if get_current_direction().x == DIRECTION.LEFT.x:
+		if get_movement_direction().x == DIRECTION.LEFT.x:
 			state_detected = STATE.MOVING1
 		else:
 			state_detected = STATE.MOVING2
@@ -369,7 +393,7 @@ func _detect_jumping_state() -> int:
 		if !(_rng.randi_range(0, 2)):
 			state_detected = STATE.JUMPING
 			
-		_decided_jump        = true
+		_decided_jump = true
 			
 	return state_detected
 
@@ -384,8 +408,8 @@ func _detect_waiting_state() -> int:
 	# If the current state is one of the movement states, then randomly decide to wait or not
 	# Only randomly decide to wait if the cooldown is past
 	if _wait_cooldown_timer >= _wait_cooldown:
-		# 1 in 5 chance for the ai to wait
-		if _rng.randi_range(0, 4):
+		# 1 in 4 chance for the ai to wait
+		if _rng.randi_range(0, 3):
 			state_detected = STATE.WAITING1
 			
 		# Regardless of decision, reset the cooldown timer
@@ -506,13 +530,7 @@ func _run_ai_stage_one() -> void:
 				_zorro_jump()
 				_jump_attack_timer = 0.0
 		STATE.ATTACKING4: # ATTACKING4: player is behind and above ai
-			# Within intervals of time, randomly decide to turn around
-			if _attack_turnaround_timer >= _attack_turnaround_cooldown and _jump_attack_timer >= _jump_attack_cooldown:
-				if !_rng.randi_range(0, 2):
-					_zorro_jump()
-					turn_around()
-				_attack_turnaround_timer = 0.0
-				_jump_attack_timer = 0.0
+			pass
 		STATE.ATTACKING5: # ATTACKING5: player is in front and below ai
 			pass
 		STATE.ATTACKING6: # ATTACKING6: player is behind and below ai
@@ -524,9 +542,9 @@ func _run_ai_stage_one() -> void:
 			_change_animation(_ANIMATION.WALK)
 			set_movement_direction(DIRECTION.RIGHT)
 		STATE.JUMPING:
-			_zorro_jump()
+			pass
 		STATE.WAITING1:
-			_zorro_wait()
+			_taunt()
 		_:
 			pass
 
@@ -540,7 +558,50 @@ func _run_ai_stage_two() -> void:
 	# If in a place to jump on the scaffolding, then make a random decision to do so
 	# or not.
 	# Stop every once in a while and throw a 3x5 card at the player.
-	pass
+	
+	# If the current state isn't none, then enable movement
+	if get_current_state() != STATE.NONE:
+		set_movement_enabled(true)
+	
+	# Perform actions depending upon the current state
+	match get_current_state():
+		STATE.ATTACKING1: # ATTACKING1: player is directly in front of ai
+			if _rng.randi_range(0, 1) and _attack_turnaround_timer >= _attack_turnaround_cooldown:
+				turn_around()
+				_attack_turnaround_timer = 0.0
+			else:
+				_throw_card()
+		STATE.ATTACKING2: # ATTACKING2: player is directly behind ai
+			# 66% chance to jump
+			if _rng.randi_range(0, 2):
+				_zorro_jump(true)
+				_timer.start(0.2)
+				yield(_timer, "timeout")
+			else:
+				_secondary_jump_cooldown_timer = 0.0
+			
+			# Randomly decide to jump and/or dash
+			if !_rng.randi_range(0, 1):
+				if _dash_cooldown_timer >= _dash_cooldown:
+					# Set the velocity (simialar to how it's done in entity.gd)
+					_change_animation(_ANIMATION.JUMP)
+					set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
+					_timer.start(0.2)
+					yield(_timer, "timeout")
+					_dash_cooldown_timer = 0.0
+					_change_animation(_ANIMATION.WALK)
+		STATE.MOVING1: # MOVING1:  moving left
+			_change_animation(_ANIMATION.WALK)
+			set_movement_direction(DIRECTION.LEFT)
+		STATE.MOVING2: # MOVING2:  moving right
+			_change_animation(_ANIMATION.WALK)
+			set_movement_direction(DIRECTION.RIGHT)
+		STATE.JUMPING:
+			pass
+		STATE.WAITING1:
+			_throw_card()
+		_:
+			pass
 
 # Code for the ai run during stage three of the fight
 func _run_ai_stage_three() -> void:
@@ -549,23 +610,65 @@ func _run_ai_stage_three() -> void:
 	# drones.
 	# Combine the ai from stages one and two so that Dr. Geary is trying to 
 	# attack with the sword and occasionally throw's 3x5 cards as well.
-	pass
+	
+	# If the current state isn't none, then enable movement
+	if get_current_state() != STATE.NONE:
+		set_movement_enabled(true)
+	
+	# Perform actions depending upon the current state
+	match get_current_state():
+		STATE.ATTACKING1: # ATTACKING1: player is directly in front of ai
+			attack()
+		STATE.ATTACKING2: # ATTACKING2: player is directly behind ai
+			# Within intervals of time, randomly decide to turn around
+			if _attack_turnaround_timer >= _attack_turnaround_cooldown:
+				if !_rng.randi_range(0, 2):
+					turn_around()
+				_attack_turnaround_timer = 0.0
+		STATE.ATTACKING3: # ATTACKING3: player is in front and above of ai
+			if _jump_attack_timer >= _jump_attack_cooldown:
+				_zorro_jump()
+				_jump_attack_timer = 0.0
+		STATE.ATTACKING4: # ATTACKING4: player is behind and above ai
+			# Within intervals of time, randomly decide to turn around
+			if _attack_turnaround_timer >= _attack_turnaround_cooldown and _jump_attack_timer >= _jump_attack_cooldown:
+				if !_rng.randi_range(0, 2):
+					_zorro_jump()
+					turn_around()
+				_attack_turnaround_timer = 0.0
+				_jump_attack_timer       = 0.0
+		STATE.ATTACKING5: # ATTACKING5: player is in front and below ai
+			pass
+		STATE.ATTACKING6: # ATTACKING6: player is behind and below ai
+			pass
+		STATE.MOVING1: # MOVING1:  moving left
+			_change_animation(_ANIMATION.WALK)
+			set_movement_direction(DIRECTION.LEFT)
+		STATE.MOVING2: # MOVING2:  moving right
+			_change_animation(_ANIMATION.WALK)
+			set_movement_direction(DIRECTION.RIGHT)
+		STATE.JUMPING:
+			_zorro_jump()
+		STATE.WAITING1:
+			_throw_card()
+		_:
+			pass
 
 # Code for the ai run during stage four of the fight
 func _run_ai_stage_four() -> void:
 	pass
-	
+
 # Code called when the boss fight is finished
 func _finish_fight() -> void:
 	pass
 	
 # Code for the ai jumping
-func _zorro_jump() -> void:
+func _zorro_jump(secondary_cooldown: bool = false) -> void:
 	# Holds the number of floors on the scaffolding
 	var num_floors = 0
 	
 	# Only check for a jump if the cooldown is not still counting
-	if _jump_cooldown_timer >= _jump_cooldown:
+	if (_jump_cooldown_timer >= _jump_cooldown and !secondary_cooldown) or _secondary_jump_cooldown_timer >= _secondary_jump_cooldown and secondary_cooldown:
 		# If jumping within scaffolding
 		if _scaffolding_id != 0:
 			# Determine the number of floors in the scaffolding
@@ -584,25 +687,103 @@ func _zorro_jump() -> void:
 		_change_animation(_ANIMATION.JUMP)
 		jump()
 		
-		_jump_cooldown_timer = 0.0
+		if secondary_cooldown:
+			_secondary_jump_cooldown_timer = 0.0
+		else:
+			_jump_cooldown_timer = 0.0
+
+# Draws or Sheaths the ai's sword
+func _draw_sword(sheath: bool = false, ai_wait_add_time: bool = true) -> void:
+	ai_wait(0.5, ai_wait_add_time)
+	
+	if sheath:
+		# Have ai sheath sword
+		_change_animation(_ANIMATION.SHEATH_SWORD)
+		_timer.start(0.5)
+		yield(_timer, "timeout")
+	else:
+		_change_animation(_ANIMATION.DRAW_SWORD)
+		_timer.start(0.5)
+		yield(_timer, "timeout")
 	
 # Code for the ai waiting
-func _zorro_wait() -> void:
+func _taunt() -> void:
 	# Random value in seconds to wait
-	var wait_time: float = _rng.randf_range(0.5, 2.0)
+	var wait_time:     float = _rng.randf_range(0.5, 2.0)
+	# Used to remember if the ai turned around to taunt the player
+	var turned_around: bool  = false
 	
-	# Randomly decide whether to turn around or not
-	if _rng.randi_range(0, 1):
+	# If the ai is not facing the player before the taunt, then turn the ai around
+	if !_ai_facing_player():
 		turn_around()
+		turned_around = true
 	
-	# Set the ai to wait for the given amount of time
-	_change_animation(_ANIMATION.IDLE)
+	# Have ai sheath sword
+	_draw_sword(true, false)
+	
+	# Set the ai to wait for the given amount of time while playing a taunting animation
+	_change_animation(_ANIMATION.ARM_WAVE)
 	ai_wait(wait_time)
 	
 	# Set the wait cooldown timer to negative wait_time so that it will
 	# be impossible for a wait to occur again until after the waiting is
 	# complete and the cooldown is complete after that
 	_wait_cooldown_timer = -wait_time
+	
+	# If the ai turned around, turn it back around after the animation is done
+	if turned_around:
+		_timer.start(wait_time)
+		yield(_timer, "timeout")
+		turn_around()
+		
+	# Have the ai draw it's sword before continuing
+	_draw_sword()
+
+# Throws a 3x5 card at the player
+func _throw_card() -> void:
+	# Used to remember if the ai turned around to taunt the player
+	var turned_around: bool   = false
+	# Create, initialize, and add a new study card projectile to the drone
+	var study_card:    Entity = _STUDY_CARD.instance()
+	
+	# If the ai is not facing the player before the taunt, then turn the ai around
+	if !_ai_facing_player():
+		turn_around()
+		turned_around = true
+	
+	# Have ai sheath sword
+	_draw_sword(true)
+	
+	# Pause the ai for the duration of the throw
+	ai_wait(0.5)
+	
+	# Perform the throwing animation
+	_change_animation(_ANIMATION.THROW)
+	_timer.start(0.5)
+	yield(_timer, "timeout")
+	
+	# Spawn the 3x5 card
+	# Save the position of the thrown 3x5 card to the misc_loc vector in Globals. It will
+	# be used by the study card.
+	Globals.misc_loc = Vector2($throw_point.global_position.x, $throw_point.global_position.y - (Globals.player.get_node("CollisionShape2D").get_shape().extents.y / 3))
+	_points.get_node("study_card_parent").add_child(study_card)
+	study_card.global_position = Globals.misc_loc
+	study_card.speed = 7.0
+	study_card.set_collision_mask_bit(Globals.LAYER.WORLD, false)
+	study_card.initialize()
+	
+	# Have the ai taunt the player briefly
+	_change_animation(_ANIMATION.ARM_WAVE)
+	_timer.start(1.0)
+	yield(_timer, "timeout")
+	_change_animation(_ANIMATION.IDLE)
+	
+	# Have ai draw sword
+	_draw_sword()
+	
+	# If the ai turned around, turn it back around after the animation is done
+	if turned_around:
+		turn_around()
 
 #-----------------------------------------------------------------------------#
 #                                Signal Methods                               #
@@ -613,8 +794,9 @@ func _zorro_wait() -> void:
 #=============================
 # Set initial values for use in boss ai here
 func _on_zorro_boss_init() -> void:
-	set_current_ai_stage(STAGE.ONE)
-	set_current_state(STATE.MOVING1)
+	set_current_ai_stage(STAGE.TWO)
+	set_movement_direction(DIRECTION.LEFT)
+	set_current_state(STATE.MOVING2)
 
 # Custom code for when the zorro boss attacks
 # Change animations, set movement, etc
@@ -634,8 +816,6 @@ func _on_zorro_boss_attacked() -> void:
 			set_movement_direction(DIRECTION.LEFT)
 		else:
 			set_movement_direction(DIRECTION.RIGHT)
-			
-		var current_animation: Animation = $AnimationPlayer.get_animation($AnimationPlayer.current_animation)
 		
 		# Wait for 0.2 seconds
 		_timer.start(0.2)
@@ -647,39 +827,41 @@ func _on_zorro_boss_attacked() -> void:
 		
 		# Have the ai wait with an idle animation for a bit
 		_change_animation(_ANIMATION.IDLE)
-		ai_wait(1.0)
+		ai_wait(1.0, false)
 	
 		# Reset the attack cooldown (accounting for the ai waiting for one second
 		_attack_cooldown_timer = -1.0
 
 # This signal is sent whenever any stage is run
 func _on_zorro_boss_stage_ran(stage_number):
-	# Pause ai.gd until ai code in this script is complete
-	pause_ai()
-	
-	# If the current stage running is not STAGE.NONE then check statistics
-	if stage_number != STAGE.NONE:
-		_check_within_scaffolding()
+	# Only run ai code if the fight is enabled
+	if fight_enabled:
+		# Pause ai.gd until ai code in this script is complete
+		pause_ai()
+		
+		# If the current stage running is not STAGE.NONE then check statistics
+		if stage_number != STAGE.NONE:
+			_check_within_scaffolding()
 
-	# Set the current state to the state returned by _detect_state
-	set_current_state(_detect_state())
+		# Set the current state to the state returned by _detect_state
+		set_current_state(_detect_state())
 
-	# Run ai depending upon the stage
-	match stage_number:
-		STAGE.ONE:
-			_run_ai_stage_one()
-		STAGE.TWO:
-			_run_ai_stage_two()
-		STAGE.THREE:
-			_run_ai_stage_three()
-		STAGE.FOUR:
-			_run_ai_stage_four()
-		STAGE.FINISHED:
-			_finish_fight()
-		_:
-			pass
-			
-	resume_ai()
+		# Run ai depending upon the stage
+		match stage_number:
+			STAGE.ONE:
+				_run_ai_stage_one()
+			STAGE.TWO:
+				_run_ai_stage_two()
+			STAGE.THREE:
+				_run_ai_stage_three()
+			STAGE.FOUR:
+				_run_ai_stage_four()
+			STAGE.FINISHED:
+				_finish_fight()
+			_:
+				pass
+				
+		resume_ai()
 
 #=============================
 # Signals that must be setup if being used

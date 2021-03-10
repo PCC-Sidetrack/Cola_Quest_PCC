@@ -190,7 +190,7 @@ func _get_input() -> Vector2:
 				_rng.randomize()
 				$sounds/SD5a_player_jump.pitch_scale = _rng.randf_range(0.9, 1.1)
 				$sounds/SD5a_player_jump.play()
-				jump(1.0)
+				jump()
 			else:
 				$sounds/SD5a_player_jump.pitch_scale = _rng.randf_range(1.2, 1.3)
 				$sounds/SD5a_player_jump.play()
@@ -198,7 +198,7 @@ func _get_input() -> Vector2:
 			_remaining_jumps -= 1
 		
 		if Input.is_action_just_pressed(CONTROLS.DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES:
-			set_velocity(Vector2(get_last_direction().x * get_speed() * 2.5, get_current_velocity().y))
+			set_velocity(Vector2(get_direction_facing() * get_speed() * 2.5, get_current_velocity().y))
 			_dash_cooldown     = 0.0
 			_remaining_dashes -= 1
 		

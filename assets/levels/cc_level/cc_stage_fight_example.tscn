@@ -55,7 +55,7 @@
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=53]
 [ext_resource path="res://assets/art/cc_level/tiles/cream_floor/cream_floor.png" type="Texture" id=54]
 [ext_resource path="res://assets/code/common_scripts/zoom_camera_trigger.gd" type="Script" id=55]
-[ext_resource path="res://assets/sprite_scenes/level_1/S7_running_eagor.tscn" type="PackedScene" id=56]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/S7_running_eagor.tscn" type="PackedScene" id=56]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=57]
 [ext_resource path="res://assets/art/general_levels/light_texture.png" type="Texture" id=58]
 [ext_resource path="res://assets/art/sc_level/tiles/B22_palm_bush/B22_palm_bush.png" type="Texture" id=59]
@@ -383,7 +383,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 15
+frame = 105
 speed_scale = 2.0
 playing = true
 __meta__ = {

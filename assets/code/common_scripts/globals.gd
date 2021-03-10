@@ -58,7 +58,7 @@ const LAYER: Dictionary = {
 # Orientation
 const ORIENTATION: Dictionary = {
 	FLOOR_NORMAL   = Vector2.UP,
-	MAX_FALL_SPEED = 3200.0,
+	MAX_FALL_SPEED = 3000,
 	TILE_SIZE      = 32.0,
 }
 

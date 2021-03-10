@@ -46,7 +46,6 @@ var _shoot_update_time:    float = 0.0
 # Used to add a randomness to when the first shot occurs
 var _rng:                  RandomNumberGenerator = RandomNumberGenerator.new()
 
-
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
@@ -84,12 +83,14 @@ func _physics_process(delta: float) -> void:
 func _shoot() -> void:
 	# Save the position of the drone to the misc_loc vector in Globals. It will
 	# be used by the study card.
-	Globals.misc_loc = global_position
+	Globals.misc_loc = $StudyCardSpawn.global_position
 	
 	# Create, initialize, and add a new study card projectile to the drone
 	var study_card = STUDY_CARD.instance()
-	#study_card.get_node("AnimatedSprite").play("spin")
-	$StudyCardSpawn.add_child(study_card)
+	get_node("/root").add_child(study_card)
+	study_card.global_position = Globals.misc_loc
+	#$StudyCardSpawn.add_child(study_card)
+	study_card.initialize()
 	_shoot_update_time = 0.0
 		
 #-----------------------------------------------------------------------------#
