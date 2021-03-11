@@ -15,7 +15,7 @@ extends Node
 # Determines how much damage the damage_box deals
 export var damage:           int   = 1
 # Determines how much knockback is applied to the player
-export var knockback:        float = 1.5
+export var knockback:        float = 10.0
 # Determines if the damage_box deals damage
 export var deals_damage:     bool  = true
 # Determines if the damage_box causes knockback
@@ -42,7 +42,7 @@ func _on_damage_box_body_entered(body):
 			body.take_damage(damage)
 		
 		if causes_knockback: body.knockback  (self, Vector2.UP)
-		if tp_to_spawn:
+		if tp_to_spawn and Globals.player.get_current_health() != 0:
 			# Wait to respawn for a moment
 			Globals.game_locked = true
 			yield(get_tree().create_timer(0.3), "timeout")

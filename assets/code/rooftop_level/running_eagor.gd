@@ -56,14 +56,21 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_S7_running_eagor_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER):
-		body.knockback(self)
-		deal_damage(body)
-
 func _on_S7_running_eagor_death():
-	pass # Replace with function body.
+	# Used to wait a given amount of time before deleting the entity
+	var timer: Timer = Timer.new()
+	
+	$CollisionShape2D.disabled = true
+	timer.set_one_shot(true)
+	add_child(timer)
+	
+	$sword_hit.play()
+	death_anim (50,  0.04)
+	timer.start(50 * 0.04)
+	yield(timer, "timeout")
+	queue_free()
 
-func _on_S7_running_eagor_health_changed(_change):
-	pass # Replace with function body.
+func _on_S7_running_eagor_health_changed(ammount):
+	if ammount < 0 and get_current_health():
+		$sword_hit.play()
+		flash_damaged(10)

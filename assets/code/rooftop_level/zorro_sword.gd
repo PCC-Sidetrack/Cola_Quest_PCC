@@ -20,5 +20,5 @@ func get_knockback_multiplier() -> float:
 # If the player runs into the sword, then it damages him/her
 func _on_sword_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
-		body.take_damage(1)
+		body.take_damage(get_parent().damage)
 		body.knockback(self)

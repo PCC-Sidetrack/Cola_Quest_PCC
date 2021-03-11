@@ -19,7 +19,7 @@ export var movement_speed:     float = 1.875
 export var turnaround_time:    float = 3.0
 # Start facing right?
 export var start_moving_right: bool  = true
-export var health:			   int   = 1
+export var health:			   int   = 5
 export var damage: 			   int   = 1
 export var accelertion: 	   float = 20.0
 export var knockback:          float = 0.8
@@ -46,6 +46,7 @@ func _ready() -> void:
 	set_auto_facing            (true)
 	
 	$AnimationPlayer.play("fly")
+	$AudioStreamPlayer2D.play()
 
 
 #-----------------------------------------------------------------------------#
@@ -59,16 +60,27 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_bird_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
-		body.deal_damage(self)
-		body.knockback(self)
-
 # Triggered whenever the entity dies	
 func _on_bird_death():
-	pass # Replace with function body.
+	# Used to wait a given amount of time before deleting the entity
+	var timer: Timer = Timer.new()
+	
+	$CollisionShape2D.disabled = true
+	timer.set_one_shot(true)
+	add_child(timer)
+	
+	# Add an audio fade out
+	$Tween.interpolate_property($AudioStreamPlayer2D, "pitch_scale", $AudioStreamPlayer2D.pitch_scale, 0.01, 50 * 0.04)
+	$Tween.start()
+	
+	$sword_hit.play()
+	death_anim (50,  0.04)
+	timer.start(50 * 0.04)
+	yield(timer, "timeout")
+	queue_free()
 
-# Triggered whenever the entity's health is changed
-func _on_bird_health_changed(_change):
-	pass # Replace with function body.
+
+func _on_bird_health_changed(ammount):
+	if ammount < 0 and get_current_health():
+		$sword_hit.play()
+		flash_damaged(10)
