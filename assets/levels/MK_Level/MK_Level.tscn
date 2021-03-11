@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/mk_level/tiles/lobby_tiles.png" type="Texture" id=2]
@@ -9,8 +9,7 @@
 [ext_resource path="res://assets/sprite_scenes/mk_scenes/Taurus1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/art/mk_level/parallaxing/background/PL10_space_and_stars/PL10_space_background.png.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprite_scenes/mk_scenes/MK_Orion.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sprite_scenes/common_scenes/Moving_Platform.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/sprite_scenes/common_scenes/Moving_Platform.gd" type="Script" id=11]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/moving_platformNEW.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -346,6 +345,7 @@ motion_mirroring = Vector2( 1280, 1280 )
 position = Vector2( 441.886, 235.197 )
 texture = ExtResource( 8 )
 
-[node name="Moving_Platform" parent="." instance=ExtResource( 10 )]
-position = Vector2( 191.606, 233.609 )
-script = ExtResource( 11 )
+[node name="Node2D2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 374.601, 222.977 )
+move = Vector2( 320, 32 )
+move_speed = 10.0

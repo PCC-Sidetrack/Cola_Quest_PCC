@@ -294,7 +294,8 @@ func _on_player_health_changed(change) -> void:
 		$sounds/SD19_player_hurt.play()
 		
 		set_invulnerability(invlunerability_time)
-		flash_damaged()
+		if get_current_health():
+			flash_damaged()
 		
 	
 	# If the player would be healed, then update the GUI
