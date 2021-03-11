@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/bird.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S3_flying_bird/S3_flying_bird.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/SD16_wing_flap.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -84,6 +85,10 @@ physics_process_parent = true
 stream = ExtResource( 3 )
 max_distance = 800.0
 attenuation = 4.0
-[connection signal="collision" from="." to="." method="_on_bird_collision"]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="death" from="." to="." method="_on_bird_death"]
 [connection signal="health_changed" from="." to="." method="_on_bird_health_changed"]

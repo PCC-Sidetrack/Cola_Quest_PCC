@@ -47,16 +47,21 @@ func initialize() -> void:
 	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
 	set_knockback_multiplier(knockback)
 	_initialized = true
+	
+	# Wait for a little while then set collision to hit enemies as well
+	var t: Timer = Timer.new()
+	t.set_one_shot(true)
+	add_child(t)
+	t.start(0.3)
+	yield(t, "timeout")
+	set_collision_mask_bit(Globals.LAYER.ENEMY, true)
 
 #-----------------------------------------------------------------------------#
 #                             Signal Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
 func _on_KinematicBody2D_collision(body):
-	# This is a workaround for an odd glitch. For some reason the player doesn't
-	# always detect a collision with projectiles. (Spent hours trying to figure
-	# out why but couldn't). So I perform a knockbapck in this collision code instead
-	if body.is_in_group(Globals.GROUP.PLAYER):
+	if body.is_in_group(Globals.GROUP.PLAYER) or body.is_in_group(Globals.GROUP.ENEMY):
 		body.knockback(self)
 		deal_damage(body)
 	

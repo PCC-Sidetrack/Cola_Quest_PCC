@@ -23,7 +23,7 @@ export var debug:                bool    = false
 export var max_health:           int     = 5
 export var invlunerability_time: float   = 1.5
 export var jump_speed:           float   = 850.0
-export var knockback_multiplier: float   = 3.0
+export var knockback_multiplier: float   = 1.0
 export var speed:                float   = 8.0
 
 
@@ -32,6 +32,10 @@ export var speed:                float   = 8.0
 #-----------------------------------------------------------------------------#
 # Time between dashes
 var _dash_cooldown:     float  = _DASH_REFRESH
+# Attack cooldown
+var _attack_cooldown:   float  = 0.5
+# Attack cooldown timer
+var _attack_timer:      float = 0.0
 # How many dashes the player has left in air
 var _remaining_dashes:  int    = _MAX_DASHES
 # How many jumps the player has left
@@ -139,6 +143,10 @@ func set_is_dead(value: bool) -> void:
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
 func _physics_process(delta: float) -> void:
+	# Update the attack cooldown timer
+	if _attack_timer < _attack_cooldown:
+		_attack_timer += delta
+	
 	# Get the movement vector from the player input
 	var input: Vector2 = _get_input()
 	
@@ -202,9 +210,11 @@ func _get_input() -> Vector2:
 			_dash_cooldown     = 0.0
 			_remaining_dashes -= 1
 		
-		if Input.is_action_just_pressed("melee_attack"):
+		if Input.is_action_just_pressed("melee_attack") and _attack_timer >= _attack_cooldown:
 			_is_attacking = true
+			$sounds/SD13a_sword_swing.play()
 			_switch_sprite(SPRITE.MELEE)
+			_attack_timer = 0.0
 		
 		if not _is_attacking:
 			_set_sprite(direction)
@@ -329,7 +339,14 @@ func _on_game_UI_respawn_player() -> void:
 func _on_melee_body_entered(body: Node) -> void:
 	if body.is_in_group(Globals.GROUP.ENEMY):
 		body.take_damage(get_damage())
-		body.knockback(self)
+		body.custom_knockback(self, 5.0)
+	
+	if body.is_in_group(Globals.GROUP.ENEMY) or body.get_collision_layer_bit(Globals.LAYER.WORLD):
+		#set_velocity(body.get_position().direction_to(global_position).normalized() * (get_speed()))
+		if get_direction_facing() == Globals.DIRECTION.LEFT:
+			custom_knockback(self, 3.0, Vector2.RIGHT)
+		else:
+			custom_knockback(self, 3.0, Vector2.LEFT)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:

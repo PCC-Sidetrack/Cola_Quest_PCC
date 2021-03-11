@@ -85,12 +85,16 @@ var _metadata: Dictionary = {
 	time_on_ground      = 0.0,
 }
 
+var _entity_timer: Timer = Timer.new()
+
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	_health.current       = _health.maximum
 	_metadata.spawn_point = global_position
+	_entity_timer.set_one_shot(true)
+	add_child(_entity_timer)
 
 #-----------------------------------------------------------------------------#
 #                                   Loop                                      #
@@ -374,11 +378,14 @@ func initialize_player(health: int, damage: int, speed: float, acceleration: flo
 	_health.current = health
 
 # Initialize a projectile entity
-func initialize_projectile(damage: int, speed: float, initiator: String, direction: Vector2 = Vector2.RIGHT, turn_force: float = 1.0, life_time: float = -1.0) -> void:
+func initialize_projectile(damage: int, speed: float, initiator: String, direction: Vector2 = Vector2.RIGHT, turn_force: float = 1.0, life_time: float = -1.0, can_hit_enemies: bool = false) -> void:
 	add_to_group       (Globals.GROUP.PROJECTILE)
 	add_to_group       (Globals.GROUP.ENTITY)
 	_set_layer_bits    ([Globals.LAYER.PROJECTILE])
-	_set_mask_bits     ([Globals.LAYER.WORLD, Globals.LAYER.PLAYER])
+	if can_hit_enemies:
+		_set_mask_bits     ([Globals.LAYER.WORLD, Globals.LAYER.PLAYER, Globals.LAYER.ENEMY])
+	else:
+		_set_mask_bits     ([Globals.LAYER.WORLD, Globals.LAYER.PLAYER])
 	set_acceleration   (turn_force)
 	set_damage         (damage)
 	set_life_time      (life_time)
@@ -398,12 +405,23 @@ func jump(height: float = 1.0) -> void:
 
 	_movement.current_velocity.y = _movement.initial_jump_velocity * -height
 
-# Cause the entity that calls this function to knockback based off of the entity's speed and the referenced entity's damage
+# Cause the entity that calls this function to knockback another entity based off of the entity's speed and the referenced entity's damage
 func knockback(other_entity: Object, direction: Vector2 = Vector2(0.0, 0.0)) -> void:
 	if direction == Vector2(0.0, 0.0):
 		set_velocity(other_entity.get_position().direction_to(global_position).normalized() * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
 	else:
-		set_velocity(direction * (get_speed() * other_entity.get_knockback_multiplier() * 2.0))
+		set_velocity(direction * (get_speed() * other_entity.get_knockback_multiplier() / 3.0))
+
+# Causes the entity that calls this function to knockback another entity based off custom value
+func custom_knockback(other_entity: Object, knockback_value: float, direction: Vector2 = Vector2(0.0, 0.0)) -> void:
+	# Scalar to apply to the knockback value given (to allow the value to be smaller)
+	var scalar = 100.0
+	
+	if direction == Vector2(0.0, 0.0):
+		set_velocity(other_entity.get_position().direction_to(global_position).normalized() * knockback_value * scalar)
+	else:
+		set_velocity(direction * knockback_value * scalar)
+
 
 # A generic move function that determines what kind of movement the entity contains
 # This is intended for more automation, but should not be considered lazy coding
@@ -763,34 +781,47 @@ func _knockback_old(other_entity: KinematicBody2D) -> void:
 	other_entity.set_velocity(global_position.direction_to(other_entity.get_position()).normalized() * other_entity.get_speed() * _damage.knockback_multiplier)
 
 # Flash a sprite when it takes damage
-func flash_damaged():
+func flash_damaged(num_flashes: int = 0, flash_time: float = 0.03):
 	var t = Timer.new()
 	
-	t.set_wait_time(.03)
+	t.set_wait_time(flash_time)
 	t.set_one_shot(true)
 	self.add_child(t)
 	
-	while get_invulnerability():
-		t.start()
-		yield(t, "timeout")
-		set_modulate(Color(1, 0.3, 0.3, 0.3))
-		t.start()
-		yield(t, "timeout")
-		set_modulate(Color(1, 1, 1, .5))
-		
+	# Note: if an entity that doesn't get invunlerability (non-player usually) is used,
+	#       it's likely that num_flashes should be set
+	if num_flashes <= 0:
+		while get_invulnerability():
+			t.start()
+			yield(t, "timeout")
+			set_modulate(Color(1, 0.3, 0.3, 0.3))
+			t.start()
+			yield(t, "timeout")
+			set_modulate(Color(1, 1, 1, .5))
+	else:
+		for i in range(num_flashes):
+			t.start()
+			yield(t, "timeout")
+			set_modulate(Color(1, 0.3, 0.3, 0.3))
+			t.start()
+			yield(t, "timeout")
+			set_modulate(Color(1, 1, 1, .5))
+					
 	set_modulate(Color(1, 1, 1, 1))
 
 # Cause a sprite to flash red then fade out when it dies
-func death_anim():
-	var j = 1.0
-	var t = Timer.new()
+func death_anim(num_flashes: int = 10, time_per_flash: float = 0.04):
+	var j:           float = 1.0
+	var j_decrement: float = j / num_flashes
 	
-	t.set_wait_time(.03)
-	t.set_one_shot(true)
-	self.add_child(t)
-	
-	while j > 0:
-		t.start()
-		yield(t, "timeout")
+	# Flash back and forth a certain number of times
+	for i in range(num_flashes):
 		set_modulate(Color(1, 0.3, 0.3, j))
-		j -= 0.1
+		_entity_timer.start(time_per_flash / 2)
+		yield(_entity_timer, "timeout")
+		
+		set_modulate(Color(1, 1, 1, j))
+		_entity_timer.start(time_per_flash / 2)
+		yield(_entity_timer, "timeout")
+		
+		j -= j_decrement

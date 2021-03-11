@@ -20,11 +20,11 @@ const STUDY_CARD = preload("res://assets//sprite_scenes//rooftop_scenes//study_c
 export var ai_enabled:      bool  = true
 
 # Movement speed
-export var movement_speed:  float = 0.1875
+export var movement_speed:  float = 1.5
 # Seconds before drone shoots a 3x5 card
 export var shoot_cooldown:  float = 3.0
 # Seconds of movement before changing directions
-export var turnaround_time: float = 1
+export var turnaround_time: float = 0.5
 # Acceleration applied to drone's movement
 export var acceleration:    float = 20.0
 # Knockback multiplier for drone
@@ -45,6 +45,8 @@ var _movement_update_time: float = 0.0
 var _shoot_update_time:    float = 0.0
 # Used to add a randomness to when the first shot occurs
 var _rng:                  RandomNumberGenerator = RandomNumberGenerator.new()
+# Used to check if the drone can currently shoot
+var _shoot_enabled:        bool = true
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
@@ -81,29 +83,44 @@ func _physics_process(delta: float) -> void:
 
 # Create a new instance of a study card projectile and shoot it out of the drone
 func _shoot() -> void:
-	# Save the position of the drone to the misc_loc vector in Globals. It will
-	# be used by the study card.
-	Globals.misc_loc = $StudyCardSpawn.global_position
-	
-	# Create, initialize, and add a new study card projectile to the drone
-	var study_card = STUDY_CARD.instance()
-	get_node("/root").add_child(study_card)
-	study_card.global_position = Globals.misc_loc
-	#$StudyCardSpawn.add_child(study_card)
-	study_card.initialize()
-	_shoot_update_time = 0.0
+	if _shoot_enabled:
+		# Save the position of the drone to the misc_loc vector in Globals. It will
+		# be used by the study card.
+		Globals.misc_loc = $StudyCardSpawn.global_position
+		
+		# Create, initialize, and add a new study card projectile to the drone
+		var study_card = STUDY_CARD.instance()
+		get_node("/root").add_child(study_card)
+		study_card.global_position = Globals.misc_loc
+		#$StudyCardSpawn.add_child(study_card)
+		study_card.initialize()
+		_shoot_update_time = 0.0
 		
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_drone_a_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER) && body is Entity:
-		body.deal_damage(self)
-		body.knockback(self)
-
+# Triggered when the drone dies
 func _on_drone_a_death():
-	pass # Replace with function body.
+	# Used to wait a given amount of time before deleting the entity
+	var timer: Timer = Timer.new()
+	
+	$CollisionShape2D.disabled = true
+	_shoot_enabled             = false
+	timer.set_one_shot(true)
+	add_child(timer)
+	
+	# Add an audio pitch fade out
+	$sword_hit.play()
+	$Tween.interpolate_property($AudioStreamPlayer2D, "pitch_scale", $AudioStreamPlayer2D.pitch_scale, 0.01, 50 * 0.04)
+	$Tween.start()
+	
+	death_anim (50,  0.04)
+	timer.start(50 * 0.04)
+	yield(timer, "timeout")
+	queue_free()
 
-func _on_drone_a_health_changed(_change):
-	pass # Replace with function body.
+
+func _on_drone_a_health_changed(ammount):
+	if ammount < 0 and get_current_health():
+		$sword_hit.play()
+		flash_damaged(10)
