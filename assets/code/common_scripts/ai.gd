@@ -254,7 +254,7 @@ func _physics_process(delta) -> void:
 				STAGE.FOUR:
 					emit_signal("stage_ran", STAGE.FOUR)
 				STAGE.FINISHED:
-					emit_signal("stage_ran", STAGE.FIVE)
+					emit_signal("stage_ran", STAGE.FINISHED)
 				_:
 					emit_signal("stage_ran", STAGE.NONE)
 
@@ -428,11 +428,11 @@ func set_current_ai_stage(id: int) -> void:
 	if id in STAGE.values():
 		var temp_id: int = _current_ai_stage
 		_current_ai_stage = id
-		emit_signal("stage_change", id, _current_ai_stage)
+		emit_signal("stage_changed", temp_id, _current_ai_stage)
 	else:
 		var temp_id: int = _current_ai_stage
 		_current_ai_stage = STAGE.NONE
-		emit_signal("stage_change", STAGE.NONE, _current_ai_stage)
+		emit_signal("stage_changed", temp_id, STAGE.NONE)
 		
 # Sets the current state of the ai (from STATE dictionary)
 func set_current_state(state: int) -> void:

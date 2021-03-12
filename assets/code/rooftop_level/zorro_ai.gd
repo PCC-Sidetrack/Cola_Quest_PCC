@@ -31,39 +31,42 @@ var _ANIMATION: Dictionary = {
 
 # Holds a reference to the 3x5_projectile scene
 const _STUDY_CARD = preload("res://assets//sprite_scenes//rooftop_scenes//study_card_projectile.tscn")
-
+# Holds a reference to the drone_a scene
+const _DRONE_A    = preload("res://assets//sprite_scenes//rooftop_scenes//drone_a.tscn")
+# Holds a reference to the drone_b scene
+const _DRONE_B    = preload("res://assets//sprite_scenes//rooftop_scenes//drone_b.tscn")
 
 #-----------------------------------------------------------------------------#
 #                              Exported Variables                             #
 #-----------------------------------------------------------------------------#
 # Controls whether zorro obeys gravity
-export var obeys_gravity:   bool  = true
+export var obeys_gravity:                 bool  = true
 # Controls whether zorro accelerates into movement or not
-export var smooth_movement: bool  = true
+export var smooth_movement:               bool  = true
 # Controls whether zorro uses entity.gd's auto facing or custom code
-export var auto_facing:     bool  = false
+export var auto_facing:                   bool  = false
 
 # Controls the acceleration of movement if smooth_movement is turned on
-export var acceleration:    float = 20.0
+export var acceleration:                  float = 20.0
 # Speed at which zorro jumps
-export var jump_speed:      float = 850.0
+export var jump_speed:                    float = 850.0
 # Speed at which zorro moves
-export var speed:           float = 5.0
+export var speed:                         float = 5.0
 # Multiplier applied to speed for dashing
-export var dash_multiplier: float = 3.0
+export var dash_multiplier:               float = 4.0
 
 # Indicates the cooldown for attacking (in seconds)
-export var attack_cooldown: float = 1.5
+export var attack_cooldown:               float = 2.0
 # Indicates the cooldown for dashing (in seconds)
 # Should be same as or less than attack cooldown if used in an attack action
-export var dash_cooldown:   float = attack_cooldown
+export var dash_cooldown:                 float = attack_cooldown
 
 # Damage that zorro deals to entitys
 export var damage:                        int = 1
 # Max health of boss
-export var max_health:                    int = 16
+export var max_health:                    int = 18
 # Distance of boss from player before an action occurs (such as an attack)
-export var standard_distance_from_player: int = 130
+export var standard_distance_from_player: int = 200
 
 
 #-----------------------------------------------------------------------------#
@@ -100,6 +103,10 @@ var _attack_turnaround_timer:       float = 0.0
 var _jump_attack_cooldown:          float = 1.0
 # Tracks Jump attack timer for when player is behind ai
 var _jump_attack_timer:             float = 0.0
+# Throw 3x5 card cooldown
+var _throw_card_cooldown:           float = 1.5
+# Tracks throw 3x5 card timer
+var _throw_card_timer:              float = 1.0
 
 
 
@@ -161,6 +168,8 @@ func _physics_process(delta) -> void:
 		_attack_turnaround_timer += delta
 	if _jump_attack_timer < _jump_attack_cooldown:
 		_jump_attack_timer += delta
+	if _throw_card_timer < _throw_card_cooldown:
+		_throw_card_timer += delta
 
 #-----------------------------------------------------------------------------#
 #                                Private Methods                              #
@@ -419,8 +428,30 @@ func _detect_waiting_state() -> int:
 	
 # Detects and (if needed) changes the current stage of the ai
 func _detect_stage() -> void:
-	pass
+	# Holds the division of health for one stage
+	var stage_change_inc: int = int(max_health / 3)
+	# Temporarily stores the ai's current health so that method calls can be less frequent
+	var current_health:   int = get_current_health()
+	# Temproarily stores the current ai's stage so that method calls can be less frequent
+	var current_stage:    int = get_current_ai_stage()
 	
+	# Is ai at stage one
+	if current_health > max_health - stage_change_inc:
+		if current_stage != STAGE.ONE:
+			set_current_ai_stage(STAGE.ONE)
+	# Is ai at stage two
+	elif current_health > max_health - (stage_change_inc * 2):
+		if current_stage != STAGE.TWO:
+			set_current_ai_stage(STAGE.TWO)
+	# Is ai at stage three
+	elif current_health <= stage_change_inc && current_health > 2:
+		if current_stage != STAGE.THREE:
+			set_current_ai_stage(STAGE.THREE)
+	# Ist the ai at final stage
+	else:
+		if current_stage != STAGE.FINISHED:
+			set_current_ai_stage(STAGE.FINISHED)
+		
 # Get the current floor of scaffolding the ai is on.
 # -1 = not in scaffolding, 0 = ground, 1 = 1st floor, 2 = 2nd floor, etc.
 func _get_scaffolding_floor() -> int:
@@ -566,12 +597,71 @@ func _run_ai_stage_two() -> void:
 	# Perform actions depending upon the current state
 	match get_current_state():
 		STATE.ATTACKING1: # ATTACKING1: player is directly in front of ai
-			if _rng.randi_range(0, 1) and _attack_turnaround_timer >= _attack_turnaround_cooldown:
-				turn_around()
-				_attack_turnaround_timer = 0.0
-			else:
-				_throw_card()
+			match _rng.randi_range(0, 3):
+				0: # Turn around to run
+					if _attack_turnaround_timer >= _attack_turnaround_cooldown:
+						turn_around()
+						_attack_turnaround_timer = 0.0
+				1: # Throw a 3x5 card
+					_throw_card()
+				_: # Jump and dash over the player's head
+					if _dash_cooldown_timer >= _dash_cooldown:
+						# Jump
+						_zorro_jump(true)
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						
+						# Set the velocity (simialar to how it's done in entity.gd)
+						_change_animation(_ANIMATION.JUMP)
+						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						_dash_cooldown_timer = 0.0
+						_change_animation(_ANIMATION.WALK)
+			
 		STATE.ATTACKING2: # ATTACKING2: player is directly behind ai
+			
+			match _rng.randi_range(0, 3):
+				0: # Dash
+					if _dash_cooldown_timer >= _dash_cooldown:	
+						# Set the velocity (simialar to how it's done in entity.gd)
+						_change_animation(_ANIMATION.JUMP)
+						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						_dash_cooldown_timer = 0.0
+						_change_animation(_ANIMATION.WALK)
+				1: # Turn around, jump, and dash over the players head
+					if _dash_cooldown_timer >= _dash_cooldown:
+						# Turnaround
+						turn_around()
+						
+						# Jump
+						_zorro_jump(true)
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						
+						# Set the velocity (simialar to how it's done in entity.gd)
+						_change_animation(_ANIMATION.JUMP)
+						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						_dash_cooldown_timer = 0.0
+						_change_animation(_ANIMATION.WALK)
+				_: # Jump and dash
+					if _dash_cooldown_timer >= _dash_cooldown:
+						_zorro_jump(true)
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						
+						# Set the velocity (simialar to how it's done in entity.gd)
+						_change_animation(_ANIMATION.JUMP)
+						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
+						_timer.start(0.2)
+						yield(_timer, "timeout")
+						_dash_cooldown_timer = 0.0
+						_change_animation(_ANIMATION.WALK)
+			
 			# 66% chance to jump
 			if _rng.randi_range(0, 2):
 				_zorro_jump(true)
@@ -654,13 +744,106 @@ func _run_ai_stage_three() -> void:
 		_:
 			pass
 
-# Code for the ai run during stage four of the fight
-func _run_ai_stage_four() -> void:
-	pass
+# Code called when the ai switches to stage two
+func _stage_two_transition() -> void:
+	# Have zorro throw 3 drones into the air
+	set_movement_enabled(false)
+	
+	# Throw drone
+	_change_animation(_ANIMATION.THROW)
+	pause_ai(3.0)
+	_timer.start(3.0)
+	yield(_timer, "timeout")
+	
+		
+	# Spawn Drone 1	
+	var drone1 = _DRONE_B.instance()
+	_points.get_node("drone_spawns/drone_b/spawn4").add_child(drone1)
+	drone1.get_node("CollisionShape2D").disabled = true
+	drone1.global_position = global_position
+	$Tween.interpolate_property(drone1, "global_position", global_position, _points.get_node("drone_spawns/drone_b/spawn4").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 2
+	var drone2 = _DRONE_B.instance()
+	_points.get_node("drone_spawns/drone_b/spawn5").add_child(drone2)
+	drone2.get_node("CollisionShape2D").disabled = true
+	drone2.global_position = global_position
+	$Tween.interpolate_property(drone2, "global_position", global_position, _points.get_node("drone_spawns/drone_b/spawn5").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 3
+	var drone3 = _DRONE_B.instance()
+	_points.get_node("drone_spawns/drone_b/spawn6").add_child(drone3)
+	drone3.get_node("CollisionShape2D").disabled = true
+	drone3.global_position = global_position
+	$Tween.interpolate_property(drone3, "global_position", global_position, _points.get_node("drone_spawns/drone_b/spawn6").global_position, 1.0)
+	$Tween.start()
+	
+	_timer.start(1.0)
+	yield(_timer, "timeout")
+	
+	drone1.get_node("CollisionShape2D").disabled = false
+	#drone1.set_initial_direction_moving()
+	
+	drone2.get_node("CollisionShape2D").disabled = false
+	#drone2.set_initial_direction_moving()
+	
+	drone3.get_node("CollisionShape2D").disabled = false
+	#drone3.set_initial_direction_moving()
+	
+# Code called when the ai switches to stage three
+func _stage_three_transition() -> void:
+	# Have zorro throw 3 drones into the air
+	set_movement_enabled(false)
+	
+	# Throw drone
+	_change_animation(_ANIMATION.THROW)
+	pause_ai(3.0)
+	_timer.start(3.0)
+	yield(_timer, "timeout")
+	
+		
+	# Spawn Drone 1	
+	var drone1 = _DRONE_A.instance()
+	_points.get_node("drone_spawns/drone_a/spawn1").add_child(drone1)
+	drone1.get_node("CollisionShape2D").disabled = true
+	drone1.global_position = global_position
+	$Tween.interpolate_property(drone1, "global_position", global_position, _points.get_node("drone_spawns/drone_a/spawn1").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 2
+	var drone2 = _DRONE_A.instance()
+	_points.get_node("drone_spawns/drone_a/spawn2").add_child(drone2)
+	drone2.get_node("CollisionShape2D").disabled = true
+	drone2.global_position = global_position
+	$Tween.interpolate_property(drone2, "global_position", global_position, _points.get_node("drone_spawns/drone_a/spawn2").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 3
+	var drone3 = _DRONE_A.instance()
+	_points.get_node("drone_spawns/drone_a/spawn3").add_child(drone3)
+	drone3.get_node("CollisionShape2D").disabled = true
+	drone3.global_position = global_position
+	$Tween.interpolate_property(drone3, "global_position", global_position, _points.get_node("drone_spawns/drone_a/spawn3").global_position, 1.0)
+	$Tween.start()
+	
+	_timer.start(1.0)
+	yield(_timer, "timeout")
+	
+	drone1.get_node("CollisionShape2D").disabled = false
+	#drone1.set_initial_direction_moving()
+	
+	drone2.get_node("CollisionShape2D").disabled = false
+	#drone2.set_initial_direction_moving()
+	
+	drone3.get_node("CollisionShape2D").disabled = false
+	#drone3.set_initial_direction_moving()
 
 # Code called when the boss fight is finished
-func _finish_fight() -> void:
-	pass
+func _fight_finished_transition() -> void:
+	Globals.player.get_node("game_UI").on_player_level_cleared()
+	queue_free()
 	
 # Code for the ai jumping
 func _zorro_jump(secondary_cooldown: bool = false) -> void:
@@ -746,44 +929,49 @@ func _throw_card() -> void:
 	# Create, initialize, and add a new study card projectile to the drone
 	var study_card:    Entity = _STUDY_CARD.instance()
 	
-	# If the ai is not facing the player before the taunt, then turn the ai around
-	if !_ai_facing_player():
-		turn_around()
-		turned_around = true
-	
-	# Have ai sheath sword
-	_draw_sword(true)
-	
-	# Pause the ai for the duration of the throw
-	ai_wait(0.5)
-	
-	# Perform the throwing animation
-	_change_animation(_ANIMATION.THROW)
-	_timer.start(0.5)
-	yield(_timer, "timeout")
-	
-	# Spawn the 3x5 card
-	# Save the position of the thrown 3x5 card to the misc_loc vector in Globals. It will
-	# be used by the study card.
-	Globals.misc_loc = Vector2($throw_point.global_position.x, $throw_point.global_position.y - (Globals.player.get_node("CollisionShape2D").get_shape().extents.y / 3))
-	_points.get_node("study_card_parent").add_child(study_card)
-	study_card.global_position = Globals.misc_loc
-	study_card.speed = 7.0
-	study_card.set_collision_mask_bit(Globals.LAYER.WORLD, false)
-	study_card.initialize()
-	
-	# Have the ai taunt the player briefly
-	_change_animation(_ANIMATION.ARM_WAVE)
-	_timer.start(1.0)
-	yield(_timer, "timeout")
-	_change_animation(_ANIMATION.IDLE)
-	
-	# Have ai draw sword
-	_draw_sword()
-	
-	# If the ai turned around, turn it back around after the animation is done
-	if turned_around:
-		turn_around()
+	# Only throw the 3x5 card if the throw cooldown is finished
+	if _throw_card_timer >= _throw_card_cooldown:
+		
+		# If the ai is not facing the player before the taunt, then turn the ai around
+		if !_ai_facing_player():
+			turn_around()
+			turned_around = true
+		
+		# Have ai sheath sword
+		_draw_sword(true)
+		
+		# Pause the ai for the duration of the throw
+		ai_wait(0.5)
+		
+		# Perform the throwing animation
+		_change_animation(_ANIMATION.THROW)
+		_timer.start(0.5)
+		yield(_timer, "timeout")
+		
+		# Spawn the 3x5 card
+		# Save the position of the thrown 3x5 card to the misc_loc vector in Globals. It will
+		# be used by the study card.
+		Globals.misc_loc = Vector2($throw_point.global_position.x, $throw_point.global_position.y - (Globals.player.get_node("CollisionShape2D").get_shape().extents.y / 3))
+		_points.get_node("study_card_parent").add_child(study_card)
+		study_card.global_position = Globals.misc_loc
+		study_card.speed = 7.0
+		study_card.set_collision_mask_bit(Globals.LAYER.WORLD, false)
+		study_card.initialize()
+		
+		# Have the ai taunt the player briefly
+		_change_animation(_ANIMATION.ARM_WAVE)
+		_timer.start(1.0)
+		yield(_timer, "timeout")
+		_change_animation(_ANIMATION.IDLE)
+		
+		# Have ai draw sword
+		_draw_sword()
+		
+		# If the ai turned around, turn it back around after the animation is done
+		if turned_around:
+			turn_around()
+			
+		_throw_card_timer = 0.0
 
 #-----------------------------------------------------------------------------#
 #                                Signal Methods                               #
@@ -794,7 +982,7 @@ func _throw_card() -> void:
 #=============================
 # Set initial values for use in boss ai here
 func _on_zorro_boss_init() -> void:
-	set_current_ai_stage(STAGE.TWO)
+	set_current_ai_stage(STAGE.ONE)
 	set_movement_direction(DIRECTION.LEFT)
 	set_current_state(STATE.MOVING2)
 
@@ -839,6 +1027,9 @@ func _on_zorro_boss_stage_ran(stage_number):
 		# Pause ai.gd until ai code in this script is complete
 		pause_ai()
 		
+		# Detect and set the current stage of the ai
+		_detect_stage()
+		
 		# If the current stage running is not STAGE.NONE then check statistics
 		if stage_number != STAGE.NONE:
 			_check_within_scaffolding()
@@ -854,10 +1045,6 @@ func _on_zorro_boss_stage_ran(stage_number):
 				_run_ai_stage_two()
 			STAGE.THREE:
 				_run_ai_stage_three()
-			STAGE.FOUR:
-				_run_ai_stage_four()
-			STAGE.FINISHED:
-				_finish_fight()
 			_:
 				pass
 				
@@ -900,12 +1087,25 @@ func _on_zorro_boss_ai_resumed(was_waiting):
 
 # Emitted after an ai_stage is made
 func _on_zorro_boss_stage_changed(previous_stage, new_stage):
-	pass # Replace with function body.
+	if previous_stage < new_stage:
+		match new_stage:
+			STAGE.TWO:
+				_stage_two_transition()
+			STAGE.THREE:
+				_stage_three_transition()
+			STAGE.FINISHED:
+				_fight_finished_transition()
 
 #=============================
 # Signals not from ai.gd
 #=============================
-# Note that player damage is already taken care of using entity.gd
-# This signal is meant for puroses other than damage detection
-func _on_zorro_boss_collision(body) -> void:
-	pass # Replace with function body.
+
+# Boss shouldn't be able to actually die
+func _on_zorro_boss_death():
+	$audio/sword_hit.play()
+	set_current_ai_stage(STAGE.FINISHED)
+
+func _on_zorro_boss_health_changed(ammount):
+	if ammount < 0 and get_current_health():
+		$audio/sword_hit.play()
+		flash_damaged(10)

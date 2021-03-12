@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/drone_b_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/SD8_drone.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -64,6 +65,10 @@ stream = ExtResource( 3 )
 volume_db = -10.0
 max_distance = 500.0
 attenuation = 4.0
-[connection signal="collision" from="." to="." method="_on_drone_b_collision"]
+
+[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="death" from="." to="." method="_on_drone_b_death"]
 [connection signal="health_changed" from="." to="." method="_on_drone_b_health_changed"]
