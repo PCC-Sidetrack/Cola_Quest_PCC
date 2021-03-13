@@ -58,6 +58,7 @@ func _on_drone_b_death():
 	var timer: Timer = Timer.new()
 	
 	$CollisionShape2D.disabled = true
+	$healthbar.max_value       = health
 	timer.set_one_shot(true)
 	add_child(timer)
 	
@@ -65,13 +66,23 @@ func _on_drone_b_death():
 	$sword_hit.play()
 	$Tween.interpolate_property($AudioStreamPlayer2D, "pitch_scale", $AudioStreamPlayer2D.pitch_scale, 0.01, 50 * 0.04)
 	$Tween.start()
-	
+
 	death_anim (50,  0.04)
 	timer.start(50 * 0.04)
 	yield(timer, "timeout")
 	queue_free()
 
+# On drone health changed
 func _on_drone_b_health_changed(ammount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
 	if ammount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
+
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 
+

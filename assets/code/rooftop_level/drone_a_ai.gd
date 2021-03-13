@@ -62,6 +62,7 @@ func _ready() -> void:
 	
 	initialize_instructions (instructions, true)
 	initialize_enemy        (health, damage, movement_speed, acceleration)
+	$healthbar.max_value = health
 	set_knockback_multiplier(knockback)
 	
 	$AnimatedSprite.play("fly")
@@ -119,8 +120,16 @@ func _on_drone_a_death():
 	yield(timer, "timeout")
 	queue_free()
 
-
+# On drone health changed
 func _on_drone_a_health_changed(ammount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
 	if ammount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
+
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 

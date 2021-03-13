@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/running_eagor.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S7_running_eagor/S7_running_eagor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -44,7 +45,7 @@ script = ExtResource( 1 )
 position = Vector2( -0.093895, -16.0562 )
 frames = SubResource( 5 )
 animation = "run"
-frame = 3
+frame = 1
 playing = true
 flip_h = true
 
@@ -65,5 +66,11 @@ occluder = SubResource( 7 )
 
 [node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="healthbar" parent="." instance=ExtResource( 4 )]
+margin_left = -7.62543
+margin_top = -41.6051
+margin_right = 8.37457
+margin_bottom = -35.6051
 [connection signal="death" from="." to="." method="_on_S7_running_eagor_death"]
 [connection signal="health_changed" from="." to="." method="_on_S7_running_eagor_health_changed"]

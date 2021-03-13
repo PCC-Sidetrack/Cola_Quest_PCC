@@ -19,6 +19,8 @@ func _on_boss_fight_trigger_body_entered(body):
 		# Enable the boss
 		get_node("../../../enemies/zorro_boss").fight_enabled = true
 		
+		# Enable boss health
+		get_owner().get_node("player/game_UI").on_boss_healthbar_visible(true)
 		queue_free()
 		
 	

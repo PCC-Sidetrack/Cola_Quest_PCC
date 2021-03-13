@@ -2101,7 +2101,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 115 )
-frame = 12
+frame = 1
 speed_scale = 3.0
 playing = true
 
@@ -2459,7 +2459,6 @@ position = Vector2( 18688, 536 )
 position = Vector2( 17952, 603 )
 
 [node name="triggers" type="Node2D" parent="."]
-visible = false
 
 [node name="spawnpoints" type="Node2D" parent="triggers"]
 
@@ -2852,7 +2851,7 @@ stream = ExtResource( 37 )
 stream = ExtResource( 38 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 17120, 92 )
+position = Vector2( 17770.9, 495.857 )
 z_index = 1
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
