@@ -23,7 +23,7 @@ var _cola_count:    int = 0
 # Hide respawn counter by default
 func _ready() -> void:
 	$respawn_counter.visible = false
-	$cola_collected.visible  = false
+	$total_cola_collected.visible  = false
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
@@ -31,7 +31,7 @@ func _ready() -> void:
 # Prints the fps onto a label
 func _physics_process(_delta: float) -> void:
 	$fps_counter.set_text    ("FPS: " + str(Engine.get_frames_per_second()))
-	$cola_collected.set_text ("Cola Collected : " + str(_cola_count))
+	$total_cola_collected.set_text ("Cola Collected : " + str(_cola_count))
 	$respawn_counter.set_text("Respawn Counter: " + str(_respawn_count))
 
 
@@ -47,11 +47,11 @@ func _on_game_UI_player_killed() -> void:
 func _on_game_UI_respawn_player() -> void:
 	_respawn_count += 1
 	$respawn_counter.visible = false
-	$cola_collected.visible  = false
+	$total_cola_collected.visible  = false
 	
 func _on_game_UI_level_cleared():
 	yield(get_tree().create_timer(3.0), "timeout")
-	$cola_collected.visible  = true
+	$total_cola_collected.visible  = true
 	$respawn_counter.visible = true
 
 func _on_game_UI_cola_collect(amount):
