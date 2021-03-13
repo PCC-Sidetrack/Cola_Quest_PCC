@@ -45,8 +45,10 @@ func _ready() -> void:
 	set_sprite_facing_direction(Globals.DIRECTION.RIGHT)
 	set_auto_facing            (true)
 	
+	
 	$AnimationPlayer.play("fly")
 	$AudioStreamPlayer2D.play()
+	$healthbar.max_value = health
 
 
 #-----------------------------------------------------------------------------#
@@ -81,6 +83,13 @@ func _on_bird_death():
 
 
 func _on_bird_health_changed(ammount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
 	if ammount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 
