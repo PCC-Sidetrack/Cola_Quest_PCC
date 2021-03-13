@@ -92,3 +92,29 @@ func _on_Aggro_Range_body_exited(body):
 	player_in_range = false
 	$AnimatedSprite.stop()
 	$AnimatedSprite.play("Idle")
+
+
+func _on_Pisces_health_changed(ammount):
+	if ammount < 0 and get_current_health():
+		$sword_hit.play()
+		flash_damaged(10)
+
+
+func _on_Pisces_death():
+	# Used to wait a given amount of time before deleting the entity
+	var timer: Timer = Timer.new()
+	
+	$CollisionShape2D.disabled = true
+
+	timer.set_one_shot(true)
+	add_child(timer)
+	
+	# Add an audio pitch fade out
+	$sword_hit.play()
+	$Tween.interpolate_property($AudioStreamPlayer2D, "pitch_scale", $AudioStreamPlayer2D.pitch_scale, 0.01, 50 * 0.04)
+	$Tween.start()
+	
+	death_anim (50,  0.04)
+	timer.start(50 * 0.04)
+	yield(timer, "timeout")
+	queue_free()

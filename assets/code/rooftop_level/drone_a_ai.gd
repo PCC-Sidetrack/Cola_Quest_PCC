@@ -67,6 +67,18 @@ func _ready() -> void:
 	$AnimatedSprite.play("fly")
 	$AudioStreamPlayer2D.play()
 
+
+#-----------------------------------------------------------------------------#
+#                                Public Methods                               #
+#-----------------------------------------------------------------------------#
+func set_initial_direction_moving(direction: Vector2 = Vector2.DOWN) -> void:
+	var instructions = [
+		duration (direction, turnaround_time),
+		end_point(global_position)
+	]
+	
+	initialize_instructions (instructions, true)
+
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#

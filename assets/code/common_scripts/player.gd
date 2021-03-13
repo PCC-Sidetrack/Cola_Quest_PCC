@@ -218,6 +218,7 @@ func _get_input() -> Vector2:
 		
 		if not _is_attacking:
 			_set_sprite(direction)
+		
 		velocity.x = direction
 	
 	return velocity
@@ -334,6 +335,7 @@ func _on_game_UI_respawn_player() -> void:
 	set_modulate(Color(1, 1, 1, 1))
 	set_current_health(max_health)
 	take_damage(-max_health)
+	_switch_sprite(SPRITE.IDLE)
 	Globals.game_locked = false
 
 

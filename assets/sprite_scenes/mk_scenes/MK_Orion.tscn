@@ -103,3 +103,7 @@ shape = SubResource( 18 )
 
 [node name="spear_spawn" type="Node2D" parent="."]
 position = Vector2( -14, -7 )
+
+[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+[connection signal="death" from="." to="." method="_on_Orion_death"]
+[connection signal="health_changed" from="." to="." method="_on_Orion_health_changed"]

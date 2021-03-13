@@ -1577,7 +1577,6 @@ visible = false
 position = Vector2( 0, -15.6562 )
 texture = ExtResource( 6 )
 hframes = 7
-frame = 5
 
 [node name="walk" type="Sprite" parent="sprites"]
 visible = false
@@ -1595,8 +1594,8 @@ texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
 visible = false
-position = Vector2( -8.54123, 14.3609 )
-rotation = 2.00687
+position = Vector2( -8.55, 14.3 )
+rotation = 2.00713
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
@@ -1608,10 +1607,14 @@ shape = SubResource( 13 )
 [node name="throw_point" type="Node2D" parent="."]
 position = Vector2( 3.44101, -24.7224 )
 
-[node name="audio" type="Node" parent="."]
+[node name="audio" type="Node2D" parent="."]
 
 [node name="sword_hit" type="AudioStreamPlayer2D" parent="audio"]
 stream = ExtResource( 11 )
+volume_db = -5.0
+pitch_scale = 1.6
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="ai_paused" from="." to="." method="_on_zorro_boss_ai_paused"]
 [connection signal="ai_resumed" from="." to="." method="_on_zorro_boss_ai_resumed"]
 [connection signal="attacked" from="." to="." method="_on_zorro_boss_attacked"]

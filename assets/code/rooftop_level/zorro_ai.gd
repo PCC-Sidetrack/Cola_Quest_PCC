@@ -31,7 +31,10 @@ var _ANIMATION: Dictionary = {
 
 # Holds a reference to the 3x5_projectile scene
 const _STUDY_CARD = preload("res://assets//sprite_scenes//rooftop_scenes//study_card_projectile.tscn")
-
+# Holds a reference to the drone_a scene
+const _DRONE_A    = preload("res://assets//sprite_scenes//rooftop_scenes//drone_a.tscn")
+# Holds a reference to the drone_b scene
+const _DRONE_B    = preload("res://assets//sprite_scenes//rooftop_scenes//drone_b.tscn")
 
 #-----------------------------------------------------------------------------#
 #                              Exported Variables                             #
@@ -53,7 +56,7 @@ export var speed:                         float = 5.0
 export var dash_multiplier:               float = 4.0
 
 # Indicates the cooldown for attacking (in seconds)
-export var attack_cooldown:               float = 1.5
+export var attack_cooldown:               float = 2.0
 # Indicates the cooldown for dashing (in seconds)
 # Should be same as or less than attack cooldown if used in an attack action
 export var dash_cooldown:                 float = attack_cooldown
@@ -61,9 +64,9 @@ export var dash_cooldown:                 float = attack_cooldown
 # Damage that zorro deals to entitys
 export var damage:                        int = 1
 # Max health of boss
-export var max_health:                    int = 16
+export var max_health:                    int = 18
 # Distance of boss from player before an action occurs (such as an attack)
-export var standard_distance_from_player: int = 130
+export var standard_distance_from_player: int = 200
 
 
 #-----------------------------------------------------------------------------#
@@ -425,8 +428,30 @@ func _detect_waiting_state() -> int:
 	
 # Detects and (if needed) changes the current stage of the ai
 func _detect_stage() -> void:
-	pass
+	# Holds the division of health for one stage
+	var stage_change_inc: int = int(max_health / 3)
+	# Temporarily stores the ai's current health so that method calls can be less frequent
+	var current_health:   int = get_current_health()
+	# Temproarily stores the current ai's stage so that method calls can be less frequent
+	var current_stage:    int = get_current_ai_stage()
 	
+	# Is ai at stage one
+	if current_health > max_health - stage_change_inc:
+		if current_stage != STAGE.ONE:
+			set_current_ai_stage(STAGE.ONE)
+	# Is ai at stage two
+	elif current_health > max_health - (stage_change_inc * 2):
+		if current_stage != STAGE.TWO:
+			set_current_ai_stage(STAGE.TWO)
+	# Is ai at stage three
+	elif current_health <= stage_change_inc && current_health > 2:
+		if current_stage != STAGE.THREE:
+			set_current_ai_stage(STAGE.THREE)
+	# Ist the ai at final stage
+	else:
+		if current_stage != STAGE.FINISHED:
+			set_current_ai_stage(STAGE.FINISHED)
+		
 # Get the current floor of scaffolding the ai is on.
 # -1 = not in scaffolding, 0 = ground, 1 = 1st floor, 2 = 2nd floor, etc.
 func _get_scaffolding_floor() -> int:
@@ -588,7 +613,7 @@ func _run_ai_stage_two() -> void:
 						
 						# Set the velocity (simialar to how it's done in entity.gd)
 						_change_animation(_ANIMATION.JUMP)
-						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier * 2, get_ai_velocity().y))
+						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
 						_timer.start(0.2)
 						yield(_timer, "timeout")
 						_dash_cooldown_timer = 0.0
@@ -618,7 +643,7 @@ func _run_ai_stage_two() -> void:
 						
 						# Set the velocity (simialar to how it's done in entity.gd)
 						_change_animation(_ANIMATION.JUMP)
-						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier * 2, get_ai_velocity().y))
+						set_ai_velocity(Vector2(get_movement_direction().x * get_ai_speed() * _dash_multiplier, get_ai_velocity().y))
 						_timer.start(0.2)
 						yield(_timer, "timeout")
 						_dash_cooldown_timer = 0.0
@@ -719,9 +744,106 @@ func _run_ai_stage_three() -> void:
 		_:
 			pass
 
+# Code called when the ai switches to stage two
+func _stage_two_transition() -> void:
+	# Have zorro throw 3 drones into the air
+	set_movement_enabled(false)
+	
+	# Throw drone
+	_change_animation(_ANIMATION.THROW)
+	pause_ai(3.0)
+	_timer.start(3.0)
+	yield(_timer, "timeout")
+	
+		
+	# Spawn Drone 1	
+	var drone1 = _DRONE_B.instance()
+	_points.get_node("drone_spawns/drone_b/spawn4").add_child(drone1)
+	drone1.get_node("CollisionShape2D").disabled = true
+	drone1.global_position = global_position
+	$Tween.interpolate_property(drone1, "global_position", global_position, _points.get_node("drone_spawns/drone_b/spawn4").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 2
+	var drone2 = _DRONE_B.instance()
+	_points.get_node("drone_spawns/drone_b/spawn5").add_child(drone2)
+	drone2.get_node("CollisionShape2D").disabled = true
+	drone2.global_position = global_position
+	$Tween.interpolate_property(drone2, "global_position", global_position, _points.get_node("drone_spawns/drone_b/spawn5").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 3
+	var drone3 = _DRONE_B.instance()
+	_points.get_node("drone_spawns/drone_b/spawn6").add_child(drone3)
+	drone3.get_node("CollisionShape2D").disabled = true
+	drone3.global_position = global_position
+	$Tween.interpolate_property(drone3, "global_position", global_position, _points.get_node("drone_spawns/drone_b/spawn6").global_position, 1.0)
+	$Tween.start()
+	
+	_timer.start(1.0)
+	yield(_timer, "timeout")
+	
+	drone1.get_node("CollisionShape2D").disabled = false
+	#drone1.set_initial_direction_moving()
+	
+	drone2.get_node("CollisionShape2D").disabled = false
+	#drone2.set_initial_direction_moving()
+	
+	drone3.get_node("CollisionShape2D").disabled = false
+	#drone3.set_initial_direction_moving()
+	
+# Code called when the ai switches to stage three
+func _stage_three_transition() -> void:
+	# Have zorro throw 3 drones into the air
+	set_movement_enabled(false)
+	
+	# Throw drone
+	_change_animation(_ANIMATION.THROW)
+	pause_ai(3.0)
+	_timer.start(3.0)
+	yield(_timer, "timeout")
+	
+		
+	# Spawn Drone 1	
+	var drone1 = _DRONE_A.instance()
+	_points.get_node("drone_spawns/drone_a/spawn1").add_child(drone1)
+	drone1.get_node("CollisionShape2D").disabled = true
+	drone1.global_position = global_position
+	$Tween.interpolate_property(drone1, "global_position", global_position, _points.get_node("drone_spawns/drone_a/spawn1").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 2
+	var drone2 = _DRONE_A.instance()
+	_points.get_node("drone_spawns/drone_a/spawn2").add_child(drone2)
+	drone2.get_node("CollisionShape2D").disabled = true
+	drone2.global_position = global_position
+	$Tween.interpolate_property(drone2, "global_position", global_position, _points.get_node("drone_spawns/drone_a/spawn2").global_position, 1.0)
+	$Tween.start()
+	
+	# Spawn Drone 3
+	var drone3 = _DRONE_A.instance()
+	_points.get_node("drone_spawns/drone_a/spawn3").add_child(drone3)
+	drone3.get_node("CollisionShape2D").disabled = true
+	drone3.global_position = global_position
+	$Tween.interpolate_property(drone3, "global_position", global_position, _points.get_node("drone_spawns/drone_a/spawn3").global_position, 1.0)
+	$Tween.start()
+	
+	_timer.start(1.0)
+	yield(_timer, "timeout")
+	
+	drone1.get_node("CollisionShape2D").disabled = false
+	#drone1.set_initial_direction_moving()
+	
+	drone2.get_node("CollisionShape2D").disabled = false
+	#drone2.set_initial_direction_moving()
+	
+	drone3.get_node("CollisionShape2D").disabled = false
+	#drone3.set_initial_direction_moving()
+
 # Code called when the boss fight is finished
-func _finish_fight() -> void:
-	pass
+func _fight_finished_transition() -> void:
+	Globals.player.get_node("game_UI").on_player_level_cleared()
+	queue_free()
 	
 # Code for the ai jumping
 func _zorro_jump(secondary_cooldown: bool = false) -> void:
@@ -860,7 +982,7 @@ func _throw_card() -> void:
 #=============================
 # Set initial values for use in boss ai here
 func _on_zorro_boss_init() -> void:
-	set_current_ai_stage(STAGE.TWO)
+	set_current_ai_stage(STAGE.ONE)
 	set_movement_direction(DIRECTION.LEFT)
 	set_current_state(STATE.MOVING2)
 
@@ -905,6 +1027,9 @@ func _on_zorro_boss_stage_ran(stage_number):
 		# Pause ai.gd until ai code in this script is complete
 		pause_ai()
 		
+		# Detect and set the current stage of the ai
+		_detect_stage()
+		
 		# If the current stage running is not STAGE.NONE then check statistics
 		if stage_number != STAGE.NONE:
 			_check_within_scaffolding()
@@ -920,10 +1045,6 @@ func _on_zorro_boss_stage_ran(stage_number):
 				_run_ai_stage_two()
 			STAGE.THREE:
 				_run_ai_stage_three()
-			STAGE.FOUR:
-				_run_ai_stage_three()
-			STAGE.FINISHED:
-				_finish_fight()
 			_:
 				pass
 				
@@ -966,7 +1087,14 @@ func _on_zorro_boss_ai_resumed(was_waiting):
 
 # Emitted after an ai_stage is made
 func _on_zorro_boss_stage_changed(previous_stage, new_stage):
-	pass # Replace with function body.
+	if previous_stage < new_stage:
+		match new_stage:
+			STAGE.TWO:
+				_stage_two_transition()
+			STAGE.THREE:
+				_stage_three_transition()
+			STAGE.FINISHED:
+				_fight_finished_transition()
 
 #=============================
 # Signals not from ai.gd

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/levels/MK_Level/Taurus_Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/mk_level/sprites/Taurus/Taurus Idle-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/MK_Level/Taurus_Charge2.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -75,3 +76,10 @@ physics_process_parent = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="death" from="." to="." method="_on_Taurus1_death"]
+[connection signal="health_changed" from="." to="." method="_on_Taurus1_health_changed"]

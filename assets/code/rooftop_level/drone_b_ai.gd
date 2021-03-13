@@ -51,6 +51,17 @@ func _physics_process(_delta: float) -> void:
 		move()
 		
 #-----------------------------------------------------------------------------#
+#                                Public Methods                               #
+#-----------------------------------------------------------------------------#
+func set_initial_direction_moving(direction: Vector2 = Vector2.DOWN) -> void:
+	var instructions = [
+		duration (direction, turnaround_time),
+		end_point(global_position)
+	]
+	
+	initialize_instructions (instructions, true)
+		
+#-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 func _on_drone_b_death():

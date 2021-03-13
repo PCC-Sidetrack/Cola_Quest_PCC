@@ -30,6 +30,9 @@ func _ready() -> void:
 # need this trigger to deal with the collectible when the player's collision box
 # enters it. This is also why the CollisionShape2D outside the Area2D is disabled.
 func _on_Area2D_body_entered(body):
+	# Tell the gui that a cola was collected
+	Globals.player.get_node("game_UI").on_cola_collect(1)
+	
 	# Play the collection sound
 	_rng.randomize()
 	$SD20_coke_collect.pitch_scale = _rng.randf_range(0.9, 1.1)
