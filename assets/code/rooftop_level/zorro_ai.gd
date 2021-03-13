@@ -143,6 +143,7 @@ onready var _points:                Node = get_node("../../points/boss_fight")
 func _ready() -> void:
 	# Initialize the boss
 	initialize(max_health, damage, speed, acceleration, jump_speed, dash_cooldown, obeys_gravity, smooth_movement, auto_facing)
+	get_owner().get_node("player/game_UI").on_initialize_boss (max_health, "Dr. Zorro")
 	
 	# Set the initial animation to play
 	_change_animation(_ANIMATION.IDLE)
@@ -843,6 +844,7 @@ func _stage_three_transition() -> void:
 # Code called when the boss fight is finished
 func _fight_finished_transition() -> void:
 	Globals.player.get_node("game_UI").on_player_level_cleared()
+	Globals.player.set_invulnerability(999999)
 	queue_free()
 	
 # Code for the ai jumping
@@ -1106,6 +1108,8 @@ func _on_zorro_boss_death():
 	set_current_ai_stage(STAGE.FINISHED)
 
 func _on_zorro_boss_health_changed(ammount):
+	print(get_current_health())
+	get_owner().get_node("player/game_UI").on_boss_health_changed(get_current_health(), get_current_health() + ammount)
 	if ammount < 0 and get_current_health():
 		$audio/sword_hit.play()
 		flash_damaged(10)
