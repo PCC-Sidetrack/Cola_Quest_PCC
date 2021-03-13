@@ -25,5 +25,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	
 	# On logo on screen, change scene
 	if anim_name == "logo_fade_into":
-		yield(get_tree().create_timer(.5), "timeout")
 		return get_tree().change_scene("res://assets/levels/rooftop_level.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/gui/hud/game_UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/gui/menus/failure/failure.tscn" type="PackedScene" id=2]
@@ -10,47 +10,6 @@
 [ext_resource path="res://assets/gui/hud/screen_flash/screen_flash.png" type="Texture" id=8]
 [ext_resource path="res://assets/gui/hud/flash.gd" type="Script" id=9]
 [ext_resource path="res://assets/gui/fonts/m5x7.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://assets/art/rooftop_level/sprites/C2_cola_collectible/C2_cola_collectible.png" type="Texture" id=11]
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 11 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 11 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 11 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 11 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 11 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 11 )
-region = Rect2( 192, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 11 )
-region = Rect2( 224, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=12]
-animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "default",
-"speed": 7.0
-} ]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://assets/gui/fonts/m5x7.ttf"
@@ -89,29 +48,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cola_icon" type="AnimatedSprite" parent="other_hud/ui_statistics"]
-position = Vector2( 24, 42.5101 )
-scale = Vector2( 0.78195, 0.78195 )
-frames = SubResource( 12 )
-frame = 1
-playing = true
-
-[node name="cola_collected" type="Label" parent="other_hud/ui_statistics"]
-margin_left = 36.5112
-margin_top = 40.0
-margin_right = 99.5112
-margin_bottom = 54.0
-custom_fonts/font = SubResource( 2 )
-text = "cola_amount"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="fps_counter" type="Label" parent="other_hud/ui_statistics"]
-margin_left = 36.5112
-margin_top = 72.0
-margin_right = 98.5112
-margin_bottom = 86.0
+margin_left = 8.09406
+margin_top = 52.3131
+margin_right = 48.0941
+margin_bottom = 66.3131
 custom_fonts/font = SubResource( 2 )
 text = "fps_counter"
 __meta__ = {
@@ -138,7 +79,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="total_cola_collected" type="Label" parent="other_hud/ui_statistics"]
+[node name="cola_collected" type="Label" parent="other_hud/ui_statistics"]
 anchor_left = 0.378419
 anchor_top = 0.465916
 anchor_right = 0.456419
@@ -186,12 +127,12 @@ centered = false
 [connection signal="flash_screen" from="." to="other_hud/flash" method="_on_game_UI_flash_screen"]
 [connection signal="initialize_boss" from="." to="boss_healthbar" method="_on_game_UI_initialize_boss"]
 [connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
-[connection signal="level_cleared" from="." to="other_hud/ui_statistics" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
+[connection signal="level_cleared" from="." to="other_hud/ui_statistics" method="_on_game_UI_level_cleared"]
 [connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
-[connection signal="player_killed" from="." to="other_hud/ui_statistics" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="other_hud/ui_statistics" method="_on_game_UI_player_killed"]
 [connection signal="player_low_health" from="." to="player_healthbar" method="_on_game_UI_player_low_health"]
 [connection signal="respawn_player" from="." to="other_hud/ui_statistics" method="_on_game_UI_respawn_player"]
 [connection signal="respawn_player" from="pause" to="." method="_on_pause_respawn_player"]
