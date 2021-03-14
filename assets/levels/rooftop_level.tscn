@@ -2117,45 +2117,41 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
-frame = 3
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
-frame = 3
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
+frame = 3
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
-frame = 3
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
-frame = 3
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
-frame = 3
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
-frame = 3
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
+frame = 3
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
-frame = 0
+frame = 2
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -2253,7 +2249,7 @@ movement_speed = 0.1
 position = Vector2( 3856, -198 )
 
 [node name="drone_b18" parent="enemies/drones" instance=ExtResource( 5 )]
-position = Vector2( 4392, -186 )
+position = Vector2( 4368, -125 )
 
 [node name="eagors" type="Node2D" parent="enemies"]
 
@@ -2277,7 +2273,7 @@ position = Vector2( 8926, -93 )
 position = Vector2( 12193.8, 298.336 )
 
 [node name="bird3" parent="enemies/birds" instance=ExtResource( 8 )]
-position = Vector2( 3968, -384 )
+position = Vector2( 3969, -346 )
 turnaround_time = 4.0
 
 [node name="killzone" type="Area2D" parent="enemies"]
@@ -2507,7 +2503,7 @@ position = Vector2( 3712, 66 )
 scale = Vector2( 1, 1.44 )
 
 [node name="spawnpoint17" parent="triggers/spawnpoints" instance=ExtResource( 31 )]
-position = Vector2( 3969, -243 )
+position = Vector2( 3969, -198 )
 scale = Vector2( 12.68, -0.135606 )
 
 [node name="spawnpoint4" parent="triggers/spawnpoints" instance=ExtResource( 31 )]
@@ -2958,7 +2954,7 @@ z_index = -1
 texture = ExtResource( 44 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 178.624, 187.192 )
+position = Vector2( 200, 191 )
 z_index = 1
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]

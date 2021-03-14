@@ -40,7 +40,6 @@ func _ready() -> void:
 	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
 	set_auto_facing            (true)
 	
-	$healthbar.max_value = health
 	$AnimatedSprite.play("run")
 	
 #-----------------------------------------------------------------------------#
@@ -71,15 +70,7 @@ func _on_S7_running_eagor_death():
 	yield(timer, "timeout")
 	queue_free()
 
-# On eagor health change 
 func _on_S7_running_eagor_health_changed(ammount):
-	$healthbar.value   = get_current_health()
-	$healthbar.visible = true
 	if ammount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
-	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
-
-# On healthbar visibility timeout
-func _visible_timeout():
-	$healthbar.visible = false 
