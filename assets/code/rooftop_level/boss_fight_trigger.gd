@@ -18,9 +18,12 @@ func _on_boss_fight_trigger_body_entered(body):
 		
 		# Enable the boss
 		get_node("../../../enemies/zorro_boss").fight_enabled = true
+		#Globals.player.get_node("game_UI").on_boss_healthbar_visible(true)
 		
-		# Enable boss health
-		get_owner().get_node("player/game_UI").on_boss_healthbar_visible(true)
+		# Initialze the boss healthbar
+		#Globals.player.get_node("game_UI").on_initialize_boss(get_node("../../../player").max_health, "Dr. Geary (Zorro)")
+	
+		
 		queue_free()
 		
 	

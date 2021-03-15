@@ -69,7 +69,7 @@ func _on_Pisces_collision(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.knockback(self)
 		deal_damage(body)
-	
+		
 
 func play_attack():
 	var t = Timer.new()

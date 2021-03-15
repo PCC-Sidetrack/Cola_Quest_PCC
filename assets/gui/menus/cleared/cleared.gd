@@ -42,7 +42,6 @@ func _on_CompletionText_animation_finished() -> void:
 
 # On level cleared, show level cleared menu
 func _on_game_UI_level_cleared() -> void:
-	Globals.game_locked       = true
 	$completed.play()
 	$CompletionScreen.visible = true
 	_completion_sign.play()
