@@ -94,20 +94,6 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_Taurus_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER):
-		body.knockback(self)
-		deal_damage(body)
-
-func _on_Taurus_death():
-	death_anim()
-	kill()
-
-func _on_Taurus_health_changed(_change):
-	health -= _change
-
-
 func play_sound():
 	var j = 1.0
 	var t = Timer.new()

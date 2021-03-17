@@ -64,13 +64,6 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_Pisces_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER):
-		body.knockback(self)
-		deal_damage(body)
-		
-
 func play_attack():
 	var t = Timer.new()
 	t.set_wait_time(1.5)
