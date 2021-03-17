@@ -70,7 +70,7 @@ func _on_Pisces_collision(body):
 		body.knockback(self)
 		deal_damage(body)
 		
-
+		
 func play_attack():
 	var t = Timer.new()
 	t.set_wait_time(1.5)
