@@ -286,7 +286,7 @@ func _change_footstep_pitch() -> void:
 #-----------------------------------------------------------------------------#
 # Triggered whenever the player collides with something
 func _on_player_collision(body) -> void:
-	if body.has_method("is_in_group"):
+	if body.has_method("is_in_group") and Globals.game_locked == false:
 		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
 			take_damage(body.get_damage())
 			knockback(body)
@@ -340,7 +340,7 @@ func _on_game_UI_respawn_player() -> void:
 
 
 func _on_melee_body_entered(body: Node) -> void:
-	if body.is_in_group(Globals.GROUP.ENEMY):
+	if body.is_in_group(Globals.GROUP.ENEMY) and Globals.game_locked == false:
 		body.take_damage(get_damage())
 		body.custom_knockback(self, 5.0)
 	

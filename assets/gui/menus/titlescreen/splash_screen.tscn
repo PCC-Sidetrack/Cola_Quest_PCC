@@ -76,8 +76,9 @@ __meta__ = {
 }
 
 [node name="loading_can" type="TextureRect" parent="."]
+margin_top = 219.161
 margin_right = 512.0
-margin_bottom = 300.0
+margin_bottom = 519.161
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false

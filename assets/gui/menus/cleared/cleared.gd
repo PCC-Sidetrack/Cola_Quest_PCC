@@ -30,7 +30,7 @@ func _on_CompletionSign_animation_finished() -> void:
 	_completion_text.visible                      = true
 	_completion_text.animation                    = "glow"
 	_completion_text.playing                      = true
-	$buttons/ButtonScreen/Buttons/Retry.visible   = true
+	$buttons/ButtonScreen/Buttons/Retry.visible   = false
 	$buttons/ButtonScreen/Buttons/Restart.visible = true
 	$buttons/ButtonScreen/Buttons/Exit.visible    = true
 	_confetti_left.emitting                       = true
@@ -42,6 +42,7 @@ func _on_CompletionText_animation_finished() -> void:
 
 # On level cleared, show level cleared menu
 func _on_game_UI_level_cleared() -> void:
+	Globals.game_locked       = true
 	$completed.play()
 	$CompletionScreen.visible = true
 	_completion_sign.play()
