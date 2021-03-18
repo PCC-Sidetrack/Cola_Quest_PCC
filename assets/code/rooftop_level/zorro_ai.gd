@@ -143,7 +143,8 @@ onready var _points:                Node = get_node("../../points/boss_fight")
 func _ready() -> void:
 	# Initialize the boss
 	initialize(max_health, damage, speed, acceleration, jump_speed, dash_cooldown, obeys_gravity, smooth_movement, auto_facing)
-	
+	get_owner().get_node("player/game_UI").on_initialize_boss (max_health, "Dr. Zorro")
+
 	# Set the initial animation to play
 	_change_animation(_ANIMATION.IDLE)
 	
@@ -1061,7 +1062,7 @@ func _on_zorro_boss_stage_ran(stage_number):
 # Emitted after the ai turns aound either through turn_around() or set_movement_direcion()
 # NOTE: If custom flip code is not desired (indicated in the initialize() function parameters)
 #       then this signal does not need to have any code.
-func _on_zorro_boss_turned_around(h_new_direction):
+func _on_zorro_boss_turned_around(_h_new_direction):
 	# Flip all dr. geary sprites
 	for child in get_node("sprites").get_children():
 		if child is Sprite:
@@ -1075,12 +1076,12 @@ func _on_zorro_boss_turned_around(h_new_direction):
 #============================= 
 # Custom code for dashing (dash already does something but this allows addition
 # of more code)
-func _on_zorro_boss_dashed(multiplier):
+func _on_zorro_boss_dashed(_multiplier):
 	pass # Replace with function body.
 
 # Emitted after the ai is paused. Also gives how long it is intended to be
 # paused for (this holds true unless unpause_ai() is called)
-func _on_zorro_boss_ai_paused(num_seconds) -> void:
+func _on_zorro_boss_ai_paused(_num_seconds) -> void:
 	pass
 
 # Emitted when the ai is resumed (after a pause)
@@ -1110,7 +1111,9 @@ func _on_zorro_boss_death():
 	set_current_ai_stage(STAGE.FINISHED)
 
 func _on_zorro_boss_health_changed(ammount):
+	get_owner().get_node("player/game_UI").on_boss_health_changed(get_current_health(), get_current_health() + ammount)
 	if ammount < 0 and get_current_health():
 		$audio/sword_hit.play()
 		flash_damaged(10)
-		Globals.player.get_node("game_UI").on_boss_health_changed(get_current_health() - ammount, get_current_health())
+
+

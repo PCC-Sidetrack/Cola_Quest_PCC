@@ -799,7 +799,7 @@ func flash_damaged(num_flashes: int = 0, flash_time: float = 0.03):
 			yield(t, "timeout")
 			set_modulate(Color(1, 1, 1, .5))
 	else:
-		for i in range(num_flashes):
+		for _i in range(num_flashes):
 			t.start()
 			yield(t, "timeout")
 			set_modulate(Color(1, 0.3, 0.3, 0.3))
@@ -815,7 +815,7 @@ func death_anim(num_flashes: int = 10, time_per_flash: float = 0.04):
 	var j_decrement: float = j / num_flashes
 	
 	# Flash back and forth a certain number of times
-	for i in range(num_flashes):
+	for _i in range(num_flashes):
 		set_modulate(Color(1, 0.3, 0.3, j))
 		_entity_timer.start(time_per_flash / 2)
 		yield(_entity_timer, "timeout")

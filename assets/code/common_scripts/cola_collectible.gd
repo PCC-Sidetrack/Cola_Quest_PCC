@@ -29,7 +29,7 @@ func _ready() -> void:
 # Because we don't want the player to actually collide with the collectible, we
 # need this trigger to deal with the collectible when the player's collision box
 # enters it. This is also why the CollisionShape2D outside the Area2D is disabled.
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	# Tell the gui that a cola was collected
 	Globals.player.get_node("game_UI").on_cola_collect(1)
 	

@@ -9,6 +9,6 @@
 extends Area2D
 
 # Runs every physics engine update
-func _physics_process(delta) -> void:
+func _physics_process(_delta) -> void:
 	if Globals.player_position.y >= global_position.y:
 		Globals.player.take_damage(Globals.player.get_max_health())

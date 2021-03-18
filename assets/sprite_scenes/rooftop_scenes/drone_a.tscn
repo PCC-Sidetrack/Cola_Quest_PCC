@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/drone_a_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S1_drone/S1a_drone.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/SD8_drone.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -74,5 +75,11 @@ attenuation = 4.0
 stream = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="healthbar" parent="." instance=ExtResource( 5 )]
+margin_left = -8.23597
+margin_top = -21.4834
+margin_right = 7.76403
+margin_bottom = -15.4834
 [connection signal="death" from="." to="." method="_on_drone_a_death"]
 [connection signal="health_changed" from="." to="." method="_on_drone_a_health_changed"]
