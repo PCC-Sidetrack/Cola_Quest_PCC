@@ -338,7 +338,7 @@ func _on_game_UI_respawn_player() -> void:
 	_switch_sprite(SPRITE.IDLE)
 	Globals.game_locked = false
 
-
+# COMMENT NEEDED
 func _on_melee_body_entered(body: Node) -> void:
 	if body.is_in_group(Globals.GROUP.ENEMY) and Globals.game_locked == false:
 		body.take_damage(get_damage())
@@ -351,7 +351,13 @@ func _on_melee_body_entered(body: Node) -> void:
 		else:
 			custom_knockback(self, 3.0, Vector2.LEFT)
 
-
+# COMMENT NEEDED
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "melee":
 		_is_attacking = false
+
+# COMMENT NEEDED
+func _on_game_UI_cola_healing():
+	$cola_healing/animate_plus.play("heal")	
+	$cola_healing/healing_sound.play()
+	take_damage(-1)
