@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/sounds/object_sounds/SD19_player_hurt.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/object_sounds/SD5a_jump_player.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/object_sounds/SD13a_swordswing_player.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/gui/hud/cola_healing/assests/sprites/plus_ss.png" type="Texture" id=11]
+[ext_resource path="res://assets/gui/hud/cola_healing/assests/sounds/healing_sound.wav" type="AudioStream" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -126,6 +128,89 @@ extents = Vector2( 30.9873, 25.6928 )
 [sub_resource type="OccluderPolygon2D" id=7]
 polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
 
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 11 )
+region = Rect2( 13, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 11 )
+region = Rect2( 26, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 11 )
+region = Rect2( 39, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 11 )
+region = Rect2( 52, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 11 )
+region = Rect2( 65, 0, 13, 13 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="Animation" id=15]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../animate_plus:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ NodePath("../green_plus") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.11 ),
+"transitions": PoolRealArray( 1, 0.189465 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -5, 1 ),
+"update": 0,
+"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [node name="player" type="KinematicBody2D"]
 collision_layer = 2147483649
 collision_mask = 10
@@ -210,9 +295,33 @@ volume_db = -10.0
 [node name="SD13a_sword_swing" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource( 10 )
 volume_db = -5.0
+
+[node name="cola_healing" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="green_plus" type="AnimatedSprite" parent="cola_healing"]
+visible = false
+position = Vector2( -4.527, -44.481 )
+frames = SubResource( 14 )
+frame = 3
+playing = true
+
+[node name="animate_plus" type="AnimationPlayer" parent="cola_healing"]
+root_node = NodePath("../green_plus")
+anims/heal = SubResource( 15 )
+
+[node name="healing_sound" type="AudioStreamPlayer" parent="cola_healing"]
+stream = ExtResource( 12 )
+volume_db = -8.548
+pitch_scale = 0.89
 [connection signal="collision" from="." to="." method="_on_player_collision"]
 [connection signal="death" from="." to="." method="_on_player_death"]
 [connection signal="health_changed" from="." to="." method="_on_player_health_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="melee" to="." method="_on_melee_body_entered"]
+[connection signal="cola_healing" from="game_UI" to="." method="_on_game_UI_cola_healing"]
 [connection signal="respawn_player" from="game_UI" to="." method="_on_game_UI_respawn_player"]

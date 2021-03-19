@@ -31,7 +31,6 @@ margin_left = -6.14153
 margin_top = -22.3188
 margin_right = 89.8585
 margin_bottom = 41.6812
-max_value = 100.0
 value = 100.0
 texture_progress = ExtResource( 6 )
 __meta__ = {

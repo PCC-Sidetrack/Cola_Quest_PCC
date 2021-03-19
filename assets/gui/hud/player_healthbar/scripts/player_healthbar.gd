@@ -25,7 +25,7 @@ func _hud_shake() -> void:
 func animate_value(start, end) -> void:
 	$healthbar/health_over.value  = end
 	$tween.interpolate_property($healthbar/health_under, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$tween.interpolate_property($healthbar/health_alert, "modulate", Color.white , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	$tween.interpolate_property($healthbar/health_alert, "modulate", Color.red , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$tween.start()
 
 #-----------------------------------------------------------------------------#
@@ -39,7 +39,7 @@ func _on_pulse_tween_all_completed() -> void:
 		$pulse.interpolate_property($low_health_border, "modulate", Color.white , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.start()
 	else:
-		$healthbar/health_over.modulate = Color.white
+		$healthbar/health_over.modulate = Color.red
 		$pulse.stop_all()
 
 # On health change, animate healthbar

@@ -33,6 +33,8 @@ signal boss_healthbar_visible(visible)
 signal flash_screen          (color)
 # Signal that is activated when a cola is collected
 signal cola_collect          (amount)
+# COMMENT NEEDED
+signal cola_healing          ()
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
@@ -88,3 +90,7 @@ func _on_pause_respawn_player() -> void:
 # Emit respawn signal when failure "retry" is pressed
 func _on_failure_respawn_player() -> void:
 	emit_signal("respawn_player")
+
+# COMMENT NEEDED
+func _on_HUD_cola_healing():
+	emit_signal("cola_healing")
