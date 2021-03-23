@@ -19,7 +19,7 @@ export  var movement_speed:    float   = 3.0
 export  var acceleration:      float   = 25.0
 export  var jump_velocity:     float   = 0.0
 
-export  var health:            int     = 1
+export  var health:            int     = 2
 export  var damage:            int     = 1
 
 export  var obeys_gravity:     bool    = true
@@ -35,6 +35,7 @@ export onready var DmgPlayer           = get_node("DmgPlayer")
 #-----------------------------------------------------------------------------#
 # The direction the enemy is moving
 var _direction: Vector2 = initial_direction
+var check_health = health - 1
 
 var _sound_timer: float = 10.0
 #-----------------------------------------------------------------------------#
@@ -57,26 +58,21 @@ func _physics_process(_delta: float) -> void:
 		if EdgeLooker.get_cast_to() == Vector2(-35, 25):
 			EdgeLooker.set_cast_to(Vector2(35, 25))
 			ChargeLooker.set_cast_to(Vector2(180, 0))
-			DmgPlayer.set_cast_to(Vector2(20, 0))
 		else:
 			EdgeLooker.set_cast_to(Vector2(-35, 25))
 			ChargeLooker.set_cast_to(Vector2(-180, 0))
-			DmgPlayer.set_cast_to(Vector2(-20, 0))
 	
 	_sound_timer += _delta
 	if ChargeLooker.is_colliding():
 		set_speed(10)
 		set_knockback_multiplier(2)
 		if _sound_timer > 2:
-			play_sound()
+			play_sound($TaurusCharge, 1)
 			_sound_timer = 0.0
 	else:
 		set_speed(3)
 		set_knockback_multiplier(1)
-		
-	if DmgPlayer.get_collider():
-		deal_damage(DmgPlayer.get_collider())
-		DmgPlayer.get_collider().knockback(self)
+	
 	
 	move_dynamically(_direction)
 	# Change the direction if the entity hits a wall
@@ -85,61 +81,68 @@ func _physics_process(_delta: float) -> void:
 		if EdgeLooker.get_cast_to() == Vector2(-35, 25):
 			EdgeLooker.set_cast_to(Vector2(35, 25))
 			ChargeLooker.set_cast_to(Vector2(180, 0))
-			DmgPlayer.set_cast_to(Vector2(20, 0))
 		else:
 			EdgeLooker.set_cast_to(Vector2(-35, 25))
 			ChargeLooker.set_cast_to(Vector2(-180, 0))
-			DmgPlayer.set_cast_to(Vector2(-20, 0))
 			
+
+	
+func play_sound(var sound, var length):
+	var t = Timer.new()
+	t.set_wait_time(length)
+	t.set_one_shot(true)
+	self.add_child(t)
+	sound.play()
+	t.start()
+	yield(t, "timeout")
+	sound.stop()
+	
+func spin_sprite():
+	var timer: Timer = Timer.new()
+	for i in 100:
+		timer.set_one_shot(true)
+		add_child(timer)
+		timer.start(0.01)
+		yield(timer, "timeout")
+		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
+		i += 1
+	
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
 func _on_Taurus_collision(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
-		body.knockback(self)
-		deal_damage(body)
-
-func _on_Taurus_death():
-	death_anim()
-	kill()
-
-func _on_Taurus_health_changed(_change):
-	health -= _change
-
-
-func play_sound():
-	var j = 1.0
-	var t = Timer.new()
-	t.set_wait_time(1)
-	t.set_one_shot(true)
-	self.add_child(t)
-	$AudioStreamPlayer2D.play()
-	t.start()
-	yield(t, "timeout")
-	$AudioStreamPlayer2D.stop()
+		if check_health:
+			body.knockback(self)
+			deal_damage(body)
 
 
 func _on_Taurus1_health_changed(ammount):
-	if ammount < 0 and get_current_health():
-		$sword_hit.play()
+	if check_health:
+		play_sound($Hurt, .75)
 		flash_damaged(10)
+		check_health -= 1
 
 func _on_Taurus1_death():
-	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
-	
-	$CollisionShape2D.disabled = true
-
+	$DmgPlayer.set_collision_mask(0)
+	set_collision_mask(0)
+	set_collision_layer(0)
+	spin_sprite()
 	timer.set_one_shot(true)
 	add_child(timer)
 	
-	# Add an audio pitch fade out
-	$sword_hit.play()
-	$Tween.interpolate_property($AudioStreamPlayer2D, "pitch_scale", $AudioStreamPlayer2D.pitch_scale, 0.01, 50 * 0.04)
-	$Tween.start()
+	play_sound($Hurt, .75)
 	
-	death_anim (50,  0.04)
-	timer.start(50 * 0.04)
+	death_anim (25, 0.01)
+	timer.start(25 * 0.04)
 	yield(timer, "timeout")
 	queue_free()
+
+
+func _on_DmgPlayer_body_entered(body):
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		if check_health:
+			body.knockback(self)
+			deal_damage(body)

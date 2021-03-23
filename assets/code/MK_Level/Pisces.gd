@@ -60,6 +60,15 @@ func _physics_process(_delta: float) -> void:
 #	if is_on_wall():
 #		_direction = -_direction
 		
+func spin_sprite():
+	var timer: Timer = Timer.new()
+	for i in 100:
+		timer.set_one_shot(true)
+		add_child(timer)
+		timer.start(0.01)
+		yield(timer, "timeout")
+		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
+		i += 1
 
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
@@ -69,8 +78,8 @@ func _on_Pisces_collision(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.knockback(self)
 		deal_damage(body)
-		
-		
+	
+
 func play_attack():
 	var t = Timer.new()
 	t.set_wait_time(1.5)
@@ -84,37 +93,34 @@ func play_attack():
 func _on_Aggro_Range_body_entered(body):
 	if(body.is_in_group(Globals.GROUP.PLAYER)):
 		player_in_range = true
-		print("Player Entered")
 		$AnimatedSprite.stop()
 		$AnimatedSprite.play("attack")
 	
 func _on_Aggro_Range_body_exited(body):
-	player_in_range = false
-	$AnimatedSprite.stop()
-	$AnimatedSprite.play("Idle")
-
-
-func _on_Pisces_health_changed(ammount):
-	if ammount < 0 and get_current_health():
-		$sword_hit.play()
-		flash_damaged(10)
+	if(body.is_in_group(Globals.GROUP.PLAYER)):
+		player_in_range = false
+		$AnimatedSprite.stop()
+		$AnimatedSprite.play("Idle")
 
 
 func _on_Pisces_death():
-	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
-	
-	$CollisionShape2D.disabled = true
-
+	set_collision_mask(0)
+	set_collision_layer(0)
+	$Dmg_Player.set_collision_mask(0)
+	spin_sprite()
 	timer.set_one_shot(true)
 	add_child(timer)
 	
-	# Add an audio pitch fade out
-	$sword_hit.play()
-	$Tween.interpolate_property($AudioStreamPlayer2D, "pitch_scale", $AudioStreamPlayer2D.pitch_scale, 0.01, 50 * 0.04)
-	$Tween.start()
+#	play_sound($Hurt, .75)
 	
-	death_anim (50,  0.04)
-	timer.start(50 * 0.04)
+	death_anim (25, 0.01)
+	timer.start(25 * 0.04)
 	yield(timer, "timeout")
 	queue_free()
+
+
+func _on_Dmg_Player_body_entered(body):
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.knockback(self)
+		deal_damage(body)
