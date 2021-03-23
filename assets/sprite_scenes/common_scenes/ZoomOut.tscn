@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/sprite_scenes/common_scenes/ZoomOut.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/common_scripts/ZoomOut.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.05618, 40 )

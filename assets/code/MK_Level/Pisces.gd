@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
-# File Name:   running_eagor.gd
-# Description: A basic enemy with basic AI
-# Author:      Jeff Newell
+# File Name:   Pisces.gd
+# Description: A basic enemy that floats towards the player
+# Author:      Luke Hathcock
 # Company:     Sidetrack
-# Date:        October 6, 2020
+# Date:        March 15, 2020
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#

@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
 # File Name:   	orion.gd                                                      #
-# Description: 	Controls the throwing of the spear projectile and animations  #
-# Author:      	Andrew Zedwick (mostly) & Jeff Newell                         #
+# Description: 	Contols the MK_Orion enemy                                    #
+# Author:      	Luke HAthcock                                                 #
 # Company:    	Sidetrack                                                     #
-# Last Updated:	November 21th, 2020                                           #
+# Last Updated:	March 20, 2021                                                #
 #-----------------------------------------------------------------------------#
 
 extends Entity

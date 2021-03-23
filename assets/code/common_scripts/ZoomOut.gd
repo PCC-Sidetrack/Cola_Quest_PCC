@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
-# File Name:   spawnpoint.gd
-# Description: Script that sets the global spawnpoint
-# Author:      Andrew Zedwick
+# File Name:   ZoomOut.gd
+# Description: Script that zooms the camera out
+# Author:      Luke Hathcock
 # Company:     Sidetrack
-# Date:        December 4, 2020
+# Date:        March 22, 2021
 #-----------------------------------------------------------------------------#
 
 extends Node2D
