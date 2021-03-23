@@ -33,7 +33,8 @@ func _input(event) -> void:
 		if event.is_action_pressed("ui_pause")        or \
 		$buttons/ButtonScreen/Buttons/Resume.pressed  or \
 		$buttons/ButtonScreen/Buttons/Retry.pressed   or \
-		$buttons/ButtonScreen/Buttons/Restart.pressed:
+		$buttons/ButtonScreen/Buttons/Restart.pressed or \
+		$buttons/ButtonScreen/Buttons/Exit.pressed:
 			_pause_unpause()
 
 #-----------------------------------------------------------------------------#

@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/gui/hud/player_healthbar/assets/healthbar_progress.png" type="Texture" id=1]
+[ext_resource path="res://assets/gui/hud/player_healthbar/assets/healthbar_progress(white).png" type="Texture" id=1]
 [ext_resource path="res://assets/gui/hud/player_healthbar/assets/damaged_border.png" type="Texture" id=2]
 [ext_resource path="res://assets/gui/hud/player_healthbar/assets/healthbar_border_player.png" type="Texture" id=3]
 [ext_resource path="res://assets/gui/hud/player_healthbar/sounds/low_health.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/gui/hud/player_healthbar/assets/healthbar_loss.png" type="Texture" id=5]
-[ext_resource path="res://assets/gui/hud/player_healthbar/assets/healthbar_alert.png" type="Texture" id=6]
+[ext_resource path="res://assets/gui/hud/player_healthbar/assets/healthbar_alert(white).png" type="Texture" id=6]
 [ext_resource path="res://assets/gui/hud/player_healthbar/scripts/player_healthbar.gd" type="Script" id=10]
 
 [node name="player_healthbar" type="CanvasLayer"]
@@ -50,6 +50,7 @@ __meta__ = {
 }
 
 [node name="health_over" type="TextureProgress" parent="healthbar"]
+modulate = Color( 1, 0.0705882, 0.0862745, 1 )
 margin_left = 11.0
 margin_top = 2.0
 margin_right = 46.0
