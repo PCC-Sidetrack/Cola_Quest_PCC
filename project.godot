@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/ai.gd"
 }, {
-"base": "TileMap",
+"base": "Reference",
 "class": "Animate_Tiles",
 "language": "GDScript",
 "path": "res://assets/code/old/animate_tiles.gd"
@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/entity.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Reference",
 "class": "EntityOld",
 "language": "GDScript",
 "path": "res://assets/code/old/entity_old.gd"
@@ -51,8 +51,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Sidetrack"
-run/main_scene="res://assets/gui/menus/titlescreen/splash_screen.tscn"
-boot_splash/image="res://assets/gui/menus/titlescreen/assets/sprites/splashscreen.png"
+run/main_scene="res://assets/gui/menus/splash_screen/splash_screen.tscn"
+boot_splash/image="res://assets/gui/menus/splash_screen/assets/sprites/splashscreen.png"
 boot_splash/use_filter=false
 config/icon="res://assets/art/logo/Logo_v2.png"
 
@@ -60,6 +60,7 @@ config/icon="res://assets/art/logo/Logo_v2.png"
 
 Globals="*res://assets/code/common_scripts/globals.gd"
 ProgramAlerts="*res://assets/code/common_scripts/program_alerts.gd"
+SceneFade="*res://assets/gui/screen_transitions/fade/scene_fade.tscn"
 
 [display]
 

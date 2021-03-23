@@ -25,8 +25,15 @@ func _hud_shake() -> void:
 func animate_value(start, end) -> void:
 	$healthbar/health_over.value  = end
 	$tween.interpolate_property($healthbar/health_under, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$tween.interpolate_property($healthbar/health_alert, "modulate", Color.red , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$tween.start()
+	if start < end:
+		$healthbar/health_over.modulate = Color.green
+		$tween.interpolate_property($healthbar/health_alert, "modulate", Color.green , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$tween.start()
+		yield(get_tree().create_timer(1), "timeout")
+		$healthbar/health_over.modulate = Color("ff1216")
+	else:
+		$tween.interpolate_property($healthbar/health_alert, "modulate", Color.red , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$tween.start()
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -35,11 +42,11 @@ func animate_value(start, end) -> void:
 func _on_pulse_tween_all_completed() -> void:
 	if Globals.game_locked == false:
 		$low_health.play()
-		$pulse.interpolate_property($healthbar/health_over, "tint_progress", Color.black , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$pulse.interpolate_property($healthbar/health_over, "modulate", Color.white , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.interpolate_property($low_health_border, "modulate", Color.white , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.start()
 	else:
-		$healthbar/health_over.modulate = Color.red
+		$healthbar/health_over.modulate = Color.white
 		$pulse.stop_all()
 
 # On health change, animate healthbar

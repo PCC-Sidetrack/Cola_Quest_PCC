@@ -19,7 +19,7 @@ signal respawn_player()
 #-----------------------------------------------------------------------------#
 # Hide failure menu when "retry" button is pressed
 func _input(_event) -> void:
-	if $buttons/ButtonScreen/Buttons/Retry.pressed == true:
+	if $buttons/ButtonScreen/Buttons/Retry.pressed == true or $buttons/ButtonScreen/Buttons/Exit.pressed:
 		$FailureScreen.visible                      = false
 		$buttons/ButtonScreen/Buttons/Retry.visible = false
 		$buttons/ButtonScreen/Buttons/Exit.visible  = false
@@ -29,7 +29,7 @@ func _input(_event) -> void:
 #-----------------------------------------------------------------------------#
 # Repeat failure text animation "bounce" after it finishes
 func _on_FailureText_animation_finished() -> void:
-	$FailureScreen/FailureTextContainer/FailureText.animation     = "text"
+	$FailureScreen/FailureTextContainer/FailureText.animation = "text"
 
 # Display failure menu on player death
 func _on_game_UI_player_killed() -> void:

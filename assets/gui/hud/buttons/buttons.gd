@@ -31,7 +31,9 @@ func _on_Retry_pressed() -> void:
 # On exit button pressed
 func _on_Exit_pressed() -> void:
 	$mouse_pressed.play()
-	get_tree().quit()
+	get_tree().paused = false
+	SceneFade.change_scene("res://assets/gui/menus/main_menu/main_menu.tscn", 'fade')
+	get_tree().current_scene.queue_free()
 
 # On resume button mouse hover
 func _on_Resume_mouse_entered() -> void:
@@ -48,7 +50,7 @@ func _on_Exit_mouse_entered() -> void:
 # On restart button pressed
 func _on_Restart_pressed():
 	Globals.game_locked = false
-	return get_tree().reload_current_scene()
+	return 	SceneFade.change_scene(get_tree().current_scene.filename, 'fade')
 
 # On restart button mouse hover
 func _on_Restart_mouse_entered() -> void:
