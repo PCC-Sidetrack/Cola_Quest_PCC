@@ -2,8 +2,8 @@
 
 [sub_resource type="DynamicFontData" id=1]
 antialiased = false
-font_path = "res://assets/gui/fonts/Born2bSportyV2.ttf"
+font_path = "res://assets/gui/fonts/kenvector_future.ttf"
 
 [resource]
-size = 22
+size = 18
 font_data = SubResource( 1 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/gui/screen_transitions/fade/assets/scripts/scene_fade.gd" type="Script" id=1]
+[ext_resource path="res://assets/gui/menus/main_menu/assets/sounds/play_sound.wav" type="AudioStream" id=2]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=2]
 resource_name = "fade"
 length = 1.5
 tracks/0/type = "value"
@@ -63,7 +64,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
 root_node = NodePath("../ColorRect")
-anims/fade = SubResource( 1 )
+anims/fade = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
@@ -73,3 +74,6 @@ color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="play_sound" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource( 2 )
