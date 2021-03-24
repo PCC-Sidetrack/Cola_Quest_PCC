@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=3]
 [ext_resource path="res://assets/code/common_scripts/player.gd" type="Script" id=4]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack-sheet.png" type="Texture" id=5]
 [ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sounds/object_sounds/SD4_footsteps.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/object_sounds/SD19_player_hurt.wav" type="AudioStream" id=8]
@@ -247,8 +247,6 @@ visible = false
 texture = ExtResource( 2 )
 
 [node name="melee" type="Sprite" parent="sprites"]
-visible = false
-position = Vector2( 32, 0 )
 texture = ExtResource( 5 )
 hframes = 8
 
@@ -307,7 +305,6 @@ __meta__ = {
 visible = false
 position = Vector2( -4.527, -44.481 )
 frames = SubResource( 14 )
-frame = 1
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="cola_healing"]
