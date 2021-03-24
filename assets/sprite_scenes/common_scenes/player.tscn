@@ -62,7 +62,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("sprites/melee:frame")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -70,7 +70,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
 "update": 0,
-"values": [ 0, 1, 6 ]
+"values": [ 0, 1, 7 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -123,7 +123,7 @@ tracks/2/keys = {
 extents = Vector2( 10, 29 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 30.9873, 25.6928 )
+extents = Vector2( 38.7584, 31.4514 )
 
 [sub_resource type="OccluderPolygon2D" id=7]
 polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
@@ -228,11 +228,10 @@ position = Vector2( -6, 2 )
 shape = SubResource( 5 )
 
 [node name="melee" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
-position = Vector2( 34.8759, -9.83725 )
+position = Vector2( 48.2134, 0 )
 shape = SubResource( 6 )
 disabled = true
 
@@ -249,8 +248,9 @@ texture = ExtResource( 2 )
 
 [node name="melee" type="Sprite" parent="sprites"]
 visible = false
+position = Vector2( 32, 0 )
 texture = ExtResource( 5 )
-hframes = 7
+hframes = 8
 
 [node name="walk" type="Sprite" parent="sprites"]
 texture = ExtResource( 3 )
