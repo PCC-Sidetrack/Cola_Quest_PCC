@@ -1,8 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://assets/code/rooftop_level/orion.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/MK_Level/MK_Orion.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S8_orion_enemy/S8_orion_enemy_idle.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S8_orion_enemy/S8_orion_enemy_attack.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/MK_Level/Orion_Idle.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/object_sounds/MK_Level/Hurt_Orion.ogg" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -84,6 +86,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 7, 20 )
 
+[sub_resource type="CapsuleShape2D" id=19]
+height = 27.1102
+
 [node name="Orion" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -104,6 +109,25 @@ shape = SubResource( 18 )
 [node name="spear_spawn" type="Node2D" parent="."]
 position = Vector2( -14, -7 )
 
-[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+[node name="Idle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = 10.0
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback_process_mode = 0
+playback/repeat = true
+
+[node name="Dmg_Player" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Dmg_Player_Shape" type="CollisionShape2D" parent="Dmg_Player"]
+position = Vector2( 0, 6.368 )
+shape = SubResource( 19 )
+[connection signal="collision" from="." to="." method="_on_Orion_collision"]
 [connection signal="death" from="." to="." method="_on_Orion_death"]
 [connection signal="health_changed" from="." to="." method="_on_Orion_health_changed"]
+[connection signal="body_entered" from="Dmg_Player" to="." method="_on_Dmg_Player_body_entered"]

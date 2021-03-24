@@ -23,12 +23,11 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 219.161 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "fade_away_logo"
 length = 2.0
 
-[sub_resource type="Animation" id=2]
-resource_name = "logo_fade_into"
+[sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("logo:rect_position")
@@ -43,8 +42,7 @@ tracks/0/keys = {
 "values": [ Vector2( 143.959, 283.698 ), Vector2( 143.959, 30.014 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "logo_flash"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("logo:modulate")
 tracks/0/interp = 1
@@ -90,9 +88,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/can_fade_away = SubResource( 1 )
-anims/fade_away_logo = SubResource( 4 )
-anims/logo_fade_into = SubResource( 2 )
-anims/logo_flash = SubResource( 3 )
+anims/fade_away_logo = SubResource( 2 )
+anims/logo_fade_into = SubResource( 3 )
+anims/logo_flash = SubResource( 4 )
 
 [node name="coke_fade_away" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

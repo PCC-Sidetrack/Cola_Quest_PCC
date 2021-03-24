@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprite_scenes/common_scenes/moving_platformNEW.gd" type="Script" id=1]
+[ext_resource path="res://assets/code/common_scripts/moving_platformNEW.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/mk_level/tiles/Platform.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]

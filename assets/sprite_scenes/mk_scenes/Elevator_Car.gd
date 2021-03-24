@@ -5,7 +5,7 @@ extends Node2D
 #                           Constant Variables                                #
 #-----------------------------------------------------------------------------#
 
-const IDLE_DURATION = 1.0
+const IDLE_DURATION = 3.0
 const SPRITE_SIZE   = 32
 
 #-----------------------------------------------------------------------------#
@@ -13,7 +13,7 @@ const SPRITE_SIZE   = 32
 #-----------------------------------------------------------------------------#
 
 export var move       = Vector2.RIGHT * (10 * SPRITE_SIZE)
-export var move_speed = 3.0
+export var move_speed = 5.0
 
 #-----------------------------------------------------------------------------#
 #                            Private Variables                                #

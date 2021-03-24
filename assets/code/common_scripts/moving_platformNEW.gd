@@ -1,3 +1,10 @@
+#-----------------------------------------------------------------------------#
+# File Name:   moving_platformNEW.gd
+# Description: Script that moves a platform around
+# Author:      Luke Hathcock
+# Company:     Sidetrack
+# Date:        March 12, 2021
+#-----------------------------------------------------------------------------#
 extends Node2D
 
 
