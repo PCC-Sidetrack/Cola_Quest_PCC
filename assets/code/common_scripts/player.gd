@@ -259,6 +259,7 @@ func _set_sprite(direction: float) -> void:
 		#if get_vertical_velocity() > 0.0:
 			#$AnimatedSprite.play("fall")
 		#else:
+		if get_time_in_air() > 0.05:
 			_switch_sprite(SPRITE.JUMP)
 
 # Change what the currently displaying sprite is

@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sprite_scenes/mk_scenes/Elevator_Car.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32.5728, 5.98694 )
+extents = Vector2( 32.5728, 7.42291 )
 
 [node name="Elevator_base" type="Node2D"]
 script = ExtResource( 4 )
@@ -23,7 +23,7 @@ scale = Vector2( 1.76584, 0.307231 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2( 17.491, 1.168 )
+position = Vector2( 17.0705, 2.63957 )
 scale = Vector2( 1.069, 1 )
 shape = SubResource( 1 )
 one_way_collision = true

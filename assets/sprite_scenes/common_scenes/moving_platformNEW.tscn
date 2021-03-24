@@ -3,9 +3,8 @@
 [ext_resource path="res://assets/code/common_scripts/moving_platformNEW.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/mk_level/tiles/Platform.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 5.23275
-height = 142.897
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 72.5618, 9.28445 )
 
 [node name="moving_platformNEW" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,9 +15,9 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2( 0, -11.042 )
-rotation = 1.5708
+position = Vector2( 0, -7.03296 )
 shape = SubResource( 1 )
+one_way_collision = true
 
 [node name="Tween" type="Tween" parent="."]
 repeat = true
