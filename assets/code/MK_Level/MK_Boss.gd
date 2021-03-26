@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------#
-# File Name:   	MK_Boss.gd                                                      #
+# File Name:   	MK_Boss.gd                                                    #
 # Description: 	Contols the MK_Orion enemy                                    #
 # Author:      	Luke HAthcock                                                 #
 # Company:    	Sidetrack                                                     #
