@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/art/mk_level/sprites/MK_Boss/Big_MK_BOSS.png" type="Texture" id=1]
-[ext_resource path="res://assets/code/common_scripts/ai.gd" type="Script" id=2]
+[ext_resource path="res://assets/code/MK_Level/MK_Boss.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprite_scenes/mk_scenes/MK_Boss_Laser.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1253.85
@@ -62,3 +63,9 @@ shape = SubResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dmg_Player"]
 position = Vector2( 0, 125 )
 shape = SubResource( 6 )
+
+[node name="MK_Boss_Laser1" parent="." instance=ExtResource( 3 )]
+position = Vector2( -228.983, -98.4189 )
+
+[node name="MK_Boss_Laser2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -130.982, -121.727 )

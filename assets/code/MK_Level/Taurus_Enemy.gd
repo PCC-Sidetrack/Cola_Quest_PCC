@@ -26,10 +26,6 @@ export  var obeys_gravity:     bool    = true
 
 export  var initial_direction: Vector2 = Vector2.RIGHT
 
-export onready var EdgeLooker          = get_node("EdgeLooker")
-export onready var ChargeLooker        = get_node("ChargeLooker")
-export onready var DmgPlayer           = get_node("DmgPlayer")
-
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
@@ -52,22 +48,17 @@ func _ready() -> void:
 #                            Private Functions                                #
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
-	if !EdgeLooker.is_colliding():
+	if !$EdgeLooker.is_colliding():
 		_direction = -_direction
-		print("Changing dir")
-		if EdgeLooker.get_cast_to() == Vector2(-35, 25):
-			EdgeLooker.set_cast_to(Vector2(35, 25))
-			ChargeLooker.set_cast_to(Vector2(180, 0))
-		else:
-			EdgeLooker.set_cast_to(Vector2(-35, 25))
-			ChargeLooker.set_cast_to(Vector2(-180, 0))
+		$EdgeLooker.scale.x   *= -1
+		$ChargeLooker.scale.x *= -1
 	
 	_sound_timer += _delta
-	if ChargeLooker.is_colliding():
+	if $ChargeLooker.is_colliding():
 		set_speed(10)
 		set_knockback_multiplier(2)
 		if _sound_timer > 2:
-			play_sound($TaurusCharge, 1)
+			play_sound($TaurusCharge, 2)
 			_sound_timer = 0.0
 	else:
 		set_speed(3)
@@ -78,13 +69,8 @@ func _physics_process(_delta: float) -> void:
 	# Change the direction if the entity hits a wall
 	if is_on_wall():
 		_direction = -_direction
-		if EdgeLooker.get_cast_to() == Vector2(-35, 25):
-			EdgeLooker.set_cast_to(Vector2(35, 25))
-			ChargeLooker.set_cast_to(Vector2(180, 0))
-		else:
-			EdgeLooker.set_cast_to(Vector2(-35, 25))
-			ChargeLooker.set_cast_to(Vector2(-180, 0))
-			
+		$EdgeLooker.scale.x   *= -1
+		$ChargeLooker.scale.x *= -1
 
 	
 func play_sound(var sound, var length):
@@ -118,11 +104,11 @@ func _on_Taurus_collision(body):
 			deal_damage(body)
 
 
-func _on_Taurus1_health_changed(ammount):
+func _on_Taurus1_health_changed(amount):
 	if check_health:
 		play_sound($Hurt, .75)
 		flash_damaged(10)
-		check_health -= 1
+		check_health -= amount
 
 func _on_Taurus1_death():
 	var timer: Timer = Timer.new()

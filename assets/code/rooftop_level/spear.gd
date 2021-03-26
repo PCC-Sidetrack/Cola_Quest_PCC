@@ -14,14 +14,12 @@ export var damage:       int   = 1
 export var speed:        float = 9.375
 export var acceleration: float = 50.0
 export var life_time:    float = 10.0
+export var knockback:          = 1
+var        _initialized        = false
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
-func _ready() -> void:
-	initialize_projectile      (damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
-	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
-	set_looking                (true)
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
@@ -29,7 +27,20 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	move_dynamically(get_current_velocity())
 
-
+func initialize() -> void:
+	initialize_projectile   (damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
+	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
+	set_looking                (true)
+	set_knockback_multiplier(knockback)
+	_initialized = true
+	
+	# Wait for a little while then set collision to hit enemies as well
+	var t: Timer = Timer.new()
+	t.set_one_shot(true)
+	add_child(t)
+	t.start(0.3)
+	yield(t, "timeout")
+	set_collision_mask_bit(Globals.LAYER.ENEMY, true)
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
