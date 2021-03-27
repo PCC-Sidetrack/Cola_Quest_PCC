@@ -72,7 +72,8 @@ signal init()
 # Signal is sent whenever the direction being moved in is changed and allows
 # inheriting classes to create custom code for flipping an entity. h_direction_facing
 # will be either DIRECTION.LEFT or DIRECTION.RIGHT
-signal flipped(h_direction_facing)
+#signal flipped(h_direction_facing)
+# ***NOTICE*** Line 75 commented out, Unused code
 # Signal is sent whenever a change in the stage of the ai is made through set_current_ai_stage()
 signal stage_changed(previous_stage, new_stage)
 # Signal is sent whenever any ai stage is run
@@ -309,7 +310,8 @@ func attack(uninterruptable: bool = true) -> void:
 # Sets the direction facing to the opposite of it's current direction
 func turn_around() -> void:
 	_current_direction.x *= -1
-	emit_signal("turn_around")
+	#emit_signal("turned_around")
+	# *** NOTICE ***: Line 313 commented out, unused code, Problematic
 	
 # Causes the boss to dash forward based on speed multiplier given
 func dash(speed_multiplier: float = _dash_multiplier) -> void:
@@ -318,7 +320,7 @@ func dash(speed_multiplier: float = _dash_multiplier) -> void:
 		_movement_enabled = true
 		# Set the velocity (simialar to how it's done in entity.gd)
 		set_velocity(Vector2(_current_direction.x * get_speed() * speed_multiplier, _current_direction.y))
-		emit_signal("dash", speed_multiplier)
+		emit_signal("dashed", speed_multiplier)
 
 # Stops AI from running for a given time
 func ai_wait(seconds: float, add_to_wait_time: bool = true, stop_moving: bool = true) -> void:
@@ -455,7 +457,8 @@ func set_movement_direction(direction: Vector2):
 	# Holds the Vector for the analyzed direction
 	var analyzed_direction: Vector2 = Vector2(0.0, 0.0)
 	# Stores whether the direction was changed from left to right or visa versa
-	var direction_changed:  bool    = false
+	#var direction_changed:  bool    = false
+	# ***NOTICE*** Line 460 commented out, unused code
 	
 	# Set the analyzed direction based on the sign of the direction given
 	if direction.x != 0.0:
@@ -465,16 +468,18 @@ func set_movement_direction(direction: Vector2):
 		analyzed_direction.y = 1 * sign(direction.y)
 	
 	# Checks if current direction is the same as the old direction
-	if sign(analyzed_direction.x) != sign(_current_direction.x):
-		direction_changed = true
+	#if sign(analyzed_direction.x) != sign(_current_direction.x):
+	#	direction_changed = true
+	# ***NOTICE*** Line 471 and 472 commented out, Unused code
 	
 	# Set the current direction to the analyzed direction
 	_current_direction = analyzed_direction
 	
 	# Only emit a turn_around signal if the direction was changed.
 	# This is purposely done after the _current_direction has been changed.
-	if direction_changed:
-		emit_signal("turn_around")
+	#if direction_changed:
+	#	emit_signal("turn_around")
+	# ***NOTICE***, Line 476, 477 Commented out. Unused Code
 	
 # Set the movement to enabled or disabled
 func set_movement_enabled(enabled: bool):

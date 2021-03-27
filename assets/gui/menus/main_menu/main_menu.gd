@@ -65,15 +65,20 @@ func _handle_selection(_current_selection) -> void:
 		match _current_selection:
 			menu_start:
 				$sounds/play_button.play()
-				yield(get_tree().create_timer(0.3), "timeout")
+				Globals.game_locked = true
 				SceneFade.change_scene("res://assets/levels/rooftop_level.tscn", 'fade')
+				yield($sounds/play_button, "finished")
 				queue_free()
 			menu_credits:
+				$sounds/credits_button.play()
 				menu_opened                      = true
 				$credits/CenterContainer.visible = true
 				$main_menu_options/CenterContainer/AnimationPlayer.play('menu_fade_away')
-
 			menu_exit:
+				$sounds/exit_button.play()
+				Globals.game_locked = true
+				$main_menu_options/CenterContainer/AnimationPlayer.play('menu_fade_away')
+				yield($sounds/exit_button, "finished")
 				get_tree().quit()
 
 # Set current selection 
@@ -118,13 +123,10 @@ func _on_start_gui_input(event) -> void:
 func _on_credits_gui_input(event) -> void:
 	if event.is_action_pressed("melee_attack"):
 		_handle_selection(current_selection)
-		$sounds/credits_button.play()
 
 # On clicking menu exit
 func _on_exit_gui_input(event) -> void:
 	if event.is_action_pressed("melee_attack"):
-		$sounds/exit_button.play()
-		yield(get_tree().create_timer(0.5), "timeout")
 		_handle_selection(current_selection)
 
 # On clicking back button
@@ -133,4 +135,3 @@ func _on_back_button_gui_input(event) -> void:
 		menu_opened                       = false
 		$credits/CenterContainer.visible  = false
 		$main_menu_options/CenterContainer/AnimationPlayer.play_backwards("menu_fade_away")
-
