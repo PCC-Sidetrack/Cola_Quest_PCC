@@ -11,6 +11,7 @@ extents = Vector2( 32.5728, 7.42291 )
 script = ExtResource( 4 )
 
 [node name="Platform" type="KinematicBody2D" parent="."]
+collision_layer = 2147483648
 
 [node name="Car" type="Sprite" parent="Platform"]
 position = Vector2( 24.2697, -64.7397 )

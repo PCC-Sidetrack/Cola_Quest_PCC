@@ -33,7 +33,7 @@ export var damage: int = 1
 var _throw_update_time: float = 0.0
 # Number of seconds since Orion began playing his throwing animation
 var _throw_anim_time: 	float = throw_cooldown / 2
-var move_time = 0.75
+var move_time = .5
 var check_health = health
 
 #-----------------------------------------------------------------------------#
@@ -42,12 +42,15 @@ var check_health = health
 func _ready() -> void:
 	
 	var instructions = [
-		duration (Vector2.LEFT, move_time),
+		duration (Vector2.LEFT + Vector2.UP, move_time),
+		duration (Vector2.RIGHT + Vector2.UP, move_time),
+		duration (Vector2.RIGHT + Vector2.DOWN, move_time),
+		duration (Vector2.LEFT + Vector2.DOWN, move_time),
 		end_point(global_position)
 	]
 	initialize_instructions (instructions, true)
 	
-	initialize_enemy(health, damage, 0.0, 0.0)
+	initialize_enemy(health, damage, 3, 16.0)
 	$AnimatedSprite.play("idle")
 	
 		
@@ -66,12 +69,15 @@ func _physics_process(delta: float) -> void:
 				_spawn_spear()
 		elif $AnimatedSprite.animation != "idle":
 			$AnimatedSprite.play("idle")
+	move()
 
 # Spawns and propels a spear
 func _spawn_spear() -> void:
 	# Create, initialize, and add a new spear projectile
 	var spear = SPEAR.instance()
-	$spear_spawn.add_child(spear)
+	get_node("/root").add_child(spear)
+	spear.global_position = $spear_spawn.global_position
+	spear.initialize()
 	
 	# Reset the _throw_update time now that the spear has been spawned
 	_throw_update_time = 0.0

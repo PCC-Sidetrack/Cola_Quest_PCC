@@ -61,14 +61,9 @@ func _physics_process(_delta: float) -> void:
 #		_direction = -_direction
 		
 func spin_sprite():
-	var timer: Timer = Timer.new()
 	for i in 100:
-		timer.set_one_shot(true)
-		add_child(timer)
-		timer.start(0.01)
-		yield(timer, "timeout")
+		yield(get_tree().create_timer(0.01), "timeout")
 		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
-		i += 1
 
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
@@ -81,42 +76,28 @@ func _on_Pisces_collision(body):
 	
 
 func play_attack():
-	var t = Timer.new()
-	t.set_wait_time(1.5)
-	t.set_one_shot(true)
-	self.add_child(t)
 	$AudioStreamPlayer2D.play()
-	t.start()
-	yield(t, "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	$AudioStreamPlayer2D.stop()
 	
 func _on_Aggro_Range_body_entered(body):
 	if(body.is_in_group(Globals.GROUP.PLAYER)):
 		player_in_range = true
-		$AnimatedSprite.stop()
-		$AnimatedSprite.play("attack")
 	
 func _on_Aggro_Range_body_exited(body):
 	if(body.is_in_group(Globals.GROUP.PLAYER)):
 		player_in_range = false
-		$AnimatedSprite.stop()
-		$AnimatedSprite.play("Idle")
 
 
 func _on_Pisces_death():
-	var timer: Timer = Timer.new()
+	player_in_range = false
 	set_collision_mask(0)
 	set_collision_layer(0)
 	$Dmg_Player.set_collision_mask(0)
 	spin_sprite()
-	timer.set_one_shot(true)
-	add_child(timer)
-	
-#	play_sound($Hurt, .75)
 	
 	death_anim (25, 0.01)
-	timer.start(25 * 0.04)
-	yield(timer, "timeout")
+	yield(get_tree().create_timer(25 * 0.04), "timeout")
 	queue_free()
 
 

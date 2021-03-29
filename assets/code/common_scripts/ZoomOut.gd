@@ -32,6 +32,6 @@ func _on_Area2D_body_entered(body):
 		Globals.player.zoom(2)
 		zoomed_in = true
 	else:
-		Globals.player.zoom(.33)
+		Globals.player.zoom(.5)
 		zoomed_in = false
 

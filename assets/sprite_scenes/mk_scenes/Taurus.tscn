@@ -47,7 +47,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=9]
 radius = 12.2369
 
-[node name="Taurus1" type="KinematicBody2D"]
+[node name="Taurus" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
 collision_layer = 2
 collision_mask = 9
@@ -82,6 +82,7 @@ stream = ExtResource( 3 )
 stream = ExtResource( 4 )
 
 [node name="DmgPlayer" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="DmgPlayer_Shape" type="CollisionShape2D" parent="DmgPlayer"]
 shape = SubResource( 9 )
