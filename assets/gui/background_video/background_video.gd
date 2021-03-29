@@ -1,15 +1,23 @@
+#-----------------------------------------------------------------------------#
+# Class Name:   background_video.gd
+# Description:  Main menu background
+# Author:       Rightin Yamada
+# Company:      Sidetrack
+# Last Updated: March 24, 2021
+#-----------------------------------------------------------------------------#
+
 extends CanvasLayer
 
-# COMMET NEEDED 
+#-----------------------------------------------------------------------------#
+#                                Variables                                    #
+#-----------------------------------------------------------------------------#
+# Speed of background 
 export(int) var speed: int = 20
 
-# COMMET NEEDED 
-var direction = Vector2(0,1)
-
-# COMMET NEEDED 
-onready var parallax = $ParallaxBackground
-
-# COMMET NEEDED 
+#-----------------------------------------------------------------------------#
+#                             Private Functions                               #
+#-----------------------------------------------------------------------------#
+# Pan the background left every delta process 
 func _process(delta):
-	parallax.scroll_offset -= Vector2(delta * speed, 0)
+	$ParallaxBackground.scroll_offset -= Vector2(delta * speed, 0)
 	$animations/sprites.play("geary")

@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------#
 # File Name:   	orion.gd                                                      #
 # Description: 	Contols the MK_Orion enemy                                    #
-# Author:      	Luke HAthcock                                                 #
+# Author:      	Luke Hathcock                                                 #
 # Company:    	Sidetrack                                                     #
 # Last Updated:	March 20, 2021                                                #
 #-----------------------------------------------------------------------------#
