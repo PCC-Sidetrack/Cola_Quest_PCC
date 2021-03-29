@@ -430,7 +430,7 @@ func _detect_waiting_state() -> int:
 # Detects and (if needed) changes the current stage of the ai
 func _detect_stage() -> void:
 	# Holds the division of health for one stage
-	var stage_change_inc: int = int(max_health / 3)
+	var stage_change_inc: int = int(max_health / 3.0)
 	# Temporarily stores the ai's current health so that method calls can be less frequent
 	var current_health:   int = get_current_health()
 	# Temproarily stores the current ai's stage so that method calls can be less frequent

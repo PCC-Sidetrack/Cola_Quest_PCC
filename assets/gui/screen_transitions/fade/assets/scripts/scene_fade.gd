@@ -1,23 +1,37 @@
+#-----------------------------------------------------------------------------#
+# Class Name:   scene_fade.gd
+# Description:  Fades the screen into another scene
+# Author:       Rightin Yamada
+# Company:      Sidetrack
+# Last Updated: March 27, 2021
+#-----------------------------------------------------------------------------#
 extends CanvasLayer
 
-# COMMET NEEDED 
+#-----------------------------------------------------------------------------#
+#                                Variables                                    #
+#-----------------------------------------------------------------------------#
+# Animation player node
 onready var Anim = $Control/AnimationPlayer
-# COMMET NEEDED 
+
+# Scene to be transitioned into 
 var scene : String
 
-# COMMET NEEDED 
+#-----------------------------------------------------------------------------#
+#                                Functions                                    #
+#-----------------------------------------------------------------------------#
+# Animate transition into new scene  
 func change_scene(new_scene, animation):
 	scene = new_scene
 	Anim.play(animation)
 
-# COMMET NEEDED 
+# Change current scene into new scene
 func _new_scene():
 	return get_tree().change_scene(scene)
 
-# COMMET NEEDED 
+# Lock the game 
 func _game_lock():
 	Globals.game_locked = true
 
-# COMMET NEEDED 
+# Unlock the game 
 func _game_unlock():
 	Globals.game_locked = false

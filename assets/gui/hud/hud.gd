@@ -11,7 +11,7 @@ extends Control
 #-----------------------------------------------------------------------------#
 #                                 Signals                                     #
 #-----------------------------------------------------------------------------#
-# COMMENT NEEDED
+# Emitted when cola healing occurs
 signal cola_healing()
 
 #-----------------------------------------------------------------------------#
@@ -23,13 +23,13 @@ var _respawn_count:    int = 0
 # Counts the amount of cola collected 
 var _cola_count:       int = 0
 
-# COMMENT NEEDED
+# Number of cola required for healing to occur
 var _cola_requirement: int = 5
 
-# COMMENT NEEDED
+# Maximum player health
 var _m_health:         int = 0
 
-# COMMENT NEEDED
+# Current player health
 var _c_health:         int = 0
 
 #-----------------------------------------------------------------------------#
@@ -68,13 +68,13 @@ func _on_game_UI_respawn_player() -> void:
 	$ui_stat/stats/respawn_counter.visible       = false
 	$ui_stat/stats/total_cola_collected.visible  = false
 
-# COMMENT NEEDED
+# On game cleared, show level stats
 func _on_game_UI_level_cleared():
 	yield(get_tree().create_timer(3.0), "timeout")
 	$ui_stat/stats/total_cola_collected.visible  = true
 	$ui_stat/stats/respawn_counter.visible       = true
 
-# COMMENT NEEDED
+# On collecting a cola(s)
 func _on_game_UI_cola_collect(amount):
 	_cola_count                               += amount
 	$ui_element/cola_healing/green_plus.value += amount
@@ -87,18 +87,18 @@ func _on_game_UI_cola_collect(amount):
 	if ($ui_element/cola_healing/green_plus.value == _cola_requirement) and (_c_health != _m_health):
 		_cola_healing()
 
-# COMMENT NEEDED
+# On initialization
 func _on_game_UI_initialize_player(max_health) -> void:
 	_m_health = max_health
 	_c_health = max_health
 
-# COMMENT NEEDED
+# On player health changing
 func _on_game_UI_player_health_changed(_current_health, _previous_health) -> void:
 	_c_health = _current_health
 	if ($ui_element/cola_healing/green_plus.value == _cola_requirement) and (_current_health < _previous_health):
 		_cola_healing()
 
-# COMMENT NEEDED
+# On cola healing the player
 func _cola_healing():
 	emit_signal("cola_healing")
 	$ui_element/cola_healing/green_plus.value      = 0

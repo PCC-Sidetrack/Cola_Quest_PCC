@@ -68,7 +68,7 @@ func _on_drone_b_death():
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
-	$CollisionShape2D.disabled = true
+	set_damage(0)
 	$healthbar.max_value       = health
 	timer.set_one_shot(true)
 	add_child(timer)
