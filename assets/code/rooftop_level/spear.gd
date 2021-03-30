@@ -52,6 +52,9 @@ func _on_Entity_collision(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.knockback(self)
 		deal_damage(body)
+	if body.is_in_group(Globals.GROUP.ENEMY):
+		body.knockback(self)
+		deal_damage(body)
 	
 	# Delete the projectile
 	delete()
