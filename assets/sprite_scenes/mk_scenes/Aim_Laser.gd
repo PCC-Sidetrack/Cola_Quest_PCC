@@ -19,8 +19,8 @@ var cast_point := cast_to
 #-----------------------------------------------------------------------------#
 func _ready():
 	set_physics_process(false)
-	$Line2D.points[1] = Vector2.ZERO
-
+	$Line2D.points[1]       = Vector2.ZERO
+	$Emit_Particle.emitting = false
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
@@ -33,6 +33,7 @@ func _physics_process(delta):
 	$Line2D.points[1] = cast_point
 
 func set_is_casting(cast: bool):
+	$Emit_Particle.emitting = cast
 	
 	if cast:
 		shoot()
@@ -53,9 +54,8 @@ func stop():
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-func _unhandled_input(event: InputEvent):
-	if event is InputEventMouseButton:
-		self.is_casting = event.pressed
-		
+#func _unhandled_input(event: InputEvent):
+#	if event is InputEventMouseButton:
+#		self.is_casting = event.pressed	
 
 
