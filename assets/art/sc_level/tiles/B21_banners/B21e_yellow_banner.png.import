@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/B21e_yellow_banner.png-80a6f72be7fa743cfb44d2a13f86cef3.stex"
+path="res://.import/B21e_yellow_banner.png-7278ad95bf18a565003c3abe1ca77c2e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sc_level/tiles/B21_banners/B21e_yellow_banner.png"
-dest_files=[ "res://.import/B21e_yellow_banner.png-80a6f72be7fa743cfb44d2a13f86cef3.stex" ]
+source_file="res://assets/art/tiles/B21_banners/B21e_yellow_banner.png"
+dest_files=[ "res://.import/B21e_yellow_banner.png-7278ad95bf18a565003c3abe1ca77c2e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

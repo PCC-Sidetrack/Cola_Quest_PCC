@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T23_white_carpet.png-fb35bc611113428c13cd7d1c73cdd794.stex"
+path="res://.import/T23_white_carpet.png-baf4242d57dc55a6099faa71aac4cab7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sc_level/tiles/T23_white_carpet/T23_white_carpet.png"
-dest_files=[ "res://.import/T23_white_carpet.png-fb35bc611113428c13cd7d1c73cdd794.stex" ]
+source_file="res://assets/art/tiles/T23_white_carpet/T23_white_carpet.png"
+dest_files=[ "res://.import/T23_white_carpet.png-baf4242d57dc55a6099faa71aac4cab7.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

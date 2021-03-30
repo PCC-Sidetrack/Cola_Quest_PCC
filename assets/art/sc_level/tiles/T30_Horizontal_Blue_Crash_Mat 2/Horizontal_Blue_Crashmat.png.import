@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Horizontal_Blue_Crashmat.png-e9395330c3bf44d92cfbdfb9ccd0306e.stex"
+path="res://.import/Horizontal_Blue_Crashmat.png-77520130cb00deac27ccdac73174e625.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sc_level/tiles/T30_Horizontal_Blue_Crash_Mat 2/Horizontal_Blue_Crashmat.png"
-dest_files=[ "res://.import/Horizontal_Blue_Crashmat.png-e9395330c3bf44d92cfbdfb9ccd0306e.stex" ]
+source_file="res://assets/art/tiles/T30_Horizontal_Blue_Crash_Mat 2/Horizontal_Blue_Crashmat.png"
+dest_files=[ "res://.import/Horizontal_Blue_Crashmat.png-77520130cb00deac27ccdac73174e625.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

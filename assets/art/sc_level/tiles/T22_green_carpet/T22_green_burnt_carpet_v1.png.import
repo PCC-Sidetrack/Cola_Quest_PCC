@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T22_green_burnt_carpet_v1.png-aaeb51b725e05b9807edb9c9cce26059.stex"
+path="res://.import/T22_green_burnt_carpet_v1.png-45053dc82aae8a7793a1c208f6c182b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sc_level/tiles/T22_green_carpet/T22_green_burnt_carpet_v1.png"
-dest_files=[ "res://.import/T22_green_burnt_carpet_v1.png-aaeb51b725e05b9807edb9c9cce26059.stex" ]
+source_file="res://assets/art/tiles/T22_green_carpet/T22_green_burnt_carpet_v1.png"
+dest_files=[ "res://.import/T22_green_burnt_carpet_v1.png-45053dc82aae8a7793a1c208f6c182b6.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

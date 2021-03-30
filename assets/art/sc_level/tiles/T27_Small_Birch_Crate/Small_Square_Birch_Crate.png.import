@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Small_Square_Birch_Crate.png-7ff2e253e8d3ebcbb60a3e5a85a8f6e8.stex"
+path="res://.import/Small_Square_Birch_Crate.png-7877c2dab0ba8a681986d7ee4e090d78.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sc_level/tiles/T27_Small_Birch_Crate/Small_Square_Birch_Crate.png"
-dest_files=[ "res://.import/Small_Square_Birch_Crate.png-7ff2e253e8d3ebcbb60a3e5a85a8f6e8.stex" ]
+source_file="res://assets/art/tiles/T27_Small_Birch_Crate/Small_Square_Birch_Crate.png"
+dest_files=[ "res://.import/Small_Square_Birch_Crate.png-7877c2dab0ba8a681986d7ee4e090d78.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

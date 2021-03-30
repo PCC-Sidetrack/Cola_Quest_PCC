@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T32_red_scaffold_beam.png-9cb1a961d42cba4aa7036c43bd9bc84e.stex"
+path="res://.import/T32_red_scaffold_beam.png-108d972c1c94a050fe4bf557e1950bfe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sc_level/tiles/T32_red_scaffoold_beam/T32_red_scaffold_beam.png"
-dest_files=[ "res://.import/T32_red_scaffold_beam.png-9cb1a961d42cba4aa7036c43bd9bc84e.stex" ]
+source_file="res://assets/art/tiles/T32_red_scaffoold_beam/T32_red_scaffold_beam.png"
+dest_files=[ "res://.import/T32_red_scaffold_beam.png-108d972c1c94a050fe4bf557e1950bfe.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -1,0 +1,1174 @@
+[gd_scene load_steps=125 format=2]
+
+[ext_resource path="res://assets/art/tiles/tilesetOpenGame.png" type="Texture" id=1]
+[ext_resource path="res://assets/code/sprite_scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/art/parallaxing/PL9_arena_background/PL9_arena_background.png" type="Texture" id=3]
+[ext_resource path="res://assets/code/sprite_scenes/eagor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/art/tiles/T2_concrete_floor/T2_concrete_floor_bottom.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/tiles/T2_concrete_floor/T2_concreet_floor_matte.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/tiles/T24_shiny_wooden_floor/T24_shiny_wooden_floor.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/tiles/T32_red_scaffoold_beam/T32_red_scaffold_beam.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/tiles/T32_red_scaffoold_beam/T32_red_scaffold_beam2.png" type="Texture" id=9]
+[ext_resource path="res://assets/art/tiles/TH_shadow/TH_shadow_left.png" type="Texture" id=10]
+[ext_resource path="res://assets/code/scripts/boss_arena_camera.gd" type="Script" id=11]
+[ext_resource path="res://assets/code/scripts/SportCenterSection4.gd" type="Script" id=12]
+[ext_resource path="res://assets/code/scripts/boss.gd" type="Script" id=13]
+[ext_resource path="res://assets/code/sprite_scenes/portal_door.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/sounds/mixkit-soft-horror-hit-drum-564.wav" type="AudioStream" id=15]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 544, 480 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 544, 0, 544, 480 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 2
+atlas = ExtResource( 3 )
+region = Rect2( 1088, 0, 544, 480 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="TileSet" id=5]
+0/name = "TH_shadow_left.png 0"
+0/texture = ExtResource( 10 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 0, 1.06805, 32, 1.06805, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=12]
+0/name = "tilesetOpenGame.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 96, 160, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 6 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 7 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "T24_shiny_wooden_floor.png 1"
+1/texture = ExtResource( 7 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 8 )
+1/shape_one_way = false
+1/shape_one_way_margin = 5.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 5.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "T2_concrete_floor_bottom.png 2"
+2/texture = ExtResource( 5 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 10 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "T2_concreet_floor_matte.png 3"
+3/texture = ExtResource( 6 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 32, 32 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 11 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 11 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "T32_red_scaffold_beam.png 4"
+4/texture = ExtResource( 8 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 32, 32 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "T32_red_scaffold_beam2.png 5"
+5/texture = ExtResource( 9 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 32, 32 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+
+[sub_resource type="Animation" id=13]
+resource_name = "center"
+length = 0.5
+
+[sub_resource type="Animation" id=14]
+resource_name = "center_left"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "left_center" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "center_right"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "center_right" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 5.0
+tracks/0/type = "method"
+tracks/0/path = NodePath("paths/intro/boss_position/eagor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ "jump" ],
+"method": "_play_animation"
+}, {
+"args": [ "roar" ],
+"method": "_play_animation"
+}, {
+"args": [ "idle" ],
+"method": "_play_animation"
+}, {
+"args": [  ],
+"method": "start_fight"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../world/ground:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4, 4.3, 4.6, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0.333333, 0.333333, 0.333333, 1 ), Color( 0.666667, 0.666667, 0.666667, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../background/AnimatedSprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 4, 4.3, 4.6, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0.25098, 0.25098, 0.25098, 1 ), Color( 0.501961, 0.501961, 0.501961, 1 ), Color( 0.752941, 0.752941, 0.752941, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../background/BackgroundScenery:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4, 4.3, 4.6, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0.333333, 0.333333, 0.333333, 1 ), Color( 0.666667, 0.666667, 0.666667, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "audio"
+tracks/5/path = NodePath("../../AudioStreamPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 2.41363,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+}, {
+"end_offset": 2.41363,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+}, {
+"end_offset": 2.41363,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 4.3, 4.6, 4.9 )
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_intro"
+} ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "left"
+length = 0.5
+
+[sub_resource type="Animation" id=18]
+resource_name = "left_right"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "left_right" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "left_scaffold"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "left_scaffold" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "right"
+length = 0.5
+
+[sub_resource type="Animation" id=21]
+resource_name = "right_left"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "left_right" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "right_scaffold"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "right_scaffold" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "scaffold"
+length = 0.5
+
+[sub_resource type="Animation" id=24]
+resource_name = "scaffold_center"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "scaffold_center" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/intro/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "center"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "center_left"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "center_right"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "intro"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "left"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "left_right"
+
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "left_scaffold"
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "right"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "right_left"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "right_scaffold"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "scaffold"
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "scaffold_center"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=52]
+states/center/node = SubResource( 25 )
+states/center/position = Vector2( 401.75, 306.75 )
+states/center_left/node = SubResource( 26 )
+states/center_left/position = Vector2( 243.5, 290.5 )
+states/center_right/node = SubResource( 27 )
+states/center_right/position = Vector2( 566, 276 )
+states/intro/node = SubResource( 28 )
+states/intro/position = Vector2( 955.437, 259.939 )
+states/left/node = SubResource( 29 )
+states/left/position = Vector2( 79.5, 265 )
+states/left_right/node = SubResource( 30 )
+states/left_right/position = Vector2( 342, 194.732 )
+states/left_scaffold/node = SubResource( 31 )
+states/left_scaffold/position = Vector2( 210, 115 )
+states/right/node = SubResource( 32 )
+states/right/position = Vector2( 732.5, 265.25 )
+states/right_left/node = SubResource( 33 )
+states/right_left/position = Vector2( 399.5, 394.732 )
+states/right_scaffold/node = SubResource( 34 )
+states/right_scaffold/position = Vector2( 687, 127.5 )
+states/scaffold/node = SubResource( 35 )
+states/scaffold/position = Vector2( 456.5, 7.5 )
+states/scaffold_center/node = SubResource( 36 )
+states/scaffold_center/position = Vector2( 489.5, 138.25 )
+transitions = [ "left", "left_scaffold", SubResource( 37 ), "left_scaffold", "scaffold", SubResource( 38 ), "scaffold", "scaffold_center", SubResource( 39 ), "scaffold_center", "center", SubResource( 40 ), "left", "left_right", SubResource( 41 ), "left_right", "right", SubResource( 42 ), "center", "center_left", SubResource( 43 ), "center_left", "left", SubResource( 44 ), "center", "center_right", SubResource( 45 ), "center_right", "right", SubResource( 46 ), "scaffold", "right_scaffold", SubResource( 47 ), "right_scaffold", "right", SubResource( 48 ), "right", "right_left", SubResource( 49 ), "right_left", "left", SubResource( 50 ), "intro", "right", SubResource( 51 ) ]
+graph_offset = Vector2( 257.164, 117.661 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=53]
+
+[sub_resource type="Curve2D" id=54]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 160, 96, -107.742, -0.591988, 107.742, 0.591988, 320, -80, 0, 0, 0, 0, 512, 96 )
+}
+
+[sub_resource type="Curve2D" id=55]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 512, 96, -97.678, 0.591988, 97.678, -0.591988, 720, -80, 0, 0, 0, 0, 864, 96 )
+}
+
+[sub_resource type="Curve2D" id=56]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 864, -160, 71.6305, 0, -71.6305, 0, 704, -272, 0, 0, 0, 0, 512, 96 )
+}
+
+[sub_resource type="Curve2D" id=57]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 160, 96, -190.028, 0, 190.028, 0, 512, -80, 0, 0, 0, 0, 864, 96 )
+}
+
+[sub_resource type="Curve2D" id=58]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 160, 96, -78.7344, 0, 78.7344, 0, 704, -256, 0, 0, 0, 0, 864, -160 )
+}
+
+[sub_resource type="Curve2D" id=59]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 864, 96, 0, 0, 0, 0, 864, -256, 0, 0, 0, 0, 864, -160 )
+}
+
+[sub_resource type="Curve2D" id=60]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1280, 128, 93.2552, 2.59042, -93.2552, -2.59042, 1024, -80, 0, 0, 0, 0, 864, 96 )
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "death"
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_death"
+} ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "delay"
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_delay"
+} ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "end_of_stage"
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_end_of_stage"
+} ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "enemies_dead"
+length = 0.1
+loop = true
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_enemies_dead"
+} ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "idle"
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_idle"
+} ]
+}
+
+[sub_resource type="Animation" id=66]
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_is_dead"
+} ]
+}
+
+[sub_resource type="Animation" id=67]
+resource_name = "jump"
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_jump"
+} ]
+}
+
+[sub_resource type="Animation" id=68]
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_pick_action"
+} ]
+}
+
+[sub_resource type="Animation" id=69]
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_player_close"
+} ]
+}
+
+[sub_resource type="Animation" id=70]
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_summon"
+} ]
+}
+
+[sub_resource type="Animation" id=71]
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_swipe"
+} ]
+}
+
+[sub_resource type="Animation" id=72]
+resource_name = "throw"
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_throw"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=73]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=74]
+animation = "delay"
+
+[sub_resource type="AnimationNodeAnimation" id=75]
+animation = "end_of_stage"
+
+[sub_resource type="AnimationNodeAnimation" id=76]
+animation = "enemies_dead"
+
+[sub_resource type="AnimationNodeAnimation" id=77]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "is_dead"
+
+[sub_resource type="AnimationNodeAnimation" id=80]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=81]
+animation = "pick_action"
+
+[sub_resource type="AnimationNodeAnimation" id=82]
+animation = "player_close"
+
+[sub_resource type="AnimationNodeAnimation" id=83]
+animation = "summon"
+
+[sub_resource type="AnimationNodeAnimation" id=84]
+animation = "swipe"
+
+[sub_resource type="AnimationNodeAnimation" id=85]
+animation = "throw"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=96]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=103]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=104]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=105]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=106]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=107]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=108]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=109]
+
+[sub_resource type="AnimationNodeStateMachine" id=110]
+states/death/node = SubResource( 73 )
+states/death/position = Vector2( 290.75, 559.905 )
+states/delay/node = SubResource( 74 )
+states/delay/position = Vector2( 364.5, 352.172 )
+states/end_of_stage/node = SubResource( 75 )
+states/end_of_stage/position = Vector2( 537, 442.498 )
+states/enemies_dead/node = SubResource( 76 )
+states/enemies_dead/position = Vector2( 645.5, 188.786 )
+states/idle/node = SubResource( 77 )
+states/idle/position = Vector2( 204, 258.635 )
+states/is_dead/node = SubResource( 79 )
+states/is_dead/position = Vector2( 140.125, 443.951 )
+states/jump/node = SubResource( 80 )
+states/jump/position = Vector2( 322.938, 219.669 )
+states/pick_action/node = SubResource( 81 )
+states/pick_action/position = Vector2( 166.375, 125 )
+states/player_close/node = SubResource( 82 )
+states/player_close/position = Vector2( 401, 76 )
+states/summon/node = SubResource( 83 )
+states/summon/position = Vector2( 686.5, 354.469 )
+states/swipe/node = SubResource( 84 )
+states/swipe/position = Vector2( 633, 44.25 )
+states/throw/node = SubResource( 85 )
+states/throw/position = Vector2( 81.5, 311.253 )
+transitions = [ "player_close", "swipe", SubResource( 87 ), "swipe", "player_close", SubResource( 88 ), "player_close", "pick_action", SubResource( 89 ), "delay", "player_close", SubResource( 90 ), "is_dead", "death", SubResource( 91 ), "enemies_dead", "player_close", SubResource( 92 ), "is_dead", "end_of_stage", SubResource( 93 ), "end_of_stage", "summon", SubResource( 94 ), "summon", "enemies_dead", SubResource( 95 ), "pick_action", "throw", SubResource( 96 ), "pick_action", "idle", SubResource( 97 ), "pick_action", "jump", SubResource( 98 ), "throw", "delay", SubResource( 99 ), "idle", "delay", SubResource( 100 ), "jump", "delay", SubResource( 101 ), "end_of_stage", "player_close", SubResource( 102 ), "delay", "is_dead", SubResource( 103 ), "throw", "is_dead", SubResource( 104 ), "idle", "is_dead", SubResource( 105 ), "jump", "is_dead", SubResource( 106 ), "pick_action", "is_dead", SubResource( 107 ), "player_close", "is_dead", SubResource( 108 ), "enemies_dead", "summon", SubResource( 109 ) ]
+end_node = "death"
+graph_offset = Vector2( 0, -54.8691 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=111]
+
+[node name="Scene 4" type="Node2D"]
+script = ExtResource( 12 )
+
+[node name="parallaxing" type="Node2D" parent="."]
+
+[node name="background" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="background"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+position = Vector2( 512, -36 )
+scale = Vector2( 1.765, 1.186 )
+frames = SubResource( 4 )
+frame = 2
+playing = true
+
+[node name="BackgroundScenery" type="TileMap" parent="background"]
+tile_set = SubResource( 5 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -655359, 0, 0, -589823, 0, 0, -524287, 0, 0, -458751, 0, 0, -393215, 0, 0, -327679, 0, 0, -262143, 0, 0, -196607, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0 )
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="ground" type="TileMap" parent="world"]
+tile_set = SubResource( 12 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+collision_friction = 0.01
+collision_bounce = 0.9
+collision_layer = 8
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( -720897, 3, 0, -786432, 3, 0, -786431, 3, 0, -786430, 3, 0, -786429, 3, 0, -786428, 3, 0, -786427, 3, 0, -786426, 3, 0, -786425, 3, 0, -786424, 3, 0, -786423, 3, 0, -786422, 3, 0, -786421, 3, 0, -786420, 3, 0, -786419, 3, 0, -786418, 3, 0, -786417, 3, 0, -786416, 3, 0, -786415, 3, 0, -786414, 3, 0, -786413, 3, 0, -786412, 3, 0, -786411, 3, 0, -786410, 3, 0, -786409, 3, 0, -786408, 3, 0, -786407, 3, 0, -786406, 3, 0, -786405, 3, 0, -786404, 3, 0, -786403, 3, 0, -786402, 3, 0, -786401, 3, 0, -786400, 3, 0, -655361, 3, 0, -720896, 3, 0, -720895, 3, 0, -720894, 3, 0, -720893, 3, 0, -720892, 3, 0, -720891, 2, 0, -720890, 2, 0, -720889, 3, 0, -720888, 3, 0, -720887, 3, 0, -720886, 3, 0, -720885, 3, 0, -720884, 3, 0, -720883, 3, 0, -720882, 3, 0, -720881, 3, 0, -720880, 3, 0, -720879, 3, 0, -720878, 3, 0, -720877, 3, 0, -720876, 3, 0, -720875, 3, 0, -720874, 3, 0, -720873, 3, 0, -720872, 3, 0, -720871, 3, 0, -720870, 3, 0, -720869, 2, 0, -720868, 2, 0, -720867, 3, 0, -720866, 3, 0, -720865, 3, 0, -720864, 3, 0, -589825, 3, 0, -655360, 3, 0, -655329, 3, 0, -655328, 3, 0, -524289, 3, 0, -589824, 3, 0, -589793, 3, 0, -589792, 3, 0, -458753, 3, 0, -524288, 3, 0, -524257, 3, 0, -524256, 3, 0, -393217, 3, 0, -458752, 3, 0, -458721, 3, 0, -458720, 3, 0, -327681, 3, 0, -393216, 3, 0, -393185, 3, 0, -393184, 3, 0, -262145, 3, 0, -327680, 3, 0, -327649, 3, 0, -327648, 3, 0, -196609, 3, 0, -262144, 3, 0, -262113, 3, 0, -262112, 3, 0, -131073, 3, 0, -196608, 3, 0, -196577, 3, 0, -196576, 3, 0, -65537, 3, 0, -131072, 3, 0, -131041, 3, 0, -131040, 3, 0, -1, 3, 0, -65536, 3, 0, -65513, 5, 0, -65512, 4, 0, -65511, 4, 0, -65510, 4, 0, -65509, 4, 0, -65508, 4, 0, -65507, 4, 0, -65506, 4, 0, -65505, 3, 0, -65504, 3, 0, 65535, 3, 0, 0, 3, 0, 31, 3, 0, 32, 3, 0, 131071, 3, 0, 65536, 3, 0, 65567, 3, 0, 65568, 3, 0, 196607, 3, 0, 131072, 3, 0, 131103, 3, 0, 131104, 3, 0, 262143, 3, 0, 196608, 3, 0, 196639, 3, 0, 196640, 3, 0, 327679, 3, 0, 262144, 3, 0, 262175, 3, 0, 262176, 3, 0, 393215, 3, 0, 327680, 3, 0, 327711, 3, 0, 327712, 3, 0, 458751, 3, 0, 393216, 3, 0, 393247, 3, 0, 393248, 3, 0, 524287, 3, 0, 458752, 3, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 458772, 1, 0, 458773, 1, 0, 458774, 1, 0, 458775, 1, 0, 458776, 1, 0, 458777, 1, 0, 458778, 1, 0, 458779, 1, 0, 458780, 1, 0, 458781, 1, 0, 458782, 1, 0, 458783, 3, 0, 458784, 3, 0, 589823, 3, 0, 524288, 3, 0, 524289, 3, 0, 524290, 3, 0, 524291, 3, 0, 524292, 3, 0, 524293, 3, 0, 524294, 3, 0, 524295, 3, 0, 524296, 3, 0, 524297, 3, 0, 524298, 3, 0, 524299, 3, 0, 524300, 3, 0, 524301, 3, 0, 524302, 3, 0, 524303, 3, 0, 524304, 3, 0, 524305, 3, 0, 524306, 3, 0, 524307, 3, 0, 524308, 3, 0, 524309, 3, 0, 524310, 3, 0, 524311, 3, 0, 524312, 3, 0, 524313, 3, 0, 524314, 3, 0, 524315, 3, 0, 524316, 3, 0, 524317, 3, 0, 524318, 3, 0, 524319, 3, 0, 524320, 3, 0 )
+
+[node name="portal_door" parent="world" instance=ExtResource( 14 )]
+visible = false
+position = Vector2( -109.92, 235.54 )
+
+[node name="entities" type="Node2D" parent="."]
+
+[node name="boss" type="Node2D" parent="entities"]
+script = ExtResource( 13 )
+
+[node name="points" type="Node2D" parent="entities/boss"]
+visible = false
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="right_floor" type="Position2D" parent="entities/boss/points"]
+position = Vector2( 864, 96 )
+
+[node name="left_floor" type="Position2D" parent="entities/boss/points"]
+position = Vector2( 160, 96 )
+
+[node name="scaffold" type="Position2D" parent="entities/boss/points"]
+position = Vector2( 864, -160 )
+
+[node name="center_floor" type="Position2D" parent="entities/boss/points"]
+position = Vector2( 512, 96 )
+
+[node name="boss_movement" type="AnimationPlayer" parent="entities/boss"]
+anims/center = SubResource( 13 )
+anims/center_left = SubResource( 14 )
+anims/center_right = SubResource( 15 )
+anims/intro = SubResource( 16 )
+anims/left = SubResource( 17 )
+anims/left_right = SubResource( 18 )
+anims/left_scaffold = SubResource( 19 )
+anims/right = SubResource( 20 )
+anims/right_left = SubResource( 21 )
+anims/right_scaffold = SubResource( 22 )
+anims/scaffold = SubResource( 23 )
+anims/scaffold_center = SubResource( 24 )
+
+[node name="AnimationTree" type="AnimationTree" parent="entities/boss/boss_movement"]
+tree_root = SubResource( 52 )
+anim_player = NodePath("..")
+active = true
+parameters/playback = SubResource( 53 )
+
+[node name="paths" type="Node2D" parent="entities/boss"]
+visible = false
+
+[node name="left_center" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 54 )
+
+[node name="center_right" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 55 )
+
+[node name="scaffold_center" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 56 )
+
+[node name="left_right" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 57 )
+
+[node name="left_scaffold" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 58 )
+
+[node name="right_scaffold" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 59 )
+
+[node name="intro" type="Path2D" parent="entities/boss/paths"]
+curve = SubResource( 60 )
+
+[node name="boss_position" type="PathFollow2D" parent="entities/boss/paths/intro"]
+position = Vector2( 864, 96 )
+scale = Vector2( 2, 2 )
+offset = 586.553
+rotate = false
+loop = false
+
+[node name="eagor" parent="entities/boss/paths/intro/boss_position" instance=ExtResource( 4 )]
+position = Vector2( 0.782539, 0 )
+
+[node name="boss_fight" type="AnimationPlayer" parent="entities/boss"]
+anims/death = SubResource( 61 )
+anims/delay = SubResource( 62 )
+anims/end_of_stage = SubResource( 63 )
+anims/enemies_dead = SubResource( 64 )
+anims/idle = SubResource( 65 )
+anims/is_dead = SubResource( 66 )
+anims/jump = SubResource( 67 )
+anims/pick_action = SubResource( 68 )
+anims/player_close = SubResource( 69 )
+anims/summon = SubResource( 70 )
+anims/swipe = SubResource( 71 )
+anims/throw = SubResource( 72 )
+
+[node name="AnimationTree" type="AnimationTree" parent="entities/boss/boss_fight"]
+tree_root = SubResource( 110 )
+anim_player = NodePath("..")
+active = true
+parameters/playback = SubResource( 111 )
+
+[node name="player" parent="entities" instance=ExtResource( 2 )]
+position = Vector2( 96.4183, 189.383 )
+
+[node name="enemies" type="Node2D" parent="entities"]
+
+[node name="foreground" type="Node2D" parent="."]
+
+[node name="cameras" type="Node2D" parent="."]
+
+[node name="boss_arena" type="Camera2D" parent="cameras"]
+position = Vector2( 512, -47 )
+script = ExtResource( 11 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[connection signal="eagor_hit" from="entities/boss/paths/intro/boss_position/eagor" to="entities/boss" method="_on_eagor_eagor_hit"]
+[connection signal="shake_screen" from="entities/boss/paths/intro/boss_position/eagor" to="cameras/boss_arena" method="_on_eagor_shake_screen"]

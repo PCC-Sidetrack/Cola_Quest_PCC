@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/code/scripts/running_eagor.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/sprites/running_eagor/S7_running_eagor.png" type="Texture" id=2]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -7.1056, -22.5519, -6.38157, -29.858, -3.88038, -31.3719, 5.86109, -31.2402, 6.8484, -28.8049, 5.46616, -22.4203, 11.9824, -21.8279, 12.9039, -19.7874, 10.7318, -17.1546, 5.92691, -15.4433, 3.689, -12.1522, 3.3599, -1.02852, 1.91184, 0.222076, -5.5259, 0.353718, -7.76381, -1.42344, -7.56634, -10.046, -5.92082, -12.2839, -6.18411, -14.7851, -12.7004, -18.9318, -12.7004, -21.4329, -11.0548, -22.2886 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12.6324, 15.5461 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "run",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 11.3797, 10.4968 )
+
+[node name="S7_running_eagor" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource( 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0707878, -15.4294 )
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.093895, -16.0562 )
+frames = SubResource( 7 )
+animation = "run"
+playing = true
+flip_h = true
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -0.328633, -15.5868 )
+scale = Vector2( 1.22066, 1.57277 )
+process_parent = true
+physics_process_parent = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -0.328633, -15.5868 )
+scale = Vector2( 1.22066, 1.57277 )
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 0.168627, 0.298039, 1, 1 )
+position = Vector2( 0.0539238, 0 )
+shape = SubResource( 8 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
