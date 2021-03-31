@@ -1,8 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/art/particles/P4_little_eagor/P4_little_eagor.png" type="Texture" id=1]
-[ext_resource path="res://assets/code/scripts/wall_of_eagors.gd" type="Script" id=2]
-[ext_resource path="res://assets/sounds/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/art/sc_level/particles/P4_little_eagor/P4_little_eagor.png" type="Texture" id=1]
+[ext_resource path="res://assets/code/sc_level/wall_of_eagors.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/sc_level/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=3]
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 99.3714, 302.421 )

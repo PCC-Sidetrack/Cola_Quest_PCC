@@ -1,8 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/code/scripts/moving_platformNEW.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/tiles/TH_shadow/TH_shadow_left.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/tiles/T32_red_scaffoold_beam/T32_red_scaffold_beam.png" type="Texture" id=3]
+[ext_resource path="res://assets/code/sc_level/moving_platformNEW.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/sc_level/tiles/TH_shadow/TH_shadow_left.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/sc_level/tiles/T32_red_scaffoold_beam/T32_red_scaffold_beam.png" type="Texture" id=3]
+
+
+
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )

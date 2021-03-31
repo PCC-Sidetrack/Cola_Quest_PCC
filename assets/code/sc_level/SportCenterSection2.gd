@@ -20,7 +20,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 	get_node("entities/player").load_from_transition()
-	camera.zoom                  = Vector2(1,1)
+	camera.zoom                  = Vector2(2,2)
 	camera.limit_left            = 0
 	camera.limit_top             = -1888
 	camera.limit_bottom          = 160

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T23_white_burnt_carpet.png-43b9cd8f95db05e20c303915c5b0f980.stex"
+path="res://.import/T23_white_burnt_carpet.png-0261dce0fc758d00da9dc0047f5e5e03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/T23_white_carpet/T23_white_burnt_carpet.png"
-dest_files=[ "res://.import/T23_white_burnt_carpet.png-43b9cd8f95db05e20c303915c5b0f980.stex" ]
+source_file="res://assets/art/sc_level/tiles/T23_white_carpet/T23_white_burnt_carpet.png"
+dest_files=[ "res://.import/T23_white_burnt_carpet.png-0261dce0fc758d00da9dc0047f5e5e03.stex" ]
 
 [params]
 

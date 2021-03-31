@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T21_blue_carpet.png-4619b11d36353f37d9d6c323c63337f6.stex"
+path="res://.import/T21_blue_carpet.png-672a5873dd9d45767d5d12e3413d65a1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/T21_blue_carpet/T21_blue_carpet.png"
-dest_files=[ "res://.import/T21_blue_carpet.png-4619b11d36353f37d9d6c323c63337f6.stex" ]
+source_file="res://assets/art/sc_level/tiles/T21_blue_carpet/T21_blue_carpet.png"
+dest_files=[ "res://.import/T21_blue_carpet.png-672a5873dd9d45767d5d12e3413d65a1.stex" ]
 
 [params]
 

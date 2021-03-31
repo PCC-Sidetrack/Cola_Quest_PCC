@@ -54,6 +54,27 @@ var _is_attacking:      bool   = false
 var _current_sprite:    String = "idle"
 # Allows code to use random numbers
 var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
+# Player stats
+var _stats:    Dictionary = {
+	# How many times has the player attacked
+	total_attacks_given  = 0,
+	# How many collectables the player has collected
+	total_collected_collectables = 0,
+	# How much damage has the player dealt
+	total_damage_dealt   = 0,
+	# How much damage has the player taken
+	total_damage_taken   = 0,
+	# How many times has the player died
+	total_deaths         = 0,
+	# How many enemies has the player killed
+	total_enemies_killed = 0,
+	# How many times has the player jumped
+	total_jumps          = 0,
+	# How many times has the player dashed
+	total_times_dashed   = 0,
+	# How many times has the player been hit
+	total_times_hit      = 0,
+}
 
 
 
@@ -112,6 +133,28 @@ func _ready() -> void:
 	_switch_sprite          (SPRITE.IDLE)
 
 #-----------------------------------------------------------------------------#
+#                                   Getters                                   #
+#-----------------------------------------------------------------------------#
+func get_total_attacks_given() -> int:
+	return _stats.total_attacks_given
+func get_total_collected_collectables() -> int:
+	return _stats.total_collected_collectables
+func get_total_damage_dealt() -> int:
+	return _stats.total_damage_dealt
+func get_total_damage_taken() -> int:
+	return _stats.total_damage_taken
+func get_total_deaths() -> int:
+	return _stats.total_deaths
+func get_total_enemies_killed() -> int:
+	return _stats.total_enemies_killed
+func get_total_jumps() -> int:
+	return _stats.total_jumps
+func get_total_times_dashed() -> int:
+	return _stats.total_times_dashed
+func get_total_times_hit() -> int:
+	return _stats.total_times_hit
+
+#-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
 # Set the speed that the camera is zoomed in and out
@@ -138,6 +181,16 @@ func is_dead() -> bool:
 # Sets the value of the 'dead' boolean. When dead, the player can't take damage.
 func set_is_dead(value: bool) -> void:
 	_dead = value
+
+func prepare_transition() -> void:
+	PlayerVariables.saved_health = get_current_health()
+	PlayerVariables.saved_cola   = get_total_collected_collectables()
+	PlayerVariables.saved_deaths = get_total_deaths()
+
+func load_from_transition() -> void:
+	set_current_health(PlayerVariables.saved_health)
+	_stats.total_collected_collectables = PlayerVariables.saved_cola
+	_stats.total_deaths                 = PlayerVariables.saved_deaths
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #

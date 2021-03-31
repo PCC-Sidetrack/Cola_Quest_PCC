@@ -20,6 +20,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 	get_node("entities/player").load_from_transition()
+	camera.zoom                  = Vector2(2, 2)
 	camera.position              = Vector2(512, -47)
 	camera.current               = true
 	

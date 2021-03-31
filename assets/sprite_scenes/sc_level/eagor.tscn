@@ -1,18 +1,31 @@
 [gd_scene load_steps=57 format=2]
 
-[ext_resource path="res://assets/art/sprites/eagor/eagor_idle.png" type="Texture" id=1]
-[ext_resource path="res://assets/art/sprites/eagor/eagor_hurt.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/sprites/eagor/eagor_jump.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/sprites/eagor/eagor_swipe.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/sprites/eagor/eagor_roar.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/sprites/eagor/eagor_throw.png" type="Texture" id=6]
-[ext_resource path="res://assets/art/sprites/eagor/eagor_summon.png" type="Texture" id=7]
-[ext_resource path="res://assets/code/scripts/eagor.gd" type="Script" id=8]
-[ext_resource path="res://assets/sounds/Screaming Hawk-SoundBible.com-1210664501.wav" type="AudioStream" id=9]
-[ext_resource path="res://assets/code/shaders/dissolve_shader.shader" type="Shader" id=10]
-[ext_resource path="res://assets/sounds/mixkit-quest-game-heavy-stomp-v-3049.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/art/particles/PS_Screw/PS_Screw.png" type="Texture" id=12]
-[ext_resource path="res://assets/art/particles/PN_Nut/PN_Nut.png" type="Texture" id=13]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_idle.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_hurt.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_jump.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_swipe.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_roar.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_throw.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_summon.png" type="Texture" id=7]
+[ext_resource path="res://assets/code/sc_level/eagor.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/sc_level/Screaming Hawk-SoundBible.com-1210664501.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/shaders/sc_level/dissolve_shader.shader" type="Shader" id=10]
+[ext_resource path="res://assets/sounds/sc_level/mixkit-quest-game-heavy-stomp-v-3049.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/art/sc_level/particles/PS_Screw/PS_Screw.png" type="Texture" id=12]
+[ext_resource path="res://assets/art/sc_level/particles/PN_Nut/PN_Nut.png" type="Texture" id=13]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

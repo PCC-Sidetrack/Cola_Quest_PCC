@@ -81,7 +81,7 @@ var _last_state:       String  = "idle"
 #                            Onready Variables                                #
 #-----------------------------------------------------------------------------#
 onready var audio         = $AudioStreamPlayer2D
-onready var basketball    = preload("res://assets/code/sprite_scenes/basketball.tscn")
+onready var basketball    = preload("res://assets/sprite_scenes/sc_level/basketball.tscn")
 onready var animation_machine = $AnimationTree.get("parameters/playback")
 
 #-----------------------------------------------------------------------------#

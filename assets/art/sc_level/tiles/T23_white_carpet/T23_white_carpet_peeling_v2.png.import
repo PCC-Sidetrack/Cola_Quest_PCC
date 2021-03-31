@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T23_white_carpet_peeling_v2.png-84b39037784984a46c517df9a8a705a0.stex"
+path="res://.import/T23_white_carpet_peeling_v2.png-3fa3f41a9e550f0589a4b06c9c96d7dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/T23_white_carpet/T23_white_carpet_peeling_v2.png"
-dest_files=[ "res://.import/T23_white_carpet_peeling_v2.png-84b39037784984a46c517df9a8a705a0.stex" ]
+source_file="res://assets/art/sc_level/tiles/T23_white_carpet/T23_white_carpet_peeling_v2.png"
+dest_files=[ "res://.import/T23_white_carpet_peeling_v2.png-3fa3f41a9e550f0589a4b06c9c96d7dc.stex" ]
 
 [params]
 

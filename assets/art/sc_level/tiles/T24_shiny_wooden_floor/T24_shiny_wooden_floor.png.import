@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T24_shiny_wooden_floor.png-3458675a080bb3b328b331584e136770.stex"
+path="res://.import/T24_shiny_wooden_floor.png-c9b4fdce80140c0e9301a819479a8687.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/T24_shiny_wooden_floor/T24_shiny_wooden_floor.png"
-dest_files=[ "res://.import/T24_shiny_wooden_floor.png-3458675a080bb3b328b331584e136770.stex" ]
+source_file="res://assets/art/sc_level/tiles/T24_shiny_wooden_floor/T24_shiny_wooden_floor.png"
+dest_files=[ "res://.import/T24_shiny_wooden_floor.png-c9b4fdce80140c0e9301a819479a8687.stex" ]
 
 [params]
 

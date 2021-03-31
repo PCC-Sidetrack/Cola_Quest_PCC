@@ -1,7 +1,9 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/code/scripts/running_eagor.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/sprites/running_eagor/S7_running_eagor.png" type="Texture" id=2]
+[ext_resource path="res://assets/code/sc_level/running_eagor.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/sc_level/sprites/running_eagor/S7_running_eagor.png" type="Texture" id=2]
+
+
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -7.1056, -22.5519, -6.38157, -29.858, -3.88038, -31.3719, 5.86109, -31.2402, 6.8484, -28.8049, 5.46616, -22.4203, 11.9824, -21.8279, 12.9039, -19.7874, 10.7318, -17.1546, 5.92691, -15.4433, 3.689, -12.1522, 3.3599, -1.02852, 1.91184, 0.222076, -5.5259, 0.353718, -7.76381, -1.42344, -7.56634, -10.046, -5.92082, -12.2839, -6.18411, -14.7851, -12.7004, -18.9318, -12.7004, -21.4329, -11.0548, -22.2886 )

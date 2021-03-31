@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wide_Birch_Cratet.png-c7b3474073ae3166d7b0384851a687d0.stex"
+path="res://.import/Wide_Birch_Cratet.png-67d6ba234320b00a12e8306c96e16f28.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/T26_Wide_Birch_Crate/Wide_Birch_Cratet.png"
-dest_files=[ "res://.import/Wide_Birch_Cratet.png-c7b3474073ae3166d7b0384851a687d0.stex" ]
+source_file="res://assets/art/sc_level/tiles/T26_Wide_Birch_Crate/Wide_Birch_Cratet.png"
+dest_files=[ "res://.import/Wide_Birch_Cratet.png-67d6ba234320b00a12e8306c96e16f28.stex" ]
 
 [params]
 

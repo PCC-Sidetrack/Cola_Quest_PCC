@@ -1,10 +1,15 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://assets/art/tiles/TD_portal_door/TD_portal_door.png" type="Texture" id=1]
-[ext_resource path="res://assets/code/scripts/door_portal.gd" type="Script" id=2]
-[ext_resource path="res://assets/code/shaders/diamond_transition.shader" type="Shader" id=3]
-[ext_resource path="res://assets/sounds/Whoosh_SFX_01.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/art/tiles/UI_enter_bubble/UI_enter_bubble.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/sc_level/tiles/TD_portal_door/TD_portal_door.png" type="Texture" id=1]
+[ext_resource path="res://assets/code/sc_level/door_portal.gd" type="Script" id=2]
+[ext_resource path="res://assets/shaders/sc_level/diamond_transition.shader" type="Shader" id=3]
+[ext_resource path="res://assets/sounds/sc_level/Whoosh_SFX_01.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/art/sc_level/tiles/UI_enter_bubble/UI_enter_bubble.png" type="Texture" id=5]
+
+
+
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "bubble_grow"

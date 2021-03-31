@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Vertical_BLue_Crashmat.png-eaf0daf958e402edd87f9bec3f273248.stex"
+path="res://.import/Vertical_BLue_Crashmat.png-6bebc245c474cccb3e20cf2f41a0e91f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/T29_Vertical_Blue_Crash_Mat 2/Vertical_BLue_Crashmat.png"
-dest_files=[ "res://.import/Vertical_BLue_Crashmat.png-eaf0daf958e402edd87f9bec3f273248.stex" ]
+source_file="res://assets/art/sc_level/tiles/T29_Vertical_Blue_Crash_Mat 2/Vertical_BLue_Crashmat.png"
+dest_files=[ "res://.import/Vertical_BLue_Crashmat.png-6bebc245c474cccb3e20cf2f41a0e91f.stex" ]
 
 [params]
 

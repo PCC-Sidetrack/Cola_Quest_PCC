@@ -12,7 +12,7 @@ extends Node
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # How much health did the player have
-var saved_health: int
+var saved_health: int = 5
 # How much cola had the player collected
 var saved_cola:   int
 # How many times had the player died
