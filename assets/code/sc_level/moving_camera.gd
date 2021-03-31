@@ -129,7 +129,7 @@ func _start_moving() -> void:
 #-----------------------------------------------------------------------------#
 # The player has reached the node to start the animation sequence
 func _on_Area2D_body_entered(body: Node) -> void:
-	if body.has_method("get_total_deaths"):
+	if body.has_method("prepare_transition"):
 		current   = true
 		get_node("LeftBorder/CollisionShape2D").set_deferred("disabled", false)
 		get_parent().get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)

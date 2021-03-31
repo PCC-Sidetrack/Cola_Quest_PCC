@@ -24,7 +24,7 @@ func _ready() -> void:
 	$background/BA_arrow.visible = false
 	camera.position              = Vector2(-512, 0)
 	camera.anchor_mode           = 0
-	camera.zoom                  = Vector2(1,1)
+	camera.zoom                  = Vector2(2, 2)
 	camera.limit_left            = 0
 	camera.limit_top             = 0
 	camera.limit_bottom          = 600

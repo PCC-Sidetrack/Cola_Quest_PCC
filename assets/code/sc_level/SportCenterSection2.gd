@@ -28,5 +28,5 @@ func _ready() -> void:
 	camera.current               = true
 	camera.drag_margin_v_enabled = true
 	camera.smoothing_enabled     = true
-	
+#
 	portal.get_node("AnimationPlayer").play("transition_out")

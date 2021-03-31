@@ -15,8 +15,8 @@ extends Entity
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 export var acceleration: float = 10.0
-export var damage:       int   = 5
-export var health:       int   = 10
+export var damage:       int   = 1
+export var health:       int   = 2
 export var jump_speed:   float = 0.05
 export var speed:        float = 5.0
 

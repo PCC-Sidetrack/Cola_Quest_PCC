@@ -67,14 +67,14 @@ func _start_eagors() -> void:
 	$Particles2D.emitting = true
 	$Area2D.monitoring    = true
 	$Area2D.monitorable   = true
-	get_node("Area2D/CollisionShape2D").set_deferred("disable", false)
+	#get_node("Area2D/CollisionShape2D").set_deferred("disable", false)
 
 # Stop the eagor wall functions
 func _stop_eagors() -> void:
 	$Particles2D.emitting = false
 	$Area2D.monitoring    = false
 	$Area2D.monitorable   = false
-	get_node("Area2D/CollisionShape2D").set_deferred("disable", true)
+	#get_node("Area2D/CollisionShape2D").set_deferred("disable", true)
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #
@@ -87,9 +87,8 @@ func _on_Camera2D_reached_end() -> void:
 
 # Kill the player if they get too close to the wall of eagors
 func _on_Area2D_body_entered(body: Node) -> void:
-	if body.has_method("get_total_deaths") or body.is_in_group(Globals.GROUP.PLAYER):
-# warning-ignore:return_value_discarded
-		get_tree().reload_current_scene()
+	if body.has_method("prepare_transition") or body.is_in_group(Globals.GROUP.PLAYER):
+		Globals.player.take_damage(Globals.player.get_max_health())
 
 # When the delay timer has finished, play a bird sound
 func _on_Timer_timeout() -> void:

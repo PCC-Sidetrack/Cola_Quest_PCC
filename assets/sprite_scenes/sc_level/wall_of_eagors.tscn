@@ -4,9 +4,6 @@
 [ext_resource path="res://assets/code/sc_level/wall_of_eagors.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/sc_level/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=3]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 99.3714, 302.421 )
 
@@ -30,11 +27,13 @@ sound_file = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
+monitoring = false
+monitorable = false
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 74.4857, 292.567 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, 292.567 )
