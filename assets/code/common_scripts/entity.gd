@@ -426,7 +426,6 @@ func custom_knockback(other_entity: Object, knockback_value: float, direction: V
 # A generic move function that determines what kind of movement the entity contains
 # This is intended for more automation, but should not be considered lazy coding
 # Provides minimal control over entities
-# Returns whether the entity has moved
 func move() -> void:
 	var current_instruction: Dictionary = _metadata.movement.instructions[_metadata.movement.current_instruction]
 	

@@ -14,19 +14,6 @@
 [ext_resource path="res://assets/art/sc_level/particles/PS_Screw/PS_Screw.png" type="Texture" id=12]
 [ext_resource path="res://assets/art/sc_level/particles/PN_Nut/PN_Nut.png" type="Texture" id=13]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="ParticlesMaterial" id=2]
@@ -664,7 +651,7 @@ graph_offset = Vector2( -116.132, -51.5492 )
 "enemy",
 ]]
 pause_mode = 2
-position = Vector2( 0.998561, 0 )
+position = Vector2( -0.237649, 0 )
 collision_layer = 2
 collision_mask = 9
 script = ExtResource( 8 )
@@ -710,6 +697,7 @@ texture = ExtResource( 2 )
 [node name="idle" type="Sprite" parent="sprites"]
 texture = ExtResource( 1 )
 hframes = 2
+frame = 1
 
 [node name="jump" type="Sprite" parent="sprites"]
 visible = false

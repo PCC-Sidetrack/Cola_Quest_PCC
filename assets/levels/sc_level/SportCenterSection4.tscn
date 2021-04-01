@@ -1026,6 +1026,7 @@ modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
+frame = 2
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
@@ -1127,7 +1128,7 @@ rotate = false
 loop = false
 
 [node name="eagor" parent="entities/boss/paths/intro/boss_position" instance=ExtResource( 4 )]
-position = Vector2( -0.988511, 0 )
+position = Vector2( -1.3261, 0 )
 
 [node name="boss_fight" type="AnimationPlayer" parent="entities/boss"]
 anims/death = SubResource( 61 )
