@@ -17,6 +17,10 @@ signal cola_healing()
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
+onready var green_plus    = $ui_element/cola_healing/green_plus
+onready var green_plus_ss = $ui_element/cola_healing/green_plus_ss
+
+
 # Counts the amount of respawns
 var _respawn_count:    int = 0
 
@@ -27,10 +31,12 @@ var _cola_count:       int = 0
 var _cola_requirement: int = 5
 
 # Maximum player health
-var _m_health:         int = 0
+var _m_health:         int  = 0
 
 # Current player health
-var _c_health:         int = 0
+var _c_health:         int  = 0
+
+var _healing_enabled:  bool = true
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
@@ -39,9 +45,9 @@ var _c_health:         int = 0
 func _ready() -> void:
 	$ui_stat/stats/respawn_counter.visible         = false
 	$ui_stat/stats/total_cola_collected.visible    = false
-	$ui_element/cola_healing/green_plus.max_value  = _cola_requirement
-	$ui_element/cola_healing/green_plus.value      = 0
-	$ui_element/cola_healing/green_plus_ss.visible = false
+	green_plus.max_value  = _cola_requirement
+	green_plus.value      = 0
+	green_plus_ss.visible = false
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
@@ -63,8 +69,10 @@ func _on_game_UI_player_killed() -> void:
 
 # On player respawn, increment respawn counter
 func _on_game_UI_respawn_player() -> void:
-	$ui_element/cola_healing/green_plus.value    = 0
-	_respawn_count += 1
+	_healing_enabled      = true
+	green_plus.value      =  0
+	green_plus_ss.visible = false
+	_respawn_count        += 1
 	$ui_stat/stats/respawn_counter.visible       = false
 	$ui_stat/stats/total_cola_collected.visible  = false
 
@@ -76,16 +84,18 @@ func _on_game_UI_level_cleared():
 
 # On collecting a cola(s)
 func _on_game_UI_cola_collect(amount):
-	_cola_count                               += amount
-	$ui_element/cola_healing/green_plus.value += amount
+	_cola_count += amount
+
 	$ui_element/cola_counter/cola_tween.interpolate_property($ui_element/cola_counter/cola_icon, "scale", Vector2(2,2), Vector2(1,1), .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$ui_element/cola_counter/cola_tween.start()
-	if ($ui_element/cola_healing/green_plus.value == $ui_element/cola_healing/green_plus.max_value):
-		$ui_element/cola_healing/green_plus_ss.visible = true
-		$ui_element/cola_healing/green_plus.visible    = false
 	
-	if ($ui_element/cola_healing/green_plus.value == _cola_requirement) and (_c_health != _m_health):
-		_cola_healing()
+	if _healing_enabled:
+		green_plus.value += amount
+		if (green_plus.value == green_plus.max_value):
+			green_plus_ss.visible = true
+			green_plus.visible    = false
+		if (green_plus.value == _cola_requirement) and (_c_health != _m_health):
+			_cola_healing()
 
 # On initialization
 func _on_game_UI_initialize_player(max_health) -> void:
@@ -95,12 +105,19 @@ func _on_game_UI_initialize_player(max_health) -> void:
 # On player health changing
 func _on_game_UI_player_health_changed(_current_health, _previous_health) -> void:
 	_c_health = _current_health
-	if ($ui_element/cola_healing/green_plus.value == _cola_requirement) and (_current_health < _previous_health):
-		_cola_healing()
+	
+	if _healing_enabled == true:
+		if (green_plus.value == _cola_requirement) and (_current_health < _previous_health):
+			_cola_healing()
 
 # On cola healing the player
 func _cola_healing():
 	emit_signal("cola_healing")
-	$ui_element/cola_healing/green_plus.value      = 0
-	$ui_element/cola_healing/green_plus_ss.visible = false
-	$ui_element/cola_healing/green_plus.visible    = true
+	green_plus.value      = 0
+	green_plus_ss.visible = false
+	green_plus.visible    = true
+
+# COMMENT NEEDED
+func _on_game_UI_healing_enabled(enabled):
+	print(enabled)
+	_healing_enabled = enabled
