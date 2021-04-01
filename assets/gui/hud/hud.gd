@@ -117,7 +117,6 @@ func _cola_healing():
 	green_plus_ss.visible = false
 	green_plus.visible    = true
 
-# COMMENT NEEDED
+# On healing enabled
 func _on_game_UI_healing_enabled(enabled):
-	print(enabled)
 	_healing_enabled = enabled
