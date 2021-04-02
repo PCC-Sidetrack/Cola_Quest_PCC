@@ -20,13 +20,13 @@ onready var selector_three = $main_menu_options/CenterContainer/VBoxContainer/Ce
 # Selector currently being selected 
 var current_selection:int  = 0
 # Menu start  
-var menu_start:int         = 0
+var menu_start:       int  = 0
 # Menu credits 
-var menu_credits:int       = 1
+var menu_credits:     int  = 1
 # Menu exit 
-var menu_exit:int          = 2 
+var menu_exit:        int  = 2 
 # Menu opened
-var menu_opened:bool       = false
+var menu_opened:      bool = false
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #

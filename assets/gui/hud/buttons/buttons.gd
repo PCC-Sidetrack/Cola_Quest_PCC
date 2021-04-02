@@ -3,7 +3,7 @@
 # Description:  GUI menu buttons that are used on every menu
 # Author:       Rightin Yamada
 # Company:      Sidetrack
-# Last Updated: January 30, 2021
+# Last Updated: April 1, 2021
 #-----------------------------------------------------------------------------#
 
 extends CanvasLayer
@@ -13,6 +13,24 @@ extends CanvasLayer
 #-----------------------------------------------------------------------------#
 # Emits respawn signal when "retry" buttons have been pressed
 signal respawn_player()
+
+#-----------------------------------------------------------------------------#
+#                                Variables                                    #
+#-----------------------------------------------------------------------------#
+# Current selected button
+var current_selection:int = 0
+
+# Resume button
+var resume_button:    int = 0
+
+# Retry button
+var retry_button:     int = 1
+
+# Restart button
+var restart_button:   int = 2
+
+# Exit button
+var exit_button:      int = 3
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -55,3 +73,34 @@ func _on_Restart_pressed():
 # On restart button mouse hover
 func _on_Restart_mouse_entered() -> void:
 	pass
+
+### Control buttons with keyboard
+#func _input(event) -> void:
+#	if Globals.game_locked == true:
+#		if event.is_action_pressed("ui_up") and current_selection > resume_button:
+#			current_selection -= 1 
+#			$mouse_hover.play()
+#		elif event.is_action_pressed("ui_down") and current_selection < exit_button:
+#			current_selection += 1 
+#			$mouse_hover.play()
+#		elif event.is_action_pressed("ui_up") and current_selection == resume_button:
+#			current_selection = exit_button
+#			$mouse_hover.play()
+#		elif event.is_action_pressed("ui_down") and current_selection == exit_button:
+#			current_selection = resume_button
+#			$mouse_hover.play()
+#		elif event.is_action_pressed("ui_accept"):
+#			_handle_selection(current_selection)
+#
+## Handle the current selection
+#func _handle_selection(_current_selection) -> void:
+#	if Globals.game_locked == false:
+#		match _current_selection:
+#			resume_button:
+#				_on_Resume_pressed()
+#			retry_button:
+#				_on_Retry_pressed()
+#			restart_button:
+#				_on_Restart_pressed()
+#			exit_button:
+#				_on_Exit_pressed()

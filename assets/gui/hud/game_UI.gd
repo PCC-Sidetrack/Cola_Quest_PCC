@@ -8,6 +8,13 @@
 
 extends Control
 
+
+#-----------------------------------------------------------------------------#
+#                                Variables                                    #
+#-----------------------------------------------------------------------------#
+# Show or hide in-game UI
+export var enable_hud: bool = true
+
 #-----------------------------------------------------------------------------#
 #                                 Signals                                     #
 #-----------------------------------------------------------------------------#
@@ -33,8 +40,10 @@ signal boss_healthbar_visible(visible)
 signal flash_screen          (color)
 # Signal that is activated when a cola is collected
 signal cola_collect          (amount)
-# COMMENT NEEDED
+# Signal that is activated when cola healing occurs
 signal cola_healing          ()
+# Signal that is activated when healing is enabled or disabled
+signal healing_enabled       (enabled)
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
@@ -79,7 +88,18 @@ func on_flash_screen          (color) -> void:
 # Emit signal when cola is collected
 func on_cola_collect          (amount) -> void:
 	emit_signal("cola_collect", amount)
-	
+
+# Emit signal when healing is enabled or disabled
+func on_healing_enabled       (enabled) -> void:
+	emit_signal("healing_enabled", enabled)
+
+# On game ui visiblity being set
+func on_game_ui_visible       (visible) -> void:
+	$HUD/ui_stat/stats.visible           = visible
+	$HUD/ui_element/cola_counter.visible = visible
+	$HUD/ui_element/cola_healing.visible = visible
+	$player_healthbar/healthbar.visible  = visible
+
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#	
@@ -92,5 +112,9 @@ func _on_failure_respawn_player() -> void:
 	emit_signal("respawn_player")
 
 # On cola healing
-func _on_HUD_cola_healing():
+func _on_HUD_cola_healing() -> void:
 	emit_signal("cola_healing")
+	
+# Show game ui by default
+func _ready() -> void:
+	on_game_ui_visible(true)
