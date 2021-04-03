@@ -7,6 +7,7 @@
 #-----------------------------------------------------------------------------#
 
 extends Control
+export var enable_hud: bool = true
 
 #-----------------------------------------------------------------------------#
 #                                 Signals                                     #
@@ -35,6 +36,8 @@ signal flash_screen          (color)
 signal cola_collect          (amount)
 # COMMENT NEEDED
 signal cola_healing          ()
+# COMMENT NEEDED
+signal healing_enabled       (enabled)
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
@@ -79,7 +82,18 @@ func on_flash_screen          (color) -> void:
 # Emit signal when cola is collected
 func on_cola_collect          (amount) -> void:
 	emit_signal("cola_collect", amount)
-	
+
+# Emit signal when healing is enabled or disabled
+func on_healing_enabled       (enabled) -> void:
+	emit_signal("healing_enabled", enabled)
+
+# COMMENT NEEDED
+func on_game_ui_visible       (visible) -> void:
+	$HUD/ui_stat/stats.visible             = visible
+	$HUD/ui_element/cola_counter.visible   = visible
+	$HUD/ui_element/cola_healing.visible   = visible
+	$player_healthbar/healthbar.visible    = visible
+
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#	
@@ -94,3 +108,7 @@ func _on_failure_respawn_player() -> void:
 # On cola healing
 func _on_HUD_cola_healing():
 	emit_signal("cola_healing")
+	
+# COMMENT NEEDED
+func _ready() -> void:
+	on_game_ui_visible(true)
