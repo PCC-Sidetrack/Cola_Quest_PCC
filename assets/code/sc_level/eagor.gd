@@ -91,6 +91,9 @@ onready var animation_machine = $AnimationTree.get("parameters/playback")
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
+	$AnimationTree["parameters/swipe/TimeScale/scale"] = STAGE_VARIABLES[current_stage].speed
+	$AnimationTree["parameters/throw/TimeScale/scale"] = STAGE_VARIABLES[current_stage].speed
+	
 	audio.stream      = sound
 	audio.volume_db   = -10
 	audio.pitch_scale = 0.8
