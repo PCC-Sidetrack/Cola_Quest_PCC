@@ -28,5 +28,6 @@ func _ready() -> void:
 	camera.current               = true
 	camera.drag_margin_v_enabled = true
 	camera.smoothing_enabled     = true
-#
+	
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	portal.get_node("AnimationPlayer").play("transition_out")

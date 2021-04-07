@@ -17,3 +17,11 @@ var saved_health: int = 5
 var saved_cola:   int
 # How many times had the player died
 var saved_deaths: int
+
+func new_level() -> void:
+	saved_health = Globals.player.get_max_health()
+	saved_cola   = 0
+	saved_deaths = 0
+
+func restart_level() -> void:
+	saved_health = Globals.player.get_max_health()

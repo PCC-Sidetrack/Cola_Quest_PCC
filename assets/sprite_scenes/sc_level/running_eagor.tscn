@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/code/sc_level/running_eagor.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/sc_level/sprites/running_eagor/S7_running_eagor.png" type="Texture" id=2]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -7.1056, -22.5519, -6.38157, -29.858, -3.88038, -31.3719, 5.86109, -31.2402, 6.8484, -28.8049, 5.46616, -22.4203, 11.9824, -21.8279, 12.9039, -19.7874, 10.7318, -17.1546, 5.92691, -15.4433, 3.689, -12.1522, 3.3599, -1.02852, 1.91184, 0.222076, -5.5259, 0.353718, -7.76381, -1.42344, -7.56634, -10.046, -5.92082, -12.2839, -6.18411, -14.7851, -12.7004, -18.9318, -12.7004, -21.4329, -11.0548, -22.2886 )
@@ -36,7 +38,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 11.3797, 10.4968 )
 
-[node name="S7_running_eagor" type="KinematicBody2D"]
+[node name="S7_running_eagor" type="KinematicBody2D" groups=[
+"enemy",
+]]
 collision_layer = 2
 collision_mask = 11
 script = ExtResource( 1 )
@@ -71,4 +75,15 @@ monitorable = false
 modulate = Color( 0.168627, 0.298039, 1, 1 )
 position = Vector2( 0.0539238, 0 )
 shape = SubResource( 8 )
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+
+[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="healthbar" parent="." instance=ExtResource( 3 )]
+margin_left = -7.62543
+margin_top = -41.6051
+margin_right = 8.37457
+margin_bottom = -35.6051
+[connection signal="death" from="." to="." method="_on_S7_running_eagor_death"]
+[connection signal="health_changed" from="." to="." method="_on_S7_running_eagor_health_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

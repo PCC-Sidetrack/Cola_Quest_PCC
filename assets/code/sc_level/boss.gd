@@ -18,11 +18,19 @@ extends Node2D
 #-----------------------------------------------------------------------------#
 #                            Onready Variables                                #
 #-----------------------------------------------------------------------------#
-onready var movement_machine:  AnimationNodeStateMachinePlayback = $boss_movement/AnimationTree.get("parameters/playback")
-onready var animation_machine: AnimationNodeStateMachinePlayback = $paths/intro/boss_position/eagor/AnimationTree.get("parameters/playback")
-onready var logic_machine:     AnimationNodeStateMachinePlayback = $boss_fight/AnimationTree.get("parameters/playback")
-onready var eagor_current_position: PathFollow2D = $paths/intro/boss_position
-onready var eagor_data = $paths/intro/boss_position/eagor
+onready var animation_player:       AnimationTree                     = $paths/intro/boss_position/eagor/AnimationTree
+onready var movement_machine:       AnimationNodeStateMachinePlayback = $boss_movement/AnimationTree.get("parameters/playback")
+onready var animation_machine:      AnimationNodeStateMachinePlayback = $paths/intro/boss_position/eagor/AnimationTree.get("parameters/playback")
+onready var logic_machine:          AnimationNodeStateMachinePlayback = $boss_fight/AnimationTree.get("parameters/playback")
+onready var eagor_current_position: PathFollow2D                      = $paths/intro/boss_position
+onready var eagor_data:             StaticBody2D                      = $paths/intro/boss_position/eagor
+
+onready var flying_eagor:           Resource                          = preload("res://assets/sprite_scenes/sc_level/flying_eagor.tscn")
+
+onready var right_point:            Position2D                        = $points/right_floor
+onready var left_point:             Position2D                        = $points/left_floor
+onready var center_point:           Position2D                        = $points/center_floor
+onready var scaffold:               Position2D                        = $points/scaffold
 
 #-----------------------------------------------------------------------------#
 #                             Export Variables                                #
@@ -56,32 +64,7 @@ var _last_path: String = "intro"
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
-func _player_close() -> void:
-	print("player_close")
-	if eagor_data.player_close:
-		if not eagor_data.is_hurt:
-			logic_machine.travel("swipe")
-	else:
-		if not eagor_data.is_hurt:
-			logic_machine.travel("pick_action")
-
-func _intro() -> void:
-	print("intro")
-	logic_machine.start("player_close")
-
-func _delay() -> void:
-	print("delay")
-	yield(get_tree().create_timer(eagor_data.STAGE_VARIABLES[eagor_data.current_stage].delay), "timeout")
-	logic_machine.travel("player_close")
-
-func _swipe() -> void:
-	print("swipe")
-	animation_machine.travel("swipe")
-	yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-	animation_machine.travel("idle")
-	if not eagor_data.is_hurt:
-		logic_machine.travel("player_close")
-
+# The code for the change path node
 func _change_path(new_path: String) -> void:
 	# Get the node for the new path
 	var new_parent = $paths.get_node(new_path)
@@ -90,105 +73,177 @@ func _change_path(new_path: String) -> void:
 	# Attach eagor to his new path
 	new_parent.add_child(eagor_current_position)
 
-func _jump() -> void:
-	print("jump")
-	animation_machine.travel("jump")
-	if movement_machine.get_current_node() == "left":
-		movement_machine.travel("right")
-	else:
-		movement_machine.travel("left")
-	yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-	animation_machine.travel("idle")
-	if not eagor_data.is_hurt:
-		logic_machine.travel("delay")
+# The code for the death node
+func _death() -> void:
+	#print("death")
+	$boss_fight/AnimationTree.active = false
+	animation_player.active          = false
+	#animation_machine.travel("death")
+	animation_machine.stop()
+	eagor_data._play_animation("death")
 
-func _idle() -> void:
-	print("idle")
-	animation_machine.travel("idle")
-	yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-	if not eagor_data.is_hurt:
-		logic_machine.travel("delay")
+# The code for the delay node
+func _delay() -> void:
+	#print("delay")
+	yield(get_tree().create_timer(eagor_data.STAGE_VARIABLES[eagor_data.current_stage].delay), "timeout")
+	if logic_machine.get_current_node() == "delay":
+		logic_machine.travel("player_close")
 
-func _throw() -> void:
-	print("throw")
-	animation_machine.travel("throw")
-	yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-	animation_machine.travel("idle")
-	if not eagor_data.is_hurt:
-		logic_machine.travel("delay")
-
-func _pick_action() -> void:
-	print("pick_action")
-	var choice: int = rand_range(eagor_data.RANGE_MIN, eagor_data.RANGE_MAX)
-	if choice >= eagor_data.RANGE_MAX - eagor_data.STAGE_VARIABLES[eagor_data.current_stage].jump_chance:
-		if not eagor_data.is_hurt:
-			print("jumping")
-			logic_machine.travel("jump")
-	elif choice < eagor_data.STAGE_VARIABLES[eagor_data.current_stage].throw_chance:
-		if not eagor_data.is_hurt:
-			print("throwing")
-			logic_machine.travel("throw")
-	else:
-		if not eagor_data.is_hurt:
-			print("idling")
-			logic_machine.travel("idle")
-
-func _is_dead() -> void:
-	print("is_dead")
-	if eagor_data.is_dead():
-		logic_machine.travel("death")
-	else:
-		animation_machine.travel("hurt")
-		yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-		logic_machine.travel("end_of_stage")
-
+# The code for the end of stage node
 func _end_of_stage() -> void:
-	print("end_of_stage")
+	#print("end_of_stage")
 	if eagor_data.get_current_health() <= 0:
+		eagor_data.current_wave = 1
 		animation_machine.travel("jump")
 		movement_machine.travel("scaffold")
-		yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
+		yield(get_tree().create_timer(0.5), "timeout")
 		animation_machine.travel("idle")
-		logic_machine.travel("summon")
+		yield(get_tree().create_timer(1.0), "timeout")
+		if logic_machine.get_current_node() == "end_of_stage":
+			logic_machine.travel("summon")
 	else:
-		logic_machine.travel("player_close")
+		if logic_machine.get_current_node() == "end_of_stage":
+			logic_machine.travel("player_close")
 
-func _death() -> void:
-	print("death")
-	animation_machine.travel("death")
-
-func _summon() -> void:
-	print("summon")
-	animation_machine.travel("summon")
-	# Code to summon enemies
-	print("summoning")
-	yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-	logic_machine.travel("enemies_dead")
-
+# The code for the enemies dead node
 func _enemies_dead() -> void:
-	print("enemies_dead")
-	if get_tree().get_node("entities/enemies").get_child_count() <= 0 and eagor_data.current_wave == eagor_data.STAGE_VARIABLES[eagor_data.current_stage].waves:
+	#print("enemies_dead")
+	if get_node("../enemies").get_child_count() <= 0 and eagor_data.current_wave >= eagor_data.STAGE_VARIABLES[eagor_data.current_stage].waves:
 		animation_machine.travel("roar")
-		yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-		animation_machine.travel("jump")
-		movement_machine.travel("center")
-		yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-		animation_machine.travel("jump")
-		if randf() >= 0.5:
-			movement_machine.travel("left")
-		else:
-			movement_machine.travel("right")
-		yield(get_tree().create_timer(eagor_data.get_node("AnimationPlayer").get_animation(animation_machine.get_current_node()).length - 0.5), "timeout")
-		logic_machine.travel("player_close")
-	elif get_tree().get_node("entities/enemies").get_child_count() <= 0 and eagor_data.current_wave < eagor_data.STAGE_VARIABLES[eagor_data.current_stage].waves:
+		yield(get_tree().create_timer(2.5), "timeout")
+		if movement_machine.get_current_node() == "scaffold":
+			animation_machine.travel("jump")
+			if randf() >= 0.5:
+				movement_machine.travel("left")
+			else:
+				movement_machine.travel("right")
+			yield(get_tree().create_timer(1.0), "timeout")
+			
+		if logic_machine.get_current_node() == "enemies_dead":
+			eagor_data.next_stage()
+			logic_machine.travel("player_close")
+	elif get_node("../enemies").get_child_count() <= 0 and eagor_data.current_wave < eagor_data.STAGE_VARIABLES[eagor_data.current_stage].waves:
 		eagor_data.current_wave += 1
-		logic_machine.travel("summon")
+		if logic_machine.get_current_node() == "enemies_dead":
+			logic_machine.travel("summon")
 	else:
 		animation_machine.travel("idle")
+
+# The code for the idle node
+func _idle() -> void:
+	#print("idle")
+	animation_machine.travel("idle")
+	yield(get_tree().create_timer(1.0), "timeout")
+	if logic_machine.get_current_node() == "idle":
+		logic_machine.travel("delay")
+
+# The code for the intro node
+func _intro() -> void:
+	#print("intro")
+	animation_machine.travel("idle")
+	logic_machine.start("player_close")
+
+# The code for the is dead node
+func _is_dead() -> void:
+	#print("is dead")
+	if eagor_data.is_dead():
+		if logic_machine.get_current_node() == "is_dead":
+			logic_machine.travel("death")
+	else:
+		animation_machine.travel("hurt")
+		#logic_machine.stop()
+		yield(get_tree().create_timer(1.5), "timeout")
+		#logic_machine.start("end_of_stage")
+		if logic_machine.get_current_node() == "is_dead":
+			logic_machine.travel("end_of_stage")
+
+# The code for the jump node
+func _jump() -> void:
+	#print("jump")
+	if not eagor_data.is_hurt:
+		animation_machine.travel("jump")
+		if movement_machine.get_current_node() == "left":
+			movement_machine.travel("right")
+		else:
+			movement_machine.travel("left")
+		yield(get_tree().create_timer(0.5), "timeout")
+	
+	if not eagor_data.is_hurt:
+		animation_machine.travel("idle")
+		if logic_machine.get_current_node() == "jump":
+			logic_machine.travel("delay")
+
+# The code for the pick action node
+func _pick_action() -> void:
+	#print("pick action")
+	var choice: int = rand_range(eagor_data.RANGE_MIN, eagor_data.RANGE_MAX) as int
+	if choice >= eagor_data.RANGE_MAX - eagor_data.STAGE_VARIABLES[eagor_data.current_stage].jump_chance:
+		if logic_machine.get_current_node() == "pick_action":
+			logic_machine.travel("jump")
+	#elif choice < eagor_data.STAGE_VARIABLES[eagor_data.current_stage].throw_chance:
+	else:
+		if logic_machine.get_current_node() == "pick_action":
+			logic_machine.travel("throw")
+	#else:
+		#if logic_machine.get_current_node() == "pick_action":
+		#	logic_machine.travel("idle")
+
+# The code for the player close node
+func _player_close() -> void:
+	#print("player close")
+	if eagor_data.player_close:
+		if logic_machine.get_current_node() == "player_close":
+			logic_machine.travel("swipe")
+	else:
+		if logic_machine.get_current_node() == "player_close":
+			logic_machine.travel("pick_action")
+
+# The code for the throw node
+func _throw() -> void:
+	#print("throw")
+	animation_machine.travel("throw")
+	yield(get_tree().create_timer(1.5 / eagor_data.STAGE_VARIABLES[eagor_data.current_stage].speed), "timeout")
+	animation_machine.travel("idle")
+	if logic_machine.get_current_node() == "throw":
+		logic_machine.travel("delay")
+
+# The code for the summon node
+func _summon() -> void:
+	#print("summon")
+	animation_machine.travel("summon")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	var eagor1 = flying_eagor.instance()
+	var eagor2 = flying_eagor.instance()
+	var eagor3 = flying_eagor.instance()
+	
+	eagor1.global_position = scaffold.global_position
+	eagor2.global_position = scaffold.global_position
+	eagor3.global_position = scaffold.global_position
+	
+	get_node("../enemies").add_child(eagor1)
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_node("../enemies").add_child(eagor2)
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_node("../enemies").add_child(eagor3)
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "summon":
 		logic_machine.travel("enemies_dead")
+
+# The code for the swipe node
+func _swipe() -> void:
+	#print("swipe")
+	animation_machine.travel("swipe")
+	yield(get_tree().create_timer(2.0 / eagor_data.STAGE_VARIABLES[eagor_data.current_stage].speed), "timeout")
+	animation_machine.travel("idle")
+	if logic_machine.get_current_node() == "swipe":
+		logic_machine.travel("player_close")
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #
 #-----------------------------------------------------------------------------#
+# Has eagor gotten hit
 func _on_eagor_eagor_hit() -> void:
-	logic_machine.travel("is_dead")
+	logic_machine.stop()
+	logic_machine.start("is_dead")

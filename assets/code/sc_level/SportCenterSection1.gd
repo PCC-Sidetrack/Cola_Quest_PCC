@@ -33,5 +33,9 @@ func _ready() -> void:
 	camera.drag_margin_h_enabled = true
 	camera.smoothing_enabled     = true
 	
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
+	PlayerVariables.new_level()
+	
 	# Play the transition
 	portal.get_node("AnimationPlayer").play("transition_out")

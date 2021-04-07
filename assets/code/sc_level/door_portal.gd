@@ -5,7 +5,6 @@
 # Company:     Sidetrack
 # Date:        March 23, 2021
 #-----------------------------------------------------------------------------#
-
 # Extends a Node2D
 extends Node2D
 
@@ -62,13 +61,13 @@ func next_level() -> void:
 #-----------------------------------------------------------------------------#
 # If the player has entered the doorway, they can travel
 func _on_doorway_body_entered(body: Node) -> void:
-	if body.has_method("get_total_deaths"):
+	if body.has_method("prepare_transition"):
 		state_machine.travel("bubble_grow")
 		_can_travel = true
 
 # If the player has exited the doorway, they cannot travel
 func _on_doorway_body_exited(body: Node) -> void:
-	if body.has_method("get_total_deaths"):
+	if body.has_method("prepare_transition"):
 		state_machine.travel("bubble_shrink")
 		_can_travel = false
 

@@ -337,16 +337,16 @@ move = Vector2( -100, -100 )
 [node name="collectables" type="Node2D" parent="entities"]
 
 [node name="c_cola" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 298.155, -150.614 )
+position = Vector2( 304, -128 )
 
 [node name="c_cola2" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 373.902, -148.822 )
+position = Vector2( 368, -128 )
 
 [node name="c_cola3" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 502.164, -275.292 )
+position = Vector2( 496, -256 )
 
 [node name="c_cola4" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 609.049, -274.652 )
+position = Vector2( 625, -256 )
 
 [node name="jumping_eagor" parent="entities/collectables" instance=ExtResource( 17 )]
 position = Vector2( 803.49, -392.29 )
@@ -355,43 +355,43 @@ position = Vector2( 803.49, -392.29 )
 position = Vector2( 310.923, -512.104 )
 
 [node name="c_cola5" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 108.673, -522.984 )
+position = Vector2( 112, -512 )
 
 [node name="c_cola6" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 174.596, -522.984 )
+position = Vector2( 176, -512 )
 
 [node name="flying_eagor2" parent="entities/collectables" instance=ExtResource( 15 )]
 position = Vector2( 853.284, -894.075 )
 
 [node name="c_cola7" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 171.524, -940.926 )
+position = Vector2( 176, -928 )
 
 [node name="c_cola8" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 247.688, -940.286 )
+position = Vector2( 240, -928 )
 
 [node name="c_cola9" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 668.188, -740.596 )
+position = Vector2( 656, -736 )
 
 [node name="c_cola10" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 727.07, -743.796 )
+position = Vector2( 720, -736 )
 
 [node name="c_cola11" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 593.944, -1334.16 )
+position = Vector2( 600, -1325 )
 
 [node name="c_cola12" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 694.429, -1407.77 )
+position = Vector2( 688, -1408 )
 
 [node name="c_cola13" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 788.513, -1477.53 )
+position = Vector2( 784, -1472 )
 
 [node name="c_cola14" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 456.21, -1565.34 )
+position = Vector2( 464, -1548 )
 
 [node name="c_cola15" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 372.366, -1619.1 )
+position = Vector2( 368, -1619 )
 
 [node name="c_cola16" parent="entities/collectables" instance=ExtResource( 18 )]
-position = Vector2( 295.562, -1699.11 )
+position = Vector2( 288, -1696 )
 
 [node name="S7_running_eagor" parent="entities/collectables" instance=ExtResource( 19 )]
 position = Vector2( 209.798, -1443.1 )
@@ -403,14 +403,14 @@ position = Vector2( 686.621, -1093.64 )
 position = Vector2( 396.047, -1238.93 )
 
 [node name="player" parent="entities" instance=ExtResource( 2 )]
-position = Vector2( 109.459, -68.746 )
+position = Vector2( 96, -32 )
 
 [node name="foreground" type="Node2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ViewModulation" type="TileMap" parent="CanvasLayer"]
-modulate = Color( 0.219608, 0.215686, 0.215686, 0.427451 )
+modulate = Color( 0.219608, 0.215686, 0.215686, 0.505882 )
 tile_set = SubResource( 14 )
 cell_size = Vector2( 32, 32 )
 format = 1

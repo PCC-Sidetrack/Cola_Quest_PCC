@@ -16,7 +16,7 @@ signal reached_end
 #-----------------------------------------------------------------------------#
 #                             Export Variables                                #
 #-----------------------------------------------------------------------------#
-export var camera_speed:     float   = 2
+export var camera_speed:     float = 2
 export var shake_duration:   float = 7
 export var shake_frequency:  float = 20
 export var shake_amplitude:  float = 8
@@ -59,7 +59,9 @@ func _physics_process(delta: float) -> void:
 			_time_between_timer = _time_between_shakes
 			shake(shake_duration, shake_frequency, shake_amplitude)
 	
-	if get_camera_screen_center().x >= limit_right - (get_viewport_rect().end.x / 2):
+	#if get_camera_screen_center().x >= limit_right - (get_viewport_rect().end.x / 2):
+	#if get_camera_position().x + Globals.get("display/width") >= limit_right:
+	if get_camera_position().x + (get_viewport_rect().end.x * 2) >= limit_right:
 		_is_moving = false
 		emit_signal("reached_end")
 	

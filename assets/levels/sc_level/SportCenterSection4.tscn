@@ -264,16 +264,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 3.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ "jump" ],
 "method": "_play_animation"
 }, {
 "args": [ "roar" ],
-"method": "_play_animation"
-}, {
-"args": [ "idle" ],
 "method": "_play_animation"
 }, {
 "args": [  ],
@@ -600,10 +597,10 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=49]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=50]
 switch_mode = 2
 auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
 switch_mode = 2
@@ -625,17 +622,17 @@ states/left_right/position = Vector2( 342, 194.732 )
 states/left_scaffold/node = SubResource( 31 )
 states/left_scaffold/position = Vector2( 210, 115 )
 states/right/node = SubResource( 32 )
-states/right/position = Vector2( 732.5, 265.25 )
+states/right/position = Vector2( 733, 262.469 )
 states/right_left/node = SubResource( 33 )
-states/right_left/position = Vector2( 399.5, 394.732 )
+states/right_left/position = Vector2( 400.375, 394.232 )
 states/right_scaffold/node = SubResource( 34 )
 states/right_scaffold/position = Vector2( 687, 127.5 )
 states/scaffold/node = SubResource( 35 )
 states/scaffold/position = Vector2( 456.5, 7.5 )
 states/scaffold_center/node = SubResource( 36 )
 states/scaffold_center/position = Vector2( 489.5, 138.25 )
-transitions = [ "left", "left_scaffold", SubResource( 37 ), "left_scaffold", "scaffold", SubResource( 38 ), "scaffold", "scaffold_center", SubResource( 39 ), "scaffold_center", "center", SubResource( 40 ), "left", "left_right", SubResource( 41 ), "left_right", "right", SubResource( 42 ), "center", "center_left", SubResource( 43 ), "center_left", "left", SubResource( 44 ), "center", "center_right", SubResource( 45 ), "center_right", "right", SubResource( 46 ), "scaffold", "right_scaffold", SubResource( 47 ), "right_scaffold", "right", SubResource( 48 ), "right", "right_left", SubResource( 49 ), "right_left", "left", SubResource( 50 ), "intro", "right", SubResource( 51 ) ]
-graph_offset = Vector2( 257.164, 117.661 )
+transitions = [ "left", "left_scaffold", SubResource( 37 ), "left_scaffold", "scaffold", SubResource( 38 ), "scaffold", "scaffold_center", SubResource( 39 ), "scaffold_center", "center", SubResource( 40 ), "left", "left_right", SubResource( 41 ), "left_right", "right", SubResource( 42 ), "center", "center_left", SubResource( 43 ), "center_left", "left", SubResource( 44 ), "center", "center_right", SubResource( 45 ), "center_right", "right", SubResource( 46 ), "right", "right_left", SubResource( 47 ), "right_left", "left", SubResource( 48 ), "intro", "right", SubResource( 49 ), "right", "right_scaffold", SubResource( 50 ), "right_scaffold", "scaffold", SubResource( 51 ) ]
+graph_offset = Vector2( 567.944, 181.28 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=53]
 
@@ -941,6 +938,7 @@ animation = "throw"
 [sub_resource type="AnimationNodeStateMachineTransition" id=87]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=88]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=89]
 
@@ -959,10 +957,13 @@ animation = "throw"
 [sub_resource type="AnimationNodeStateMachineTransition" id=96]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=97]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=98]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=99]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=100]
 
@@ -1004,10 +1005,10 @@ states/summon/position = Vector2( 686.5, 354.469 )
 states/swipe/node = SubResource( 83 )
 states/swipe/position = Vector2( 633, 44.25 )
 states/throw/node = SubResource( 84 )
-states/throw/position = Vector2( 81.5, 311.253 )
+states/throw/position = Vector2( 45.5, 279.253 )
 transitions = [ "player_close", "swipe", SubResource( 85 ), "swipe", "player_close", SubResource( 86 ), "player_close", "pick_action", SubResource( 87 ), "delay", "player_close", SubResource( 88 ), "is_dead", "death", SubResource( 89 ), "enemies_dead", "player_close", SubResource( 90 ), "is_dead", "end_of_stage", SubResource( 91 ), "end_of_stage", "summon", SubResource( 92 ), "summon", "enemies_dead", SubResource( 93 ), "pick_action", "throw", SubResource( 94 ), "pick_action", "idle", SubResource( 95 ), "pick_action", "jump", SubResource( 96 ), "throw", "delay", SubResource( 97 ), "idle", "delay", SubResource( 98 ), "jump", "delay", SubResource( 99 ), "end_of_stage", "player_close", SubResource( 100 ), "delay", "is_dead", SubResource( 101 ), "throw", "is_dead", SubResource( 102 ), "idle", "is_dead", SubResource( 103 ), "jump", "is_dead", SubResource( 104 ), "pick_action", "is_dead", SubResource( 105 ), "player_close", "is_dead", SubResource( 106 ), "enemies_dead", "summon", SubResource( 107 ) ]
 end_node = "death"
-graph_offset = Vector2( 0, -54.8691 )
+graph_offset = Vector2( 0, 169.489 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=109]
 
@@ -1022,14 +1023,15 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="background"]
-modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
+modulate = Color( 0, 0, 0, 1 )
 tile_set = SubResource( 5 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -1038,6 +1040,7 @@ tile_data = PoolIntArray( -655359, 0, 0, -589823, 0, 0, -524287, 0, 0, -458751, 
 [node name="world" type="Node2D" parent="."]
 
 [node name="ground" type="TileMap" parent="world"]
+modulate = Color( 0, 0, 0, 1 )
 tile_set = SubResource( 12 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
@@ -1121,14 +1124,13 @@ curve = SubResource( 59 )
 curve = SubResource( 60 )
 
 [node name="boss_position" type="PathFollow2D" parent="entities/boss/paths/intro"]
-position = Vector2( 864, 95.9999 )
+position = Vector2( 1280, 128 )
 scale = Vector2( 2, 2 )
-offset = 586.553
 rotate = false
 loop = false
 
 [node name="eagor" parent="entities/boss/paths/intro/boss_position" instance=ExtResource( 4 )]
-position = Vector2( -1.3261, 0 )
+position = Vector2( -0.202783, 0 )
 
 [node name="boss_fight" type="AnimationPlayer" parent="entities/boss"]
 anims/death = SubResource( 61 )
