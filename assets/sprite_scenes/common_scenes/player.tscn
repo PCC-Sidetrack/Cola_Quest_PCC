@@ -211,7 +211,9 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[node name="player" type="KinematicBody2D"]
+[node name="player" type="KinematicBody2D" groups=[
+"player",
+]]
 collision_layer = 2147483649
 collision_mask = 10
 script = ExtResource( 4 )
@@ -227,9 +229,11 @@ visible = false
 position = Vector2( -6, 2 )
 shape = SubResource( 5 )
 
-[node name="melee" type="Area2D" parent="."]
-visible = false
-collision_mask = 2
+[node name="melee" type="Area2D" parent="." groups=[
+"hitbox",
+"player",
+]]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
 position = Vector2( 40.0971, 0 )
@@ -257,6 +261,7 @@ texture = ExtResource( 3 )
 hframes = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 2
 current = true
 zoom = Vector2( 1.5, 1.5 )
 limit_left = -10240

@@ -55,8 +55,6 @@ var _current_sprite:    String = "idle"
 # Allows code to use random numbers
 var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
 
-
-
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
@@ -70,7 +68,7 @@ const CONTROLS: Dictionary = {
 	"DASH":       "dash",
 	#"INTERACT":   "interact",
 	"JUMP":       "jump",
-	#"MELEE":      "melee",
+	#"MELEE":      "melee_attack",
 	"MOVE_LEFT":  "move_left",
 	"MOVE_RIGHT": "move_right",
 	#"RANGED":     "ranged",
@@ -139,6 +137,19 @@ func is_dead() -> bool:
 func set_is_dead(value: bool) -> void:
 	_dead = value
 
+# Save the players current health, cola collected in a given scene, and how many times they respawned
+func prepare_transition() -> void:
+	PlayerVariables.saved_health = get_current_health()
+	PlayerVariables.saved_cola   = get_node("game_UI/HUD")._cola_count
+	PlayerVariables.saved_deaths = get_node("game_UI/HUD")._respawn_count
+
+# Loads the saved values between scene
+func load_from_transition() -> void:
+	set_current_health(PlayerVariables.saved_health)
+	get_node("game_UI/HUD")._c_health      = PlayerVariables.saved_health
+	get_node("game_UI/HUD")._cola_count    = PlayerVariables.saved_cola
+	get_node("game_UI/HUD")._respawn_count = PlayerVariables.saved_deaths
+
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
@@ -167,7 +178,6 @@ func _physics_process(delta: float) -> void:
 		_current_zoom = lerp(_current_zoom, camera_zoom, _camera_zoom_speed * delta)
 	
 		$Camera2D.zoom = _current_zoom
-	
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
@@ -291,6 +301,7 @@ func _on_player_collision(body) -> void:
 		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
 			take_damage(body.get_damage())
 			knockback(body)
+			pass
 
 # Triggered whenever the player's health is changed
 func _on_player_health_changed(change) -> void:

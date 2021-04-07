@@ -61,6 +61,7 @@ config/icon="res://assets/art/logo/Logo_v2.png"
 Globals="*res://assets/code/common_scripts/globals.gd"
 ProgramAlerts="*res://assets/code/common_scripts/program_alerts.gd"
 SceneFade="*res://assets/gui/screen_transitions/fade/scene_fade.tscn"
+PlayerVariables="*res://assets/code/sc_level/PlayerVariables.gd"
 
 [display]
 
