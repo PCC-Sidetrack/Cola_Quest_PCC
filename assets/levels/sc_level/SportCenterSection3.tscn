@@ -939,5 +939,5 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
 stream = ExtResource( 38 )
-volume_db = -34.0
+volume_db = -25.0
 autoplay = true

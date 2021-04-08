@@ -45,6 +45,8 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 # warning-ignore:return_value_discarded
 	move()
+	
+	$running.pitch_scale = rand_range(1.2, 1.6)
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #

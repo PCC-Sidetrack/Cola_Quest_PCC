@@ -36,6 +36,8 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	move_dynamically(Vector2.DOWN)
 	
+	$jump.pitch_scale = rand_range(1.2, 1.5)
+	
 	if global_position.direction_to(Globals.player_position).x >= 0:
 		set_direction_facing(Globals.DIRECTION.LEFT)
 	else:
