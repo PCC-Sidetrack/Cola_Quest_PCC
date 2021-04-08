@@ -1127,7 +1127,8 @@ position = Vector2( 8336, 352 )
 position = Vector2( 8956.49, 55.9083 )
 
 [node name="player" parent="entities" instance=ExtResource( 2 )]
-position = Vector2( 151, 384 )
+position = Vector2( 100.543, 384.722 )
+z_index = 1
 
 [node name="foreground" type="Node2D" parent="."]
 

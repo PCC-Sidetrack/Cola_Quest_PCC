@@ -86,6 +86,7 @@ var _last_state:       String  = "idle"
 onready var audio             = $AudioStreamPlayer2D
 onready var basketball        = preload("res://assets/sprite_scenes/sc_level/basketball.tscn")
 onready var animation_machine = $AnimationTree.get("parameters/playback")
+onready var gui               = get_parent().get_parent().get_parent().get_parent().get_parent().get_node("player/game_UI")
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
@@ -144,6 +145,7 @@ func get_current_health() -> int:
 # Called when eagor gets hurt
 # Useable only with the hitbox/hurtbox system
 func hurt() -> void:
+	gui.on_boss_health_changed(_current_health, _current_health - 1)
 	_current_health -= 1
 	emit_signal("eagor_hit")
 
@@ -152,6 +154,8 @@ func next_stage() -> void:
 	if current_stage < TOTAL_STAGES:
 		current_stage  += 1
 		current_wave    = 1
+		gui.on_boss_health_changed(_current_health, full_health)
+		
 		_current_health = full_health
 		
 		$AnimationTree["parameters/swipe/TimeScale/scale"] = STAGE_VARIABLES[current_stage].speed
@@ -227,6 +231,7 @@ func _spawn_ball() -> void:
 #-----------------------------------------------------------------------------#
 # Played at the end of the death animation
 func boss_defeated() -> void:
+	gui.on_player_level_cleared()
 	emit_signal("_on_boss_defeated")
 
 # If eagor hits the player, cause him to take damage

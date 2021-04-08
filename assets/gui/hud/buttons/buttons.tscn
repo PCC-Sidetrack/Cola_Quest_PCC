@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/gui/hud/buttons/buttons.gd" type="Script" id=15]
 
 [node name="buttons" type="CanvasLayer"]
-layer = 2
+layer = 128
 script = ExtResource( 15 )
 
 [node name="ButtonScreen" type="CenterContainer" parent="."]

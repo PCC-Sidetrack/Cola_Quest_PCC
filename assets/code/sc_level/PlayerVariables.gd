@@ -23,5 +23,5 @@ func new_level() -> void:
 	saved_cola   = 0
 	saved_deaths = 0
 
-func restart_level() -> void:
+func restart_scene() -> void:
 	saved_health = Globals.player.get_max_health()

@@ -1027,7 +1027,7 @@ modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
@@ -1167,7 +1167,5 @@ script = ExtResource( 11 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
 [connection signal="eagor_hit" from="entities/boss/paths/intro/boss_position/eagor" to="entities/boss" method="_on_eagor_eagor_hit"]
 [connection signal="shake_screen" from="entities/boss/paths/intro/boss_position/eagor" to="cameras/boss_arena" method="_on_eagor_shake_screen"]

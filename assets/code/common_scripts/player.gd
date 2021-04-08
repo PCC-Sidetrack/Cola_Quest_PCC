@@ -54,6 +54,8 @@ var _is_attacking:      bool   = false
 var _current_sprite:    String = "idle"
 # Allows code to use random numbers
 var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
+# Does the player have a spawn point
+var _has_spawn_points:  bool   = true
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
@@ -341,14 +343,18 @@ func _on_player_death() -> void:
 # Triggered whenever the player respawns
 func _on_game_UI_respawn_player() -> void:
 	# Respawn
-	global_position = get_spawn_point()
-	set_invulnerability(invlunerability_time)
-	set_is_dead(false)
-	set_modulate(Color(1, 1, 1, 1))
-	set_current_health(max_health)
-	take_damage(-max_health)
-	_switch_sprite(SPRITE.IDLE)
-	Globals.game_locked = false
+	if _has_spawn_points:
+		global_position = get_spawn_point()
+		set_invulnerability(invlunerability_time)
+		set_is_dead(false)
+		set_modulate(Color(1, 1, 1, 1))
+		set_current_health(max_health)
+		take_damage(-max_health)
+		_switch_sprite(SPRITE.IDLE)
+		Globals.game_locked = false
+	else:
+		PlayerVariables.restart_scene()
+		get_tree().reload_current_scene()
 
 # COMMENT NEEDED
 func _on_melee_body_entered(body: Node) -> void:
