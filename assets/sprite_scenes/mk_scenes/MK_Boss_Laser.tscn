@@ -1,7 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/code/MK_Level/MK_Boss_Laser.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/mk_level/particles/glowing_circle.png" type="Texture" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.844444 )
@@ -28,9 +31,9 @@ lifetime_randomness = 1.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
-gravity = Vector3( 250, 0, 0 )
-initial_velocity = 200.0
-orbit_velocity = 3.0
+gravity = Vector3( 0, -50, 0 )
+initial_velocity = 1.0
+orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 radial_accel = 69.78
 scale = 0.5
@@ -72,13 +75,13 @@ script = ExtResource( 1 )
 position = Vector2( 0, 0.943878 )
 points = PoolVector2Array( 0, 0, 10, 0 )
 width = 5.0
+width_curve = SubResource( 1 )
 default_color = Color( 1, 0.180392, 0, 1 )
 
 [node name="Emit_Particle" type="Particles2D" parent="."]
 position = Vector2( -1.83142, -4.74357 )
 amount = 500
-lifetime = 5.0
-explosiveness = 0.15
+lifetime = 1.5
 local_coords = false
 process_material = SubResource( 8 )
 texture = ExtResource( 2 )

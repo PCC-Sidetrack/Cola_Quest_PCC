@@ -90,6 +90,7 @@ extents = Vector2( 7, 20 )
 height = 27.1102
 
 [node name="Orion" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

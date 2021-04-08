@@ -17,7 +17,7 @@ height = 328.0
 radius = 7.00002
 height = 306.0
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 100.0
 height = 328.0
 
@@ -49,7 +49,7 @@ collision_layer = 0
 [node name="Dmg_Player_Area" type="CollisionShape2D" parent="Dmg_Player"]
 position = Vector2( 0, -100 )
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="MK_Boss_Laser1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -228.983, -98.4189 )
@@ -77,3 +77,5 @@ position = Vector2( -434.402, -93.0444 )
 
 [node name="Taurus_Spawn" type="Node2D" parent="."]
 position = Vector2( -16.2657, 215.602 )
+[connection signal="death" from="." to="." method="_on_MK_Boss_death"]
+[connection signal="health_changed" from="." to="." method="_on_MK_Boss_health_changed"]
