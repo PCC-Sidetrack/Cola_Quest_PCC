@@ -63,6 +63,7 @@ func _on_Timer_timeout() -> void:
 	$Sprites/Jump.visible      = true
 	$Sprites/ReadyJump.visible = false
 	jump(rand_range(0.6, 1.0))
+	$jump.play()
 
 # This detects the the player and causes damage
 func _on_Area2D_body_entered(body: Node) -> void:
@@ -99,3 +100,11 @@ func _on_jumping_eagor_death() -> void:
 # On healthbar visibility timeout
 func _visible_timeout():
 	$healthbar.visible = false 
+
+
+func _on_VisibilityEnabler2D_screen_entered() -> void:
+	$Timer.paused = false
+
+
+func _on_VisibilityEnabler2D_screen_exited() -> void:
+	$Timer.paused = true

@@ -91,3 +91,11 @@ func _on_S7_running_eagor_death() -> void:
 # On healthbar visibility timeout
 func _visible_timeout():
 	$healthbar.visible = false 
+
+
+func _on_VisibilityEnabler2D_screen_entered() -> void:
+	$running.play()
+
+
+func _on_VisibilityEnabler2D_screen_exited() -> void:
+	$running.stop()

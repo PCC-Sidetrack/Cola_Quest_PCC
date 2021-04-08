@@ -1097,7 +1097,7 @@ position = Vector2( 3056, 409.838 )
 [node name="enemies" type="Node2D" parent="entities"]
 
 [node name="jumping_eagor" parent="entities/enemies" instance=ExtResource( 20 )]
-position = Vector2( 3376, 320 )
+position = Vector2( 3620.24, 382.186 )
 
 [node name="jumping_eagor2" parent="entities/enemies" instance=ExtResource( 20 )]
 position = Vector2( 4144, 192 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_hurt.png" type="Texture" id=2]
@@ -15,6 +15,10 @@
 [ext_resource path="res://assets/art/sc_level/particles/PN_Nut/PN_Nut.png" type="Texture" id=13]
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/sc_level/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/object_sounds/SD5b_jump_npc.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/object_sounds/SD14_explosion.ogg" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/object_sounds/SD14_explosion_no_loop.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/object_sounds/SD13b_swordswing_npc.wav" type="AudioStream" id=19]
 
 [sub_resource type="ParticlesMaterial" id=1]
 lifetime_randomness = 0.62
@@ -53,15 +57,14 @@ height = 58.8143
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 13.1037
-height = 11.1027
+height = 47.5831
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 45.282
-height = 77.844
+height = 116.49
 
 [sub_resource type="Animation" id=9]
 length = 5.0
-step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/hurtbox:disabled")
 tracks/0/interp = 1
@@ -157,6 +160,40 @@ tracks/6/keys = {
 "args": [ false ],
 "method": "_emit_particles"
 } ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("explode")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+} ],
+"times": PoolRealArray( 0.6, 1, 1.5, 2, 2.5, 3 )
 }
 
 [sub_resource type="Animation" id=10]
@@ -338,6 +375,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("jump")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.74,
+"start_offset": 0.0,
+"stream": ExtResource( 16 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=14]
 length = 2.5
@@ -501,7 +552,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1.2, 1.7, 2 ),
+"times": PoolRealArray( 0, 1, 1.7, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, false ]
@@ -529,6 +580,20 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("throw")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 19 )
+} ],
+"times": PoolRealArray( 1 )
 }
 
 [sub_resource type="Animation" id=17]
@@ -621,6 +686,20 @@ tracks/6/keys = {
 "args": [  ],
 "method": "finished_animation"
 } ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("throw")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 19 )
+} ],
+"times": PoolRealArray( 0.6 )
 }
 
 [sub_resource type="AnimationNodeAnimation" id=18]
@@ -756,6 +835,7 @@ graph_offset = Vector2( 53.8669, 9.94459 )
 "enemy",
 ]]
 pause_mode = 2
+position = Vector2( 0.300526, 0 )
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 8 )
@@ -840,6 +920,7 @@ collision_mask = 3
 [node name="hurtbox" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 2.95418, 29.3307 )
 shape = SubResource( 6 )
+disabled = true
 
 [node name="hitbox_arm" type="Area2D" parent="." groups=[
 "enemy",
@@ -898,6 +979,18 @@ stream = ExtResource( 14 )
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 15 )
 pitch_scale = 0.86
+
+[node name="jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+pitch_scale = 0.52
+
+[node name="throw" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
+pitch_scale = 0.5
+
+[node name="explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+pitch_scale = 0.8
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hitbox_arm" to="." method="_on_hitbox_arm_body_entered"]
 [connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
