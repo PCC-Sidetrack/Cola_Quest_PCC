@@ -840,7 +840,6 @@ collision_mask = 3
 [node name="hurtbox" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 2.95418, 29.3307 )
 shape = SubResource( 6 )
-disabled = true
 
 [node name="hitbox_arm" type="Area2D" parent="." groups=[
 "enemy",

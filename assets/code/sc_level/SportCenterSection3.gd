@@ -29,7 +29,7 @@ func _ready() -> void:
 	camera.drag_margin_h_enabled = true
 	camera.smoothing_enabled     = true
 	
-	Globals.player._has_spawn_points = false
+	Globals.player.has_spawn_points = false
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	portal.get_node("AnimationPlayer").play("transition_out")

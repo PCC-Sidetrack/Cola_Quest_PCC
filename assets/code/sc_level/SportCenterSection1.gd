@@ -36,7 +36,7 @@ func _ready() -> void:
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	PlayerVariables.new_level()
-	Globals.player._has_spawn_points = false
+	Globals.player.has_spawn_points = false
 	
 	# Play the transition
 	portal.get_node("AnimationPlayer").play("transition_out")

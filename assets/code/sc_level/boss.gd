@@ -186,7 +186,6 @@ func _pick_action() -> void:
 	if choice >= eagor_data.RANGE_MAX - eagor_data.STAGE_VARIABLES[eagor_data.current_stage].jump_chance:
 		if logic_machine.get_current_node() == "pick_action":
 			logic_machine.travel("jump")
-	#elif choice < eagor_data.STAGE_VARIABLES[eagor_data.current_stage].throw_chance:
 	else:
 		if logic_machine.get_current_node() == "pick_action":
 			logic_machine.travel("throw")

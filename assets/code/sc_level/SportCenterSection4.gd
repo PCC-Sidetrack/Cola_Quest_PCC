@@ -41,7 +41,7 @@ func _ready() -> void:
 	get_node("entities/player/game_UI").on_initialize_boss(3, "Eagor")
 	get_node("entities/player/game_UI").on_boss_healthbar_visible(true)
 	
-	Globals.player._has_spawn_points = false
+	Globals.player.has_spawn_points = false
 	
 	portal.get_node("AnimationPlayer").play("transition_out")
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

@@ -26,6 +26,8 @@ export var jump_speed:           float   = 850.0
 export var knockback_multiplier: float   = 1.0
 export var speed:                float   = 8.0
 
+# Does the player have spawn points
+var has_spawn_points:  bool   = true
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
@@ -54,8 +56,6 @@ var _is_attacking:      bool   = false
 var _current_sprite:    String = "idle"
 # Allows code to use random numbers
 var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
-# Does the player have a spawn point
-var _has_spawn_points:  bool   = true
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
@@ -343,7 +343,7 @@ func _on_player_death() -> void:
 # Triggered whenever the player respawns
 func _on_game_UI_respawn_player() -> void:
 	# Respawn
-	if _has_spawn_points:
+	if has_spawn_points:
 		global_position = get_spawn_point()
 		set_invulnerability(invlunerability_time)
 		set_is_dead(false)
