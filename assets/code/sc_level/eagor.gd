@@ -147,6 +147,13 @@ func get_current_health() -> int:
 func hurt() -> void:
 	gui.on_boss_health_changed(_current_health, _current_health - 1)
 	_current_health -= 1
+	
+	$sword_hit.play()
+	if current_stage >= TOTAL_STAGES and _current_health == 0:
+		pass
+	else:
+		$hurt.play()
+	
 	emit_signal("eagor_hit")
 
 # Move eagor to the next stage in the fight

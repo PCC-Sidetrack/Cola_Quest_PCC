@@ -27,6 +27,7 @@ func _ready() -> void:
 	camera.current  = true
 	
 	# Set the background to be black
+	$background/AnimatedSprite.set_deferred("playing", true)
 	get_node("background/BackgroundScenery").modulate = Color(0,0,0)
 	get_node("background/AnimatedSprite").modulate    = Color(0,0,0)
 	get_node("world/ground").modulate                 = Color(0,0,0)
@@ -52,3 +53,10 @@ func lock_player() -> void:
 
 func unlock_player() -> void:
 	Globals.game_locked = false
+
+func start_crowd_cheer() -> void:
+	$AudioStreamPlayer2.play()
+
+func stop_crowd_cheer() -> void:
+	$AudioStreamPlayer2.stop()
+	$background/AnimatedSprite.set_deferred("playing", false)

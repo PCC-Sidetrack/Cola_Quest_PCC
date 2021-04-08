@@ -233,6 +233,7 @@ shape = SubResource( 5 )
 "hitbox",
 "player",
 ]]
+visible = false
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]

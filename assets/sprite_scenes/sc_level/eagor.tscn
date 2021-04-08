@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_hurt.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://assets/sounds/sc_level/mixkit-quest-game-heavy-stomp-v-3049.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/art/sc_level/particles/PS_Screw/PS_Screw.png" type="Texture" id=12]
 [ext_resource path="res://assets/art/sc_level/particles/PN_Nut/PN_Nut.png" type="Texture" id=13]
+[ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/sc_level/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=15]
 
 [sub_resource type="ParticlesMaterial" id=1]
 lifetime_randomness = 0.62
@@ -838,6 +840,7 @@ collision_mask = 3
 [node name="hurtbox" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 2.95418, 29.3307 )
 shape = SubResource( 6 )
+disabled = true
 
 [node name="hitbox_arm" type="Area2D" parent="." groups=[
 "enemy",
@@ -889,6 +892,13 @@ parameters/playback = SubResource( 52 )
 parameters/jump/TimeScale/scale = 1.0
 parameters/swipe/TimeScale/scale = 2.0
 parameters/throw/TimeScale/scale = 1.0
+
+[node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+pitch_scale = 0.86
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hitbox_arm" to="." method="_on_hitbox_arm_body_entered"]
 [connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]

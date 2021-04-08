@@ -77,6 +77,8 @@ func _change_path(new_path: String) -> void:
 func _death() -> void:
 	#print("death")
 	Globals.game_locked = true
+	Globals.player.set_obeys_gravity(false)
+	Globals.player.set_velocity(Vector2.ZERO)
 	
 	for ball in get_owner().get_node("entities/enemies").get_children():
 		ball.queue_free()
