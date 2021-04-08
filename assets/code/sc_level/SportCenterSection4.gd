@@ -46,3 +46,9 @@ func _ready() -> void:
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	get_node("entities/boss/boss_movement/AnimationTree").get("parameters/playback").start("intro")
+
+func lock_player() -> void:
+	Globals.game_locked = true
+
+func unlock_player() -> void:
+	Globals.game_locked = false

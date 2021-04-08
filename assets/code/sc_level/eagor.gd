@@ -220,7 +220,7 @@ func _spawn_ball() -> void:
 		var ball      = basketball.instance()
 		var direction = Vector2(get_parent().scale.x, 0)
 		var impulse   = direction * rand_range(ball_speed - 50, ball_speed + 50) * STAGE_VARIABLES[current_stage].speed
-		get_tree().get_root().add_child(ball)
+		get_parent().get_parent().get_parent().get_parent().get_parent().get_node("enemies").add_child(ball)
 		
 		ball.start_lifetime()
 		ball.position = $ball_spawn.global_position

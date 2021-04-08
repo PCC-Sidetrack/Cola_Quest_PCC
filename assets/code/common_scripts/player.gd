@@ -354,6 +354,7 @@ func _on_game_UI_respawn_player() -> void:
 		Globals.game_locked = false
 	else:
 		PlayerVariables.restart_scene()
+		Globals.game_locked = false
 		get_tree().reload_current_scene()
 
 # COMMENT NEEDED

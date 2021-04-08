@@ -361,6 +361,23 @@ tracks/6/keys = {
 "method": "_intro"
 } ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath("../..")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "lock_player"
+}, {
+"args": [  ],
+"method": "unlock_player"
+} ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "left"
@@ -1023,15 +1040,14 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="background"]
-modulate = Color( 0, 0, 0, 1 )
+modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
-modulate = Color( 0, 0, 0, 1 )
 tile_set = SubResource( 5 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -1040,7 +1056,6 @@ tile_data = PoolIntArray( -655359, 0, 0, -589823, 0, 0, -524287, 0, 0, -458751, 
 [node name="world" type="Node2D" parent="."]
 
 [node name="ground" type="TileMap" parent="world"]
-modulate = Color( 0, 0, 0, 1 )
 tile_set = SubResource( 12 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
@@ -1124,8 +1139,9 @@ curve = SubResource( 59 )
 curve = SubResource( 60 )
 
 [node name="boss_position" type="PathFollow2D" parent="entities/boss/paths/intro"]
-position = Vector2( 1280, 128 )
+position = Vector2( 864, 96 )
 scale = Vector2( 2, 2 )
+offset = 586.553
 rotate = false
 loop = false
 

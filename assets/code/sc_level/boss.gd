@@ -76,9 +76,13 @@ func _change_path(new_path: String) -> void:
 # The code for the death node
 func _death() -> void:
 	#print("death")
+	Globals.game_locked = true
+	
+	for ball in get_owner().get_node("entities/enemies").get_children():
+		ball.queue_free()
+	
 	$boss_fight/AnimationTree.active = false
 	animation_player.active          = false
-	#animation_machine.travel("death")
 	animation_machine.stop()
 	eagor_data._play_animation("death")
 
