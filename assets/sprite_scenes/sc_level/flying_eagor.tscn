@@ -53,15 +53,18 @@ parameters/playback = SubResource( 3 )
 [node name="Area2D" type="Area2D" parent="." groups=[
 "enemy",
 ]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 0.0313726, 0.27451, 0.909804, 1 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 5 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 process_parent = true
 physics_process_parent = true
 

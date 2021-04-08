@@ -1044,7 +1044,6 @@ modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
-frame = 1
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
@@ -1139,7 +1138,7 @@ curve = SubResource( 59 )
 curve = SubResource( 60 )
 
 [node name="boss_position" type="PathFollow2D" parent="entities/boss/paths/intro"]
-position = Vector2( 864, 96 )
+position = Vector2( 864, 95.9999 )
 scale = Vector2( 2, 2 )
 offset = 586.553
 rotate = false
