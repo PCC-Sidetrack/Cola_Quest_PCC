@@ -36,6 +36,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
 	move_dynamically(global_position.direction_to(Globals.player_position))
+	$flaping.pitch_scale = rand_range(1.2, 1.6)
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #

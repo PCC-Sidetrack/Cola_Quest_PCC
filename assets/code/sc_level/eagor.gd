@@ -24,28 +24,22 @@ const STAGE_VARIABLES: Dictionary = {
 	1: {
 		ball_attacks = 1,
 		delay        = 2.0,
-		idle_chance  = 45,
-		jump_chance  = 20,
+		jump_chance  = 40,
 		speed        = 1.0,
-		throw_chance = 35,
 		waves        = 1,
 	},
 	2: {
 		ball_attacks = 1,
-		delay        = 1.7,
-		idle_chance  = 35,
-		jump_chance  = 20,
+		delay        = 1.4,
+		jump_chance  = 45,
 		speed        = 1.5,
-		throw_chance = 45,
 		waves        = 1,
 	},
 	3: {
 		ball_attacks = 2,
-		delay        = 1.0,
-		idle_chance  = 25,
-		jump_chance  = 30,
+		delay        = 0.5,
+		jump_chance  = 55,
 		speed        = 2.0,
-		throw_chance = 45,
 		waves        = 2,
 	},
 }
@@ -86,6 +80,7 @@ var _last_state:       String  = "idle"
 onready var audio             = $AudioStreamPlayer2D
 onready var basketball        = preload("res://assets/sprite_scenes/sc_level/basketball.tscn")
 onready var animation_machine = $AnimationTree.get("parameters/playback")
+onready var gui               = get_parent().get_parent().get_parent().get_parent().get_parent().get_node("player/game_UI")
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
@@ -144,7 +139,15 @@ func get_current_health() -> int:
 # Called when eagor gets hurt
 # Useable only with the hitbox/hurtbox system
 func hurt() -> void:
+	gui.on_boss_health_changed(_current_health, _current_health - 1)
 	_current_health -= 1
+	
+	$sword_hit.play()
+	if current_stage >= TOTAL_STAGES and _current_health == 0:
+		pass
+	else:
+		$hurt.play()
+	
 	emit_signal("eagor_hit")
 
 # Move eagor to the next stage in the fight
@@ -152,6 +155,8 @@ func next_stage() -> void:
 	if current_stage < TOTAL_STAGES:
 		current_stage  += 1
 		current_wave    = 1
+		gui.on_boss_health_changed(_current_health, full_health)
+		
 		_current_health = full_health
 		
 		$AnimationTree["parameters/swipe/TimeScale/scale"] = STAGE_VARIABLES[current_stage].speed
@@ -216,7 +221,7 @@ func _spawn_ball() -> void:
 		var ball      = basketball.instance()
 		var direction = Vector2(get_parent().scale.x, 0)
 		var impulse   = direction * rand_range(ball_speed - 50, ball_speed + 50) * STAGE_VARIABLES[current_stage].speed
-		get_tree().get_root().add_child(ball)
+		get_parent().get_parent().get_parent().get_parent().get_parent().get_node("enemies").add_child(ball)
 		
 		ball.start_lifetime()
 		ball.position = $ball_spawn.global_position
@@ -227,6 +232,7 @@ func _spawn_ball() -> void:
 #-----------------------------------------------------------------------------#
 # Played at the end of the death animation
 func boss_defeated() -> void:
+	gui.on_player_level_cleared()
 	emit_signal("_on_boss_defeated")
 
 # If eagor hits the player, cause him to take damage

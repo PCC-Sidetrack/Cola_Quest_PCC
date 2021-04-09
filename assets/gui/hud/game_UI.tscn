@@ -106,8 +106,10 @@ __meta__ = {
 }
 
 [node name="player_healthbar" parent="." instance=ExtResource( 3 )]
+layer = 2
 
 [node name="boss_healthbar" parent="." instance=ExtResource( 7 )]
+layer = 2
 
 [node name="pause" parent="." instance=ExtResource( 5 )]
 
@@ -124,7 +126,7 @@ __meta__ = {
 }
 
 [node name="ui_stat" type="CanvasLayer" parent="HUD"]
-layer = 2
+layer = 0
 
 [node name="stats" type="Control" parent="HUD/ui_stat"]
 __meta__ = {
@@ -132,6 +134,7 @@ __meta__ = {
 }
 
 [node name="fps_counter" type="Label" parent="HUD/ui_stat/stats"]
+visible = false
 margin_left = 36.5112
 margin_top = 72.0
 margin_right = 98.5112
@@ -218,7 +221,7 @@ show_behind_parent = true
 position = Vector2( 24, 42.5101 )
 scale = Vector2( 1.00607, 1 )
 frames = SubResource( 12 )
-frame = 4
+frame = 7
 playing = true
 
 [node name="cola_collected" type="Label" parent="HUD/ui_element/cola_counter"]
@@ -263,7 +266,7 @@ visible = false
 position = Vector2( 76.3097, 47.3414 )
 scale = Vector2( 1.7, 1.7 )
 frames = SubResource( 19 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="green_plus_back" type="Sprite" parent="HUD/ui_element/cola_healing"]
@@ -281,13 +284,13 @@ texture = ExtResource( 12 )
 [connection signal="initialize_boss" from="." to="boss_healthbar" method="_on_game_UI_initialize_boss"]
 [connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
 [connection signal="initialize_player" from="." to="HUD" method="_on_game_UI_initialize_player"]
-[connection signal="level_cleared" from="." to="HUD" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
+[connection signal="level_cleared" from="." to="HUD" method="_on_game_UI_level_cleared"]
 [connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_health_changed" from="." to="HUD" method="_on_game_UI_player_health_changed"]
 [connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
-[connection signal="player_killed" from="." to="HUD" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="HUD" method="_on_game_UI_player_killed"]
 [connection signal="player_low_health" from="." to="player_healthbar" method="_on_game_UI_player_low_health"]
 [connection signal="respawn_player" from="." to="HUD" method="_on_game_UI_respawn_player"]
 [connection signal="respawn_player" from="pause" to="." method="_on_pause_respawn_player"]

@@ -26,6 +26,8 @@ export var jump_speed:           float   = 850.0
 export var knockback_multiplier: float   = 1.0
 export var speed:                float   = 8.0
 
+# Does the player have spawn points
+var has_spawn_points:  bool   = true
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
@@ -341,14 +343,19 @@ func _on_player_death() -> void:
 # Triggered whenever the player respawns
 func _on_game_UI_respawn_player() -> void:
 	# Respawn
-	global_position = get_spawn_point()
-	set_invulnerability(invlunerability_time)
-	set_is_dead(false)
-	set_modulate(Color(1, 1, 1, 1))
-	set_current_health(max_health)
-	take_damage(-max_health)
-	_switch_sprite(SPRITE.IDLE)
-	Globals.game_locked = false
+	if has_spawn_points:
+		global_position = get_spawn_point()
+		set_invulnerability(invlunerability_time)
+		set_is_dead(false)
+		set_modulate(Color(1, 1, 1, 1))
+		set_current_health(max_health)
+		take_damage(-max_health)
+		_switch_sprite(SPRITE.IDLE)
+		Globals.game_locked = false
+	else:
+		PlayerVariables.restart_scene()
+		Globals.game_locked = false
+		get_tree().reload_current_scene()
 
 # COMMENT NEEDED
 func _on_melee_body_entered(body: Node) -> void:

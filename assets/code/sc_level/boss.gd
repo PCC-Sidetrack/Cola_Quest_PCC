@@ -76,9 +76,15 @@ func _change_path(new_path: String) -> void:
 # The code for the death node
 func _death() -> void:
 	#print("death")
+	Globals.game_locked = true
+	Globals.player.set_obeys_gravity(false)
+	Globals.player.set_velocity(Vector2.ZERO)
+	
+	for ball in get_owner().get_node("entities/enemies").get_children():
+		ball.queue_free()
+	
 	$boss_fight/AnimationTree.active = false
 	animation_player.active          = false
-	#animation_machine.travel("death")
 	animation_machine.stop()
 	eagor_data._play_animation("death")
 
@@ -180,7 +186,6 @@ func _pick_action() -> void:
 	if choice >= eagor_data.RANGE_MAX - eagor_data.STAGE_VARIABLES[eagor_data.current_stage].jump_chance:
 		if logic_machine.get_current_node() == "pick_action":
 			logic_machine.travel("jump")
-	#elif choice < eagor_data.STAGE_VARIABLES[eagor_data.current_stage].throw_chance:
 	else:
 		if logic_machine.get_current_node() == "pick_action":
 			logic_machine.travel("throw")
