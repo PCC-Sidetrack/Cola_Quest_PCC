@@ -221,7 +221,7 @@ show_behind_parent = true
 position = Vector2( 24, 42.5101 )
 scale = Vector2( 1.00607, 1 )
 frames = SubResource( 12 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="cola_collected" type="Label" parent="HUD/ui_element/cola_counter"]
@@ -266,7 +266,7 @@ visible = false
 position = Vector2( 76.3097, 47.3414 )
 scale = Vector2( 1.7, 1.7 )
 frames = SubResource( 19 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="green_plus_back" type="Sprite" parent="HUD/ui_element/cola_healing"]
