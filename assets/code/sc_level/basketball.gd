@@ -23,7 +23,7 @@ var _rotation_direction: float
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
-	rotate(0.1 * _rotation_direction)
+	rotate(_rotation_direction)
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
@@ -44,7 +44,7 @@ func get_knockback_multiplier() -> int:
 # Apply a force to the basketball
 func ball_force(direction, impulse) -> void:
 	apply_impulse(direction, impulse)
-	_rotation_direction = sign(impulse.x)
+	_rotation_direction = sign(impulse.x) * 0.1
 
 # Start the basketball's lifetime
 func start_lifetime() -> void:
