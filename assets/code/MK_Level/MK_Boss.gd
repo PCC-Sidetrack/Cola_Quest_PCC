@@ -6,7 +6,7 @@
 # Last Updated:	March 20, 2021                                                #
 #-----------------------------------------------------------------------------#
 
-extends AI
+extends Entity
 
 #-----------------------------------------------------------------------------#
 #                           Constant Variables                                #
@@ -67,8 +67,9 @@ export var damage: int = 2
 var start_pos
 
 func _ready():
-	initialize_enemy(health, damage, 0, 0, 0, true)
+	initialize_enemy(health, damage, 0, 0, 0, false)
 	randomize()
+	knockback_enabled = false
 
 
 func _physics_process(delta):

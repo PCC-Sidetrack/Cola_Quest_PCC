@@ -36,7 +36,9 @@ func _physics_process(delta):
 		$Impact_Particle.global_rotation = get_collision_normal().angle()
 		$Impact_Particle.position        = cast_point
 		$Light2D.enabled                 = true
-		
+#	else:
+#		cast_point *= 100
+	
 	$Line2D.points[1] = cast_point
 	$Light2D.position = to_local(get_collision_point())
 
