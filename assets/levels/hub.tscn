@@ -717,7 +717,7 @@
 30/shapes = [  ]
 30/z_index = 0
 
-[sub_resource type="TileSet" id=4]
+[sub_resource type="TileSet" id=3]
 0/name = "tree.png 0"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -747,7 +747,7 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="TileSet" id=4]
 0/name = "makenzie.png 0"
 0/texture = ExtResource( 50 )
 0/tex_offset = Vector2( 0, 0 )
@@ -821,14 +821,14 @@ tile_data = PoolIntArray( -4456422, 18, 0, -4456420, 19, 0, -4390886, 18, 0, -43
 
 [node name="trees2" type="TileMap" parent="tilemaps"]
 mode = 1
-tile_set = SubResource( 4 )
+tile_set = SubResource( 3 )
 cell_size = Vector2( 78, 39 )
 format = 1
 tile_data = PoolIntArray( -4521937, 0, 0, -4456443, 0, 0, -4456442, 0, 0, -4456419, 1, 0, -4390907, 0, 0, -4390906, 0, 0, -4390883, 1, 0, -4325371, 0, 0, -4325370, 0, 0, -4325349, 1, 0, -4325347, 1, 0, -4259836, 0, 0, -4259813, 1, 0, -4259811, 1, 0, -4194299, 0, 0, -4194297, 0, 0, -4194277, 1, 0, -4194275, 1, 0, -4128761, 0, 0, -4128739, 1, 0, -4063226, 0, 0, -4063224, 0, 0, -4063203, 1, 0, -3997691, 0, 0, -3997688, 0, 0, -3997667, 1, 0, -3932131, 1, 0, -3801072, 0, 0, -3801071, 0, 0, -3801070, 0, 0, -3801064, 0, 0, -3735547, 0, 0, -3735541, 0, 0, -3735537, 0, 0, -3735533, 0, 0, -3735532, 0, 0, -3735530, 0, 0, -3735528, 0, 0, -3669999, 0, 0, -3669994, 0, 0, -3669992, 0, 0, -3538929, 0, 0, -3538924, 0, 0, -3538923, 0, 0, -3538922, 0, 0, -3473400, 0, 0, -3473394, 0, 0, -3473390, 0, 0, -3473388, 0, 0, -3407848, 0, 0 )
 
 [node name="buildings" type="TileMap" parent="tilemaps"]
 mode = 1
-tile_set = SubResource( 3 )
+tile_set = SubResource( 4 )
 cell_size = Vector2( 78, 39 )
 format = 1
 tile_data = PoolIntArray( -4521983, 1, 0, -4194285, 2, 0, -2686949, 0, 0 )
@@ -836,11 +836,11 @@ tile_data = PoolIntArray( -4521983, 1, 0, -4194285, 2, 0, -2686949, 0, 0 )
 [node name="fountain" parent="tilemaps" instance=ExtResource( 53 )]
 position = Vector2( 3397.81, -812.693 )
 z_index = 1
-frame = 1
+frame = 2
 
 [node name="trees1" type="TileMap" parent="tilemaps"]
 mode = 1
-tile_set = SubResource( 4 )
+tile_set = SubResource( 3 )
 cell_size = Vector2( 78, 39 )
 format = 1
 tile_data = PoolIntArray( -4587495, 1, 0, -4521965, 1, 0, -4521963, 1, 0, -4521959, 1, 0, -4456423, 1, 0, -4390889, 1, 0, -4390887, 1, 0, -4325351, 1, 0, -4259815, 1, 0, -4194279, 1, 0, -4128743, 1, 0, -4128720, 0, 0, -4063207, 1, 0, -4063184, 1, 0, -3997671, 1, 0, -3932114, 1, 0, -3932113, 1, 0, -3866581, 0, 0, -3866580, 1, 0, -3866579, 0, 0, -3735507, 0, 0, -3669976, 1, 0, -3669975, 0, 0 )
