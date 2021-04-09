@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_throw.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/sc_level/sprites/eagor/eagor_summon.png" type="Texture" id=7]
 [ext_resource path="res://assets/code/sc_level/eagor.gd" type="Script" id=8]
-[ext_resource path="res://assets/sounds/sc_level/Screaming Hawk-SoundBible.com-1210664501.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/sc_level/Screaming Hawk.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/shaders/sc_level/dissolve_shader.shader" type="Shader" id=10]
 [ext_resource path="res://assets/sounds/sc_level/mixkit-quest-game-heavy-stomp-v-3049.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/art/sc_level/particles/PS_Screw/PS_Screw.png" type="Texture" id=12]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/sounds/object_sounds/SD14_explosion.ogg" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/object_sounds/SD14_explosion_no_loop.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/object_sounds/SD13b_swordswing_npc.wav" type="AudioStream" id=19]
+
 
 [sub_resource type="ParticlesMaterial" id=1]
 lifetime_randomness = 0.62

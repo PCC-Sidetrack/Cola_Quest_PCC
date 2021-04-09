@@ -37,11 +37,12 @@
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/sprite_scenes/sc_level/running_eagor.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/sprite_scenes/sc_level/SC_kill_zone.tscn" type="PackedScene" id=37]
-[ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm-SoundBible.com-2056381765.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm.wav" type="AudioStream" id=38]
 [ext_resource path="res://assets/art/sc_level/tiles/TF_Fluorescent_Lights/fluorescent_light_middle.png" type="Texture" id=39]
 [ext_resource path="res://assets/art/sc_level/tiles/TF_Fluorescent_Lights/light_wire.png" type="Texture" id=40]
 [ext_resource path="res://assets/art/sc_level/tiles/TF_Fluorescent_Lights/fluorescent_light_left.png" type="Texture" id=41]
 [ext_resource path="res://assets/art/sc_level/tiles/TF_Fluorescent_Lights/fluorescent_light_right.png" type="Texture" id=42]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "B18_regular_cream_colored_wall.png 0"

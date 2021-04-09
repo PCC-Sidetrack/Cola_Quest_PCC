@@ -19,9 +19,10 @@
 [ext_resource path="res://assets/sprite_scenes/sc_level/jumping_eagor.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/sprite_scenes/sc_level/running_eagor.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm-SoundBible.com-2056381765.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm.wav" type="AudioStream" id=20]
 [ext_resource path="res://icon.png" type="Texture" id=21]
 [ext_resource path="res://assets/shaders/sc_level/fog.shader" type="Shader" id=22]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "BG_green_wallpaper.png 0"
