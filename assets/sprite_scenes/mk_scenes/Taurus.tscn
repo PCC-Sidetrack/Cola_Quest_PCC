@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/code/MK_Level/Taurus_Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/mk_level/sprites/Taurus/Taurus Idle-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/MK_Level/Taurus_Charge2.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/object_sounds/MK_Level/Hurt_Orion.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -86,6 +87,8 @@ collision_layer = 0
 
 [node name="DmgPlayer_Shape" type="CollisionShape2D" parent="DmgPlayer"]
 shape = SubResource( 9 )
+
+[node name="healthbar" parent="." instance=ExtResource( 5 )]
 [connection signal="death" from="." to="." method="_on_Taurus1_death"]
 [connection signal="health_changed" from="." to="." method="_on_Taurus1_health_changed"]
 [connection signal="body_entered" from="DmgPlayer" to="." method="_on_DmgPlayer_body_entered"]

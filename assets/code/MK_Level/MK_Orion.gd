@@ -53,6 +53,8 @@ func _ready() -> void:
 	initialize_enemy(health, damage, 3, 16.0)
 	$AnimatedSprite.play("idle")
 	
+	$healthbar.max_value = health
+	
 		
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -135,10 +137,14 @@ func _on_Orion_death():
 	queue_free()
 
 func _on_Orion_health_changed(change):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
 	if health > 0:
 		play_sound($Hurt, .75)
 		flash_damaged(10)
 	check_health = check_health - 1
+	
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
 
 
 
@@ -147,3 +153,7 @@ func _on_Dmg_Player_body_entered(body):
 		if check_health:
 			body.knockback(self)
 			deal_damage(body)
+			
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 
