@@ -22,22 +22,41 @@ func _ready() -> void:
 	get_node("entities/player").load_from_transition()
 	
 	# Set the camera correctly
-	camera.zoom                  = Vector2(2, 2)
-	camera.position              = Vector2(512, -47)
-	camera.current               = true
+	camera.zoom     = Vector2(2, 2)
+	camera.position = Vector2(512, -47)
+	camera.current  = true
 	
 	# Set the background to be black
+	$background/AnimatedSprite.set_deferred("playing", true)
 	get_node("background/BackgroundScenery").modulate = Color(0,0,0)
 	get_node("background/AnimatedSprite").modulate    = Color(0,0,0)
 	get_node("world/ground").modulate                 = Color(0,0,0)
 	
 	# Move the boss to his correct position
-	get_node("entities/boss/paths/intro/boss_position").unit_offset = 0
+	get_node("entities/boss/paths/intro/boss_position").unit_offset                    = 0
 	get_node("entities/boss/paths/intro/boss_position/eagor/hurtbox/hurtbox").disabled = false
-	get_node("entities/boss/paths").visible = true
+	get_node("entities/boss/paths").visible                                            = true
+	
+	# Initialize the boss healthbar
+	get_node("entities/player/game_UI").on_initialize_boss(3, "Eagor")
+	get_node("entities/player/game_UI").on_boss_healthbar_visible(true)
+	
+	Globals.player.has_spawn_points = false
 	
 	portal.get_node("AnimationPlayer").play("transition_out")
-	
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	get_node("entities/boss/boss_movement/AnimationTree").get("parameters/playback").start("intro")
+
+func lock_player() -> void:
+	Globals.game_locked = true
+
+func unlock_player() -> void:
+	Globals.game_locked = false
+
+func start_crowd_cheer() -> void:
+	$AudioStreamPlayer2.play()
+
+func stop_crowd_cheer() -> void:
+	$AudioStreamPlayer2.stop()
+	$background/AnimatedSprite.set_deferred("playing", false)

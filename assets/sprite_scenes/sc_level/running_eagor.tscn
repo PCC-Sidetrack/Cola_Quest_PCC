@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/code/sc_level/running_eagor.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/sc_level/sprites/running_eagor/S7_running_eagor.png" type="Texture" id=2]
 [ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/object_sounds/SD4_footsteps.ogg" type="AudioStream" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -7.1056, -22.5519, -6.38157, -29.858, -3.88038, -31.3719, 5.86109, -31.2402, 6.8484, -28.8049, 5.46616, -22.4203, 11.9824, -21.8279, 12.9039, -19.7874, 10.7318, -17.1546, 5.92691, -15.4433, 3.689, -12.1522, 3.3599, -1.02852, 1.91184, 0.222076, -5.5259, 0.353718, -7.76381, -1.42344, -7.56634, -10.046, -5.92082, -12.2839, -6.18411, -14.7851, -12.7004, -18.9318, -12.7004, -21.4329, -11.0548, -22.2886 )
@@ -49,6 +50,7 @@ script = ExtResource( 1 )
 occluder = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -0.0707878, -15.4294 )
 shape = SubResource( 2 )
 
@@ -61,12 +63,14 @@ playing = true
 flip_h = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 position = Vector2( -0.328633, -15.5868 )
 scale = Vector2( 1.22066, 1.57277 )
 process_parent = true
 physics_process_parent = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2( -0.328633, -15.5868 )
 scale = Vector2( 1.22066, 1.57277 )
 monitorable = false
@@ -79,6 +83,11 @@ shape = SubResource( 8 )
 [node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
+[node name="running" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, 1.90735e-06 )
+stream = ExtResource( 5 )
+pitch_scale = 1.3
+
 [node name="healthbar" parent="." instance=ExtResource( 3 )]
 margin_left = -7.62543
 margin_top = -41.6051
@@ -86,4 +95,6 @@ margin_right = 8.37457
 margin_bottom = -35.6051
 [connection signal="death" from="." to="." method="_on_S7_running_eagor_death"]
 [connection signal="health_changed" from="." to="." method="_on_S7_running_eagor_health_changed"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

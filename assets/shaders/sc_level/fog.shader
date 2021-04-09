@@ -38,7 +38,7 @@ float fbm(vec2 coord){
 }
 
 void fragment() {
-	vec2 coord = UV * 20.0;
+	vec2 coord = UV * 200.0;
 
 	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
 

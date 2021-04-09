@@ -233,6 +233,7 @@ shape = SubResource( 5 )
 "hitbox",
 "player",
 ]]
+visible = false
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee"]
@@ -312,7 +313,6 @@ __meta__ = {
 visible = false
 position = Vector2( -4.527, -44.481 )
 frames = SubResource( 14 )
-frame = 1
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="cola_healing"]
