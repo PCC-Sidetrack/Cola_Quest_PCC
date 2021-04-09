@@ -558,11 +558,11 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 10/shape = SubResource( 11 )
 10/shape_one_way = true
-10/shape_one_way_margin = 1.0
+10/shape_one_way_margin = 15.0
 10/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
-"one_way_margin": 1.0,
+"one_way_margin": 15.0,
 "shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
@@ -580,11 +580,11 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 11/shape = SubResource( 13 )
 11/shape_one_way = true
-11/shape_one_way_margin = 1.0
+11/shape_one_way_margin = 15.0
 11/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
-"one_way_margin": 1.0,
+"one_way_margin": 15.0,
 "shape": SubResource( 13 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
@@ -873,22 +873,22 @@ motion_scale = Vector2( 0.7, 1 )
 motion_mirroring = Vector2( 896, 0 )
 
 [node name="PL8_bowling_alley" type="Sprite" parent="parallaxing/ParallaxBackground/ParallaxLayer"]
-position = Vector2( 0, -82.6735 )
+position = Vector2( 0, -74.6735 )
 texture = ExtResource( 24 )
 centered = false
 
 [node name="PL8_bowling_alley2" type="Sprite" parent="parallaxing/ParallaxBackground/ParallaxLayer"]
-position = Vector2( 224, -82.6735 )
+position = Vector2( 224, -74.6735 )
 texture = ExtResource( 24 )
 centered = false
 
 [node name="PL8_bowling_alley3" type="Sprite" parent="parallaxing/ParallaxBackground/ParallaxLayer"]
-position = Vector2( 448, -82.6735 )
+position = Vector2( 448, -74.6735 )
 texture = ExtResource( 24 )
 centered = false
 
 [node name="PL8_bowling_alley4" type="Sprite" parent="parallaxing/ParallaxBackground/ParallaxLayer"]
-position = Vector2( 672, -82.6735 )
+position = Vector2( 672, -74.6735 )
 texture = ExtResource( 24 )
 centered = false
 

@@ -43,7 +43,6 @@
 [ext_resource path="res://assets/art/sc_level/tiles/TF_Fluorescent_Lights/fluorescent_light_left.png" type="Texture" id=41]
 [ext_resource path="res://assets/art/sc_level/tiles/TF_Fluorescent_Lights/fluorescent_light_right.png" type="Texture" id=42]
 
-
 [sub_resource type="TileSet" id=1]
 0/name = "B18_regular_cream_colored_wall.png 0"
 0/texture = ExtResource( 22 )
@@ -280,11 +279,11 @@ points = PoolVector2Array( 64, 32, 0, 32, 0, 0, 64, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 1/shape = SubResource( 7 )
 1/shape_one_way = true
-1/shape_one_way_margin = 1.0
+1/shape_one_way_margin = 15.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
-"one_way_margin": 1.0,
+"one_way_margin": 15.0,
 "shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
@@ -553,11 +552,11 @@ points = PoolVector2Array( 64, 32, 0, 32, 0, 0, 64, 0 )
 14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 14/shape = SubResource( 12 )
 14/shape_one_way = true
-14/shape_one_way_margin = 1.0
+14/shape_one_way_margin = 15.0
 14/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
-"one_way_margin": 1.0,
+"one_way_margin": 15.0,
 "shape": SubResource( 12 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
