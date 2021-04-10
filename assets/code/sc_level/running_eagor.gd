@@ -31,9 +31,9 @@ func _ready() -> void:
 	initialize_instructions(instructions, true)
 	
 	
-	initialize_enemy           (health, damage, speed, acceleration, jump_speed)
+	initialize_enemy           (health, damage, speed, acceleration, jump_speed, true)
 	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
-	set_smooth_movement        (false)
+	set_smooth_movement        (true)
 	set_knockback_multiplier   (3.0)
 	set_auto_facing            (true)
 	
