@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/sprite_scenes/sc_level/jumping_eagor.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/sprite_scenes/sc_level/running_eagor.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm-SoundBible.com-2056381765.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm.wav" type="AudioStream" id=20]
 [ext_resource path="res://icon.png" type="Texture" id=21]
 [ext_resource path="res://assets/shaders/sc_level/fog.shader" type="Shader" id=22]
 
@@ -182,11 +182,11 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 2/shape = SubResource( 9 )
 2/shape_one_way = true
-2/shape_one_way_margin = 1.0
+2/shape_one_way_margin = 15.0
 2/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
-"one_way_margin": 1.0,
+"one_way_margin": 15.0,
 "shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
@@ -245,11 +245,11 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 5/shape = SubResource( 12 )
 5/shape_one_way = true
-5/shape_one_way_margin = 1.0
+5/shape_one_way_margin = 15.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
-"one_way_margin": 1.0,
+"one_way_margin": 15.0,
 "shape": SubResource( 12 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]

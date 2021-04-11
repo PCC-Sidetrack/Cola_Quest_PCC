@@ -22,6 +22,7 @@ scale = 2.0
 scale_random = 1.0
 
 [node name="Node2D" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 sound_file = ExtResource( 3 )
 
