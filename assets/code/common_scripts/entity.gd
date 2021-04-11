@@ -37,6 +37,8 @@ const INSTRUCTIONS: Dictionary = {
 	NONE          = "none",
 }
 
+export var knockback_enabled: bool = true
+
 #-----------------------------------------------------------------------------#
 #                              Private Variables                              #
 #-----------------------------------------------------------------------------#
@@ -415,12 +417,13 @@ func knockback(other_entity: Object, direction: Vector2 = Vector2(0.0, 0.0)) -> 
 # Causes the entity that calls this function to knockback another entity based off custom value
 func custom_knockback(other_entity: Object, knockback_value: float, direction: Vector2 = Vector2(0.0, 0.0)) -> void:
 	# Scalar to apply to the knockback value given (to allow the value to be smaller)
-	var scalar = 100.0
-	
-	if direction == Vector2(0.0, 0.0):
-		set_velocity(other_entity.get_position().direction_to(global_position).normalized() * knockback_value * scalar)
-	else:
-		set_velocity(direction * knockback_value * scalar)
+	if knockback_enabled:
+		var scalar = 100.0
+		
+		if direction == Vector2(0.0, 0.0):
+			set_velocity(other_entity.get_position().direction_to(global_position).normalized() * knockback_value * scalar)
+		else:
+			set_velocity(direction * knockback_value * scalar)
 
 
 # A generic move function that determines what kind of movement the entity contains

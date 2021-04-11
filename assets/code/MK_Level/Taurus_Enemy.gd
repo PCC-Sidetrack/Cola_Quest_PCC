@@ -43,6 +43,7 @@ func _ready() -> void:
 	set_auto_facing            (true)
 	
 	$AnimatedSprite.play("move")
+	$healthbar.max_value = health
 	
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -105,10 +106,14 @@ func _on_Taurus_collision(body):
 
 
 func _on_Taurus1_health_changed(amount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
 	if check_health:
 		play_sound($Hurt, .75)
 		flash_damaged(10)
 		check_health -= amount
+	
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
 
 func _on_Taurus1_death():
 	var timer: Timer = Timer.new()
@@ -132,3 +137,7 @@ func _on_DmgPlayer_body_entered(body):
 		if check_health:
 			body.knockback(self)
 			deal_damage(body)
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 
