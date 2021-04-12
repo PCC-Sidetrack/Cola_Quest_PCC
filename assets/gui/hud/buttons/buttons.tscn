@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/gui/hud/buttons/buttons.gd" type="Script" id=15]
 
 [node name="buttons" type="CanvasLayer"]
-layer = 128
+layer = 101
 script = ExtResource( 15 )
 
 [node name="ButtonScreen" type="CenterContainer" parent="."]
@@ -68,9 +68,8 @@ texture_hover = ExtResource( 6 )
 
 [node name="Exit" type="TextureButton" parent="ButtonScreen/Buttons"]
 visible = false
-margin_top = 18.0
 margin_right = 33.0
-margin_bottom = 32.0
+margin_bottom = 14.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )

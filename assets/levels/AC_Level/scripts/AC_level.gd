@@ -10,8 +10,8 @@ onready var l_section_3        = $lights/l_section_3
 onready var l_section_4        = $lights/l_section_4_bats
 onready var light_tween        = $lights/light_tween
 onready var error_zone         = $error_zone
-onready var camera             = $player/Camera2D
-onready var camera_tween       = $player/Camera2D/Tween
+onready var camera             = $player/ac_camera
+onready var camera_tween       = $player/ac_camera/Tween
 onready var shake_timer        = $world_timers/shake_timer
 onready var section_1_borders  = $section_1/section_1_borders
 onready var area_trigger       = $Area_triggers
@@ -70,13 +70,13 @@ func _physics_process(_delta):
 		_shake()
 
 func _shake():
-	$player/Camera2D.set_offset(Vector2( \
+	$player/ac_camera.set_offset(Vector2( \
 	rand_range(-1.0, 1.0) * shake_amount, \
 	rand_range(-1.0, 1.0) * shake_amount  \
 ))
 	
 func _on_lock_section_spiders_body_entered(body):
-	if body == $player:
+	if body == Globals.player:
 		enemies_remaining = 15
 		instructions_text.set_text("Destroy " + str(enemies_remaining) + " bugs!")
 		# Disable last section lights, and enable current section lights
@@ -88,16 +88,16 @@ func _on_lock_section_spiders_body_entered(body):
 		$error_zone/error_text.set_text("stack_error")
 		_current_section = l_section_2
 
-		$player/Camera2D.zoom.x = 1.4
-		$player/Camera2D.zoom.y = 1.4
+		$player/ac_camera.zoom.x = 1.4
+		$player/ac_camera.zoom.y = 1.4
 		
 		# Disable activation area and enable borders
 		area_trigger.get_node("lock_section_spiders/activator").set_deferred("disabled", true)
 		section_1_borders.enable()
 		
 		# Tween the camera to the new position
-		camera_tween.interpolate_property(camera, "limit_left", $player.position.x , 648, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
-		camera_tween.interpolate_property(camera, "limit_right", $player.position.x , 1416, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
+		camera_tween.interpolate_property(camera, "limit_left", Globals.player.position.x , 648, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
+		camera_tween.interpolate_property(camera, "limit_right", Globals.player.position.x , 1416, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
 		camera_tween.start()
 		yield(camera_tween, "tween_all_completed")
 		
@@ -213,7 +213,7 @@ func _enemies_cleared(l_section_type):
 			area_trigger.get_node("lever_2").set_deferred("monitoring", true)
 			yield(get_tree().create_timer(3), "timeout")
 			cannon.disable_turret()
-			$player.visible = true
+			Globals.player.visible = true
 			yield(get_tree().create_timer(.5), "timeout")
 			Globals.game_locked = false
 
@@ -250,13 +250,13 @@ func _on_section_spikes_body_entered(body):
 	for lever in light_levers.get_children():
 		light_tween.interpolate_property(lever, "color", Color.white, Color.black, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		light_tween.start()
-	if body == $player:
+	if body == Globals.player:
 		$Area_triggers/section_spikes/spikes_animation.play("fade_in")
 		area_trigger.get_node("section_spikes").set_deferred("monitoring", false)
 
 func _on_lock_section_bats_body_entered(body):
-	if body == $player:
-		$player.visible = false
+	if body == Globals.player:
+		Globals.player.visible = false
 		Globals.game_locked = true
 		cannon.enable_turret()
 		
@@ -274,8 +274,8 @@ func _on_lock_section_bats_body_entered(body):
 		$error_zone/bugs_left.rect_position.y = 40
 		_current_section = l_section_4
 		
-		$player/Camera2D.zoom.x = 1.4
-		$player/Camera2D.zoom.y = 1.4
+		$player/ac_camera.zoom.x = 1.4
+		$player/ac_camera.zoom.y = 1.4
 		# Disable activation area and enable borders
 
 		area_trigger.get_node("lock_section_bats/activator").set_deferred("disabled", true)
@@ -283,8 +283,8 @@ func _on_lock_section_bats_body_entered(body):
 		section_1_borders.enable()
 		
 		# Tween the camera to the new position
-		camera_tween.interpolate_property(camera, "limit_left", $player.position.x , 2501, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
-		camera_tween.interpolate_property(camera, "limit_right", $player.position.x , 3281, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
+		camera_tween.interpolate_property(camera, "limit_left", Globals.player.position.x , 2501, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
+		camera_tween.interpolate_property(camera, "limit_right", Globals.player.position.x , 3281, 1, Tween.TRANS_SINE, Tween.EASE_OUT)
 		camera_tween.start()
 		yield(camera_tween, "tween_all_completed")
 		

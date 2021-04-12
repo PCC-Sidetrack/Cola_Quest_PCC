@@ -257,6 +257,7 @@ animations = [ {
 } ]
 
 [node name="cleared" type="CanvasLayer"]
+layer = 100
 script = ExtResource( 7 )
 
 [node name="buttons" parent="." instance=ExtResource( 8 )]

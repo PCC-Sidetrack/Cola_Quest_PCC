@@ -6,10 +6,10 @@
 
 [node name="pause" type="CanvasLayer"]
 pause_mode = 2
+layer = 100
 script = ExtResource( 2 )
 
 [node name="buttons" parent="." instance=ExtResource( 3 )]
-layer = 1
 
 [node name="PausedScreen" type="Control" parent="."]
 visible = false

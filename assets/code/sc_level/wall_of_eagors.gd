@@ -58,7 +58,7 @@ func _play_audio(_userdata) -> void:
 	audio.play()
 	
 	# Yield the audio stream once the audio has finished and remove it from the tree
-	yield(get_tree().create_timer(audio.stream.get_length()), "timeout")
+	yield(audio, "finished")
 	audio.queue_free()
 
 # Start the eagor wall functions
@@ -89,7 +89,6 @@ func _on_Camera2D_reached_end() -> void:
 func _on_Timer_timeout() -> void:
 	_play_audio(null)
 	$Timer.start(rand_range(TIME_MIN, TIME_MAX))
-
 
 func _on_SC_killzone_body_entered(body: Node) -> void:
 	if body == Globals.player and Globals.game_locked == false:
