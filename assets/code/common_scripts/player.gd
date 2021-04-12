@@ -25,6 +25,7 @@ export var invlunerability_time: float   = 1.5
 export var jump_speed:           float   = 850.0
 export var knockback_multiplier: float   = 1.0
 export var speed:                float   = 8.0
+export var max_jumps:            int     = 2
 
 # Does the player have spawn points
 var has_spawn_points:  bool   = true
@@ -41,7 +42,7 @@ var _attack_timer:      float = 0.0
 # How many dashes the player has left in air
 var _remaining_dashes:  int    = _MAX_DASHES
 # How many jumps the player has left
-var _remaining_jumps:   int    = _MAX_JUMPS
+var _remaining_jumps:   int    = max_jumps
 # Specifies the speed that the camera is zoomed to a new location
 var _camera_zoom_speed: int    = 5
 # Holds the current zoom of the camera. Used for smooth zoom changes
@@ -56,13 +57,15 @@ var _is_attacking:      bool   = false
 var _current_sprite:    String = "idle"
 # Allows code to use random numbers
 var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
+# Indicates if the player is currently underwater
+var _is_underwater:     bool   = false
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
 const _COYOTE_TIME:  float = 0.12
 const _DASH_REFRESH: float = 0.5
-const _MAX_JUMPS:    int   = 2
+#const _MAX_JUMPS:    int   = 2
 const _MAX_DASHES:   int   = 1
 const CONTROLS: Dictionary = {
 	#"CLIMB":      "climb",
@@ -138,6 +141,14 @@ func is_dead() -> bool:
 # Sets the value of the 'dead' boolean. When dead, the player can't take damage.
 func set_is_dead(value: bool) -> void:
 	_dead = value
+
+# Returns a boolean based on whether the player is currently respawning from a death.
+func is_underwater() -> bool:
+	return _is_underwater
+
+# Sets the value of the '_is_underwater' boolean. When underwater, player swims.
+func set_is_underwater(underwater: bool) -> void:
+	_is_underwater = underwater
 
 # Save the players current health, cola collected in a given scene, and how many times they respawned
 func prepare_transition() -> void:
@@ -217,7 +228,7 @@ func _get_input() -> Vector2:
 				jump(0.75)
 			_remaining_jumps -= 1
 		
-		if Input.is_action_just_pressed(CONTROLS.DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES:
+		if Input.is_action_just_pressed(CONTROLS.DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES and not _is_underwater:
 			set_velocity(Vector2(get_direction_facing() * get_speed() * 2.5, get_current_velocity().y))
 			_dash_cooldown     = 0.0
 			_remaining_dashes -= 1
@@ -232,6 +243,9 @@ func _get_input() -> Vector2:
 			_set_sprite(direction)
 		
 		velocity.x = direction
+
+	if Globals.game_locked and is_underwater():
+		_set_sprite(0.0)
 	
 	return velocity
 
@@ -243,11 +257,11 @@ func _refresh(delta: float) -> void:
 	
 	# Reset the number of jumps when the character is on the floor or the wall
 	if is_on_floor():
-		_remaining_jumps  = _MAX_JUMPS
+		_remaining_jumps  = max_jumps
 		_remaining_dashes = _MAX_DASHES
 	
 	# Only lets the player jump once in the air
-	if get_time_in_air() >= _COYOTE_TIME and _remaining_jumps == _MAX_JUMPS:
+	if get_time_in_air() >= _COYOTE_TIME and _remaining_jumps == max_jumps:
 		_remaining_jumps -= 1
 
 # Set which sprite is currently displayed

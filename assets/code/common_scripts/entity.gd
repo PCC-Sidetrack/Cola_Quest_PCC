@@ -62,6 +62,7 @@ var _movement: Dictionary = {
 	#gravity               = 0.0,
 	initial_jump_velocity = 0.0,
 	speed                 = 0.0,
+	max_fall_speed        = 3000.0
 }
 
 # Different metadata to track for the entity
@@ -179,6 +180,8 @@ func get_knockback_multiplier () -> float:
 	return _damage.knockback_multiplier
 func get_jump_speed           () -> float:
 	return _movement.initial_jump_velocity
+func get_max_fall_speed       () -> float:
+	return _movement.max_fall_speed
 
 #-----------------------------------------------------------------------------#
 #                             Setter Functions                                #
@@ -223,6 +226,8 @@ func set_speed                  (new_movement_speed: float) -> void:
 	_movement.speed = Globals.til2pix(new_movement_speed)
 func set_velocity               (new_velocity: Vector2) -> void:
 	_movement.current_velocity = new_velocity
+func set_max_fall_speed(new_max_fall_speed: float) -> void:
+	_movement.max_fall_speed = new_max_fall_speed
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
@@ -476,7 +481,7 @@ func move_dynamically(direction: Vector2, custom_acceleration: float = _movement
 	if _metadata.is_movement_smooth:
 		if get_obeys_gravity():
 			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, custom_acceleration)
-			vertical   = move_toward(_movement.current_velocity.y, Globals.ORIENTATION.MAX_FALL_SPEED, Globals.ORIENTATION.MAX_FALL_SPEED * get_physics_process_delta_time())
+			vertical   = move_toward(_movement.current_velocity.y, _movement.max_fall_speed, _movement.max_fall_speed * get_physics_process_delta_time())
 		else:
 			horizontal = move_toward(_movement.current_velocity.x, horizontal * _movement.speed, custom_acceleration)
 			vertical   = move_toward(_movement.current_velocity.y, vertical * _movement.speed, custom_acceleration)
