@@ -1006,7 +1006,6 @@ position = Vector2( 2848.25, 127 )
 
 [node name="shark" parent="enemies/sharks" instance=ExtResource( 18 )]
 position = Vector2( 675.235, 245.331 )
-turnaround_time = 2.0
 start_moving_right = false
 
 [node name="shark3" parent="enemies/sharks" instance=ExtResource( 18 )]
@@ -1032,7 +1031,6 @@ position = Vector2( 2393.53, 24.5234 )
 
 [node name="shark10" parent="enemies/sharks" instance=ExtResource( 18 )]
 position = Vector2( 3317.66, -10.1035 )
-turnaround_time = 2.0
 
 [node name="bible_verse" parent="." instance=ExtResource( 33 )]
 position = Vector2( -342.647, 78.5559 )
