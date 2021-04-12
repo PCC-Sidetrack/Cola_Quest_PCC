@@ -49,6 +49,7 @@ func _ready() -> void:
 	set_auto_facing            (true)
 
 	$AnimatedSprite.play("swim")
+	$healthbar.max_value = health
 
 
 #-----------------------------------------------------------------------------#
@@ -124,7 +125,16 @@ func _on_shark_collision(body) -> void:
 		body._knockback_old(self)
 		deal_damage(body)
 
-func _on_shark_health_changed(amount) -> void:
+func _on_shark_health_changed(amount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
+
 	if check_health:
 		flash_damaged(10)
 		check_health -= amount
+
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 

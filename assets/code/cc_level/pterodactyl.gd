@@ -61,7 +61,7 @@ func _ready() -> void:
 	set_auto_facing            (true)
 	
 	$AnimatedSprite.play("fly")
-
+	$healthbar.max_value = health
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -122,7 +122,15 @@ func _on_pterodactyl_death() -> void:
 	queue_free()
 
 # Triggered whenever the pterodactyl's health is changed
-func _on_pterodactyl_health_changed(amount) -> void:
+func _on_pterodactyl_health_changed(amount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
+
 	if amount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 

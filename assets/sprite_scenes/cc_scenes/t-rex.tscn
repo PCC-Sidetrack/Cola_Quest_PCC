@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/code/cc_level/t-rex.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/S34_t-rex/S34_t-rex-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -60,5 +61,7 @@ collision_mask = 8
 
 [node name="sword_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="healthbar" parent="." instance=ExtResource( 4 )]
 [connection signal="death" from="." to="." method="_on_t_rex_death"]
 [connection signal="health_changed" from="." to="." method="_on_t_rex_health_changed"]

@@ -44,7 +44,7 @@ func _ready() -> void:
 	set_auto_facing            (true)
 	
 	$AnimatedSprite.play("walk")
-
+	$healthbar.max_value = health
 
 
 #-----------------------------------------------------------------------------#
@@ -72,10 +72,15 @@ func _physics_process(_delta: float) -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever a t-rex's health is changed
-func _on_t_rex_health_changed(amount) -> void:
+func _on_t_rex_health_changed(amount):
+	$healthbar.value   = get_current_health()
+	$healthbar.visible = true
+
 	if amount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
+
+	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
 
 # Triggered whenever a t-rex dies
 func _on_t_rex_death() -> void:
@@ -93,3 +98,7 @@ func _on_t_rex_death() -> void:
 	yield(timer, "timeout")
 	
 	queue_free()
+
+# On healthbar visibility timeout
+func _visible_timeout():
+	$healthbar.visible = false 
