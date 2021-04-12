@@ -62,7 +62,7 @@ export var phase3: bool = false
 export var phase4: bool = false
 
 export var health: int = 20
-export var damage: int = 2
+export var damage: int = 1
 
 var start_pos
 
