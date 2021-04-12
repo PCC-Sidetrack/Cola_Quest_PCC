@@ -581,6 +581,23 @@ position = Vector2( 8976, -944 )
 scale = Vector2( 1, 1.00734 )
 move = Vector2( 256, 0 )
 
+[node name="moving_platformNEW9" parent="Moving_Platforms" instance=ExtResource( 10 )]
+position = Vector2( 11352, -1600 )
+scale = Vector2( 1, 1.00734 )
+move = Vector2( 0, -350 )
+
+[node name="moving_platformNEW10" parent="Moving_Platforms" instance=ExtResource( 10 )]
+position = Vector2( 11512, -1672 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+move = Vector2( -700, 0 )
+
+[node name="moving_platformNEW11" parent="Moving_Platforms" instance=ExtResource( 10 )]
+position = Vector2( 11544, -1944 )
+rotation = 1.57079
+scale = Vector2( 0.5, 0.5 )
+move = Vector2( 700, 0 )
+
 [node name="moving_platformNEW2" parent="Moving_Platforms" instance=ExtResource( 10 )]
 position = Vector2( 2768, -656 )
 move = Vector2( 0, 196 )
@@ -609,7 +626,7 @@ position = Vector2( 7000, -1200 )
 position = Vector2( 8784, -1000 )
 
 [node name="spawnpoint8" parent="Spawnpoints" instance=ExtResource( 14 )]
-position = Vector2( 10552, -1824 )
+position = Vector2( 10560, -1824 )
 
 [node name="Elevators" type="Node2D" parent="."]
 
