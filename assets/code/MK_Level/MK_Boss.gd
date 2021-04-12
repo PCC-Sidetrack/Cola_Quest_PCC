@@ -41,8 +41,8 @@ export var fire_charge1: float = 2.0
 export var fire_charge2: float = 2.0
 
 # Number fo seconds that the laser is active
-export var fire_duration1: float = 3.0
-export var fire_duration2: float = 3.0
+export var fire_duration1: float = 4.0
+export var fire_duration2: float = 4.0
 
 # Tells if aiming should be locked
 export var lock_aim1: bool = false
@@ -96,14 +96,14 @@ func _physics_process(delta):
 					deal_damage($MK_Boss_Laser1.get_collider())
 		grace_period1 += delta
 		fire_duration1 -= delta
-		$MK_Boss_Laser1.rotation_degrees += delta * 10
+		$MK_Boss_Laser1.rotation_degrees += delta * 2
 		if fire_duration1 < 0:
 			$MK_Boss_Laser1.set_is_casting(false)
 			is_firing1         = false
 			fire_cooldown1     = 5
 			fire_aim1          = 3
 			fire_charge1       = 2
-			fire_duration1     = 3
+			fire_duration1     = 4
 			lock_aim1          = false
 			sent_fire_command1 = !sent_fire_command1
 			sent_aim_command1  = !sent_aim_command1
@@ -114,6 +114,7 @@ func _physics_process(delta):
 			if !sent_aim_command1:
 				$Aim_Laser1.set_is_casting(true)
 				sent_aim_command1 = true
+				$Laser_Fire1.play()
 
 			$Aim_Laser1.set_cast_to(aim_location1)
 		if fire_aim1 < 0:
@@ -145,7 +146,7 @@ func _physics_process(delta):
 			fire_cooldown2 = 6
 			fire_aim2      = 3
 			fire_charge2   = 2
-			fire_duration2 = 3
+			fire_duration2 = 4
 			lock_aim2      = false
 			sent_fire_command2 = false
 			sent_aim_command2 = false
@@ -164,6 +165,7 @@ func _physics_process(delta):
 			if !sent_aim_command2:
 				$Aim_Laser2.set_is_casting(true)
 				sent_aim_command2 = !sent_aim_command2
+				$Laser_Fire2.play()
 
 			$Aim_Laser2.set_cast_to(aim_location2)
 		if fire_aim2 < 0:
@@ -215,6 +217,7 @@ func _on_MK_Boss_health_changed(ammount):
 		flash_damaged(10)
 	health_lost -= ammount
 	print(health_lost)
+	$Sword_Hit.play()
 
 
 func _on_MK_Boss_death():
@@ -228,3 +231,4 @@ func _on_MK_Boss_death():
 	death_anim (25,  0.04)
 	timer.start(25 * 0.04)
 	yield(timer, "timeout")
+	queue_free()
