@@ -1,0 +1,16 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+background_mode = 4
+background_canvas_max_layer = 5
+glow_enabled = true
+glow_levels/4 = true
+glow_levels/5 = false
+glow_intensity = 0.08
+glow_strength = 0.8
+glow_blend_mode = 0
+glow_hdr_threshold = 1.21
+glow_hdr_luminance_cap = 13.4
+glow_hdr_scale = 1.2
+adjustment_enabled = true
+adjustment_contrast = 1.27

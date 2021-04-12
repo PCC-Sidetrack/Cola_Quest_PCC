@@ -1,0 +1,279 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/particles/teleportin.png" type="Texture" id=1]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/AI_sounds/spider_sounds/spider_disengage.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/AI_sounds/creature_death.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/AI_sounds/creature_attack_.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/AI_sounds/spider_sounds/spider_engage.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/AI_sounds/spider_sounds/spider_idle.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/particles/P14_glitch_trail.png" type="Texture" id=7]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/AI_sounds/creature_damaged.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/characters/S39_Bat-Sheet.png" type="Texture" id=9]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/levels/AC_Level/scripts/spider.gd" type="Script" id=11]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/explosion.wav" type="AudioStream" id=12]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float pixel = 1.0;
+uniform vec2 red_offset = vec2(0.0, 0.0);
+uniform vec2 green_offset = vec2(0.0, 0.0);
+uniform vec2 blue_offset = vec2(0.0, 0.0);
+uniform float alpha = 1.0;
+uniform float rand_strength = 1.0;
+
+uniform vec4 affected = vec4(0.0, 0.0, 1.0, 1.0);
+
+float Hash21(vec2 p) {
+	p = fract(p*vec2(123.34, 456.21));
+	p += dot(p, p+45.32);
+	
+	return fract(p.x*p.y);
+}
+
+vec2 pixelize(vec2 uv) {
+	float mult = 5000.0 / (pixel * pixel);
+	uv.x = floor(uv.x * mult) / mult;
+	uv.y = floor(uv.y * mult) / mult;
+	return uv;
+}
+
+vec4 chroma(vec2 uv, sampler2D tex) {
+	vec4 col = texture(tex, uv);
+	if (abs(red_offset.x) + abs(red_offset.y) > 0.001) {
+		col.r = texture(tex, vec2(uv.x + red_offset.x, uv.y + red_offset.y)).r;
+	}
+	if (abs(green_offset.x) + abs(green_offset.y) > 0.001) {
+		col.g = texture(tex, vec2(uv.x + green_offset.x, uv.y + green_offset.y)).g;	
+	}
+	if (abs(blue_offset.x) + abs(blue_offset.y) > 0.001) {
+		col.b = texture(tex, vec2(uv.x + blue_offset.x, uv.y + blue_offset.y)).b;
+	}
+	
+	return col;
+}
+
+void fragment() {
+	vec2 normal_uv = UV;
+	vec4 normal_col = texture(TEXTURE, UV);
+    if (normal_uv.x < affected.x || normal_uv.y < affected.y || normal_uv.x > affected.x + affected.z || normal_uv.y > affected.y + affected.a) {
+		COLOR = normal_col;
+	}
+	else {
+		vec2 uv = pixelize(UV);
+		vec4 col = chroma(uv, TEXTURE);
+		col.a = col.a * alpha;
+		vec2 id = floor(uv * 10.0);
+		float alpha_rand = Hash21(id + floor(TIME*10.0));
+		col = col * ( alpha_rand + (rand_strength * (1.0-alpha_rand)) );
+		COLOR = col;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/pixel = 8.83
+shader_param/red_offset = Vector2( 0, 0 )
+shader_param/green_offset = Vector2( 0.447, 0 )
+shader_param/blue_offset = Vector2( 0, 0 )
+shader_param/alpha = 0.852
+shader_param/rand_strength = 16.831
+shader_param/affected = Plane( 0, 0, 1, 1 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 2
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 2
+atlas = ExtResource( 9 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 2
+atlas = ExtResource( 9 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 2
+atlas = ExtResource( 9 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=22]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 11.1889, 11.7212 )
+
+[sub_resource type="CanvasItemMaterial" id=24]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticlesMaterial" id=25]
+emission_shape = 1
+emission_sphere_radius = 12.43
+flag_disable_z = true
+gravity = Vector3( 0, -8.6, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+hue_variation = 0.32
+anim_speed = 2.0
+
+[sub_resource type="CircleShape2D" id=26]
+radius = 376.977
+
+[sub_resource type="RectangleShape2D" id=27]
+
+[node name="bat" type="KinematicBody2D" groups=[
+"bat",
+"enemy",
+]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 11 )
+
+[node name="spawn_in_effect" type="AnimatedSprite" parent="."]
+modulate = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
+material = SubResource( 2 )
+position = Vector2( -4.48583, -2.60748 )
+scale = Vector2( 1.5, 1.5 )
+z_index = 1
+frames = SubResource( 17 )
+
+[node name="bat_animation" type="AnimatedSprite" parent="."]
+position = Vector2( -1.32433, -2.04052 )
+frames = SubResource( 22 )
+frame = 2
+speed_scale = 3.0
+playing = true
+flip_h = true
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2( -1.19189, 6.22435 )
+collision_layer = 2
+
+[node name="col2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 1.80203, -7.41216 )
+shape = SubResource( 23 )
+
+[node name="healthbar" parent="." instance=ExtResource( 10 )]
+
+[node name="sounds" type="Node2D" parent="."]
+
+[node name="on_damaged" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 8 )
+
+[node name="on_death" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 3 )
+
+[node name="on_attack" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 4 )
+
+[node name="idle" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 6 )
+
+[node name="on_engage" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 5 )
+
+[node name="on_disengage" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 24 )
+position = Vector2( 1.12373, -9.17713 )
+amount = 4
+local_coords = false
+process_material = SubResource( 25 )
+texture = ExtResource( 7 )
+
+[node name="detection" type="Area2D" parent="."]
+scale = Vector2( 1.38763, 0.627634 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+shape = SubResource( 26 )
+
+[node name="ground_collision" type="CollisionShape2D" parent="."]
+position = Vector2( 3, -7.875 )
+shape = SubResource( 27 )
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+[connection signal="death" from="." to="." method="_on_bat_death"]
+[connection signal="health_changed" from="." to="." method="_on_bat_health_changed"]
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
