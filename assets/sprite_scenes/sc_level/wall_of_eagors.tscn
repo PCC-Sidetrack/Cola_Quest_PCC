@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/art/sc_level/particles/P4_little_eagor/P4_little_eagor.png" type="Texture" id=1]
+[ext_resource path="res://assets/code/sc_level/wall_of_eagors.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/sc_level/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 99.3714, 302.421 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 2
+emission_box_extents = Vector3( 100, 300, 1 )
+flag_disable_z = true
+direction = Vector3( 1, -0.5, 0 )
+gravity = Vector3( 0, 30, 0 )
+initial_velocity = 40.0
+angular_velocity = 200.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_random = 1.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+sound_file = ExtResource( 3 )
+
+[node name="SC_killzone" type="Area2D" parent="."]
+visible = false
+monitoring = false
+monitorable = false
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SC_killzone"]
+position = Vector2( 74.4857, 292.567 )
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, 292.567 )
+emitting = false
+amount = 1000
+lifetime = 5.0
+fixed_fps = 60
+visibility_rect = Rect2( -100, -300, 200, 600 )
+process_material = SubResource( 2 )
+texture = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="body_entered" from="SC_killzone" to="." method="_on_SC_killzone_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
