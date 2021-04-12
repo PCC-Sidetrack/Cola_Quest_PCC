@@ -1,0 +1,202 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/art/cc_level/tiles/B44_bible_stand/bible_stand_images/B44_bible_stand2.png" type="Texture" id=1]
+[ext_resource path="res://assets/code/cc_level/bible_stand.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/sc_level/Whoosh_SFX_01.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/art/sc_level/tiles/UI_enter_bubble/UI_enter_bubble.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/cc_level/tiles/B44_bible_stand/bible_stand_images/B44_bible_stand4.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/cc_level/tiles/B44_bible_stand/bible_stand_images/B44_bible_stand1.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/cc_level/tiles/B44_bible_stand/bible_stand_images/B44_bible_stand3.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bubble_grow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/UI_enter_bubble:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5e-06, 1e-05 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/UI_enter_bubble:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -97 ), Vector2( 32, -124 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "bubble_idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -124 ), Vector2( 32, -128 ), Vector2( 32, -124 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "bubble_shrink"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -124 ), Vector2( 32, -98 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/UI_enter_bubble:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.56,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.56,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0.6 )
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "bubble_grow"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "bubble_idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "bubble_shrink"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+switch_mode = 2
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/bubble_grow/node = SubResource( 6 )
+states/bubble_grow/position = Vector2( 422.567, 38 )
+states/bubble_idle/node = SubResource( 7 )
+states/bubble_idle/position = Vector2( 168, 112 )
+states/bubble_shrink/node = SubResource( 8 )
+states/bubble_shrink/position = Vector2( 422.505, 157 )
+transitions = [ "bubble_grow", "bubble_idle", SubResource( 9 ), "bubble_idle", "bubble_shrink", SubResource( 10 ), "bubble_shrink", "bubble_grow", SubResource( 11 ) ]
+start_node = "bubble_shrink"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 1 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "page_flip",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 9.99047, 25.5454 )
+
+[node name="bible_stand" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.064
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bubble_grow = SubResource( 1 )
+anims/bubble_idle = SubResource( 2 )
+anims/bubble_shrink = SubResource( 3 )
+anims/transition_in = SubResource( 4 )
+anims/transition_out = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 13 )
+
+[node name="bible_stand" type="AnimatedSprite" parent="."]
+frames = SubResource( 14 )
+animation = "page_flip"
+frame = 2
+playing = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( -32, 75 )
+
+[node name="UI_enter_bubble" type="Sprite" parent="Node2D"]
+position = Vector2( 32, -98 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 5 )
+
+[node name="flooding_trigger" type="Area2D" parent="."]
+
+[node name="detection" type="CollisionShape2D" parent="flooding_trigger"]
+position = Vector2( 0, 6.5 )
+shape = SubResource( 15 )
+[connection signal="body_entered" from="flooding_trigger" to="." method="_on_flooding_trigger_body_entered"]
+[connection signal="body_exited" from="flooding_trigger" to="." method="_on_flooding_trigger_body_exited"]
