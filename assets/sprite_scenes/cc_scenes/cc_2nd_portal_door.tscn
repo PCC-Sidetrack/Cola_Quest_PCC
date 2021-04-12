@@ -274,6 +274,7 @@ shape = SubResource( 17 )
 layer = 10
 
 [node name="transition" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource( 18 )
 margin_right = 1024.0
 margin_bottom = 600.0

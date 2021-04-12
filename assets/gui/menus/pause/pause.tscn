@@ -9,6 +9,7 @@ pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="buttons" parent="." instance=ExtResource( 3 )]
+layer = 1
 
 [node name="PausedScreen" type="Control" parent="."]
 visible = false

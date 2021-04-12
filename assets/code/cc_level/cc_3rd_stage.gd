@@ -31,3 +31,4 @@ func _ready() -> void:
 	camera.limit_smoothed        = true
 	
 	portal.play("transition_out")
+	get_node("player").load_from_transition()

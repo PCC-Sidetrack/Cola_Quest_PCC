@@ -24,7 +24,7 @@ export var damage:             int   = 1
 export var accelertion:        float = 20.0
 export var knockback:          float = 2
 
-var player_is_in_range: bool = false
+var is_player_in_range: bool = false
 var direction = Globals.DIRECTION.NONE
 var check_health = health - 1
 
@@ -57,13 +57,13 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 # Built in function is called every physics frame
 func _physics_process(_delta: float) -> void:
-	if ai_enabled and not player_is_in_range:
+	if ai_enabled and not is_player_in_range:
 		move()
 		rotation = 0.0
 		$AnimatedSprite.flip_v = false
 		#$AnimatedSprite.flip_h = false
 	
-	if player_is_in_range:
+	if is_player_in_range:
 		ai_enabled = false
 		move_dynamically(Globals.player_position - global_position)
 		#rotation = lerp_angle(rotation, (Globals.player_position - global_position).angle(), 0.05)
@@ -84,11 +84,24 @@ func _physics_process(_delta: float) -> void:
 	else:
 		ai_enabled = true
 
+#func spin_sprite():
+#	var timer: Timer = Timer.new()
+#	for i in 100:
+#		timer.set_one_shot(true)
+#		add_child(timer)
+#		timer.start(0.01)
+#		yield(timer, "timeout")
+#		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
+#		i += 1
+
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity dies	
 func _on_shark_death() -> void:
+	set_obeys_gravity(true)
+	#spin_sprite()
+	
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
@@ -99,19 +112,19 @@ func _on_shark_death() -> void:
 	add_child(timer)
 	
 	$sword_hit.play()
-	death_anim (10, 0.05)
-	timer.start(10 * 0.05)
+	death_anim (20, 0.05)
+	timer.start(20 * 0.05)
 	yield(timer, "timeout")
 	queue_free()
 
 func _on_follow_range_body_entered(body: Node) -> void:
 	movement_speed = 1
 	if(body.is_in_group(Globals.GROUP.PLAYER)):
-		player_is_in_range = true
+		is_player_in_range = true
 
 func _on_follow_range_body_exited(body: Node) -> void:
 	if(body.is_in_group(Globals.GROUP.PLAYER)):
-		player_is_in_range = false
+		is_player_in_range = false
 
 	if direction == Globals.DIRECTION.LEFT:
 			set_direction_facing(Globals.DIRECTION.LEFT)

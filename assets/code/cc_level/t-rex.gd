@@ -11,12 +11,8 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                           Exported Variables                                #
 #-----------------------------------------------------------------------------#
-## Boolean indicating if the sprite's ai is active
-#export var ai_enabled:         bool  = true
 # Movement speed
 export var movement_speed:     float = 1.5
-## Seconds of movement before changing directions
-#export var turnaround_time:    float = 2.5
 # Start facing right?
 export var start_moving_right: bool  = true
 export var health:             int   = 1
@@ -87,16 +83,15 @@ func _on_t_rex_death() -> void:
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
-	$CollisionShape2D.disabled = true
-	
-	$sword_hit.play()
-	
+	set_collision_mask(0)
+	set_collision_layer(0)
 	timer.set_one_shot(true)
 	add_child(timer)
-	death_anim (50,  0.04)
-	timer.start(50 * 0.04)
-	yield(timer, "timeout")
 	
+	$sword_hit.play()
+	death_anim (10, 0.05)
+	timer.start(10 * 0.05)
+	yield(timer, "timeout")
 	queue_free()
 
 # On healthbar visibility timeout

@@ -41,6 +41,8 @@ var _shoot_enabled:        bool = true
 # Number of seconds since Orion last threw a spear
 var _throw_update_time: float = 0.0
 
+var is_player_in_range: bool = false
+
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
@@ -68,26 +70,26 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 # Built in function is called every physics frame
 func _physics_process(delta: float) -> void:
-	#print("Player ", Globals.player_position)
-	#print("Pterodactyl ", self.global_position)
-	#print(get_direction_facing())
-	# left is -1, right is 1
-	# player - self = positve when in right direction
-	# player - self = negative when in left direction
-	
-	if ai_enabled:
+	if ai_enabled and not is_stationary:
 		_throw_update_time += delta
 		
 		if _throw_update_time >= throw_cooldown:
 			# Animate orion to throw the spear
 			#$AnimatedSprite.play("throw")
 			#if $AnimatedSprite.animation == "throw" and $AnimatedSprite.frame >= $AnimatedSprite.frames.get_frame_count("throw") - 3:
-			if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1):
+			if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1) and is_player_in_range:
 				_spawn_gust()
-		elif $AnimatedSprite.animation != "fly":
-			$AnimatedSprite.play("fly")
-
 		move()
+
+	if is_stationary and global_position.direction_to(Globals.player_position).x >= 0:
+		scale.x = -1.25
+	elif global_position.direction_to(Globals.player_position).x < 0:
+		scale.x = 1.25
+		_throw_update_time += delta
+		
+		if _throw_update_time >= throw_cooldown:
+			if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1) and is_player_in_range:
+				_spawn_gust()
 
 # Spawns and propels a gust attack
 func _spawn_gust() -> void:
@@ -109,15 +111,14 @@ func _on_pterodactyl_death() -> void:
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
-	$CollisionShape2D.disabled = true
-	_shoot_enabled             = false
+	set_collision_mask(0)
+	set_collision_layer(0)
 	timer.set_one_shot(true)
 	add_child(timer)
 	
 	$sword_hit.play()
-	
-	death_anim (50,  0.04)
-	timer.start(50 * 0.04)
+	death_anim (10, 0.05)
+	timer.start(10 * 0.05)
 	yield(timer, "timeout")
 	queue_free()
 
@@ -134,3 +135,9 @@ func _on_pterodactyl_health_changed(amount):
 # On healthbar visibility timeout
 func _visible_timeout():
 	$healthbar.visible = false 
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	is_player_in_range = true
+
+func _on_Area2D_body_exited(body: Node) -> void:
+	is_player_in_range = false
