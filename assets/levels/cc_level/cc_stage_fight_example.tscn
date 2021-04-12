@@ -383,7 +383,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 105
+frame = 77
 speed_scale = 2.0
 playing = true
 __meta__ = {
