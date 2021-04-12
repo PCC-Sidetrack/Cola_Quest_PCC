@@ -540,7 +540,7 @@ rotation = 4.71239
 texture = ExtResource( 13 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 10520, -2024 )
+position = Vector2( 10512, -2048 )
 collision_layer = 2147483656
 collision_mask = 31
 
