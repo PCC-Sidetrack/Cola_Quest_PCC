@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://assets/levels/AC_Level/assets/tilesets/dirt-tiles.png" type="Texture" id=1]
 [ext_resource path="res://assets/levels/AC_Level/assets/tilesets/industrial.v2.png" type="Texture" id=2]
@@ -18,8 +18,262 @@
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack-sheet.png" type="Texture" id=16]
 [ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=17]
 [ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/levels/AC_Level/scripts/AC_level_grass.gd" type="Script" id=19]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/plane.png" type="Texture" id=20]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/plane_ss.png" type="Texture" id=21]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 21 )
+region = Rect2( 108, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 21 )
+region = Rect2( 216, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 21 )
+region = Rect2( 324, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 21 )
+region = Rect2( 432, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 21 )
+region = Rect2( 540, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 21 )
+region = Rect2( 648, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 21 )
+region = Rect2( 756, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 21 )
+region = Rect2( 864, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 21 )
+region = Rect2( 972, 0, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 70, 108, 70 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 21 )
+region = Rect2( 108, 70, 108, 70 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="Animation" id=14]
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/idle:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 0.999999 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/jump:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprites/melee:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
+"update": 0,
+"values": [ 0, 1, 7 ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("sounds/SD4_footsteps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0.15 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_change_footstep_pitch"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 10, 29 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 34.0725, 29.1493 )
+
+[sub_resource type="OccluderPolygon2D" id=20]
+polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 11 )
+region = Rect2( 13, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 11 )
+region = Rect2( 26, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 11 )
+region = Rect2( 39, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 11 )
+region = Rect2( 52, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 11 )
+region = Rect2( 65, 0, 13, 13 )
+
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="Animation" id=28]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../animate_plus:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ NodePath("../green_plus") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.11 ),
+"transitions": PoolRealArray( 1, 0.189465 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -5, 1 ),
+"update": 0,
+"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="TileSet" id=29]
 0/name = ""
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -5775,7 +6029,7 @@
 867/shapes = [  ]
 867/z_index = 0
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=30]
 0/name = ""
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -9669,7 +9923,7 @@
 375/shapes = [  ]
 375/z_index = 0
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="TileSet" id=31]
 0/name = ""
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -13563,213 +13817,146 @@
 375/shapes = [  ]
 375/z_index = 0
 
-[sub_resource type="Animation" id=62]
-resource_name = "idle"
-loop = true
-step = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/idle:frame")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 0.999999 ),
-"update": 0,
-"values": [ 0, 3 ]
-}
-
-[sub_resource type="Animation" id=63]
-resource_name = "jump"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/jump:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=64]
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("sprites/melee:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
-"update": 0,
-"values": [ 0, 1, 7 ]
-}
-
-[sub_resource type="Animation" id=65]
-resource_name = "walk"
-length = 0.3
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/walk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-tracks/1/type = "audio"
-tracks/1/path = NodePath("sounds/SD4_footsteps")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 8 )
-} ],
-"times": PoolRealArray( 0.15 )
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_change_footstep_pitch"
-} ]
-}
-
-[sub_resource type="RectangleShape2D" id=66]
-extents = Vector2( 10, 29 )
-
-[sub_resource type="RectangleShape2D" id=67]
-extents = Vector2( 34.0725, 29.1493 )
-
-[sub_resource type="OccluderPolygon2D" id=68]
-polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
-
-[sub_resource type="AtlasTexture" id=69]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=70]
-atlas = ExtResource( 11 )
-region = Rect2( 13, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=71]
-atlas = ExtResource( 11 )
-region = Rect2( 26, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=72]
-atlas = ExtResource( 11 )
-region = Rect2( 39, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=73]
-atlas = ExtResource( 11 )
-region = Rect2( 52, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=74]
-atlas = ExtResource( 11 )
-region = Rect2( 65, 0, 13, 13 )
-
-[sub_resource type="SpriteFrames" id=75]
-animations = [ {
-"frames": [ SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
-} ]
-
-[sub_resource type="Animation" id=76]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("../animate_plus:root_node")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ NodePath("../green_plus") ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.11 ),
-"transitions": PoolRealArray( 1, 0.189465 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( -5, 1 ),
-"update": 0,
-"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 62.5, 10 )
 
 [node name="AC_level_part_2" type="Node2D"]
 scale = Vector2( 1.28, 1.28 )
+script = ExtResource( 19 )
+
+[node name="adkins_plane" type="Node2D" parent="."]
+position = Vector2( 0, -656.25 )
+z_index = 4
+
+[node name="adkins_plane" type="AnimatedSprite" parent="adkins_plane"]
+frames = SubResource( 13 )
+frame = 1
+playing = true
+
+[node name="plane" type="Sprite" parent="."]
+position = Vector2( 562.5, 181.25 )
+rotation = -0.261799
+z_index = 3
+texture = ExtResource( 20 )
+
+[node name="player" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 0, 125 )
+z_index = 4
+collision_layer = 2147483649
+collision_mask = 10
+script = ExtResource( 7 )
+
+[node name="Camera2D2" type="Camera2D" parent="player"]
+position = Vector2( -6.25, -33.8397 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_left = -365
+limit_top = -150
+limit_right = 1776
+limit_bottom = 542
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
+anims/idle = SubResource( 14 )
+anims/jump = SubResource( 15 )
+anims/melee = SubResource( 16 )
+anims/walk = SubResource( 17 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+visible = false
+position = Vector2( -6, 2 )
+shape = SubResource( 18 )
+
+[node name="melee" type="Area2D" parent="player" groups=[
+"hitbox",
+"player",
+]]
+visible = false
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/melee"]
+position = Vector2( 40.0971, 0 )
+shape = SubResource( 19 )
+disabled = true
+
+[node name="sprites" type="Node2D" parent="player"]
+
+[node name="idle" type="Sprite" parent="player/sprites"]
+texture = ExtResource( 14 )
+hframes = 4
+
+[node name="jump" type="Sprite" parent="player/sprites"]
+visible = false
+texture = ExtResource( 17 )
+
+[node name="melee" type="Sprite" parent="player/sprites"]
+visible = false
+texture = ExtResource( 16 )
+hframes = 8
+
+[node name="walk" type="Sprite" parent="player/sprites"]
+visible = false
+texture = ExtResource( 15 )
+hframes = 4
+
+[node name="game_UI" parent="player" instance=ExtResource( 18 )]
+margin_left = -5.66968
+margin_right = 34.3303
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="player"]
+visible = false
+occluder = SubResource( 20 )
+
+[node name="sounds" type="Node2D" parent="player"]
+
+[node name="SD4_footsteps" type="AudioStreamPlayer" parent="player/sounds"]
+stream = ExtResource( 8 )
+volume_db = -5.0
+
+[node name="SD19_player_hurt" type="AudioStreamPlayer" parent="player/sounds"]
+stream = ExtResource( 12 )
+
+[node name="SD5a_player_jump" type="AudioStreamPlayer" parent="player/sounds"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="SD13a_sword_swing" type="AudioStreamPlayer2D" parent="player/sounds"]
+stream = ExtResource( 9 )
+volume_db = -5.0
+
+[node name="cola_healing" type="Control" parent="player"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="green_plus" type="AnimatedSprite" parent="player/cola_healing"]
+visible = false
+position = Vector2( -4.527, -44.481 )
+frames = SubResource( 27 )
+playing = true
+
+[node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]
+root_node = NodePath("../green_plus")
+anims/heal = SubResource( 28 )
+
+[node name="healing_sound" type="AudioStreamPlayer" parent="player/cola_healing"]
+stream = ExtResource( 13 )
+volume_db = -8.548
+pitch_scale = 0.89
 
 [node name="tileset" type="Node2D" parent="."]
+scale = Vector2( 1.28, 1.28 )
 
 [node name="Indust_obj" type="TileMap" parent="tileset"]
 position = Vector2( -208, -64 )
 z_index = 1
-tile_set = SubResource( 1 )
+tile_set = SubResource( 29 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 589834, 1073742019, 0, 589835, 1073742019, 0, 589836, 1073742019, 0, 589837, 1073742019, 0, 589838, 1073742019, 0, 589839, 1073742019, 0, 589894, 1073741952, 0, 589895, 267, 0, 589896, 236, 0, 589897, 236, 0, 589898, 236, 0, 589899, 237, 0, 655370, 196, 0, 655371, 197, 0, 655372, 198, 0, 655373, 199, 0, 655374, 200, 0, 655375, 201, 0, 655430, 1073741920, 0, 655431, 270, 0, 655432, 1073742019, 0, 655433, 1073742019, 0, 655434, 1073742019, 0, 655435, 270, 0, 720906, 228, 0, 720907, 229, 0, 720908, 230, 0, 720909, 231, 0, 720910, 232, 0, 720911, 233, 0, 720965, 420, 0, 720966, 196, 0, 720967, 197, 0, 720968, 198, 0, 720969, 199, 0, 720970, 200, 0, 720971, 201, 0, 720972, 536871332, 0, 786442, 196, 0, 786443, 197, 0, 786444, 198, 0, 786445, 199, 0, 786446, 200, 0, 786447, 201, 0, 786501, 420, 0, 786502, 228, 0, 786503, 229, 0, 786504, 230, 0, 786505, 231, 0, 786506, 232, 0, 786507, 233, 0, 786508, 536871332, 0, 851978, 228, 0, 851979, 229, 0, 851980, 230, 0, 851981, 231, 0, 851982, 232, 0, 851983, 233, 0, 852037, 420, 0, 852038, 196, 0, 852039, 197, 0, 852040, 198, 0, 852041, 199, 0, 852042, 200, 0, 852043, 201, 0, 852044, 400, 0, 917514, 196, 0, 917515, 197, 0, 917516, 198, 0, 917517, 199, 0, 917518, 200, 0, 917519, 201, 0, 917564, 263, 0, 917569, 1073741952, 0, 917573, 420, 0, 917574, 228, 0, 917575, 229, 0, 917576, 230, 0, 917577, 231, 0, 917578, 232, 0, 917579, 233, 0, 917580, 271, 0, 917581, 237, 0, 983050, 228, 0, 983051, 229, 0, 983052, 230, 0, 983053, 231, 0, 983054, 232, 0, 983055, 233, 0, 983104, 1073741952, 0, 983105, 1073741920, 0, 983106, 1, 0, 983107, 3, 0, 983109, 420, 0, 983110, 196, 0, 983111, 197, 0, 983112, 198, 0, 983113, 199, 0, 983114, 200, 0, 983115, 201, 0, 983116, 536871332, 0, 983117, 270, 0, 1048640, 1073741920, 0, 1048641, 5, 0, 1048642, 5, 0, 1048643, 5, 0, 1048645, 420, 0, 1048646, 228, 0, 1048647, 229, 0, 1048648, 230, 0, 1048649, 231, 0, 1048650, 232, 0, 1048651, 233, 0, 1048652, 536871332, 0, 1048653, 270, 0, 1114189, 270, 0, 1179725, 302, 0, 1245261, 1610612975, 0 )
@@ -13777,7 +13964,7 @@ tile_data = PoolIntArray( 589834, 1073742019, 0, 589835, 1073742019, 0, 589836, 
 [node name="Grassland_obj" type="TileMap" parent="tileset"]
 position = Vector2( -208, -64 )
 z_index = 2
-tile_set = SubResource( 2 )
+tile_set = SubResource( 30 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 196610, 42, 0, 196618, 210, 0, 196665, 41, 0, 196670, 41, 0, 262146, 66, 0, 262154, 234, 0, 262156, 208, 0, 262157, 209, 0, 262178, 42, 0, 262201, 41, 0, 262206, 41, 0, 327682, 90, 0, 327692, 232, 0, 327693, 233, 0, 327714, 66, 0, 327728, 42, 0, 327737, 41, 0, 327742, 41, 0, 393241, 136, 0, 393250, 90, 0, 393264, 66, 0, 393273, 41, 0, 393278, 41, 0, 458777, 160, 0, 458800, 90, 0, 458815, 16, 0, 524313, 184, 0, 524351, 41, 0, 589841, 20, 0, 589842, 21, 0, 589843, 22, 0, 589844, 23, 0, 589887, 90, 0, 655377, 44, 0, 655378, 45, 0, 655379, 46, 0, 655380, 47, 0, 720913, 68, 0, 720914, 69, 0, 720915, 70, 0, 720916, 71, 0, 720937, 137, 0, 720938, 138, 0, 786441, 41, 0, 786449, 92, 0, 786450, 93, 0, 786451, 94, 0, 786452, 95, 0, 786473, 161, 0, 786474, 162, 0, 851977, 41, 0, 851985, 116, 0, 851986, 117, 0, 851987, 118, 0, 851988, 43, 0, 852005, 112, 0, 852006, 113, 0, 852007, 114, 0, 852008, 115, 0, 852009, 185, 0, 852010, 186, 0, 852011, 187, 0, 852025, 41, 0, 917512, 41, 0, 917513, 41, 0, 917514, 41, 0, 917520, 208, 0, 917521, 209, 0, 917522, 141, 0, 917523, 142, 0, 917524, 67, 0, 917561, 41, 0, 983044, 112, 0, 983045, 113, 0, 983046, 114, 0, 983047, 115, 0, 983048, 41, 0, 983049, 41, 0, 983050, 41, 0, 983054, 187, 0, 983056, 232, 0, 983057, 233, 0, 983058, 165, 0, 983059, 166, 0, 983060, 91, 0, 983061, 188, 0, 983062, 188, 0, 983063, 188, 0, 983064, 188, 0, 983065, 188, 0, 983066, 188, 0, 983067, 188, 0, 983068, 188, 0, 983069, 188, 0, 983070, 188, 0, 983071, 188, 0, 983072, 189, 0, 983096, 41, 0, 983097, 41, 0, 1048627, 112, 0, 1048628, 113, 0, 1048629, 114, 0, 1048630, 115, 0, 1048632, 41, 0, 1048633, 41, 0, 1048634, 187, 0, 1048635, 112, 0, 1048636, 113, 0, 1048637, 114, 0, 1048638, 115, 0, 1310723, 1073742046, 0, 1310724, 1073742047, 0, 1310730, 1073742046, 0, 1310731, 1073742047, 0, 1310735, 1073742046, 0, 1310736, 1073742047, 0, 1310752, 1073742046, 0, 1310753, 1073742047, 0, 1310772, 1610612959, 0, 1310773, 1610612958, 0, 1310780, 1073742046, 0, 1310781, 1073742047, 0, 1376259, 1073742022, 0, 1376260, 1073742023, 0, 1376266, 1073742022, 0, 1376267, 1073742023, 0, 1376271, 1073742022, 0, 1376272, 1073742023, 0, 1376288, 1073742022, 0, 1376289, 1073742023, 0, 1376308, 1610612935, 0, 1376309, 1610612934, 0, 1376316, 1073742022, 0, 1376317, 1073742023, 0 )
@@ -13793,7 +13980,7 @@ tile_data = PoolIntArray( 131129, 48, 0, 131130, 4, 0, 131131, 4, 0, 131132, 4, 
 [node name="AutoLayer" type="TileMap" parent="tileset"]
 position = Vector2( -208, -64 )
 z_index = 4
-tile_set = SubResource( 3 )
+tile_set = SubResource( 31 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 65593, 76, 0, 65596, 7, 0, 65598, 6, 0, 262153, 76, 0, 327692, 7, 0, 393274, 6, 0, 393276, 6, 0, 524312, 6, 0, 524314, 6, 0, 852004, 7, 0, 852006, 6, 0, 852008, 7, 0, 852012, 6, 0, 852013, 76, 0, 917564, 7, 0, 983044, 6, 0, 983046, 6, 0, 983048, 7, 0, 983052, 7, 0, 983055, 76, 0, 983056, 6, 0, 983058, 6, 0, 983060, 7, 0, 983062, 6, 0, 983064, 7, 0, 983066, 6, 0, 983068, 7, 0, 983070, 6, 0, 983072, 7, 0, 1048628, 7, 0, 1048630, 6, 0, 1048632, 6, 0, 1048639, 76, 0, 1048640, 6, 0, 1048642, 6, 0, 1048644, 6, 0, 1048648, 7, 0, 1048650, 6, 0 )
@@ -13802,8 +13989,8 @@ tile_data = PoolIntArray( 65593, 76, 0, 65596, 7, 0, 65598, 6, 0, 262153, 76, 0,
 z_index = 5
 
 [node name="PL1a_blue_sky_clouds" type="Sprite" parent="."]
-position = Vector2( 480, 136 )
-scale = Vector2( 3.89932, 1.82813 )
+position = Vector2( 793.75, -493.75 )
+scale = Vector2( 9.1169, 4.80811 )
 texture = ExtResource( 4 )
 
 [node name="PL1b_blue_sky_clouds" type="Sprite" parent="."]
@@ -13815,123 +14002,44 @@ texture = ExtResource( 6 )
 position = Vector2( 369.394, 9.15854 )
 texture = ExtResource( 5 )
 
-[node name="Player" type="KinematicBody2D" parent="." groups=[
-"player",
-]]
-position = Vector2( 6.25, 137.5 )
-z_index = 1
-collision_layer = 2147483649
-collision_mask = 10
-script = ExtResource( 7 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( -0.0758743, -18.75 )
-current = true
-zoom = Vector2( 1.5, 1.5 )
-limit_left = -291
-limit_top = -72
-limit_right = 1364
-limit_bottom = 0
-smoothing_enabled = true
-smoothing_speed = 1.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-anims/idle = SubResource( 62 )
-anims/jump = SubResource( 63 )
-anims/melee = SubResource( 64 )
-anims/walk = SubResource( 65 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-visible = false
-position = Vector2( -6, 2 )
-shape = SubResource( 66 )
-
-[node name="melee" type="Area2D" parent="Player" groups=[
-"hitbox",
-"player",
-]]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/melee"]
-position = Vector2( 40.0971, 0 )
-shape = SubResource( 67 )
-disabled = true
-
-[node name="sprites" type="Node2D" parent="Player"]
-
-[node name="idle" type="Sprite" parent="Player/sprites"]
-texture = ExtResource( 14 )
-hframes = 4
-
-[node name="jump" type="Sprite" parent="Player/sprites"]
-visible = false
-texture = ExtResource( 17 )
-
-[node name="melee" type="Sprite" parent="Player/sprites"]
-visible = false
-texture = ExtResource( 16 )
-hframes = 8
-
-[node name="walk" type="Sprite" parent="Player/sprites"]
-visible = false
-texture = ExtResource( 15 )
-hframes = 4
-
-[node name="game_UI" parent="Player" instance=ExtResource( 18 )]
-margin_left = -5.66968
-margin_right = 34.3303
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Player"]
-visible = false
-occluder = SubResource( 68 )
-
-[node name="sounds" type="Node2D" parent="Player"]
-
-[node name="SD4_footsteps" type="AudioStreamPlayer" parent="Player/sounds"]
-stream = ExtResource( 8 )
-volume_db = -5.0
-
-[node name="SD19_player_hurt" type="AudioStreamPlayer" parent="Player/sounds"]
-stream = ExtResource( 12 )
-
-[node name="SD5a_player_jump" type="AudioStreamPlayer" parent="Player/sounds"]
-stream = ExtResource( 10 )
-volume_db = -10.0
-
-[node name="SD13a_sword_swing" type="AudioStreamPlayer2D" parent="Player/sounds"]
-stream = ExtResource( 9 )
-volume_db = -5.0
-
-[node name="cola_healing" type="Control" parent="Player"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="green_plus" type="AnimatedSprite" parent="Player/cola_healing"]
-visible = false
-position = Vector2( -4.527, -44.481 )
-frames = SubResource( 75 )
-frame = 4
-playing = true
-
-[node name="animate_plus" type="AnimationPlayer" parent="Player/cola_healing"]
-root_node = NodePath("../green_plus")
-anims/heal = SubResource( 76 )
-
-[node name="healing_sound" type="AudioStreamPlayer" parent="Player/cola_healing"]
-stream = ExtResource( 13 )
-volume_db = -8.548
-pitch_scale = 0.89
-
 [node name="AI" type="Node2D" parent="."]
 
 [node name="enemies" type="Node2D" parent="AI"]
-[connection signal="collision" from="Player" to="Player" method="_on_player_collision"]
-[connection signal="death" from="Player" to="Player" method="_on_player_death"]
-[connection signal="health_changed" from="Player" to="Player" method="_on_player_health_changed"]
-[connection signal="animation_finished" from="Player/AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]
-[connection signal="body_entered" from="Player/melee" to="Player" method="_on_melee_body_entered"]
-[connection signal="cola_healing" from="Player/game_UI" to="Player" method="_on_game_UI_cola_healing"]
-[connection signal="respawn_player" from="Player/game_UI" to="Player" method="_on_game_UI_respawn_player"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -43.75, 50 )
+shape = SubResource( 32 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 265.14, 112.5 )
+shape = SubResource( 32 )
+
+[node name="enemy_spawn" type="Node2D" parent="."]
+
+[node name="point_1" type="Node2D" parent="enemy_spawn"]
+position = Vector2( 912.5, -656.25 )
+
+[node name="point_2" type="Node2D" parent="enemy_spawn"]
+position = Vector2( 912.5, -837.5 )
+
+[node name="point_3" type="Node2D" parent="enemy_spawn"]
+position = Vector2( 912.5, -487.5 )
+
+[node name="world_timers" type="Node2D" parent="."]
+
+[node name="enemy_respawn_delay" type="Timer" parent="world_timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="enemy_spawn_in" type="Timer" parent="world_timers"]
+
+[node name="sounds" type="Node2D" parent="."]
+[connection signal="collision" from="player" to="player" method="_on_player_collision"]
+[connection signal="death" from="player" to="player" method="_on_player_death"]
+[connection signal="health_changed" from="player" to="player" method="_on_player_health_changed"]
+[connection signal="animation_finished" from="player/AnimationPlayer" to="player" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="player/melee" to="player" method="_on_melee_body_entered"]
+[connection signal="cola_healing" from="player/game_UI" to="player" method="_on_game_UI_cola_healing"]
+[connection signal="respawn_player" from="player/game_UI" to="player" method="_on_game_UI_respawn_player"]

@@ -105,18 +105,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="player_healthbar" parent="." instance=ExtResource( 3 )]
-layer = 2
-
-[node name="boss_healthbar" parent="." instance=ExtResource( 7 )]
-layer = 2
-
-[node name="pause" parent="." instance=ExtResource( 5 )]
-
-[node name="cleared" parent="." instance=ExtResource( 4 )]
-
-[node name="failure" parent="." instance=ExtResource( 2 )]
-
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -126,9 +114,13 @@ __meta__ = {
 }
 
 [node name="ui_stat" type="CanvasLayer" parent="HUD"]
-layer = 0
+layer = 101
 
 [node name="stats" type="Control" parent="HUD/ui_stat"]
+margin_left = 24.5685
+margin_top = -10.0794
+margin_right = 24.5685
+margin_bottom = -10.0794
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -186,7 +178,7 @@ __meta__ = {
 }
 
 [node name="ui_element" type="CanvasLayer" parent="HUD"]
-layer = 0
+layer = 100
 
 [node name="flash" type="Control" parent="HUD/ui_element"]
 anchor_left = 0.014
@@ -221,7 +213,7 @@ show_behind_parent = true
 position = Vector2( 24, 42.5101 )
 scale = Vector2( 1.00607, 1 )
 frames = SubResource( 12 )
-frame = 6
+frame = 4
 playing = true
 
 [node name="cola_collected" type="Label" parent="HUD/ui_element/cola_counter"]
@@ -276,6 +268,16 @@ show_behind_parent = true
 position = Vector2( 77.6981, 46.465 )
 scale = Vector2( 1.7, 1.7 )
 texture = ExtResource( 12 )
+
+[node name="player_healthbar" parent="." instance=ExtResource( 3 )]
+
+[node name="boss_healthbar" parent="." instance=ExtResource( 7 )]
+
+[node name="pause" parent="." instance=ExtResource( 5 )]
+
+[node name="cleared" parent="." instance=ExtResource( 4 )]
+
+[node name="failure" parent="." instance=ExtResource( 2 )]
 [connection signal="boss_health_changed" from="." to="boss_healthbar" method="_on_game_UI_boss_health_changed"]
 [connection signal="boss_healthbar_visible" from="." to="boss_healthbar" method="_on_game_UI_boss_healthbar_visible"]
 [connection signal="cola_collect" from="." to="HUD" method="_on_game_UI_cola_collect"]
@@ -288,11 +290,11 @@ texture = ExtResource( 12 )
 [connection signal="level_cleared" from="." to="HUD" method="_on_game_UI_level_cleared"]
 [connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_health_changed" from="." to="HUD" method="_on_game_UI_player_health_changed"]
-[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
 [connection signal="player_killed" from="." to="HUD" method="_on_game_UI_player_killed"]
 [connection signal="player_low_health" from="." to="player_healthbar" method="_on_game_UI_player_low_health"]
 [connection signal="respawn_player" from="." to="HUD" method="_on_game_UI_respawn_player"]
+[connection signal="cola_healing" from="HUD" to="." method="_on_HUD_cola_healing"]
 [connection signal="respawn_player" from="pause" to="." method="_on_pause_respawn_player"]
 [connection signal="respawn_player" from="failure" to="." method="_on_failure_respawn_player"]
-[connection signal="cola_healing" from="HUD" to="." method="_on_HUD_cola_healing"]
