@@ -87,7 +87,7 @@ func _on_t_rex_death() -> void:
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 	
 	$sword_hit.play()
 	

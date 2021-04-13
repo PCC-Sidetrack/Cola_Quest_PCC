@@ -27,7 +27,7 @@ func _ready() -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	if !zoomed_in:
 		Globals.player.zoom(2)
 		zoomed_in = true
