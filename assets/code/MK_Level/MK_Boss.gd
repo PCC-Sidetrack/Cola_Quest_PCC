@@ -61,7 +61,7 @@ export var phase2: bool = false
 export var phase3: bool = false
 export var phase4: bool = false
 
-export var health: int = 20
+export var health: int = 10
 export var damage: int = 1
 
 var start_pos
@@ -177,12 +177,10 @@ func _physics_process(delta):
 	
 		fire_cooldown1 -= delta
 		fire_cooldown2 -= delta
-		if health_lost >= 5:
+		if health_lost >= 3:
 			phase2 = true
-			print("yeet")
-		if health_lost >= 12:
+		if health_lost >= 6:
 			phase3 = true
-			print("yeet")
 			
 			
 func pisces_spawn() -> void:
