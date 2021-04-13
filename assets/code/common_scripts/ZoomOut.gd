@@ -29,7 +29,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 
 func _on_Area2D_body_entered(body):
-	get_node("../../../player/game_UI").on_initialize_boss(20, "Projector")
+	get_node("../../../player/game_UI").on_initialize_boss(10, "Projector")
 	get_node("../../../player/game_UI").on_boss_healthbar_visible(true)
 	if !zoomed_in:
 		Globals.player.zoom(2)
