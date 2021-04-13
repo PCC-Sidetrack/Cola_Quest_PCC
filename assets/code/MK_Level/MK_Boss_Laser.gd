@@ -26,7 +26,7 @@ func _ready():
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
-func _physics_process(delta):
+func _physics_process(_delta):
 	force_raycast_update()
 	
 	$Impact_Particle.emitting = is_colliding()

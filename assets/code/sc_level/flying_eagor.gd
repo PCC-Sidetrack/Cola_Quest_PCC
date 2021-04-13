@@ -79,3 +79,6 @@ func _on_flying_eagor_health_changed(ammount):
 		$sword_hit.play()
 		flash_damaged(10)
 	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
+
+func _visible_timeout():
+	$healthbar.visible = false

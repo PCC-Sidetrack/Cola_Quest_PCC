@@ -13,6 +13,7 @@ font_path = "res://assets/gui/fonts/DungeonFont.ttf"
 font_data = SubResource( 1 )
 
 [node name="boss_healthbar" type="CanvasLayer"]
+layer = 100
 script = ExtResource( 5 )
 
 [node name="boss_healthbar" type="Control" parent="."]
