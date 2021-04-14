@@ -6,7 +6,7 @@ var         bullet       = preload("res://assets/levels/AC_Level/assets/sprites/
 export  var bullet_speed = 500
 var turret_on = false
 
-onready var shake_timer        = get_owner().get_node("world_timers/shake_timer")
+onready var shake_timer        = get_parent().get_parent().get_node("world_timers/shake_timer")
 
 func _shake():
 	get_owner().get_node("player/Camera2D").set_offset(Vector2( \
@@ -29,7 +29,7 @@ func _physics_process(_delta):
 			bullet_instance.rotation_degrees = rotation_degrees
 			bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
 			get_tree().get_root().add_child(bullet_instance)
-			get_parent().get_node("cannon_fire").play()
+			get_parent().get_parent().get_node("sounds/cannon_fire").play()
 			can_fire = false
 			return get_tree().create_timer(fire_rate).connect("timeout", self, "_can_fire")
 

@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/levels/AC_Level/scripts/section_borders.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 320 )
+
+[node name="section_1" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 760.0
+margin_top = -15.1054
+margin_right = 249.0
+margin_bottom = -314.105
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="spawner" type="Node2D" parent="."]
+position = Vector2( -24, 279.105 )
+scale = Vector2( 2, 2 )
+
+[node name="point_1" type="Node2D" parent="spawner"]
+position = Vector2( -13.2142, -51.5134 )
+
+[node name="point_2" type="Node2D" parent="spawner"]
+position = Vector2( 0, 16.0002 )
+
+[node name="point_3" type="Node2D" parent="spawner"]
+position = Vector2( 168, -46.2908 )
+
+[node name="point_4" type="Node2D" parent="spawner"]
+position = Vector2( 164, -0.254227 )
+
+[node name="section_1_borders" type="StaticBody2D" parent="."]
+position = Vector2( -1480, -8.1257 )
+script = ExtResource( 1 )
+
+[node name="left" type="CollisionShape2D" parent="section_1_borders"]
+position = Vector2( 1360.32, 51.8591 )
+shape = SubResource( 1 )
+
+[node name="right" type="CollisionShape2D" parent="section_1_borders"]
+position = Vector2( 2144, 29.3106 )
+shape = SubResource( 1 )

@@ -173,18 +173,6 @@ func _spawn_enemies(enemy_type_instance, spawner_section):
 					7:
 						enemy_respawn_delay.wait_time = .5
 
-func _on_enemies_left_body_exited(body):
-	if body.is_in_group("enemy") and enemies_remaining >= 0:
-		enemies_remaining -= 1
-		bugs_left.get_node("Tween").interpolate_property(number_remaining, "rect_scale", Vector2(1.3,0.9), Vector2(0.895,0.431), .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-		bugs_left.get_node("Tween").start()
-		if enemies_remaining == 0:
-			match _current_section:
-				l_section_2:
-					_enemies_cleared(l_section_2)
-				l_section_4:
-					_enemies_cleared(l_section_4)
-
 func _enemies_cleared(l_section_type):
 	$sounds/siren.stop()
 	$sounds/music_attack.stop()
@@ -260,7 +248,7 @@ func _on_lock_section_bats_body_entered(body):
 		Globals.game_locked = true
 		cannon.enable_turret()
 		
-		enemies_remaining = 1
+		enemies_remaining = 17
 		instructions_text.set_text("Destroy " + str(enemies_remaining) + " bugs!")
 		# Disable last section lights, and enable current section lights
 		l_section_2.visible = false
@@ -309,3 +297,15 @@ func _on_next_scene_area_entered(area):
 		$sounds/door_transition.play()
 		yield($sounds/door_transition, "finished")
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_grass.tscn", 'fade')
+
+func _on_error_zone_body_left(body):
+	if body.is_in_group("enemy") and enemies_remaining >= 0:
+		enemies_remaining -= 1
+		bugs_left.get_node("Tween").interpolate_property(number_remaining, "rect_scale", Vector2(1.3,0.9), Vector2(0.895,0.431), .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		bugs_left.get_node("Tween").start()
+		if enemies_remaining == 0:
+			match _current_section:
+				l_section_2:
+					_enemies_cleared(l_section_2)
+				l_section_4:
+					_enemies_cleared(l_section_4)
