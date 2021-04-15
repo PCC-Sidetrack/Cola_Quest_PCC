@@ -150,6 +150,10 @@ func is_underwater() -> bool:
 func set_is_underwater(underwater: bool) -> void:
 	_is_underwater = underwater
 
+# Set the value of the is_attacking boolean
+func set_is_attacking(is_attacking: bool) -> void:
+	_is_attacking = is_attacking
+
 # Save the players current health, cola collected in a given scene, and how many times they respawned
 func prepare_transition() -> void:
 	PlayerVariables.saved_health = get_current_health()
@@ -386,8 +390,9 @@ func _on_melee_body_entered(body: Node) -> void:
 
 # COMMENT NEEDED
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	if anim_name == "melee":
-		_is_attacking = false
+	pass
+	#if anim_name == "melee":
+	#	_is_attacking = false
 
 # COMMENT NEEDED
 func _on_game_UI_cola_healing():
