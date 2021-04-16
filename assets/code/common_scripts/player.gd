@@ -389,12 +389,6 @@ func _on_melee_body_entered(body: Node) -> void:
 			custom_knockback(self, 3.0, Vector2.LEFT)
 
 # COMMENT NEEDED
-func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	pass
-	#if anim_name == "melee":
-	#	_is_attacking = false
-
-# COMMENT NEEDED
 func _on_game_UI_cola_healing():
 	$cola_healing/animate_plus.play("heal")	
 	$cola_healing/healing_sound.play()
