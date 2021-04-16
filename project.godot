@@ -62,6 +62,7 @@ Globals="*res://assets/code/common_scripts/globals.gd"
 ProgramAlerts="*res://assets/code/common_scripts/program_alerts.gd"
 SceneFade="*res://assets/gui/screen_transitions/fade/scene_fade.tscn"
 PlayerVariables="*res://assets/code/common_scripts/PlayerVariables.gd"
+Story="*res://assets/sprite_scenes/story/story.tscn"
 
 [debug]
 
