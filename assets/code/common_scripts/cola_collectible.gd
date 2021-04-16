@@ -33,6 +33,8 @@ func _on_Area2D_body_entered(_body):
 	# Tell the gui that a cola was collected
 	Globals.player.get_node("game_UI").on_cola_collect(1)
 	
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	
 	# Play the collection sound
 	_rng.randomize()
 	$SD20_coke_collect.pitch_scale = _rng.randf_range(0.9, 1.1)

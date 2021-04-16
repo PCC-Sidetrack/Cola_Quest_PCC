@@ -402,7 +402,7 @@ position = Vector2( 368, -1619 )
 position = Vector2( 288, -1696 )
 
 [node name="S7_running_eagor" parent="entities/collectables" instance=ExtResource( 19 )]
-position = Vector2( 209.798, -1443.1 )
+position = Vector2( 172, -1442 )
 
 [node name="S7_running_eagor2" parent="entities/collectables" instance=ExtResource( 19 )]
 position = Vector2( 686.621, -1087.64 )

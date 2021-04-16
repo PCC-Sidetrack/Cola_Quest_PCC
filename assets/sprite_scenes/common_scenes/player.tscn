@@ -48,6 +48,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 length = 0.3
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
 tracks/0/interp = 1
@@ -71,6 +72,23 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
 "update": 0,
 "values": [ 0, 1, 7 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_is_attacking"
+}, {
+"args": [ false ],
+"method": "set_is_attacking"
+} ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -313,7 +331,7 @@ __meta__ = {
 visible = false
 position = Vector2( -4.527, -44.481 )
 frames = SubResource( 14 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="cola_healing"]
