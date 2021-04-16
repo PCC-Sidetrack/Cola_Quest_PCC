@@ -75,24 +75,14 @@ func _physics_process(_delta: float) -> void:
 
 	
 func play_sound(var sound, var length):
-	var t = Timer.new()
-	t.set_wait_time(length)
-	t.set_one_shot(true)
-	self.add_child(t)
 	sound.play()
-	t.start()
-	yield(t, "timeout")
+	yield(get_tree().create_timer(length), "timeout")
 	sound.stop()
 	
 func spin_sprite():
-	var timer: Timer = Timer.new()
 	for i in 100:
-		timer.set_one_shot(true)
-		add_child(timer)
-		timer.start(0.01)
-		yield(timer, "timeout")
+		yield(get_tree().create_timer(0.01), "timeout")
 		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
-		i += 1
 	
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
@@ -116,19 +106,15 @@ func _on_Taurus1_health_changed(amount):
 	return get_tree().create_timer(1.5).connect("timeout", self, "_visible_timeout")
 
 func _on_Taurus1_death():
-	var timer: Timer = Timer.new()
 	$DmgPlayer.set_collision_mask(0)
 	set_collision_mask(0)
 	set_collision_layer(0)
-	spin_sprite()
-	timer.set_one_shot(true)
-	add_child(timer)
 	
 	play_sound($Hurt, .75)
 	
 	death_anim (25, 0.01)
-	timer.start(25 * 0.04)
-	yield(timer, "timeout")
+	yield(spin_sprite(), "completed")
+	yield(get_tree().create_timer(25 * 0.04), "timeout")
 	queue_free()
 
 

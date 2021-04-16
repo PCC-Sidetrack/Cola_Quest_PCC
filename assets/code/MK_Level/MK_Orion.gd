@@ -85,24 +85,14 @@ func _spawn_spear() -> void:
 	_throw_update_time = 0.0
 	
 func play_sound(var sound, var length):
-	var t = Timer.new()
-	t.set_wait_time(length)
-	t.set_one_shot(true)
-	self.add_child(t)
 	sound.play()
-	t.start()
-	yield(t, "timeout")
+	yield(get_tree().create_timer(length), "timeout")
 	sound.stop()
 	
 func spin_sprite():
-	var timer: Timer = Timer.new()
 	for i in 1000:
-		timer.set_one_shot(true)
-		add_child(timer)
-		timer.start(0.01)
-		yield(timer, "timeout")
+		yield(get_tree().create_timer(0.01), "timeout")
 		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
-		i += 1
 	
 func set_initial_direction_moving(direction: Vector2 = Vector2.DOWN) -> void:
 	var instructions = [
@@ -119,20 +109,15 @@ func _on_Orion_collision(_body):
 	pass
 
 func _on_Orion_death():
-	var timer: Timer = Timer.new()
-
 	set_collision_mask(0)
 	set_collision_layer(0)
 	$Dmg_Player.set_collision_layer(0)
-	spin_sprite()
 	can_throw = false
 	play_sound($Hurt, .75)
 	
-	timer.set_one_shot(true)
-	add_child(timer)
 	death_anim (25,  0.04)
-	timer.start(25 * 0.04)
-	yield(timer, "timeout")
+	yield(spin_sprite(), "completed")
+	yield(get_tree().create_timer(25 * 0.04), "timeout")
 	
 	queue_free()
 

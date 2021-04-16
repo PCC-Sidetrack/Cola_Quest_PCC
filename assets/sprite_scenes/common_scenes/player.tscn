@@ -331,7 +331,7 @@ __meta__ = {
 visible = false
 position = Vector2( -4.527, -44.481 )
 frames = SubResource( 14 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="cola_healing"]
@@ -345,7 +345,6 @@ pitch_scale = 0.89
 [connection signal="collision" from="." to="." method="_on_player_collision"]
 [connection signal="death" from="." to="." method="_on_player_death"]
 [connection signal="health_changed" from="." to="." method="_on_player_health_changed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="melee" to="." method="_on_melee_body_entered"]
 [connection signal="cola_healing" from="game_UI" to="." method="_on_game_UI_cola_healing"]
 [connection signal="respawn_player" from="game_UI" to="." method="_on_game_UI_respawn_player"]

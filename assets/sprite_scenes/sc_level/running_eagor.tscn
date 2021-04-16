@@ -58,7 +58,7 @@ shape = SubResource( 2 )
 position = Vector2( -0.093895, -16.0562 )
 frames = SubResource( 7 )
 animation = "run"
-frame = 1
+frame = 2
 playing = true
 flip_h = true
 

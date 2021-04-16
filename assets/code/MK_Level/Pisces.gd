@@ -94,9 +94,9 @@ func _on_Pisces_death():
 	set_collision_mask(0)
 	set_collision_layer(0)
 	$Dmg_Player.set_collision_mask(0)
-	spin_sprite()
 	
 	death_anim (25, 0.01)
+	yield(spin_sprite(), "completed")
 	yield(get_tree().create_timer(25 * 0.04), "timeout")
 	queue_free()
 
