@@ -31,6 +31,7 @@ func _on_CompletionSign_animation_finished() -> void:
 	_completion_text.animation                    = "glow"
 	_completion_text.playing                      = true
 	$buttons/Control/VBoxContainer/CenterContainer3/Restart.visible = true
+	$buttons/Control/VBoxContainer/CenterContainer4/Hub.visible = true
 	$buttons/Control/VBoxContainer/CenterContainer5/Exit.visible    = true
 	_confetti_left.emitting                       = true
 	_confetti_right.emitting                      = true
