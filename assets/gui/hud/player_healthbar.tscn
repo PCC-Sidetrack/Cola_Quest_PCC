@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/gui/hud/player_healthbar/scripts/player_healthbar.gd" type="Script" id=10]
 
 [node name="player_healthbar" type="CanvasLayer"]
+layer = 100
 script = ExtResource( 10 )
 
 [node name="low_health_border" type="Sprite" parent="."]

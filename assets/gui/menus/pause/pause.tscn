@@ -6,10 +6,10 @@
 
 [node name="pause" type="CanvasLayer"]
 pause_mode = 2
+layer = 100
 script = ExtResource( 2 )
 
 [node name="buttons" parent="." instance=ExtResource( 3 )]
-layer = 1
 
 [node name="PausedScreen" type="Control" parent="."]
 visible = false
@@ -28,10 +28,10 @@ __meta__ = {
 }
 
 [node name="PauseContainer" type="CenterContainer" parent="PausedScreen"]
-anchor_left = 0.488164
-anchor_top = 0.132284
-anchor_right = 0.488164
-anchor_bottom = 0.132284
+anchor_left = 0.508991
+anchor_top = 0.0649363
+anchor_right = 0.508991
+anchor_bottom = 0.0649363
 margin_left = -54.0
 margin_top = 50.0
 margin_right = 49.0

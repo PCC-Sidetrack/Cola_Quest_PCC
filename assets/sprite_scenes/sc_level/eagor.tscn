@@ -20,7 +20,6 @@
 [ext_resource path="res://assets/sounds/object_sounds/SD14_explosion_no_loop.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/object_sounds/SD13b_swordswing_npc.wav" type="AudioStream" id=19]
 
-
 [sub_resource type="ParticlesMaterial" id=1]
 lifetime_randomness = 0.62
 flag_disable_z = true
@@ -727,7 +726,7 @@ nodes/Animation/position = Vector2( -30, 80 )
 nodes/TimeScale/node = SubResource( 23 )
 nodes/TimeScale/position = Vector2( 220, 120 )
 nodes/output/position = Vector2( 430, 120 )
-node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "roar"
@@ -747,7 +746,7 @@ nodes/Animation/position = Vector2( -20, 140 )
 nodes/TimeScale/node = SubResource( 28 )
 nodes/TimeScale/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 380, 140 )
-node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
 [sub_resource type="AnimationNodeAnimation" id=30]
 animation = "throw"
@@ -760,7 +759,7 @@ nodes/Animation/node = SubResource( 30 )
 nodes/Animation/position = Vector2( -280, 110 )
 nodes/TimeScale/node = SubResource( 31 )
 nodes/TimeScale/position = Vector2( 20, 150 )
-node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
@@ -921,7 +920,6 @@ collision_mask = 3
 [node name="hurtbox" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 2.95418, 29.3307 )
 shape = SubResource( 6 )
-disabled = true
 
 [node name="hitbox_arm" type="Area2D" parent="." groups=[
 "enemy",

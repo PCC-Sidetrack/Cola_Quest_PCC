@@ -12,7 +12,7 @@ extends Camera2D
 #                               Private Variables                             #
 #-----------------------------------------------------------------------------#
 # Used to set the initial zoom of the camera
-var _initial_zoom:    Vector2 = Vector2(3.0, 3.0)
+var _initial_zoom:    Vector2 = Vector2(zoom.x, zoom.y)
 # Multiplier affecting how much zoom in and out is applied when zooming
 var _zoom_multiplier: float = 1.0
 # Time in seconds for one zoom calculation to occur
