@@ -105,3 +105,4 @@ func _on_Dmg_Player_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.knockback(self)
 		deal_damage(body)
+		self.knockback(body, Vector2.UP * 3)

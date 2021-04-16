@@ -311,6 +311,13 @@ func _change_footstep_pitch() -> void:
 		$sounds/SD4_footsteps.set_pitch_scale(1.1)
 	else:
 		$sounds/SD4_footsteps.set_pitch_scale(0.8)
+		
+func _mouse_is_visible(visibility: bool) -> void:
+	if visibility:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/code/MK_Level/Taurus_Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/mk_level/sprites/Taurus/Taurus Idle-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://assets/sounds/object_sounds/MK_Level/Taurus_Charge2.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/MK_Level/Taurus_Charge2.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/object_sounds/MK_Level/Hurt_Orion.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=5]
 

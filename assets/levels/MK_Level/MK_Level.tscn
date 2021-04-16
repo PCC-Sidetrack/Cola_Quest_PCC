@@ -537,7 +537,7 @@ rotation = 4.71239
 texture = ExtResource( 13 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 34, 214 )
+position = Vector2( 32, 224 )
 collision_layer = 2147483656
 collision_mask = 31
 
@@ -630,17 +630,17 @@ position = Vector2( 10560, -1824 )
 [node name="Elevator_base2" parent="Elevators" instance=ExtResource( 5 )]
 position = Vector2( 4464, -472 )
 move = Vector2( 0, -660 )
-move_speed = 5.0
+move_speed = 7.0
 
 [node name="Elevator_base3" parent="Elevators" instance=ExtResource( 5 )]
 position = Vector2( 10448, -920 )
 move = Vector2( 0, -1100 )
-move_speed = 5.0
+move_speed = 7.0
 
 [node name="Elevator_base" parent="Elevators" instance=ExtResource( 5 )]
 position = Vector2( 560, -400 )
 move = Vector2( 0, 660 )
-move_speed = 5.0
+move_speed = 7.0
 
 [node name="Collideables" type="TileMap" parent="."]
 position = Vector2( 96, 0 )
