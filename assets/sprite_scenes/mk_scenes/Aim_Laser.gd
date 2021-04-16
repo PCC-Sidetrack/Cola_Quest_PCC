@@ -24,7 +24,7 @@ func _ready():
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
-func _physics_process(delta):
+func _physics_process(_delta):
 	force_raycast_update()
 	
 	if is_colliding():

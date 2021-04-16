@@ -576,13 +576,13 @@ next_scene = ExtResource( 35 )
 [node name="water_fountain" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -291, 292.182 )
 frames = SubResource( 24 )
-frame = 1
+frame = 9
 playing = true
 
 [node name="water_fountain2" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -253, 274.424 )
 frames = SubResource( 24 )
-frame = 10
+frame = 6
 playing = true
 
 [node name="exit_signs" type="Node2D" parent="."]

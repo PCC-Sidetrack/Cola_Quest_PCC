@@ -8,6 +8,9 @@
 
 extends CanvasLayer
 
+onready var retry = $buttons/Control/VBoxContainer/CenterContainer2/Retry
+onready var restart = $buttons/Control/VBoxContainer/CenterContainer3/Restart
+onready var exit    = $buttons/Control/VBoxContainer/CenterContainer5/Exit
 #-----------------------------------------------------------------------------#
 #                                 Signals                                     #
 #-----------------------------------------------------------------------------#
@@ -19,10 +22,10 @@ signal respawn_player()
 #-----------------------------------------------------------------------------#
 # Hide failure menu when "retry" button is pressed
 func _input(_event) -> void:
-	if $buttons/ButtonScreen/Buttons/Retry.pressed == true or $buttons/ButtonScreen/Buttons/Exit.pressed:
+	if retry.pressed == true:
 		$FailureScreen.visible                      = false
-		$buttons/ButtonScreen/Buttons/Retry.visible = false
-		$buttons/ButtonScreen/Buttons/Exit.visible  = false
+		retry.visible = false
+		exit.visible  = false
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -41,8 +44,8 @@ func _on_game_UI_player_killed() -> void:
 	$FailureScreen/FailureBackgroundContainer/FailureBackground.play()
 	$FailureScreen/FailureTextContainer/FailureText.animation = "drop"
 	$FailureScreen/FailureTextContainer/FailureText.play()
-	$buttons/ButtonScreen/Buttons/Retry.visible               = true
-	$buttons/ButtonScreen/Buttons/Exit.visible                = true
+	retry.visible               = true
+	exit.visible                = true
 
 # Emit respawn signal when "retry" button pressed
 func _on_buttons_respawn_player() -> void:

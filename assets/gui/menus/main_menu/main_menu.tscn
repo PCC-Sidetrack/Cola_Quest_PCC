@@ -69,8 +69,6 @@ layer = -1
 layer = 2
 
 [node name="CenterContainer" type="Control" parent="main_menu_options"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

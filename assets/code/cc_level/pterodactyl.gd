@@ -109,7 +109,7 @@ func _on_pterodactyl_death() -> void:
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 	_shoot_enabled             = false
 	timer.set_one_shot(true)
 	add_child(timer)

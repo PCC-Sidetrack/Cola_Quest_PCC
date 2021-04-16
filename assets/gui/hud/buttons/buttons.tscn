@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/gui/hud/buttons/assets/resume_hover.png" type="Texture" id=1]
 [ext_resource path="res://assets/gui/hud/buttons/assets/exit_normal.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/gui/hud/buttons/assets/exit_hover.png" type="Texture" id=4]
 [ext_resource path="res://assets/gui/hud/buttons/assets/exit_pressed.png" type="Texture" id=5]
 [ext_resource path="res://assets/gui/hud/buttons/assets/restart_hover.png" type="Texture" id=6]
+[ext_resource path="res://assets/gui/hud/buttons/assets/retry_normal.png" type="Texture" id=7]
 [ext_resource path="res://assets/gui/hud/buttons/assets/resume_pressedr.png" type="Texture" id=8]
 [ext_resource path="res://assets/gui/hud/buttons/assets/retry_hover.png" type="Texture" id=9]
 [ext_resource path="res://assets/gui/hud/buttons/assets/restart_normal.png" type="Texture" id=10]
@@ -14,35 +15,52 @@
 [ext_resource path="res://assets/gui/hud/buttons/sounds/mouse_pressed.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/gui/hud/buttons/sounds/mouse_hover.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/gui/hud/buttons/buttons.gd" type="Script" id=15]
+[ext_resource path="res://assets/gui/hud/buttons/assets/hub_pressed.png" type="Texture" id=16]
+[ext_resource path="res://assets/gui/hud/buttons/assets/hub_hover.png" type="Texture" id=17]
+[ext_resource path="res://assets/gui/hud/buttons/assets/hub_normal.png" type="Texture" id=18]
+[ext_resource path="res://assets/gui/hud/buttons/assets/main_menu_hover.png" type="Texture" id=19]
+[ext_resource path="res://assets/gui/hud/buttons/assets/main_menu_normal.png" type="Texture" id=20]
+[ext_resource path="res://assets/gui/hud/buttons/assets/main_menu_pressed.png" type="Texture" id=21]
+[ext_resource path="res://assets/gui/hud/buttons/assets/desktop_normal.png" type="Texture" id=22]
+[ext_resource path="res://assets/gui/hud/buttons/assets/desktop_hover.png" type="Texture" id=23]
+[ext_resource path="res://assets/gui/hud/buttons/assets/desktop_pressed.png" type="Texture" id=24]
+[ext_resource path="res://assets/gui/hud/buttons/assets/back_hover.png" type="Texture" id=25]
+[ext_resource path="res://assets/gui/hud/buttons/assets/back_pressed.png" type="Texture" id=26]
+[ext_resource path="res://assets/gui/hud/buttons/assets/back_normal.png" type="Texture" id=27]
 
 [node name="buttons" type="CanvasLayer"]
-layer = 128
+layer = 101
 script = ExtResource( 15 )
 
-[node name="ButtonScreen" type="CenterContainer" parent="."]
-margin_left = 230.419
-margin_top = 137.418
-margin_right = 263.419
-margin_bottom = 205.418
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="VBoxContainer" parent="ButtonScreen"]
-margin_left = 16.0
-margin_top = 34.0
-margin_right = 16.0
-margin_bottom = 34.0
-mouse_filter = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Resume" type="TextureButton" parent="ButtonScreen/Buttons"]
+[node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer"]
+margin_top = 144.0
+margin_right = 512.0
+margin_bottom = 144.0
+mouse_filter = 2
+
+[node name="Resume" type="TextureButton" parent="Control/VBoxContainer/CenterContainer"]
 visible = false
-margin_right = 33.0
-margin_bottom = 14.0
+margin_left = 239.0
+margin_top = -7.0
+margin_right = 272.0
+margin_bottom = 7.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 8 )
 texture_hover = ExtResource( 1 )
@@ -50,30 +68,150 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Retry" type="TextureButton" parent="ButtonScreen/Buttons"]
+[node name="CenterContainer2" type="CenterContainer" parent="Control/VBoxContainer"]
+margin_top = 148.0
+margin_right = 512.0
+margin_bottom = 148.0
+mouse_filter = 2
+
+[node name="Retry" type="TextureButton" parent="Control/VBoxContainer/CenterContainer2"]
 visible = false
-margin_right = 33.0
-margin_bottom = 14.0
-texture_normal = ExtResource( 9 )
+margin_left = 239.0
+margin_top = -7.0
+margin_right = 272.0
+margin_bottom = 7.0
+texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 12 )
 texture_hover = ExtResource( 9 )
 
-[node name="Restart" type="TextureButton" parent="ButtonScreen/Buttons"]
+[node name="CenterContainer3" type="CenterContainer" parent="Control/VBoxContainer"]
+margin_top = 152.0
+margin_right = 512.0
+margin_bottom = 152.0
+mouse_filter = 2
+
+[node name="Restart" type="TextureButton" parent="Control/VBoxContainer/CenterContainer3"]
 visible = false
-margin_right = 33.0
-margin_bottom = 14.0
+margin_left = 239.0
+margin_top = -7.0
+margin_right = 272.0
+margin_bottom = 7.0
 texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 6 )
 
-[node name="Exit" type="TextureButton" parent="ButtonScreen/Buttons"]
+[node name="CenterContainer5" type="CenterContainer" parent="Control/VBoxContainer"]
+margin_top = 156.0
+margin_right = 512.0
+margin_bottom = 156.0
+mouse_filter = 2
+
+[node name="Exit" type="TextureButton" parent="Control/VBoxContainer/CenterContainer5"]
 visible = false
-margin_top = 18.0
-margin_right = 33.0
-margin_bottom = 32.0
+margin_left = 239.0
+margin_top = -7.0
+margin_right = 272.0
+margin_bottom = 7.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
+
+[node name="exit_menu" type="CanvasLayer" parent="."]
+layer = 101
+
+[node name="exit_menu" type="Control" parent="exit_menu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="exit_menu/exit_menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0, 0, 0, 0.564706 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="exit_menu/exit_menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="exit_menu/exit_menu/VBoxContainer"]
+margin_top = 114.0
+margin_right = 512.0
+margin_bottom = 128.0
+mouse_filter = 0
+alignment = 1
+
+[node name="CenterContainer4" type="CenterContainer" parent="exit_menu/exit_menu/VBoxContainer/VBoxContainer"]
+margin_right = 512.0
+margin_bottom = 14.0
+
+[node name="Hub" type="TextureButton" parent="exit_menu/exit_menu/VBoxContainer/VBoxContainer/CenterContainer4"]
+margin_left = 245.0
+margin_right = 267.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 17 )
+
+[node name="CenterContainer" type="CenterContainer" parent="exit_menu/exit_menu/VBoxContainer"]
+margin_top = 143.0
+margin_right = 512.0
+margin_bottom = 157.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="exit_menu/exit_menu/VBoxContainer/CenterContainer"]
+margin_left = 210.0
+margin_right = 301.0
+margin_bottom = 14.0
+mouse_filter = 0
+
+[node name="main_menu" type="TextureButton" parent="exit_menu/exit_menu/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 21 )
+texture_hover = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="desktop" type="TextureButton" parent="exit_menu/exit_menu/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_left = 52.0
+margin_right = 91.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 22 )
+texture_pressed = ExtResource( 24 )
+texture_hover = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="exit_menu/exit_menu/VBoxContainer"]
+margin_top = 172.0
+margin_right = 512.0
+margin_bottom = 186.0
+
+[node name="back" type="TextureButton" parent="exit_menu/exit_menu/VBoxContainer/CenterContainer2"]
+margin_left = 245.0
+margin_right = 267.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 27 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="mouse_pressed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
@@ -82,11 +220,15 @@ stream = ExtResource( 13 )
 stream = ExtResource( 14 )
 volume_db = -4.37
 pitch_scale = 0.7
-[connection signal="mouse_entered" from="ButtonScreen/Buttons/Resume" to="." method="_on_Resume_mouse_entered"]
-[connection signal="pressed" from="ButtonScreen/Buttons/Resume" to="." method="_on_Resume_pressed"]
-[connection signal="mouse_entered" from="ButtonScreen/Buttons/Retry" to="." method="_on_Retry_mouse_entered"]
-[connection signal="pressed" from="ButtonScreen/Buttons/Retry" to="." method="_on_Retry_pressed"]
-[connection signal="mouse_entered" from="ButtonScreen/Buttons/Restart" to="." method="_on_Restart_mouse_entered"]
-[connection signal="pressed" from="ButtonScreen/Buttons/Restart" to="." method="_on_Restart_pressed"]
-[connection signal="mouse_entered" from="ButtonScreen/Buttons/Exit" to="." method="_on_Exit_mouse_entered"]
-[connection signal="pressed" from="ButtonScreen/Buttons/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/CenterContainer/Resume" to="." method="_on_Resume_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/CenterContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/CenterContainer2/Retry" to="." method="_on_Retry_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/CenterContainer2/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/CenterContainer3/Restart" to="." method="_on_Restart_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/CenterContainer3/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/CenterContainer5/Exit" to="." method="_on_Exit_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/CenterContainer5/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/VBoxContainer/CenterContainer4/Hub" to="." method="_on_Hub_pressed"]
+[connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/CenterContainer/HBoxContainer/main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/CenterContainer/HBoxContainer/desktop" to="." method="_on_desktop_pressed"]
+[connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/CenterContainer2/back" to="." method="_on_back_pressed"]

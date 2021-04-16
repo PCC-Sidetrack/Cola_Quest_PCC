@@ -27,8 +27,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	get_node("../../../player/game_UI").on_initialize_boss(10, "Projector")
 	get_node("../../../player/game_UI").on_boss_healthbar_visible(true)
 	if !zoomed_in:
