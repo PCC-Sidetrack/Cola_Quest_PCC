@@ -817,6 +817,8 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
+[node name="pause" parent="." instance=ExtResource( 58 )]
+
 [node name="tilemaps" type="Node" parent="."]
 
 [node name="ground" type="TileMap" parent="tilemaps"]
@@ -857,7 +859,6 @@ tile_data = PoolIntArray( -4521983, 1, 0, -4194285, 2, 0, -2818043, 3, 0, -26869
 [node name="fountain" parent="tilemaps" instance=ExtResource( 53 )]
 position = Vector2( 3397.81, -812.693 )
 z_index = 1
-frame = 2
 
 [node name="trees1" type="TileMap" parent="tilemaps"]
 mode = 1
@@ -935,9 +936,6 @@ polygon = PoolVector2Array( -456.502, 391.416, -456.368, 371.393, -458.905, 370.
 z_index = 1
 color = Color( 0.054902, 0, 1, 0.282353 )
 polygon = PoolVector2Array( -456.502, 391.416, -456.368, 371.393, -458.905, 370.459, -458.501, 240.979, -463.707, 238.31, -463.573, 44.224, -355.184, 27.5385, -349.978, 33.9457, -310.199, 27.2715, -310.198, -11.9727, -305.259, -42.2736, -303.39, -51.8844, -303.387, -158.138, -290.306, -188.972, -266.946, -177.626, -262.675, -176.825, -242.784, -166.147, -232.372, -175.491, -223.429, -182.432, -223.295, -199.384, -210.213, -229.418, -196.998, -222.477, -165.629, -208.194, -129.722, -226.882, -123.047, -226.615, -97.5513, -217.404, -78.9971, -225.28, 169.418, -163.744, 192.111, -177.092, 245.638, -137.181, 245.506, -85.3889, 336.409, 70.6539, 336.943, 73.0566, 413.298, 160.889, 413.965, 194.26, 430.651, 204.672, 431.585, 382.472, 423.709, 393.952, 392.474, 398.624, 358.835, 382.739, 352.294, 392.083, 351.493, 422.651, 343.751, 434.264, 312.248, 438.669, 264.46, 415.71, 216.406, 428.925, 172.622, 436.133, 134.846, 440.137, 114.69, 442.406, 67.3025, 442.006, 48.3474, 440.271, 4.83081, 436.4, -38.5515, 428.257, -77.9294, 417.311, -115.84, 403.963, -174.574, 501.54, -226.234, 498.603, -256.936, 471.506, -256.802, 451.617, -276.692, 439.47, -291.375, 428.925, -312.065, 412.239, -337.56, 388.479, -370.397, 404.497, -370.665, 385.676, -384.281, 392.083, -385.215, 411.572, -388.285, 413.44, -392.557, 412.373, -392.423, 392.483, -449.956, 373.662, -450.356, 393.151 )
-
-[node name="pause" parent="." instance=ExtResource( 58 )]
-layer = 128
 [connection signal="input_event" from="building_selectables/sports_center" to="building_selectables" method="_on_sports_center_input_event"]
 [connection signal="mouse_entered" from="building_selectables/sports_center" to="building_selectables" method="_on_sports_center_mouse_entered"]
 [connection signal="mouse_exited" from="building_selectables/sports_center" to="building_selectables" method="_on_sports_center_mouse_exited"]

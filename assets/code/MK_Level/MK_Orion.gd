@@ -115,7 +115,7 @@ func set_initial_direction_moving(direction: Vector2 = Vector2.DOWN) -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the entity detects a collision
-func _on_Orion_collision(body):
+func _on_Orion_collision(_body):
 	pass
 
 func _on_Orion_death():
@@ -136,7 +136,7 @@ func _on_Orion_death():
 	
 	queue_free()
 
-func _on_Orion_health_changed(change):
+func _on_Orion_health_changed(_change):
 	$healthbar.value   = get_current_health()
 	$healthbar.visible = true
 	if health > 0:

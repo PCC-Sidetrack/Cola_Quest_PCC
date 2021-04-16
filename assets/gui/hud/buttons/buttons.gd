@@ -48,10 +48,9 @@ func _on_Retry_pressed() -> void:
 
 # On exit button pressed
 func _on_Exit_pressed() -> void:
+	$exit_menu/exit_menu.visible = true
 	$mouse_pressed.play()
-	get_tree().paused = false
-	SceneFade.change_scene("res://assets/gui/menus/main_menu/main_menu.tscn", 'fade')
-	get_tree().current_scene.queue_free()
+
 
 # On resume button mouse hover
 func _on_Resume_mouse_entered() -> void:
@@ -104,3 +103,21 @@ func _on_Restart_mouse_entered() -> void:
 #				_on_Restart_pressed()
 #			exit_button:
 #				_on_Exit_pressed()
+
+
+func _on_back_pressed():
+	$exit_menu/exit_menu.visible = false
+
+func _on_Hub_pressed():
+	get_tree().paused = false
+	SceneFade.change_scene("res://assets/levels/hub.tscn", 'fade')
+	get_tree().current_scene.queue_free()
+
+func _on_main_menu_pressed():
+	get_tree().paused = false
+	SceneFade.change_scene("res://assets/gui/menus/main_menu/main_menu.tscn", 'fade')
+	get_tree().current_scene.queue_free()
+
+func _on_desktop_pressed():
+	Globals.game_locked = true
+	get_tree().quit()
