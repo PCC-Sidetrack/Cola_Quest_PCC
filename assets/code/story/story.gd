@@ -43,7 +43,10 @@ func _input(event: InputEvent) -> void:
 		_can_continue = false
 		hide()
 		emit_signal("on_continue")
-	
+
+func _ready() -> void:
+	hide()
+
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#

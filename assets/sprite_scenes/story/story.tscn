@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/gui/fonts/main_menu.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/art/story/mouse_click.png" type="Texture" id=7]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 resource_name = "fade"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -59,8 +59,7 @@ tracks/3/keys = {
 "values": [ false, false ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "start_story"
+[sub_resource type="Animation" id=2]
 length = 6.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("pictures:modulate")
@@ -152,17 +151,17 @@ tracks/6/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -225,8 +224,8 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.75
-anims/fade = SubResource( 5 )
-anims/start_story = SubResource( 1 )
+anims/fade = SubResource( 1 )
+anims/start_story = SubResource( 2 )
 
 [node name="continue" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -245,5 +244,5 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="continue"]
 position = Vector2( 14.8401, 0 )
-frames = SubResource( 4 )
+frames = SubResource( 5 )
 playing = true
