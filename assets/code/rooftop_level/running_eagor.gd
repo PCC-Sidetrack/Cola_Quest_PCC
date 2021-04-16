@@ -83,3 +83,10 @@ func _on_S7_running_eagor_health_changed(ammount):
 # On healthbar visibility timeout
 func _visible_timeout():
 	$healthbar.visible = false 
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		body._knockback_old(self)
