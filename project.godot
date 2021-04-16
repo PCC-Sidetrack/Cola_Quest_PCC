@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/ai.gd"
 }, {
-"base": "Reference",
+"base": "TileMap",
 "class": "Animate_Tiles",
 "language": "GDScript",
 "path": "res://assets/code/old/animate_tiles.gd"
@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/code/common_scripts/entity.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody2D",
 "class": "EntityOld",
 "language": "GDScript",
 "path": "res://assets/code/old/entity_old.gd"
