@@ -67,7 +67,7 @@ func _on_bird_death():
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 	timer.set_one_shot(true)
 	add_child(timer)
 	
