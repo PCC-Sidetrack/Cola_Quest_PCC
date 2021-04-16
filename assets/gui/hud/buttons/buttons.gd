@@ -66,8 +66,10 @@ func _on_Exit_mouse_entered() -> void:
 
 # On restart button pressed
 func _on_Restart_pressed():
+	get_tree().paused = false
 	Globals.game_locked = false
-	return 	SceneFade.change_scene(get_tree().current_scene.filename, 'fade')
+	SceneFade.change_scene(get_tree().current_scene.filename, 'fade')
+	get_tree().current_scene.queue_free()
 
 # On restart button mouse hover
 func _on_Restart_mouse_entered() -> void:

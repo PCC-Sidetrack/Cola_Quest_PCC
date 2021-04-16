@@ -142,10 +142,10 @@ anchor_left = 0.378419
 anchor_top = 0.465916
 anchor_right = 0.456419
 anchor_bottom = 0.475916
-margin_left = 204.753
-margin_top = 124.864
-margin_right = 306.753
-margin_bottom = 141.864
+margin_left = 191.069
+margin_top = 109.658
+margin_right = 293.069
+margin_bottom = 126.658
 rect_pivot_offset = Vector2( 18.553, 0 )
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -162,10 +162,10 @@ anchor_left = 0.378419
 anchor_top = 0.465916
 anchor_right = 0.456419
 anchor_bottom = 0.475916
-margin_left = 204.753
-margin_top = 116.685
-margin_right = 283.753
-margin_bottom = 133.685
+margin_left = 191.069
+margin_top = 101.479
+margin_right = 270.069
+margin_bottom = 118.479
 rect_pivot_offset = Vector2( 18.553, 0 )
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0.94902, 0.384314, 1 )
@@ -213,7 +213,7 @@ show_behind_parent = true
 position = Vector2( 24, 42.5101 )
 scale = Vector2( 1.00607, 1 )
 frames = SubResource( 12 )
-frame = 4
+frame = 6
 playing = true
 
 [node name="cola_collected" type="Label" parent="HUD/ui_element/cola_counter"]
@@ -288,6 +288,8 @@ texture = ExtResource( 12 )
 [connection signal="initialize_player" from="." to="HUD" method="_on_game_UI_initialize_player"]
 [connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="HUD" method="_on_game_UI_level_cleared"]
+[connection signal="no_checkpoints" from="." to="failure" method="_on_game_UI_no_checkpoints"]
+[connection signal="no_checkpoints" from="." to="pause" method="_on_game_UI_no_checkpoints"]
 [connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_health_changed" from="." to="HUD" method="_on_game_UI_player_health_changed"]
 [connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]

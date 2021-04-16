@@ -39,6 +39,7 @@ orbit_velocity_random = 0.0
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 2
+gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 2 )

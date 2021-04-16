@@ -21,20 +21,20 @@ export var damage:       int   = 2
 export var health:       int   = 2
 export var jump_speed:   float = 1.0
 export var speed:        float = 7.0
+var attack_point
 var engage_player = false
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
+	randomize()
 #	initialize_enemy(health, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("spider"): initialize_enemy(2, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("bat"):    initialize_enemy(3, damage, 4, acceleration, jump_speed, false, true)
+	if self.is_in_group("bat"):    initialize_enemy(2, damage, rand_range(5,20), acceleration, jump_speed, false, true)
 	set_sprite_facing_direction(Globals.DIRECTION.RIGHT)
 	set_smooth_movement        (true)
 	set_knockback_multiplier   (1.0)
 	set_auto_facing            (true)
-	self.set_modulate          (Color(4.63, 0, 1.73, 1.0))
 	$spawn_in_effect.play()
 	yield($spawn_in_effect, "animation_finished")
 	$spawn_in_effect.visible = false
@@ -44,9 +44,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
 	if engage_player == true:
-		move_dynamically(global_position.direction_to(Globals.player_position))
-	else:
-		if self.is_in_group("spider"): move_dynamically(Vector2(0.0,20))
+		move_dynamically(global_position.direction_to(attack_point.position))
 	$sounds/idle.pitch_scale = rand_range(1.2, 1.6)
 
 #-----------------------------------------------------------------------------#
@@ -105,15 +103,15 @@ func _flash_damage(num_flashes: int = 0, flash_time: float = 0.03):
 			yield(t, "timeout")
 			set_modulate(Color(7.52, 7.52, 7.52, 1.0))
 					
-	set_modulate(Color(4.63, 0, 1.73, 1.0))
+	set_modulate(Color.white)
 
 func _on_detection_body_entered(body):
-	if body == Globals.player:
+	if body == attack_point:
 		$sounds/on_engage.play()
 		engage_player = true
 
 func _on_detection_body_exited(body):
-	if body == Globals.player:
+	if body == attack_point:
 		$sounds/on_disengage.play()
 		engage_player = false
 
@@ -124,3 +122,6 @@ func _on_bat_death():
 
 func _on_bat_health_changed(ammount):
 	_on_spider_health_changed(ammount)
+
+func attack_plane(node):
+	attack_point = node
