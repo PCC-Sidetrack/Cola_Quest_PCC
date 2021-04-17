@@ -85,16 +85,14 @@ func _on_game_UI_level_cleared():
 # On collecting a cola(s)
 func _on_game_UI_cola_collect(amount):
 	_cola_count += amount
-
 	$ui_element/cola_counter/cola_tween.interpolate_property($ui_element/cola_counter/cola_icon, "scale", Vector2(2,2), Vector2(1,1), .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$ui_element/cola_counter/cola_tween.start()
-	
 	if _healing_enabled:
 		green_plus.value += amount
-		if (green_plus.value == green_plus.max_value):
+		if (green_plus.value == _cola_requirement):
 			green_plus_ss.visible = true
 			green_plus.visible    = false
-		if (green_plus.value == _cola_requirement) and (_c_health != _m_health):
+		if (green_plus.value == _cola_requirement) and (Globals.player.get_current_health() != Globals.player.get_max_health()):
 			_cola_healing()
 
 # On initialization
@@ -105,7 +103,6 @@ func _on_game_UI_initialize_player(max_health) -> void:
 # On player health changing
 func _on_game_UI_player_health_changed(_current_health, _previous_health) -> void:
 	_c_health = _current_health
-	
 	if _healing_enabled == true:
 		if (green_plus.value == _cola_requirement) and (_current_health < _previous_health):
 			_cola_healing()

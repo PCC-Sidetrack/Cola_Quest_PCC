@@ -102,7 +102,6 @@ texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 6 )
 
 [node name="CenterContainer4" type="CenterContainer" parent="Control/VBoxContainer"]
-modulate = Color( 0, 0.976471, 1, 1 )
 margin_top = 154.0
 margin_right = 512.0
 margin_bottom = 154.0
@@ -112,9 +111,9 @@ __meta__ = {
 
 [node name="Hub" type="TextureButton" parent="Control/VBoxContainer/CenterContainer4"]
 visible = false
-margin_left = 245.0
+margin_left = 239.0
 margin_top = -7.0
-margin_right = 267.0
+margin_right = 272.0
 margin_bottom = 7.0
 texture_normal = ExtResource( 18 )
 texture_pressed = ExtResource( 16 )

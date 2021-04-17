@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=116 format=2]
 
 [ext_resource path="res://assets/levels/AC_Level/scripts/AC_level.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/particles/glitch_background/blcoks.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/levels/AC_Level/assets/fonts/LucrethiaFreeFont-zZo0.otf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/levels/AC_Level/sounds.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/levels/AC_Level/scripts/error_zone.gd" type="Script" id=19]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/gui/fonts/m5x7.ttf" type="DynamicFontData" id=35]
 [ext_resource path="res://assets/levels/AC_Level/scripts/spikes.gd" type="Script" id=36]
 [ext_resource path="res://assets/code/common_scripts/killzone.gd" type="Script" id=37]
@@ -41379,12 +41380,15 @@ extents = Vector2( 24, 3.418 )
 extents = Vector2( 41.4233, 54.5949 )
 
 [sub_resource type="RectangleShape2D" id=70]
-extents = Vector2( 56.2461, 1954.24 )
+extents = Vector2( 22.2786, 74.2864 )
 
 [sub_resource type="RectangleShape2D" id=71]
+extents = Vector2( 56.2461, 1954.24 )
+
+[sub_resource type="RectangleShape2D" id=72]
 extents = Vector2( 13.167, 31.6593 )
 
-[sub_resource type="Animation" id=72]
+[sub_resource type="Animation" id=73]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../../glitch_backgruond/text_1:visible")
@@ -41531,7 +41535,7 @@ tracks/11/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Animation" id=73]
+[sub_resource type="Animation" id=74]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../../glitch_backgruond/red_rectangles:modulate")
@@ -41678,66 +41682,66 @@ tracks/11/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=74]
+[sub_resource type="RectangleShape2D" id=75]
 extents = Vector2( 5.98962, 328 )
 
-[sub_resource type="RectangleShape2D" id=75]
-
 [sub_resource type="RectangleShape2D" id=76]
-extents = Vector2( 2149.11, 10 )
 
 [sub_resource type="RectangleShape2D" id=77]
-extents = Vector2( 10, 28.6755 )
+extents = Vector2( 2149.11, 10 )
 
-[sub_resource type="AtlasTexture" id=78]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 45, 36 )
+[sub_resource type="RectangleShape2D" id=78]
+extents = Vector2( 10, 28.6755 )
 
 [sub_resource type="AtlasTexture" id=79]
 atlas = ExtResource( 4 )
-region = Rect2( 45, 0, 45, 36 )
+region = Rect2( 0, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=80]
 atlas = ExtResource( 4 )
-region = Rect2( 90, 0, 45, 36 )
+region = Rect2( 45, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 4 )
-region = Rect2( 135, 0, 45, 36 )
+region = Rect2( 90, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=82]
 atlas = ExtResource( 4 )
-region = Rect2( 180, 0, 45, 36 )
+region = Rect2( 135, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=83]
 atlas = ExtResource( 4 )
-region = Rect2( 225, 0, 45, 36 )
+region = Rect2( 180, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=84]
 atlas = ExtResource( 4 )
-region = Rect2( 270, 0, 45, 36 )
+region = Rect2( 225, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=85]
 atlas = ExtResource( 4 )
-region = Rect2( 315, 0, 45, 36 )
+region = Rect2( 270, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=86]
 atlas = ExtResource( 4 )
-region = Rect2( 360, 0, 45, 36 )
+region = Rect2( 315, 0, 45, 36 )
 
 [sub_resource type="AtlasTexture" id=87]
 atlas = ExtResource( 4 )
+region = Rect2( 360, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 4 )
 region = Rect2( 405, 0, 45, 36 )
 
-[sub_resource type="SpriteFrames" id=88]
+[sub_resource type="SpriteFrames" id=89]
 animations = [ {
-"frames": [ SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ) ],
+"frames": [ SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=89]
+[sub_resource type="RectangleShape2D" id=90]
 extents = Vector2( 37.6245, 36.9128 )
 
 [node name="AC_level" type="Node"]
@@ -41748,7 +41752,7 @@ __meta__ = {
 
 [node name="player" parent="." instance=ExtResource( 9 )]
 modulate = Color( 0.447059, 0.447059, 0.447059, 1 )
-position = Vector2( 96.924, 116.757 )
+position = Vector2( 81.3846, 146.903 )
 
 [node name="ac_camera" type="Camera2D" parent="player"]
 position = Vector2( -7.27846, 59.0876 )
@@ -41914,7 +41918,7 @@ modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( 320, 184 )
 scale = Vector2( 7.56936, 7.56936 )
 frames = SubResource( 19 )
-frame = 8
+frame = 5
 playing = true
 
 [node name="text_1" type="ParallaxLayer" parent="glitch_backgruond"]
@@ -41966,7 +41970,7 @@ modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( 320, 184 )
 scale = Vector2( 7.56936, 7.56936 )
 frames = SubResource( 19 )
-frame = 7
+frame = 4
 playing = true
 
 [node name="lights" type="Node2D" parent="."]
@@ -42353,13 +42357,13 @@ scale = Vector2( 0.6, 0.6 )
 [node name="panic_fe" type="AnimatedSprite" parent="AI/NPC"]
 position = Vector2( 220, 150 )
 frames = SubResource( 34 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="panic_ma" type="AnimatedSprite" parent="AI/NPC"]
 position = Vector2( 290, 150 )
 frames = SubResource( 39 )
-frame = 1
+frame = 2
 playing = true
 flip_h = true
 
@@ -42389,7 +42393,6 @@ __meta__ = {
 position = Vector2( 936, 80 )
 frames = SubResource( 48 )
 animation = "stuck"
-frame = 3
 playing = true
 
 [node name="drsparks" type="Label" parent="AI/Teachers/sparks"]
@@ -42523,6 +42526,10 @@ shape = SubResource( 68 )
 position = Vector2( 2866.71, 297.003 )
 shape = SubResource( 69 )
 
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 3478.35, 301.163 )
+shape = SubResource( 70 )
+
 [node name="Area_triggers" type="Node2D" parent="."]
 
 [node name="lock_section_spiders" type="Area2D" parent="Area_triggers"]
@@ -42532,7 +42539,7 @@ scale = Vector2( 0.200602, 1.22473 )
 [node name="activator" type="CollisionShape2D" parent="Area_triggers/lock_section_spiders"]
 modulate = Color( 0.313726, 1, 0, 1 )
 position = Vector2( 528.118, 55.318 )
-shape = SubResource( 70 )
+shape = SubResource( 71 )
 
 [node name="lock_section_bats" type="Area2D" parent="Area_triggers"]
 position = Vector2( 2763.65, 90.883 )
@@ -42542,30 +42549,30 @@ scale = Vector2( 0.200602, 1.22473 )
 modulate = Color( 0.313726, 1, 0, 1 )
 position = Vector2( 534.397, -50.4989 )
 scale = Vector2( 1, 0.0528522 )
-shape = SubResource( 70 )
+shape = SubResource( 71 )
 
 [node name="lever_1" type="Area2D" parent="Area_triggers"]
 position = Vector2( 1321.08, 153.159 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/lever_1"]
-shape = SubResource( 71 )
+shape = SubResource( 72 )
 
 [node name="lever_2" type="Area2D" parent="Area_triggers"]
 position = Vector2( 2917.69, 133.167 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/lever_2"]
-shape = SubResource( 71 )
+shape = SubResource( 72 )
 
 [node name="section_spikes" type="Area2D" parent="Area_triggers"]
 position = Vector2( 1464, 200 )
 
 [node name="spikes_animation" type="AnimationPlayer" parent="Area_triggers/section_spikes"]
-anims/fade_in = SubResource( 72 )
-anims/fade_out = SubResource( 73 )
+anims/fade_in = SubResource( 73 )
+anims/fade_out = SubResource( 74 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 188.287, -108.8 )
-shape = SubResource( 74 )
+shape = SubResource( 75 )
 
 [node name="spikes_1" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( -1048, 16 )
@@ -42573,7 +42580,7 @@ scale = Vector2( -7.52178, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_1"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_2" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 40, -24 )
@@ -42581,7 +42588,7 @@ scale = Vector2( -1.20178, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_2"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_3" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 236.205, 60.671 )
@@ -42589,7 +42596,7 @@ scale = Vector2( -1.88175, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_3"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_4" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 286.658, 60.671 )
@@ -42597,7 +42604,7 @@ scale = Vector2( -1.08175, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_4"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_5" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 628.551, -83.315 )
@@ -42605,7 +42612,7 @@ scale = Vector2( -2.29254, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_5"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_6" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 645.949, 80 )
@@ -42613,7 +42620,7 @@ scale = Vector2( -2.09254, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_6"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_7" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 748.655, 80 )
@@ -42621,7 +42628,7 @@ scale = Vector2( -2.09254, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_7"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="spikes_8" type="Area2D" parent="Area_triggers/section_spikes"]
 position = Vector2( 1403.88, 40 )
@@ -42629,21 +42636,38 @@ scale = Vector2( -3.85254, 0.923457 )
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/section_spikes/spikes_8"]
-shape = SubResource( 75 )
+shape = SubResource( 76 )
 
 [node name="killzone" type="Area2D" parent="Area_triggers"]
 script = ExtResource( 37 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/killzone"]
 position = Vector2( 1789.09, 431.262 )
-shape = SubResource( 76 )
+shape = SubResource( 77 )
 
 [node name="next_scene" type="Area2D" parent="Area_triggers"]
 position = Vector2( 3656.3, 277.54 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_triggers/next_scene"]
 position = Vector2( 0, -17.818 )
-shape = SubResource( 77 )
+shape = SubResource( 78 )
+
+[node name="checkpoints" type="Node2D" parent="Area_triggers"]
+
+[node name="spawnpoint" parent="Area_triggers/checkpoints" instance=ExtResource( 20 )]
+position = Vector2( 467.98, 27.7995 )
+
+[node name="spawnpoint_after_spider_dead" parent="Area_triggers/checkpoints" instance=ExtResource( 20 )]
+position = Vector2( 1018.85, 234.509 )
+
+[node name="spawnpoint2" parent="Area_triggers/checkpoints" instance=ExtResource( 20 )]
+position = Vector2( 1472.03, 150.549 )
+
+[node name="spawnpoint3" parent="Area_triggers/checkpoints" instance=ExtResource( 20 )]
+position = Vector2( 2530.75, 163.922 )
+
+[node name="spawnpoint4" parent="Area_triggers/checkpoints" instance=ExtResource( 20 )]
+position = Vector2( 3305.75, 42.3477 )
 
 [node name="sounds" parent="." instance=ExtResource( 18 )]
 
@@ -42673,7 +42697,7 @@ texture = ExtResource( 39 )
 
 [node name="cannon" type="AnimatedSprite" parent="cannon_stationary"]
 position = Vector2( -0.766602, 14.3917 )
-frames = SubResource( 88 )
+frames = SubResource( 89 )
 frame = 2
 speed_scale = 2.0
 flip_h = true
@@ -42686,7 +42710,8 @@ position = Vector2( 20.2065, -0.891685 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cannon_stationary/damage_zone"]
 position = Vector2( -0.766602, 13.5 )
-shape = SubResource( 89 )
+shape = SubResource( 90 )
+[connection signal="death" from="player" to="." method="_on_player_death"]
 [connection signal="body_left" from="error_zone" to="." method="_on_error_zone_body_left"]
 [connection signal="body_exited" from="error_zone/enemies_left" to="error_zone" method="_on_enemies_left_body_exited"]
 [connection signal="body_entered" from="Area_triggers/lock_section_spiders" to="." method="_on_lock_section_spiders_body_entered"]
