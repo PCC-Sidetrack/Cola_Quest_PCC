@@ -11,6 +11,7 @@ func _physics_process(_delta):
 
 
 func _ready():
+	$player/player_cam.current = true
 	$player/game_UI.on_no_checkpoints()
 	$StaticBody2D2/Light2D2.visible = false
 	$door_activator.set_deferred("monitoring", false)
@@ -20,7 +21,7 @@ func _ready():
 	$error_zone2.visible = false
 	$error_zone2/error_zone.error_zone_init(70, "air_has_ocurred", $world_timers/shake_timer)
 	$plane_transitions/black_screen.visible = false
-	$player/player_cam.current = true
+
 	$background/PL1c_blue_sky_clouds.material.set("shader_param/speed", .01)
 	$background/PL1b_blue_sky_clouds.material.set("shader_param/speed", .02)
 	$background/PL1b_blue_sky_clouds2.material.set("shader_param/speed", .02)

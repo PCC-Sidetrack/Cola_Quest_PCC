@@ -35,12 +35,15 @@ onready var spark_animation      = $AI/Teachers/sparks/sparks_animation
 onready var stemen_aniamtion     = $AI/Teachers/stemen/stemen_ani
 onready var cannon               = $cannon_stationary/cannon
 
+var bat_section_cleared    = false
+var spider_section_cleared = false
 var _current_section  = l_section_2
 var shake_amount      = 3
 var enemies_remaining = 999
 
 func _ready():
-	$player/game_UI.on_no_checkpoints()
+	area_trigger.get_node("checkpoints/spawnpoint_after_spider_dead/Area2D").set_deferred("monitoring", false)
+	$player/game_UI/pause/buttons/Control/VBoxContainer/CenterContainer2.visible = false
 	$AI/Teachers/sparks/force_field.visible                  = true
 	$AI/Teachers/sparks/transition/transition_screen.visible = false
 	$AI/Teachers/sparks/drsparks.visible                     = false
@@ -136,11 +139,13 @@ func _show_error_zone():
 	yield(er_zone_ani_player, "animation_finished")
 	bugs_left.visible = true
 
+
+
 func _spawn_enemies(enemy_type_instance, spawner_section):
 	while enemies_remaining >= 0:
 		for spawn_point in spawner_section.get_children():
 
-			var spawn_in  = spawn_in_effect.instance()
+			var spawn_in   = spawn_in_effect.instance()
 			var enemy_type = enemy_type_instance.instance()
 
 			enemy_type.global_position = spawn_point.position
@@ -197,7 +202,10 @@ func _enemies_cleared(l_section_type):
 	
 	match l_section_type:
 		l_section_2:
+			area_trigger.get_node("checkpoints/spawnpoint_after_spider_dead/Area2D").set_deferred("monitoring", true)
 			area_trigger.get_node("lever_1").set_deferred("monitoring", true)
+			area_trigger.get_node("checkpoints/spawnpoint/Area2D").set_deferred("disabled", true)
+			spider_section_cleared = true
 		l_section_4:
 			area_trigger.get_node("lever_2").set_deferred("monitoring", true)
 			yield(get_tree().create_timer(3), "timeout")
@@ -205,6 +213,7 @@ func _enemies_cleared(l_section_type):
 			Globals.player.visible = true
 			yield(get_tree().create_timer(.5), "timeout")
 			Globals.game_locked = false
+			bat_section_cleared = true
 
 func _section_cleared(l_section_type):
 	$sounds/music_idle.play()
@@ -224,6 +233,7 @@ func _on_lever_1_area_entered(area):
 	if area.is_in_group("hitbox"):
 		lever_hit.play()
 		_section_cleared(l_section_2)
+		spider_section_cleared = true
 		spark_animation.play("zoom_in")
 		area_trigger.get_node("lever_1").set_deferred("monitoring", false)
 
@@ -231,6 +241,7 @@ func _on_lever_2_area_entered(area):
 	if area.is_in_group("hitbox"):
 		lever_hit.play()
 		_section_cleared(l_section_4)
+		bat_section_cleared = true
 		stemen_aniamtion.play("stemen_freed")
 		area_trigger.get_node("lever_2").set_deferred("monitoring", false)
 		$lights/end_door_light.visible = true
@@ -245,6 +256,7 @@ func _on_section_spikes_body_entered(body):
 
 func _on_lock_section_bats_body_entered(body):
 	if body == Globals.player:
+		area_trigger.get_node("lock_section_bats/activator").set_deferred("disabled", true)
 		Globals.player.visible = false
 		Globals.game_locked = true
 		cannon.enable_turret()
@@ -267,7 +279,7 @@ func _on_lock_section_bats_body_entered(body):
 		camera.zoom.y = 1.4
 		# Disable activation area and enable borders
 
-		area_trigger.get_node("lock_section_bats/activator").set_deferred("disabled", true)
+
 		
 		section_1_borders.enable()
 		
@@ -310,3 +322,53 @@ func _on_error_zone_body_left(body):
 					_enemies_cleared(l_section_2)
 				l_section_4:
 					_enemies_cleared(l_section_4)
+					area_trigger.get_node("lock_section_bats/activator").set_deferred("disabled", true)
+
+func _reset_section(spawner_section, l_section_type):
+	enemies_remaining = 0
+	for spawn_point in spawner_section.get_children():
+		for i in spawn_point.get_children():
+			i.queue_free()
+	
+#	for lights in l_section_type.get_children():
+#		lights.visible = false
+	$sounds/music_idle.play()
+
+	$sounds/siren.stop()
+	$sounds/music_attack.stop()
+
+	bugs_left.visible      = false
+	red_rectangles.visible = false
+	text_1.visible         = false 
+	text_2.visible         = false 
+	
+	camera.limit_left  = -61
+	camera.limit_right = 3953
+
+	
+	match l_section_type:
+		l_section_2:
+			if spider_section_cleared == false:
+				error_zone.visible = false
+				section_1_borders.disable()
+				l_section_2.visible = false
+				area_trigger.get_node("lock_section_spiders/activator").set_deferred("disabled", false)
+		l_section_4:
+			if bat_section_cleared == false:
+				cannon.disable_turret()
+				Globals.player.visible     = true
+				Globals.game_locked        = false
+				section_1_borders.visible  = true
+				l_section_4.visible        = false
+				yield(get_tree().create_timer(2), "timeout")
+				if Globals.player.position.x < 2786.078:
+					area_trigger.get_node("lock_section_bats/activator").set_deferred("disabled", false)
+
+
+
+func _on_player_death():
+	if Globals.player.position.x < 1450:
+		_reset_section(section_1_spawner, l_section_2)
+	if Globals.player.position.x < 3300:
+		_reset_section(section_1_spawner, l_section_4)
+

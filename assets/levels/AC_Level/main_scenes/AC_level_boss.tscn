@@ -21180,7 +21180,7 @@
 375/shapes = [  ]
 375/z_index = 0
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=5]
 resource_name = "idle"
 loop = true
 step = 0.5
@@ -21197,7 +21197,7 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=6]
 resource_name = "jump"
 length = 0.1
 tracks/0/type = "value"
@@ -21213,7 +21213,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=7]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
@@ -21240,7 +21240,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 7 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=8]
 resource_name = "walk"
 length = 0.3
 loop = true
@@ -21286,48 +21286,48 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 10, 29 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 34.0725, 29.1493 )
 
-[sub_resource type="OccluderPolygon2D" id=7]
+[sub_resource type="OccluderPolygon2D" id=11]
 polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 16 )
-region = Rect2( 0, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 16 )
-region = Rect2( 13, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 16 )
-region = Rect2( 26, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 16 )
-region = Rect2( 39, 0, 13, 13 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 16 )
-region = Rect2( 52, 0, 13, 13 )
+region = Rect2( 0, 0, 13, 13 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 16 )
+region = Rect2( 13, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 16 )
+region = Rect2( 26, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 16 )
+region = Rect2( 39, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 16 )
+region = Rect2( 52, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 16 )
 region = Rect2( 65, 0, 13, 13 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=19]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../animate_plus:root_node")
@@ -21457,15 +21457,15 @@ collision_mask = 10
 script = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-anims/idle = SubResource( 16 )
-anims/jump = SubResource( 17 )
-anims/melee = SubResource( 18 )
-anims/walk = SubResource( 19 )
+anims/idle = SubResource( 5 )
+anims/jump = SubResource( 6 )
+anims/melee = SubResource( 7 )
+anims/walk = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 visible = false
 position = Vector2( -6, 2 )
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="melee" type="Area2D" parent="player" groups=[
 "hitbox",
@@ -21476,7 +21476,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/melee"]
 position = Vector2( 40.0971, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 disabled = true
 
 [node name="sprites" type="Node2D" parent="player"]
@@ -21505,7 +21505,7 @@ margin_right = 34.3303
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="player"]
 visible = false
-occluder = SubResource( 7 )
+occluder = SubResource( 11 )
 
 [node name="sounds" type="Node2D" parent="player"]
 
@@ -21534,13 +21534,12 @@ __meta__ = {
 [node name="green_plus" type="AnimatedSprite" parent="player/cola_healing"]
 visible = false
 position = Vector2( -4.527, -44.481 )
-frames = SubResource( 14 )
-frame = 4
+frames = SubResource( 18 )
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]
 root_node = NodePath("../green_plus")
-anims/heal = SubResource( 15 )
+anims/heal = SubResource( 19 )
 
 [node name="healing_sound" type="AudioStreamPlayer" parent="player/cola_healing"]
 stream = ExtResource( 13 )

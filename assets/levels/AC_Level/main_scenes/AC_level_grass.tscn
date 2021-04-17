@@ -37,12 +37,228 @@
 [ext_resource path="res://assets/levels/AC_Level/assets/sounds/lever_hit.ogg" type="AudioStream" id=35]
 [ext_resource path="res://assets/levels/AC_Level/assets/sounds/sprite_jump.wav" type="AudioStream" id=36]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/idle:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 0.999999 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/jump:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprites/melee:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
+"update": 0,
+"values": [ 0, 1, 7 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_is_attacking"
+}, {
+"args": [ false ],
+"method": "set_is_attacking"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "walk"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("sounds/SD4_footsteps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 23 )
+} ],
+"times": PoolRealArray( 0.15 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_change_footstep_pitch"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 29 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 34.0725, 29.1493 )
+
+[sub_resource type="OccluderPolygon2D" id=7]
+polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 11 )
+region = Rect2( 13, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 11 )
+region = Rect2( 26, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 11 )
+region = Rect2( 39, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 11 )
+region = Rect2( 52, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 11 )
+region = Rect2( 65, 0, 13, 13 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="Animation" id=15]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../animate_plus:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ NodePath("../green_plus") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.11 ),
+"transitions": PoolRealArray( 1, 0.189465 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -5, 1 ),
+"update": 0,
+"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=16]
 size = 50
 extra_spacing_char = 3
 font_data = ExtResource( 30 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=17]
 code = "/*
 	Glitch Effect Shader by Yui Kinomoto @arlez80
 
@@ -97,15 +313,15 @@ void fragment( )
 }
 "
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 17 )
 shader_param/shake_power = 2.005
 shader_param/shake_rate = 0.524
 shader_param/shake_speed = 5.998
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=19]
 length = 0.51
 tracks/0/type = "value"
 tracks/0/path = NodePath("instructions:rect_scale")
@@ -120,7 +336,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 0.48 ), Vector2( 1, 0 ) ]
 }
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=20]
 shader = ExtResource( 29 )
 shader_param/shake_power = 4.622
 shader_param/shake_rate = 1.0
@@ -128,7 +344,7 @@ shader_param/shake_speed = 2.033
 shader_param/shake_block_size = 1.027
 shader_param/shake_color_rate = 0.493
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 29 )
 shader_param/shake_power = 0.03
 shader_param/shake_rate = 0.2
@@ -136,211 +352,16 @@ shader_param/shake_speed = 5.0
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 
-[sub_resource type="DynamicFontData" id=7]
+[sub_resource type="DynamicFontData" id=22]
 font_path = "res://assets/levels/AC_Level/assets/fonts/LucrethiaFreeFont-zZo0.otf"
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=23]
 size = 30
 use_filter = true
-font_data = SubResource( 7 )
+font_data = SubResource( 22 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 384, 237.685 )
-
-[sub_resource type="Animation" id=10]
-loop = true
-step = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/idle:frame")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 0.999999 ),
-"update": 0,
-"values": [ 0, 3 ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/jump:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=12]
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("sprites/melee:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
-"update": 0,
-"values": [ 0, 1, 7 ]
-}
-
-[sub_resource type="Animation" id=13]
-length = 0.3
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/walk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-tracks/1/type = "audio"
-tracks/1/path = NodePath("sounds/SD4_footsteps")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 23 )
-} ],
-"times": PoolRealArray( 0.15 )
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_change_footstep_pitch"
-} ]
-}
-
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 10, 29 )
-
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 34.0725, 29.1493 )
-
-[sub_resource type="OccluderPolygon2D" id=16]
-polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 11 )
-region = Rect2( 13, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 11 )
-region = Rect2( 26, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 11 )
-region = Rect2( 39, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 11 )
-region = Rect2( 52, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 11 )
-region = Rect2( 65, 0, 13, 13 )
-
-[sub_resource type="SpriteFrames" id=23]
-animations = [ {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
-} ]
-
-[sub_resource type="Animation" id=24]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("../animate_plus:root_node")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ NodePath("../green_plus") ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.11 ),
-"transitions": PoolRealArray( 1, 0.189465 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( -5, 1 ),
-"update": 0,
-"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
 
 [sub_resource type="Environment" id=25]
 background_mode = 4
@@ -14158,7 +14179,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 3.3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ false, true ]
 }
 tracks/3/type = "value"
@@ -14326,7 +14347,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ false, true ]
 }
 tracks/2/type = "value"
@@ -14406,31 +14427,31 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false, true ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("../player/player_cam:current")
+tracks/3/type = "method"
+tracks/3/path = NodePath("..")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("..")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "fast_clouds"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../player/player_cam:current")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="RectangleShape2D" id=70]
@@ -14443,180 +14464,25 @@ __meta__ = {
 "_edit_horizontal_guides_": [ -744.0 ]
 }
 
-[node name="error_zone2" type="Node2D" parent="."]
-z_index = 10
-
-[node name="error_zone" type="Control" parent="error_zone2"]
-modulate = Color( 0.803922, 0.803922, 0.803922, 1 )
-margin_left = 81.25
-margin_top = -393.75
-margin_right = 121.25
-margin_bottom = -353.75
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="error_text" type="Label" parent="error_zone2/error_zone"]
-margin_left = -118.75
-margin_top = -12.5
-margin_right = 355.247
-margin_bottom = 42.5
-rect_scale = Vector2( 1, 0.48 )
-custom_fonts/font = SubResource( 1 )
-text = "error_text"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="instructions" type="Label" parent="error_zone2/error_zone"]
-margin_left = -177.75
-margin_top = -12.5001
-margin_right = 213.25
-margin_bottom = 42.4999
-rect_scale = Vector2( 1, 0.48 )
-custom_fonts/font = SubResource( 1 )
-text = "Destroy 999 bugs!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="left_glitch" type="ColorRect" parent="error_zone2/error_zone"]
-material = SubResource( 3 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -406.25
-margin_top = -237.5
-margin_right = -406.25
-margin_bottom = -237.5
-rect_scale = Vector2( 0.356446, 12.5817 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="right_glitch" type="ColorRect" parent="error_zone2/error_zone"]
-material = SubResource( 3 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 393.75
-margin_top = -218.75
-margin_right = 393.75
-margin_bottom = -218.75
-rect_scale = Vector2( 0.356446, 11.3942 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="error_zone2/error_zone"]
-anims/transitino_instructions = SubResource( 4 )
-
-[node name="center_glitch" type="ColorRect" parent="error_zone2/error_zone"]
-modulate = Color( 1, 1, 1, 0.0901961 )
-material = SubResource( 5 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -443.75
-margin_top = -25.0
-margin_right = -443.75
-margin_bottom = -25.0
-rect_scale = Vector2( 21.9087, 1.15064 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="error_zone2/error_zone"]
-material = SubResource( 6 )
-margin_left = -512.5
-margin_top = -22.5
-margin_right = -472.5
-margin_bottom = 17.5
-rect_scale = Vector2( 37.1665, 1.10403 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="instructions_timeout" type="Timer" parent="error_zone2/error_zone"]
-wait_time = 2.0
-one_shot = true
-
-[node name="bugs_left" type="Control" parent="error_zone2/error_zone"]
-margin_left = -1031.25
-margin_top = -156.25
-margin_right = -1031.25
-margin_bottom = -156.25
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="error_zone2/error_zone/bugs_left"]
-material = SubResource( 6 )
-margin_left = 872.0
-margin_top = -40.5659
-margin_right = 912.0
-margin_bottom = -0.565887
-rect_scale = Vector2( 7.65228, 0.913823 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="bugs_left_text" type="Label" parent="error_zone2/error_zone/bugs_left"]
-modulate = Color( 4.05, 1, 1, 1 )
-margin_left = 944.0
-margin_top = -28.4551
-margin_right = 1125.0
-margin_bottom = 4.5449
-rect_scale = Vector2( 0.895495, 0.430757 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Bugs Remaining:"
-
-[node name="number_remaining" type="Label" parent="error_zone2/error_zone/bugs_left"]
-modulate = Color( 4.05, 1, 1, 1 )
-margin_left = 1110.92
-margin_top = -27.2979
-margin_right = 1291.92
-margin_bottom = 5.70213
-rect_scale = Vector2( 0.895, 0.431 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="error_zone2/error_zone/bugs_left"]
-
-[node name="enemies_left" type="Area2D" parent="error_zone2/error_zone"]
-visible = false
-position = Vector2( -25, 68.75 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="error_zone2/error_zone/enemies_left"]
-position = Vector2( 32, -56 )
-shape = SubResource( 9 )
-
-[node name="sounds" parent="error_zone2/error_zone" instance=ExtResource( 10 )]
-
 [node name="player" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
-position = Vector2( -0.5, 181.25 )
-z_index = 4
+position = Vector2( 2.14548, 194.092 )
+z_index = 6
 collision_layer = 2147483649
 collision_mask = 10
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-anims/idle = SubResource( 10 )
-anims/jump = SubResource( 11 )
-anims/melee = SubResource( 12 )
-anims/walk = SubResource( 13 )
+anims/idle = SubResource( 1 )
+anims/jump = SubResource( 2 )
+anims/melee = SubResource( 3 )
+anims/walk = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 visible = false
 position = Vector2( -6, 2 )
-shape = SubResource( 14 )
+shape = SubResource( 5 )
 
 [node name="melee" type="Area2D" parent="player" groups=[
 "hitbox",
@@ -14627,7 +14493,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/melee"]
 position = Vector2( 40.0971, 0 )
-shape = SubResource( 15 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="sprites" type="Node2D" parent="player"]
@@ -14656,7 +14522,7 @@ margin_right = 34.3303
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="player"]
 visible = false
-occluder = SubResource( 16 )
+occluder = SubResource( 7 )
 
 [node name="sounds" type="Node2D" parent="player"]
 
@@ -14685,13 +14551,13 @@ __meta__ = {
 [node name="green_plus" type="AnimatedSprite" parent="player/cola_healing"]
 visible = false
 position = Vector2( -4.527, -44.481 )
-frames = SubResource( 23 )
-frame = 3
+frames = SubResource( 14 )
+frame = 4
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]
 root_node = NodePath("../green_plus")
-anims/heal = SubResource( 24 )
+anims/heal = SubResource( 15 )
 
 [node name="healing_sound" type="AudioStreamPlayer" parent="player/cola_healing"]
 stream = ExtResource( 13 )
@@ -14699,7 +14565,8 @@ volume_db = -8.548
 pitch_scale = 0.89
 
 [node name="player_cam" type="Camera2D" parent="player"]
-position = Vector2( -5.75, -90.0898 )
+position = Vector2( -4.72458, -21.8398 )
+current = true
 zoom = Vector2( 1.7, 1.7 )
 limit_left = -365
 limit_top = -150
@@ -14708,6 +14575,161 @@ limit_bottom = 542
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.0
+
+[node name="error_zone2" type="Node2D" parent="."]
+z_index = 10
+
+[node name="error_zone" type="Control" parent="error_zone2"]
+modulate = Color( 0.803922, 0.803922, 0.803922, 1 )
+margin_left = 81.25
+margin_top = -393.75
+margin_right = 121.25
+margin_bottom = -353.75
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="error_text" type="Label" parent="error_zone2/error_zone"]
+margin_left = -118.75
+margin_top = -12.5
+margin_right = 355.247
+margin_bottom = 42.5
+rect_scale = Vector2( 1, 0.48 )
+custom_fonts/font = SubResource( 16 )
+text = "error_text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="instructions" type="Label" parent="error_zone2/error_zone"]
+margin_left = -177.75
+margin_top = -12.5001
+margin_right = 213.25
+margin_bottom = 42.4999
+rect_scale = Vector2( 1, 0.48 )
+custom_fonts/font = SubResource( 16 )
+text = "Destroy 999 bugs!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_glitch" type="ColorRect" parent="error_zone2/error_zone"]
+material = SubResource( 18 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -406.25
+margin_top = -237.5
+margin_right = -406.25
+margin_bottom = -237.5
+rect_scale = Vector2( 0.356446, 12.5817 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right_glitch" type="ColorRect" parent="error_zone2/error_zone"]
+material = SubResource( 18 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 393.75
+margin_top = -218.75
+margin_right = 393.75
+margin_bottom = -218.75
+rect_scale = Vector2( 0.356446, 11.3942 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="error_zone2/error_zone"]
+anims/transitino_instructions = SubResource( 19 )
+
+[node name="center_glitch" type="ColorRect" parent="error_zone2/error_zone"]
+modulate = Color( 1, 1, 1, 0.0901961 )
+material = SubResource( 20 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -443.75
+margin_top = -25.0
+margin_right = -443.75
+margin_bottom = -25.0
+rect_scale = Vector2( 21.9087, 1.15064 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="error_zone2/error_zone"]
+material = SubResource( 21 )
+margin_left = -512.5
+margin_top = -22.5
+margin_right = -472.5
+margin_bottom = 17.5
+rect_scale = Vector2( 37.1665, 1.10403 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="instructions_timeout" type="Timer" parent="error_zone2/error_zone"]
+wait_time = 2.0
+one_shot = true
+
+[node name="bugs_left" type="Control" parent="error_zone2/error_zone"]
+margin_left = -1031.25
+margin_top = -156.25
+margin_right = -1031.25
+margin_bottom = -156.25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="error_zone2/error_zone/bugs_left"]
+material = SubResource( 21 )
+margin_left = 872.0
+margin_top = -40.5659
+margin_right = 912.0
+margin_bottom = -0.565887
+rect_scale = Vector2( 7.65228, 0.913823 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bugs_left_text" type="Label" parent="error_zone2/error_zone/bugs_left"]
+modulate = Color( 4.05, 1, 1, 1 )
+margin_left = 944.0
+margin_top = -28.4551
+margin_right = 1125.0
+margin_bottom = 4.5449
+rect_scale = Vector2( 0.895495, 0.430757 )
+custom_fonts/font = SubResource( 23 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Bugs Remaining:"
+
+[node name="number_remaining" type="Label" parent="error_zone2/error_zone/bugs_left"]
+modulate = Color( 4.05, 1, 1, 1 )
+margin_left = 1110.92
+margin_top = -27.2979
+margin_right = 1291.92
+margin_bottom = 5.70213
+rect_scale = Vector2( 0.895, 0.431 )
+custom_fonts/font = SubResource( 23 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="error_zone2/error_zone/bugs_left"]
+
+[node name="enemies_left" type="Area2D" parent="error_zone2/error_zone"]
+visible = false
+position = Vector2( -25, 68.75 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="error_zone2/error_zone/enemies_left"]
+position = Vector2( 32, -56 )
+shape = SubResource( 24 )
+
+[node name="sounds" parent="error_zone2/error_zone" instance=ExtResource( 10 )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 25 )
@@ -14753,7 +14775,6 @@ script = ExtResource( 22 )
 
 [node name="adkins_plane" type="AnimatedSprite" parent="adkins_plane"]
 frames = SubResource( 42 )
-frame = 3
 playing = true
 
 [node name="hitbox" type="Area2D" parent="adkins_plane"]
@@ -14784,7 +14805,6 @@ texture = ExtResource( 20 )
 [node name="static_plane_cam" type="Camera2D" parent="."]
 position = Vector2( 81.25, -387.5 )
 z_index = 5
-current = true
 zoom = Vector2( 2, 2 )
 smoothing_enabled = true
 smoothing_speed = 3.0
@@ -14882,7 +14902,7 @@ playing = true
 position = Vector2( 0, 16.4176 )
 frames = SubResource( 60 )
 animation = "stuck"
-frame = 3
+frame = 2
 playing = true
 
 [node name="drhowell" type="Label" parent="drhowell"]
@@ -14985,15 +15005,14 @@ position = Vector2( 1118.75, 231.25 )
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="door_activator"]
 position = Vector2( -6.25, 31.25 )
 shape = SubResource( 70 )
-[connection signal="body_left" from="error_zone2/error_zone" to="." method="_on_error_zone_body_left"]
-[connection signal="body_exited" from="error_zone2/error_zone/enemies_left" to="error_zone2/error_zone" method="_on_enemies_left_body_exited"]
 [connection signal="collision" from="player" to="player" method="_on_player_collision"]
 [connection signal="death" from="player" to="player" method="_on_player_death"]
 [connection signal="health_changed" from="player" to="player" method="_on_player_health_changed"]
-[connection signal="animation_finished" from="player/AnimationPlayer" to="player" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="player/melee" to="player" method="_on_melee_body_entered"]
 [connection signal="cola_healing" from="player/game_UI" to="player" method="_on_game_UI_cola_healing"]
 [connection signal="respawn_player" from="player/game_UI" to="player" method="_on_game_UI_respawn_player"]
+[connection signal="body_left" from="error_zone2/error_zone" to="." method="_on_error_zone_body_left"]
+[connection signal="body_exited" from="error_zone2/error_zone/enemies_left" to="error_zone2/error_zone" method="_on_enemies_left_body_exited"]
 [connection signal="body_entered" from="adkins_plane/hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="StaticBody2D/killzone" to="StaticBody2D/killzone" method="_on_killzone_body_entered"]
 [connection signal="area_entered" from="plane_activator" to="." method="_on_plane_activator_area_entered"]
