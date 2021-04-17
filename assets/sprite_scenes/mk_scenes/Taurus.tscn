@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/code/MK_Level/Taurus_Enemy.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/mk_level/sprites/Taurus/Taurus Idle-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/object_sounds/MK_Level/Taurus_Charge2.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/object_sounds/MK_Level/Hurt_Orion.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 12.2369
+
+[node name="Taurus" type="KinematicBody2D"]
+scale = Vector2( 2, 2 )
+collision_layer = 2
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 7 )
+animation = "move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 8 )
+
+[node name="EdgeLooker" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 45, 15 )
+collision_mask = 9
+
+[node name="ChargeLooker" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 180, 0 )
+collide_with_areas = true
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, 0.0662155 )
+process_parent = true
+physics_process_parent = true
+
+[node name="TaurusCharge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="DmgPlayer" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="DmgPlayer_Shape" type="CollisionShape2D" parent="DmgPlayer"]
+shape = SubResource( 9 )
+
+[node name="healthbar" parent="." instance=ExtResource( 5 )]
+[connection signal="death" from="." to="." method="_on_Taurus1_death"]
+[connection signal="health_changed" from="." to="." method="_on_Taurus1_health_changed"]
+[connection signal="body_entered" from="DmgPlayer" to="." method="_on_DmgPlayer_body_entered"]

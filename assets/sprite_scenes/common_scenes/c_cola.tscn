@@ -2,6 +2,7 @@
 
 [ext_resource path="res://assets/code/common_scripts/cola_collectible.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/C2_cola_collectible/C2_cola_collectible.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/object_sounds/SD20_coke_collect.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -40,7 +41,7 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "spin",
-"speed": 5.0
+"speed": 7.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
@@ -48,9 +49,6 @@ extents = Vector2( 7, 10 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 9.72687, 11.4999 )
-
-[sub_resource type="OccluderPolygon2D" id=12]
-polygon = PoolVector2Array( -7.77851, -7.83012, -7.58974, -20.8556, -3.53108, -24.5367, 2.60411, -24.7255, 6.47399, -20.8556, 6.47399, -7.92451, 1.75462, -3.58268, -2.39843, -3.4883 )
 
 [node name="c_cola" type="KinematicBody2D"]
 collision_layer = 4
@@ -61,8 +59,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -16 )
 frames = SubResource( 9 )
 animation = "spin"
-frame = 2
-playing = true
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -80,6 +77,6 @@ modulate = Color( 0.262745, 0.443137, 0.921569, 1 )
 position = Vector2( 0, 2 )
 shape = SubResource( 11 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 12 )
+[node name="SD20_coke_collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

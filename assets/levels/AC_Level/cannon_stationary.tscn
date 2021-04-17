@@ -1,0 +1,104 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/levels/AC_Level/scripts/cannon.gd" type="Script" id=1]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/stand.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/cannon.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/cannon.png" type="Texture" id=4]
+
+
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 4 )
+region = Rect2( 45, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 4 )
+region = Rect2( 90, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 4 )
+region = Rect2( 135, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 4 )
+region = Rect2( 180, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 4 )
+region = Rect2( 225, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 4 )
+region = Rect2( 270, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 4 )
+region = Rect2( 315, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 4 )
+region = Rect2( 360, 0, 45, 36 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 4 )
+region = Rect2( 405, 0, 45, 36 )
+
+[sub_resource type="SpriteFrames" id=89]
+animations = [ {
+"frames": [ SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=90]
+extents = Vector2( 37.6245, 36.9128 )
+
+[node name="cannon_stationary" type="Node2D"]
+position = Vector2( 2872, 112 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.766602, 0 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, 27.5087 )
+rotation = 3.14159
+texture = ExtResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( -14.3579, 14.3918 )
+rotation = -1.57079
+texture = ExtResource( 2 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 13.2334, 14.7087 )
+rotation = 1.57079
+texture = ExtResource( 2 )
+
+[node name="cannon" type="AnimatedSprite" parent="."]
+position = Vector2( -0.766602, 14.3917 )
+frames = SubResource( 89 )
+frame = 2
+speed_scale = 2.0
+flip_h = true
+script = ExtResource( 1 )
+
+[node name="fire_point" type="Node2D" parent="cannon"]
+position = Vector2( 20.2065, -0.891685 )
+
+[node name="damage_zone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone"]
+position = Vector2( -0.766602, 13.5 )
+shape = SubResource( 90 )
+
+[node name="cannon_fire" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="shake_timer" type="Timer" parent="."]
+one_shot = true

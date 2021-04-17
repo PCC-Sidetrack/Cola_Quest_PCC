@@ -257,6 +257,7 @@ animations = [ {
 } ]
 
 [node name="cleared" type="CanvasLayer"]
+layer = 100
 script = ExtResource( 7 )
 
 [node name="buttons" parent="." instance=ExtResource( 8 )]
@@ -315,7 +316,7 @@ __meta__ = {
 
 [node name="CompletionText" type="AnimatedSprite" parent="CompletionScreen/CompletionBackgroundContainer"]
 visible = false
-position = Vector2( 547.626, 252.275 )
+position = Vector2( 547.626, 235.456 )
 scale = Vector2( 1.78202, 1.78202 )
 frames = SubResource( 56 )
 animation = "glow"

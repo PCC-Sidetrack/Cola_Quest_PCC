@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png.import
-path="res://.import/PL1a_blue_sky_clouds.png-09ddb1bdd5a1a1fe194d464126179893.stex"
-=======
 path="res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex"
->>>>>>> origin/cc_artwork_3_andrew:assets/art/rooftop_level/tiles/B8_rooftop_stair_access/B8_rooftop_stair_access.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png.import
-source_file="res://assets/art/rooftop_level/parallaxing/background/PL1_blue_sky_clouds/PL1a_blue_sky_clouds.png"
-dest_files=[ "res://.import/PL1a_blue_sky_clouds.png-09ddb1bdd5a1a1fe194d464126179893.stex" ]
-=======
 source_file="res://assets/art/rooftop_level/tiles/B8_rooftop_stair_access/B8_rooftop_stair_access.png"
 dest_files=[ "res://.import/B8_rooftop_stair_access.png-55a4188e482a68ca903f495df4d47f50.stex" ]
->>>>>>> origin/cc_artwork_3_andrew:assets/art/rooftop_level/tiles/B8_rooftop_stair_access/B8_rooftop_stair_access.png.import
 
 [params]
 
@@ -29,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

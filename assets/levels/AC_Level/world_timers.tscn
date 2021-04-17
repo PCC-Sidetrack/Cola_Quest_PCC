@@ -1,0 +1,18 @@
+[gd_scene format=2]
+
+[node name="world_timers" type="Node2D"]
+
+[node name="enemy_spawn_in" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="enemy_respawn_delay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="shake_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="enemies_alive" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true

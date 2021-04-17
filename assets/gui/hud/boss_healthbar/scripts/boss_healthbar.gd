@@ -3,7 +3,7 @@
 # Description:  GUI for boss healthbar
 # Author:       Rightin Yamada                
 # Company:      Sidetrack
-# Last Updated: February 5, 2021
+# Last Updated: April 1, 2021
 #-----------------------------------------------------------------------------#
 
 extends CanvasLayer
@@ -11,6 +11,7 @@ extends CanvasLayer
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
+# By deafult, hide boss healthbar
 func _ready() -> void:
 	$boss_healthbar.visible = false
 
@@ -38,7 +39,7 @@ func animate_value(start, end) -> void:
 #                             Trigger Functions                               #
 #-----------------------------------------------------------------------------#
 # On boss heatlh changed, animate value and shake 
-func _on_game_UI_boss_health_changed(current_health, previous_health):
+func _on_game_UI_boss_health_changed(current_health, previous_health) -> void:
 	animate_value(current_health, previous_health)
 	_hud_shake()
 
@@ -51,5 +52,5 @@ func _on_game_UI_initialize_boss(max_health, boss_name) -> void:
 	$boss_healthbar/boss_health_loss.value       = max_health
 
 # On boss heatlhbar visibility
-func _on_game_UI_boss_healthbar_visible(visible):
+func _on_game_UI_boss_healthbar_visible(visible) -> void:
 	$boss_healthbar.visible = visible

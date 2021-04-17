@@ -14,45 +14,58 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                             Export Variables                                #
 #-----------------------------------------------------------------------------#
-export var accelleration:        float   = 20.0
+export var accelleration:        float   = 15.0
+export var friction:             float   = 25.0
 export var camera_zoom:          Vector2 = Vector2(1.5, 1.5)
 export var original_zoom:        float   = 1.0
 export var damage:               int     = 1
 export var debug:                bool    = false
 export var max_health:           int     = 5
 export var invlunerability_time: float   = 1.5
-#export var jump_height:         float   = 4.5
-#export var jump_speed:          float   = 0.05
 export var jump_speed:           float   = 850.0
-export var knockback_multiplier: float   = 3.0
+export var knockback_multiplier: float   = 1.0
 export var speed:                float   = 8.0
+export var max_jumps:            int     = 2
 
+# Does the player have spawn points
+var has_spawn_points:  bool   = true
 
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
 # Time between dashes
-var _dash_cooldown:     float = _DASH_REFRESH
+var _dash_cooldown:     float  = _DASH_REFRESH
+# Attack cooldown
+var _attack_cooldown:   float  = 0.5
+# Attack cooldown timer
+var _attack_timer:      float = 0.0
 # How many dashes the player has left in air
-var _remaining_dashes:  int   = _MAX_DASHES
+var _remaining_dashes:  int    = _MAX_DASHES
 # How many jumps the player has left
-var _remaining_jumps:   int   = _MAX_JUMPS
-# Holds the inital zoom
-var _init_camera_zoom:  Vector2
+var _remaining_jumps:   int    = max_jumps
 # Specifies the speed that the camera is zoomed to a new location
-var _camera_zoom_speed: int   = 5
+var _camera_zoom_speed: int    = 5
 # Holds the current zoom of the camera. Used for smooth zoom changes
 var _current_zoom
 # Indicates if the player is currently dead and respawning
-var _dead:              bool  = false
-
+var _dead:              bool   = false
+# Holds the inital zoom
+var _init_camera_zoom:  Vector2
+# Is the player currently attacking
+var _is_attacking:      bool   = false
+# Indicates the current sprite that is visible
+var _current_sprite:    String = "idle"
+# Allows code to use random numbers
+var _rng:               RandomNumberGenerator = RandomNumberGenerator.new()
+# Indicates if the player is currently underwater
+var _is_underwater:     bool   = false
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
 #-----------------------------------------------------------------------------#
 const _COYOTE_TIME:  float = 0.12
 const _DASH_REFRESH: float = 0.5
-const _MAX_JUMPS:    int   = 2
+#const _MAX_JUMPS:    int   = 2
 const _MAX_DASHES:   int   = 1
 const CONTROLS: Dictionary = {
 	#"CLIMB":      "climb",
@@ -60,16 +73,17 @@ const CONTROLS: Dictionary = {
 	"DASH":       "dash",
 	#"INTERACT":   "interact",
 	"JUMP":       "jump",
-	#"MELEE":      "melee",
+	#"MELEE":      "melee_attack",
 	"MOVE_LEFT":  "move_left",
 	"MOVE_RIGHT": "move_right",
 	#"RANGED":     "ranged",
 }
 const SPRITE: Dictionary = {
-	"DASH": "dash",
-	"IDLE": "idle",
-	"JUMP": "jump",
-	"WALK": "walk",
+	"DASH":  "dash",
+	"IDLE":  "idle",
+	"JUMP":  "jump",
+	"MELEE": "melee",
+	"WALK":  "walk"
 }
 
 #-----------------------------------------------------------------------------#
@@ -128,12 +142,52 @@ func is_dead() -> bool:
 func set_is_dead(value: bool) -> void:
 	_dead = value
 
+# Returns a boolean based on whether the player is currently respawning from a death.
+func is_underwater() -> bool:
+	return _is_underwater
+
+# Sets the value of the '_is_underwater' boolean. When underwater, player swims.
+func set_is_underwater(underwater: bool) -> void:
+	_is_underwater = underwater
+
+# Set the value of the is_attacking boolean
+func set_is_attacking(is_attacking: bool) -> void:
+	_is_attacking = is_attacking
+
+# Save the players current health, cola collected in a given scene, and how many times they respawned
+func prepare_transition() -> void:
+	PlayerVariables.saved_health = get_current_health()
+	PlayerVariables.saved_cola   = get_node("game_UI/HUD")._cola_count
+	PlayerVariables.saved_deaths = get_node("game_UI/HUD")._respawn_count
+
+# Loads the saved values between scene
+func load_from_transition() -> void:
+	set_current_health(PlayerVariables.saved_health)
+	get_node("game_UI/HUD")._c_health      = PlayerVariables.saved_health
+	get_node("game_UI/HUD")._cola_count    = PlayerVariables.saved_cola
+	get_node("game_UI/HUD")._respawn_count = PlayerVariables.saved_deaths
+
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
 func _physics_process(delta: float) -> void:
+	# Update the attack cooldown timer
+	if _attack_timer < _attack_cooldown:
+		_attack_timer += delta
+	
+	# Get the movement vector from the player input
+	var input: Vector2 = _get_input()
+	
+	# Set the current position of the player
 	Globals.player_position = self.global_position
-	move_dynamically(_get_input())
+	
+	# Check if the input has no horizontal movement, if so, temporarily
+	# change the acceleration to the friction value
+	if input.x == 0.0:
+		move_dynamically(input, friction)
+	else:
+		move_dynamically(input)
+	
 	_refresh        (delta)
 	
 	# Set the camera's zoom smoothly
@@ -141,7 +195,6 @@ func _physics_process(delta: float) -> void:
 		_current_zoom = lerp(_current_zoom, camera_zoom, _camera_zoom_speed * delta)
 	
 		$Camera2D.zoom = _current_zoom
-	
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
@@ -167,19 +220,36 @@ func _get_input() -> Vector2:
 		
 		# If the player can jump, then jump
 		if (Input.is_action_just_pressed(CONTROLS.JUMP) and _remaining_jumps > 0):
+			
 			if get_time_in_air() < _COYOTE_TIME:
-				jump(1.0)
+				_rng.randomize()
+				$sounds/SD5a_player_jump.pitch_scale = _rng.randf_range(0.9, 1.1)
+				$sounds/SD5a_player_jump.play()
+				jump()
 			else:
+				$sounds/SD5a_player_jump.pitch_scale = _rng.randf_range(1.2, 1.3)
+				$sounds/SD5a_player_jump.play()
 				jump(0.75)
 			_remaining_jumps -= 1
 		
-		if Input.is_action_just_pressed(CONTROLS.DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES:
-			set_velocity(Vector2(get_last_direction().x * get_speed() * 3.0, get_current_velocity().y))
+		if Input.is_action_just_pressed(CONTROLS.DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES and not _is_underwater:
+			set_velocity(Vector2(get_direction_facing() * get_speed() * 2.5, get_current_velocity().y))
 			_dash_cooldown     = 0.0
 			_remaining_dashes -= 1
 		
-		_set_sprite(direction)
+		if Input.is_action_just_pressed("melee_attack") and _attack_timer >= _attack_cooldown:
+			_is_attacking = true
+			$sounds/SD13a_sword_swing.play()
+			_switch_sprite(SPRITE.MELEE)
+			_attack_timer = 0.0
+		
+		if not _is_attacking:
+			_set_sprite(direction)
+		
 		velocity.x = direction
+
+	if Globals.game_locked and is_underwater():
+		_set_sprite(0.0)
 	
 	return velocity
 
@@ -191,11 +261,11 @@ func _refresh(delta: float) -> void:
 	
 	# Reset the number of jumps when the character is on the floor or the wall
 	if is_on_floor():
-		_remaining_jumps  = _MAX_JUMPS
+		_remaining_jumps  = max_jumps
 		_remaining_dashes = _MAX_DASHES
 	
 	# Only lets the player jump once in the air
-	if get_time_in_air() >= _COYOTE_TIME and _remaining_jumps == _MAX_JUMPS:
+	if get_time_in_air() >= _COYOTE_TIME and _remaining_jumps == max_jumps:
 		_remaining_jumps -= 1
 
 # Set which sprite is currently displayed
@@ -219,35 +289,65 @@ func _set_sprite(direction: float) -> void:
 		#if get_vertical_velocity() > 0.0:
 			#$AnimatedSprite.play("fall")
 		#else:
+		if get_time_in_air() > 0.05:
 			_switch_sprite(SPRITE.JUMP)
 
 # Change what the currently displaying sprite is
 func _switch_sprite(new_sprite: String) -> void:
-	var sprites: Array = $sprites.get_children()
-	for sprite in sprites:
-		sprite.visible = false
+	if new_sprite != _current_sprite:
+		var sprites: Array = $sprites.get_children()
+		
+		_current_sprite = new_sprite
+		
+		for sprite in sprites:
+			sprite.visible = false
 	
-	$sprites.get_node(new_sprite).visible = true
-	$AnimationPlayer.play(new_sprite)
+		$sprites.get_node(new_sprite).visible = true
+		$AnimationPlayer.play(new_sprite)
+		
+# Change the pitch of the footsteps
+func _change_footstep_pitch() -> void:
+	if $sounds/SD4_footsteps.get_pitch_scale() <= 1.1:
+		$sounds/SD4_footsteps.set_pitch_scale(1.1)
+	else:
+		$sounds/SD4_footsteps.set_pitch_scale(0.8)
+		
+func _mouse_is_visible(visibility: bool) -> void:
+	if visibility:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
 #-----------------------------------------------------------------------------#
 # Triggered whenever the player collides with something
 func _on_player_collision(body) -> void:
-	if body.has_method("is_in_group"):
+	if body.has_method("is_in_group") and Globals.game_locked == false:
 		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
 			take_damage(body.get_damage())
 			knockback(body)
+			pass
 
 # Triggered whenever the player's health is changed
 func _on_player_health_changed(change) -> void:
 	# If the player would be damaged, isn't invunerable, and isn't already dead,
 	# then process the damage
-	if change < 0 and !get_invulnerability() and !is_dead():
+	if change < 0 and !is_dead():
 		# Update the GUI, print out the damage taken, and make the player invunerable for a bit
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
+		
+		# Play the player_hurt sound with a randomized pitch
+		_rng.randomize()
+		$sounds/SD19_player_hurt.pitch_scale = _rng.randf_range(0.5, 1.5)
+		$sounds/SD19_player_hurt.play()
+		
 		set_invulnerability(invlunerability_time)
+		if get_current_health():
+			flash_damaged()
+		
+	
 	# If the player would be healed, then update the GUI
 	elif change > 0:
 		get_node("game_UI").on_player_health_changed(get_current_health(), get_current_health() - change)
@@ -255,6 +355,7 @@ func _on_player_health_changed(change) -> void:
 # Triggered whenever the player dies
 func _on_player_death() -> void:
 	if !is_dead():
+		death_anim()
 		set_is_dead(true)
 		
 		# Lock the game and have a short cooldown before respawning
@@ -267,9 +368,35 @@ func _on_player_death() -> void:
 # Triggered whenever the player respawns
 func _on_game_UI_respawn_player() -> void:
 	# Respawn
-	global_position = get_spawn_point()
-	set_invulnerability(invlunerability_time)
-	set_is_dead(false)
-	set_current_health(max_health)
-	take_damage(-max_health)
-	Globals.game_locked = false
+	if has_spawn_points:
+		global_position = get_spawn_point()
+		set_invulnerability(invlunerability_time)
+		set_is_dead(false)
+		set_modulate(Color(1, 1, 1, 1))
+		set_current_health(max_health)
+		take_damage(-max_health)
+		_switch_sprite(SPRITE.IDLE)
+		Globals.game_locked = false
+	else:
+		PlayerVariables.restart_scene()
+		Globals.game_locked = false
+		get_tree().reload_current_scene()
+
+# COMMENT NEEDED
+func _on_melee_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.ENEMY) and Globals.game_locked == false:
+		body.take_damage(get_damage())
+		body.custom_knockback(self, 5.0)
+	
+	if body.is_in_group(Globals.GROUP.ENEMY) or body.get_collision_layer_bit(Globals.LAYER.WORLD):
+		#set_velocity(body.get_position().direction_to(global_position).normalized() * (get_speed()))
+		if get_direction_facing() == Globals.DIRECTION.LEFT:
+			custom_knockback(self, 3.0, Vector2.RIGHT)
+		else:
+			custom_knockback(self, 3.0, Vector2.LEFT)
+
+# COMMENT NEEDED
+func _on_game_UI_cola_healing():
+	$cola_healing/animate_plus.play("heal")	
+	$cola_healing/healing_sound.play()
+	take_damage(-1)

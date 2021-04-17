@@ -11,6 +11,9 @@ extends CanvasLayer
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
+func _physics_process(_delta):
+	$healthbar/health_over.value = Globals.player.get_current_health()
+	
 # Shakes the healthbar 
 func _hud_shake() -> void:
 	set_offset(Vector2(rand_range(-2.0, 2.0) * 10, rand_range(-2.0, 2.0) * 5))
@@ -23,9 +26,17 @@ func _hud_shake() -> void:
 
 # Animate healthar change
 func animate_value(start, end) -> void:
-	$healthbar/health_over.value = end
+	$healthbar/health_over.value  = end
 	$tween.interpolate_property($healthbar/health_under, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$tween.start()
+	if start < end:	
+		$healthbar/health_over.modulate = Color.green
+		$tween.interpolate_property($healthbar/health_alert, "modulate", Color.green , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$tween.start()
+		yield(get_tree().create_timer(1), "timeout")
+		$healthbar/health_over.modulate = Color("ff1216")
+	else:
+		$tween.interpolate_property($healthbar/health_alert, "modulate", Color.red , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$tween.start()
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -34,7 +45,7 @@ func animate_value(start, end) -> void:
 func _on_pulse_tween_all_completed() -> void:
 	if Globals.game_locked == false:
 		$low_health.play()
-		$pulse.interpolate_property($healthbar/health_over, "tint_progress", Color.black , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$pulse.interpolate_property($healthbar/health_over, "modulate", Color.white , Color.red, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.interpolate_property($low_health_border, "modulate", Color.white , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$pulse.start()
 	else:
@@ -52,16 +63,13 @@ func _on_game_UI_player_low_health() -> void:
 
 # On player killed, disable healthbar pulsing and show cracked heart
 func _on_game_UI_player_killed() -> void:
-	if Globals.game_locked == true:
-		$healthbar/heart.visible         = false
-		$healthbar/heart_cracked.visible = true
-	else:
-		$healthbar/heart.visible         = true
-		$healthbar/heart_cracked.visible = false
+	pass
 
 # On UI intialize, set healthbar max health
 func _on_game_UI_initialize_player(max_health) -> void:
 	$healthbar/health_over.max_value  = max_health
 	$healthbar/health_under.max_value = max_health
+	$healthbar/health_alert.max_value = max_health
 	$healthbar/health_over.value      = max_health
 	$healthbar/health_under.value     = max_health
+	$healthbar/health_alert.value     = max_health

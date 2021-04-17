@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/gui/menus/splash_screen/assets/scripts/splash_screen.gd" type="Script" id=1]
+[ext_resource path="res://assets/gui/menus/splash_screen/assets/sprites/logo backgruond.png" type="Texture" id=2]
+[ext_resource path="res://assets/gui/menus/splash_screen/assets/sprites/loading_can.png" type="Texture" id=3]
+[ext_resource path="res://assets/gui/menus/splash_screen/assets/sounds/coke_fade_away.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/gui/menus/splash_screen/assets/sprites/logo.png" type="Texture" id=5]
+[ext_resource path="res://assets/gui/menus/splash_screen/assets/sounds/logo_fade_into.wav" type="AudioStream" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "can_fade_away"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("loading_can:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 219.161 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_away_logo"
+length = 2.0
+
+[sub_resource type="Animation" id=3]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("logo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 143.959, 283.698 ), Vector2( 143.959, 30.014 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="splash_screen" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="logo" type="TextureRect" parent="."]
+margin_left = 143.959
+margin_top = 283.698
+margin_right = 367.959
+margin_bottom = 507.698
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loading_can" type="TextureRect" parent="."]
+margin_right = 512.0
+margin_bottom = 300.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/can_fade_away = SubResource( 1 )
+anims/fade_away_logo = SubResource( 2 )
+anims/logo_fade_into = SubResource( 3 )
+anims/logo_flash = SubResource( 4 )
+
+[node name="coke_fade_away" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="logo_fade_into" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
