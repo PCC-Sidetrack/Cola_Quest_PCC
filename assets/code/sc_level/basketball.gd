@@ -33,6 +33,10 @@ func _physics_process(_delta: float) -> void:
 func custom_knockback(_useless_parameter1, _useless_parameter2) -> void:
 	pass
 
+# Needed because of how current collisions work
+func get_damage() -> int:
+	return 0
+
 # Get the speed of the basketball
 func get_speed() -> int:
 	return speed
