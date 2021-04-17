@@ -5,7 +5,7 @@
 # Company:     Sidetrack
 # Date:        April 15, 2021
 #-----------------------------------------------------------------------------#
-extends Node2D
+extends CanvasLayer
 
 #-----------------------------------------------------------------------------#
 #                                 Signals                                     #
@@ -27,7 +27,7 @@ var _can_continue: bool = false
 #                              Dictionaries                                   #
 #-----------------------------------------------------------------------------#
 var _story_text: Dictionary = {
-	roof     = "Dr Adkin's Cola has been stolen! Get it back!",
+	roof     = "Dr Adkin's Cola has been taken by Dr. (Geary) Zorro! Get it back!",
 	cc       = "There is water leaking into the building! Avoid the enemies and make it to the stage!",
 	ac       = "The building's code looks unstable! Stop the bugs and save the teachers!",
 	mk       = "Space has begun to leak into the building! Grab the cola and find a way to stop it!",
@@ -63,9 +63,19 @@ func fade_out() -> void:
 	emit_signal("fade_complete")
 
 func hide() -> void:
-	visible = false
+	$background.visible = false
+	$story_text.visible = false
+	$continue.visible   = false
+	$pictures.visible   = false
 
-func play_story(story_name: String) -> void:
+func show() -> void:
+	$background.visible = true
+	$story_text.visible = true
+	$continue.visible   = true
+	$pictures.visible   = true
+
+# Plays the specified story, but dosn't transition to another scene afterwards
+func play(story_name: String) -> void:
 	selected_story = story_name
 	show()
 	_select_picture(selected_story)
@@ -73,12 +83,11 @@ func play_story(story_name: String) -> void:
 	$AnimationPlayer.play("start_story")
 	yield($AnimationPlayer, "animation_finished")
 
-func show() -> void:
-	visible = true
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
+
 func _set_continue(can: bool) -> void:
 	_can_continue = can
 

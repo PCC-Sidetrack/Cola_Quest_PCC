@@ -15,3 +15,4 @@ func _process(_delta: float) -> void:
 
 func _on_Tween_tween_completed(_object: Object, _key: NodePath) -> void:
 	Globals.game_locked = false
+	get_node("../initial_barrier").queue_free()

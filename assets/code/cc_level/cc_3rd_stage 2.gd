@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------#
-# File Name:    cc_1st_stage.gd                                               #
+# File Name:    cc_3rd_stage.gd                                               #
 # Description:  Initializes the camera limits at the start of the stage       #
 # Author:       Sephrael Lumbres                                              #
 # Company:      Sidetrack                                                     #
-# Last Updated: March 26, 2021                                                #
+# Last Updated: April 1, 2021                                                 #
 #-----------------------------------------------------------------------------#
 extends Node2D
 
@@ -11,32 +11,23 @@ extends Node2D
 #                            Onready Variables                                #
 #-----------------------------------------------------------------------------#
 onready var camera = $player/Camera2D
+onready var portal = $cc_2nd_portal_door/AnimationPlayer
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	Globals.game_locked = true
-	$player/game_UI.on_game_ui_visible(false)
-	$story.show()
-	$story.play("cc")
-	yield($story, "on_continue")
-	$story.hide()
-	$player/game_UI.on_game_ui_visible(true)
-	Globals.game_locked = false
+	get_tree().paused = true
 	
-	
-	camera.limit_left            = -768
-	camera.limit_top             = -170
-	camera.limit_right           = 256
-	#camera.limit_right           = 3840
-	camera.limit_bottom          = 430
-	camera.zoom.x                = 2
-	camera.zoom.y                = 2
+	camera.limit_left   = -544
+	camera.limit_top    = -200
+	camera.limit_right  = 4065
+	camera.limit_bottom = 400
+	camera.zoom.x = 1.8
+	camera.zoom.y = 1.8
 	camera.current               = true
 	camera.drag_margin_v_enabled = true
 	camera.smoothing_enabled     = true
 	camera.limit_smoothed        = true
 	
-	$cc_portal_door/AnimationPlayer.play("transition_out")
-	get_node("player").load_from_transition()
+	portal.play("transition_out")

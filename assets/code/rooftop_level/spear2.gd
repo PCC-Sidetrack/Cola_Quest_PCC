@@ -18,15 +18,13 @@ export var knockback:          = 1
 var        _initialized        = false
 
 #-----------------------------------------------------------------------------#
-#                              Initialization                                 #
-#-----------------------------------------------------------------------------#
-
-#-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
 #-----------------------------------------------------------------------------#
 func _physics_process(_delta: float) -> void:
 	move_dynamically(get_current_velocity())
 
+# Instead of initializing the spear when the on _ready(), allow the timing of
+# initialization to be custimized
 func initialize() -> void:
 	initialize_projectile      (damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
 	set_sprite_facing_direction(Globals.DIRECTION.LEFT)
@@ -40,8 +38,8 @@ func initialize() -> void:
 	add_child(t)
 	t.start(0.3)
 	yield(t, "timeout")
-	set_collision_mask_bit(Globals.LAYER.ENEMY, true)
 	t.queue_free()
+
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
@@ -53,15 +51,6 @@ func _on_Entity_collision(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		body.knockback(self)
 		deal_damage(body)
-	if body.is_in_group(Globals.GROUP.ENEMY):
-		body.knockback(self)
-		deal_damage(body)
 	
 	# Delete the projectile
 	delete()
-
-func _on_Entity_death():
-	pass # Replace with function body.
-
-func _on_Entity_health_changed(_change):
-	pass # Replace with function body.

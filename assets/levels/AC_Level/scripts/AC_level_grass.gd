@@ -81,6 +81,7 @@ func _transition_to_plane():
 	$plane_transitions/AnimationPlayer.play("transition_to")
 	$adkins_plane/enter_plane.play()
 	yield($plane_transitions/AnimationPlayer, "animation_finished")
+	$player/player_cam/CanvasLayer/Control.visible = false
 	$adkins_plane/plane_flying.play()
 	$adkins_plane.enable_plane()
 	$error_zone2/error_zone.activate_error_zone()
@@ -89,6 +90,7 @@ func _transition_to_plane():
 	$background/Light2D.visible = true
 	yield($error_zone2/error_zone/AnimationPlayer, "animation_finished")
 	$error_zone2/error_zone/ColorRect2.visible = false
+
 
 	_bats_attacking()
 
