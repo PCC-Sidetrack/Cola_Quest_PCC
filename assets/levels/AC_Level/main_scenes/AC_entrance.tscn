@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/levels/AC_Level/assets/tiles/B41_flag3.png" type="Texture" id=1]
 [ext_resource path="res://assets/levels/AC_Level/assets/tiles/B41_flag1.png" type="Texture" id=2]
@@ -25,7 +24,7 @@
 [ext_resource path="res://assets/sprite_scenes/story/story.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/scene_transition.tscn" type="PackedScene" id=23]
 
-[sub_resource type="Shader" id=21]
+[sub_resource type="Shader" id=1]
 code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
 // original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
 //
@@ -70,8 +69,8 @@ void vertex() {
     VERTEX.x += getWind(VERTEX.xy, UV, time);
 }"
 
-[sub_resource type="ShaderMaterial" id=22]
-shader = SubResource( 21 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/speed = 1.0
 shader_param/minStrength = 0.05
 shader_param/maxStrength = 0.01
@@ -82,7 +81,7 @@ shader_param/distortion = null
 shader_param/heightOffset = 0.0
 shader_param/offset = 0.0
 
-[sub_resource type="Shader" id=23]
+[sub_resource type="Shader" id=3]
 code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
 // original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
 //
@@ -127,8 +126,8 @@ void vertex() {
     VERTEX.x += getWind(VERTEX.xy, UV, time);
 }"
 
-[sub_resource type="ShaderMaterial" id=24]
-shader = SubResource( 23 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/speed = 1.0
 shader_param/minStrength = 0.05
 shader_param/maxStrength = 0.01
@@ -139,7 +138,7 @@ shader_param/distortion = null
 shader_param/heightOffset = null
 shader_param/offset = 0.0
 
-[sub_resource type="Shader" id=25]
+[sub_resource type="Shader" id=5]
 code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
 // original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
 //
@@ -184,8 +183,8 @@ void vertex() {
     VERTEX.x += getWind(VERTEX.xy, UV, time);
 }"
 
-[sub_resource type="ShaderMaterial" id=26]
-shader = SubResource( 25 )
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 shader_param/speed = 1.0
 shader_param/minStrength = 0.05
 shader_param/maxStrength = 0.01
@@ -196,8 +195,7 @@ shader_param/distortion = null
 shader_param/heightOffset = null
 shader_param/offset = 0.0
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
+[sub_resource type="Animation" id=7]
 loop = true
 step = 0.5
 tracks/0/type = "value"
@@ -213,8 +211,7 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "jump"
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/jump:frame")
@@ -229,7 +226,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=9]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -274,8 +271,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "walk"
+[sub_resource type="Animation" id=10]
 length = 0.3
 loop = true
 step = 0.15
@@ -320,48 +316,48 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 10, 29 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 34.0725, 29.1493 )
 
-[sub_resource type="OccluderPolygon2D" id=7]
+[sub_resource type="OccluderPolygon2D" id=13]
 polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 13, 13 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 14 )
 region = Rect2( 13, 0, 13, 13 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 14 )
 region = Rect2( 26, 0, 13, 13 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 14 )
 region = Rect2( 39, 0, 13, 13 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 14 )
 region = Rect2( 52, 0, 13, 13 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 14 )
 region = Rect2( 65, 0, 13, 13 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=20]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=21]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../animate_plus:root_node")
@@ -412,16 +408,16 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 1456, 60.5189 )
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 131.245, 525.733 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 16, 40 )
 
-[sub_resource type="Shader" id=19]
+[sub_resource type="Shader" id=25]
 code = "/*
 	Glitch Effect Shader by Yui Kinomoto @arlez80
 
@@ -476,11 +472,11 @@ void fragment( )
 }
 "
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=26]
 render_priority = 3
-shader = SubResource( 19 )
+shader = SubResource( 25 )
 shader_param/shake_power = 0.075
-shader_param/shake_rate = 0.643
+shader_param/shake_rate = 1.0
 shader_param/shake_speed = 0.2
 shader_param/shake_block_size = 1.0
 shader_param/shake_color_rate = 0.202
@@ -536,6 +532,10 @@ modulate = Color( 2.89, 1.16, 3.47, 1 )
 position = Vector2( 256, -120.5 )
 texture = ExtResource( 5 )
 
+[node name="story" parent="." instance=ExtResource( 22 )]
+
+[node name="scene_transition" parent="." instance=ExtResource( 23 )]
+
 [node name="PL6a_buildings5" type="Sprite" parent="."]
 modulate = Color( 2.89, 1.16, 3.47, 1 )
 position = Vector2( -480, -120.5 )
@@ -549,18 +549,18 @@ __meta__ = {
 }
 
 [node name="B41_flag3" type="Sprite" parent="Control2"]
-material = SubResource( 22 )
+material = SubResource( 2 )
 position = Vector2( -78, -96 )
 texture = ExtResource( 1 )
 
 [node name="B41_flag2" type="Sprite" parent="Control2"]
-material = SubResource( 24 )
+material = SubResource( 4 )
 position = Vector2( -38, -80 )
 scale = Vector2( 0.768613, 0.768613 )
 texture = ExtResource( 4 )
 
 [node name="B41_flag1" type="Sprite" parent="Control2"]
-material = SubResource( 26 )
+material = SubResource( 6 )
 position = Vector2( 10, -72 )
 scale = Vector2( 0.699221, 0.699221 )
 texture = ExtResource( 2 )
@@ -605,15 +605,15 @@ smoothing_enabled = true
 smoothing_speed = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-anims/idle = SubResource( 1 )
-anims/jump = SubResource( 2 )
-anims/melee = SubResource( 3 )
-anims/walk = SubResource( 4 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/melee = SubResource( 9 )
+anims/walk = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 visible = false
 position = Vector2( -6, 2 )
-shape = SubResource( 5 )
+shape = SubResource( 11 )
 
 [node name="melee" type="Area2D" parent="player" groups=[
 "hitbox",
@@ -624,7 +624,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/melee"]
 position = Vector2( 40.0971, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 12 )
 disabled = true
 
 [node name="sprites" type="Node2D" parent="player"]
@@ -653,7 +653,7 @@ margin_right = 34.3303
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="player"]
 visible = false
-occluder = SubResource( 7 )
+occluder = SubResource( 13 )
 
 [node name="sounds" type="Node2D" parent="player"]
 
@@ -682,12 +682,13 @@ __meta__ = {
 [node name="green_plus" type="AnimatedSprite" parent="player/cola_healing"]
 visible = false
 position = Vector2( -4.527, -44.481 )
-frames = SubResource( 14 )
+frames = SubResource( 20 )
+frame = 5
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]
 root_node = NodePath("../green_plus")
-anims/heal = SubResource( 15 )
+anims/heal = SubResource( 21 )
 
 [node name="healing_sound" type="AudioStreamPlayer" parent="player/cola_healing"]
 stream = ExtResource( 15 )
@@ -698,24 +699,24 @@ pitch_scale = 0.89
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -616, 64 )
-shape = SubResource( 16 )
+shape = SubResource( 22 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 314.125, -91.1138 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -728.82, -112.377 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )
 
 [node name="activate_door" type="Area2D" parent="."]
 position = Vector2( 198.753, -32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="activate_door"]
-shape = SubResource( 18 )
+shape = SubResource( 24 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 20 )
+material = SubResource( 26 )
 margin_left = 98.0
 margin_top = -312.0
 margin_right = 138.0
@@ -727,7 +728,7 @@ __meta__ = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-material = SubResource( 20 )
+material = SubResource( 26 )
 margin_left = 163.579
 margin_top = -200.0
 margin_right = 203.579
@@ -739,7 +740,7 @@ __meta__ = {
 }
 
 [node name="ColorRect3" type="ColorRect" parent="."]
-material = SubResource( 20 )
+material = SubResource( 26 )
 margin_left = 442.0
 margin_top = -352.0
 margin_right = 482.0
@@ -751,7 +752,7 @@ __meta__ = {
 }
 
 [node name="ColorRect4" type="ColorRect" parent="."]
-material = SubResource( 20 )
+material = SubResource( 26 )
 margin_left = 184.0
 margin_top = -64.0
 margin_right = 224.0

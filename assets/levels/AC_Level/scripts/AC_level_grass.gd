@@ -127,3 +127,4 @@ func _on_door_activator_area_entered(area):
 	if area.is_in_group("hitbox"):
 		$adkins_plane/enter_plane.play()
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_boss.tscn",'fade')
+		queue_free()
