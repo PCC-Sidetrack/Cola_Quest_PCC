@@ -504,7 +504,7 @@ func move_dynamically(direction: Vector2, custom_acceleration: float = _movement
 		snap = Vector2.ZERO
 	
 	# Perform the calculation to move the enitity and save the collision data	
-	_movement.current_velocity = move_and_slide_with_snap(Vector2(horizontal, vertical), snap, Globals.ORIENTATION.FLOOR_NORMAL, false, 4000, deg2rad(90), false)
+	_movement.current_velocity = move_and_slide_with_snap(Vector2(horizontal, vertical), snap, Globals.ORIENTATION.FLOOR_NORMAL, false, 400, deg2rad(15), false)
 	
 	# If a collision occured, call on_collision for the last one that happened during the movement
 	var slide_count: int = get_slide_count()
