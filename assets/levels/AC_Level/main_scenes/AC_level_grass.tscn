@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://assets/levels/AC_Level/assets/tilesets/dirt-tiles.png" type="Texture" id=1]
 [ext_resource path="res://assets/levels/AC_Level/assets/tilesets/industrial.v2.png" type="Texture" id=2]
@@ -6,25 +6,14 @@
 [ext_resource path="res://assets/levels/AC_Level/assets/tiles/PL1a_blue_sky_clouds.png" type="Texture" id=4]
 [ext_resource path="res://assets/levels/AC_Level/assets/tiles/PL1c_blue_sky_clouds.png" type="Texture" id=5]
 [ext_resource path="res://assets/levels/AC_Level/assets/tiles/PL1b_blue_sky_clouds.png" type="Texture" id=6]
-[ext_resource path="res://assets/code/common_scripts/player.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/levels/AC_Level/scripts/error_zone.gd" type="Script" id=8]
 [ext_resource path="res://assets/levels/AC_Level/world_timers.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/levels/AC_Level/sounds.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/gui/hud/cola_healing/assests/sprites/plus_ss.png" type="Texture" id=11]
-[ext_resource path="res://assets/sounds/object_sounds/SD19_player_hurt.wav" type="AudioStream" id=12]
-[ext_resource path="res://assets/gui/hud/cola_healing/assests/sounds/healing_sound.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=14]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=15]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack-sheet.png" type="Texture" id=16]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=17]
-[ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/levels/AC_Level/scripts/AC_level_grass.gd" type="Script" id=19]
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/plane.png" type="Texture" id=20]
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/plane_ss.png" type="Texture" id=21]
 [ext_resource path="res://assets/levels/AC_Level/scripts/adkins_plane.gd" type="Script" id=22]
-[ext_resource path="res://assets/sounds/object_sounds/SD4_footsteps.wav" type="AudioStream" id=23]
-[ext_resource path="res://assets/sounds/object_sounds/SD13a_swordswing_player.wav" type="AudioStream" id=24]
-[ext_resource path="res://assets/sounds/object_sounds/SD5a_jump_player.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/levels/AC_Level/assets/lights/ligh2(v2).png" type="Texture" id=26]
 [ext_resource path="res://assets/levels/AC_Level/assets/sounds/plane_engine.ogg" type="AudioStream" id=27]
 [ext_resource path="res://assets/levels/AC_Level/assets/sounds/enter_plane.ogg" type="AudioStream" id=28]
@@ -37,221 +26,260 @@
 [ext_resource path="res://assets/levels/AC_Level/assets/sounds/lever_hit.ogg" type="AudioStream" id=35]
 [ext_resource path="res://assets/levels/AC_Level/assets/sounds/sprite_jump.wav" type="AudioStream" id=36]
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
-loop = true
-step = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/idle:frame")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 0.999999 ),
-"update": 0,
-"values": [ 0, 3 ]
+[sub_resource type="Shader" id=71]
+code = "/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/VHS-and-CRT-monitor-effect
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+*/
+
+shader_type canvas_item;
+
+//*** IMPORTANT! ***/ 
+// - If you are using this shader to affect the node it is applied to set 'overlay' to false (unchecked in the instepctor).
+// - If you are using this shader as an overlay, and want the shader to affect the nodes below in the Scene hierarchy,
+//   set 'overlay' to true (checked in the inspector).
+// On Mac there is potentially a bug causing this to not work properly. If that is the case and you want to use the shader as an overlay
+// change all \"overlay ? SCREEN_TEXTURE : TEXTURE\" to only \"SCREEN_TEXTURE\" on lines 129-140, and \"vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV);\"
+// to \"vec2 uv = warp(SCREEN_UV);\" on line 98.
+uniform bool overlay = false;
+
+uniform float scanlines_opacity : hint_range(0.0, 1.0) = 0.4;
+uniform float scanlines_width : hint_range(0.0, 0.5) = 0.25;
+uniform float grille_opacity : hint_range(0.0, 1.0) = 0.3;
+uniform vec2 resolution = vec2(640.0, 480.0); // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
+
+uniform bool pixelate = true; // Fill each square (\"pixel\") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
+
+uniform bool roll = true;
+uniform float roll_speed = 8.0; // Positive values are down, negative are up
+uniform float roll_size : hint_range(0.0, 100.0) = 15.0;
+uniform float roll_variation : hint_range(0.1, 5.0) = 1.8; // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
+uniform float distort_intensity : hint_range(0.0, 0.2) = 0.05; // The distortion created by the rolling effect.
+
+uniform float noise_opacity : hint_range(0.0, 1.0) = 0.4;
+uniform float noise_speed = 5.0; // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
+
+uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
+
+uniform float aberration : hint_range(-1.0, 1.0) = 0.03; // Chromatic aberration, a distortion on each color channel.
+uniform float brightness = 1.4; // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
+uniform bool discolor = true; // Add a discolor effect simulating a VHS
+
+uniform float warp_amount :hint_range(0.0, 5.0) = 1.0; // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
+uniform bool clip_warp = false;
+
+uniform float vignette_intensity = 0.4; // Size of the vignette, how far towards the middle it should go.
+uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
+
+// Used by the noise functin to generate a pseudo random value between 0.0 and 1.0
+vec2 random(vec2 uv){
+    uv = vec2( dot(uv, vec2(127.1,311.7) ),
+               dot(uv, vec2(269.5,183.3) ) );
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "jump"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/jump:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
+// Generate a Perlin noise used by the distortion effects
+float noise(vec2 uv) {
+    vec2 uv_index = floor(uv);
+    vec2 uv_fract = fract(uv);
+
+    vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+
+    return mix( mix( dot( random(uv_index + vec2(0.0,0.0) ), uv_fract - vec2(0.0,0.0) ),
+                     dot( random(uv_index + vec2(1.0,0.0) ), uv_fract - vec2(1.0,0.0) ), blur.x),
+                mix( dot( random(uv_index + vec2(0.0,1.0) ), uv_fract - vec2(0.0,1.0) ),
+                     dot( random(uv_index + vec2(1.0,1.0) ), uv_fract - vec2(1.0,1.0) ), blur.x), blur.y) * 0.5 + 0.5;
 }
 
-[sub_resource type="Animation" id=3]
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("sprites/melee:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
-"update": 0,
-"values": [ 0, 1, 7 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ true ],
-"method": "set_is_attacking"
-}, {
-"args": [ false ],
-"method": "set_is_attacking"
-} ]
+// Takes in the UV and warps the edges, creating the spherized effect
+vec2 warp(vec2 uv){
+	vec2 delta = uv - 0.5;
+	float delta2 = dot(delta.xy, delta.xy);
+	float delta4 = delta2 * delta2;
+	float delta_offset = delta4 * warp_amount;
+	
+	return uv + delta * delta_offset;
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "walk"
-length = 0.3
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/walk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-tracks/1/type = "audio"
-tracks/1/path = NodePath("sounds/SD4_footsteps")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 23 )
-} ],
-"times": PoolRealArray( 0.15 )
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_change_footstep_pitch"
-} ]
+// Adds a black border to hide stretched pixel created by the warp effect
+float border (vec2 uv){
+	float radius = min(warp_amount, 0.08);
+	radius = max(min(min(abs(radius * 2.0), abs(1.0)), abs(1.0)), 1e-5);
+	vec2 abs_uv = abs(uv * 2.0 - 1.0) - vec2(1.0, 1.0) + radius;
+	float dist = length(max(vec2(0.0), abs_uv)) / radius;
+	float square = smoothstep(0.96, 1.0, dist);
+	return clamp(1.0 - square, 0.0, 1.0);
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10, 29 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 34.0725, 29.1493 )
-
-[sub_resource type="OccluderPolygon2D" id=7]
-polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 11 )
-region = Rect2( 13, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 11 )
-region = Rect2( 26, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 11 )
-region = Rect2( 39, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 11 )
-region = Rect2( 52, 0, 13, 13 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 11 )
-region = Rect2( 65, 0, 13, 13 )
-
-[sub_resource type="SpriteFrames" id=14]
-animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
-} ]
-
-[sub_resource type="Animation" id=15]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("../animate_plus:root_node")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ NodePath("../green_plus") ]
+// Adds a vignette shadow to the edges of the image
+float vignette(vec2 uv){
+	uv *= 1.0 - uv.xy;
+	float vignette = uv.x * uv.y * 15.0;
+	return pow(vignette, vignette_intensity * vignette_opacity);
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.11 ),
-"transitions": PoolRealArray( 1, 0.189465 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( -5, 1 ),
-"update": 0,
-"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
+
+void fragment()
+{
+	vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV); // Warp the uv. uv will be used in most cases instead of UV to keep the warping
+	vec2 text_uv = uv;
+	vec2 roll_uv = vec2(0.0);
+	float time = roll ? TIME : 0.0;
+	
+
+	// Pixelate the texture based on the given resolution.
+	if (pixelate)
+	{
+		text_uv = ceil(uv * resolution) / resolution;
+	}
+	
+	// Create the rolling effect. We need roll_line a bit later to make the noise effect.
+	// That is why this runs if roll is true OR noise_opacity is over 0.
+	float roll_line = 0.0;
+	if (roll || noise_opacity > 0.0)
+	{
+		// Create the areas/lines where the texture will be distorted.
+		roll_line = smoothstep(0.3, 0.9, sin(uv.y * roll_size - (time * roll_speed) ) );
+		// Create more lines of a different size and apply to the first set of lines. This creates a bit of variation.
+		roll_line *= roll_line * smoothstep(0.3, 0.9, sin(uv.y * roll_size * roll_variation - (time * roll_speed * roll_variation) ) );
+		// Distort the UV where where the lines are
+		roll_uv = vec2(( roll_line * distort_intensity * (1.-UV.x)), 0.0);
+	}
+	
+	vec4 text;
+	if (roll)
+	{
+		// If roll is true distort the texture with roll_uv. The texture is split up into RGB to 
+		// make some chromatic aberration. We apply the aberration to the red and green channels accorging to the aberration parameter
+		// and intensify it a bit in the roll distortion.
+		text.r = texture(SCREEN_TEXTURE, text_uv + roll_uv * 0.8 + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv + roll_uv * 1.2 - vec2(aberration, 0.0) * .1 ).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv + roll_uv).b;
+		text.a = 1.0;
+	}
+	else
+	{
+		// If roll is false only apply the aberration without any distorion. The aberration values are very small so the .1 is only 
+		// to make the slider in the Inspector less sensitive.
+		text.r = texture(SCREEN_TEXTURE, text_uv + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv - vec2(aberration, 0.0) * .1).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv).b;
+		text.a = 1.0;
+	}
+	
+	float r = text.r;
+	float g = text.g;
+	float b = text.b;
+	
+	uv = warp(UV);
+	
+	// CRT monitors don't have pixels but groups of red, green and blue dots or lines, called grille. We isolate the texture's color channels 
+	// and divide it up in 3 offsetted lines to show the red, green and blue colors next to each other, with a small black gap between.
+	if (grille_opacity > 0.0){
+		
+		float g_r = smoothstep(0.85, 0.95, abs(sin(uv.x * (resolution.x * 3.14159265))));
+		r = mix(r, r * g_r, grille_opacity);
+		
+		float g_g = smoothstep(0.85, 0.95, abs(sin(1.05 + uv.x * (resolution.x * 3.14159265))));
+		g = mix(g, g * g_g, grille_opacity);
+		
+		float b_b = smoothstep(0.85, 0.95, abs(sin(2.1 + uv.x * (resolution.x * 3.14159265))));
+		b = mix(b, b * b_b, grille_opacity);
+		
+	}
+	
+	// Apply the grille to the texture's color channels and apply Brightness. Since the grille and the scanlines (below) make the image very dark you
+	// can compensate by increasing the brightness.
+	text.r = clamp(r * brightness, 0.0, 1.0);
+	text.g = clamp(g * brightness, 0.0, 1.0);
+	text.b = clamp(b * brightness, 0.0, 1.0);
+	
+	// Scanlines are the horizontal lines that make up the image on a CRT monitor. 
+	// Here we are actual setting the black gap between each line, which I guess is not the right definition of the word, but you get the idea  
+	float scanlines = 0.5;
+	if (scanlines_opacity > 0.0)
+	{
+		// Same technique as above, create lines with sine and applying it to the texture. Smoothstep to allow setting the line size.
+		scanlines = smoothstep(scanlines_width, scanlines_width + 0.5, abs(sin(uv.y * (resolution.y * 3.14159265))));
+		text.rgb = mix(text.rgb, text.rgb * vec3(scanlines), scanlines_opacity);
+	}
+	
+	// Apply the banded noise.
+	if (noise_opacity > 0.0)
+	{
+		// Generate a noise pattern that is very stretched horizontally, and animate it with noise_speed
+		float noise = smoothstep(0.4, 0.5, noise(uv * vec2(2.0, 200.0) + vec2(10.0, (TIME * (noise_speed))) ) );
+		
+		// We use roll_line (set above) to define how big the noise should be vertically (multiplying cuts off all black parts).
+		// We also add in some basic noise with random() to break up the noise pattern above. The noise is sized according to 
+		// the resolution value set in the inspector. If you don't like this look you can 
+		// change \"ceil(uv * resolution) / resolution\" to only \"uv\" to make it less pixelated. Or multiply resolution with som value
+		// greater than 1.0 to make them smaller.
+		roll_line *= noise * scanlines * clamp(random((ceil(uv * resolution) / resolution) + vec2(TIME * 0.8, 0.0)).x + 0.8, 0.0, 1.0);
+		// Add it to the texture based on noise_opacity
+		text.rgb = clamp(mix(text.rgb, text.rgb + roll_line, noise_opacity), vec3(0.0), vec3(1.0));
+	}
+	
+	// Apply static noise by generating it over the whole screen in the same way as above
+	if (static_noise_intensity > 0.0)
+	{
+		text.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
+	}
+	
+	// Apply a black border to hide imperfections caused by the warping.
+	// Also apply the vignette
+	text.rgb *= border(uv);
+	text.rgb *= vignette(uv);
+	// Hides the black border and make that area transparent. Good if you want to add the the texture on top an image of a TV or monitor.
+	if (clip_warp)
+	{
+		text.a = border(uv);
+	}
+	
+	// Apply discoloration to get a VHS look (lower saturation and higher contrast)
+	// You can play with the values below or expose them in the Inspector.
+	float saturation = 0.5;
+	float contrast = 1.2;
+	if (discolor)
+	{
+		// Saturation
+		vec3 greyscale = vec3(text.r + text.g + text.b) / 3.;
+		text.rgb = mix(text.rgb, greyscale, saturation);
+		
+		// Contrast
+		float midpoint = pow(0.5, 2.2);
+		text.rgb = (text.rgb - vec3(midpoint)) * contrast + midpoint;
+	}
+	
+	COLOR = text;
+}"
+
+[sub_resource type="ShaderMaterial" id=72]
+shader = SubResource( 71 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.188
+shader_param/scanlines_width = 0.125
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 640, 480 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 3.0
+shader_param/roll_size = 15.0
+shader_param/roll_variation = 1.8
+shader_param/distort_intensity = 0.05
+shader_param/noise_opacity = 0.4
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.06
+shader_param/aberration = 0.03
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.808
+shader_param/clip_warp = false
+shader_param/vignette_intensity = 0.4
+shader_param/vignette_opacity = 0.5
 
 [sub_resource type="DynamicFont" id=16]
 size = 50
@@ -6225,6 +6253,63 @@ extents = Vector2( 50, 31.25 )
 867/shape_one_way_margin = 0.0
 867/shapes = [  ]
 867/z_index = 0
+
+[sub_resource type="Shader" id=73]
+code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
+// original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
+//
+// speed - The speed of the wind movement.
+// minStrength - The minimal strength of the wind movement.
+// maxStrength - The maximal strength of the wind movement.
+// strengthScale - Scalefactor for the wind strength.
+// interval - The time between minimal and maximal strength changes.
+// detail - The detail (number of waves) of the wind movement.
+// distortion - The strength of geometry distortion.
+// heightOffset - The height where the wind begins to move. By default 0.0.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+// Wind settings.
+uniform float speed = 1.0;
+uniform float minStrength : hint_range(0.0, 1.0) = 0.05;
+uniform float maxStrength : hint_range(0.0, 1.0) = 0.01;
+uniform float strengthScale = 100.0;
+uniform float interval = 3.5;
+uniform float detail = 1.0;
+uniform float distortion : hint_range(0.0, 1.0);
+uniform float heightOffset : hint_range(0.0, 1.0);
+
+// With the offset value, you can if you want different moves for each asset. Just put a random value (1, 2, 3) in the editor. Don't forget to mark the material as unique if you use this
+uniform float offset = 0; 
+
+
+float getWind(vec2 vertex, vec2 uv, float time){
+    float diff = pow(maxStrength - minStrength, 2.0);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0.0, (1.0-uv.y) - heightOffset);
+    
+    return wind; 
+}
+
+void vertex() {
+    vec4 pos = WORLD_MATRIX * vec4(0.0, 0.0, 0.0, 1.0);
+    float time = TIME * speed + offset;
+    //float time = TIME * speed + pos.x * pos.y  ; not working when moving...
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+}"
+
+[sub_resource type="ShaderMaterial" id=74]
+shader = SubResource( 73 )
+shader_param/speed = 1.0
+shader_param/minStrength = 0.115
+shader_param/maxStrength = 0.106
+shader_param/strengthScale = 50.0
+shader_param/interval = 2.661
+shader_param/detail = 3.0
+shader_param/distortion = 1.0
+shader_param/heightOffset = 0.481
+shader_param/offset = 4.345
 
 [sub_resource type="TileSet" id=46]
 0/name = ""
@@ -14464,108 +14549,12 @@ __meta__ = {
 "_edit_horizontal_guides_": [ -744.0 ]
 }
 
-[node name="player" type="KinematicBody2D" parent="." groups=[
-"player",
-]]
-position = Vector2( 2.14548, 194.092 )
-z_index = 6
-collision_layer = 2147483649
-collision_mask = 10
-script = ExtResource( 7 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-anims/idle = SubResource( 1 )
-anims/jump = SubResource( 2 )
-anims/melee = SubResource( 3 )
-anims/walk = SubResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-visible = false
-position = Vector2( -6, 2 )
-shape = SubResource( 5 )
-
-[node name="melee" type="Area2D" parent="player" groups=[
-"hitbox",
-"player",
-]]
-visible = false
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/melee"]
-position = Vector2( 40.0971, 0 )
-shape = SubResource( 6 )
-disabled = true
-
-[node name="sprites" type="Node2D" parent="player"]
-
-[node name="idle" type="Sprite" parent="player/sprites"]
-texture = ExtResource( 14 )
-hframes = 4
-
-[node name="jump" type="Sprite" parent="player/sprites"]
-visible = false
-texture = ExtResource( 17 )
-
-[node name="melee" type="Sprite" parent="player/sprites"]
-visible = false
-texture = ExtResource( 16 )
-hframes = 8
-
-[node name="walk" type="Sprite" parent="player/sprites"]
-visible = false
-texture = ExtResource( 15 )
-hframes = 4
-
-[node name="game_UI" parent="player" instance=ExtResource( 18 )]
-margin_left = -5.66968
-margin_right = 34.3303
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="player"]
-visible = false
-occluder = SubResource( 7 )
-
-[node name="sounds" type="Node2D" parent="player"]
-
-[node name="SD4_footsteps" type="AudioStreamPlayer" parent="player/sounds"]
-stream = ExtResource( 23 )
-volume_db = -5.0
-
-[node name="SD19_player_hurt" type="AudioStreamPlayer" parent="player/sounds"]
-stream = ExtResource( 12 )
-
-[node name="SD5a_player_jump" type="AudioStreamPlayer" parent="player/sounds"]
-stream = ExtResource( 25 )
-volume_db = -10.0
-
-[node name="SD13a_sword_swing" type="AudioStreamPlayer2D" parent="player/sounds"]
-stream = ExtResource( 24 )
-volume_db = -5.0
-
-[node name="cola_healing" type="Control" parent="player"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="green_plus" type="AnimatedSprite" parent="player/cola_healing"]
-visible = false
-position = Vector2( -4.527, -44.481 )
-frames = SubResource( 14 )
-frame = 4
-playing = true
-
-[node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]
-root_node = NodePath("../green_plus")
-anims/heal = SubResource( 15 )
-
-[node name="healing_sound" type="AudioStreamPlayer" parent="player/cola_healing"]
-stream = ExtResource( 13 )
-volume_db = -8.548
-pitch_scale = 0.89
+[node name="player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 11.0485, 198.874 )
+z_index = 7
 
 [node name="player_cam" type="Camera2D" parent="player"]
-position = Vector2( -4.72458, -21.8398 )
+position = Vector2( -2.5791, -19.9925 )
 current = true
 zoom = Vector2( 1.7, 1.7 )
 limit_left = -365
@@ -14575,6 +14564,25 @@ limit_bottom = 542
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="player/player_cam"]
+layer = 2
+
+[node name="Control" type="Control" parent="player/player_cam/CanvasLayer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="player/player_cam/CanvasLayer/Control"]
+material = SubResource( 72 )
+margin_left = -354.58
+margin_top = -46.7677
+margin_right = -314.58
+margin_bottom = -6.76766
+rect_scale = Vector2( 22.6033, 13.6411 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="error_zone2" type="Node2D" parent="."]
 z_index = 10
@@ -14768,13 +14776,17 @@ position = Vector2( 824.074, 80.0072 )
 scale = Vector2( 1.27243, 1.27243 )
 texture = ExtResource( 6 )
 
-[node name="adkins_plane" type="KinematicBody2D" parent="."]
+[node name="adkins_plane" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
 position = Vector2( -237.5, -381.25 )
 z_index = 4
+collision_mask = 10
 script = ExtResource( 22 )
 
 [node name="adkins_plane" type="AnimatedSprite" parent="adkins_plane"]
 frames = SubResource( 42 )
+frame = 5
 playing = true
 
 [node name="hitbox" type="Area2D" parent="adkins_plane"]
@@ -14821,6 +14833,7 @@ format = 1
 tile_data = PoolIntArray( 589834, 1073742019, 0, 589835, 1073742019, 0, 589836, 1073742019, 0, 589837, 1073742019, 0, 589838, 1073742019, 0, 589839, 1073742019, 0, 589894, 1073741952, 0, 589895, 267, 0, 589896, 236, 0, 589897, 236, 0, 589898, 236, 0, 589899, 237, 0, 655370, 196, 0, 655371, 197, 0, 655372, 198, 0, 655373, 199, 0, 655374, 200, 0, 655375, 201, 0, 655430, 1073741920, 0, 655431, 270, 0, 655432, 1073742019, 0, 655433, 1073742019, 0, 655434, 1073742019, 0, 655435, 270, 0, 720906, 228, 0, 720907, 229, 0, 720908, 230, 0, 720909, 231, 0, 720910, 232, 0, 720911, 233, 0, 720939, 263, 0, 720965, 420, 0, 720966, 196, 0, 720967, 197, 0, 720968, 198, 0, 720969, 199, 0, 720970, 200, 0, 720971, 201, 0, 720972, 536871332, 0, 786442, 196, 0, 786443, 197, 0, 786444, 198, 0, 786445, 199, 0, 786446, 200, 0, 786447, 201, 0, 786501, 420, 0, 786502, 228, 0, 786503, 229, 0, 786504, 230, 0, 786505, 231, 0, 786506, 232, 0, 786507, 233, 0, 786508, 536871332, 0, 851978, 228, 0, 851979, 229, 0, 851980, 230, 0, 851981, 231, 0, 851982, 232, 0, 851983, 233, 0, 852037, 420, 0, 852038, 196, 0, 852039, 197, 0, 852040, 198, 0, 852041, 199, 0, 852042, 200, 0, 852043, 201, 0, 852044, 400, 0, 917514, 196, 0, 917515, 197, 0, 917516, 198, 0, 917517, 199, 0, 917518, 200, 0, 917519, 201, 0, 917569, 1073741952, 0, 917573, 420, 0, 917574, 228, 0, 917575, 229, 0, 917576, 230, 0, 917577, 231, 0, 917578, 232, 0, 917579, 233, 0, 917580, 271, 0, 917581, 237, 0, 983050, 228, 0, 983051, 229, 0, 983052, 230, 0, 983053, 231, 0, 983054, 232, 0, 983055, 233, 0, 983104, 1073741952, 0, 983105, 1073741920, 0, 983106, 1, 0, 983107, 263, 0, 983109, 420, 0, 983110, 196, 0, 983111, 197, 0, 983112, 198, 0, 983113, 199, 0, 983114, 200, 0, 983115, 201, 0, 983116, 536871332, 0, 983117, 270, 0, 1048640, 1073741920, 0, 1048641, 5, 0, 1048642, 5, 0, 1048643, 5, 0, 1048645, 420, 0, 1048646, 228, 0, 1048647, 229, 0, 1048648, 230, 0, 1048649, 231, 0, 1048650, 232, 0, 1048651, 233, 0, 1048652, 536871332, 0, 1048653, 270, 0, 1114189, 270, 0, 1179725, 302, 0, 1245261, 1610612975, 0 )
 
 [node name="Grassland_obj" type="TileMap" parent="tileset"]
+material = SubResource( 74 )
 position = Vector2( -208, -64 )
 z_index = 2
 tile_set = SubResource( 46 )
@@ -14895,14 +14908,14 @@ position = Vector2( 962.5, 19.698 )
 position = Vector2( 0, -11.8056 )
 frames = SubResource( 60 )
 animation = "stuck"
-frame = 2
+frame = 4
 playing = true
 
 [node name="drhowell3" type="AnimatedSprite" parent="drhowell"]
 position = Vector2( 0, 16.4176 )
 frames = SubResource( 60 )
 animation = "stuck"
-frame = 2
+frame = 4
 playing = true
 
 [node name="drhowell" type="Label" parent="drhowell"]
@@ -15005,12 +15018,6 @@ position = Vector2( 1118.75, 231.25 )
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="door_activator"]
 position = Vector2( -6.25, 31.25 )
 shape = SubResource( 70 )
-[connection signal="collision" from="player" to="player" method="_on_player_collision"]
-[connection signal="death" from="player" to="player" method="_on_player_death"]
-[connection signal="health_changed" from="player" to="player" method="_on_player_health_changed"]
-[connection signal="body_entered" from="player/melee" to="player" method="_on_melee_body_entered"]
-[connection signal="cola_healing" from="player/game_UI" to="player" method="_on_game_UI_cola_healing"]
-[connection signal="respawn_player" from="player/game_UI" to="player" method="_on_game_UI_respawn_player"]
 [connection signal="body_left" from="error_zone2/error_zone" to="." method="_on_error_zone_body_left"]
 [connection signal="body_exited" from="error_zone2/error_zone/enemies_left" to="error_zone2/error_zone" method="_on_enemies_left_body_exited"]
 [connection signal="body_entered" from="adkins_plane/hitbox" to="." method="_on_hitbox_body_entered"]

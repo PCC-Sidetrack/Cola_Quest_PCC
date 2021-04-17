@@ -204,7 +204,8 @@ func _enemies_cleared(l_section_type):
 		l_section_2:
 			area_trigger.get_node("checkpoints/spawnpoint_after_spider_dead/Area2D").set_deferred("monitoring", true)
 			area_trigger.get_node("lever_1").set_deferred("monitoring", true)
-			area_trigger.get_node("checkpoints/spawnpoint/Area2D").set_deferred("disabled", true)
+#			area_trigger.get_node("checkpoints/spawnpoint/Area2D").
+			$Area_triggers/checkpoints/spawnpoint.remove_from_group(Globals.GROUP.SPAWNPOINT)
 			spider_section_cleared = true
 		l_section_4:
 			area_trigger.get_node("lever_2").set_deferred("monitoring", true)
