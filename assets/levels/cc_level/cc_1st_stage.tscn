@@ -1037,7 +1037,7 @@ position = Vector2( -342.647, 78.5559 )
 scale = Vector2( 0.4, 0.4 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -675.012, 222.28 )
+position = Vector2( -708.353, 270.684 )
 
 [node name="water_shader" type="Sprite" parent="."]
 pause_mode = 2

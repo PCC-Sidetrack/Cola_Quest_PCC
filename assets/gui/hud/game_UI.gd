@@ -30,18 +30,24 @@ signal initialize_boss       (max_health, boss_name)
 signal respawn_player        ()
 # Signal that is activated when boss healthbar is shown
 signal boss_healthbar_visible(visible)
-# Signal that is activated when the screen flashes
+# Flash the screen 
 signal flash_screen          (color)
-# Signal that is activated when a cola is collected
+# Cola is being collected
 signal cola_collect          (amount)
-# COMMENT NEEDED
+# On cola healing 
 signal cola_healing          ()
-# COMMENT NEEDED
+# On healing enabled
 signal healing_enabled       (enabled)
+# Disable checkpoints
+signal no_checkpoints         ()
+
 
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#	
+func on_no_checkpoints        () -> void:
+	emit_signal("no_checkpoints")
+
 # Emit signal on player killed 
 func on_player_killed         () -> void:
 	emit_signal("player_killed")

@@ -53,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 #                                Triggers                                     #
 #-----------------------------------------------------------------------------#
 func _on_spider_death():
+	engage_player = false
 	if self.is_in_group("bat"): $spawn_in_effect.play()
 	var cola_can = cola_can_instance.instance()
 	var explosion = explosion_instance.instance()

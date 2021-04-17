@@ -133,10 +133,10 @@ frames = SubResource( 6 )
 centered = false
 
 [node name="FailureTextContainer" type="CenterContainer" parent="FailureScreen"]
-margin_left = 245.0
-margin_top = 89.0
-margin_right = 245.0
-margin_bottom = 89.0
+margin_left = 258.0
+margin_top = 77.0
+margin_right = 258.0
+margin_bottom = 77.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

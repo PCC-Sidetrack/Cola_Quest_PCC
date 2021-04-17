@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/gui/hud/buttons/assets/back_normal.png" type="Texture" id=27]
 
 [node name="buttons" type="CanvasLayer"]
+pause_mode = 2
 layer = 101
 script = ExtResource( 15 )
 
@@ -50,9 +51,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer"]
-margin_top = 144.0
+margin_top = 142.0
 margin_right = 512.0
-margin_bottom = 144.0
+margin_bottom = 142.0
 mouse_filter = 2
 
 [node name="Resume" type="TextureButton" parent="Control/VBoxContainer/CenterContainer"]
@@ -69,9 +70,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer2" type="CenterContainer" parent="Control/VBoxContainer"]
-margin_top = 148.0
+margin_top = 146.0
 margin_right = 512.0
-margin_bottom = 148.0
+margin_bottom = 146.0
 mouse_filter = 2
 
 [node name="Retry" type="TextureButton" parent="Control/VBoxContainer/CenterContainer2"]
@@ -85,9 +86,9 @@ texture_pressed = ExtResource( 12 )
 texture_hover = ExtResource( 9 )
 
 [node name="CenterContainer3" type="CenterContainer" parent="Control/VBoxContainer"]
-margin_top = 152.0
+margin_top = 150.0
 margin_right = 512.0
-margin_bottom = 152.0
+margin_bottom = 150.0
 mouse_filter = 2
 
 [node name="Restart" type="TextureButton" parent="Control/VBoxContainer/CenterContainer3"]
@@ -100,10 +101,29 @@ texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 6 )
 
-[node name="CenterContainer5" type="CenterContainer" parent="Control/VBoxContainer"]
-margin_top = 156.0
+[node name="CenterContainer4" type="CenterContainer" parent="Control/VBoxContainer"]
+modulate = Color( 0, 0.976471, 1, 1 )
+margin_top = 154.0
 margin_right = 512.0
-margin_bottom = 156.0
+margin_bottom = 154.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hub" type="TextureButton" parent="Control/VBoxContainer/CenterContainer4"]
+visible = false
+margin_left = 245.0
+margin_top = -7.0
+margin_right = 267.0
+margin_bottom = 7.0
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 17 )
+
+[node name="CenterContainer5" type="CenterContainer" parent="Control/VBoxContainer"]
+margin_top = 158.0
+margin_right = 512.0
+margin_bottom = 158.0
 mouse_filter = 2
 
 [node name="Exit" type="TextureButton" parent="Control/VBoxContainer/CenterContainer5"]
@@ -146,29 +166,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="exit_menu/exit_menu/VBoxContainer"]
-margin_top = 114.0
-margin_right = 512.0
-margin_bottom = 128.0
-mouse_filter = 0
-alignment = 1
-
-[node name="CenterContainer4" type="CenterContainer" parent="exit_menu/exit_menu/VBoxContainer/VBoxContainer"]
-margin_right = 512.0
-margin_bottom = 14.0
-
-[node name="Hub" type="TextureButton" parent="exit_menu/exit_menu/VBoxContainer/VBoxContainer/CenterContainer4"]
-margin_left = 245.0
-margin_right = 267.0
-margin_bottom = 14.0
-texture_normal = ExtResource( 18 )
-texture_pressed = ExtResource( 16 )
-texture_hover = ExtResource( 17 )
-
 [node name="CenterContainer" type="CenterContainer" parent="exit_menu/exit_menu/VBoxContainer"]
-margin_top = 143.0
+margin_top = 128.0
 margin_right = 512.0
-margin_bottom = 157.0
+margin_bottom = 142.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="exit_menu/exit_menu/VBoxContainer/CenterContainer"]
 margin_left = 210.0
@@ -198,9 +199,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer2" type="CenterContainer" parent="exit_menu/exit_menu/VBoxContainer"]
-margin_top = 172.0
+margin_top = 157.0
 margin_right = 512.0
-margin_bottom = 186.0
+margin_bottom = 171.0
 
 [node name="back" type="TextureButton" parent="exit_menu/exit_menu/VBoxContainer/CenterContainer2"]
 margin_left = 245.0
@@ -226,9 +227,9 @@ pitch_scale = 0.7
 [connection signal="pressed" from="Control/VBoxContainer/CenterContainer2/Retry" to="." method="_on_Retry_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/CenterContainer3/Restart" to="." method="_on_Restart_mouse_entered"]
 [connection signal="pressed" from="Control/VBoxContainer/CenterContainer3/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/CenterContainer4/Hub" to="." method="_on_Hub_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/CenterContainer5/Exit" to="." method="_on_Exit_mouse_entered"]
 [connection signal="pressed" from="Control/VBoxContainer/CenterContainer5/Exit" to="." method="_on_Exit_pressed"]
-[connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/VBoxContainer/CenterContainer4/Hub" to="." method="_on_Hub_pressed"]
 [connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/CenterContainer/HBoxContainer/main_menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/CenterContainer/HBoxContainer/desktop" to="." method="_on_desktop_pressed"]
 [connection signal="pressed" from="exit_menu/exit_menu/VBoxContainer/CenterContainer2/back" to="." method="_on_back_pressed"]

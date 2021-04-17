@@ -13,6 +13,8 @@
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/particles/teleportin.png" type="Texture" id=11]
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/characters/S40_Spider-Sheet.png" type="Texture" id=12]
 
+
+
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
