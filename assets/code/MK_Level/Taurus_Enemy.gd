@@ -58,8 +58,8 @@ func _physics_process(_delta: float) -> void:
 	if $ChargeLooker.is_colliding():
 		set_speed(10)
 		set_knockback_multiplier(2)
-		if _sound_timer > 2:
-			play_sound($TaurusCharge, 2)
+		if _sound_timer > 1:
+			play_sound($TaurusCharge, 1)
 			_sound_timer = 0.0
 	else:
 		set_speed(3)

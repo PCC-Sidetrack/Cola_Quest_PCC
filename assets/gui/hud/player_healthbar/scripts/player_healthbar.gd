@@ -11,6 +11,9 @@ extends CanvasLayer
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
+func _physics_process(_delta):
+	$healthbar/health_over.value = Globals.player.get_current_health()
+	
 # Shakes the healthbar 
 func _hud_shake() -> void:
 	set_offset(Vector2(rand_range(-2.0, 2.0) * 10, rand_range(-2.0, 2.0) * 5))
@@ -25,7 +28,7 @@ func _hud_shake() -> void:
 func animate_value(start, end) -> void:
 	$healthbar/health_over.value  = end
 	$tween.interpolate_property($healthbar/health_under, "value", start, end, .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	if start < end:
+	if start < end:	
 		$healthbar/health_over.modulate = Color.green
 		$tween.interpolate_property($healthbar/health_alert, "modulate", Color.green , Color.transparent, 1.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$tween.start()

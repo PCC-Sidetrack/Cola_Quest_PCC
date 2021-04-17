@@ -60,6 +60,5 @@ func on_hub_level():
 	hub_level = true
 
 func _on_game_UI_no_checkpoints():
-	print("we got here")
 	no_checkpoints = true
 

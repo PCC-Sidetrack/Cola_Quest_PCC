@@ -30,7 +30,7 @@ export var is_firing2: bool = false
 
 # Number of seconds between shots
 export var fire_cooldown1: float = 5.0
-export var fire_cooldown2: float = 6.0
+export var fire_cooldown2: float = 8.0
 
 # Number of seconds Boss aims
 export var fire_aim1: float = 3.0
@@ -143,7 +143,7 @@ func _physics_process(delta):
 			if fire_duration2 < 0:
 				$MK_Boss_Laser2.set_is_casting(false)
 				is_firing2     = false
-				fire_cooldown2 = 6
+				fire_cooldown2 = 8
 				fire_aim2      = 3
 				fire_charge2   = 2
 				fire_duration2 = 4
