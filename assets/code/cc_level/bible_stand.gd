@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 		Globals.game_locked = true
 		can_read_bible = false
 		finished_reading_bible = true
-	elif event.is_action_pressed("ui_accept") and not can_read_bible and finished_reading_bible:
+	elif (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and not can_read_bible and finished_reading_bible:
 		bible_verse.transition_in_out(false)
 		state_machine.travel("bubble_shrink")
 

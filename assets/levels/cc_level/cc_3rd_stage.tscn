@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprite_scenes/cc_scenes/t-rex.tscn" type="PackedScene" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://assets/art/cc_level/tiles/B38_water_fountain/B38a_water_fountain_ss.png" type="Texture" id=32]
 [ext_resource path="res://assets/art/cc_level/tiles/cream_wall/cream_wall.png" type="Texture" id=33]
 [ext_resource path="res://assets/sprite_scenes/cc_scenes/cc_2nd_portal_door.tscn" type="PackedScene" id=34]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/killzone.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/art/cc_level/tiles/cream_brick/cream_brick.png" type="Texture" id=36]
 [ext_resource path="res://assets/art/cc_level/tiles/B32_exit_sign/B32_exit_sign.png" type="Texture" id=37]
 [ext_resource path="res://assets/art/cc_level/tiles/T40_CC_Carpet_W_Concrete/T40_cc_full_carpet.png" type="Texture" id=38]
@@ -665,13 +666,13 @@ position = Vector2( 3680, 320 )
 [node name="water_fountain" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -291, 292.182 )
 frames = SubResource( 25 )
-frame = 8
+frame = 6
 playing = true
 
 [node name="water_fountain2" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -253, 274.424 )
 frames = SubResource( 25 )
-frame = 5
+frame = 3
 playing = true
 
 [node name="exit_signs" type="Node2D" parent="."]
@@ -932,4 +933,6 @@ rotation = 0.647517
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 3645.69, 111.086 )
 shape = SubResource( 26 )
+
+[node name="killzone" parent="." instance=ExtResource( 35 )]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

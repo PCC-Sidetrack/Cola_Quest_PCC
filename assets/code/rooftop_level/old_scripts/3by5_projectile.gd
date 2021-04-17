@@ -28,13 +28,13 @@ func _ready() -> void:
 # Launches the projectile
 func launch(direction: float) -> void:
 	# remove the projectile so it can be added again in the correct location
-	var temp:  Transform2D = global_transform
-	var scene: Node		   = get_tree().current_scene
+	#var temp:  Transform2D = global_transform
+	#var scene: Node		   = get_tree().current_scene
 	get_parent().remove_child(self)
-	scene.add_child(self)
-	global_transform = temp
-	velocity = shoot_velocity * Vector2(direction, 1)
-	set_physics_process(true)
+	get_tree().add_child(self)
+	#global_transform = temp
+	#velocity = shoot_velocity * Vector2(direction, 1)
+	#set_physics_process(true)
 	
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
