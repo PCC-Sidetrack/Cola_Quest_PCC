@@ -16,11 +16,11 @@
 [ext_resource path="res://assets/sprite_scenes/common_scenes/spawnpoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sprite_scenes/mk_scenes/MK_Boss.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/ZoomOut.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/sprite_scenes/sc_level/SC_kill_zone.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/art/mk_level/tiles/Boss_Room_Tile.png" type="Texture" id=19]
 [ext_resource path="res://assets/art/mk_level/parallaxing/background/B28_planetarium_chair/B28_planetarium_chair.png" type="Texture" id=20]
 [ext_resource path="res://assets/art/mk_level/tiles/MK_BOSS_Stair_Carpet.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprite_scenes/mk_scenes/MK_Kill_Zone.gd" type="Script" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "MK_BOSS_Stair_Carpet.png 0"
@@ -922,6 +922,6 @@ position = Vector2( 3064, -680 )
 [node name="c_cola7" parent="Node" instance=ExtResource( 18 )]
 position = Vector2( 376, 232 )
 
-[node name="killzone" parent="." instance=ExtResource( 17 )]
-position = Vector2( 104, 1056 )
-[connection signal="body_entered" from="killzone" to="killzone" method="_on_killzone_body_entered"]
+[node name="killzone" type="Area2D" parent="."]
+position = Vector2( 0.0360107, 376 )
+script = ExtResource( 22 )
