@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://assets/art/hub_level/grass/grass.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/hub_level/tree/tree.png" type="Texture" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://assets/code/hub/hub.gd" type="Script" id=57]
 [ext_resource path="res://assets/gui/menus/pause/pause.tscn" type="PackedScene" id=58]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/scene_transition.tscn" type="PackedScene" id=59]
+[ext_resource path="res://assets/sprite_scenes/story/story.tscn" type="PackedScene" id=60]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grass.png 0"
@@ -891,6 +892,8 @@ drag_margin_bottom = 0.7
 script = ExtResource( 51 )
 
 [node name="Tween" type="Tween" parent="Camera2D"]
+
+[node name="story" parent="Camera2D" instance=ExtResource( 60 )]
 
 [node name="building_selectables" type="Node2D" parent="."]
 script = ExtResource( 56 )

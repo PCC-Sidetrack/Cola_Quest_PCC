@@ -94,7 +94,7 @@ func on_healing_enabled       (enabled) -> void:
 	emit_signal("healing_enabled", enabled)
 
 # COMMENT NEEDED
-func on_game_ui_visible       (visible) -> void:
+func on_game_ui_visible (visible: bool) -> void:
 	$HUD/ui_stat/stats.visible             = visible
 	$HUD/ui_element/cola_counter.visible   = visible
 	$HUD/ui_element/cola_healing.visible   = visible

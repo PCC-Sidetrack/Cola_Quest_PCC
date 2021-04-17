@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://assets/art/sc_level/tiles/tilesetOpenGame.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=2]
@@ -52,6 +52,7 @@
 [ext_resource path="res://assets/code/sc_level/SportCenterSection1.gd" type="Script" id=50]
 [ext_resource path="res://assets/sprite_scenes/sc_level/SC_kill_zone.tscn" type="PackedScene" id=51]
 [ext_resource path="res://assets/sounds/sc_level/Perfect Thunder Storm.wav" type="AudioStream" id=52]
+[ext_resource path="res://assets/sprite_scenes/story/story.tscn" type="PackedScene" id=53]
 
 [sub_resource type="TileSet" id=1]
 0/name = "B18_regular_cream_colored_wall.png 0"
@@ -1229,5 +1230,7 @@ transform = Transform2D( 0.5, 0, 0, 0.5, 0, 0 )
 stream = ExtResource( 52 )
 volume_db = -25.0
 autoplay = true
+
+[node name="story" parent="." instance=ExtResource( 53 )]
 [connection signal="body_entered" from="cameras/Area2D" to="cameras/Camera2D" method="_on_Area2D_body_entered"]
 [connection signal="reached_end" from="cameras/Camera2D" to="cameras/Camera2D/Node2D" method="_on_Camera2D_reached_end"]
