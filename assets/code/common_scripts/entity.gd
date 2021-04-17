@@ -497,9 +497,9 @@ func move_dynamically(direction: Vector2, custom_acceleration: float = _movement
 	
 	var snap = Vector2(0, 32)
 	
-	if _movement.current_velocity > 0:
+	if _movement.current_velocity.y > 0:
 		snap = Vector2(0, 32)
-	elif _movement.current_velocity == 0:
+	elif _movement.current_velocity.y == 0:
 		snap = Vector2(0, 16)
 	else:
 		snap = Vector2.ZERO
