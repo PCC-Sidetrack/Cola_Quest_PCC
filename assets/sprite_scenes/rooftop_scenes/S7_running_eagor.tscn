@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/running_eagor.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S7_running_eagor/S7_running_eagor.png" type="Texture" id=2]
@@ -32,6 +32,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 7.07079, 14.5706 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8.79155, 16 )
+
 [node name="S7_running_eagor" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
@@ -42,12 +45,11 @@ script = ExtResource( 1 )
 position = Vector2( -0.093895, -16.0562 )
 frames = SubResource( 5 )
 animation = "run"
-frame = 2
+frame = 3
 playing = true
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -0.0707878, -15.4294 )
 shape = SubResource( 6 )
 
@@ -66,5 +68,12 @@ margin_left = -7.62543
 margin_top = -41.6051
 margin_right = 8.37457
 margin_bottom = -35.6051
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -16 )
+shape = SubResource( 7 )
 [connection signal="death" from="." to="." method="_on_S7_running_eagor_death"]
 [connection signal="health_changed" from="." to="." method="_on_S7_running_eagor_health_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

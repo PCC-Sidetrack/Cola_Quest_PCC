@@ -2111,7 +2111,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 115 )
-frame = 4
+frame = 12
 speed_scale = 3.0
 playing = true
 
@@ -2958,7 +2958,7 @@ z_index = -1
 texture = ExtResource( 44 )
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 225.088, 59.9429 )
+position = Vector2( 195.676, 192.321 )
 z_index = 1
 [connection signal="body_entered" from="enemies/killzone" to="enemies/killzone" method="_on_killzone_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]

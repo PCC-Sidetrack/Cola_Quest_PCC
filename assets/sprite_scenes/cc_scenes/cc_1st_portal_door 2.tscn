@@ -1,0 +1,286 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/art/sc_level/tiles/TD_portal_door/TD_portal_door.png" type="Texture" id=1]
+[ext_resource path="res://assets/code/sc_level/door_portal.gd" type="Script" id=2]
+[ext_resource path="res://assets/shaders/sc_level/diamond_transition.shader" type="Shader" id=3]
+[ext_resource path="res://assets/sounds/sc_level/Whoosh_SFX_01.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/art/sc_level/tiles/UI_enter_bubble/UI_enter_bubble.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/cc_level/tiles/B33_bathroom_door/B33_bathroom_door.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bubble_grow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/UI_enter_bubble:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5e-06, 1e-05 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/UI_enter_bubble:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -97 ), Vector2( 32, -124 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "bubble_idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -124 ), Vector2( 32, -128 ), Vector2( 32, -124 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "bubble_shrink"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -124 ), Vector2( 32, -98 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/UI_enter_bubble:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/transition:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.56,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/transition:material:shader_param/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.56,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0.6 )
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "bubble_grow"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "bubble_idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "bubble_shrink"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+switch_mode = 2
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/bubble_grow/node = SubResource( 6 )
+states/bubble_grow/position = Vector2( 422.567, 38 )
+states/bubble_idle/node = SubResource( 7 )
+states/bubble_idle/position = Vector2( 168, 112 )
+states/bubble_shrink/node = SubResource( 8 )
+states/bubble_shrink/position = Vector2( 422.505, 157 )
+transitions = [ "bubble_grow", "bubble_idle", SubResource( 9 ), "bubble_idle", "bubble_shrink", SubResource( 10 ), "bubble_shrink", "bubble_grow", SubResource( 11 ) ]
+start_node = "bubble_shrink"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+
+[sub_resource type="Shader" id=14]
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+
+[sub_resource type="TileSet" id=16]
+1/name = "TD_portal_door.png 1"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "TD_portal_door.png 2"
+2/texture = ExtResource( 1 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 32, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "B33_bathroom_door.png 3"
+3/texture = ExtResource( 6 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 32, 64 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 48.0501, 32.1246 )
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 3 )
+shader_param/progress = 1.0
+shader_param/diamondPixelSize = 50.0
+
+[node name="cc_1st_portal_door" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.064
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bubble_grow = SubResource( 1 )
+anims/bubble_idle = SubResource( 2 )
+anims/bubble_shrink = SubResource( 3 )
+anims/transition_in = SubResource( 4 )
+anims/transition_out = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 13 )
+
+[node name="TileMap" type="TileMap" parent="."]
+material = SubResource( 15 )
+tile_set = SubResource( 16 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -131072, 536870915, 0, -131071, 536870915, 0, -131070, 536870915, 0 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 16, 31 )
+
+[node name="UI_enter_bubble" type="Sprite" parent="Node2D"]
+position = Vector2( 32, -98 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 5 )
+
+[node name="doorway" type="Area2D" parent="."]
+visible = false
+
+[node name="detection" type="CollisionShape2D" parent="doorway"]
+position = Vector2( 48, -32 )
+shape = SubResource( 17 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="transition" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 18 )
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="doorway" to="." method="_on_doorway_body_entered"]
+[connection signal="body_exited" from="doorway" to="." method="_on_doorway_body_exited"]

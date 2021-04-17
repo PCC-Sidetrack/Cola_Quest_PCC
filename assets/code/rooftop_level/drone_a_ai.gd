@@ -118,6 +118,7 @@ func _on_drone_a_death():
 	var timer: Timer = Timer.new()
 	
 	set_damage(0)
+	$CollisionShape2D.set_deferred("disabled", true)
 	_shoot_enabled             = false
 	timer.set_one_shot(true)
 	add_child(timer)

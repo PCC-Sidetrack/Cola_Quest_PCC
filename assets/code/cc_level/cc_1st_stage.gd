@@ -29,3 +29,4 @@ func _ready() -> void:
 	camera.limit_smoothed        = true
 	
 	$cc_portal_door/AnimationPlayer.play("transition_out")
+	get_node("player").load_from_transition()
