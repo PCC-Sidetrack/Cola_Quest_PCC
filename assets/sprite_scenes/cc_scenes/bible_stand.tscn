@@ -182,7 +182,6 @@ parameters/playback = SubResource( 13 )
 [node name="bible_stand" type="AnimatedSprite" parent="."]
 frames = SubResource( 14 )
 animation = "page_flip"
-frame = 2
 playing = true
 
 [node name="Node2D" type="Node2D" parent="."]

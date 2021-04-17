@@ -17,6 +17,15 @@ onready var portal: Node2D   = $world/portal_door
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
+	Globals.game_locked = true
+	$entities/player/game_UI.on_game_ui_visible(false)
+	$story.show()
+	$story.play("sc")
+	yield($story, "on_continue")
+	$story.hide()
+	$entities/player/game_UI.on_game_ui_visible(true)
+	Globals.game_locked = false
+	
 	# Freeze the scene until the transition has finished
 	get_tree().paused = true
 	

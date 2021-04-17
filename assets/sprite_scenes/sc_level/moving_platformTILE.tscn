@@ -48,17 +48,13 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 script = ExtResource( 1 )
 
 [node name="Platform" type="KinematicBody2D" parent="."]
-motion/sync_to_physics = true
 
 [node name="TileMap" type="TileMap" parent="Platform"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
-collision_use_kinematic = true
-collision_bounce = 1.0
 format = 1
 tile_data = PoolIntArray( 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0 )
 
 [node name="Tween" type="Tween" parent="."]
 repeat = true
-playback_process_mode = 0
 playback/repeat = true

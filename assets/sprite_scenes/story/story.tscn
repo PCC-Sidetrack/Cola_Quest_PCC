@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/code/story/story.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/story/SC_Level.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/art/story/AC_Level.png" type="Texture" id=4]
 [ext_resource path="res://assets/art/story/MK_Level.png" type="Texture" id=5]
 [ext_resource path="res://assets/gui/fonts/main_menu.tres" type="DynamicFont" id=6]
-[ext_resource path="res://assets/art/story/mouse_click.png" type="Texture" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade"
@@ -152,11 +151,9 @@ tracks/6/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=5]
@@ -167,7 +164,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[node name="story" type="Node2D"]
+[node name="story" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="background" type="ColorRect" parent="."]
@@ -205,6 +202,7 @@ texture = ExtResource( 5 )
 [node name="roof" type="Sprite" parent="pictures"]
 position = Vector2( 256, 96 )
 scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
 
 [node name="epilogue" type="Sprite" parent="pictures"]
 position = Vector2( 256, 96 )
