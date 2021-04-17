@@ -12,6 +12,8 @@ extends Node2D
 #-----------------------------------------------------------------------------#
 onready var camera = $player/Camera2D
 onready var portal = $cc_2nd_portal_door/AnimationPlayer
+onready var gui    = $player/game_UI
+onready var player = $player/AnimationPlayer
 
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
@@ -31,3 +33,9 @@ func _ready() -> void:
 	camera.limit_smoothed        = true
 	
 	portal.play("transition_out")
+	get_node("player").load_from_transition()
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		gui.on_player_level_cleared()
+		player.play("idle")

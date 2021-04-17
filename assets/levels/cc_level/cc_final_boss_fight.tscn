@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/cc_level/parallaxing/background/PL13_cc_stage/PL13_spritesheet_cc_stage/PL13_cc_stage36.png" type="Texture" id=2]
@@ -55,11 +55,12 @@
 [ext_resource path="res://assets/art/rooftop_level/tiles/rooftop_level_tilesheet/rooftop_level_tilesheet.png" type="Texture" id=53]
 [ext_resource path="res://assets/art/cc_level/tiles/cream_floor/cream_floor.png" type="Texture" id=54]
 [ext_resource path="res://assets/code/common_scripts/zoom_camera_trigger.gd" type="Script" id=55]
-[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/S7_running_eagor.tscn" type="PackedScene" id=56]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/c_cola.tscn" type="PackedScene" id=57]
 [ext_resource path="res://assets/art/general_levels/light_texture.png" type="Texture" id=58]
 [ext_resource path="res://assets/art/sc_level/tiles/B22_palm_bush/B22_palm_bush.png" type="Texture" id=59]
 [ext_resource path="res://assets/art/sc_level/tiles/B23_palm_tree/B23_palm_tree.png" type="Texture" id=60]
+[ext_resource path="res://assets/sprite_scenes/cc_scenes/cc_2nd_portal_door.tscn" type="PackedScene" id=61]
+[ext_resource path="res://assets/code/cc_level/cc_final_boss_fight.gd" type="Script" id=62]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -369,7 +370,8 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 a = Vector2( -742.709, -109.281 )
 b = Vector2( 739.315, -107.232 )
 
-[node name="cc_stage_fight" type="Node2D"]
+[node name="cc_final_boss_fight" type="Node2D"]
+script = ExtResource( 62 )
 
 [node name="parallax" type="Node2D" parent="."]
 
@@ -383,7 +385,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 77
+frame = 11
 speed_scale = 2.0
 playing = true
 __meta__ = {
@@ -499,9 +501,6 @@ tile_data = PoolIntArray( -3342401, 13, 0, -3342400, 13, 0, -3342399, 13, 0, -33
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="S7_running_eagor" parent="enemies" instance=ExtResource( 56 )]
-position = Vector2( -559.174, 410.063 )
-
 [node name="triggers" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="triggers"]
@@ -536,4 +535,7 @@ position = Vector2( 279.067, 151.011 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -1144.92, -934.633 )
+
+[node name="cc_2nd_portal_door" parent="." instance=ExtResource( 61 )]
+position = Vector2( -2329.55, -272.107 )
 [connection signal="body_entered" from="triggers/Area2D" to="triggers/Area2D" method="_on_Area2D_body_entered"]

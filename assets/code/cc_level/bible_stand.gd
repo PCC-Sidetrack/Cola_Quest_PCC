@@ -36,15 +36,14 @@ func _input(event: InputEvent) -> void:
 		finished_reading_bible = true
 	elif event.is_action_pressed("ui_accept") and not can_read_bible and finished_reading_bible:
 		bible_verse.transition_in_out(false)
-
 		state_machine.travel("bubble_shrink")
 
 		Globals.player.set_speed(5)
-		Globals.player.set_acceleration(15.0)
 		Globals.player.set_jump(300.0)
 		Globals.player.set_is_underwater(true)
-		player.max_jumps = 99
 		Globals.player.set_max_fall_speed(300.0)
+		player.max_jumps = 99
+		
 		$flooding_trigger/detection.disabled = true
 		tween.interpolate_property(water, "position", Vector2(1525, 1000), Vector2(1525, 120), 5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
