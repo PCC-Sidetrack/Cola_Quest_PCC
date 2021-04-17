@@ -90,7 +90,7 @@ func play_sound(var sound, var length):
 	sound.stop()
 	
 func spin_sprite():
-	for i in 1000:
+	for i in 100:
 		yield(get_tree().create_timer(0.01), "timeout")
 		$AnimatedSprite.rotation_degrees = $AnimatedSprite.rotation_degrees + 30
 	
@@ -117,7 +117,6 @@ func _on_Orion_death():
 	
 	death_anim (25,  0.04)
 	yield(spin_sprite(), "completed")
-	yield(get_tree().create_timer(25 * 0.04), "timeout")
 	
 	queue_free()
 

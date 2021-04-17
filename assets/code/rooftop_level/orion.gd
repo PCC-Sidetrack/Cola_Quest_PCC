@@ -62,7 +62,9 @@ func _physics_process(delta: float) -> void:
 func _spawn_spear() -> void:
 	# Create, initialize, and add a new spear projectile
 	var spear = SPEAR.instance()
-	$spear_spawn.add_child(spear)
+	get_node("/root").add_child(spear)
+	spear.global_position = $spear_spawn.global_position
+	spear.initialize()
 	
 	# Reset the _throw_update time now that the spear has been spawned
 	_throw_update_time = 0.0
