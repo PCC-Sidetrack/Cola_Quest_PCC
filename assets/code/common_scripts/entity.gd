@@ -409,7 +409,7 @@ func initialize_projectile(damage: int, speed: float, initiator: String, directi
 func jump(height: float = 1.0) -> void:
 	if height > 1.0 or height <= 0.0:
 		ProgramAlerts.add_warning("jump height should normally be between 1.0 and greater than 0.0")
-
+		
 	_movement.current_velocity.y = _movement.initial_jump_velocity * -height
 
 # Cause the entity that calls this function to knockback another entity based off of the entity's speed and the referenced entity's damage
@@ -495,8 +495,16 @@ func move_dynamically(direction: Vector2, custom_acceleration: float = _movement
 	if _metadata.is_looking:
 		rotation = Vector2(horizontal, vertical).angle()
 	
+	var snap = Vector2(0, 32) 
+	if _movement.current_velocity.y > 0:
+		snap = Vector2(0, 32) 
+	elif _movement.current_velocity.y == 0:
+		snap = Vector2(0, 16) 
+	else:
+		snap = Vector2.ZERO
+	
 	# Perform the calculation to move the enitity and save the collision data	
-	_movement.current_velocity = move_and_slide(Vector2(horizontal, vertical), Globals.ORIENTATION.FLOOR_NORMAL)
+	_movement.current_velocity = move_and_slide_with_snap(Vector2(horizontal, vertical), snap, Globals.ORIENTATION.FLOOR_NORMAL, false, 4000, deg2rad(90), false)
 	
 	# If a collision occured, call on_collision for the last one that happened during the movement
 	var slide_count: int = get_slide_count()
