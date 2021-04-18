@@ -683,7 +683,7 @@ __meta__ = {
 visible = false
 position = Vector2( -4.527, -44.481 )
 frames = SubResource( 20 )
-frame  = 5
+frame = 3
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]

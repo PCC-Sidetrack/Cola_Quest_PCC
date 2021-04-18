@@ -9,6 +9,7 @@
 extends Node2D
 
 func _ready():
+	get_tree().paused = true
 	Globals.game_locked = true
 	$player/game_UI.on_game_ui_visible(false)
 	$story.show()
@@ -19,7 +20,6 @@ func _ready():
 	$player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
 	
-	get_tree().paused = true
 	$scene_transition/AnimationPlayer.play("transition_out")
 	yield($scene_transition/AnimationPlayer, "animation_finished")
 	get_tree().paused = false
