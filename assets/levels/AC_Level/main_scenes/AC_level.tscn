@@ -40722,53 +40722,53 @@ animations = [ {
 [sub_resource type="AtlasTexture" id=40]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 0, 70, 57, 70 )
+region = Rect2( 0, 0, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=41]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 57, 70, 57, 70 )
+region = Rect2( 57, 0, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=42]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 114, 70, 57, 70 )
+region = Rect2( 114, 0, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=43]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 171, 70, 57, 70 )
+region = Rect2( 171, 0, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=44]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 57, 70 )
+region = Rect2( 0, 70, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=45]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 57, 0, 57, 70 )
+region = Rect2( 57, 70, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=46]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 114, 0, 57, 70 )
+region = Rect2( 114, 70, 57, 70 )
 
 [sub_resource type="AtlasTexture" id=47]
 flags = 2
 atlas = ExtResource( 8 )
-region = Rect2( 171, 0, 57, 70 )
+region = Rect2( 171, 70, 57, 70 )
 
 [sub_resource type="SpriteFrames" id=48]
 animations = [ {
 "frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
 "loop": true,
-"name": "stuck",
+"name": "freed",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
 "loop": true,
-"name": "freed",
+"name": "stuck",
 "speed": 5.0
 } ]
 
@@ -41082,58 +41082,58 @@ tracks/18/keys = {
 [sub_resource type="AtlasTexture" id=53]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 46, 56 )
+region = Rect2( 0, 56, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=54]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 46, 0, 46, 56 )
+region = Rect2( 46, 56, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=55]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 92, 0, 46, 56 )
+region = Rect2( 92, 56, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=56]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 138, 0, 46, 56 )
+region = Rect2( 138, 56, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=57]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 0, 56, 46, 56 )
+region = Rect2( 184, 56, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=58]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 46, 56, 46, 56 )
+region = Rect2( 0, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=59]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 92, 56, 46, 56 )
+region = Rect2( 46, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=60]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 138, 56, 46, 56 )
+region = Rect2( 92, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=61]
 flags = 2
 atlas = ExtResource( 5 )
-region = Rect2( 184, 56, 46, 56 )
+region = Rect2( 138, 0, 46, 56 )
 
 [sub_resource type="SpriteFrames" id=62]
 animations = [ {
-"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
-"loop": true,
-"name": "stuck",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ) ],
 "loop": true,
 "name": "freed",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"loop": true,
+"name": "stuck",
 "speed": 5.0
 } ]
 
@@ -41918,7 +41918,7 @@ modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( 320, 184 )
 scale = Vector2( 7.56936, 7.56936 )
 frames = SubResource( 19 )
-frame = 6
+frame = 8
 playing = true
 
 [node name="text_1" type="ParallaxLayer" parent="glitch_backgruond"]
@@ -41970,7 +41970,7 @@ modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( 320, 184 )
 scale = Vector2( 7.56936, 7.56936 )
 frames = SubResource( 19 )
-frame = 5
+frame = 7
 playing = true
 
 [node name="lights" type="Node2D" parent="."]
@@ -42437,7 +42437,7 @@ position = Vector2( 2948.44, 312 )
 z_index = 1
 frames = SubResource( 62 )
 animation = "stuck"
-frame = 1
+frame = 3
 speed_scale = 2.0
 playing = true
 
