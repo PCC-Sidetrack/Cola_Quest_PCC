@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/code/story/story.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/story/SC_Level.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://assets/art/story/AC_Level.png" type="Texture" id=4]
 [ext_resource path="res://assets/art/story/MK_Level.png" type="Texture" id=5]
 [ext_resource path="res://assets/gui/fonts/main_menu.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/art/story/roof.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/story/epilogue.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/story/mouse_click.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade"
@@ -150,15 +153,17 @@ tracks/6/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 9 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -202,11 +207,12 @@ texture = ExtResource( 5 )
 [node name="roof" type="Sprite" parent="pictures"]
 position = Vector2( 256, 96 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 
 [node name="epilogue" type="Sprite" parent="pictures"]
 position = Vector2( 256, 96 )
 scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 8 )
 
 [node name="story_text" type="Label" parent="."]
 margin_left = 160.584
@@ -243,4 +249,5 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="continue"]
 position = Vector2( 14.8401, 0 )
 frames = SubResource( 5 )
+frame = 1
 playing = true
