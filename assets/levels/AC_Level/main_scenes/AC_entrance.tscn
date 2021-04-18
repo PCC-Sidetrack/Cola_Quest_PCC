@@ -476,7 +476,7 @@ void fragment( )
 render_priority = 3
 shader = SubResource( 25 )
 shader_param/shake_power = 0.075
-shader_param/shake_rate = 0.643
+shader_param/shake_rate = 1.0
 shader_param/shake_speed = 0.2
 shader_param/shake_block_size = 1.0
 shader_param/shake_color_rate = 0.202
@@ -683,7 +683,7 @@ __meta__ = {
 visible = false
 position = Vector2( -4.527, -44.481 )
 frames = SubResource( 20 )
-frame = 1
+frame  = 5
 playing = true
 
 [node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]

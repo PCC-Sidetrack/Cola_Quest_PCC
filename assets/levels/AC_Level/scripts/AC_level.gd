@@ -204,8 +204,7 @@ func _enemies_cleared(l_section_type):
 		l_section_2:
 			area_trigger.get_node("checkpoints/spawnpoint_after_spider_dead/Area2D").set_deferred("monitoring", true)
 			area_trigger.get_node("lever_1").set_deferred("monitoring", true)
-#			area_trigger.get_node("checkpoints/spawnpoint/Area2D").
-			$Area_triggers/checkpoints/spawnpoint.remove_from_group(Globals.GROUP.SPAWNPOINT)
+			$section_1/section_1_borders/left.set_deferred("disabled", true)
 			spider_section_cleared = true
 		l_section_4:
 			area_trigger.get_node("lever_2").set_deferred("monitoring", true)
@@ -311,6 +310,7 @@ func _on_next_scene_area_entered(area):
 		$sounds/door_transition.play()
 		yield($sounds/door_transition, "finished")
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_grass.tscn", 'fade')
+		queue_free()
 
 func _on_error_zone_body_left(body):
 	if body.is_in_group("enemy") and enemies_remaining >= 0:
