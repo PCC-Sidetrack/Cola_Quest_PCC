@@ -17,6 +17,7 @@ onready var camera = $player/Camera2D
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	Globals.game_locked = true
+	get_tree().paused = true
 	$player/game_UI.on_game_ui_visible(false)
 	$story.show()
 	$story.play("cc")
