@@ -26,11 +26,11 @@ position = Vector2( -0.5, -1 )
 scale = Vector2( 1.45, 0.3 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.5, -0.5 )
 shape = SubResource( 2 )
-[connection signal="collision" from="." to="." method="_on_Entity_collision"]
 [connection signal="death" from="." to="." method="_on_Entity_death"]
 [connection signal="health_changed" from="." to="." method="_on_Entity_health_changed"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

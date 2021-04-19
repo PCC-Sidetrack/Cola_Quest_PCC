@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/drone_b_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S1_drone/S1b_drone.png" type="Texture" id=2]
@@ -40,6 +40,9 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=8]
 
+[sub_resource type="CircleShape2D" id=9]
+radius = 12.0986
+
 [node name="drone_b" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -50,7 +53,6 @@ animation = "fly"
 offset = Vector2( 256, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -1 )
 shape = SubResource( 8 )
 
@@ -73,5 +75,12 @@ stream = ExtResource( 4 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="healthbar" parent="." instance=ExtResource( 5 )]
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 0, -0.920685 )
+shape = SubResource( 9 )
 [connection signal="death" from="." to="." method="_on_drone_b_death"]
 [connection signal="health_changed" from="." to="." method="_on_drone_b_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

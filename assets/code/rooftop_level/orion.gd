@@ -81,6 +81,7 @@ func _on_Orion_death():
 	var timer: Timer = Timer.new()
 	
 	$CollisionShape2D.set_deferred("disabled", true)
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 	timer.set_one_shot(true)
 	add_child(timer)
@@ -94,3 +95,10 @@ func _on_Orion_health_changed(ammount):
 	if ammount < 0 and get_current_health():
 		$sword_hit.play()
 		flash_damaged(10)
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))

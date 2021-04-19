@@ -20,10 +20,10 @@ func _ready() -> void:
 	Globals.game_locked = true
 	get_tree().paused = true
 	$entities/player/game_UI.on_game_ui_visible(false)
-	$story.show()
-	$story.play("sc")
-	yield($story, "on_continue")
-	$story.hide()
+	if PlayerVariables.saved_deaths < 1:
+		Story.show()
+		Story.play("sc")
+		yield(Story, "on_continue")
 	$entities/player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
 	

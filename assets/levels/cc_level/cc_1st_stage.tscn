@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/cc_level/tiles/T39_Maroon_Wall/T39_Maroon_Wall.png" type="Texture" id=2]
@@ -41,7 +41,6 @@
 [ext_resource path="res://assets/art/cc_level/tiles/B38_water_fountain/B38a_water_fountain_ss.png" type="Texture" id=39]
 [ext_resource path="res://assets/art/cc_level/tiles/cream_wall/cream_wall.png" type="Texture" id=40]
 [ext_resource path="res://assets/sprite_scenes/cc_scenes/cc_1st_portal_door.tscn" type="PackedScene" id=41]
-[ext_resource path="res://assets/sprite_scenes/story/story.tscn" type="PackedScene" id=42]
 
 [sub_resource type="TileSet" id=1]
 0/name = "T39_Maroon_Wall.png 0"
@@ -1060,7 +1059,4 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="initial_barrier"]
 position = Vector2( 256, 100 )
 shape = SubResource( 26 )
-
-[node name="story" parent="." instance=ExtResource( 42 )]
-layer = 10
 [connection signal="tween_completed" from="water_shader/Tween" to="water_shader" method="_on_Tween_tween_completed"]

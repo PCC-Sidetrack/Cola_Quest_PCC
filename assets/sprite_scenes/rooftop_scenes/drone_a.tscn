@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/drone_a_ai.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S1_drone/S1a_drone.png" type="Texture" id=2]
@@ -40,6 +40,9 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=8]
 
+[sub_resource type="CircleShape2D" id=9]
+radius = 11.8084
+
 [node name="drone_a" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 9
@@ -51,7 +54,6 @@ animation = "fly"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 2 )
 shape = SubResource( 8 )
 
@@ -81,5 +83,12 @@ margin_left = -8.23597
 margin_top = -21.4834
 margin_right = 7.76403
 margin_bottom = -15.4834
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( -0.104603, 2.09204 )
+shape = SubResource( 9 )
 [connection signal="death" from="." to="." method="_on_drone_a_death"]
 [connection signal="health_changed" from="." to="." method="_on_drone_a_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
