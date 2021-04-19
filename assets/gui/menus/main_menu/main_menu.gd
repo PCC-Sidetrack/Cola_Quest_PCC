@@ -98,12 +98,16 @@ func _handle_selection(_current_selection) -> void:
 				$sounds/play_button.play()
 				Globals.game_locked = true
 				SceneFade.change_scene("res://assets/levels/rooftop_level.tscn", 'fade')
+				$skip_intro_level/Control/VBoxContainer.visible = false
+				$skip_intro_level/Control/CenterContainer3/HBoxContainer.visible = false
 				yield($sounds/play_button, "finished")
 				queue_free()
 			skip_intro:
 				$sounds/play_button.play()
 				Globals.game_locked = true
 				SceneFade.change_scene("res://assets/levels/hub.tscn", 'fade')
+				$skip_intro_level/Control/VBoxContainer.visible = false
+				$skip_intro_level/Control/CenterContainer3/HBoxContainer.visible = false
 				yield($sounds/play_button, "finished")
 				queue_free()
 

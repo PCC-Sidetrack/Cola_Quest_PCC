@@ -213,6 +213,7 @@ show_behind_parent = true
 position = Vector2( 24, 42.5101 )
 scale = Vector2( 1.00607, 1 )
 frames = SubResource( 12 )
+frame = 7
 playing = true
 
 [node name="cola_collected" type="Label" parent="HUD/ui_element/cola_counter"]
@@ -285,8 +286,8 @@ texture = ExtResource( 12 )
 [connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
 [connection signal="level_cleared" from="." to="HUD" method="_on_game_UI_level_cleared"]
 [connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
-[connection signal="no_checkpoints" from="." to="failure" method="_on_game_UI_no_checkpoints"]
 [connection signal="no_checkpoints" from="." to="pause" method="_on_game_UI_no_checkpoints"]
+[connection signal="no_checkpoints" from="." to="failure" method="_on_game_UI_no_checkpoints"]
 [connection signal="player_health_changed" from="." to="HUD" method="_on_game_UI_player_health_changed"]
 [connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_killed" from="." to="HUD" method="_on_game_UI_player_killed"]

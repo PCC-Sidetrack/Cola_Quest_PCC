@@ -14,7 +14,7 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
-onready var cola_can_instance  = preload("res://assets/sprite_scenes/common_scenes/c_cola.tscn")
+onready var cola_can_instance  = preload("res://assets/levels/AC_Level/c_cola_temp.tscn")
 onready var explosion_instance = preload("res://assets/levels/AC_Level/assets/sprites/explosion.tscn")
 export var acceleration: float = 20.0
 export var damage:       int   = 2
