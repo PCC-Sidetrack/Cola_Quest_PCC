@@ -106,6 +106,7 @@ func _on_shark_death() -> void:
 	var timer: Timer = Timer.new()
 	
 	$follow_range.set_collision_mask(0)
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	set_collision_mask(0)
 	set_collision_layer(0)
 	timer.set_one_shot(true)
@@ -151,3 +152,11 @@ func _on_shark_health_changed(amount):
 # On healthbar visibility timeout
 func _visible_timeout():
 	$healthbar.visible = false 
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		#custom_knockback(self, 6.0, -global_position.direction_to(Globals.player_position))
+		body._knockback_old(self)

@@ -20,10 +20,10 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 	$player/game_UI.on_game_ui_visible(false)
-	$story.show()
-	$story.play("cc")
-	yield($story, "on_continue")
-	$story.hide()
+	if PlayerVariables.saved_deaths < 1:
+		Story.show()
+		Story.play("cc")
+		yield(Story, "on_continue")
 	$player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
 	

@@ -62,6 +62,7 @@ func _on_S7_running_eagor_death():
 	var timer: Timer = Timer.new()
 	
 	$CollisionShape2D.set_deferred("disabled", true)
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
 	timer.set_one_shot(true)
 	add_child(timer)
 	

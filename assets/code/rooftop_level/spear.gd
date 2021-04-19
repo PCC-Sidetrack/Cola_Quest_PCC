@@ -14,7 +14,7 @@ export var damage:       int   = 1
 export var speed:        float = 9.375
 export var acceleration: float = 50.0
 export var life_time:    float = 10.0
-export var knockback:          = 1
+export var knockback:          = 2.0
 var        _initialized        = false
 
 #-----------------------------------------------------------------------------#
@@ -45,23 +45,20 @@ func initialize() -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_Entity_collision(body):
-	# This is a workaround for an odd glitch. For some reason the player doesn't
-	# always detect a collision with projectiles. (Spent hours trying to figure
-	# out why but couldn't). So I perform a knockbapck in this collision code instead
-	if body.is_in_group(Globals.GROUP.PLAYER):
-		body.knockback(self)
-		deal_damage(body)
-	if body.is_in_group(Globals.GROUP.ENEMY):
-		body.knockback(self)
-		deal_damage(body)
-	
-	# Delete the projectile
-	delete()
-
 func _on_Entity_death():
 	pass # Replace with function body.
 
 func _on_Entity_health_changed(_change):
 	pass # Replace with function body.
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+	if not body.is_in_group(Globals.GROUP.ENEMY):
+		delete()
+
+
+func _on_VisibilityEnabler2D_screen_exited() -> void:
+	delete()

@@ -12,11 +12,11 @@ func _ready():
 	get_tree().paused = true
 	Globals.game_locked = true
 	$player/game_UI.on_game_ui_visible(false)
-	$story.show()
-	$story.play("roof")
-	yield($story, "on_continue")
+	if PlayerVariables.saved_deaths < 1:
+		Story.show()
+		Story.play("roof")
+		yield(Story, "on_continue")
 	$scene_transition/CanvasLayer/transition.visible = true
-	$story.hide()
 	$player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
 	

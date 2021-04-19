@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/code/cc_level/pterodactyl.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/S35_pterodactyl/S35_pterodactyl-Sheet.png" type="Texture" id=2]
@@ -65,6 +65,9 @@ animations = [ {
 radius = 28.0179
 
 [sub_resource type="CircleShape2D" id=15]
+radius = 27.6605
+
+[sub_resource type="CircleShape2D" id=16]
 radius = 318.882
 
 [node name="pterodactyl" type="KinematicBody2D"]
@@ -76,7 +79,6 @@ frames = SubResource( 13 )
 animation = "fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 4, 0 )
 shape = SubResource( 14 )
 
@@ -88,13 +90,20 @@ stream = ExtResource( 3 )
 
 [node name="healthbar" parent="." instance=ExtResource( 4 )]
 
+[node name="hitbox" type="Area2D" parent="."]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource( 15 )
+
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -1.38027, 0 )
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 [connection signal="death" from="." to="." method="_on_pterodactyl_death"]
 [connection signal="health_changed" from="." to="." method="_on_pterodactyl_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

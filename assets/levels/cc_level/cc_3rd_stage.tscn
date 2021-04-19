@@ -666,13 +666,13 @@ position = Vector2( 3680, 320 )
 [node name="water_fountain" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -291, 292.182 )
 frames = SubResource( 25 )
-frame = 6
+frame = 5
 playing = true
 
 [node name="water_fountain2" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -253, 274.424 )
 frames = SubResource( 25 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="exit_signs" type="Node2D" parent="."]

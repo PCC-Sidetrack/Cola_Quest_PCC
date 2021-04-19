@@ -20,7 +20,7 @@ export var turnaround_time: float = 2
 # Acceleration applied to drone's movement
 export var acceleration:    float = 20.0
 # Knockback multiplier for drone
-export var knockback:       float = 0.8
+export var knockback:       float = 2.0
 
 # Stores how much health the drone has
 export var health:       int   = 2
@@ -70,6 +70,7 @@ func _on_drone_b_death():
 	
 	set_damage(0)
 	$CollisionShape2D.set_deferred("disabled", true)
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	$healthbar.max_value       = health
 	timer.set_one_shot(true)
 	add_child(timer)
@@ -98,3 +99,10 @@ func _on_drone_b_health_changed(ammount):
 func _visible_timeout():
 	$healthbar.visible = false 
 
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))

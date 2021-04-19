@@ -322,14 +322,6 @@ func _mouse_is_visible(visibility: bool) -> void:
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the player collides with something
-func _on_player_collision(body) -> void:
-	if body.has_method("is_in_group") and Globals.game_locked == false:
-		if body.is_in_group(Globals.GROUP.ENEMY) or body.is_in_group(Globals.GROUP.PROJECTILE):
-			take_damage(body.get_damage())
-			knockback(body)
-			pass
-
 # Triggered whenever the player's health is changed
 func _on_player_health_changed(change) -> void:
 	# If the player would be damaged, isn't invunerable, and isn't already dead,
@@ -388,12 +380,12 @@ func _on_melee_body_entered(body: Node) -> void:
 		body.take_damage(get_damage())
 		body.custom_knockback(self, 5.0)
 	
-	if body.is_in_group(Globals.GROUP.ENEMY) or body.get_collision_layer_bit(Globals.LAYER.WORLD):
+	if body.is_in_group(Globals.GROUP.ENEMY):
 		#set_velocity(body.get_position().direction_to(global_position).normalized() * (get_speed()))
 		if get_direction_facing() == Globals.DIRECTION.LEFT:
-			custom_knockback(self, 3.0, Vector2.RIGHT)
+			custom_knockback(self, 1.0, Vector2.RIGHT)
 		else:
-			custom_knockback(self, 3.0, Vector2.LEFT)
+			custom_knockback(self, 1.0, Vector2.LEFT)
 
 # COMMENT NEEDED
 func _on_game_UI_cola_healing():

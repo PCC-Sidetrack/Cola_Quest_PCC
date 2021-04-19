@@ -59,18 +59,20 @@ func initialize() -> void:
 #-----------------------------------------------------------------------------#
 #                             Signal Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_KinematicBody2D_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER) or body.is_in_group(Globals.GROUP.ENEMY):
-		body.knockback(self)
-		deal_damage(body)
-	
-	# Delete the projectile
-	delete()
-
-
 func _on_KinematicBody2D_death():
 	pass # Replace with function body.
 
 func _on_KinematicBody2D_health_changed(_change):
 	pass # Replace with function body.
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+	if not body.is_in_group(Globals.GROUP.ENEMY):
+		delete()
+
+
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	delete()

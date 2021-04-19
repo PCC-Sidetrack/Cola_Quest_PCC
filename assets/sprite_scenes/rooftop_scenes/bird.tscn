@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/bird.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S3_flying_bird/S3_flying_bird.png" type="Texture" id=2]
@@ -7,12 +7,10 @@
 [ext_resource path="res://assets/gui/hud/enemy_healthbar.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
@@ -58,6 +56,9 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 9.0
 
+[sub_resource type="CircleShape2D" id=6]
+radius = 10.9726
+
 [node name="bird" type="KinematicBody2D"]
 z_index = 1
 script = ExtResource( 1 )
@@ -71,7 +72,6 @@ frame = 1
 anims/fly = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 1, 4 )
 shape = SubResource( 5 )
 
@@ -93,5 +93,12 @@ attenuation = 4.0
 stream = ExtResource( 4 )
 
 [node name="healthbar" parent="." instance=ExtResource( 5 )]
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 1.25523, 4.18407 )
+shape = SubResource( 6 )
 [connection signal="death" from="." to="." method="_on_bird_death"]
 [connection signal="health_changed" from="." to="." method="_on_bird_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

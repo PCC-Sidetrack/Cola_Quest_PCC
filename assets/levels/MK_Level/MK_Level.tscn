@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/mk_level/tiles/lobby_tiles.png" type="Texture" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://assets/art/mk_level/tiles/MK_BOSS_Stair_Carpet.png" type="Texture" id=21]
 [ext_resource path="res://assets/code/MK_Level/MK_Level.gd" type="Script" id=22]
 [ext_resource path="res://assets/sprite_scenes/common_scenes/scene_transition.tscn" type="PackedScene" id=23]
-[ext_resource path="res://assets/sprite_scenes/story/story.tscn" type="PackedScene" id=24]
 
 [sub_resource type="TileSet" id=1]
 0/name = "MK_BOSS_Stair_Carpet.png 0"
@@ -930,8 +929,6 @@ position = Vector2( 3064, -680 )
 position = Vector2( 376, 232 )
 
 [node name="scene_transition" parent="." instance=ExtResource( 23 )]
-
-[node name="story" parent="." instance=ExtResource( 24 )]
 
 [node name="killzone" parent="." instance=ExtResource( 17 )]
 position = Vector2( 2928, 1056 )
