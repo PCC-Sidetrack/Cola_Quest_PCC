@@ -14,7 +14,7 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
-onready var cola_can_instance  = preload("res://assets/sprite_scenes/common_scenes/c_cola.tscn")
+onready var cola_can_instance  = preload("res://assets/levels/AC_Level/c_cola_temp.tscn")
 onready var explosion_instance = preload("res://assets/levels/AC_Level/assets/sprites/explosion.tscn")
 export var acceleration: float = 20.0
 export var damage:       int   = 2
@@ -59,7 +59,9 @@ func _on_spider_death():
 	var explosion = explosion_instance.instance()
 	cola_can.position = get_global_position()
 	explosion.position = get_global_position()
-	get_tree().get_root().call_deferred("add_child",cola_can)
+#	get_parent().call_deferred("add_child",cola_can)
+	if self.is_in_group("spider"):
+		get_tree().get_root().call_deferred("add_child", cola_can)
 	if self.is_in_group("bat"):get_tree().get_root().call_deferred("add_child",explosion)
 	if self.is_in_group("bat"):$explosion.play()
 	

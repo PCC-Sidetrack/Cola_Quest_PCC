@@ -346,7 +346,6 @@ func _reset_section(spawner_section, l_section_type):
 	camera.limit_left  = -61
 	camera.limit_right = 3953
 
-	
 	match l_section_type:
 		l_section_2:
 			if spider_section_cleared == false:
@@ -364,8 +363,6 @@ func _reset_section(spawner_section, l_section_type):
 				yield(get_tree().create_timer(2), "timeout")
 				if Globals.player.position.x < 2786.078:
 					area_trigger.get_node("lock_section_bats/activator").set_deferred("disabled", false)
-
-
 
 func _on_player_death():
 	if Globals.player.position.x < 1450:
