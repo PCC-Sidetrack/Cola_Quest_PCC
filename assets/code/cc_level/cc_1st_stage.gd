@@ -18,6 +18,7 @@ onready var camera = $player/Camera2D
 func _ready() -> void:
 	Globals.game_locked = true
 	get_tree().paused = true
+	
 	$player/game_UI.on_game_ui_visible(false)
 	$story.show()
 	$story.play("cc")
@@ -25,7 +26,6 @@ func _ready() -> void:
 	$story.hide()
 	$player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
-	
 	
 	camera.limit_left            = -768
 	camera.limit_top             = -170
@@ -39,5 +39,8 @@ func _ready() -> void:
 	camera.smoothing_enabled     = true
 	camera.limit_smoothed        = true
 	
-	$cc_portal_door/AnimationPlayer.play("transition_out")
+	PlayerVariables.new_level()
+	
 	get_node("player").load_from_transition()
+	$cc_portal_door/AnimationPlayer.play("transition_out")
+	#get_tree().paused = false

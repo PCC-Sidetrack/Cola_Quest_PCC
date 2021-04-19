@@ -45,6 +45,7 @@ func _input(event: InputEvent) -> void:
 		emit_signal("on_continue")
 
 func _ready() -> void:
+	PlayerVariables.reset_values()
 	hide()
 
 #-----------------------------------------------------------------------------#

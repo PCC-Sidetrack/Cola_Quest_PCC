@@ -31,4 +31,4 @@ func restart_scene() -> void:
 func reset_values() -> void:
 	saved_cola   = 0
 	saved_deaths = 0
-	saved_health = Globals.player.get_max_health()
+	saved_health = 5

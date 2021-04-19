@@ -29,7 +29,7 @@ var finished_reading_bible: bool = false
 #                               Input events                                  #
 #-----------------------------------------------------------------------------#
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and can_read_bible:
+	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and can_read_bible:
 		bible_verse.transition_in_out(true)
 		Globals.game_locked = true
 		can_read_bible = false
@@ -56,11 +56,9 @@ func _input(event: InputEvent) -> void:
 func _on_flooding_trigger_body_entered(body: Node) -> void:
 	if body.has_method("prepare_transition"):
 		state_machine.travel("bubble_grow")
-		
-	can_read_bible = true
+		can_read_bible = true
 
 func _on_flooding_trigger_body_exited(body: Node) -> void:
 	if body.has_method("prepare_transition"):
 		state_machine.travel("bubble_shrink")
-	
-	can_read_bible = false
+		can_read_bible = false
