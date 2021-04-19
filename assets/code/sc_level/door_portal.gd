@@ -37,7 +37,7 @@ var _can_travel: bool = false
 #                               Input events                                  #
 #-----------------------------------------------------------------------------#
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and _can_travel:
+	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and _can_travel:
 		if not next_scene:
 			return
 		else:
