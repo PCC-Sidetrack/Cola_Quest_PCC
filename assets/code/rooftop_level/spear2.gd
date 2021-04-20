@@ -44,13 +44,19 @@ func initialize() -> void:
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
 func _on_Area2D_body_entered(body: Node) -> void:
-	if body.is_in_group(Globals.GROUP.PLAYER):
+	if (body.is_in_group(Globals.GROUP.PLAYER) or body.is_in_group(Globals.GROUP.ENEMY)) and body != self:
 		body.take_damage(damage)
 		_knockback_old(body)
-	
-	if not body.is_in_group(Globals.GROUP.ENEMY):
+		
+	if body != self:
 		delete()
 
 
 func _on_VisibilityEnabler2D_screen_exited() -> void:
 	delete()
+
+
+func _on_delay_body_exited(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.ENEMY):
+		$Area2D/CollisionShape2D.set_deferred("disabled", false)
+		$delay/CollisionShape2D.set_deferred("disabled", true)
