@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/cc_level/parallaxing/background/PL13_cc_stage/PL13_spritesheet_cc_stage/PL13_cc_stage36.png" type="Texture" id=2]
@@ -368,12 +368,81 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 } ]
 13/z_index = 0
 
-[sub_resource type="Curve2D" id=16]
+[sub_resource type="Curve2D" id=15]
 _data = {
-"points": PoolVector2Array(  )
+"points": PoolVector2Array( -1008.36, 556.973, 1008.36, -556.973, -824.617, -1022.45, 474.744, 31.6182, -474.744, -31.6182, -480, 290.016 )
 }
 
-[sub_resource type="SegmentShape2D" id=15]
+[sub_resource type="Animation" id=21]
+resource_name = "balcony"
+length = 0.5
+
+[sub_resource type="Animation" id=22]
+resource_name = "balcony_stage"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "balcony_stage" ],
+"method": "_change_path"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("paths/balcony_stage/boss_position:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "stage_left"
+length = 0.5
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "balcony"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "balcony_stage"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "stage_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/balcony/node = SubResource( 24 )
+states/balcony/position = Vector2( 328.5, -211.75 )
+states/balcony_stage/node = SubResource( 25 )
+states/balcony_stage/position = Vector2( 417, -84.375 )
+states/stage_left/node = SubResource( 26 )
+states/stage_left/position = Vector2( 510.5, 75.8125 )
+transitions = [ "balcony", "balcony_stage", SubResource( 27 ), "balcony_stage", "stage_left", SubResource( 28 ) ]
+graph_offset = Vector2( 0, -74.5609 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+[sub_resource type="AnimationNodeStateMachine" id=19]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+
+[sub_resource type="SegmentShape2D" id=16]
 a = Vector2( -742.709, -109.281 )
 b = Vector2( 739.315, -107.232 )
 
@@ -392,7 +461,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 3
+frame = 114
 speed_scale = 2.0
 playing = true
 __meta__ = {
@@ -511,13 +580,53 @@ tile_data = PoolIntArray( -3342401, 13, 0, -3342400, 13, 0, -3342399, 13, 0, -33
 [node name="boss" type="Node2D" parent="enemies"]
 script = ExtResource( 63 )
 
-[node name="Path2D" type="Path2D" parent="enemies/boss"]
-curve = SubResource( 16 )
+[node name="paths" type="Node2D" parent="enemies/boss"]
 
-[node name="PathFollow2D" type="PathFollow2D" parent="enemies/boss/Path2D"]
+[node name="balcony_stage" type="Path2D" parent="enemies/boss/paths"]
+curve = SubResource( 15 )
 
-[node name="StaticBody2D" parent="enemies/boss/Path2D/PathFollow2D" instance=ExtResource( 56 )]
-position = Vector2( -469.535, 74.736 )
+[node name="boss_position" type="PathFollow2D" parent="enemies/boss/paths/balcony_stage"]
+position = Vector2( -480, 290.016 )
+offset = 2125.07
+rotate = false
+loop = false
+
+[node name="zacharias" parent="enemies/boss/paths/balcony_stage/boss_position" instance=ExtResource( 56 )]
+scale = Vector2( 3, 3 )
+
+[node name="positions" type="Node2D" parent="enemies/boss"]
+
+[node name="balcony" type="Position2D" parent="enemies/boss/positions"]
+position = Vector2( -824.625, -1022.48 )
+scale = Vector2( 3, 3 )
+
+[node name="stage_left" type="Position2D" parent="enemies/boss/positions"]
+position = Vector2( -480, 290 )
+scale = Vector2( 3, 3 )
+
+[node name="stage_right" type="Position2D" parent="enemies/boss/positions"]
+position = Vector2( 560, 290 )
+rotation = 3.14159
+scale = Vector2( 3, -3 )
+
+[node name="movement" type="AnimationPlayer" parent="enemies/boss"]
+anims/balcony = SubResource( 21 )
+anims/balcony_stage = SubResource( 22 )
+anims/stage_left = SubResource( 23 )
+
+[node name="movement_machine" type="AnimationTree" parent="enemies/boss/movement"]
+tree_root = SubResource( 17 )
+anim_player = NodePath("..")
+active = true
+parameters/playback = SubResource( 18 )
+
+[node name="logic" type="AnimationPlayer" parent="enemies/boss"]
+
+[node name="logic_machine" type="AnimationTree" parent="enemies/boss/logic"]
+tree_root = SubResource( 19 )
+anim_player = NodePath("..")
+active = true
+parameters/playback = SubResource( 20 )
 
 [node name="triggers" type="Node2D" parent="."]
 
@@ -526,7 +635,7 @@ script = ExtResource( 55 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/Area2D"]
 position = Vector2( 3.99995, -744.858 )
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 
 [node name="collectibles" type="Node2D" parent="."]
 
