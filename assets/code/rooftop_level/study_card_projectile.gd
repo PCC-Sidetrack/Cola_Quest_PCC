@@ -65,14 +65,21 @@ func _on_KinematicBody2D_death():
 func _on_KinematicBody2D_health_changed(_change):
 	pass # Replace with function body.
 
-
+# Determine if the card has hit the player
 func _on_hitbox_body_entered(body: Node) -> void:
-	if body.is_in_group(Globals.GROUP.PLAYER):
+	if (body.is_in_group(Globals.GROUP.PLAYER) or body.is_in_group(Globals.GROUP.ENEMY)) and body != self:
 		body.take_damage(damage)
 		_knockback_old(body)
-	if not body.is_in_group(Globals.GROUP.ENEMY):
+		
+	if body != self:
 		delete()
 
-
+# Delete the card if it goes off screen
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	delete()
+
+# Keep the card from immediatly hitting the enemy that launched t
+func _on_delay_body_exited(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.ENEMY):
+		$hitbox/CollisionShape2D.set_deferred("disabled", false)
+		$delay/CollisionShape2D.set_deferred("disabled", true)
