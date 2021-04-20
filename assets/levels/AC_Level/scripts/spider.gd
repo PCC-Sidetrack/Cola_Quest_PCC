@@ -17,7 +17,7 @@ extends Entity
 onready var cola_can_instance  = preload("res://assets/levels/AC_Level/c_cola_temp.tscn")
 onready var explosion_instance = preload("res://assets/levels/AC_Level/assets/sprites/explosion.tscn")
 export var acceleration: float = 20.0
-export var damage:       int   = 2
+export var damage:       int   = 1
 export var health:       int   = 2
 export var jump_speed:   float = 1.0
 export var speed:        float = 7.0
@@ -126,3 +126,11 @@ func _on_bat_death():
 
 func _on_bat_health_changed(ammount):
 	_on_spider_health_changed(ammount)
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))
+		#body._knockback_old(self)
