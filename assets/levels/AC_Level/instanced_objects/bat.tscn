@@ -146,22 +146,18 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=18]
-flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
-flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
-flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
-flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 96, 0, 32, 32 )
 
@@ -275,5 +271,6 @@ shape = SubResource( 27 )
 stream = ExtResource( 12 )
 [connection signal="death" from="." to="." method="_on_bat_death"]
 [connection signal="health_changed" from="." to="." method="_on_bat_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
