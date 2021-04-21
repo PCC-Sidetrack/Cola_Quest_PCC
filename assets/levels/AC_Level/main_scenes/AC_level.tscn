@@ -85,6 +85,7 @@ void fragment( )
 	COLOR = pixel_color;
 }
 "
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
@@ -137,47 +138,38 @@ font_data = SubResource( 7 )
 extents = Vector2( 384, 237.685 )
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 102, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 204, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=13]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 306, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=14]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 408, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=15]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 510, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=16]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 612, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=17]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 714, 0, 102, 60 )
 
 [sub_resource type="AtlasTexture" id=18]
-flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 816, 0, 102, 60 )
 
@@ -40664,22 +40656,18 @@ font_data = ExtResource( 17 )
 867/z_index = 0
 
 [sub_resource type="AtlasTexture" id=30]
-flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=31]
-flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=32]
-flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 192, 0, 64, 64 )
 
@@ -40692,22 +40680,18 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 2
 atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=36]
-flags = 2
 atlas = ExtResource( 13 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=37]
-flags = 2
 atlas = ExtResource( 13 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=38]
-flags = 2
 atlas = ExtResource( 13 )
 region = Rect2( 192, 0, 64, 64 )
 
@@ -40720,55 +40704,47 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=40]
-flags = 2
-atlas = ExtResource( 8 )
-region = Rect2( 0, 70, 57, 70 )
-
-[sub_resource type="AtlasTexture" id=41]
-flags = 2
-atlas = ExtResource( 8 )
-region = Rect2( 57, 70, 57, 70 )
-
-[sub_resource type="AtlasTexture" id=42]
-flags = 2
-atlas = ExtResource( 8 )
-region = Rect2( 114, 70, 57, 70 )
-
-[sub_resource type="AtlasTexture" id=43]
-flags = 2
-atlas = ExtResource( 8 )
-region = Rect2( 171, 70, 57, 70 )
-
-[sub_resource type="AtlasTexture" id=44]
-flags = 2
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 57, 70 )
 
-[sub_resource type="AtlasTexture" id=45]
-flags = 2
+[sub_resource type="AtlasTexture" id=41]
 atlas = ExtResource( 8 )
 region = Rect2( 57, 0, 57, 70 )
 
-[sub_resource type="AtlasTexture" id=46]
-flags = 2
+[sub_resource type="AtlasTexture" id=42]
 atlas = ExtResource( 8 )
 region = Rect2( 114, 0, 57, 70 )
 
-[sub_resource type="AtlasTexture" id=47]
-flags = 2
+[sub_resource type="AtlasTexture" id=43]
 atlas = ExtResource( 8 )
 region = Rect2( 171, 0, 57, 70 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 70, 57, 70 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 8 )
+region = Rect2( 57, 70, 57, 70 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 8 )
+region = Rect2( 114, 70, 57, 70 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 8 )
+region = Rect2( 171, 70, 57, 70 )
 
 [sub_resource type="SpriteFrames" id=48]
 animations = [ {
 "frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
 "loop": true,
-"name": "stuck",
+"name": "freed",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
 "loop": true,
-"name": "freed",
+"name": "stuck",
 "speed": 5.0
 } ]
 
@@ -40832,6 +40808,7 @@ void fragment() {
 		COLOR = col;
 	}
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=51]
 shader = SubResource( 50 )
@@ -41080,60 +41057,51 @@ tracks/18/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=53]
-flags = 2
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 46, 56 )
-
-[sub_resource type="AtlasTexture" id=54]
-flags = 2
-atlas = ExtResource( 5 )
-region = Rect2( 46, 0, 46, 56 )
-
-[sub_resource type="AtlasTexture" id=55]
-flags = 2
-atlas = ExtResource( 5 )
-region = Rect2( 92, 0, 46, 56 )
-
-[sub_resource type="AtlasTexture" id=56]
-flags = 2
-atlas = ExtResource( 5 )
-region = Rect2( 138, 0, 46, 56 )
-
-[sub_resource type="AtlasTexture" id=57]
-flags = 2
 atlas = ExtResource( 5 )
 region = Rect2( 0, 56, 46, 56 )
 
-[sub_resource type="AtlasTexture" id=58]
-flags = 2
+[sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 5 )
 region = Rect2( 46, 56, 46, 56 )
 
-[sub_resource type="AtlasTexture" id=59]
-flags = 2
+[sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 5 )
 region = Rect2( 92, 56, 46, 56 )
 
-[sub_resource type="AtlasTexture" id=60]
-flags = 2
+[sub_resource type="AtlasTexture" id=56]
 atlas = ExtResource( 5 )
 region = Rect2( 138, 56, 46, 56 )
 
-[sub_resource type="AtlasTexture" id=61]
-flags = 2
+[sub_resource type="AtlasTexture" id=57]
 atlas = ExtResource( 5 )
 region = Rect2( 184, 56, 46, 56 )
 
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 46, 56 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 5 )
+region = Rect2( 46, 0, 46, 56 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 5 )
+region = Rect2( 92, 0, 46, 56 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 5 )
+region = Rect2( 138, 0, 46, 56 )
+
 [sub_resource type="SpriteFrames" id=62]
 animations = [ {
-"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
-"loop": true,
-"name": "stuck",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ) ],
 "loop": true,
 "name": "freed",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"loop": true,
+"name": "stuck",
 "speed": 5.0
 } ]
 
@@ -41365,7 +41333,7 @@ tracks/17/keys = {
 extents = Vector2( 392, 12.7415 )
 
 [sub_resource type="RectangleShape2D" id=65]
-extents = Vector2( 88, 96 )
+extents = Vector2( 95.7959, 96 )
 
 [sub_resource type="RectangleShape2D" id=66]
 extents = Vector2( 16, 312 )
@@ -41913,12 +41881,10 @@ motion_scale = Vector2( 0.7, 0.7 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="glitch_p_rect" type="AnimatedSprite" parent="glitch_backgruond/red_rectangles"]
-visible = false
 modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( 320, 184 )
 scale = Vector2( 7.56936, 7.56936 )
 frames = SubResource( 19 )
-frame = 7
 playing = true
 
 [node name="text_1" type="ParallaxLayer" parent="glitch_backgruond"]
@@ -41970,7 +41936,7 @@ modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( 320, 184 )
 scale = Vector2( 7.56936, 7.56936 )
 frames = SubResource( 19 )
-frame = 6
+frame = 8
 playing = true
 
 [node name="lights" type="Node2D" parent="."]
@@ -42355,15 +42321,16 @@ position = Vector2( 112, 75.2 )
 scale = Vector2( 0.6, 0.6 )
 
 [node name="panic_fe" type="AnimatedSprite" parent="AI/NPC"]
-position = Vector2( 220, 150 )
+position = Vector2( 220, 126.667 )
+scale = Vector2( 1.75, 1.75 )
 frames = SubResource( 34 )
-frame = 2
 playing = true
 
 [node name="panic_ma" type="AnimatedSprite" parent="AI/NPC"]
-position = Vector2( 290, 150 )
+position = Vector2( 302.433, 125.72 )
+scale = Vector2( 1.75, 1.75 )
 frames = SubResource( 39 )
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 
@@ -42393,7 +42360,7 @@ __meta__ = {
 position = Vector2( 936, 80 )
 frames = SubResource( 48 )
 animation = "stuck"
-frame = 3
+frame = 1
 playing = true
 
 [node name="drsparks" type="Label" parent="AI/Teachers/sparks"]
@@ -42501,7 +42468,9 @@ shape = SubResource( 64 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 544, 280 )
+rotation = 4.71239
 shape = SubResource( 65 )
+one_way_collision = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 3944, 240 )
