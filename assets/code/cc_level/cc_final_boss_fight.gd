@@ -19,5 +19,10 @@ onready var portal = $cc_2nd_portal_door/AnimationPlayer
 func _ready() -> void:
 	get_tree().paused = true
 	
+	$player/game_UI.on_initialize_boss($enemies/boss/paths/balcony_stage/boss_position/zacharias.get_total_health(), "Dr. Zacharias")
+	$player/game_UI.on_boss_healthbar_visible(true)
+	
+	camera.set_script(load("res://assets/code/sc_level/boss_arena_camera.gd"))
+	
 	portal.play("transition_out")
 	get_node("player").load_from_transition()

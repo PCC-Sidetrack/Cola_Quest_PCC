@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------#
 # File Name:   zacharias.gd
-# Description: The AI for the zacharias boss fight
+# Description: General zacharias variables and functions
 # Author:      Jeff Newell
 # Company:     Sidetrack
 # Date:        April 20, 2021
@@ -8,9 +8,28 @@
 extends StaticBody2D
 
 #-----------------------------------------------------------------------------#
+#                                 Signals                                     #
+#-----------------------------------------------------------------------------#
+signal started_jump
+signal shake_screen(duration, frequency, amplitude)
+signal boss_defeated
+
+#-----------------------------------------------------------------------------#
+#                                Constants                                    #
+#-----------------------------------------------------------------------------#
+const TOTAL_STAGES: int = 3
+
+#-----------------------------------------------------------------------------#
+#                            Onready Variables                                #
+#-----------------------------------------------------------------------------#
+onready var gui
+onready var audio
+onready var fireball
+onready var animation_machine = $animation/animation_machine.get("parameters/playback")
+
+#-----------------------------------------------------------------------------#
 #                             Export Variables                                #
 #-----------------------------------------------------------------------------#
-export var total_stages: int = 3
 
 #-----------------------------------------------------------------------------#
 #                             Public Variables                                #
@@ -49,6 +68,17 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 #-----------------------------------------------------------------------------#
+#                            Physics/Process Loop                             #
+#-----------------------------------------------------------------------------#
+func _process(_delta: float) -> void:
+	# Continuously check the current state to make sure that only the current animation is shown
+	_manage_visibility(animation_machine.get_current_node())
+	
+	# If true, always face the player
+	if _is_facing_player:
+		_face_player()
+
+#-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
 # Get the current health of the boss
@@ -68,6 +98,15 @@ func get_total_health() -> int:
 func hurt() -> void:
 	health[current_stage].current -= 1
 
+func next_stage() -> void:
+	current_stage += 1
+
+func set_facing_direction(direction: int) -> void:
+	get_parent().scale.x = direction * 3
+
+func set_face_player(face_player: bool) -> void:
+	_is_facing_player = face_player
+
 func set_hurt(hurt: bool) -> void:
 	is_hurt = hurt
 
@@ -79,9 +118,24 @@ func stage_completed() -> bool:
 #-----------------------------------------------------------------------------#
 func _face_player() -> void:
 	if global_position.direction_to(Globals.player_position).x >= 0:
-		get_parent().scale.x = -3
-	else:
 		get_parent().scale.x = 3
+	else:
+		get_parent().scale.x = -3
+
+func _is_dead() -> bool:
+	return health[current_stage].current <= 0 and current_stage >= TOTAL_STAGES
+
+# Change the currently showing animation to the new animation
+func _manage_visibility(new_state) -> void:
+	if _last_state != new_state and new_state != "":
+		get_node("sprites/stage" + String(current_stage) + "/" + _last_state).visible = false
+		get_node("sprites/stage" + String(current_stage) + "/" + new_state).visible   = true
+		
+		_last_state = new_state
+
+# Shake the screen
+func _shake_screen(duration: float, frequency: float, amplitude: float) -> void:
+	emit_signal("shake_screen", duration, frequency, amplitude)
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #

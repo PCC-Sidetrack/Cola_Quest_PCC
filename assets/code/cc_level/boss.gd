@@ -1,7 +1,42 @@
+#-----------------------------------------------------------------------------#
+# File Name:   boss.gd
+# Description: The AI for the zacharias boss fight
+# Author:      Jeff Newell
+# Company:     Sidetrack
+# Date:        March 25, 2021
+#-----------------------------------------------------------------------------#
 extends Node2D
 
+#-----------------------------------------------------------------------------#
+#                            Onready Variables                                #
+#-----------------------------------------------------------------------------#
 onready var zacharias_current_position = $paths/balcony_stage/boss_position
+onready var zacharias_data             = $paths/balcony_stage/boss_position/zacharias
 
+onready var animation_player           = $paths/balcony_stage/boss_position/zacharias/animation/animation_machine
+onready var animation_machine          = $paths/balcony_stage/boss_position/zacharias/animation/animation_machine.get("parameters/playback")
+onready var logic_player               = $logic/logic_machine
+onready var logic_machine              = $logic/logic_machine.get("parameters/playback")
+onready var movement_player            = $movement/movement_machine
+onready var movement_machine           = $movement/movement_machine.get("parameters/playback")
+
+onready var fireball
+
+onready var gui = get_parent().get_parent().get_node("player/game_UI")
+
+#-----------------------------------------------------------------------------#
+#                             Export Variables                                #
+#-----------------------------------------------------------------------------#
+export var debugging: bool = false
+
+#-----------------------------------------------------------------------------#
+#                             Private Variables                               #
+#-----------------------------------------------------------------------------#
+#var _last_path: String = "balcony_stage"
+
+#-----------------------------------------------------------------------------#
+#                              Initialization                                 #
+#-----------------------------------------------------------------------------#
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$paths.visible = true
@@ -20,57 +55,188 @@ func _change_path(new_path: String) -> void:
 
 # Stage 1 nodes
 func _pick_action1() -> void:
-	pass
+	if debugging:
+		print("pick_action1")
+	
+	if logic_machine.get_current_node() == "pick_action1":
+		pass
 
 func _jump() -> void:
-	pass
+	if debugging:
+		print("jump")
+	
+	animation_machine.travel("jump")
+	yield(zacharias_data, "started_jump")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if movement_machine.get_current_node() == "p_stage_left":
+		movement_machine.travel("p_stage_right")
+	else:
+		movement_machine.travel("p_stage_left")
+	
+	if logic_machine.get_current_node() == "jump":
+		logic_machine.travel("delay1")
 
 func _punch() -> void:
-	pass
+	if debugging:
+		print("punch")
+	
+	animation_machine.travel("punch")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "punch":
+		logic_machine.travel("delay1")
 
 func _fire() -> void:
-	pass
+	if debugging:
+		print("fire")
+	
+	animation_machine.travel("fire")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "fire":
+		logic_machine.travel("delay1")
 
 func _delay1() -> void:
-	pass
+	if debugging:
+		print("delay1")
+	
+	animation_machine.travel("idle1")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "delay1":
+		logic_machine.travel("pick_action1")
 
 func _hit1() -> void:
-	pass
+	if debugging:
+		print("hit1")
+	
+	animation_machine.travel("hit1")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "hit1":
+		logic_machine.travel("is_dead1")
 
 func _is_dead1() -> void:
-	pass
+	if debugging:
+		print("is_dead1")
+	
+	if logic_machine.get_current_node() == "is_dead1":
+		if zacharias_data.stage_completed():
+			zacharias_data.next_stage()
+			logic_machine.travel("delay2")
+		else:
+			logic_machine.travel("pick_action1")
 
 # Stage 2 nodes
 func _delay2() -> void:
-	pass
+	if debugging:
+		print("delay2")
+	
+	animation_machine.travel("idle2")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "delay2":
+		logic_machine.travel("throw")
 
 func _throw() -> void:
-	pass
+	if debugging:
+		print("throw")
+	
+	animation_machine.travel("throw")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "throw":
+		logic_machine.travel("delay2")
 
 func _hit2() -> void:
-	pass
+	if debugging:
+		print("hit2")
+	
+	animation_machine.travel("hit2")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "hit2":
+		logic_machine.travel("is_dead2")
 
 func _is_dead2() -> void:
-	pass
+	if debugging:
+		print("is_dead2")
+	
+	if logic_machine.get_current_node() == "is_dead2":
+		if zacharias_data.stage_completed():
+			zacharias_data.next_stage()
+			logic_machine.travel("pick_action3")
+		else:
+			logic_machine.travel("delay2")
 
 # Stage 3 nodes
 func _pick_action3() -> void:
-	pass
+	if debugging:
+		print("pick_action3")
+	
+	if logic_machine.get_current_node() == "pick_action3":
+		if rand_range(0.0, 2.0) >= 1:
+			logic_machine.travel("swoop")
+		else:
+			logic_machine.travel("gust")
 
 func _gust() -> void:
-	pass
+	if debugging:
+		print("gust")
+	
+	animation_machine.travel("gust")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "gust":
+		logic_machine.travel("delay3")
 
 func _delay3() -> void:
-	pass
+	if debugging:
+		print("delay3")
+	
+	animation_machine.travel("idle3")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "delay3":
+		logic_machine.travel("pick_action3")
 
 func _swoop() -> void:
-	pass
+	if debugging:
+		print("swoop")
+	
+	animation_machine.travel("swoop")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "swoop":
+		logic_machine.travel("delay3")
 
 func _hit3() -> void:
-	pass
+	if debugging:
+		print("hit3")
+	
+	animation_machine.travel("hit3")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	if logic_machine.get_current_node() == "hit3":
+		logic_machine.travel("is_dead3")
 
 func _is_dead3() -> void:
-	pass
+	if debugging:
+		print("is_dead3")
+	
+	if logic_machine.get_current_node() == "is_dead3":
+		if zacharias_data.stage_completed():
+			logic_machine.travel("death")
+		else:
+			logic_machine.travel("pick_action3")
 
+# Boss fight end
 func _death() -> void:
-	pass
+	if debugging:
+		print("death")
+	
+	animation_machine.travel("death")
+	yield(get_tree().create_timer(1.0), "timeout")
+	
+	gui.on_player_level_cleared()
