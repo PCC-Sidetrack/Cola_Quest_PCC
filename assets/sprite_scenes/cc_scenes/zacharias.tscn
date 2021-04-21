@@ -93,7 +93,7 @@ disabled = true
 [node name="idle" type="Sprite" parent="sprites/stage1"]
 texture = ExtResource( 2 )
 hframes = 6
-frame = 1
+frame = 3
 
 [node name="jump" type="Sprite" parent="sprites/stage1"]
 visible = false

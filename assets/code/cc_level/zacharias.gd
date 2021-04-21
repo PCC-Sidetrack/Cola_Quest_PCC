@@ -129,10 +129,10 @@ func stage_completed() -> bool:
 #                             Private Functions                               #
 #-----------------------------------------------------------------------------#
 func _face_player() -> void:
-	if global_position.direction_to(Globals.player_position).x >= 0:
-		get_parent().scale.x = 3
-	else:
+	if global_position.direction_to(Globals.player_position).x < 0:
 		get_parent().scale.x = -3
+	else:
+		get_parent().scale.x = 3
 
 func _is_dead() -> bool:
 	return health[current_stage].current <= 0 and current_stage >= TOTAL_STAGES

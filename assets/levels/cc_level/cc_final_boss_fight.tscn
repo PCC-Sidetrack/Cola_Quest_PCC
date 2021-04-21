@@ -1539,7 +1539,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 94
+frame = 62
 speed_scale = 2.0
 playing = true
 __meta__ = {
@@ -1667,7 +1667,7 @@ curve = SubResource( 15 )
 
 [node name="boss_position" type="PathFollow2D" parent="enemies/boss/paths/balcony_stage"]
 pause_mode = 2
-position = Vector2( -479.627, 291.622 )
+position = Vector2( -479.627, 291.62 )
 offset = 1732.34
 rotate = false
 loop = false
