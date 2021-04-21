@@ -13,6 +13,7 @@ extends StaticBody2D
 signal started_jump
 signal shake_screen(duration, frequency, amplitude)
 signal boss_defeated
+signal boss_hit
 
 #-----------------------------------------------------------------------------#
 #                                Constants                                    #
@@ -22,7 +23,7 @@ const TOTAL_STAGES: int = 3
 #-----------------------------------------------------------------------------#
 #                            Onready Variables                                #
 #-----------------------------------------------------------------------------#
-onready var gui
+onready var gui               = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("player/game_UI")
 onready var audio
 onready var fireball
 onready var animation_machine = $animation/animation_machine.get("parameters/playback")
@@ -65,7 +66,7 @@ var health: Dictionary = {
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 #-----------------------------------------------------------------------------#
 #                            Physics/Process Loop                             #
@@ -81,11 +82,19 @@ func _process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                             Public Functions                                #
 #-----------------------------------------------------------------------------#
+# Flash the character with increasing frequency for the duration
+func invulnerable_flicker(frequency: float) -> void:
+	for period in frequency:
+		get_parent().modulate.a = 0.5
+		yield(get_tree(), "idle_frame")
+		get_parent().modulate.a = 1.0
+		yield(get_tree(), "idle_frame")
+
 # Get the current health of the boss
 func get_current_heatlh() -> int:
 	var total: int = 0
 	for stage in health:
-		total += health[total].current
+		total += health[stage].current
 	return total
 
 # Get the total health of the boss
@@ -96,7 +105,10 @@ func get_total_health() -> int:
 	return total
 
 func hurt() -> void:
+	gui.on_boss_health_changed(get_current_heatlh(), get_current_heatlh() - 1)
 	health[current_stage].current -= 1
+	
+	emit_signal("boss_hit")
 
 func next_stage() -> void:
 	current_stage += 1

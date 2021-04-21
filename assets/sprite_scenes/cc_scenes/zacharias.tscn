@@ -8,26 +8,25 @@
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 27.156, 38.404 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=3]
 resource_name = "death"
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "fire"
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=5]
 resource_name = "gust"
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=6]
 resource_name = "hit1"
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=7]
 resource_name = "hit2"
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=8]
 resource_name = "hit3"
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle1"
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/stage1/idle:frame")
@@ -54,33 +53,31 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=10]
 resource_name = "idle2"
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=11]
 resource_name = "idle3"
 
-[sub_resource type="Animation" id=8]
-resource_name = "jump"
+[sub_resource type="Animation" id=12]
 
-[sub_resource type="Animation" id=9]
-resource_name = "punch"
+[sub_resource type="Animation" id=13]
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=14]
 resource_name = "swoop"
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=15]
 resource_name = "throw"
 
-[sub_resource type="AnimationNodeAnimation" id=4]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "idle1"
 
-[sub_resource type="AnimationNodeStateMachine" id=5]
-states/idle/node = SubResource( 4 )
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/idle/node = SubResource( 16 )
 states/idle/position = Vector2( 235, 96.5 )
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
 [node name="zacharias" type="StaticBody2D"]
 script = ExtResource( 1 )
@@ -96,7 +93,7 @@ disabled = true
 [node name="idle" type="Sprite" parent="sprites/stage1"]
 texture = ExtResource( 2 )
 hframes = 6
-frame = 4
+frame = 1
 
 [node name="jump" type="Sprite" parent="sprites/stage1"]
 visible = false
@@ -137,25 +134,25 @@ position = Vector2( 7, 3.15282 )
 shape = SubResource( 2 )
 
 [node name="animation" type="AnimationPlayer" parent="."]
-anims/death = SubResource( 10 )
-anims/fire = SubResource( 7 )
-anims/gust = SubResource( 11 )
-anims/hit1 = SubResource( 12 )
-anims/hit2 = SubResource( 13 )
-anims/hit3 = SubResource( 14 )
-anims/idle1 = SubResource( 3 )
-anims/idle2 = SubResource( 15 )
-anims/idle3 = SubResource( 16 )
-anims/jump = SubResource( 8 )
-anims/punch = SubResource( 9 )
-anims/swoop = SubResource( 17 )
-anims/throw = SubResource( 18 )
+anims/death = SubResource( 3 )
+anims/fire = SubResource( 4 )
+anims/gust = SubResource( 5 )
+anims/hit1 = SubResource( 6 )
+anims/hit2 = SubResource( 7 )
+anims/hit3 = SubResource( 8 )
+anims/idle1 = SubResource( 9 )
+anims/idle2 = SubResource( 10 )
+anims/idle3 = SubResource( 11 )
+anims/jump = SubResource( 12 )
+anims/punch = SubResource( 13 )
+anims/swoop = SubResource( 14 )
+anims/throw = SubResource( 15 )
 
 [node name="animation_machine" type="AnimationTree" parent="animation"]
-tree_root = SubResource( 5 )
+tree_root = SubResource( 17 )
 anim_player = NodePath("..")
 active = true
-parameters/playback = SubResource( 6 )
+parameters/playback = SubResource( 18 )
 
 [node name="hitbox" type="Area2D" parent="."]
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

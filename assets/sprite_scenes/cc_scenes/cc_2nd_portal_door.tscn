@@ -275,6 +275,7 @@ position = Vector2( 32, 31 )
 position = Vector2( 32, -98 )
 scale = Vector2( 1e-05, 1e-05 )
 frames = SubResource( 19 )
+frame = 1
 playing = true
 
 [node name="doorway" type="Area2D" parent="."]
@@ -288,7 +289,6 @@ shape = SubResource( 20 )
 layer = 10
 
 [node name="transition" type="ColorRect" parent="CanvasLayer"]
-visible = false
 material = SubResource( 21 )
 margin_right = 1024.0
 margin_bottom = 600.0

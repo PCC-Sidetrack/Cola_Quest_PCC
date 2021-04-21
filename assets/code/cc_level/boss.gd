@@ -39,7 +39,14 @@ export var debugging: bool = false
 #-----------------------------------------------------------------------------#
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	zacharias_current_position.unit_offset = 0
 	$paths.visible = true
+
+#-----------------------------------------------------------------------------#
+#                             Public Functions                                #
+#-----------------------------------------------------------------------------#
+func start_fight() -> void:
+	logic_machine.start("pick_action1")
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
@@ -58,16 +65,24 @@ func _pick_action1() -> void:
 	if debugging:
 		print("pick_action1")
 	
+	var choice: int = randi() % 3
+	
 	if logic_machine.get_current_node() == "pick_action1":
-		pass
+		match choice:
+			0:
+				logic_machine.travel("jump")
+			1:
+				logic_machine.travel("fire")
+			2:
+				logic_machine.travel("punch")
 
 func _jump() -> void:
 	if debugging:
 		print("jump")
 	
-	animation_machine.travel("jump")
-	yield(zacharias_data, "started_jump")
-	yield(get_tree().create_timer(1.0), "timeout")
+	#animation_machine.travel("jump")
+	#yield(zacharias_data, "started_jump")
+	yield(get_tree().create_timer(0.5), "timeout")
 	
 	if movement_machine.get_current_node() == "p_stage_left":
 		movement_machine.travel("p_stage_right")
@@ -81,7 +96,7 @@ func _punch() -> void:
 	if debugging:
 		print("punch")
 	
-	animation_machine.travel("punch")
+	#animation_machine.travel("punch")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "punch":
@@ -91,7 +106,7 @@ func _fire() -> void:
 	if debugging:
 		print("fire")
 	
-	animation_machine.travel("fire")
+	#animation_machine.travel("fire")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "fire":
@@ -101,7 +116,7 @@ func _delay1() -> void:
 	if debugging:
 		print("delay1")
 	
-	animation_machine.travel("idle1")
+	#animation_machine.travel("idle1")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "delay1":
@@ -111,7 +126,7 @@ func _hit1() -> void:
 	if debugging:
 		print("hit1")
 	
-	animation_machine.travel("hit1")
+	#animation_machine.travel("hit1")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "hit1":
@@ -124,6 +139,16 @@ func _is_dead1() -> void:
 	if logic_machine.get_current_node() == "is_dead1":
 		if zacharias_data.stage_completed():
 			zacharias_data.next_stage()
+			
+			if movement_machine.get_current_node() == "p_stage_right":
+				movement_machine.travel("p_off_stage_right")
+			else:
+				movement_machine.travel("p_off_stage_left")
+			yield(get_tree().create_timer(0.5), "timeout")
+			
+			movement_machine.travel("p_upper_right")
+			yield(get_tree().create_timer(0.5), "timeout")
+			
 			logic_machine.travel("delay2")
 		else:
 			logic_machine.travel("pick_action1")
@@ -133,7 +158,7 @@ func _delay2() -> void:
 	if debugging:
 		print("delay2")
 	
-	animation_machine.travel("idle2")
+	#animation_machine.travel("idle2")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "delay2":
@@ -143,7 +168,7 @@ func _throw() -> void:
 	if debugging:
 		print("throw")
 	
-	animation_machine.travel("throw")
+	#animation_machine.travel("throw")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "throw":
@@ -153,7 +178,7 @@ func _hit2() -> void:
 	if debugging:
 		print("hit2")
 	
-	animation_machine.travel("hit2")
+	#animation_machine.travel("hit2")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "hit2":
@@ -166,6 +191,13 @@ func _is_dead2() -> void:
 	if logic_machine.get_current_node() == "is_dead2":
 		if zacharias_data.stage_completed():
 			zacharias_data.next_stage()
+			
+			movement_machine.travel("p_off_upper_right")
+			yield(get_tree().create_timer(0.5), "timeout")
+			
+			movement_machine.travel("p_upper_right")
+			yield(get_tree().create_timer(0.5), "timeout")
+			
 			logic_machine.travel("pick_action3")
 		else:
 			logic_machine.travel("delay2")
@@ -176,7 +208,7 @@ func _pick_action3() -> void:
 		print("pick_action3")
 	
 	if logic_machine.get_current_node() == "pick_action3":
-		if rand_range(0.0, 2.0) >= 1:
+		if randi() % 2 >= 1:
 			logic_machine.travel("swoop")
 		else:
 			logic_machine.travel("gust")
@@ -185,7 +217,7 @@ func _gust() -> void:
 	if debugging:
 		print("gust")
 	
-	animation_machine.travel("gust")
+	#animation_machine.travel("gust")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "gust":
@@ -195,7 +227,7 @@ func _delay3() -> void:
 	if debugging:
 		print("delay3")
 	
-	animation_machine.travel("idle3")
+	#animation_machine.travel("idle3")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "delay3":
@@ -205,8 +237,13 @@ func _swoop() -> void:
 	if debugging:
 		print("swoop")
 	
-	animation_machine.travel("swoop")
-	yield(get_tree().create_timer(1.0), "timeout")
+	if movement_machine.get_current_node() == "p_upper_right":
+		movement_machine.travel("p_upper_left")
+	else:
+		movement_machine.travel("p_upper_right")
+	
+	#animation_machine.travel("swoop")
+	yield(get_tree().create_timer(1.5), "timeout")
 	
 	if logic_machine.get_current_node() == "swoop":
 		logic_machine.travel("delay3")
@@ -215,7 +252,7 @@ func _hit3() -> void:
 	if debugging:
 		print("hit3")
 	
-	animation_machine.travel("hit3")
+	#animation_machine.travel("hit3")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "hit3":
@@ -236,7 +273,19 @@ func _death() -> void:
 	if debugging:
 		print("death")
 	
-	animation_machine.travel("death")
+	#animation_machine.travel("death")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	gui.on_player_level_cleared()
+
+
+func _on_zacharias_boss_hit() -> void:
+	zacharias_data.invulnerable_flicker(50)
+	logic_machine.stop()
+	match zacharias_data.current_stage:
+		1:
+			logic_machine.start("hit1")
+		2:
+			logic_machine.start("hit2")
+		3:
+			logic_machine.start("hit3")

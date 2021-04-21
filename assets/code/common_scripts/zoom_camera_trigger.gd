@@ -9,6 +9,8 @@
 
 extends Area2D
 
+onready var boss = get_parent().get_parent().get_node("enemies/boss")
+
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
@@ -26,5 +28,8 @@ func _on_Area2D_body_entered(body):
 #		camera.drag_margin_right = 0.3
 #		camera.drag_margin_top = 0.3
 #		camera.drag_margin_bottom = 0.3
+		
+		yield(get_tree().create_timer(1.5), "timeout")
+		boss.start_fight()
 		
 		queue_free()
