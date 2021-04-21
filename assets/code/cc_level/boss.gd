@@ -10,6 +10,7 @@ onready var zacharias_current_position = $paths/balcony_stage/boss_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$paths.visible = true
 	pass # Replace with function body.
 
 #-----------------------------------------------------------------------------#

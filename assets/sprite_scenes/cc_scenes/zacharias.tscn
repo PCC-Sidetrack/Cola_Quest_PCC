@@ -89,6 +89,7 @@ visible = false
 visible = false
 position = Vector2( 7, 3.15282 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="animation" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )

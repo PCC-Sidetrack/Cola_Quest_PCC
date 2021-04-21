@@ -18,5 +18,6 @@ onready var portal = $cc_2nd_portal_door/AnimationPlayer
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	get_tree().paused = true
+	
 	portal.play("transition_out")
 	get_node("player").load_from_transition()
