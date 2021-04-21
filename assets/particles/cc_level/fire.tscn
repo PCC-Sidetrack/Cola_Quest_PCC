@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/levels/AC_Level/assets/lights/ligh2(v2).png" type="Texture" id=1]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 9.91838e-39, 0.223913, 0.502174, 0.771739 )
@@ -7,17 +9,17 @@ colors = PoolColorArray( 0.776471, 0, 0, 1, 0.968627, 0.411765, 0.00392157, 1, 0
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=3]
 max_value = 2.0
 _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.883163, 0.913357 ), -0.764953, -0.764953, 0, 0, Vector2( 0.995408, 0.306859 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 lifetime_randomness = 0.96
 emission_shape = 2
-emission_box_extents = Vector3( 10, 1, 1 )
+emission_box_extents = Vector3( 5, 1, 1 )
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -27,13 +29,23 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 45.0
 angle_random = 0.85
-scale = 5.0
-scale_curve = SubResource( 5 )
+scale = 2.0
+scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="fire" type="Node2D"]
 
 [node name="Particles2D" type="Particles2D" parent="."]
 amount = 100
+lifetime = 0.5
 randomness = 0.57
-process_material = SubResource( 3 )
+visibility_rect = Rect2( 0, 0, 0, 0 )
+local_coords = false
+process_material = SubResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="."]
+z_index = 1
+texture = ExtResource( 1 )
+texture_scale = 2.0
+color = Color( 0.917647, 0.219608, 0.00392157, 1 )
+energy = 2.0
