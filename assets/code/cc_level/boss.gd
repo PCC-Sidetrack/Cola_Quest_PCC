@@ -1,17 +1,10 @@
 extends Node2D
 
-
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
-
 onready var zacharias_current_position = $paths/balcony_stage/boss_position
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$paths.visible = true
-	pass # Replace with function body.
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #
@@ -47,7 +40,7 @@ func _hit1() -> void:
 func _is_dead1() -> void:
 	pass
 
-# Stage 2
+# Stage 2 nodes
 func _delay2() -> void:
 	pass
 
@@ -60,14 +53,14 @@ func _hit2() -> void:
 func _is_dead2() -> void:
 	pass
 
-# Stage 3
+# Stage 3 nodes
 func _pick_action3() -> void:
 	pass
 
 func _gust() -> void:
 	pass
 
-func _delay() -> void:
+func _delay3() -> void:
 	pass
 
 func _swoop() -> void:
