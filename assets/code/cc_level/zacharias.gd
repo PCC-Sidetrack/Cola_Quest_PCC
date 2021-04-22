@@ -42,7 +42,7 @@ var is_hurt:       bool = false
 #                             Private Variables                               #
 #-----------------------------------------------------------------------------#
 var _is_facing_player: bool   = true
-var _last_state:       String = "idle"
+var _last_state:       String = "idle1"
 
 #-----------------------------------------------------------------------------#
 #                              Dictionaries                                   #

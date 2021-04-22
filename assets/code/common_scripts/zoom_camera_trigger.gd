@@ -20,7 +20,7 @@ func _on_Area2D_body_entered(body):
 		
 		var camera = Globals.player.get_node("Camera2D")
 		
-		body.zoom(1.5)
+		body.zoom(1.8)
 		
 		camera.limit_left  = -736
 		camera.limit_right = 736
