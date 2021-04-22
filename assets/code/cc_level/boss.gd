@@ -13,11 +13,11 @@ extends Node2D
 onready var zacharias_current_position = $paths/balcony_stage/boss_position
 onready var zacharias_data             = $paths/balcony_stage/boss_position/zacharias
 
-onready var animation_player           = $paths/balcony_stage/boss_position/zacharias/animation/animation_machine
+onready var animation_player           = $paths/balcony_stage/boss_position/zacharias/animation
 onready var animation_machine          = $paths/balcony_stage/boss_position/zacharias/animation/animation_machine.get("parameters/playback")
-onready var logic_player               = $logic/logic_machine
+onready var logic_player               = $logic
 onready var logic_machine              = $logic/logic_machine.get("parameters/playback")
-onready var movement_player            = $movement/movement_machine
+onready var movement_player            = $movement
 onready var movement_machine           = $movement/movement_machine.get("parameters/playback")
 
 onready var fireball
@@ -85,7 +85,7 @@ func _jump() -> void:
 		movement_machine.travel("p_stage_right")
 	else:
 		movement_machine.travel("p_stage_left")
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("jump").length), "timeout")
 	
 	if logic_machine.get_current_node() == "jump":
 		logic_machine.travel("delay1")
@@ -95,7 +95,7 @@ func _punch() -> void:
 		print("punch")
 	
 	animation_machine.travel("punch")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("punch").length), "timeout")
 	
 	if logic_machine.get_current_node() == "punch":
 		logic_machine.travel("delay1")
@@ -105,7 +105,7 @@ func _fire() -> void:
 		print("fire")
 	
 	animation_machine.travel("fire")
-	yield(get_tree().create_timer(3.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("fire").length), "timeout")
 	
 	if logic_machine.get_current_node() == "fire":
 		logic_machine.travel("delay1")
@@ -115,7 +115,7 @@ func _delay1() -> void:
 		print("delay1")
 	
 	animation_machine.travel("idle1")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("idle1").length), "timeout")
 	
 	if logic_machine.get_current_node() == "delay1":
 		logic_machine.travel("pick_action1")
@@ -125,7 +125,7 @@ func _hit1() -> void:
 		print("hit1")
 	
 	animation_machine.travel("hit1")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("hit1").length), "timeout")
 	
 	if logic_machine.get_current_node() == "hit1":
 		logic_machine.travel("is_dead1")
@@ -159,7 +159,7 @@ func _delay2() -> void:
 		print("delay2")
 	
 	animation_machine.travel("idle2")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("idle2").length), "timeout")
 	
 	if logic_machine.get_current_node() == "delay2":
 		logic_machine.travel("throw")
@@ -169,7 +169,7 @@ func _throw() -> void:
 		print("throw")
 	
 	animation_machine.travel("throw")
-	yield(get_tree().create_timer(1.4), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("throw").length), "timeout")
 	
 	if logic_machine.get_current_node() == "throw":
 		logic_machine.travel("delay2")
@@ -179,7 +179,7 @@ func _hit2() -> void:
 		print("hit2")
 	
 	animation_machine.travel("hit2")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("hit2").length), "timeout")
 	
 	if logic_machine.get_current_node() == "hit2":
 		logic_machine.travel("is_dead2")
@@ -220,7 +220,7 @@ func _gust() -> void:
 		print("gust")
 	
 	animation_machine.travel("gust")
-	yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("gust").length), "timeout")
 	
 	if logic_machine.get_current_node() == "gust":
 		logic_machine.travel("delay3")
@@ -230,7 +230,7 @@ func _delay3() -> void:
 		print("delay3")
 	
 	animation_machine.travel("idle3")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("idle3").length), "timeout")
 	
 	if logic_machine.get_current_node() == "delay3":
 		logic_machine.travel("pick_action3")
@@ -245,7 +245,7 @@ func _swoop() -> void:
 		movement_machine.travel("p_upper_right")
 	
 	animation_machine.travel("swoop")
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("swoop").length), "timeout")
 	
 	if logic_machine.get_current_node() == "swoop":
 		logic_machine.travel("delay3")
@@ -255,7 +255,7 @@ func _hit3() -> void:
 		print("hit3")
 	
 	animation_machine.travel("hit3")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("hit3").length), "timeout")
 	
 	if logic_machine.get_current_node() == "hit3":
 		logic_machine.travel("is_dead3")
@@ -275,8 +275,7 @@ func _death() -> void:
 	if debugging:
 		print("death")
 	
-	#animation_machine.travel("death")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(animation_player.get_animation("death").length), "timeout")
 	
 	gui.on_player_level_cleared()
 

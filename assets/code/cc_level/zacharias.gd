@@ -102,7 +102,7 @@ func invulnerable_flicker(frequency: float) -> void:
 		yield(get_tree(), "idle_frame")
 
 # Get the current health of the boss
-func get_current_heatlh() -> int:
+func get_current_health() -> int:
 	var total: int = 0
 	for stage in health:
 		total += health[stage].current
@@ -116,18 +116,17 @@ func get_total_health() -> int:
 	return total
 
 func hurt() -> void:
-	gui.on_boss_health_changed(get_current_heatlh(), get_current_heatlh() - 1)
+	gui.on_boss_health_changed(get_current_health(), get_current_health() - 1)
 	health[current_stage].current -= 1
-	
 	emit_signal("boss_hit")
 
-func note_paths() -> void:
-	var chosen_path: int
-	var paths: Array = [1, 2, 3]
-	for order in note_order:
-		chosen_path = randi() % paths.size()
-		note_order[order] = paths[chosen_path]
-		paths.remove(chosen_path)
+#func note_paths() -> void:
+#	var chosen_path: int
+#	var paths: Array = [1, 2, 3]
+#	for order in note_order:
+#		chosen_path = randi() % paths.size()
+#		note_order[order] = paths[chosen_path]
+#		paths.remove(chosen_path)
 
 func next_stage() -> void:
 	current_stage += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=227 format=2]
+[gd_scene load_steps=226 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/cc_level/parallaxing/background/PL13_cc_stage/PL13_spritesheet_cc_stage/PL13_cc_stage36.png" type="Texture" id=2]
@@ -1009,7 +1009,7 @@ states/right_left_stage/position = Vector2( 751.699, 113.216 )
 states/right_left_upper/node = SubResource( 59 )
 states/right_left_upper/position = Vector2( 757.967, -130.228 )
 states/stage_off_left/node = SubResource( 60 )
-states/stage_off_left/position = Vector2( 289.571, 78.8518 )
+states/stage_off_left/position = Vector2( 289.071, 75.0598 )
 states/stage_off_right/node = SubResource( 61 )
 states/stage_off_right/position = Vector2( 1245.21, 79.093 )
 states/stage_upper_off_left/node = SubResource( 62 )
@@ -1024,7 +1024,7 @@ states/upper_stage_right/node = SubResource( 66 )
 states/upper_stage_right/position = Vector2( 1008.69, 1.86923 )
 transitions = [ "p_balcony", "balcony_stage", SubResource( 67 ), "balcony_stage", "p_stage_left", SubResource( 68 ), "p_stage_right", "right_left_stage", SubResource( 69 ), "p_stage_left", "left_right_stage", SubResource( 70 ), "left_right_stage", "p_stage_right", SubResource( 71 ), "right_left_stage", "p_stage_left", SubResource( 72 ), "upper_stage_left", "p_stage_left", SubResource( 73 ), "p_upper_left", "upper_stage_left", SubResource( 74 ), "p_upper_right", "upper_stage_right", SubResource( 75 ), "upper_stage_right", "p_stage_right", SubResource( 76 ), "stage_off_right", "p_off_stage_right", SubResource( 77 ), "p_stage_right", "stage_off_right", SubResource( 78 ), "stage_off_left", "p_off_stage_left", SubResource( 79 ), "p_stage_left", "stage_off_left", SubResource( 80 ), "p_off_stage_right", "stage_upper_off_right", SubResource( 81 ), "stage_upper_off_right", "p_off_upper_right", SubResource( 82 ), "stage_upper_off_left", "p_off_upper_right", SubResource( 83 ), "p_off_stage_left", "stage_upper_off_left", SubResource( 84 ), "p_off_upper_right", "off_upper", SubResource( 85 ), "off_upper", "p_upper_right", SubResource( 86 ), "upper_off", "p_off_upper_right", SubResource( 87 ), "p_upper_right", "upper_off", SubResource( 88 ), "p_upper_left", "left_right_upper", SubResource( 89 ), "p_upper_right", "right_left_upper", SubResource( 90 ), "right_left_upper", "p_upper_left", SubResource( 91 ), "left_right_upper", "p_upper_right", SubResource( 92 ) ]
 start_node = "p_balcony"
-graph_offset = Vector2( 324.031, -172.17 )
+graph_offset = Vector2( 1013.26, -197.535 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=94]
 
@@ -1475,8 +1475,6 @@ animation = "throw"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=157]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=158]
-
 [sub_resource type="AnimationNodeStateMachine" id=159]
 states/death/node = SubResource( 113 )
 states/death/position = Vector2( -332.407, 756.536 )
@@ -1514,8 +1512,8 @@ states/swoop/node = SubResource( 129 )
 states/swoop/position = Vector2( 55.0676, 705.536 )
 states/throw/node = SubResource( 130 )
 states/throw/position = Vector2( 329, 440.443 )
-transitions = [ "pick_action1", "jump", SubResource( 131 ), "pick_action1", "punch", SubResource( 132 ), "pick_action1", "fire", SubResource( 133 ), "jump", "delay1", SubResource( 134 ), "punch", "delay1", SubResource( 135 ), "fire", "delay1", SubResource( 136 ), "delay1", "hit1", SubResource( 137 ), "delay1", "pick_action1", SubResource( 138 ), "hit1", "is_dead1", SubResource( 139 ), "is_dead1", "pick_action1", SubResource( 140 ), "is_dead1", "delay2", SubResource( 141 ), "delay2", "hit2", SubResource( 142 ), "delay2", "throw", SubResource( 143 ), "throw", "delay2", SubResource( 144 ), "throw", "hit2", SubResource( 145 ), "hit2", "is_dead2", SubResource( 146 ), "is_dead2", "delay2", SubResource( 147 ), "pick_action3", "swoop", SubResource( 148 ), "pick_action3", "gust", SubResource( 149 ), "gust", "delay3", SubResource( 150 ), "delay3", "pick_action3", SubResource( 151 ), "swoop", "delay3", SubResource( 152 ), "swoop", "hit3", SubResource( 153 ), "hit3", "is_dead3", SubResource( 154 ), "is_dead3", "pick_action3", SubResource( 155 ), "is_dead3", "death", SubResource( 156 ), "is_dead2", "delay3", SubResource( 157 ), "gust", "hit3", SubResource( 158 ) ]
-graph_offset = Vector2( -235.451, 577.185 )
+transitions = [ "pick_action1", "jump", SubResource( 131 ), "pick_action1", "punch", SubResource( 132 ), "pick_action1", "fire", SubResource( 133 ), "jump", "delay1", SubResource( 134 ), "punch", "delay1", SubResource( 135 ), "fire", "delay1", SubResource( 136 ), "delay1", "hit1", SubResource( 137 ), "delay1", "pick_action1", SubResource( 138 ), "hit1", "is_dead1", SubResource( 139 ), "is_dead1", "pick_action1", SubResource( 140 ), "is_dead1", "delay2", SubResource( 141 ), "delay2", "hit2", SubResource( 142 ), "delay2", "throw", SubResource( 143 ), "throw", "delay2", SubResource( 144 ), "throw", "hit2", SubResource( 145 ), "hit2", "is_dead2", SubResource( 146 ), "is_dead2", "delay2", SubResource( 147 ), "pick_action3", "swoop", SubResource( 148 ), "pick_action3", "gust", SubResource( 149 ), "gust", "delay3", SubResource( 150 ), "delay3", "pick_action3", SubResource( 151 ), "swoop", "delay3", SubResource( 152 ), "swoop", "hit3", SubResource( 153 ), "hit3", "is_dead3", SubResource( 154 ), "is_dead3", "pick_action3", SubResource( 155 ), "is_dead3", "death", SubResource( 156 ), "is_dead2", "delay3", SubResource( 157 ) ]
+graph_offset = Vector2( -181.99, 513.089 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=160]
 
@@ -1541,7 +1539,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 76
+frame = 98
 speed_scale = 2.0
 playing = true
 __meta__ = {
@@ -1663,7 +1661,6 @@ tile_data = PoolIntArray( -3342401, 13, 0, -3342400, 13, 0, -3342399, 13, 0, -33
 
 [node name="boss" type="Node2D" parent="enemies"]
 script = ExtResource( 63 )
-debugging = true
 
 [node name="paths" type="Node2D" parent="enemies/boss"]
 visible = false
