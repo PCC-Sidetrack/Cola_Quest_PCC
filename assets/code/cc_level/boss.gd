@@ -137,13 +137,14 @@ func _is_dead1() -> void:
 	if logic_machine.get_current_node() == "is_dead1":
 		if zacharias_data.stage_completed():
 			zacharias_data.next_stage()
-			zacharias_data.get_node("hurtbox/CollisionShape2D").set_deferred("disabled", false)
 			
 			if movement_machine.get_current_node() == "p_stage_right":
 				movement_machine.travel("p_off_stage_right")
 			else:
 				movement_machine.travel("p_off_stage_left")
 			yield(get_tree().create_timer(0.5), "timeout")
+			
+			animation_machine.travel("idle2")
 			
 			movement_machine.travel("p_upper_right")
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -193,6 +194,8 @@ func _is_dead2() -> void:
 			
 			movement_machine.travel("p_off_upper_right")
 			yield(get_tree().create_timer(0.5), "timeout")
+			
+			animation_machine.travel("idle3")
 			
 			movement_machine.travel("p_upper_right")
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -272,7 +275,7 @@ func _death() -> void:
 	if debugging:
 		print("death")
 	
-	animation_machine.travel("death")
+	#animation_machine.travel("death")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	gui.on_player_level_cleared()
