@@ -24,12 +24,6 @@ func _on_Area2D_body_entered(body):
 		
 		camera.limit_left  = -736
 		camera.limit_right = 736
-#		camera.drag_margin_h_enabled = true
-#		camera.drag_margin_v_enabled = true
-#		camera.drag_margin_left = 0.3
-#		camera.drag_margin_right = 0.3
-#		camera.drag_margin_top = 0.3
-#		camera.drag_margin_bottom = 0.3
 		
 		yield(get_tree().create_timer(1.5), "timeout")
 		boss.start_fight()

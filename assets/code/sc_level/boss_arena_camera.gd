@@ -22,6 +22,9 @@ var _time_between_timer:  float = _time_between_shakes
 #-----------------------------------------------------------------------------#
 #                              Initialization                                 #
 #-----------------------------------------------------------------------------#
+func _init() -> void:
+	set_process(true)
+
 func _ready() -> void:
 	set_process(true)
 

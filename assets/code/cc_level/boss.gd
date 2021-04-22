@@ -80,14 +80,12 @@ func _jump() -> void:
 	if debugging:
 		print("jump")
 	
-	#animation_machine.travel("jump")
-	#yield(zacharias_data, "started_jump")
-	yield(get_tree().create_timer(0.5), "timeout")
-	
+	animation_machine.travel("jump")
 	if movement_machine.get_current_node() == "p_stage_left":
 		movement_machine.travel("p_stage_right")
 	else:
 		movement_machine.travel("p_stage_left")
+	yield(get_tree().create_timer(0.5), "timeout")
 	
 	if logic_machine.get_current_node() == "jump":
 		logic_machine.travel("delay1")
@@ -96,7 +94,7 @@ func _punch() -> void:
 	if debugging:
 		print("punch")
 	
-	#animation_machine.travel("punch")
+	animation_machine.travel("punch")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "punch":
@@ -106,8 +104,8 @@ func _fire() -> void:
 	if debugging:
 		print("fire")
 	
-	#animation_machine.travel("fire")
-	yield(get_tree().create_timer(1.0), "timeout")
+	animation_machine.travel("fire")
+	yield(get_tree().create_timer(3.0), "timeout")
 	
 	if logic_machine.get_current_node() == "fire":
 		logic_machine.travel("delay1")
@@ -116,7 +114,7 @@ func _delay1() -> void:
 	if debugging:
 		print("delay1")
 	
-	#animation_machine.travel("idle1")
+	animation_machine.travel("idle1")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "delay1":
@@ -126,7 +124,7 @@ func _hit1() -> void:
 	if debugging:
 		print("hit1")
 	
-	#animation_machine.travel("hit1")
+	animation_machine.travel("hit1")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "hit1":
@@ -139,6 +137,7 @@ func _is_dead1() -> void:
 	if logic_machine.get_current_node() == "is_dead1":
 		if zacharias_data.stage_completed():
 			zacharias_data.next_stage()
+			zacharias_data.get_node("hurtbox/CollisionShape2D").set_deferred("disabled", false)
 			
 			if movement_machine.get_current_node() == "p_stage_right":
 				movement_machine.travel("p_off_stage_right")
@@ -158,7 +157,7 @@ func _delay2() -> void:
 	if debugging:
 		print("delay2")
 	
-	#animation_machine.travel("idle2")
+	animation_machine.travel("idle2")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "delay2":
@@ -168,8 +167,8 @@ func _throw() -> void:
 	if debugging:
 		print("throw")
 	
-	#animation_machine.travel("throw")
-	yield(get_tree().create_timer(1.0), "timeout")
+	animation_machine.travel("throw")
+	yield(get_tree().create_timer(1.4), "timeout")
 	
 	if logic_machine.get_current_node() == "throw":
 		logic_machine.travel("delay2")
@@ -178,7 +177,7 @@ func _hit2() -> void:
 	if debugging:
 		print("hit2")
 	
-	#animation_machine.travel("hit2")
+	animation_machine.travel("hit2")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "hit2":
@@ -227,7 +226,7 @@ func _delay3() -> void:
 	if debugging:
 		print("delay3")
 	
-	#animation_machine.travel("idle3")
+	animation_machine.travel("idle3")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "delay3":
@@ -252,8 +251,10 @@ func _hit3() -> void:
 	if debugging:
 		print("hit3")
 	
-	#animation_machine.travel("hit3")
-	yield(get_tree().create_timer(1.0), "timeout")
+	animation_machine.travel("hit3")
+	movement_player.active = false
+	yield(get_tree().create_timer(0.8), "timeout")
+	movement_player.active = true
 	
 	if logic_machine.get_current_node() == "hit3":
 		logic_machine.travel("is_dead3")

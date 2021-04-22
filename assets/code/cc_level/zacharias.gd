@@ -10,9 +10,7 @@ extends StaticBody2D
 #-----------------------------------------------------------------------------#
 #                                 Signals                                     #
 #-----------------------------------------------------------------------------#
-signal started_jump
 signal shake_screen(duration, frequency, amplitude)
-signal boss_defeated
 signal boss_hit
 
 #-----------------------------------------------------------------------------#
@@ -25,7 +23,7 @@ const TOTAL_STAGES: int = 3
 #-----------------------------------------------------------------------------#
 onready var gui               = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("player/game_UI")
 onready var audio
-onready var fireball
+onready var fireball          = load("res://assets/sprite_scenes/cc_scenes/fireball.tscn")
 onready var animation_machine = $animation/animation_machine.get("parameters/playback")
 
 #-----------------------------------------------------------------------------#
@@ -36,6 +34,7 @@ onready var animation_machine = $animation/animation_machine.get("parameters/pla
 #                             Public Variables                                #
 #-----------------------------------------------------------------------------#
 var current_stage: int  = 1
+var damage:        int  = 1
 var is_hurt:       bool = false
 
 #-----------------------------------------------------------------------------#
@@ -43,6 +42,7 @@ var is_hurt:       bool = false
 #-----------------------------------------------------------------------------#
 var _is_facing_player: bool   = true
 var _last_state:       String = "idle1"
+var _last_stage:       int    = 1
 
 #-----------------------------------------------------------------------------#
 #                              Dictionaries                                   #
@@ -140,8 +140,14 @@ func _is_dead() -> bool:
 # Change the currently showing animation to the new animation
 func _manage_visibility(new_state) -> void:
 	if _last_state != new_state and new_state != "":
-		get_node("sprites/stage" + String(current_stage) + "/" + _last_state).visible = false
-		get_node("sprites/stage" + String(current_stage) + "/" + new_state).visible   = true
+		print(_last_state, " -> ", new_state)
+		if _last_stage == current_stage:
+			get_node("sprites/stage" + String(current_stage) + "/" + _last_state).visible = false
+			get_node("sprites/stage" + String(current_stage) + "/" + new_state).visible   = true
+		else:
+			get_node("sprites/stage" + String(current_stage - 1) + "/" + _last_state).visible = false
+			get_node("sprites/stage" + String(current_stage) + "/" + new_state).visible       = true
+			_last_stage = current_stage
 		
 		_last_state = new_state
 
@@ -149,9 +155,28 @@ func _manage_visibility(new_state) -> void:
 func _shake_screen(duration: float, frequency: float, amplitude: float) -> void:
 	emit_signal("shake_screen", duration, frequency, amplitude)
 
+# Spawn a basketball
+func _spawn_fire() -> void:
+	var fire      = fireball.instance()
+	var direction = Vector2(get_parent().scale.x, 0)
+	var impulse   = direction * 150
+	get_parent().get_parent().get_parent().get_parent().get_parent().get_node("projectiles").add_child(fire)
+	
+	fire.position = $fireball_spawn.global_position
+	fire.fire_force(direction, impulse)
+
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #
 #-----------------------------------------------------------------------------#
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		hurt()
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		if global_position.x > body.global_position.x:
+			body.set_velocity(Vector2(-1000, -2000))
+		else:
+			body.set_velocity(Vector2(1000, -2000))

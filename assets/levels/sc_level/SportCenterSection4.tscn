@@ -1062,7 +1062,6 @@ modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
-frame = 1
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
