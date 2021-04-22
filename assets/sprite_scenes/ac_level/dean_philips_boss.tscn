@@ -1,0 +1,515 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://assets/code/AC_level/dean_philips_boss.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving3.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/rear/dean_philips_rear_up2.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/rear/dean_philips_rear_up3.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving1.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving4.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/rear/dean_philips_rear_up1.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving2.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle1.png" type="Texture" id=9]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle2.png" type="Texture" id=10]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle3.png" type="Texture" id=11]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle4.png" type="Texture" id=12]
+[ext_resource path="res://assets/levels/AC_Level/assets/lights/ligh2.png" type="Texture" id=13]
+[ext_resource path="res://assets/levels/AC_Level/assets/lights/ligh2(v2).png" type="Texture" id=14]
+[ext_resource path="res://assets/particles/cc_level/fire.tscn" type="PackedScene" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "idle",
+"speed": 15.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 47, 14 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "charge"
+length = 0.2
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/move:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 47, 14 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionPolygon2D:polygon")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -32.424, -14.4139, -7.81928, -42.2728, -4.24763, -48.3843, 3.84812, -48.6224, 7.65788, -43.7808, 6.78481, -36.5581, -1.86653, -32.5896, 4.24497, -26.3194, 14.4043, -27.748, 15.3568, -20.8428, 27.2623, -23.6208, 28.6909, -16.7156, 25.5161, -14.0964 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CollisionPolygon2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18.13 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollisionPolygon2D:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 47, 14 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionPolygon2D:polygon")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -32.424, -14.4139, -7.81928, -42.2728, -4.24763, -48.3843, 3.84812, -48.6224, 7.65788, -43.7808, 6.78481, -36.5581, -1.86653, -32.5896, 4.24497, -26.3194, 14.4043, -27.748, 15.3568, -20.8428, 27.2623, -23.6208, 28.6909, -16.7156, 25.5161, -14.0964 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CollisionPolygon2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18.13 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollisionPolygon2D:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "move"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/move:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 47, 14 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionPolygon2D:polygon")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -32.424, -14.4139, -7.81928, -42.2728, -4.24763, -48.3843, 3.84812, -48.6224, 7.65788, -43.7808, 6.78481, -36.5581, -1.86653, -32.5896, 4.24497, -26.3194, 14.4043, -27.748, 15.3568, -20.8428, 27.2623, -23.6208, 28.6909, -16.7156, 25.5161, -14.0964 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CollisionPolygon2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18.13 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollisionPolygon2D:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "rear_up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/rear_up:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 2, 1, 2, 1, 2, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:shape:extents")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 47, 14 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionPolygon2D:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -32.424, -14.4139, -7.81928, -42.2728, -4.24763, -48.3843, 3.84812, -48.6224, 7.65788, -43.7808, 6.78481, -36.5581, -1.86653, -32.5896, 4.24497, -26.3194, 14.4043, -27.748, 15.3568, -20.8428, 27.2623, -23.6208, 28.6909, -16.7156, 25.5161, -14.0964 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionPolygon2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 18.13 ), Vector2( -8.4757, -0.940336 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CollisionPolygon2D:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0.0, -25.0 ]
+}
+
+[node name="dean_philips_boss" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="sprites" type="Node2D" parent="."]
+position = Vector2( -10, -15 )
+
+[node name="idle" type="AnimatedSprite" parent="sprites"]
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="move" type="AnimatedSprite" parent="sprites"]
+visible = false
+frames = SubResource( 2 )
+
+[node name="rear_up" type="AnimatedSprite" parent="sprites"]
+visible = false
+frames = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/charge = SubResource( 8 )
+anims/idle = SubResource( 4 )
+anims/move = SubResource( 5 )
+anims/rear_up = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 18 )
+shape = SubResource( 7 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 0, 18.13 )
+polygon = PoolVector2Array( -32.424, -14.4139, -7.81928, -42.2728, -4.24763, -48.3843, 3.84812, -48.6224, 7.65788, -43.7808, 6.78481, -36.5581, -1.86653, -32.5896, 4.24497, -26.3194, 14.4043, -27.748, 15.3568, -20.8428, 27.2623, -23.6208, 28.6909, -16.7156, 25.5161, -14.0964 )
+
+[node name="lights" type="Node2D" parent="."]
+
+[node name="back_light" type="Light2D" parent="lights"]
+position = Vector2( -53.4275, 17.4906 )
+texture = ExtResource( 13 )
+texture_scale = 2.0
+color = Color( 0.00392157, 0, 0.654902, 1 )
+energy = 2.0
+
+[node name="front_light" type="Light2D" parent="lights"]
+position = Vector2( 25.1997, -1.91484 )
+texture = ExtResource( 14 )
+color = Color( 1, 0.960784, 0, 1 )
+energy = 1.5
+
+[node name="flames_charge" type="Node2D" parent="."]
+visible = false
+
+[node name="fire1" parent="flames_charge" instance=ExtResource( 15 )]
+position = Vector2( -58.9489, 6.51694 )
+rotation = -0.674226
+scale = Vector2( 0.681526, 1.19763 )
+z_index = 2
+
+[node name="fire2" parent="flames_charge" instance=ExtResource( 15 )]
+position = Vector2( -59.9579, 21.9894 )
+rotation = -0.674226
+scale = Vector2( 0.681526, 1.19763 )
+z_index = 3
+
+[node name="flames_rear" type="Node2D" parent="."]
+visible = false
+
+[node name="fire1" parent="flames_rear" instance=ExtResource( 15 )]
+position = Vector2( -62.7243, 13.5016 )
+rotation = -0.674226
+scale = Vector2( 0.681526, 1.19763 )
+z_index = 2
+
+[node name="fire2" parent="flames_rear" instance=ExtResource( 15 )]
+position = Vector2( -63.7334, 28.9741 )
+rotation = -0.674226
+scale = Vector2( 0.681526, 1.19763 )
+z_index = 3
