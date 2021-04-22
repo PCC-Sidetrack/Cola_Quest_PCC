@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/code/rooftop_level/spear2.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/rooftop_level/sprites/S9_constellation_spear/S9_constellation_spear.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/mk_level/sprites/S8_orion_enemy/MK_constellation_spear.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/mk_level/particles/glowing_circle.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 1.5 )
@@ -41,6 +42,11 @@ collision_mask = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="delay"]
 shape = SubResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -12.2832, -0.198649 )
+texture = ExtResource( 3 )
+color = Color( 1, 1, 1, 0.29 )
 [connection signal="death" from="." to="." method="_on_Entity_death"]
 [connection signal="health_changed" from="." to="." method="_on_Entity_health_changed"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
