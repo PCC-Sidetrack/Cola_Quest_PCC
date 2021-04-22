@@ -42,6 +42,7 @@
 [ext_resource path="res://assets/code/cc_level/stationary_pterodactyl.gd" type="Script" id=40]
 [ext_resource path="res://assets/particles/cc_level/sparks.tscn" type="PackedScene" id=41]
 [ext_resource path="res://assets/sprite_scenes/cc_scenes/electrical_wires.tscn" type="PackedScene" id=42]
+[ext_resource path="res://assets/levels/cc_level/cc_final_boss_fight.tscn" type="PackedScene" id=43]
 
 [sub_resource type="TileSet" id=1]
 0/name = "example.png 0"
@@ -489,9 +490,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=26]
-extents = Vector2( 10, 208.225 )
-
 [node name="cc_3rd_stage" type="Node2D"]
 script = ExtResource( 11 )
 
@@ -660,19 +658,20 @@ position = Vector2( 1967, 280 )
 
 [node name="cc_2nd_portal_door" parent="." instance=ExtResource( 34 )]
 position = Vector2( 3680, 320 )
+next_scene = ExtResource( 43 )
 
 [node name="water_fountains" type="Node2D" parent="."]
 
 [node name="water_fountain" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -291, 292.182 )
 frames = SubResource( 25 )
-frame = 11
+frame = 4
 playing = true
 
 [node name="water_fountain2" type="AnimatedSprite" parent="water_fountains"]
 position = Vector2( -253, 274.424 )
 frames = SubResource( 25 )
-frame = 8
+frame = 1
 playing = true
 
 [node name="exit_signs" type="Node2D" parent="."]
@@ -928,11 +927,4 @@ rotation = 0.961676
 position = Vector2( 2983.19, -65.1935 )
 rotation = 0.647517
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 3645.69, 111.086 )
-shape = SubResource( 26 )
-
 [node name="killzone" parent="." instance=ExtResource( 35 )]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
