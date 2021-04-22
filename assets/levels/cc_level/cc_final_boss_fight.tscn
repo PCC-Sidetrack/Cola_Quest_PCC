@@ -1475,7 +1475,7 @@ animation = "throw"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=157]
 
-[sub_resource type="AnimationNodeStateMachine" id=159]
+[sub_resource type="AnimationNodeStateMachine" id=158]
 states/death/node = SubResource( 113 )
 states/death/position = Vector2( -332.407, 756.536 )
 states/delay1/node = SubResource( 114 )
@@ -1515,13 +1515,13 @@ states/throw/position = Vector2( 329, 440.443 )
 transitions = [ "pick_action1", "jump", SubResource( 131 ), "pick_action1", "punch", SubResource( 132 ), "pick_action1", "fire", SubResource( 133 ), "jump", "delay1", SubResource( 134 ), "punch", "delay1", SubResource( 135 ), "fire", "delay1", SubResource( 136 ), "delay1", "hit1", SubResource( 137 ), "delay1", "pick_action1", SubResource( 138 ), "hit1", "is_dead1", SubResource( 139 ), "is_dead1", "pick_action1", SubResource( 140 ), "is_dead1", "delay2", SubResource( 141 ), "delay2", "hit2", SubResource( 142 ), "delay2", "throw", SubResource( 143 ), "throw", "delay2", SubResource( 144 ), "throw", "hit2", SubResource( 145 ), "hit2", "is_dead2", SubResource( 146 ), "is_dead2", "delay2", SubResource( 147 ), "pick_action3", "swoop", SubResource( 148 ), "pick_action3", "gust", SubResource( 149 ), "gust", "delay3", SubResource( 150 ), "delay3", "pick_action3", SubResource( 151 ), "swoop", "delay3", SubResource( 152 ), "swoop", "hit3", SubResource( 153 ), "hit3", "is_dead3", SubResource( 154 ), "is_dead3", "pick_action3", SubResource( 155 ), "is_dead3", "death", SubResource( 156 ), "is_dead2", "delay3", SubResource( 157 ) ]
 graph_offset = Vector2( -181.99, 513.089 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=160]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=159]
 
-[sub_resource type="SegmentShape2D" id=161]
+[sub_resource type="SegmentShape2D" id=160]
 a = Vector2( -742.709, -109.281 )
 b = Vector2( 739.315, -107.232 )
 
-[sub_resource type="SegmentShape2D" id=162]
+[sub_resource type="SegmentShape2D" id=161]
 b = Vector2( 0, 326.419 )
 
 [node name="cc_final_boss_fight" type="Node2D"]
@@ -1539,7 +1539,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 79
+frame = 103
 speed_scale = 2.0
 playing = true
 __meta__ = {
@@ -1794,10 +1794,10 @@ anims/swoop = SubResource( 111 )
 anims/throw = SubResource( 112 )
 
 [node name="logic_machine" type="AnimationTree" parent="enemies/boss/logic"]
-tree_root = SubResource( 159 )
+tree_root = SubResource( 158 )
 anim_player = NodePath("..")
 active = true
-parameters/playback = SubResource( 160 )
+parameters/playback = SubResource( 159 )
 
 [node name="triggers" type="Node2D" parent="."]
 
@@ -1806,14 +1806,14 @@ script = ExtResource( 55 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/Area2D"]
 position = Vector2( 3.99995, -744.858 )
-shape = SubResource( 161 )
+shape = SubResource( 160 )
 
 [node name="Area2D2" type="Area2D" parent="triggers"]
 position = Vector2( -1007.33, -1221.81 )
 script = ExtResource( 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="triggers/Area2D2"]
-shape = SubResource( 162 )
+shape = SubResource( 161 )
 
 [node name="collectibles" type="Node2D" parent="."]
 
