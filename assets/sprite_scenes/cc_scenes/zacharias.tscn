@@ -523,7 +523,6 @@ disabled = true
 [node name="stage1" type="Node2D" parent="sprites"]
 
 [node name="idle1" type="Sprite" parent="sprites/stage1"]
-visible = false
 texture = ExtResource( 2 )
 hframes = 6
 frame = 4
@@ -533,6 +532,7 @@ visible = false
 texture = ExtResource( 4 )
 
 [node name="punch" type="Sprite" parent="sprites/stage1"]
+visible = false
 texture = ExtResource( 3 )
 hframes = 5
 
@@ -548,6 +548,7 @@ hframes = 4
 frame = 3
 
 [node name="stage2" type="Node2D" parent="sprites"]
+scale = Vector2( 0.75, 0.75 )
 
 [node name="idle2" type="Sprite" parent="sprites/stage2"]
 visible = false
@@ -566,6 +567,7 @@ hframes = 12
 frame = 5
 
 [node name="stage3" type="Node2D" parent="sprites"]
+scale = Vector2( 0.75, 0.75 )
 
 [node name="idle3" type="Sprite" parent="sprites/stage3"]
 visible = false
