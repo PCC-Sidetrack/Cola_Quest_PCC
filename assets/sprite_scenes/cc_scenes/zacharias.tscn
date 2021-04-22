@@ -526,7 +526,7 @@ disabled = true
 visible = false
 texture = ExtResource( 2 )
 hframes = 6
-frame = 4
+frame = 1
 
 [node name="jump" type="Sprite" parent="sprites/stage1"]
 visible = false
