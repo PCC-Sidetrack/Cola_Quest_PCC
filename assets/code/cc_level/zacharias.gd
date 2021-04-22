@@ -25,6 +25,7 @@ onready var gui               = get_parent().get_parent().get_parent().get_paren
 onready var audio
 onready var fireball          = load("res://assets/sprite_scenes/cc_scenes/fireball.tscn")
 onready var gust              = load("res://assets/sprite_scenes/cc_scenes/gust_projectile.tscn")
+onready var note              = load("res://assets/sprite_scenes/cc_scenes/quarter_note.tscn")
 onready var animation_machine = $animation/animation_machine.get("parameters/playback")
 
 #-----------------------------------------------------------------------------#
@@ -61,6 +62,15 @@ var health: Dictionary = {
 		maximum = 3,
 		current = 3
 	}
+}
+
+var note_order: Dictionary = {
+	1:
+		1,
+	2:
+		2,
+	3:
+		3
 }
 
 #-----------------------------------------------------------------------------#
@@ -110,6 +120,14 @@ func hurt() -> void:
 	health[current_stage].current -= 1
 	
 	emit_signal("boss_hit")
+
+func note_paths() -> void:
+	var chosen_path: int
+	var paths: Array = [1, 2, 3]
+	for order in note_order:
+		chosen_path = randi() % paths.size()
+		note_order[order] = paths[chosen_path]
+		paths.remove(chosen_path)
 
 func next_stage() -> void:
 	current_stage += 1
@@ -166,13 +184,23 @@ func _spawn_fire() -> void:
 	fire.fire_force(direction, impulse)
 
 func _spawn_gust() -> void:
-#	var Gust = gust.instance()
-#	get_parent().get_parent().get_parent().get_parent().get_parent().get_node("projectiles").add_child(Gust)
-#	Gust.global_position = global_position
-#	Gust.scale = Vector2(4,4)
-#	Gust.speed = 16
-#	Gust.initialize()
-	pass
+	var Gust = gust.instance()
+	get_parent().get_parent().get_parent().get_parent().get_parent().get_node("projectiles").add_child(Gust)
+	Gust.global_position = global_position
+	Gust.scale = Vector2(4,4)
+	Gust.speed = 16
+	Gust.initialize()
+
+func _spawn_note() -> void:
+	var spawned_note = note.instance()
+	get_parent().get_parent().get_parent().get_parent().get_parent().get_node("projectiles").add_child(spawned_note)
+	spawned_note.global_position = global_position
+	spawned_note.scale = Vector2(3, 3)
+	spawned_note.initialize()
+	if randi() % 2 > 0:
+		spawned_note.is_correct = true
+		spawned_note.modulate   = Color(255, 0, 0)
+	
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #

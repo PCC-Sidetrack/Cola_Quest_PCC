@@ -88,6 +88,18 @@ tracks/1/keys = {
 "method": "_spawn_gust"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "hit1"
@@ -106,9 +118,33 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "hit2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "hit3"
+tracks/0/type = "value"
+tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=9]
 loop = true
@@ -152,6 +188,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "idle3"
@@ -167,6 +215,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -263,6 +323,19 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "swoop"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "throw"
@@ -291,54 +364,82 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0, 3, 0, 3, 0 ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_spawn_note"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=16]
 animation = "fire"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "gust"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "hit1"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "hit2"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "hit3"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "idle1"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "idle2"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "idle3"
 
-[sub_resource type="AnimationNodeAnimation" id=51]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "punch"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "swoop"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "throw"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
@@ -351,6 +452,8 @@ animation = "throw"
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
 
@@ -368,44 +471,40 @@ animation = "throw"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=55]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=56]
-
-[sub_resource type="AnimationNodeStateMachine" id=27]
+[sub_resource type="AnimationNodeStateMachine" id=52]
 states/fire/node = SubResource( 16 )
 states/fire/position = Vector2( 81.5, 33.5 )
-states/gust/node = SubResource( 29 )
+states/gust/node = SubResource( 17 )
 states/gust/position = Vector2( 1008.58, 33.9082 )
-states/hit1/node = SubResource( 17 )
+states/hit1/node = SubResource( 18 )
 states/hit1/position = Vector2( 301.5, 141 )
-states/hit2/node = SubResource( 30 )
+states/hit2/node = SubResource( 19 )
 states/hit2/position = Vector2( 647.209, 155.498 )
-states/hit3/node = SubResource( 31 )
+states/hit3/node = SubResource( 20 )
 states/hit3/position = Vector2( 1026.58, 163.062 )
-states/idle1/node = SubResource( 18 )
+states/idle1/node = SubResource( 21 )
 states/idle1/position = Vector2( 312, 17 )
-states/idle2/node = SubResource( 19 )
+states/idle2/node = SubResource( 22 )
 states/idle2/position = Vector2( 572.709, 35.2862 )
-states/idle3/node = SubResource( 32 )
+states/idle3/node = SubResource( 23 )
 states/idle3/position = Vector2( 819.076, 33.6021 )
-states/jump/node = SubResource( 51 )
+states/jump/node = SubResource( 24 )
 states/jump/position = Vector2( 176.659, -104.982 )
-states/punch/node = SubResource( 20 )
+states/punch/node = SubResource( 25 )
 states/punch/position = Vector2( 102.5, 153 )
-states/swoop/node = SubResource( 33 )
+states/swoop/node = SubResource( 26 )
 states/swoop/position = Vector2( 842.076, 147.175 )
-states/throw/node = SubResource( 34 )
+states/throw/node = SubResource( 27 )
 states/throw/position = Vector2( 472.709, 139.124 )
-transitions = [ "fire", "idle1", SubResource( 21 ), "idle1", "fire", SubResource( 22 ), "punch", "idle1", SubResource( 23 ), "idle1", "punch", SubResource( 24 ), "idle1", "hit1", SubResource( 25 ), "hit1", "idle1", SubResource( 26 ), "idle2", "throw", SubResource( 35 ), "throw", "idle2", SubResource( 36 ), "idle2", "hit2", SubResource( 37 ), "hit2", "idle2", SubResource( 38 ), "throw", "hit2", SubResource( 39 ), "hit2", "throw", SubResource( 40 ), "idle1", "idle2", SubResource( 42 ), "idle3", "gust", SubResource( 43 ), "gust", "idle3", SubResource( 44 ), "idle3", "swoop", SubResource( 45 ), "swoop", "idle3", SubResource( 46 ), "swoop", "hit3", SubResource( 47 ), "hit3", "swoop", SubResource( 48 ), "idle2", "idle3", SubResource( 49 ), "idle1", "jump", SubResource( 52 ), "jump", "idle1", SubResource( 53 ), "hit1", "idle2", SubResource( 55 ), "hit2", "idle3", SubResource( 56 ) ]
+transitions = [ "fire", "idle1", SubResource( 28 ), "idle1", "fire", SubResource( 29 ), "punch", "idle1", SubResource( 30 ), "idle1", "punch", SubResource( 31 ), "idle1", "hit1", SubResource( 32 ), "hit1", "idle1", SubResource( 33 ), "idle2", "throw", SubResource( 34 ), "throw", "idle2", SubResource( 35 ), "idle2", "hit2", SubResource( 36 ), "hit2", "idle2", SubResource( 37 ), "throw", "hit2", SubResource( 38 ), "hit2", "throw", SubResource( 39 ), "idle1", "idle2", SubResource( 40 ), "idle3", "gust", SubResource( 41 ), "gust", "idle3", SubResource( 42 ), "idle3", "swoop", SubResource( 43 ), "swoop", "idle3", SubResource( 44 ), "swoop", "hit3", SubResource( 45 ), "hit3", "swoop", SubResource( 46 ), "idle2", "idle3", SubResource( 47 ), "idle1", "jump", SubResource( 48 ), "jump", "idle1", SubResource( 49 ), "hit1", "idle2", SubResource( 50 ), "hit2", "idle3", SubResource( 51 ) ]
 start_node = "idle1"
 graph_offset = Vector2( 263.732, 3.51499 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=53]
 
 [sub_resource type="CircleShape2D" id=54]
 radius = 22.2675
@@ -424,7 +523,7 @@ disabled = true
 [node name="idle1" type="Sprite" parent="sprites/stage1"]
 texture = ExtResource( 2 )
 hframes = 6
-frame = 4
+frame = 2
 
 [node name="jump" type="Sprite" parent="sprites/stage1"]
 visible = false
@@ -499,10 +598,10 @@ anims/swoop = SubResource( 14 )
 anims/throw = SubResource( 15 )
 
 [node name="animation_machine" type="AnimationTree" parent="animation"]
-tree_root = SubResource( 27 )
+tree_root = SubResource( 52 )
 anim_player = NodePath("..")
 active = true
-parameters/playback = SubResource( 28 )
+parameters/playback = SubResource( 53 )
 
 [node name="hitbox" type="Area2D" parent="."]
 

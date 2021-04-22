@@ -241,7 +241,7 @@ func _swoop() -> void:
 	else:
 		movement_machine.travel("p_upper_right")
 	
-	#animation_machine.travel("swoop")
+	animation_machine.travel("swoop")
 	yield(get_tree().create_timer(1.5), "timeout")
 	
 	if logic_machine.get_current_node() == "swoop":
@@ -272,10 +272,17 @@ func _death() -> void:
 	if debugging:
 		print("death")
 	
-	#animation_machine.travel("death")
+	animation_machine.travel("death")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
 	gui.on_player_level_cleared()
+
+func note_hit(correct: bool) -> void:
+	if correct:
+		zacharias_data.invulnerable_flicker(50)
+		zacharias_data.hurt()
+		logic_machine.stop()
+		logic_machine.start("hit2")
 
 
 func _on_zacharias_boss_hit() -> void:

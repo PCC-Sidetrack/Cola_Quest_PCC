@@ -34,8 +34,8 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 #                             Signal Functions                                #
 #-----------------------------------------------------------------------------#
-func _on_sword_hitbox_area_entered(_area: Area2D) -> void:
-	if _area.get_parent().is_in_group(Globals.GROUP.PLAYER):
+func _on_sword_hitbox_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group(Globals.GROUP.PLAYER):
 		delete()
 
 
