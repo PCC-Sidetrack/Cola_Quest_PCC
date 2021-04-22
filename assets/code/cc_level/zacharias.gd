@@ -24,6 +24,7 @@ const TOTAL_STAGES: int = 3
 onready var gui               = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("player/game_UI")
 onready var audio
 onready var fireball          = load("res://assets/sprite_scenes/cc_scenes/fireball.tscn")
+onready var gust              = load("res://assets/sprite_scenes/cc_scenes/gust_projectile.tscn")
 onready var animation_machine = $animation/animation_machine.get("parameters/playback")
 
 #-----------------------------------------------------------------------------#
@@ -140,7 +141,6 @@ func _is_dead() -> bool:
 # Change the currently showing animation to the new animation
 func _manage_visibility(new_state) -> void:
 	if _last_state != new_state and new_state != "":
-		print(_last_state, " -> ", new_state)
 		if _last_stage == current_stage:
 			get_node("sprites/stage" + String(current_stage) + "/" + _last_state).visible = false
 			get_node("sprites/stage" + String(current_stage) + "/" + new_state).visible   = true
@@ -164,6 +164,15 @@ func _spawn_fire() -> void:
 	
 	fire.position = $fireball_spawn.global_position
 	fire.fire_force(direction, impulse)
+
+func _spawn_gust() -> void:
+#	var Gust = gust.instance()
+#	get_parent().get_parent().get_parent().get_parent().get_parent().get_node("projectiles").add_child(Gust)
+#	Gust.global_position = global_position
+#	Gust.scale = Vector2(4,4)
+#	Gust.speed = 16
+#	Gust.initialize()
+	pass
 
 #-----------------------------------------------------------------------------#
 #                                Triggers                                     #

@@ -1,4 +1,4 @@
-[gd_scene load_steps=226 format=2]
+[gd_scene load_steps=227 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/cc_level/parallaxing/background/PL13_cc_stage/PL13_spritesheet_cc_stage/PL13_cc_stage36.png" type="Texture" id=2]
@@ -1392,6 +1392,7 @@ animation = "hit1"
 animation = "hit2"
 
 [sub_resource type="AnimationNodeAnimation" id=121]
+animation = "hit3"
 
 [sub_resource type="AnimationNodeAnimation" id=122]
 animation = "is_dead1"
@@ -1474,6 +1475,8 @@ animation = "throw"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=162]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=163]
+
 [sub_resource type="AnimationNodeStateMachine" id=158]
 states/death/node = SubResource( 113 )
 states/death/position = Vector2( -332.407, 756.536 )
@@ -1482,17 +1485,17 @@ states/delay1/position = Vector2( 609, 193 )
 states/delay2/node = SubResource( 115 )
 states/delay2/position = Vector2( 192.5, 367.443 )
 states/delay3/node = SubResource( 116 )
-states/delay3/position = Vector2( 313.568, 613.432 )
+states/delay3/position = Vector2( 312.568, 615.191 )
 states/fire/node = SubResource( 117 )
 states/fire/position = Vector2( 406.5, 126 )
 states/gust/node = SubResource( 118 )
-states/gust/position = Vector2( 171.284, 708.036 )
+states/gust/position = Vector2( 186.284, 750.536 )
 states/hit1/node = SubResource( 119 )
 states/hit1/position = Vector2( 260.5, 232 )
 states/hit2/node = SubResource( 120 )
 states/hit2/position = Vector2( 177.5, 486.943 )
 states/hit3/node = SubResource( 121 )
-states/hit3/position = Vector2( -82.9324, 779.036 )
+states/hit3/position = Vector2( -82.9324, 779.536 )
 states/is_dead1/node = SubResource( 122 )
 states/is_dead1/position = Vector2( 50, 219.5 )
 states/is_dead2/node = SubResource( 123 )
@@ -1504,15 +1507,15 @@ states/jump/position = Vector2( 178.5, 133.5 )
 states/pick_action1/node = SubResource( 126 )
 states/pick_action1/position = Vector2( 298.5, 13 )
 states/pick_action3/node = SubResource( 127 )
-states/pick_action3/position = Vector2( 112.568, 615.828 )
+states/pick_action3/position = Vector2( 112.068, 615.404 )
 states/punch/node = SubResource( 128 )
 states/punch/position = Vector2( 296, 126.5 )
 states/swoop/node = SubResource( 129 )
-states/swoop/position = Vector2( 34.0676, 718.536 )
+states/swoop/position = Vector2( 55.0676, 705.536 )
 states/throw/node = SubResource( 130 )
 states/throw/position = Vector2( 329, 440.443 )
-transitions = [ "pick_action1", "jump", SubResource( 131 ), "pick_action1", "punch", SubResource( 132 ), "pick_action1", "fire", SubResource( 133 ), "jump", "delay1", SubResource( 134 ), "punch", "delay1", SubResource( 135 ), "fire", "delay1", SubResource( 136 ), "delay1", "hit1", SubResource( 137 ), "delay1", "pick_action1", SubResource( 138 ), "hit1", "is_dead1", SubResource( 139 ), "is_dead1", "pick_action1", SubResource( 140 ), "is_dead1", "delay2", SubResource( 141 ), "delay2", "hit2", SubResource( 142 ), "delay2", "throw", SubResource( 143 ), "throw", "delay2", SubResource( 144 ), "throw", "hit2", SubResource( 145 ), "hit2", "is_dead2", SubResource( 146 ), "is_dead2", "delay2", SubResource( 147 ), "pick_action3", "swoop", SubResource( 148 ), "pick_action3", "gust", SubResource( 149 ), "gust", "delay3", SubResource( 150 ), "delay3", "pick_action3", SubResource( 151 ), "swoop", "delay3", SubResource( 152 ), "swoop", "hit3", SubResource( 153 ), "hit3", "is_dead3", SubResource( 154 ), "is_dead3", "pick_action3", SubResource( 155 ), "is_dead3", "death", SubResource( 156 ), "is_dead2", "delay3", SubResource( 162 ) ]
-graph_offset = Vector2( -374.449, 417.006 )
+transitions = [ "pick_action1", "jump", SubResource( 131 ), "pick_action1", "punch", SubResource( 132 ), "pick_action1", "fire", SubResource( 133 ), "jump", "delay1", SubResource( 134 ), "punch", "delay1", SubResource( 135 ), "fire", "delay1", SubResource( 136 ), "delay1", "hit1", SubResource( 137 ), "delay1", "pick_action1", SubResource( 138 ), "hit1", "is_dead1", SubResource( 139 ), "is_dead1", "pick_action1", SubResource( 140 ), "is_dead1", "delay2", SubResource( 141 ), "delay2", "hit2", SubResource( 142 ), "delay2", "throw", SubResource( 143 ), "throw", "delay2", SubResource( 144 ), "throw", "hit2", SubResource( 145 ), "hit2", "is_dead2", SubResource( 146 ), "is_dead2", "delay2", SubResource( 147 ), "pick_action3", "swoop", SubResource( 148 ), "pick_action3", "gust", SubResource( 149 ), "gust", "delay3", SubResource( 150 ), "delay3", "pick_action3", SubResource( 151 ), "swoop", "delay3", SubResource( 152 ), "swoop", "hit3", SubResource( 153 ), "hit3", "is_dead3", SubResource( 154 ), "is_dead3", "pick_action3", SubResource( 155 ), "is_dead3", "death", SubResource( 156 ), "is_dead2", "delay3", SubResource( 162 ), "gust", "hit3", SubResource( 163 ) ]
+graph_offset = Vector2( -235.451, 577.185 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=159]
 
@@ -1538,7 +1541,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 42
+frame = 119
 speed_scale = 2.0
 playing = true
 __meta__ = {
@@ -1670,7 +1673,7 @@ curve = SubResource( 15 )
 
 [node name="boss_position" type="PathFollow2D" parent="enemies/boss/paths/balcony_stage"]
 pause_mode = 2
-position = Vector2( -479.627, 291.62 )
+position = Vector2( -479.627, 291.622 )
 offset = 1732.34
 rotate = false
 loop = false

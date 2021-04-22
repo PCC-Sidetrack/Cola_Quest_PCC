@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/code/cc_level/zacharias.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/idle_zacharias_on_t-rex.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/jump_zacharias_on_t-rex.png" type="Texture" id=4]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/fire_breath_zacharias_on_t-rex-Sheet.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/song_leader_zacharias-Sheet.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/cc_level/sprites/S35_pterodactyl/S35_pterodactyl-Sheet.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -59,6 +60,34 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "gust"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -8.5, -9 ), Vector2( -23, 0 ), Vector2( -8.5, 9 ), Vector2( 0, 0 ), Vector2( 8.5, -9 ), Vector2( 23, 0 ), Vector2( 8.5, 9 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_spawn_gust"
+} ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "hit1"
@@ -126,6 +155,19 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "idle3"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprites/stage3/idle3:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 11 ]
+}
 
 [sub_resource type="Animation" id=12]
 length = 0.5
@@ -382,7 +424,7 @@ disabled = true
 [node name="idle1" type="Sprite" parent="sprites/stage1"]
 texture = ExtResource( 2 )
 hframes = 6
-frame = 1
+frame = 4
 
 [node name="jump" type="Sprite" parent="sprites/stage1"]
 visible = false
@@ -420,6 +462,9 @@ visible = false
 
 [node name="idle3" type="Sprite" parent="sprites/stage3"]
 visible = false
+texture = ExtResource( 7 )
+flip_h = true
+hframes = 12
 
 [node name="hit3" type="Sprite" parent="sprites/stage3"]
 visible = false
@@ -429,6 +474,8 @@ visible = false
 
 [node name="gust" type="Sprite" parent="sprites/stage3"]
 visible = false
+texture = ExtResource( 7 )
+hframes = 12
 
 [node name="hurtbox" type="Area2D" parent="."]
 

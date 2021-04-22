@@ -62,7 +62,6 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 12 )
-frame = 1
 playing = true
 
 [node name="hitbox" type="Area2D" parent="."]

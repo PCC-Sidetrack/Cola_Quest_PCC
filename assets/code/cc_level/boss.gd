@@ -216,8 +216,8 @@ func _gust() -> void:
 	if debugging:
 		print("gust")
 	
-	#animation_machine.travel("gust")
-	yield(get_tree().create_timer(1.0), "timeout")
+	animation_machine.travel("gust")
+	yield(get_tree().create_timer(2.0), "timeout")
 	
 	if logic_machine.get_current_node() == "gust":
 		logic_machine.travel("delay3")
@@ -252,9 +252,7 @@ func _hit3() -> void:
 		print("hit3")
 	
 	animation_machine.travel("hit3")
-	movement_player.active = false
-	yield(get_tree().create_timer(0.8), "timeout")
-	movement_player.active = true
+	yield(get_tree().create_timer(1.0), "timeout")
 	
 	if logic_machine.get_current_node() == "hit3":
 		logic_machine.travel("is_dead3")
