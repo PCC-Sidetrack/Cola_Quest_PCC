@@ -371,7 +371,7 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [sub_resource type="Curve2D" id=15]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -824.633, -1022.44, -125.48, -132.143, 125.48, 132.143, -561.067, -1099.69, 0, 0, 0, 0, -479.627, 291.622 )
+"points": PoolVector2Array( 0, 0, 0, 0, -824.633, -1022.44, -114.426, 17.6948, 114.426, -17.6948, -593.245, -1160.14, -186.822, -107.37, 186.822, 107.37, -159.133, -1078.75, 0, 0, 0, 0, 559.748, 292.011 )
 }
 
 [sub_resource type="Curve2D" id=16]
@@ -903,10 +903,6 @@ animation = "upper_stage_right"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=67]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=68]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=69]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=70]
@@ -979,9 +975,13 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=162]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=93]
 states/balcony_stage/node = SubResource( 46 )
-states/balcony_stage/position = Vector2( 245, -118.875 )
+states/balcony_stage/position = Vector2( 699, -220.875 )
 states/left_right_stage/node = SubResource( 47 )
 states/left_right_stage/position = Vector2( 751.886, 33.7155 )
 states/left_right_upper/node = SubResource( 48 )
@@ -1022,9 +1022,9 @@ states/upper_stage_left/node = SubResource( 65 )
 states/upper_stage_left/position = Vector2( 509.318, -31.9921 )
 states/upper_stage_right/node = SubResource( 66 )
 states/upper_stage_right/position = Vector2( 1008.69, 1.86923 )
-transitions = [ "p_balcony", "balcony_stage", SubResource( 67 ), "balcony_stage", "p_stage_left", SubResource( 68 ), "p_stage_right", "right_left_stage", SubResource( 69 ), "p_stage_left", "left_right_stage", SubResource( 70 ), "left_right_stage", "p_stage_right", SubResource( 71 ), "right_left_stage", "p_stage_left", SubResource( 72 ), "upper_stage_left", "p_stage_left", SubResource( 73 ), "p_upper_left", "upper_stage_left", SubResource( 74 ), "p_upper_right", "upper_stage_right", SubResource( 75 ), "upper_stage_right", "p_stage_right", SubResource( 76 ), "stage_off_right", "p_off_stage_right", SubResource( 77 ), "p_stage_right", "stage_off_right", SubResource( 78 ), "stage_off_left", "p_off_stage_left", SubResource( 79 ), "p_stage_left", "stage_off_left", SubResource( 80 ), "p_off_stage_right", "stage_upper_off_right", SubResource( 81 ), "stage_upper_off_right", "p_off_upper_right", SubResource( 82 ), "stage_upper_off_left", "p_off_upper_right", SubResource( 83 ), "p_off_stage_left", "stage_upper_off_left", SubResource( 84 ), "p_off_upper_right", "off_upper", SubResource( 85 ), "off_upper", "p_upper_right", SubResource( 86 ), "upper_off", "p_off_upper_right", SubResource( 87 ), "p_upper_right", "upper_off", SubResource( 88 ), "p_upper_left", "left_right_upper", SubResource( 89 ), "p_upper_right", "right_left_upper", SubResource( 90 ), "right_left_upper", "p_upper_left", SubResource( 91 ), "left_right_upper", "p_upper_right", SubResource( 92 ) ]
+transitions = [ "p_balcony", "balcony_stage", SubResource( 67 ), "p_stage_right", "right_left_stage", SubResource( 69 ), "p_stage_left", "left_right_stage", SubResource( 70 ), "left_right_stage", "p_stage_right", SubResource( 71 ), "right_left_stage", "p_stage_left", SubResource( 72 ), "upper_stage_left", "p_stage_left", SubResource( 73 ), "p_upper_left", "upper_stage_left", SubResource( 74 ), "p_upper_right", "upper_stage_right", SubResource( 75 ), "upper_stage_right", "p_stage_right", SubResource( 76 ), "stage_off_right", "p_off_stage_right", SubResource( 77 ), "p_stage_right", "stage_off_right", SubResource( 78 ), "stage_off_left", "p_off_stage_left", SubResource( 79 ), "p_stage_left", "stage_off_left", SubResource( 80 ), "p_off_stage_right", "stage_upper_off_right", SubResource( 81 ), "stage_upper_off_right", "p_off_upper_right", SubResource( 82 ), "stage_upper_off_left", "p_off_upper_right", SubResource( 83 ), "p_off_stage_left", "stage_upper_off_left", SubResource( 84 ), "p_off_upper_right", "off_upper", SubResource( 85 ), "off_upper", "p_upper_right", SubResource( 86 ), "upper_off", "p_off_upper_right", SubResource( 87 ), "p_upper_right", "upper_off", SubResource( 88 ), "p_upper_left", "left_right_upper", SubResource( 89 ), "p_upper_right", "right_left_upper", SubResource( 90 ), "right_left_upper", "p_upper_left", SubResource( 91 ), "left_right_upper", "p_upper_right", SubResource( 92 ), "balcony_stage", "p_stage_right", SubResource( 162 ) ]
 start_node = "p_balcony"
-graph_offset = Vector2( 1013.26, -197.535 )
+graph_offset = Vector2( 230.925, -383.547 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=94]
 
@@ -1539,7 +1539,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
-frame = 43
+frame = 113
 speed_scale = 2.0
 playing = true
 __meta__ = {
