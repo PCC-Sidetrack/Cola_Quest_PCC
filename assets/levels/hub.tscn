@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://assets/art/hub_level/grass/grass.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/hub_level/tree/tree.png" type="Texture" id=2]
@@ -813,6 +813,15 @@
 
 [sub_resource type="CanvasItemMaterial" id=5]
 
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://assets/levels/AC_Level/assets/fonts/LucrethiaFreeFont-zZo0.otf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+extra_spacing_char = 1
+extra_spacing_space = 1
+font_data = SubResource( 6 )
+
 [node name="hub" type="Node2D"]
 script = ExtResource( 57 )
 __meta__ = {
@@ -863,7 +872,7 @@ tile_data = PoolIntArray( -4521983, 1, 0, -4194285, 2, 0, -2818043, 3, 0, -26869
 [node name="fountain" parent="tilemaps" instance=ExtResource( 53 )]
 position = Vector2( 3397.81, -812.693 )
 z_index = 1
-frame = 1
+frame = 4
 
 [node name="trees1" type="TileMap" parent="tilemaps"]
 mode = 1
@@ -911,6 +920,20 @@ z_index = 1
 color = Color( 0.054902, 0, 1, 0.282353 )
 polygon = PoolVector2Array( 88.2688, -223.718, 9.0769, -223.458, -15.8696, -210.355, -18.7673, -210.355, -56.6899, -229.506, -56.8159, -229.506, -58.9578, -229.254, -84.6602, -216.15, -84.9116, -176.715, -217.329, -110.443, -257.017, -129.341, -284.735, -116.49, -284.734, 108.784, -310.437, 121.509, -351.258, 116.595, -367.889, 135.116, -377.464, 150.739, -377.716, 167.496, -367.889, 188.033, -351.007, 206.68, -311.193, 226.712, -270.875, 207.814, -250.591, 217.263, -269.993, 236.792, -270.75, 247.249, -230.684, 266.526, -167.31, 280.763, -128.505, 286.433, -93.8567, 286.685, -48.8777, 279.755, 8.44897, 266.778, 8.19702, 257.203, -12.97, 238.178, -4.90649, 234.02, 93.7451, 281.519, 164.301, 246.745, 156.239, 236.414, 155.861, 221.421, 208.525, 247.123, 220.999, 241.201, 221.502, 237.296, 196.934, 212.097, 236.748, 231.626, 247.457, 226.964, 247.457, 223.058, 237.251, 211.467, 300.877, 179.591, 291.05, 170.519, 291.932, 143.431, 267.364, 131.336, 267.238, 116.721, 287.775, 126.422, 288.783, 106.011, 285.507, 94.6718, 277.318, 80.0568, 266.104, 69.2214, 257.033, 61.7878, 252.245, 57.6301, 243.174, 53.3464, 233.221, 47.9287, 222.385, 42.5111, 222.133, -89.7804, 208.4, -96.9623, 208.407, -163.38 )
 
+[node name="Label" type="Label" parent="building_selectables/sports_center/modulation"]
+margin_left = -100.004
+margin_top = -139.654
+margin_right = 78.9958
+margin_bottom = -70.6538
+custom_fonts/font = SubResource( 7 )
+text = "Sports Center"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="academic_center" type="Area2D" parent="building_selectables"]
 position = Vector2( 2100, -375 )
 
@@ -921,6 +944,20 @@ polygon = PoolVector2Array( -265.434, -34.5295, -265.278, -244.983, -148.484, -3
 z_index = 1
 color = Color( 0.054902, 0, 1, 0.282353 )
 polygon = PoolVector2Array( -265.434, -34.5295, -265.278, -244.983, -148.484, -303.947, -148.861, -315.664, -87.1254, -345.398, -74.9041, -340.737, -25.8931, -364.927, 213.783, -245.211, 213.909, -161.174, -25.2236, -41.1041, -25.2068, 52.3685, -58.368, 68.8961, -145.985, 25.564, -169.505, 36.6884, -209.765, 16.2407, -209.129, -7.1734 )
+
+[node name="Label" type="Label" parent="building_selectables/academic_center/modulation"]
+margin_left = -133.642
+margin_top = -286.676
+margin_right = 64.3582
+margin_bottom = -217.676
+custom_fonts/font = SubResource( 7 )
+text = "Academic Center"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="academic_center2" type="Area2D" parent="building_selectables"]
 
@@ -934,6 +971,21 @@ z_index = 1
 color = Color( 0.054902, 0, 1, 0.282353 )
 polygon = PoolVector2Array( 2034.34, -269.467, 2034.64, -302.655, 2041.8, -305.934, 2075.05, -322.557, 2074.95, -415.973, 2314.44, -535.916, 2611.81, -387.431, 2611.77, -262.378, 2592.85, -253.24, 2592.81, -229.574, 2554.96, -211.427, 2531.74, -222.71, 2490.13, -202.352, 2275.32, -309.531, 2271.7, -309.556, 2271.56, -272.677, 2206.12, -240.337, 2170.44, -257.531, 2154.9, -250.315, 2137.26, -258.467, 2099.67, -239.394, 2094.95, -239.454 )
 
+[node name="Label" type="Label" parent="building_selectables/academic_center2/modulation"]
+margin_left = 2236.41
+margin_top = -476.386
+margin_right = 2433.41
+margin_bottom = -407.386
+custom_fonts/font = SubResource( 7 )
+text = "Rooftop
+(Intro)"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="makenzie" type="Area2D" parent="building_selectables"]
 position = Vector2( 3060, -70 )
 
@@ -945,6 +997,20 @@ z_index = 1
 color = Color( 0.054902, 0, 1, 0.282353 )
 polygon = PoolVector2Array( -445.4, 56.3, -445.407, -154.217, -367.794, -193.623, -204.479, -193.623, -153.536, -167.552, -157.132, -182.235, -159.229, -183.284, -159.829, -184.783, -156.832, -186.581, -155.484, -185.532, -155.484, -184.333, -133.009, -179.239, -129.863, -173.845, -130.612, -168.601, -135.556, -159.311, -126.267, -154.667, -119.824, -156.914, -109.7, -173.4, -89.8225, -191.745, -65.395, -201.623, -37.0957, -201.623, -17.6069, -196.417, -2.25635, -188.408, 12.4272, -175.727, 22.1716, -159.976, 73.1631, -134.213, 73.2966, -128.473, 76.5002, -128.874, 113.075, -147.962, 115.344, -147.962, 433.173, 11.6847, 433.573, 14.0874, 435.442, 14.2209, 553.576, 73.8882, 553.309, 116.603, 194.235, 295.338, 113.744, 256.361, 34.7205, 295.338 )
 
+[node name="Label" type="Label" parent="building_selectables/makenzie/modulation"]
+margin_left = -86.3684
+margin_top = -60.3909
+margin_right = 110.632
+margin_bottom = -27.3909
+custom_fonts/font = SubResource( 7 )
+text = "Makenzie"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="crown_centre" type="Area2D" parent="building_selectables"]
 position = Vector2( 4090, -645 )
 
@@ -955,6 +1021,20 @@ polygon = PoolVector2Array( -456.502, 391.416, -456.368, 371.393, -458.905, 370.
 z_index = 1
 color = Color( 0.054902, 0, 1, 0.282353 )
 polygon = PoolVector2Array( -456.502, 391.416, -456.368, 371.393, -458.905, 370.459, -458.501, 240.979, -463.707, 238.31, -463.573, 44.224, -355.184, 27.5385, -349.978, 33.9457, -310.199, 27.2715, -310.198, -11.9727, -305.259, -42.2736, -303.39, -51.8844, -303.387, -158.138, -290.306, -188.972, -266.946, -177.626, -262.675, -176.825, -242.784, -166.147, -232.372, -175.491, -223.429, -182.432, -223.295, -199.384, -210.213, -229.418, -196.998, -222.477, -165.629, -208.194, -129.722, -226.882, -123.047, -226.615, -97.5513, -217.404, -78.9971, -225.28, 169.418, -163.744, 192.111, -177.092, 245.638, -137.181, 245.506, -85.3889, 336.409, 70.6539, 336.943, 73.0566, 413.298, 160.889, 413.965, 194.26, 430.651, 204.672, 431.585, 382.472, 423.709, 393.952, 392.474, 398.624, 358.835, 382.739, 352.294, 392.083, 351.493, 422.651, 343.751, 434.264, 312.248, 438.669, 264.46, 415.71, 216.406, 428.925, 172.622, 436.133, 134.846, 440.137, 114.69, 442.406, 67.3025, 442.006, 48.3474, 440.271, 4.83081, 436.4, -38.5515, 428.257, -77.9294, 417.311, -115.84, 403.963, -174.574, 501.54, -226.234, 498.603, -256.936, 471.506, -256.802, 451.617, -276.692, 439.47, -291.375, 428.925, -312.065, 412.239, -337.56, 388.479, -370.397, 404.497, -370.665, 385.676, -384.281, 392.083, -385.215, 411.572, -388.285, 413.44, -392.557, 412.373, -392.423, 392.483, -449.956, 373.662, -450.356, 393.151 )
+
+[node name="Label" type="Label" parent="building_selectables/crown_centre/modulation"]
+margin_left = -54.0991
+margin_top = -49.9288
+margin_right = 188.901
+margin_bottom = -16.9288
+custom_fonts/font = SubResource( 7 )
+text = "Crown Centre"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="input_event" from="building_selectables/sports_center" to="building_selectables" method="_on_sports_center_input_event"]
 [connection signal="mouse_entered" from="building_selectables/sports_center" to="building_selectables" method="_on_sports_center_mouse_entered"]
 [connection signal="mouse_exited" from="building_selectables/sports_center" to="building_selectables" method="_on_sports_center_mouse_exited"]
