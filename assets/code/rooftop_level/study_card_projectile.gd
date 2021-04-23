@@ -43,7 +43,7 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 # Instead of initializing with the _ready() function, this must be called.
 # This method allows initialization to be done at a variable time.
-func initialize() -> void:
+func initialize(interact_enemy: bool = true) -> void:
 	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
 	set_knockback_multiplier(knockback)
 	_initialized = true
@@ -54,7 +54,8 @@ func initialize() -> void:
 	add_child(t)
 	t.start(0.3)
 	yield(t, "timeout")
-	set_collision_mask_bit(Globals.LAYER.ENEMY, true)
+	if interact_enemy:
+		set_collision_mask_bit(Globals.LAYER.ENEMY, true)
 
 #-----------------------------------------------------------------------------#
 #                             Signal Functions                                #

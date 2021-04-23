@@ -1,0 +1,93 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box3.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12c/S12c_error_box3.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box5.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12d/S12d_error_box2.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12c/S12c_error_box5.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box4.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12d/S12d_error_box3.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box1.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12c/S12c_error_box1.png" type="Texture" id=9]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12d/S12d_error_box1.png" type="Texture" id=10]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box2.png" type="Texture" id=11]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box7.png" type="Texture" id=12]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12d/S12d_error_box4.png" type="Texture" id=13]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12b/S12b_error_box6.png" type="Texture" id=14]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12c/S12c_error_box2.png" type="Texture" id=15]
+[ext_resource path="res://assets/art/rooftop_level/sprites/S12_error_box/S12c/S12c_error_box4.png" type="Texture" id=16]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.9
+flag_disable_z = true
+direction = Vector3( 0, 100, 0 )
+gravity = Vector3( 0, 100, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.24
+angular_velocity = -24.72
+angular_velocity_random = 0.84
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="AnimatedTexture" id=2]
+frames = 7
+fps = 8.0
+frame_0/texture = ExtResource( 8 )
+frame_1/texture = ExtResource( 11 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 1 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 6 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 3 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 14 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 12 )
+frame_6/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 5
+frame_0/texture = ExtResource( 9 )
+frame_1/texture = ExtResource( 15 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 2 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 16 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 5 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=4]
+frames = 4
+fps = 10.0
+frame_0/texture = ExtResource( 10 )
+frame_1/texture = ExtResource( 4 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 7 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 13 )
+frame_3/delay_sec = 0.0
+
+[node name="errors" type="Node2D"]
+
+[node name="error3" type="Particles2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
+amount = 20
+lifetime = 2.0
+process_material = SubResource( 1 )
+texture = SubResource( 2 )
+
+[node name="error2" type="Particles2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
+amount = 20
+lifetime = 2.0
+process_material = SubResource( 1 )
+texture = SubResource( 3 )
+
+[node name="error1" type="Particles2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
+amount = 15
+lifetime = 2.0
+process_material = SubResource( 1 )
+texture = SubResource( 4 )

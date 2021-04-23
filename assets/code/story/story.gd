@@ -27,7 +27,7 @@ var _can_continue: bool = false
 #                              Dictionaries                                   #
 #-----------------------------------------------------------------------------#
 var _story_text: Dictionary = {
-	roof     = "Dr Adkin's Cola has been taken by Dr. (Geary) Zorro! Get it back!",
+	roof     = "Dr. Adkin's Cola has been taken by Dr. (Geary) Zorro! Get it back!",
 	cc       = "There is water leaking into the building! Avoid the enemies and make it to the stage!",
 	ac       = "The building's code looks unstable! Stop the bugs and save the teachers!",
 	mk       = "Space has begun to leak into the building! Grab the cola and find a way to stop it!",
