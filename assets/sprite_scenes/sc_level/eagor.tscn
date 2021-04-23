@@ -44,7 +44,7 @@ noise = SubResource( 2 )
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 10 )
 shader_param/noiseTiling = 2.0
-shader_param/dissolveAmount = 1.0
+shader_param/dissolveAmount = 0.0
 shader_param/edgeThickness = 0.1
 shader_param/edgeColor = Color( 1, 0.4, 0, 1 )
 shader_param/noiseTexture = SubResource( 3 )
@@ -726,7 +726,7 @@ nodes/Animation/position = Vector2( -30, 80 )
 nodes/TimeScale/node = SubResource( 23 )
 nodes/TimeScale/position = Vector2( 220, 120 )
 nodes/output/position = Vector2( 430, 120 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "roar"
@@ -746,7 +746,7 @@ nodes/Animation/position = Vector2( -20, 140 )
 nodes/TimeScale/node = SubResource( 28 )
 nodes/TimeScale/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 380, 140 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=30]
 animation = "throw"
@@ -759,7 +759,7 @@ nodes/Animation/node = SubResource( 30 )
 nodes/Animation/position = Vector2( -280, 110 )
 nodes/TimeScale/node = SubResource( 31 )
 nodes/TimeScale/position = Vector2( 20, 150 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
@@ -835,7 +835,6 @@ graph_offset = Vector2( 53.8669, 9.94459 )
 "enemy",
 ]]
 pause_mode = 2
-position = Vector2( 0.300526, 0 )
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 8 )
@@ -942,7 +941,6 @@ collision_layer = 2
 position = Vector2( 0, 17.092 )
 rotation = 1.57079
 shape = SubResource( 8 )
-disabled = true
 
 [node name="ball_spawn" type="Position2D" parent="."]
 position = Vector2( -58.0622, -58.0622 )

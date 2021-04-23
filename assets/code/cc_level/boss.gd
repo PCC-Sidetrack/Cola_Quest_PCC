@@ -275,9 +275,13 @@ func _death() -> void:
 	if debugging:
 		print("death")
 	
+	logic_player.get_node("logic_machine").active = false
+	
 	yield(get_tree().create_timer(animation_player.get_animation("death").length), "timeout")
 	
 	gui.on_player_level_cleared()
+
+
 
 func note_hit(correct: bool) -> void:
 	if correct:
