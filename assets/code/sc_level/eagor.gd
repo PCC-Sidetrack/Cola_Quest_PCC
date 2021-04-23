@@ -234,6 +234,7 @@ func _spawn_ball() -> void:
 func boss_defeated() -> void:
 	gui.on_player_level_cleared()
 	emit_signal("_on_boss_defeated")
+	queue_free()
 
 # If eagor hits the player, cause him to take damage
 func _on_hitbox_arm_body_entered(body: Node) -> void:
