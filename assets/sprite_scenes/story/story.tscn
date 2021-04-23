@@ -109,7 +109,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 5.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [ false ],
+"args": [ true ],
 "method": "_set_continue"
 }, {
 "args": [ true ],
@@ -182,8 +182,6 @@ __meta__ = {
 }
 
 [node name="pictures" type="Node2D" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -8 )
 
 [node name="sc" type="Sprite" parent="pictures"]
@@ -217,14 +215,12 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 8 )
 
 [node name="story_text" type="Label" parent="."]
-visible = false
 margin_left = 160.584
 margin_top = 168.0
 margin_right = 352.584
 margin_bottom = 264.0
 custom_fonts/font = ExtResource( 6 )
 autowrap = true
-percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -236,7 +232,6 @@ anims/fade = SubResource( 1 )
 anims/start_story = SubResource( 2 )
 
 [node name="continue" type="Node2D" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 479.521, 283.199 )
 
@@ -254,4 +249,5 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="continue"]
 position = Vector2( 14.8401, 0 )
 frames = SubResource( 5 )
+frame = 1
 playing = true

@@ -40,9 +40,13 @@ var _story_text: Dictionary = {
 #-----------------------------------------------------------------------------#
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("melee_attack") and _can_continue:
-		_can_continue = false
-		hide()
-		emit_signal("on_continue")
+		if Story.get_node("AnimationPlayer").current_animation_position <= 4.6:
+			Story.get_node("AnimationPlayer").seek(4.6, true)
+			_can_continue = false
+		elif _can_continue:
+			_can_continue = false
+			hide()
+			emit_signal("on_continue")
 
 func _ready() -> void:
 	PlayerVariables.reset_values()
