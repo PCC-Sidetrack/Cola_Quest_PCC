@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=2]
+[gd_scene load_steps=172 format=2]
 
 [ext_resource path="res://assets/art/general_levels/hint_boxes/movement_hint_box.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/general_levels/hint_boxes/jump_hint_box.png" type="Texture" id=2]
@@ -50,6 +50,7 @@
 [ext_resource path="res://assets/sprite_scenes/common_scenes/scene_transition.tscn" type="PackedScene" id=48]
 [ext_resource path="res://assets/art/sc_level/particles/P4_little_eagor/P4_little_eagor.png" type="Texture" id=49]
 [ext_resource path="res://assets/art/sc_level/particles/PF_Fog/light_texture.png" type="Texture" id=50]
+[ext_resource path="res://assets/sprite_scenes/rooftop_scenes/Rocket_Launcher.tscn" type="PackedScene" id=51]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -2155,7 +2156,7 @@ tile_data = PoolIntArray( 65599, 2, 0, 65600, 3, 0, 65601, 3, 0, 65602, 3, 0, 65
 [node name="water_silo" type="AnimatedSprite" parent="tiles"]
 position = Vector2( 12432, 175.859 )
 frames = SubResource( 117 )
-frame = 5
+frame = 9
 speed_scale = 3.0
 playing = true
 
@@ -2163,47 +2164,44 @@ playing = true
 
 [node name="Smoke3" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 849, 21 )
-frame = 2
+frame = 0
 
 [node name="Smoke2" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6225, -73.25 )
-frame = 2
+frame = 0
 
 [node name="Smoke4" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 6571, -105.25 )
-frame = 0
+frame = 2
 
 [node name="Smoke11" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10256, 118.75 )
-frame = 3
 
 [node name="Smoke5" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10416, 150.75 )
-frame = 3
 
 [node name="Smoke6" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10614, 219.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke7" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10673, 310.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke8" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 10929, 246.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke9" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11056, 342.75 )
-frame = 2
+frame = 0
 
 [node name="Smoke10" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 11920, 22.75 )
-frame = 0
+frame = 2
 
 [node name="Smoke" parent="smoke" instance=ExtResource( 3 )]
 position = Vector2( 16784, 54.75 )
-frame = 3
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -2999,8 +2997,11 @@ texture = ExtResource( 44 )
 [node name="scene_transition" parent="." instance=ExtResource( 48 )]
 
 [node name="player" parent="." instance=ExtResource( 30 )]
-position = Vector2( 198, 190 )
+position = Vector2( 180.532, 177.515 )
 z_index = 1
+
+[node name="Rocket_Launcher" parent="." instance=ExtResource( 51 )]
+position = Vector2( 9644.15, -119.464 )
 [connection signal="body_entered" from="triggers/other_triggers/boss_fight_trigger" to="triggers/other_triggers/boss_fight_trigger" method="_on_boss_fight_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/decloud_trigger" to="triggers/other_triggers/decloud_trigger" method="_on_decloud_trigger_body_entered"]
 [connection signal="body_entered" from="triggers/other_triggers/cloud_trigger" to="triggers/other_triggers/cloud_trigger" method="_on_cloud_trigger_body_entered"]
