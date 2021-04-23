@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/code/sc_level/boss.gd" type="Script" id=13]
 [ext_resource path="res://assets/sprite_scenes/sc_level/portal_door.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sounds/sc_level/mixkit-soft-horror-hit-drum-564.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/sounds/sc_level/Basketball Game Crowd Sound Effect [ HD ].wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/sc_level/Basketball Game Crowd Sound Effect [ HD ].ogg" type="AudioStream" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -1062,7 +1062,6 @@ modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 512, -36 )
 scale = Vector2( 1.765, 1.186 )
 frames = SubResource( 4 )
-frame = 1
 playing = true
 
 [node name="BackgroundScenery" type="TileMap" parent="background"]
