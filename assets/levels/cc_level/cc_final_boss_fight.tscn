@@ -1539,7 +1539,11 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="parallax/background/stage"]
 frames = SubResource( 1 )
+<<<<<<< HEAD
 frame = 124
+=======
+frame = 103
+>>>>>>> CC_boss_work
 speed_scale = 2.0
 playing = true
 __meta__ = {
