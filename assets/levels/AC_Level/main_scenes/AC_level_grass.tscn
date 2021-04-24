@@ -14786,7 +14786,7 @@ script = ExtResource( 22 )
 
 [node name="adkins_plane" type="AnimatedSprite" parent="adkins_plane"]
 frames = SubResource( 29 )
-frame = 6
+frame = 3
 playing = true
 
 [node name="hitbox" type="Area2D" parent="adkins_plane"]
@@ -14908,14 +14908,14 @@ position = Vector2( 962.5, 19.698 )
 position = Vector2( 0, -11.8056 )
 frames = SubResource( 49 )
 animation = "stuck"
-frame = 3
+frame = 1
 playing = true
 
 [node name="drhowell3" type="AnimatedSprite" parent="drhowell"]
 position = Vector2( 0, 16.4176 )
 frames = SubResource( 49 )
 animation = "stuck"
-frame = 3
+frame = 1
 playing = true
 
 [node name="drhowell" type="Label" parent="drhowell"]
