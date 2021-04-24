@@ -38,6 +38,8 @@ var _throw_update_time: float = 0.0
 
 var is_player_in_range: bool = false
 
+var ai_enabled: bool = true
+
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
 #-----------------------------------------------------------------------------#
@@ -57,15 +59,16 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_throw_update_time += delta
 	
-	if global_position.direction_to(Globals.player_position).x >= 0:
-		scale.x = -1.25
-	else:
-		scale.x = 1.25
-	
-	if is_player_in_range and _throw_update_time >= throw_cooldown:
-		#if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1):
-#		#if Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1 and is_player_in_range:
-		_spawn_gust()
+	if ai_enabled:
+		if global_position.direction_to(Globals.player_position).x >= 0:
+			scale.x = -1.25
+		else:
+			scale.x = 1.25
+		
+		if is_player_in_range and _throw_update_time >= throw_cooldown:
+			#if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1):
+	#		#if Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1 and is_player_in_range:
+			_spawn_gust()
 
 # Spawns and propels a gust attack
 func _spawn_gust() -> void:
@@ -84,6 +87,7 @@ func _spawn_gust() -> void:
 #-----------------------------------------------------------------------------#
 # Triggered whenever the pterodactyl dies
 func _on_pterodactyl_death() -> void:
+	ai_enabled = false
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	

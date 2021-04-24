@@ -12,6 +12,11 @@ func _ready():
 	get_tree().paused = true
 	Globals.game_locked = true
 	$player/game_UI.on_game_ui_visible(false)
+	
+	PlayerVariables.new_level()
+	
+	#$player/Camera2D.limit_left = -125
+	
 	if PlayerVariables.saved_deaths < 1:
 		Story.show()
 		Story.play("roof")

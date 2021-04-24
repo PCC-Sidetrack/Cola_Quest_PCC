@@ -15,23 +15,23 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 9.99047, 25.5454 )
 
 [sub_resource type="Animation" id=6]
@@ -106,39 +106,39 @@ tracks/1/keys = {
 "values": [ Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "bubble_grow"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "bubble_idle"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "bubble_shrink"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 switch_mode = 2
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 switch_mode = 2
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachine" id=17]
-states/bubble_grow/node = SubResource( 11 )
+[sub_resource type="AnimationNodeStateMachine" id=15]
+states/bubble_grow/node = SubResource( 9 )
 states/bubble_grow/position = Vector2( 413.5, 53.5 )
-states/bubble_idle/node = SubResource( 12 )
+states/bubble_idle/node = SubResource( 10 )
 states/bubble_idle/position = Vector2( 140.5, 101 )
-states/bubble_shrink/node = SubResource( 13 )
+states/bubble_shrink/node = SubResource( 11 )
 states/bubble_shrink/position = Vector2( 388.5, 158 )
-transitions = [ "bubble_grow", "bubble_idle", SubResource( 14 ), "bubble_idle", "bubble_shrink", SubResource( 15 ), "bubble_shrink", "bubble_grow", SubResource( 16 ) ]
+transitions = [ "bubble_grow", "bubble_idle", SubResource( 12 ), "bubble_idle", "bubble_shrink", SubResource( 13 ), "bubble_shrink", "bubble_grow", SubResource( 14 ) ]
 start_node = "bubble_shrink"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
 [node name="bible_stand" type="Node2D"]
 pause_mode = 2
@@ -150,7 +150,7 @@ volume_db = -5.064
 [node name="bible_stand" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "page_flip"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -159,7 +159,7 @@ position = Vector2( -32, 75 )
 [node name="UI_enter_bubble" type="AnimatedSprite" parent="Node2D"]
 position = Vector2( 32, -98 )
 scale = Vector2( 1e-05, 1e-05 )
-frames = SubResource( 5 )
+frames = SubResource( 4 )
 frame = 1
 playing = true
 
@@ -167,7 +167,7 @@ playing = true
 
 [node name="detection" type="CollisionShape2D" parent="flooding_trigger"]
 position = Vector2( 0, 6.5 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bubble_grow = SubResource( 6 )
@@ -175,9 +175,9 @@ anims/bubble_idle = SubResource( 7 )
 anims/bubble_shrink = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 17 )
+tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 18 )
+parameters/playback = SubResource( 16 )
 [connection signal="body_entered" from="flooding_trigger" to="." method="_on_flooding_trigger_body_entered"]
 [connection signal="body_exited" from="flooding_trigger" to="." method="_on_flooding_trigger_body_exited"]
