@@ -30,12 +30,11 @@ var finished_reading_bible: bool = false
 #-----------------------------------------------------------------------------#
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and can_read_bible:
-		bible_verse.transition_in_out(true)
+		bible_verse.get_node("../bible_verse/AnimationPlayer").play("transition")
 		Globals.game_locked = true
 		can_read_bible = false
-		finished_reading_bible = true
-	elif (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and not can_read_bible and finished_reading_bible:
-		bible_verse.transition_in_out(false)
+	elif (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and finished_reading_bible and $flooding_trigger/detection.disabled == false:
+		bible_verse.get_node("../bible_verse/AnimationPlayer").play_backwards("transition")
 		state_machine.travel("bubble_shrink")
 
 		Globals.player.set_speed(5)
@@ -47,7 +46,7 @@ func _input(event: InputEvent) -> void:
 		$flooding_trigger/detection.disabled = true
 		tween.interpolate_property(water, "position", Vector2(1525, 1000), Vector2(1525, 120), 5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
-		finished_reading_bible = false
+		camera.shake(5, 20, 15)
 		camera.limit_right     = 3840
 
 #-----------------------------------------------------------------------------#
@@ -62,3 +61,8 @@ func _on_flooding_trigger_body_exited(body: Node) -> void:
 	if body.has_method("prepare_transition"):
 		state_machine.travel("bubble_shrink")
 		can_read_bible = false
+
+
+func _on_bible_verse_transition_complete() -> void:
+	finished_reading_bible = true
+	can_read_bible = false
