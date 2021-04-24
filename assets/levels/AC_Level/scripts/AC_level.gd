@@ -43,7 +43,7 @@ var enemies_remaining = 999
 
 func _ready():
 	area_trigger.get_node("checkpoints/spawnpoint_after_spider_dead/Area2D").set_deferred("monitoring", false)
-	$player/game_UI/pause/buttons/Control/VBoxContainer/CenterContainer2.visible = false
+	#$player/game_UI/pause/buttons/Control/VBoxContainer/CenterContainer2.visible = false
 	$AI/Teachers/sparks/force_field.visible                  = true
 	$AI/Teachers/sparks/transition/transition_screen.visible = false
 	$AI/Teachers/sparks/drsparks.visible                     = false
@@ -65,6 +65,8 @@ func _ready():
 	section_1_borders.disable() 
 	$sounds/background_ambiant.play()
 	$sounds/music_idle.play()
+	
+	$player.load_from_transition()
 
 
 func _physics_process(_delta):
@@ -307,6 +309,7 @@ func _on_game_unlock():
 
 func _on_next_scene_area_entered(area):
 	if area.is_in_group("hitbox"):
+		$player.prepare_transition()
 		$sounds/door_transition.play()
 		yield($sounds/door_transition, "finished")
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_grass.tscn", 'fade')

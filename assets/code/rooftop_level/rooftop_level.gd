@@ -15,7 +15,7 @@ func _ready():
 	
 	PlayerVariables.new_level()
 	
-	#$player/Camera2D.limit_left = -125
+	#$player/Camera2D.limit_left = -100
 	
 	if PlayerVariables.saved_deaths < 1:
 		Story.show()

@@ -11,8 +11,11 @@ func _physics_process(_delta):
 
 
 func _ready():
+	$player.load_from_transition()
+	Globals.player.has_spawn_points = false
+	
 	$player/player_cam.current = true
-	$player/game_UI.on_no_checkpoints()
+	#$player/game_UI.on_no_checkpoints()
 	$StaticBody2D2/Light2D2.visible = false
 	$door_activator.set_deferred("monitoring", false)
 	$drhowell/Light2D.visible = true
@@ -125,6 +128,7 @@ func _on_error_zone_body_left(body):
 
 func _on_door_activator_area_entered(area):
 	if area.is_in_group("hitbox"):
+		$player.prepare_transition()
 		$adkins_plane/enter_plane.play()
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_boss.tscn",'fade')
 		queue_free()
