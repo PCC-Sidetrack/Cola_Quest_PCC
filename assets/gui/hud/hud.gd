@@ -59,6 +59,13 @@ func _physics_process(_delta: float) -> void:
 	$ui_stat/stats/total_cola_collected.set_text     ("Cola Collected : " + str(_cola_count))
 	$ui_stat/stats/respawn_counter.set_text          ("Respawn Counter: " + str(_respawn_count))
 
+
+func get_cola_count() -> int:
+	return _cola_count
+	
+func get_respawn_count() -> int:
+	return _respawn_count
+
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
 #-----------------------------------------------------------------------------#

@@ -43,4 +43,5 @@ func _ready() -> void:
 	
 	get_node("player").load_from_transition()
 	$cc_portal_door/AnimationPlayer.play("transition_out")
-	#get_tree().paused = false
+	yield($cc_portal_door, "_on_transition_finished")
+	Globals.start_highscore_timer()

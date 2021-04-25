@@ -230,5 +230,15 @@ func _on_MK_Boss_death():
 	death_anim (25,  0.04)
 	timer.start(25 * 0.04)
 	yield(timer, "timeout")
-	get_parent().get_node("player/game_UI").on_player_level_cleared()
+	
+	Globals.stop_highscore_timer()
+	var game_ui = Globals.player.get_node("game_UI")
+	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	
+	if Globals.get_highscore_dictionary().makenzie < score:
+		Globals.update_mk_score(score)
+	
+	game_ui.on_player_level_cleared()
 	queue_free()

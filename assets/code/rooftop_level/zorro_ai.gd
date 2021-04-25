@@ -64,7 +64,7 @@ export var dash_cooldown:                 float = attack_cooldown
 # Damage that zorro deals to entitys
 export var damage:                        int = 1
 # Max health of boss
-export var max_health:                    int = 18
+export var max_health:                    int = 24
 # Distance of boss from player before an action occurs (such as an attack)
 export var standard_distance_from_player: int = 200
 
@@ -150,6 +150,7 @@ func _ready() -> void:
 	
 	add_child(_timer)
 	_timer.set_one_shot(true)
+	$errors.visible = false
 	
 	# Randomize the seed of the random number generator
 	_rng.randomize()
@@ -843,12 +844,50 @@ func _stage_three_transition() -> void:
 
 # Code called when the boss fight is finished
 func _fight_finished_transition() -> void:
+	var t: Timer = Timer.new()
+	t.one_shot   = true
+	
 	Globals.game_locked = true
-	death_anim(50, 0.04)
-	_timer.start(50 * 0.04)
-	yield(_timer, "timeout")
+	
+	set_movement_enabled(true)
+	
+	if Globals.player_position.x - global_position.x >= 0:
+		t.start(1.0)
+		while t.time_left > 0:
+			set_movement_direction(DIRECTION.LEFT)
+	else:
+		t.start(1.0)
+		while t.time_left > 0:
+			set_movement_direction(DIRECTION.RIGHT)
+
+	
+	#_on_zorro_boss_turned_around(Vector2(_current_direction.x, 0))	
+	
+	yield(get_tree().create_timer(1.0), "timeout")
+	$audio/voice.play()
+	t.queue_free()
+	set_movement_enabled(false)
+	
+	set_obeys_gravity(false)
+	$CollisionShape2D.queue_free()
+	$errors.visible = true
+	$audio/rocket.play()
+	$Tween.interpolate_property(self, "global_position", global_position, Vector2(global_position.x, global_position.y - 1000.0), 6.0, Tween.EASE_IN)
+	$Tween.start()
+	
+	yield(get_tree().create_timer(8.0), "timeout")
+	
+	Globals.stop_highscore_timer()
+	var game_ui = Globals.player.get_node("game_UI")
+	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	
+	if Globals.get_highscore_dictionary().rooftop < score:
+		Globals.update_rooftop_score(score)
+		
+	game_ui.on_player_level_cleared()
 	queue_free()
-	Globals.player.get_node("game_UI").on_player_level_cleared()
 	
 # Code for the ai jumping
 func _zorro_jump(secondary_cooldown: bool = false) -> void:
@@ -961,7 +1000,7 @@ func _throw_card() -> void:
 		study_card.global_position = Globals.misc_loc
 		study_card.speed = 7.0
 		study_card.set_collision_mask_bit(Globals.LAYER.WORLD, false)
-		study_card.initialize()
+		study_card.initialize(false)
 		
 		# Have the ai taunt the player briefly
 		_change_animation(_ANIMATION.ARM_WAVE)
