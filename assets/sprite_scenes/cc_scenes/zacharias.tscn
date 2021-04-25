@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/code/cc_level/zacharias.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/idle_zacharias_on_t-rex.png" type="Texture" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/sounds/cc_level/hurt.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/cc_level/pterodactyl_screech.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/cc_level/fireball.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/cc_level/missed_punch.ogg" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/cc_level/gust_attack.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/sounds/cc_level/missed_punch.wav" type="AudioStream" id=16]
 
@@ -368,7 +367,7 @@ tracks/6/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 14 )
+"stream": ExtResource( 16 )
 } ],
 "times": PoolRealArray( 1.4 )
 }
@@ -589,7 +588,7 @@ disabled = true
 [node name="idle1" type="Sprite" parent="sprites/stage1"]
 texture = ExtResource( 2 )
 hframes = 6
-frame = 2
+frame = 1
 
 [node name="jump" type="Sprite" parent="sprites/stage1"]
 visible = false
@@ -686,7 +685,7 @@ parameters/playback = SubResource( 53 )
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2( 11.754, 0 )
+position = Vector2( 11.7536, 0 )
 shape = SubResource( 54 )
 disabled = true
 

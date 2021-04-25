@@ -107,7 +107,6 @@ func _on_academic_center2_mouse_exited():
 
 func _on_sports_center_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("melee_attack"):
-		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		_level_transition()
 		yield(get_tree().create_timer(2.0), "timeout")
 		get_tree().change_scene("res://assets/levels/sc_level/SportCenterSection1.tscn")
