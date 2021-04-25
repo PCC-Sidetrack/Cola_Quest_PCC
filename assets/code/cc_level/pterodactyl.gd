@@ -22,7 +22,7 @@ export var ai_enabled:         bool  = true
 # Movement speed
 export var movement_speed:     float = 1.875
 # Number of seconds before a pterodactyl throws a gust attack
-export var throw_cooldown:     float = 3
+export var throw_cooldown:     float = 2
 # Seconds of movement before changing directions
 export var turnaround_time:    float = 5.0
 # Start facing right?

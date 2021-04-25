@@ -1,116 +1,36 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/KJV1611.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/art/cc_level/tiles/empty_textbox.png" type="Texture" id=2]
 [ext_resource path="res://assets/code/cc_level/bible_verse.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 65
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
 size = 80
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "transition"
-tracks/0/type = "value"
-tracks/0/path = NodePath("textbox:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("textbox/Reference:modulate")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("textbox/Verse:modulate")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "finished"
-} ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("textbox:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
-}
+[sub_resource type="DynamicFont" id=2]
+size = 65
+font_data = ExtResource( 1 )
 
 [node name="bible_verse" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="textbox" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Verse" type="Label" parent="textbox"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = -484.0
-margin_top = -50.0
-margin_right = 485.0
-margin_bottom = 118.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0.623529, 0, 0, 1 )
-text = "\"And, behold, I, even I, do bring a 
-   flood of waters upon the earth\""
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Reference" type="Label" parent="textbox"]
-modulate = Color( 1, 1, 1, 0 )
+[node name="Reference" type="Label" parent="."]
 margin_left = -337.585
 margin_top = -178.922
 margin_right = 338.415
 margin_bottom = -97.9218
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.623529, 0, 0, 1 )
 text = "GENESIS 6:17"
@@ -119,5 +39,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/transition = SubResource( 3 )
+[node name="Verse" type="Label" parent="."]
+margin_left = -484.0
+margin_top = -50.0
+margin_right = 485.0
+margin_bottom = 118.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.623529, 0, 0, 1 )
+text = "\"And, behold, I, even I, do bring a 
+   flood of waters upon the earth\""
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

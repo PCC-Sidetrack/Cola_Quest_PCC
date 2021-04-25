@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/code/cc_level/zacharias.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/idle_zacharias_on_t-rex.png" type="Texture" id=2]
@@ -6,18 +6,25 @@
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/jump_zacharias_on_t-rex.png" type="Texture" id=4]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/fire_breath_zacharias_on_t-rex-Sheet.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/song_leader_zacharias-Sheet.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/cc_level/boxing_bell.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/pterodactyl_swoop.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/cc_level/sprites/zacharias/zacharias_on_pterodactyl-Sheet.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/cc_level/uppercut.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/cc_level/hurt.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/cc_level/pterodactyl_screech.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/cc_level/fireball.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/cc_level/missed_punch.ogg" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/cc_level/gust_attack.ogg" type="AudioStream" id=15]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=53]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 27.156, 38.404 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=55]
 resource_name = "death"
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=56]
 resource_name = "fire"
 length = 3.0
 tracks/0/type = "value"
@@ -58,8 +65,22 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("fireball")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 2.1 )
+}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=57]
 resource_name = "gust"
 length = 2.0
 step = 0.05
@@ -102,7 +123,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=58]
 resource_name = "hit1"
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -117,7 +138,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=59]
 resource_name = "hit2"
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -132,7 +153,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=60]
 resource_name = "hit3"
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -147,7 +168,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=61]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/stage1/idle1:frame")
@@ -174,7 +195,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=62]
 resource_name = "idle2"
 loop = true
 tracks/0/type = "value"
@@ -202,7 +223,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=63]
 resource_name = "idle3"
 loop = true
 tracks/0/type = "value"
@@ -230,7 +251,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=64]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -259,7 +280,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=65]
 length = 2.0
 step = 0.05
 tracks/0/type = "value"
@@ -322,8 +343,36 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/5/type = "audio"
+tracks/5/path = NodePath("boxing_bell")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0.15 )
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("missed_punch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 1.4 )
+}
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=66]
 resource_name = "swoop"
 length = 1.5
 tracks/0/type = "value"
@@ -338,8 +387,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("pterodactyl_screech")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.78,
+"start_offset": 0.0,
+"stream": ExtResource( 12 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=67]
 resource_name = "throw"
 length = 1.4
 tracks/0/type = "value"
@@ -504,18 +567,18 @@ states/throw/node = SubResource( 27 )
 states/throw/position = Vector2( 472.709, 139.124 )
 transitions = [ "fire", "idle1", SubResource( 28 ), "idle1", "fire", SubResource( 29 ), "punch", "idle1", SubResource( 30 ), "idle1", "punch", SubResource( 31 ), "idle1", "hit1", SubResource( 32 ), "hit1", "idle1", SubResource( 33 ), "idle2", "throw", SubResource( 34 ), "throw", "idle2", SubResource( 35 ), "idle2", "hit2", SubResource( 36 ), "hit2", "idle2", SubResource( 37 ), "throw", "hit2", SubResource( 38 ), "hit2", "throw", SubResource( 39 ), "idle1", "idle2", SubResource( 40 ), "idle3", "gust", SubResource( 41 ), "gust", "idle3", SubResource( 42 ), "idle3", "swoop", SubResource( 43 ), "swoop", "idle3", SubResource( 44 ), "swoop", "hit3", SubResource( 45 ), "hit3", "swoop", SubResource( 46 ), "idle2", "idle3", SubResource( 47 ), "idle1", "jump", SubResource( 48 ), "jump", "idle1", SubResource( 49 ), "hit1", "idle2", SubResource( 50 ), "hit2", "idle3", SubResource( 51 ) ]
 start_node = "idle1"
-graph_offset = Vector2( 263.732, 3.51499 )
+graph_offset = Vector2( -36.268, -50.485 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=53]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=68]
 
-[sub_resource type="CircleShape2D" id=54]
+[sub_resource type="CircleShape2D" id=69]
 radius = 22.2675
 
 [node name="zacharias" type="StaticBody2D"]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 53 )
 disabled = true
 
 [node name="sprites" type="Node2D" parent="."]
@@ -552,19 +615,22 @@ scale = Vector2( 0.75, 0.75 )
 
 [node name="idle2" type="Sprite" parent="sprites/stage2"]
 visible = false
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 6 )
 hframes = 12
 
 [node name="throw" type="Sprite" parent="sprites/stage2"]
 visible = false
-texture = ExtResource( 6 )
-hframes = 12
-
-[node name="hit2" type="Sprite" parent="sprites/stage2"]
-visible = false
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 6 )
 hframes = 12
 frame = 5
+
+[node name="hit2" type="Sprite" parent="sprites/stage2"]
+visible = false
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 6 )
+hframes = 12
 
 [node name="stage3" type="Node2D" parent="sprites"]
 scale = Vector2( 0.75, 0.75 )
@@ -593,37 +659,58 @@ hframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 7, 3.15282 )
-shape = SubResource( 2 )
+shape = SubResource( 54 )
 
 [node name="animation" type="AnimationPlayer" parent="."]
-anims/death = SubResource( 3 )
-anims/fire = SubResource( 4 )
-anims/gust = SubResource( 5 )
-anims/hit1 = SubResource( 6 )
-anims/hit2 = SubResource( 7 )
-anims/hit3 = SubResource( 8 )
-anims/idle1 = SubResource( 9 )
-anims/idle2 = SubResource( 10 )
-anims/idle3 = SubResource( 11 )
-anims/jump = SubResource( 12 )
-anims/punch = SubResource( 13 )
-anims/swoop = SubResource( 14 )
-anims/throw = SubResource( 15 )
+anims/death = SubResource( 55 )
+anims/fire = SubResource( 56 )
+anims/gust = SubResource( 57 )
+anims/hit1 = SubResource( 58 )
+anims/hit2 = SubResource( 59 )
+anims/hit3 = SubResource( 60 )
+anims/idle1 = SubResource( 61 )
+anims/idle2 = SubResource( 62 )
+anims/idle3 = SubResource( 63 )
+anims/jump = SubResource( 64 )
+anims/punch = SubResource( 65 )
+anims/swoop = SubResource( 66 )
+anims/throw = SubResource( 67 )
 
 [node name="animation_machine" type="AnimationTree" parent="animation"]
 tree_root = SubResource( 52 )
 anim_player = NodePath("..")
 active = true
-parameters/playback = SubResource( 53 )
+parameters/playback = SubResource( 68 )
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2( 11.7536, 0 )
-shape = SubResource( 54 )
+position = Vector2( 11.754, 0 )
+shape = SubResource( 69 )
 disabled = true
 
 [node name="fireball_spawn" type="Position2D" parent="."]
 position = Vector2( 25.6839, 0 )
+
+[node name="boxing_bell" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+
+[node name="landed_punch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+
+[node name="pterodactyl_screech" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+
+[node name="fireball" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+
+[node name="missed_punch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+
+[node name="gust_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

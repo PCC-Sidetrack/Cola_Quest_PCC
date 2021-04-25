@@ -22,8 +22,9 @@ func _on_Area2D_body_entered(body):
 		
 		body.zoom(1.8)
 		
-		camera.limit_left  = -736
-		camera.limit_right = 736
+		camera.limit_left   = -736
+		camera.limit_right  = 736
+		camera.limit_bottom = 1024
 		
 		yield(get_tree().create_timer(1.5), "timeout")
 		boss.start_fight()
