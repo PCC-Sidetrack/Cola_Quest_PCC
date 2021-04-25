@@ -232,7 +232,7 @@ func _spawn_ball() -> void:
 #-----------------------------------------------------------------------------#
 # Played at the end of the death animation
 func boss_defeated() -> void:
-	gui.on_player_level_cleared()
+	#gui.on_player_level_cleared()
 	emit_signal("_on_boss_defeated")
 	queue_free()
 

@@ -22272,112 +22272,112 @@ tracks/7/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=51]
-atlas = ExtResource( 40 )
-region = Rect2( 0, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=52]
-atlas = ExtResource( 40 )
-region = Rect2( 32, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=53]
-atlas = ExtResource( 40 )
-region = Rect2( 64, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=54]
-atlas = ExtResource( 40 )
-region = Rect2( 96, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=55]
-atlas = ExtResource( 40 )
-region = Rect2( 128, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=56]
-atlas = ExtResource( 40 )
-region = Rect2( 160, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=57]
-atlas = ExtResource( 40 )
-region = Rect2( 192, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 40 )
-region = Rect2( 224, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 40 )
-region = Rect2( 256, 0, 32, 61 )
-
-[sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 39 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=61]
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 39 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=62]
+[sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 39 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=63]
+[sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 39 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=64]
+[sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 39 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=65]
+[sub_resource type="AtlasTexture" id=56]
 atlas = ExtResource( 39 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=66]
+[sub_resource type="AtlasTexture" id=57]
 atlas = ExtResource( 39 )
 region = Rect2( 192, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=67]
+[sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 39 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=68]
+[sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 39 )
 region = Rect2( 256, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=69]
+[sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 39 )
 region = Rect2( 288, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=70]
+[sub_resource type="AtlasTexture" id=61]
 atlas = ExtResource( 39 )
 region = Rect2( 0, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=71]
+[sub_resource type="AtlasTexture" id=62]
 atlas = ExtResource( 39 )
 region = Rect2( 32, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=72]
+[sub_resource type="AtlasTexture" id=63]
 atlas = ExtResource( 39 )
 region = Rect2( 64, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=73]
+[sub_resource type="AtlasTexture" id=64]
 atlas = ExtResource( 39 )
 region = Rect2( 96, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=74]
+[sub_resource type="AtlasTexture" id=65]
 atlas = ExtResource( 39 )
 region = Rect2( 128, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 40 )
+region = Rect2( 0, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 40 )
+region = Rect2( 32, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 40 )
+region = Rect2( 64, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 40 )
+region = Rect2( 96, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 40 )
+region = Rect2( 128, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 40 )
+region = Rect2( 160, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 40 )
+region = Rect2( 192, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 40 )
+region = Rect2( 224, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 40 )
+region = Rect2( 256, 0, 32, 61 )
+
 [sub_resource type="SpriteFrames" id=75]
 animations = [ {
-"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ) ],
-"loop": true,
-"name": "philips",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
+"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ) ],
 "loop": false,
 "name": "teleport_in",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
+"loop": true,
+"name": "philips",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=76]
@@ -22889,7 +22889,7 @@ anims/teleport_in = SubResource( 50 )
 [node name="philips" type="AnimatedSprite" parent="philips"]
 frames = SubResource( 75 )
 animation = "philips"
-frame = 8
+frame = 3
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="philips/philips"]

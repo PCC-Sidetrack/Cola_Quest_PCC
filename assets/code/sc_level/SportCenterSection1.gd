@@ -47,3 +47,5 @@ func _ready() -> void:
 	
 	# Play the transition
 	portal.get_node("AnimationPlayer").play("transition_out")
+	yield(portal, "_on_transition_finished")
+	Globals.start_highscore_timer()

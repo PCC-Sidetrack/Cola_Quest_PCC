@@ -18,3 +18,5 @@ func _ready():
 	$scene_transition/AnimationPlayer.play("transition_out")
 	yield($scene_transition/AnimationPlayer, "animation_finished")
 	get_tree().paused = false
+
+	Globals.start_highscore_timer()

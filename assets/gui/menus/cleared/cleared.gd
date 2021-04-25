@@ -41,7 +41,7 @@ func _on_CompletionText_animation_finished() -> void:
 	_completion_text.animation = "text"
 
 # On level cleared, show level cleared menu
-func _on_game_UI_level_cleared() -> void:
+func _on_game_UI_level_cleared(_previous_score) -> void:
 	Globals.player.set_invulnerability(99999)
 	Globals.game_locked       = true
 	$completed.play()

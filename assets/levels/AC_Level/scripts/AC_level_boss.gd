@@ -231,4 +231,15 @@ func on_boss_death():
 	yield($philips/AnimationPlayer, "animation_finished")
 	$philips/philips/name.visible = false
 	$sounds/static.stop()
-	game_ui.on_player_level_cleared()
+	
+	Globals.stop_highscore_timer()
+	var game_ui = Globals.player.get_node("game_UI")
+	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	var previous_score = Globals.get_highscore_dictionary().academic_center
+	
+	if Globals.get_highscore_dictionary().academic_center < score:
+		Globals.update_ac_score(score)
+		
+	game_ui.on_player_level_cleared(previous_score)
