@@ -14106,55 +14106,55 @@ extents = Vector2( 62.5, 10 )
 extents = Vector2( 2412.5, 10 )
 
 [sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 33 )
+atlas = ExtResource( 34 )
 region = Rect2( 0, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 33 )
+atlas = ExtResource( 34 )
 region = Rect2( 64, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 33 )
+atlas = ExtResource( 34 )
 region = Rect2( 128, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 33 )
+atlas = ExtResource( 34 )
 region = Rect2( 192, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 33 )
+atlas = ExtResource( 34 )
 region = Rect2( 256, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 34 )
+atlas = ExtResource( 33 )
 region = Rect2( 0, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 34 )
+atlas = ExtResource( 33 )
 region = Rect2( 64, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 34 )
+atlas = ExtResource( 33 )
 region = Rect2( 128, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 34 )
+atlas = ExtResource( 33 )
 region = Rect2( 192, 0, 64, 55 )
 
 [sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 34 )
+atlas = ExtResource( 33 )
 region = Rect2( 256, 0, 64, 55 )
 
 [sub_resource type="SpriteFrames" id=49]
 animations = [ {
 "frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
 "loop": true,
-"name": "idle",
+"name": "stuck",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ) ],
 "loop": true,
-"name": "stuck",
+"name": "idle",
 "speed": 5.0
 } ]
 
@@ -14786,7 +14786,7 @@ script = ExtResource( 22 )
 
 [node name="adkins_plane" type="AnimatedSprite" parent="adkins_plane"]
 frames = SubResource( 29 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="hitbox" type="Area2D" parent="adkins_plane"]
@@ -14908,14 +14908,14 @@ position = Vector2( 962.5, 19.698 )
 position = Vector2( 0, -11.8056 )
 frames = SubResource( 49 )
 animation = "stuck"
-frame = 2
+frame = 1
 playing = true
 
 [node name="drhowell3" type="AnimatedSprite" parent="drhowell"]
 position = Vector2( 0, 16.4176 )
 frames = SubResource( 49 )
 animation = "stuck"
-frame = 2
+frame = 1
 playing = true
 
 [node name="drhowell" type="Label" parent="drhowell"]

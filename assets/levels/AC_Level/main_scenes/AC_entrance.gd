@@ -18,7 +18,8 @@ func _ready():
 	yield($scene_transition/AnimationPlayer, "animation_finished")
 	get_tree().paused = false
 	
-	$player/game_UI.on_no_checkpoints()
+	#$player/game_UI.on_no_checkpoints()
+	Globals.player.has_spawn_points = false
 
 func _on_activate_door_area_entered(area):
 	if area.is_in_group("hitbox"):

@@ -35,6 +35,8 @@ func _input(event: InputEvent) -> void:
 		can_read_bible = false
 	elif (event.is_action_pressed("ui_accept") or event.is_action_pressed("melee_attack")) and finished_reading_bible and $flooding_trigger/detection.disabled == false:
 		bible_verse.get_node("../bible_verse/AnimationPlayer").play_backwards("transition")
+		yield(bible_verse.get_node("../bible_verse/AnimationPlayer"), "animation_finished")
+		camera.shake(5, 20, 15)
 		state_machine.travel("bubble_shrink")
 
 		Globals.player.set_speed(5)
@@ -46,7 +48,6 @@ func _input(event: InputEvent) -> void:
 		$flooding_trigger/detection.disabled = true
 		tween.interpolate_property(water, "position", Vector2(1525, 1000), Vector2(1525, 120), 5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
-		camera.shake(5, 20, 15)
 		camera.limit_right     = 3840
 
 #-----------------------------------------------------------------------------#

@@ -85,7 +85,6 @@ void fragment( )
 	COLOR = pixel_color;
 }
 "
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
@@ -40808,7 +40807,6 @@ void fragment() {
 		COLOR = col;
 	}
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=51]
 shader = SubResource( 50 )
@@ -42324,13 +42322,14 @@ scale = Vector2( 0.6, 0.6 )
 position = Vector2( 220, 126.667 )
 scale = Vector2( 1.75, 1.75 )
 frames = SubResource( 34 )
+frame = 2
 playing = true
 
 [node name="panic_ma" type="AnimatedSprite" parent="AI/NPC"]
 position = Vector2( 302.433, 125.72 )
 scale = Vector2( 1.75, 1.75 )
 frames = SubResource( 39 )
-frame = 3
+frame = 1
 playing = true
 flip_h = true
 
@@ -42360,7 +42359,7 @@ __meta__ = {
 position = Vector2( 936, 80 )
 frames = SubResource( 48 )
 animation = "stuck"
-frame = 1
+frame = 3
 playing = true
 
 [node name="drsparks" type="Label" parent="AI/Teachers/sparks"]
@@ -42405,7 +42404,7 @@ position = Vector2( 2948.44, 312 )
 z_index = 1
 frames = SubResource( 62 )
 animation = "stuck"
-frame = 1
+frame = 2
 speed_scale = 2.0
 playing = true
 
