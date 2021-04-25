@@ -878,7 +878,7 @@ func _fight_finished_transition() -> void:
 	$Tween.interpolate_property(self, "global_position", global_position, Vector2(global_position.x, global_position.y - 1000.0), 6.0, Tween.EASE_IN)
 	$Tween.start()
 	
-	yield(get_tree().create_timer(8.0), "timeout")
+	yield(get_tree().create_timer(5.0), "timeout")
 	
 	Globals.stop_highscore_timer()
 	var game_ui = Globals.player.get_node("game_UI")

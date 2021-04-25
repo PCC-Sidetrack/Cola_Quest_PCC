@@ -7,12 +7,12 @@
 [ext_resource path="res://assets/art/sc_level/tiles/UI_enter_bubble/UI_enter_bubble.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/cc_level/tiles/B33_bathroom_door/B33_bathroom_door.png" type="Texture" id=6]
 
-[sub_resource type="Shader" id=14]
+[sub_resource type="Shader" id=1]
 
-[sub_resource type="ShaderMaterial" id=15]
-shader = SubResource( 14 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
-[sub_resource type="TileSet" id=16]
+[sub_resource type="TileSet" id=3]
 1/name = "TD_portal_door.png 1"
 1/texture = ExtResource( 1 )
 1/tex_offset = Vector2( 0, 0 )
@@ -56,41 +56,41 @@ shader = SubResource( 14 )
 3/shapes = [  ]
 3/z_index = 0
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "bubble_grow"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "bubble_idle"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "bubble_shrink"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
 switch_mode = 2
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
 switch_mode = 2
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachine" id=33]
-states/bubble_grow/node = SubResource( 27 )
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/bubble_grow/node = SubResource( 4 )
 states/bubble_grow/position = Vector2( 413.5, 53.5 )
-states/bubble_idle/node = SubResource( 28 )
+states/bubble_idle/node = SubResource( 5 )
 states/bubble_idle/position = Vector2( 140.5, 101 )
-states/bubble_shrink/node = SubResource( 29 )
+states/bubble_shrink/node = SubResource( 6 )
 states/bubble_shrink/position = Vector2( 388.5, 158 )
-transitions = [ "bubble_grow", "bubble_idle", SubResource( 30 ), "bubble_idle", "bubble_shrink", SubResource( 31 ), "bubble_shrink", "bubble_grow", SubResource( 32 ) ]
+transitions = [ "bubble_grow", "bubble_idle", SubResource( 7 ), "bubble_idle", "bubble_shrink", SubResource( 8 ), "bubble_shrink", "bubble_grow", SubResource( 9 ) ]
 start_node = "bubble_shrink"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=34]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=12]
 resource_name = "bubble_grow"
 length = 0.5
 tracks/0/type = "value"
@@ -118,7 +118,7 @@ tracks/1/keys = {
 "values": [ Vector2( 5e-06, 1e-05 ), Vector2( 1.5, 1.5 ) ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=13]
 resource_name = "bubble_idle"
 loop = true
 tracks/0/type = "value"
@@ -134,7 +134,7 @@ tracks/0/keys = {
 "values": [ Vector2( 32, -124 ), Vector2( 32, -130 ), Vector2( 32, -124 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=14]
 resource_name = "bubble_shrink"
 length = 0.5
 tracks/0/type = "value"
@@ -162,7 +162,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=15]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/transition:material:shader_param/progress")
@@ -191,7 +191,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=16]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/transition:material:shader_param/progress")
@@ -241,7 +241,7 @@ extents = Vector2( 48.0501, 32.1246 )
 
 [sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 3 )
-shader_param/progress = 0.0
+shader_param/progress = 1.0
 shader_param/diamondPixelSize = 50.0
 
 [node name="cc_1st_portal_door" type="Node2D"]
@@ -253,24 +253,24 @@ stream = ExtResource( 4 )
 volume_db = -5.064
 
 [node name="TileMap" type="TileMap" parent="."]
-material = SubResource( 15 )
-tile_set = SubResource( 16 )
+material = SubResource( 2 )
+tile_set = SubResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -131072, 536870915, 0, -131071, 536870915, 0, -131070, 536870915, 0 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 33 )
+tree_root = SubResource( 10 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 34 )
+parameters/playback = SubResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/bubble_grow = SubResource( 35 )
-anims/bubble_idle = SubResource( 36 )
-anims/bubble_shrink = SubResource( 24 )
-anims/transition_in = SubResource( 25 )
-anims/transition_out = SubResource( 26 )
+anims/bubble_grow = SubResource( 12 )
+anims/bubble_idle = SubResource( 13 )
+anims/bubble_shrink = SubResource( 14 )
+anims/transition_in = SubResource( 15 )
+anims/transition_out = SubResource( 16 )
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( 16, 31 )
@@ -279,7 +279,6 @@ position = Vector2( 16, 31 )
 position = Vector2( 32, -98 )
 scale = Vector2( 1e-05, 1e-05 )
 frames = SubResource( 19 )
-frame = 1
 playing = true
 
 [node name="doorway" type="Area2D" parent="."]

@@ -249,5 +249,4 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="continue"]
 position = Vector2( 14.8401, 0 )
 frames = SubResource( 5 )
-frame = 1
 playing = true

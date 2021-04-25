@@ -113,7 +113,6 @@ func _on_game_UI_level_cleared(previous_score: float):
 # On collecting a cola(s)
 func _on_game_UI_cola_collect(amount):
 	_cola_count += amount
-	PlayerVariables.saved_cola += amount
 	$ui_element/cola_counter/cola_tween.interpolate_property($ui_element/cola_counter/cola_icon, "scale", Vector2(2,2), Vector2(1,1), .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$ui_element/cola_counter/cola_tween.start()
 	if _healing_enabled:
