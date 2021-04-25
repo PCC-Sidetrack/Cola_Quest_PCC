@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------#
-# File Name:   eagor_movment.gd
+# File Name:   boss.gd
 # Description: The AI for the eagor boss fight
 # Author:      Jeff Newell
 # Company:     Sidetrack
@@ -43,14 +43,10 @@ onready var scaffold:               Position2D                        = $points/
 #-----------------------------------------------------------------------------#
 #                             Private Variables                               #
 #-----------------------------------------------------------------------------#
-var _last_path: String = "intro"
+#var _last_path: String = "intro"
 
 #-----------------------------------------------------------------------------#
 #                              Dictionaries                                   #
-#-----------------------------------------------------------------------------#
-
-#-----------------------------------------------------------------------------#
-#                            Onready Variables                                #
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -75,6 +71,8 @@ func _change_path(new_path: String) -> void:
 
 # The code for the death node
 func _death() -> void:
+	#var game_ui = Globals.player.get_node("game_UI")
+	
 	#print("death")
 	Globals.game_locked = true
 	Globals.player.set_obeys_gravity(false)
@@ -87,7 +85,18 @@ func _death() -> void:
 	animation_player.active          = false
 	animation_machine.stop()
 	eagor_data._play_animation("death")
-
+	
+#	Globals.stop_highscore_timer()
+#	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+#
+#	Globals.update_highscore_file_from_local()
+#	var previous_score = Globals.get_highscore_dictionary().sports_center
+#
+#	if Globals.get_highscore_dictionary().sports_center < score:
+#		Globals.update_sc_score(score)
+#
+#	game_ui.on_player_level_cleared(previous_score)
+	
 # The code for the delay node
 func _delay() -> void:
 	#print("delay")

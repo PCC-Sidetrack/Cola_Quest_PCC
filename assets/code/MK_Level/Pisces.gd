@@ -97,7 +97,6 @@ func _on_Pisces_death():
 	
 	death_anim (25, 0.01)
 	yield(spin_sprite(), "completed")
-	yield(get_tree().create_timer(25 * 0.04), "timeout")
 	queue_free()
 
 

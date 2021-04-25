@@ -19,7 +19,7 @@ export  var movement_speed:    float   = 3.0
 export  var acceleration:      float   = 25.0
 export  var jump_velocity:     float   = 0.0
 
-export  var health:            int     = 2
+export  var health:            int     = 1
 export  var damage:            int     = 1
 
 export  var obeys_gravity:     bool    = true
@@ -57,7 +57,7 @@ func _physics_process(_delta: float) -> void:
 	_sound_timer += _delta
 	if $ChargeLooker.is_colliding():
 		set_speed(10)
-		set_knockback_multiplier(2)
+		set_knockback_multiplier(1.5)
 		if _sound_timer > 1:
 			play_sound($TaurusCharge, 1)
 			_sound_timer = 0.0
@@ -120,9 +120,8 @@ func _on_Taurus1_death():
 
 func _on_DmgPlayer_body_entered(body):
 	if body.is_in_group(Globals.GROUP.PLAYER):
-		if check_health:
-			body.knockback(self)
-			deal_damage(body)
+		body.knockback(self)
+		deal_damage(body)
 
 # On healthbar visibility timeout
 func _visible_timeout():

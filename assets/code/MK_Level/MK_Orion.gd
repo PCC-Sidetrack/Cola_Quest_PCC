@@ -12,7 +12,7 @@ extends Entity
 #                           Constant Variables                                #
 #-----------------------------------------------------------------------------#
 # Holds a reference to the 3x5_projectile scene
-const SPEAR = preload("res://assets//sprite_scenes//rooftop_scenes//spear.tscn")
+const SPEAR = preload("res://assets//sprite_scenes//rooftop_scenes//spear2.tscn")
 
 
 #-----------------------------------------------------------------------------#
@@ -104,10 +104,6 @@ func set_initial_direction_moving(direction: Vector2 = Vector2.DOWN) -> void:
 #-----------------------------------------------------------------------------#
 #                            Trigger Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_Orion_collision(_body):
-	pass
-
 func _on_Orion_death():
 	set_collision_mask(0)
 	set_collision_layer(0)

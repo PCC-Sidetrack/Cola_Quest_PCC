@@ -43,8 +43,15 @@ var _healing_enabled:  bool = true
 #-----------------------------------------------------------------------------#
 # Hide respawn counter by default
 func _ready() -> void:
-	$ui_stat/stats/respawn_counter.visible         = false
-	$ui_stat/stats/total_cola_collected.visible    = false
+	_cola_count       = PlayerVariables.saved_cola
+	_respawn_count    = PlayerVariables.saved_deaths
+	green_plus.value  = PlayerVariables.saved_health
+	$ui_stat/stats/respawn_counter.visible          = false
+	$ui_stat/stats/total_cola_collected.visible     = false
+	$ui_stat/stats/time_taken.visible               = false
+	$ui_stat/stats/score.visible                    = false
+	$ui_stat/stats/highscore.visible                = false
+	$ui_stat/stats/respawn_counter_on_death.visible = false
 	green_plus.max_value  = _cola_requirement
 	green_plus.value      = 0
 	green_plus_ss.visible = false
@@ -56,8 +63,22 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	$ui_element/cola_counter/cola_collected.set_text (" " + str(_cola_count))
 	$ui_stat/stats/fps_counter.set_text              ("FPS: " + str(Engine.get_frames_per_second()))
-	$ui_stat/stats/total_cola_collected.set_text     ("Cola Collected : " + str(_cola_count))
-	$ui_stat/stats/respawn_counter.set_text          ("Respawn Counter: " + str(_respawn_count))
+	$ui_stat/stats/total_cola_collected.set_text     ("Cola Collected: " + str(_cola_count) + " (score: " + str(int(_cola_count * Globals.HIGHSCORE_WEIGHTS.COLA)) + ")")
+	$ui_stat/stats/respawn_counter.set_text          ("Respawn Counter: " + str(_respawn_count) + " (score: " + str(int(_respawn_count * Globals.HIGHSCORE_WEIGHTS.DEATH)) + ")")
+	$ui_stat/stats/time_taken.set_text               ("Time Taken: " + _float2time(Globals.get_highscore_timer()) + " (score: " + str(int(Globals.get_highscore_timer() * Globals.HIGHSCORE_WEIGHTS.SECOND)) + ")")
+	$ui_stat/stats/score.set_text                    ("____________________\nScore: " + str(int(Globals.calculate_highscore(_cola_count, Globals.get_highscore_timer(), _respawn_count))))
+
+func get_cola_count() -> int:
+	return _cola_count
+	
+func get_respawn_count() -> int:
+	return _respawn_count
+	
+func _float2time(value: float) -> String:
+# warning-ignore:integer_division
+	var minutes: int = int(value) / 60
+	var seconds: int = int(value) % 60
+	return ("%02d" % minutes) + ":" + ("%02d" % seconds)
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
@@ -65,22 +86,29 @@ func _physics_process(_delta: float) -> void:
 # On player killed, show respawn counter
 func _on_game_UI_player_killed() -> void:
 	yield(get_tree().create_timer(1.0), "timeout")
-	$ui_stat/stats/respawn_counter.visible = true
+	$ui_stat/stats/respawn_counter_on_death.set_text("Deaths: " + str(_respawn_count + 1))
+	$ui_stat/stats/respawn_counter_on_death.visible = true
 
 # On player respawn, increment respawn counter
 func _on_game_UI_respawn_player() -> void:
 	_healing_enabled      = true
 	green_plus.value      =  0
 	green_plus_ss.visible = false
-	_respawn_count        += 1
-	$ui_stat/stats/respawn_counter.visible       = false
-	$ui_stat/stats/total_cola_collected.visible  = false
+	_respawn_count               += 1
+	PlayerVariables.saved_deaths += 1
+	$ui_stat/stats/respawn_counter_on_death.visible = false
+	$ui_stat/stats/total_cola_collected.visible     = false
 
 # On game cleared, show level stats
-func _on_game_UI_level_cleared():
+func _on_game_UI_level_cleared(previous_score: float):
 	yield(get_tree().create_timer(3.0), "timeout")
 	$ui_stat/stats/total_cola_collected.visible  = true
 	$ui_stat/stats/respawn_counter.visible       = true
+	$ui_stat/stats/time_taken.visible            = true
+	$ui_stat/stats/score.visible                 = true
+	
+	if Globals.calculate_highscore(_cola_count, Globals.get_highscore_timer(), _respawn_count) > previous_score:
+		$ui_stat/stats/highscore.visible         = true
 
 # On collecting a cola(s)
 func _on_game_UI_cola_collect(amount):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/code/cc_level/t-rex.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/S34_t-rex/S34_t-rex-Sheet.png" type="Texture" id=2]
@@ -40,6 +40,9 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=8]
 radius = 19.3225
 
+[sub_resource type="CircleShape2D" id=9]
+radius = 22.033
+
 [node name="t-rex" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 2
@@ -63,5 +66,12 @@ collision_mask = 8
 stream = ExtResource( 3 )
 
 [node name="healthbar" parent="." instance=ExtResource( 4 )]
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 0, 2.0229 )
+shape = SubResource( 9 )
 [connection signal="death" from="." to="." method="_on_t_rex_death"]
 [connection signal="health_changed" from="." to="." method="_on_t_rex_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

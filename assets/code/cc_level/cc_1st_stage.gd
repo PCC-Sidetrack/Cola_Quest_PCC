@@ -17,14 +17,15 @@ onready var camera = $player/Camera2D
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	Globals.game_locked = true
+	get_tree().paused = true
+	
 	$player/game_UI.on_game_ui_visible(false)
-	$story.show()
-	$story.play("cc")
-	yield($story, "on_continue")
-	$story.hide()
+	if PlayerVariables.saved_deaths < 1:
+		Story.show()
+		Story.play("cc")
+		yield(Story, "on_continue")
 	$player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
-	
 	
 	camera.limit_left            = -768
 	camera.limit_top             = -170
@@ -38,5 +39,11 @@ func _ready() -> void:
 	camera.smoothing_enabled     = true
 	camera.limit_smoothed        = true
 	
-	$cc_portal_door/AnimationPlayer.play("transition_out")
+	camera.set_script(load("res://assets/code/sc_level/boss_arena_camera.gd"))
+	
+	PlayerVariables.new_level()
+	
 	get_node("player").load_from_transition()
+	$cc_portal_door/AnimationPlayer.play("transition_out")
+	yield($cc_portal_door, "_on_transition_finished")
+	Globals.start_highscore_timer()

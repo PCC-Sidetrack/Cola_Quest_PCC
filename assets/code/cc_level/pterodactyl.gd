@@ -22,7 +22,7 @@ export var ai_enabled:         bool  = true
 # Movement speed
 export var movement_speed:     float = 1.875
 # Number of seconds before a pterodactyl throws a gust attack
-export var throw_cooldown:     float = 3
+export var throw_cooldown:     float = 2
 # Seconds of movement before changing directions
 export var turnaround_time:    float = 5.0
 # Start facing right?
@@ -98,6 +98,8 @@ func _spawn_gust() -> void:
 # Triggered whenever the pterodactyl dies
 func _on_pterodactyl_death() -> void:
 	# Used to wait a given amount of time before deleting the entity
+	ai_enabled = false
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	var timer: Timer = Timer.new()
 	
 	set_collision_mask(0)
@@ -132,3 +134,10 @@ func _on_Area2D_body_entered(body: Node) -> void:
 func _on_Area2D_body_exited(body: Node) -> void:
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		is_player_in_range = false
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))

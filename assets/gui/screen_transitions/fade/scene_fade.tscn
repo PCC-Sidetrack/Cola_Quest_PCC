@@ -51,6 +51,7 @@ tracks/2/keys = {
 }
 
 [node name="scene_fade" type="CanvasLayer"]
+pause_mode = 2
 layer = 2
 script = ExtResource( 1 )
 

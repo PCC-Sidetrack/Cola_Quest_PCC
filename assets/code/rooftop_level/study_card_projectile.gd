@@ -43,7 +43,7 @@ func _physics_process(_delta: float) -> void:
 #-----------------------------------------------------------------------------#
 # Instead of initializing with the _ready() function, this must be called.
 # This method allows initialization to be done at a variable time.
-func initialize() -> void:
+func initialize(interact_enemy: bool = true) -> void:
 	initialize_projectile(damage, speed, "enemy", Globals.player_position - global_position, acceleration, life_time)
 	set_knockback_multiplier(knockback)
 	_initialized = true
@@ -54,23 +54,33 @@ func initialize() -> void:
 	add_child(t)
 	t.start(0.3)
 	yield(t, "timeout")
-	set_collision_mask_bit(Globals.LAYER.ENEMY, true)
+	#if interact_enemy:
+		#set_collision_mask_bit(Globals.LAYER.ENEMY, true)
 
 #-----------------------------------------------------------------------------#
 #                             Signal Functions                                #
 #-----------------------------------------------------------------------------#
-# Triggered whenever the entity detects a collision
-func _on_KinematicBody2D_collision(body):
-	if body.is_in_group(Globals.GROUP.PLAYER) or body.is_in_group(Globals.GROUP.ENEMY):
-		body.knockback(self)
-		deal_damage(body)
-	
-	# Delete the projectile
-	delete()
-
-
 func _on_KinematicBody2D_death():
 	pass # Replace with function body.
 
 func _on_KinematicBody2D_health_changed(_change):
 	pass # Replace with function body.
+
+# Determine if the card has hit the player
+func _on_hitbox_body_entered(body: Node) -> void:
+	if (body.is_in_group(Globals.GROUP.PLAYER) or body.is_in_group(Globals.GROUP.ENEMY)) and body != self:
+		body.take_damage(damage)
+		_knockback_old(body)
+		
+	if body != self:
+		delete()
+
+# Delete the card if it goes off screen
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	delete()
+
+# Keep the card from immediatly hitting the enemy that launched t
+func _on_delay_body_exited(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.ENEMY):
+		$hitbox/CollisionShape2D.set_deferred("disabled", false)
+		$delay/CollisionShape2D.set_deferred("disabled", true)

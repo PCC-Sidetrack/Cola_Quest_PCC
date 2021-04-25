@@ -142,10 +142,10 @@ anchor_left = 0.378419
 anchor_top = 0.465916
 anchor_right = 0.456419
 anchor_bottom = 0.475916
-margin_left = 191.069
-margin_top = 109.658
-margin_right = 293.069
-margin_bottom = 126.658
+margin_left = 153.586
+margin_top = 97.7512
+margin_right = 255.586
+margin_bottom = 114.751
 rect_pivot_offset = Vector2( 18.553, 0 )
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -157,21 +157,102 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="respawn_counter_on_death" type="Label" parent="HUD/ui_stat/stats"]
+anchor_left = 0.378419
+anchor_top = 0.465916
+anchor_right = 0.456419
+anchor_bottom = 0.475916
+margin_left = 188.475
+margin_top = 97.751
+margin_right = 290.475
+margin_bottom = 114.751
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Deaths"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="time_taken" type="Label" parent="HUD/ui_stat/stats"]
+anchor_left = 0.378419
+anchor_top = 0.465916
+anchor_right = 0.456419
+anchor_bottom = 0.475916
+margin_left = 153.586
+margin_top = 108.178
+margin_right = 255.586
+margin_bottom = 125.178
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Time Taken"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="total_cola_collected" type="Label" parent="HUD/ui_stat/stats"]
 anchor_left = 0.378419
 anchor_top = 0.465916
 anchor_right = 0.456419
 anchor_bottom = 0.475916
-margin_left = 191.069
-margin_top = 101.479
-margin_right = 270.069
-margin_bottom = 118.479
+margin_left = 153.586
+margin_top = 89.5722
+margin_right = 232.586
+margin_bottom = 106.572
 rect_pivot_offset = Vector2( 18.553, 0 )
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0.94902, 0.384314, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Cola Collected"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="HUD/ui_stat/stats"]
+anchor_left = 0.378419
+anchor_top = 0.465916
+anchor_right = 0.456419
+anchor_bottom = 0.475916
+margin_left = 153.824
+margin_top = 117.93
+margin_right = 255.824
+margin_bottom = 140.93
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.317647, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "____________________
+Score"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="highscore" type="Label" parent="HUD/ui_stat/stats"]
+anchor_left = 0.378419
+anchor_top = 0.465916
+anchor_right = 0.456419
+anchor_bottom = 0.475916
+margin_left = 154.136
+margin_top = 134.377
+margin_right = 256.136
+margin_bottom = 157.377
+rect_pivot_offset = Vector2( 18.553, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.317647, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "HIGHSCORE!!!"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -213,7 +294,7 @@ show_behind_parent = true
 position = Vector2( 24, 42.5101 )
 scale = Vector2( 1.00607, 1 )
 frames = SubResource( 12 )
-frame = 6
+frame = 2
 playing = true
 
 [node name="cola_collected" type="Label" parent="HUD/ui_element/cola_counter"]
@@ -225,7 +306,6 @@ margin_bottom = 54.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
-text = "cola_amount"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -258,7 +338,7 @@ visible = false
 position = Vector2( 76.3097, 47.3414 )
 scale = Vector2( 1.7, 1.7 )
 frames = SubResource( 19 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="green_plus_back" type="Sprite" parent="HUD/ui_element/cola_healing"]
@@ -284,17 +364,17 @@ texture = ExtResource( 12 )
 [connection signal="flash_screen" from="." to="HUD/ui_element/flash" method="_on_game_UI_flash_screen"]
 [connection signal="healing_enabled" from="." to="HUD" method="_on_game_UI_healing_enabled"]
 [connection signal="initialize_boss" from="." to="boss_healthbar" method="_on_game_UI_initialize_boss"]
-[connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
 [connection signal="initialize_player" from="." to="HUD" method="_on_game_UI_initialize_player"]
-[connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
+[connection signal="initialize_player" from="." to="player_healthbar" method="_on_game_UI_initialize_player"]
 [connection signal="level_cleared" from="." to="HUD" method="_on_game_UI_level_cleared"]
-[connection signal="no_checkpoints" from="." to="failure" method="_on_game_UI_no_checkpoints"]
+[connection signal="level_cleared" from="." to="cleared" method="_on_game_UI_level_cleared"]
 [connection signal="no_checkpoints" from="." to="pause" method="_on_game_UI_no_checkpoints"]
-[connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
+[connection signal="no_checkpoints" from="." to="failure" method="_on_game_UI_no_checkpoints"]
 [connection signal="player_health_changed" from="." to="HUD" method="_on_game_UI_player_health_changed"]
-[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
-[connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
+[connection signal="player_health_changed" from="." to="player_healthbar" method="_on_game_UI_player_health_changed"]
 [connection signal="player_killed" from="." to="HUD" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="player_healthbar" method="_on_game_UI_player_killed"]
+[connection signal="player_killed" from="." to="failure" method="_on_game_UI_player_killed"]
 [connection signal="player_low_health" from="." to="player_healthbar" method="_on_game_UI_player_low_health"]
 [connection signal="respawn_player" from="." to="HUD" method="_on_game_UI_respawn_player"]
 [connection signal="cola_healing" from="HUD" to="." method="_on_HUD_cola_healing"]

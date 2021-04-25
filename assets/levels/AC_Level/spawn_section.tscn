@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/levels/AC_Level/scripts/section_borders.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 320 )
+extents = Vector2( 259.372, 41.0147 )
 
 [node name="section_1" type="Control"]
 anchor_right = 1.0
@@ -37,9 +37,11 @@ position = Vector2( -1480, -8.1257 )
 script = ExtResource( 1 )
 
 [node name="left" type="CollisionShape2D" parent="section_1_borders"]
-position = Vector2( 1360.32, 51.8591 )
+position = Vector2( 1326.98, 143.231 )
+rotation = 1.57079
 shape = SubResource( 1 )
 
 [node name="right" type="CollisionShape2D" parent="section_1_borders"]
-position = Vector2( 2144, 29.3106 )
+position = Vector2( 2170.99, 143.231 )
+rotation = -1.57079
 shape = SubResource( 1 )

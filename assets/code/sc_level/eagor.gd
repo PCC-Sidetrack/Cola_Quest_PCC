@@ -232,8 +232,19 @@ func _spawn_ball() -> void:
 #-----------------------------------------------------------------------------#
 # Played at the end of the death animation
 func boss_defeated() -> void:
-	gui.on_player_level_cleared()
+	Globals.stop_highscore_timer()
+	var score = Globals.calculate_highscore(Globals.player.get_node("game_UI").get_cola_count(), Globals.get_highscore_timer(), Globals.player.get_node("game_UI").get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	var previous_score = Globals.get_highscore_dictionary().sports_center
+	
+	if Globals.get_highscore_dictionary().sports_center < score:
+		Globals.update_sc_score(score)
+	
+	Globals.player.get_node("game_UI").on_player_level_cleared(previous_score)
+	
 	emit_signal("_on_boss_defeated")
+	queue_free()
 
 # If eagor hits the player, cause him to take damage
 func _on_hitbox_arm_body_entered(body: Node) -> void:

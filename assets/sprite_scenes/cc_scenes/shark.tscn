@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/code/cc_level/shark.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/S33_shark/S33_shark-Sheet.png" type="Texture" id=2]
@@ -60,6 +60,10 @@ height = 38.8801
 [sub_resource type="CircleShape2D" id=13]
 radius = 261.514
 
+[sub_resource type="CapsuleShape2D" id=14]
+radius = 22.4129
+height = 57.8522
+
 [node name="shark" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 9
@@ -88,8 +92,15 @@ position = Vector2( 0, -0.473511 )
 shape = SubResource( 13 )
 
 [node name="healthbar" parent="." instance=ExtResource( 4 )]
-[connection signal="collision" from="." to="." method="_on_shark_collision"]
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( -2.35344, 3.09547 )
+rotation = 1.5708
+shape = SubResource( 14 )
 [connection signal="death" from="." to="." method="_on_shark_death"]
 [connection signal="health_changed" from="." to="." method="_on_shark_health_changed"]
 [connection signal="body_entered" from="follow_range" to="." method="_on_follow_range_body_entered"]
 [connection signal="body_exited" from="follow_range" to="." method="_on_follow_range_body_exited"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

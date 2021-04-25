@@ -80,6 +80,7 @@ func _on_t_rex_health_changed(amount):
 
 # Triggered whenever a t-rex dies
 func _on_t_rex_death() -> void:
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	# Used to wait a given amount of time before deleting the entity
 	var timer: Timer = Timer.new()
 	
@@ -97,3 +98,10 @@ func _on_t_rex_death() -> void:
 # On healthbar visibility timeout
 func _visible_timeout():
 	$healthbar.visible = false 
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))

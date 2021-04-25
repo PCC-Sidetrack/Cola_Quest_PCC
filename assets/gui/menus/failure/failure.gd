@@ -24,9 +24,9 @@ var no_checkpoints = false
 # Hide failure menu when "retry" button is pressed
 func _input(_event) -> void:
 	if retry.pressed == true:
-		$FailureScreen.visible                      = false
-		retry.visible = false
-		exit.visible  = false
+		$FailureScreen.visible = false
+		retry.visible          = false
+		exit.visible           = false
 		$buttons/Control/VBoxContainer/CenterContainer4/Hub.visible = false
 
 #-----------------------------------------------------------------------------#

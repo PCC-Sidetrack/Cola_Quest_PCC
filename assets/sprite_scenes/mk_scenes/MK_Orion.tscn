@@ -130,7 +130,6 @@ position = Vector2( 0, 6.368 )
 shape = SubResource( 19 )
 
 [node name="healthbar" parent="." instance=ExtResource( 6 )]
-[connection signal="collision" from="." to="." method="_on_Orion_collision"]
 [connection signal="death" from="." to="." method="_on_Orion_death"]
 [connection signal="health_changed" from="." to="." method="_on_Orion_health_changed"]
 [connection signal="body_entered" from="Dmg_Player" to="." method="_on_Dmg_Player_body_entered"]

@@ -13,8 +13,6 @@
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/particles/teleportin.png" type="Texture" id=11]
 [ext_resource path="res://assets/levels/AC_Level/assets/sprites/characters/S40_Spider-Sheet.png" type="Texture" id=12]
 
-
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
@@ -167,49 +165,49 @@ flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=22]
 flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=23]
 flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=24]
 flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=25]
 flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=22]
+[sub_resource type="SpriteFrames" id=26]
 animations = [ {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
 "name": "New Anim",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=23]
+[sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 16, 8 )
 
-[sub_resource type="CanvasItemMaterial" id=24]
+[sub_resource type="CanvasItemMaterial" id=28]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="ParticlesMaterial" id=25]
+[sub_resource type="ParticlesMaterial" id=29]
 emission_shape = 1
 emission_sphere_radius = 12.43
 flag_disable_z = true
@@ -219,11 +217,11 @@ orbit_velocity_random = 0.0
 hue_variation = 0.32
 anim_speed = 2.0
 
-[sub_resource type="CircleShape2D" id=26]
+[sub_resource type="CircleShape2D" id=30]
 radius = 116.501
 
 [sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 14.9504, 8.79579 )
+extents = Vector2( 9.67798, 8.79579 )
 
 [node name="spider" type="KinematicBody2D" groups=[
 "enemy",
@@ -243,7 +241,7 @@ frames = SubResource( 17 )
 
 [node name="spider_animation" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
-frames = SubResource( 22 )
+frames = SubResource( 26 )
 animation = "New Anim"
 frame = 3
 playing = true
@@ -251,10 +249,11 @@ flip_h = true
 
 [node name="hitbox" type="Area2D" parent="."]
 position = Vector2( -2.52554, 6.73477 )
+scale = Vector2( 0.44, 1 )
 
 [node name="col2" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 0.875, -6.75 )
-shape = SubResource( 23 )
+shape = SubResource( 27 )
 
 [node name="healthbar" parent="." instance=ExtResource( 3 )]
 
@@ -279,10 +278,10 @@ stream = ExtResource( 10 )
 stream = ExtResource( 9 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 24 )
+material = SubResource( 28 )
 amount = 4
 local_coords = false
-process_material = SubResource( 25 )
+process_material = SubResource( 29 )
 texture = ExtResource( 8 )
 
 [node name="detection" type="Area2D" parent="."]
@@ -291,12 +290,13 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
-shape = SubResource( 26 )
+shape = SubResource( 30 )
 
 [node name="ground_collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2.82843, -0.883884 )
 shape = SubResource( 31 )
 [connection signal="death" from="." to="." method="_on_spider_death"]
 [connection signal="health_changed" from="." to="." method="_on_spider_health_changed"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]

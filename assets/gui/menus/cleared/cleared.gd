@@ -30,7 +30,7 @@ func _on_CompletionSign_animation_finished() -> void:
 	_completion_text.visible                      = true
 	_completion_text.animation                    = "glow"
 	_completion_text.playing                      = true
-	$buttons/Control/VBoxContainer/CenterContainer3/Restart.visible = true
+	$buttons/Control/VBoxContainer/CenterContainer3/Restart.visible = false
 	$buttons/Control/VBoxContainer/CenterContainer4/Hub.visible = true
 	$buttons/Control/VBoxContainer/CenterContainer5/Exit.visible    = true
 	_confetti_left.emitting                       = true
@@ -41,7 +41,7 @@ func _on_CompletionText_animation_finished() -> void:
 	_completion_text.animation = "text"
 
 # On level cleared, show level cleared menu
-func _on_game_UI_level_cleared() -> void:
+func _on_game_UI_level_cleared(_previous_score) -> void:
 	Globals.player.set_invulnerability(99999)
 	Globals.game_locked       = true
 	$completed.play()

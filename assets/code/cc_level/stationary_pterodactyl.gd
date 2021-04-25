@@ -20,13 +20,15 @@ const GUST = preload("res://assets/sprite_scenes/cc_scenes/gust_projectile.tscn"
 # Movement speed
 export var movement_speed:     float = 1.875
 # Number of seconds before a pterodactyl throws a gust attack
-export var throw_cooldown:     float = 3
+export var throw_cooldown:     float = 1.25
 # Start facing right?
 export var start_moving_right: bool  = false
 export var health:             int   = 1
 export var damage:             int   = 1
 export var knockback:          float = 0.8
 export var acceleration:       float = 20.0
+
+var ai_enabled: bool = true
 
 #-----------------------------------------------------------------------------#
 #                            Private Variables                                #
@@ -57,15 +59,17 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_throw_update_time += delta
 	
-	if global_position.direction_to(Globals.player_position).x >= 0:
-		scale.x = -1.25
-	else:
-		scale.x = 1.25
-	
-	if is_player_in_range and _throw_update_time >= throw_cooldown:
-		#if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1):
-#		#if Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1 and is_player_in_range:
-		_spawn_gust()
+	if ai_enabled:
+		if global_position.direction_to(Globals.player_position).x >= 0:
+			scale.x = -1.25
+		else:
+			scale.x = 1.25
+		
+		if is_player_in_range and _throw_update_time >= throw_cooldown:
+			#if (Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1) or (Globals.player_position.x - self.global_position.x < -75 and get_direction_facing() == -1):
+	#		#if Globals.player_position.x - self.global_position.x > 75 and get_direction_facing() == 1 and is_player_in_range:
+			_spawn_gust()
+			#$gust_sound.play()
 
 # Spawns and propels a gust attack
 func _spawn_gust() -> void:
@@ -119,3 +123,9 @@ func _on_Area2D_body_entered(body: Node) -> void:
 func _on_Area2D_body_exited(body: Node) -> void:
 	if body.is_in_group(Globals.GROUP.PLAYER):
 		is_player_in_range = false
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))

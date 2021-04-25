@@ -27,7 +27,7 @@ var _can_continue: bool = false
 #                              Dictionaries                                   #
 #-----------------------------------------------------------------------------#
 var _story_text: Dictionary = {
-	roof     = "Dr Adkin's Cola has been taken by Dr. (Geary) Zorro! Get it back!",
+	roof     = "Dr. Adkin's Cola has been taken by Dr. (Geary) Zorro! Get it back!",
 	cc       = "There is water leaking into the building! Avoid the enemies and make it to the stage!",
 	ac       = "The building's code looks unstable! Stop the bugs and save the teachers!",
 	mk       = "Space has begun to leak into the building! Grab the cola and find a way to stop it!",
@@ -40,11 +40,17 @@ var _story_text: Dictionary = {
 #-----------------------------------------------------------------------------#
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("melee_attack") and _can_continue:
-		_can_continue = false
-		hide()
-		emit_signal("on_continue")
+		if Story.get_node("AnimationPlayer").current_animation_position <= 4.6:
+			Story.get_node("AnimationPlayer").seek(4.6, true)
+			_can_continue = false
+		elif _can_continue:
+			_can_continue = false
+			hide()
+			emit_signal("on_continue")
 
 func _ready() -> void:
+	PlayerVariables.reset_values()
+	layer = 10
 	hide()
 
 #-----------------------------------------------------------------------------#

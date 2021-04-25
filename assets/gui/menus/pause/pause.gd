@@ -25,6 +25,10 @@ func _pause_unpause() -> void:
 	get_tree().paused                             = new_pause_state
 	$PausedScreen.visible                         = new_pause_state
 	if hub_level == false and no_checkpoints == false:
+		if new_pause_state == true:
+			Globals.stop_highscore_timer()
+		else:
+			Globals.start_highscore_timer()
 		$buttons/Control/VBoxContainer/CenterContainer/Resume.visible  = new_pause_state
 		$buttons/Control/VBoxContainer/CenterContainer3/Restart.visible = new_pause_state
 		$buttons/Control/VBoxContainer/CenterContainer2/Retry.visible   = new_pause_state
@@ -34,6 +38,10 @@ func _pause_unpause() -> void:
 		$buttons/Control/VBoxContainer/CenterContainer/Resume.visible  = new_pause_state
 		$buttons/Control/VBoxContainer/CenterContainer5/Exit.visible  = new_pause_state
 	elif hub_level == false and no_checkpoints == true:
+		if new_pause_state == true:
+			Globals.stop_highscore_timer()
+		else:
+			Globals.start_highscore_timer()
 		$buttons/Control/VBoxContainer/CenterContainer/Resume.visible  = new_pause_state
 		$buttons/Control/VBoxContainer/CenterContainer3/Restart.visible = new_pause_state
 		$buttons/Control/VBoxContainer/CenterContainer5/Exit.visible    = new_pause_state

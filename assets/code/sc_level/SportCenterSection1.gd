@@ -18,16 +18,14 @@ onready var portal: Node2D   = $world/portal_door
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 	Globals.game_locked = true
+	get_tree().paused = true
 	$entities/player/game_UI.on_game_ui_visible(false)
-	$story.show()
-	$story.play("sc")
-	yield($story, "on_continue")
-	$story.hide()
+	if PlayerVariables.saved_deaths < 1:
+		Story.show()
+		Story.play("sc")
+		yield(Story, "on_continue")
 	$entities/player/game_UI.on_game_ui_visible(true)
 	Globals.game_locked = false
-	
-	# Freeze the scene until the transition has finished
-	get_tree().paused = true
 	
 	# Prepare the values for the scene
 	$background/BA_arrow.visible = false
@@ -49,3 +47,5 @@ func _ready() -> void:
 	
 	# Play the transition
 	portal.get_node("AnimationPlayer").play("transition_out")
+	yield(portal, "_on_transition_finished")
+	Globals.start_highscore_timer()

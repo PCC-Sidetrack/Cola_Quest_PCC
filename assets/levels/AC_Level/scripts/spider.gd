@@ -14,10 +14,10 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                                Variables                                    #
 #-----------------------------------------------------------------------------#
-onready var cola_can_instance  = preload("res://assets/sprite_scenes/common_scenes/c_cola.tscn")
+onready var cola_can_instance  = preload("res://assets/levels/AC_Level/c_cola_temp.tscn")
 onready var explosion_instance = preload("res://assets/levels/AC_Level/assets/sprites/explosion.tscn")
 export var acceleration: float = 20.0
-export var damage:       int   = 2
+export var damage:       int   = 1
 export var health:       int   = 2
 export var jump_speed:   float = 1.0
 export var speed:        float = 7.0
@@ -28,8 +28,8 @@ var engage_player = false
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 #	initialize_enemy(health, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("spider"): initialize_enemy(2, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("bat"):    initialize_enemy(3, damage, 4, acceleration, jump_speed, false, true)
+	if self.is_in_group("spider"): initialize_enemy(2, 1, speed, acceleration, jump_speed, true, true)
+	if self.is_in_group("bat"):    initialize_enemy(3, 1, 4, acceleration, jump_speed, false, true)
 	set_sprite_facing_direction(Globals.DIRECTION.RIGHT)
 	set_smooth_movement        (true)
 	set_knockback_multiplier   (1.0)
@@ -59,7 +59,9 @@ func _on_spider_death():
 	var explosion = explosion_instance.instance()
 	cola_can.position = get_global_position()
 	explosion.position = get_global_position()
-	get_tree().get_root().call_deferred("add_child",cola_can)
+#	get_parent().call_deferred("add_child",cola_can)
+	if self.is_in_group("spider"):
+		get_tree().get_root().call_deferred("add_child", cola_can)
 	if self.is_in_group("bat"):get_tree().get_root().call_deferred("add_child",explosion)
 	if self.is_in_group("bat"):$explosion.play()
 	
@@ -124,3 +126,11 @@ func _on_bat_death():
 
 func _on_bat_health_changed(ammount):
 	_on_spider_health_changed(ammount)
+
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if body.is_in_group(Globals.GROUP.PLAYER):
+		body.take_damage(damage)
+		_knockback_old(body)
+		custom_knockback(self, 2.0, -global_position.direction_to(Globals.player_position))
+		#body._knockback_old(self)

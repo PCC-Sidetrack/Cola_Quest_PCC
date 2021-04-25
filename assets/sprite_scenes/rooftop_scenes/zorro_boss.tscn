@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_arm_wave.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/rooftop_level/sprites/S6_dr_geary_zorro_boss/S6_spritesheet_draw_sword.png" type="Texture" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://assets/code/rooftop_level/zorro_sword.gd" type="Script" id=9]
 [ext_resource path="res://assets/code/rooftop_level/zorro_ai.gd" type="Script" id=10]
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/particles/rooftop_level/error_stream.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sounds/rooftop_level/rocket_takeoff.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/rooftop_level/never_take_me_alive.wav" type="AudioStream" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "arm_wave"
@@ -1588,19 +1591,17 @@ hframes = 2
 script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( -8, 12 )
-rotation = 2.00713
+position = Vector2( 30, -18 )
+rotation = -0.629196
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
-visible = false
-position = Vector2( -8.55, 14.3 )
-rotation = 2.00713
+position = Vector2( 31.5461, -19.7706 )
+rotation = 2.51064
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -7.6562 )
 shape = SubResource( 13 )
 
@@ -1614,7 +1615,18 @@ stream = ExtResource( 11 )
 volume_db = -5.0
 pitch_scale = 1.6
 
+[node name="rocket" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource( 13 )
+volume_db = -20.0
+
+[node name="voice" type="AudioStreamPlayer2D" parent="audio"]
+stream = ExtResource( 14 )
+
 [node name="Tween" type="Tween" parent="."]
+
+[node name="errors" parent="." instance=ExtResource( 12 )]
+visible = false
+position = Vector2( -4.44473, 28.8844 )
 [connection signal="ai_paused" from="." to="." method="_on_zorro_boss_ai_paused"]
 [connection signal="ai_resumed" from="." to="." method="_on_zorro_boss_ai_resumed"]
 [connection signal="attacked" from="." to="." method="_on_zorro_boss_attacked"]

@@ -38,7 +38,12 @@ func _can_fire():
 	get_parent().get_node("cannon").stop()
 
 func enable_turret():
+	$laser.visible = true
 	turret_on = true
 
 func disable_turret():
+	$laser.visible = false
 	turret_on = false
+
+func is_cannon_enabled():
+	return turret_on

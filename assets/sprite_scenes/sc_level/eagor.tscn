@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/sounds/object_sounds/SD21_sword_hit.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/sc_level/hawk_screeching-Mike_Koenig-1626170357.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/sounds/object_sounds/SD5b_jump_npc.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/sounds/object_sounds/SD14_explosion.ogg" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/object_sounds/SD14_explosion.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/object_sounds/SD14_explosion_no_loop.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/object_sounds/SD13b_swordswing_npc.wav" type="AudioStream" id=19]
 
@@ -44,7 +44,7 @@ noise = SubResource( 2 )
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 10 )
 shader_param/noiseTiling = 2.0
-shader_param/dissolveAmount = 1.0
+shader_param/dissolveAmount = 0.0
 shader_param/edgeThickness = 0.1
 shader_param/edgeColor = Color( 1, 0.4, 0, 1 )
 shader_param/noiseTexture = SubResource( 3 )
@@ -195,6 +195,18 @@ tracks/7/keys = {
 } ],
 "times": PoolRealArray( 0.6, 1, 1.5, 2, 2.5, 3 )
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=10]
 length = 1.5
@@ -241,6 +253,18 @@ tracks/2/keys = {
 "args": [ 100.0 ],
 "method": "invulnerable_flicker"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -305,6 +329,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.862745, 0.862745, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "intro"
@@ -319,6 +355,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -389,6 +437,18 @@ tracks/4/keys = {
 } ],
 "times": PoolRealArray( 0 )
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=14]
 length = 2.5
@@ -456,6 +516,18 @@ tracks/4/keys = {
 "method": "_scream"
 } ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=15]
 tracks/0/type = "value"
@@ -493,6 +565,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -594,6 +678,18 @@ tracks/7/keys = {
 "stream": ExtResource( 19 )
 } ],
 "times": PoolRealArray( 1 )
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -701,6 +797,18 @@ tracks/7/keys = {
 } ],
 "times": PoolRealArray( 0.6 )
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "death"
@@ -726,7 +834,7 @@ nodes/Animation/position = Vector2( -30, 80 )
 nodes/TimeScale/node = SubResource( 23 )
 nodes/TimeScale/position = Vector2( 220, 120 )
 nodes/output/position = Vector2( 430, 120 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "roar"
@@ -746,7 +854,7 @@ nodes/Animation/position = Vector2( -20, 140 )
 nodes/TimeScale/node = SubResource( 28 )
 nodes/TimeScale/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 380, 140 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=30]
 animation = "throw"
@@ -759,7 +867,7 @@ nodes/Animation/node = SubResource( 30 )
 nodes/Animation/position = Vector2( -280, 110 )
 nodes/TimeScale/node = SubResource( 31 )
 nodes/TimeScale/position = Vector2( 20, 150 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
@@ -806,9 +914,9 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id=51]
 states/death/node = SubResource( 18 )
-states/death/position = Vector2( 524, 425.5 )
+states/death/position = Vector2( 531, 428.5 )
 states/hurt/node = SubResource( 19 )
-states/hurt/position = Vector2( 384, 320.062 )
+states/hurt/position = Vector2( 389.5, 318.714 )
 states/idle/node = SubResource( 20 )
 states/idle/position = Vector2( 389.5, 151.554 )
 states/intro/node = SubResource( 21 )
@@ -826,7 +934,7 @@ states/throw/position = Vector2( 153.367, 318.714 )
 transitions = [ "idle", "death", SubResource( 33 ), "hurt", "idle", SubResource( 34 ), "idle", "hurt", SubResource( 35 ), "intro", "idle", SubResource( 36 ), "idle", "summon", SubResource( 37 ), "summon", "idle", SubResource( 38 ), "roar", "idle", SubResource( 39 ), "idle", "roar", SubResource( 40 ), "idle", "swipe", SubResource( 41 ), "swipe", "hurt", SubResource( 42 ), "swipe", "idle", SubResource( 43 ), "jump", "idle", SubResource( 44 ), "idle", "jump", SubResource( 45 ), "throw", "hurt", SubResource( 46 ), "idle", "throw", SubResource( 47 ), "throw", "death", SubResource( 48 ), "hurt", "throw", SubResource( 49 ), "throw", "idle", SubResource( 50 ) ]
 start_node = "intro"
 end_node = "death"
-graph_offset = Vector2( 53.8669, 9.94459 )
+graph_offset = Vector2( -204.133, -104.055 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=52]
 
@@ -835,7 +943,6 @@ graph_offset = Vector2( 53.8669, 9.94459 )
 "enemy",
 ]]
 pause_mode = 2
-position = Vector2( 0.300526, 0 )
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 8 )
@@ -920,6 +1027,7 @@ collision_mask = 3
 [node name="hurtbox" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 2.95418, 29.3307 )
 shape = SubResource( 6 )
+disabled = true
 
 [node name="hitbox_arm" type="Area2D" parent="." groups=[
 "enemy",
