@@ -1085,7 +1085,7 @@ script = ExtResource( 8 )
 [node name="Particles2D" type="Particles2D" parent="water_shader"]
 position = Vector2( -47.6666, -62.5665 )
 scale = Vector2( 0.0265635, 0.135675 )
-amount = 500
+amount = 150
 randomness = 0.84
 visibility_rect = Rect2( -500, -100, 1000, 200 )
 process_material = SubResource( 30 )
