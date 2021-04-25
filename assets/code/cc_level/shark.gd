@@ -23,10 +23,13 @@ export var health:             int   = 2
 export var damage:             int   = 1
 export var accelertion:        float = 20.0
 export var knockback:          float = 2
+export var can_track_player:   bool  = true
+export var initial_direction:  Vector2 = Vector2.RIGHT
 
 var is_player_in_range: bool = false
 var direction = Globals.DIRECTION.NONE
 var check_health = health - 1
+var _direction: Vector2 = initial_direction
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
@@ -62,6 +65,13 @@ func _physics_process(_delta: float) -> void:
 		rotation = 0.0
 		$AnimatedSprite.flip_v = false
 		#$AnimatedSprite.flip_h = false
+	
+	if can_track_player == false:
+		$follow_range.monitoring = false
+		ai_enabled = false
+		move_dynamically(_direction)
+		if is_on_wall():
+			_direction = -_direction
 	
 	if is_player_in_range:
 		ai_enabled = false
@@ -112,7 +122,7 @@ func _on_shark_death() -> void:
 	timer.set_one_shot(true)
 	add_child(timer)
 	
-	#$sword_hit.play()
+	$sword_hit.play()
 	death_anim (20, 0.05)
 	timer.start(20 * 0.05)
 	yield(timer, "timeout")
@@ -142,7 +152,6 @@ func _on_shark_collision(body) -> void:
 func _on_shark_health_changed(amount):
 	$healthbar.value   = get_current_health()
 	$healthbar.visible = true
-	$sword_hit.play()
 
 	if check_health:
 		flash_damaged(10)

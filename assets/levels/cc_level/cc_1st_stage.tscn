@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/cc_level/tiles/T39_Maroon_Wall/T39_Maroon_Wall.png" type="Texture" id=2]
@@ -554,37 +554,7 @@ shader_param/blue_tint = Color( 0, 0.784314, 1, 1 )
 shader_param/sprite_scale = Vector2( 37.6457, 7.37057 )
 shader_param/scale_x = 0.67
 
-[sub_resource type="Gradient" id=26]
-offsets = PoolRealArray( 0, 0.984694, 0.989796, 1 )
-colors = PoolColorArray( 0.0941176, 0.423529, 0.513726, 1, 1, 1, 1, 1, 0.806122, 0.806122, 0.806122, 1, 0.080728, 0.105297, 0.112317, 1 )
-
-[sub_resource type="GradientTexture" id=27]
-gradient = SubResource( 26 )
-
-[sub_resource type="Curve" id=28]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.710867 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=29]
-curve = SubResource( 28 )
-
-[sub_resource type="ParticlesMaterial" id=30]
-emission_shape = 2
-emission_box_extents = Vector3( 500, 1, 1 )
-flag_disable_z = true
-direction = Vector3( 0, -20, 0 )
-spread = 94.05
-gravity = Vector3( 0, 60, 0 )
-initial_velocity = 60.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 4.38
-damping_random = 1.0
-scale = 5.0
-scale_curve = SubResource( 29 )
-color_ramp = SubResource( 27 )
-hue_variation_random = 1.0
-
-[sub_resource type="RectangleShape2D" id=31]
+[sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 10, 300 )
 
 [node name="cc_1st_stage" type="Node2D"]
@@ -1066,7 +1036,7 @@ position = Vector2( 2393.53, 24.5234 )
 position = Vector2( 3317.66, -10.1035 )
 
 [node name="bible_verse" parent="." instance=ExtResource( 33 )]
-position = Vector2( -256, 150 )
+position = Vector2( -342.647, 78.5559 )
 scale = Vector2( 0.4, 0.4 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
@@ -1082,21 +1052,11 @@ script = ExtResource( 8 )
 
 [node name="Tween" type="Tween" parent="water_shader"]
 
-[node name="Particles2D" type="Particles2D" parent="water_shader"]
-position = Vector2( -47.6666, -62.5665 )
-scale = Vector2( 0.0265635, 0.135675 )
-amount = 500
-randomness = 0.84
-visibility_rect = Rect2( -500, -100, 1000, 200 )
-process_material = SubResource( 30 )
-
 [node name="initial_barrier" type="StaticBody2D" parent="."]
-position = Vector2( -822.009, -32.1031 )
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="initial_barrier"]
 position = Vector2( 256, 100 )
-shape = SubResource( 31 )
-[connection signal="transition_complete" from="bible_verse" to="bible_stand" method="_on_bible_verse_transition_complete"]
+shape = SubResource( 26 )
 [connection signal="tween_completed" from="water_shader/Tween" to="water_shader" method="_on_Tween_tween_completed"]

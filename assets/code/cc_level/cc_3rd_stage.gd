@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 	camera.limit_left   = -544
 	camera.limit_top    = -200
-	camera.limit_right  = 4065
+	camera.limit_right  = 5344
 	camera.limit_bottom = 400
 	camera.zoom.x = 1.8
 	camera.zoom.y = 1.8
