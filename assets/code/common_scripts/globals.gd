@@ -84,11 +84,11 @@ var misc_loc:        Vector2 = Vector2(0, 0)
 #-----------------------------------------------------------------------------#
 # Default highscore dictionary
 var _default_highscores: Dictionary = {
-	"rooftop"         : 0,
-	"sports_center"   : 0,
-	"makenzie"        : 0,
-	"crown_centre"    : 0,
-	"academic_center" : 0
+	"rooftop"         : 1117,
+	"sports_center"   : 1920,
+	"makenzie"        : 1590,
+	"crown_centre"    : 1190,
+	"academic_center" : 760
 }
 
 # Highscore dictionary
@@ -164,7 +164,7 @@ func update_highscore_file_from_local() -> void:
 func calculate_highscore(colas: int, seconds_taken: float, deaths: int) -> int:
 	var highscore: float = (colas * HIGHSCORE_WEIGHTS.COLA) + \
 			(seconds_taken * HIGHSCORE_WEIGHTS.SECOND) + (deaths * HIGHSCORE_WEIGHTS.DEATH)
-	return int(highscore) if highscore >= 0.0 else 0.0
+	return int(highscore) if highscore >= 0 else 0
 	
 # Updates the highscore for the rooftop level
 func update_rooftop_score(score: int) -> void:
