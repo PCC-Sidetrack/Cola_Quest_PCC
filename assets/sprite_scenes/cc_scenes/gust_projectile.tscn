@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/code/cc_level/gust_projectile.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/cc_level/sprites/S38_gust/S38_gust-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/cc_level/gust_attack.ogg" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -65,5 +66,9 @@ shape = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 9 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
 [connection signal="area_entered" from="sword_hitbox" to="." method="_on_sword_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

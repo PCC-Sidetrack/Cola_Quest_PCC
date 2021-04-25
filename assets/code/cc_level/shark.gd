@@ -122,7 +122,6 @@ func _on_shark_death() -> void:
 	timer.set_one_shot(true)
 	add_child(timer)
 	
-	$sword_hit.play()
 	death_anim (20, 0.05)
 	timer.start(20 * 0.05)
 	yield(timer, "timeout")
@@ -152,7 +151,8 @@ func _on_shark_collision(body) -> void:
 func _on_shark_health_changed(amount):
 	$healthbar.value   = get_current_health()
 	$healthbar.visible = true
-
+	
+	$sword_hit.play()
 	if check_health:
 		flash_damaged(10)
 		check_health -= amount

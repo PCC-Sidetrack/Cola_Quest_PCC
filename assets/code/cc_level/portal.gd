@@ -19,7 +19,7 @@ var spawn_update_time: float = 0.0
 var can_spawn_shark: bool = false
 
 func _process(delta: float) -> void:
-	if can_spawn_shark:
+	if can_spawn_shark and get_child_count() < 3:
 		spawn_update_time += delta
 
 		if spawn_update_time >= spawn_cooldown:
