@@ -921,7 +921,7 @@ tile_data = PoolIntArray( -4521983, 1, 0, -4194285, 2, 0, -2818043, 3, 0, -26869
 [node name="fountain" parent="tilemaps" instance=ExtResource( 53 )]
 position = Vector2( 3397.81, -812.693 )
 z_index = 1
-frame = 4
+frame = 1
 
 [node name="trees1" type="TileMap" parent="tilemaps"]
 mode = 1

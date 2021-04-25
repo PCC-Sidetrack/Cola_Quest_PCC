@@ -84,20 +84,20 @@ var misc_loc:        Vector2 = Vector2(0, 0)
 #-----------------------------------------------------------------------------#
 # Default highscore dictionary
 var _default_highscores: Dictionary = {
-	"rooftop"         : 0.0,
-	"sports_center"   : 0.0,
-	"makenzie"        : 0.0,
-	"crown_centre"    : 0.0,
-	"academic_center" : 0.0
+	"rooftop"         : 0,
+	"sports_center"   : 0,
+	"makenzie"        : 0,
+	"crown_centre"    : 0,
+	"academic_center" : 0
 }
 
 # Highscore dictionary
 var _highscores: Dictionary = {
-	"rooftop"         : 0.0,
-	"sports_center"   : 0.0,
-	"makenzie"        : 0.0,
-	"crown_centre"    : 0.0,
-	"academic_center" : 0.0
+	"rooftop"         : 0,
+	"sports_center"   : 0,
+	"makenzie"        : 0,
+	"crown_centre"    : 0,
+	"academic_center" : 0
 }
 
 var _highscore_path: String = "highscores.json"
@@ -161,37 +161,37 @@ func update_highscore_file_from_local() -> void:
 	file.close()
 	
 # Calculates a highscore based on the parameters given
-func calculate_highscore(colas: int, seconds_taken: float, deaths: int) -> float:
+func calculate_highscore(colas: int, seconds_taken: float, deaths: int) -> int:
 	var highscore: float = (colas * HIGHSCORE_WEIGHTS.COLA) + \
 			(seconds_taken * HIGHSCORE_WEIGHTS.SECOND) + (deaths * HIGHSCORE_WEIGHTS.DEATH)
-	return highscore if highscore >= 0.0 else 0.0
+	return int(highscore) if highscore >= 0.0 else 0.0
 	
 # Updates the highscore for the rooftop level
-func update_rooftop_score(score: float) -> void:
+func update_rooftop_score(score: int) -> void:
 	update_local_highscore_from_file()
 	_highscores.rooftop = score
 	update_highscore_file_from_local()
 	
 # Updates the highscore for the sc level
-func update_sc_score(score: float) -> void:
+func update_sc_score(score: int) -> void:
 	update_local_highscore_from_file()
 	_highscores.sports_center = score
 	update_highscore_file_from_local()
 	
 # Updates the highscore for the mk level
-func update_mk_score(score: float) -> void:
+func update_mk_score(score: int) -> void:
 	update_local_highscore_from_file()
 	_highscores.makenzie = score
 	update_highscore_file_from_local()
 	
 # Updates the highscore for the cc level
-func update_cc_score(score: float) -> void:
+func update_cc_score(score: int) -> void:
 	update_local_highscore_from_file()
 	_highscores.crown_centre = score
 	update_highscore_file_from_local()
 
 # Updates the highscore for the ac level
-func update_ac_score(score: float) -> void:
+func update_ac_score(score: int) -> void:
 	update_local_highscore_from_file()
 	_highscores.academic_center = score
 	update_highscore_file_from_local()
