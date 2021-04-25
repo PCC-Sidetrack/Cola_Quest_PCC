@@ -16,15 +16,15 @@
 [ext_resource path="res://assets/sounds/cc_level/missed_punch.ogg" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/cc_level/gust_attack.ogg" type="AudioStream" id=15]
 
-[sub_resource type="CircleShape2D" id=53]
+[sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="RectangleShape2D" id=54]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 27.156, 38.404 )
 
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=3]
 resource_name = "death"
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=4]
 resource_name = "fire"
 length = 3.0
 tracks/0/type = "value"
@@ -80,7 +80,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 2.1 )
 }
 
-[sub_resource type="Animation" id=57]
+[sub_resource type="Animation" id=5]
 resource_name = "gust"
 length = 2.0
 step = 0.05
@@ -123,7 +123,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=58]
+[sub_resource type="Animation" id=6]
 resource_name = "hit1"
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -138,7 +138,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=7]
 resource_name = "hit2"
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -153,7 +153,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="Animation" id=8]
 resource_name = "hit3"
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -168,7 +168,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprites/stage1/idle1:frame")
@@ -195,7 +195,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=62]
+[sub_resource type="Animation" id=10]
 resource_name = "idle2"
 loop = true
 tracks/0/type = "value"
@@ -223,7 +223,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=63]
+[sub_resource type="Animation" id=11]
 resource_name = "idle3"
 loop = true
 tracks/0/type = "value"
@@ -251,7 +251,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id=12]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("hurtbox/CollisionShape2D:disabled")
@@ -280,7 +280,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=65]
+[sub_resource type="Animation" id=13]
 length = 2.0
 step = 0.05
 tracks/0/type = "value"
@@ -372,7 +372,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 1.4 )
 }
 
-[sub_resource type="Animation" id=66]
+[sub_resource type="Animation" id=14]
 resource_name = "swoop"
 length = 1.5
 tracks/0/type = "value"
@@ -402,7 +402,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=67]
+[sub_resource type="Animation" id=15]
 resource_name = "throw"
 length = 1.4
 tracks/0/type = "value"
@@ -569,16 +569,16 @@ transitions = [ "fire", "idle1", SubResource( 28 ), "idle1", "fire", SubResource
 start_node = "idle1"
 graph_offset = Vector2( -36.268, -50.485 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=68]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=53]
 
-[sub_resource type="CircleShape2D" id=69]
+[sub_resource type="CircleShape2D" id=54]
 radius = 22.2675
 
 [node name="zacharias" type="StaticBody2D"]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 53 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="sprites" type="Node2D" parent="."]
@@ -659,34 +659,34 @@ hframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2( 7, 3.15282 )
-shape = SubResource( 54 )
+shape = SubResource( 2 )
 
 [node name="animation" type="AnimationPlayer" parent="."]
-anims/death = SubResource( 55 )
-anims/fire = SubResource( 56 )
-anims/gust = SubResource( 57 )
-anims/hit1 = SubResource( 58 )
-anims/hit2 = SubResource( 59 )
-anims/hit3 = SubResource( 60 )
-anims/idle1 = SubResource( 61 )
-anims/idle2 = SubResource( 62 )
-anims/idle3 = SubResource( 63 )
-anims/jump = SubResource( 64 )
-anims/punch = SubResource( 65 )
-anims/swoop = SubResource( 66 )
-anims/throw = SubResource( 67 )
+anims/death = SubResource( 3 )
+anims/fire = SubResource( 4 )
+anims/gust = SubResource( 5 )
+anims/hit1 = SubResource( 6 )
+anims/hit2 = SubResource( 7 )
+anims/hit3 = SubResource( 8 )
+anims/idle1 = SubResource( 9 )
+anims/idle2 = SubResource( 10 )
+anims/idle3 = SubResource( 11 )
+anims/jump = SubResource( 12 )
+anims/punch = SubResource( 13 )
+anims/swoop = SubResource( 14 )
+anims/throw = SubResource( 15 )
 
 [node name="animation_machine" type="AnimationTree" parent="animation"]
 tree_root = SubResource( 52 )
 anim_player = NodePath("..")
 active = true
-parameters/playback = SubResource( 68 )
+parameters/playback = SubResource( 53 )
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 11.754, 0 )
-shape = SubResource( 69 )
+shape = SubResource( 54 )
 disabled = true
 
 [node name="fireball_spawn" type="Position2D" parent="."]

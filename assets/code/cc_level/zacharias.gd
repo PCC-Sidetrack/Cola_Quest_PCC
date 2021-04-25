@@ -194,7 +194,7 @@ func _spawn_gust() -> void:
 	Gust.scale = Vector2(3,3)
 	Gust.speed = 16
 	Gust.initialize()
-	$gust_sound.play()
+	#$gust_sound.play()
 
 func _spawn_note() -> void:
 	var choice: int = randi() % 4

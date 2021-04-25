@@ -39,6 +39,8 @@ func _ready() -> void:
 	camera.smoothing_enabled     = true
 	camera.limit_smoothed        = true
 	
+	camera.set_script(load("res://assets/code/sc_level/boss_arena_camera.gd"))
+	
 	PlayerVariables.new_level()
 	
 	get_node("player").load_from_transition()
