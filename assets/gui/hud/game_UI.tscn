@@ -257,7 +257,7 @@ visible = false
 position = Vector2( 76.3097, 47.3414 )
 scale = Vector2( 1.7, 1.7 )
 frames = SubResource( 19 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="green_plus_back" type="Sprite" parent="HUD/ui_element/cola_healing"]

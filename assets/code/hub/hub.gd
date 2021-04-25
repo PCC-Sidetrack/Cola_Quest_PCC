@@ -18,4 +18,11 @@ func _ready():
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$pause.on_hub_level()
+	
+	Globals.stop_highscore_timer()
+	Globals.reset_highscore_timer()
+	
+	# Start the day-night cycle
+	$day_night_cycle/AnimationPlayer.play("day_night")
+	
 

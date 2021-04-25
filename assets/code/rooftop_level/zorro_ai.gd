@@ -877,11 +877,17 @@ func _fight_finished_transition() -> void:
 	
 	yield(get_tree().create_timer(8.0), "timeout")
 	
-#	death_anim(50, 0.04)
-#	_timer.start(50 * 0.04)
-#	yield(_timer, "timeout")
+	Globals.stop_highscore_timer()
+	var game_ui = Globals.player.get_node("game_UI")
+	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	
+	if Globals.get_highscore_dictionary().rooftop < score:
+		Globals.update_rooftop_score(score)
+		
+	game_ui.on_player_level_cleared()
 	queue_free()
-	Globals.player.get_node("game_UI").on_player_level_cleared()
 	
 # Code for the ai jumping
 func _zorro_jump(secondary_cooldown: bool = false) -> void:

@@ -279,7 +279,16 @@ func _death() -> void:
 	
 	yield(get_tree().create_timer(animation_player.get_animation("death").length), "timeout")
 	
-	gui.on_player_level_cleared()
+	Globals.stop_highscore_timer()
+	var game_ui = Globals.player.get_node("game_UI")
+	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	
+	if Globals.get_highscore_dictionary().crown_centre < score:
+		Globals.update_cc_score(score)
+	
+	game_ui.on_player_level_cleared()
 
 
 

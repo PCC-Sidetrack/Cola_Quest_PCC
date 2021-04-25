@@ -71,6 +71,8 @@ func _change_path(new_path: String) -> void:
 
 # The code for the death node
 func _death() -> void:
+	var game_ui = Globals.player.get_node("game_UI")
+	
 	#print("death")
 	Globals.game_locked = true
 	Globals.player.set_obeys_gravity(false)
@@ -83,7 +85,17 @@ func _death() -> void:
 	animation_player.active          = false
 	animation_machine.stop()
 	eagor_data._play_animation("death")
-
+	
+	Globals.stop_highscore_timer()
+	var score = Globals.calculate_highscore(game_ui.get_cola_count(), Globals.get_highscore_timer(), game_ui.get_respawn_count())
+	
+	Globals.update_highscore_file_from_local()
+	
+	if Globals.get_highscore_dictionary().sports_center < score:
+		Globals.update_sc_score(score)
+	
+	game_ui.on_player_level_cleared()
+	
 # The code for the delay node
 func _delay() -> void:
 	#print("delay")
