@@ -65,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 	$ui_stat/stats/fps_counter.set_text              ("FPS: " + str(Engine.get_frames_per_second()))
 	$ui_stat/stats/total_cola_collected.set_text     ("Cola Collected: " + str(_cola_count) + " (score: " + str(int(_cola_count * Globals.HIGHSCORE_WEIGHTS.COLA)) + ")")
 	$ui_stat/stats/respawn_counter.set_text          ("Respawn Counter: " + str(_respawn_count) + " (score: " + str(int(_respawn_count * Globals.HIGHSCORE_WEIGHTS.DEATH)) + ")")
-	$ui_stat/stats/time_taken.set_text               ("Time Taken: " + str(int(Globals.get_highscore_timer())) + " (score: " + str(int(Globals.get_highscore_timer() * Globals.HIGHSCORE_WEIGHTS.SECOND)) + ")")
+	$ui_stat/stats/time_taken.set_text               ("Time Taken: " + _float2time(Globals.get_highscore_timer()) + " (score: " + str(int(Globals.get_highscore_timer() * Globals.HIGHSCORE_WEIGHTS.SECOND)) + ")")
 	$ui_stat/stats/score.set_text                    ("____________________\nScore: " + str(int(Globals.calculate_highscore(_cola_count, Globals.get_highscore_timer(), _respawn_count))))
 
 func get_cola_count() -> int:
@@ -73,6 +73,12 @@ func get_cola_count() -> int:
 	
 func get_respawn_count() -> int:
 	return _respawn_count
+	
+func _float2time(value: float) -> String:
+# warning-ignore:integer_division
+	var minutes: int = int(value) / 60
+	var seconds: int = int(value) % 60
+	return ("%02d" % minutes) + ":" + ("%02d" % seconds)
 
 #-----------------------------------------------------------------------------#
 #                             Trigger Functions                               #
