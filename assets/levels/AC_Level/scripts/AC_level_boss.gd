@@ -26,6 +26,7 @@ func _physics_process(_delta):
 
 func _ready():
 	Globals.player.has_spawn_points = false
+	Globals.player.load_from_transition()
 
 	$normal_ac.visible = false
 	$lights.visible    = false

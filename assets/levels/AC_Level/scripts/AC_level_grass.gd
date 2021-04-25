@@ -30,6 +30,8 @@ func _ready():
 	$background/PL1c_blue_sky_clouds.material.set("shader_param/speed", .01)
 	$background/PL1b_blue_sky_clouds.material.set("shader_param/speed", .02)
 	$background/PL1b_blue_sky_clouds2.material.set("shader_param/speed", .02)
+	
+	Globals.player.load_from_transition()
 
 func _spawn_enemies(enemy_type_instance, spawner_section):
 	while $error_zone2/error_zone.enemies_remaining >= 0:
@@ -132,6 +134,7 @@ func _on_error_zone_body_left(body):
 
 func _on_door_activator_area_entered(area):
 	if area.is_in_group("hitbox"):
+		Globals.player.prepare_transition()
 		$adkins_plane/enter_plane.play()
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_boss.tscn",'fade')
 		queue_free()
