@@ -146,18 +146,22 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=18]
+flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
+flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
+flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
+flags = 2
 atlas = ExtResource( 9 )
 region = Rect2( 96, 0, 32, 32 )
 
@@ -212,7 +216,7 @@ frames = SubResource( 17 )
 [node name="bat_animation" type="AnimatedSprite" parent="."]
 position = Vector2( -1.32433, -2.04052 )
 frames = SubResource( 22 )
-frame = 3
+frame = 2
 speed_scale = 3.0
 playing = true
 flip_h = true

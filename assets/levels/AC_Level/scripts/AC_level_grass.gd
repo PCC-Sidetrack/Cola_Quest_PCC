@@ -6,13 +6,15 @@ onready var plane                = $adkins_plane
 onready var enemy_spawn         = $enemy_spawn
 
 func _physics_process(_delta):
+	if plane.is_plane_enabled():
+		Globals.game_locked = true
 	$error_zone2/error_zone/bugs_left/bugs_left_text.set_text("Bugs Remaining: ")
 	$error_zone2/error_zone/bugs_left/number_remaining.set_text(str($error_zone2/error_zone.enemies_remaining))
 
 
 func _ready():
-	$player.load_from_transition()
-	Globals.player.has_spawn_points = false
+	$indicator2.visible = false
+	$indicator2/Area2D.set_deferred("monitoring", false)
 	
 	$player/player_cam.current = true
 	#$player/game_UI.on_no_checkpoints()
@@ -69,7 +71,7 @@ func _bats_attacking():
 
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemy"):
-		Globals.player.take_damage(2)
+		Globals.player.take_damage(1)
 		body.take_damage(1000)
 		
 
@@ -125,10 +127,11 @@ func _on_error_zone_body_left(body):
 			$drhowell/howell_animation.play("free_howell")
 			yield($drhowell/howell_animation, "animation_finished")
 			Globals.game_locked = false
+			$indicator2.visible = true
+			$indicator2/Area2D.set_deferred("monitoring", true)
 
 func _on_door_activator_area_entered(area):
 	if area.is_in_group("hitbox"):
-		$player.prepare_transition()
 		$adkins_plane/enter_plane.play()
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_boss.tscn",'fade')
 		queue_free()

@@ -146,34 +146,42 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=18]
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
+flags = 2
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
+flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
+flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
+flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
+flags = 2
 atlas = ExtResource( 12 )
 region = Rect2( 96, 0, 32, 32 )
 
@@ -213,7 +221,7 @@ anim_speed = 2.0
 radius = 116.501
 
 [sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 14.9504, 8.79579 )
+extents = Vector2( 9.67798, 8.79579 )
 
 [node name="spider" type="KinematicBody2D" groups=[
 "enemy",
@@ -235,12 +243,13 @@ frames = SubResource( 17 )
 position = Vector2( 0, -8 )
 frames = SubResource( 26 )
 animation = "New Anim"
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 
 [node name="hitbox" type="Area2D" parent="."]
 position = Vector2( -2.52554, 6.73477 )
+scale = Vector2( 0.44, 1 )
 
 [node name="col2" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 0.875, -6.75 )

@@ -22,7 +22,7 @@ export var health:       int   = 2
 export var jump_speed:   float = 1.0
 export var speed:        float = 7.0
 var attack_point
-var engage_player = false
+var engage_player = true
 
 #-----------------------------------------------------------------------------#
 #                                Constructor                                  #
@@ -30,7 +30,7 @@ var engage_player = false
 func _ready() -> void:
 	randomize()
 #	initialize_enemy(health, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("bat"):    initialize_enemy(2, damage, rand_range(5,20), acceleration, jump_speed, false, true)
+	if self.is_in_group("bat"):    initialize_enemy(2, damage, rand_range(2,10), acceleration, jump_speed, false, true)
 	set_sprite_facing_direction(Globals.DIRECTION.RIGHT)
 	set_smooth_movement        (true)
 	set_knockback_multiplier   (1.0)
@@ -38,6 +38,7 @@ func _ready() -> void:
 	$spawn_in_effect.play()
 	yield($spawn_in_effect, "animation_finished")
 	$spawn_in_effect.visible = false
+	$sounds/on_engage.play()
 
 #-----------------------------------------------------------------------------#
 #                            Private Functions                                #
@@ -53,11 +54,11 @@ func _physics_process(_delta: float) -> void:
 func _on_spider_death():
 	engage_player = false
 	if self.is_in_group("bat"): $spawn_in_effect.play()
-	var cola_can = cola_can_instance.instance()
+#	var cola_can = cola_can_instance.instance()
 	var explosion = explosion_instance.instance()
-	cola_can.position = get_global_position()
+#	cola_can.position = get_global_position()
 	explosion.position = get_global_position()
-	get_tree().get_root().call_deferred("add_child",cola_can)
+#	get_tree().get_root().call_deferred("add_child",cola_can)
 	if self.is_in_group("bat"):get_tree().get_root().call_deferred("add_child",explosion)
 	if self.is_in_group("bat"):$explosion.play()
 	
@@ -108,12 +109,10 @@ func _flash_damage(num_flashes: int = 0, flash_time: float = 0.03):
 func _on_detection_body_entered(body):
 	if body == attack_point:
 		$sounds/on_engage.play()
-		engage_player = true
 
 func _on_detection_body_exited(body):
 	if body == attack_point:
 		$sounds/on_disengage.play()
-		engage_player = false
 
 
 func _on_bat_death():

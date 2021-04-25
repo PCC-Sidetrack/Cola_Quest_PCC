@@ -201,6 +201,7 @@ radius = 376.977
 "bat",
 "enemy",
 ]]
+modulate = Color( 2.32, 1, 1, 1 )
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 11 )
@@ -216,7 +217,7 @@ frames = SubResource( 17 )
 [node name="bat_animation" type="AnimatedSprite" parent="."]
 position = Vector2( -1.32433, -2.04052 )
 frames = SubResource( 22 )
-frame = 3
+frame = 1
 speed_scale = 3.0
 playing = true
 flip_h = true

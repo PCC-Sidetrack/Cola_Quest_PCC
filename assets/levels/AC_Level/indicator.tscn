@@ -1,0 +1,200 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/sounds/sc_level/Whoosh_SFX_01.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/art/sc_level/tiles/UI_enter_bubble/UI_enter_bubble.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/AC_Level/scripts/indicator.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bubble_grow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -97 ), Vector2( 32, -124 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI_enter_bubble:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5e-06, 1e-05 ), Vector2( 1.5, 1.5 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "bubble_idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -124 ), Vector2( 32, -130 ), Vector2( 32, -124 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "bubble_shrink"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI_enter_bubble:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, -124 ), Vector2( 32, -98 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI_enter_bubble:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.56,
+"start_offset": 0.0,
+"stream": ExtResource( 1 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.56,
+"start_offset": 0.0,
+"stream": ExtResource( 1 )
+} ],
+"times": PoolRealArray( 0.6 )
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "bubble_grow"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "bubble_idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "bubble_shrink"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+switch_mode = 2
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/bubble_grow/node = SubResource( 6 )
+states/bubble_grow/position = Vector2( 413.5, 53.5 )
+states/bubble_idle/node = SubResource( 7 )
+states/bubble_idle/position = Vector2( 140.5, 101 )
+states/bubble_shrink/node = SubResource( 8 )
+states/bubble_shrink/position = Vector2( 388.5, 158 )
+transitions = [ "bubble_grow", "bubble_idle", SubResource( 9 ), "bubble_idle", "bubble_shrink", SubResource( 10 ), "bubble_shrink", "bubble_grow", SubResource( 11 ) ]
+start_node = "bubble_shrink"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 8, 16 )
+
+[node name="indicator" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -5.064
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bubble_grow = SubResource( 1 )
+anims/bubble_idle = SubResource( 2 )
+anims/bubble_shrink = SubResource( 3 )
+anims/transition_in = SubResource( 4 )
+anims/transition_out = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 13 )
+
+[node name="UI_enter_bubble" type="AnimatedSprite" parent="."]
+position = Vector2( 32, -127.877 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 16 )
+frame = 1
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 32, -88 )
+shape = SubResource( 17 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

@@ -28,8 +28,8 @@ var engage_player = false
 #-----------------------------------------------------------------------------#
 func _ready() -> void:
 #	initialize_enemy(health, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("spider"): initialize_enemy(2, damage, speed, acceleration, jump_speed, true, true)
-	if self.is_in_group("bat"):    initialize_enemy(3, damage, 4, acceleration, jump_speed, false, true)
+	if self.is_in_group("spider"): initialize_enemy(2, 1, speed, acceleration, jump_speed, true, true)
+	if self.is_in_group("bat"):    initialize_enemy(3, 1, 4, acceleration, jump_speed, false, true)
 	set_sprite_facing_direction(Globals.DIRECTION.RIGHT)
 	set_smooth_movement        (true)
 	set_knockback_multiplier   (1.0)

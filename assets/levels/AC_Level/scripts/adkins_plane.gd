@@ -59,3 +59,6 @@ func enable_plane():
 
 func disable_plane():
 	plane_on = false
+
+func is_plane_enabled():
+	return plane_on

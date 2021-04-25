@@ -1,25 +1,157 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=122 format=2]
 
 [ext_resource path="res://assets/levels/AC_Level/assets/tilesets/dirt-tiles.png" type="Texture" id=1]
 [ext_resource path="res://assets/levels/AC_Level/assets/tilesets/industrial.v2.png" type="Texture" id=2]
 [ext_resource path="res://assets/levels/AC_Level/new_environment.tres" type="Environment" id=3]
 [ext_resource path="res://assets/levels/AC_Level/assets/lights/2DLight.png" type="Texture" id=4]
-[ext_resource path="res://assets/code/common_scripts/player.gd" type="Script" id=5]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/levels/AC_Level/scripts/AC_level_boss.gd" type="Script" id=6]
-[ext_resource path="res://assets/gui/hud/game_UI.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_v2_sword_attack-sheet.png" type="Texture" id=8]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_idle.png" type="Texture" id=9]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_move.png" type="Texture" id=10]
-[ext_resource path="res://assets/art/rooftop_level/sprites/CH_dr_adkins/CH_dr_adkins_V2_sword_jump.png" type="Texture" id=11]
-[ext_resource path="res://assets/sounds/object_sounds/SD13a_swordswing_player.wav" type="AudioStream" id=12]
-[ext_resource path="res://assets/gui/hud/cola_healing/assests/sounds/healing_sound.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/object_sounds/SD19_player_hurt.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/sounds/object_sounds/SD5a_jump_player.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/gui/hud/cola_healing/assests/sprites/plus_ss.png" type="Texture" id=16]
-[ext_resource path="res://assets/sounds/object_sounds/SD4_footsteps.wav" type="AudioStream" id=17]
-[ext_resource path="res://assets/sprite_scenes/ac_level/dean_philips_boss.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/sprite_scenes/common_scenes/killzone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/particles/cc_level/fire.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/code/AC_level/dean_philips_boss.gd" type="Script" id=9]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle4.png" type="Texture" id=10]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle2.png" type="Texture" id=11]
+[ext_resource path="res://assets/levels/AC_Level/assets/lights/ligh2.png" type="Texture" id=12]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving4.png" type="Texture" id=13]
+[ext_resource path="res://assets/levels/AC_Level/assets/lights/ligh2(v2).png" type="Texture" id=14]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving1.png" type="Texture" id=15]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving3.png" type="Texture" id=16]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/rear/dean_philips_rear_up1.png" type="Texture" id=17]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/rear/dean_philips_rear_up2.png" type="Texture" id=18]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/rear/dean_philips_rear_up3.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/moving/dean_philips_boss_moving2.png" type="Texture" id=20]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle1.png" type="Texture" id=21]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/idle/dean_philips_boss_idle3.png" type="Texture" id=22]
+[ext_resource path="res://assets/art/ac_level/sprites/dean_philips/trail/bike_trail_moving.png" type="Texture" id=23]
+[ext_resource path="res://assets/levels/AC_Level/world_timers.tscn" type="PackedScene" id=24]
+[ext_resource path="res://assets/levels/AC_Level/sounds.tscn" type="PackedScene" id=25]
+[ext_resource path="res://assets/levels/AC_Level/assets/glitch.shader" type="Shader" id=26]
+[ext_resource path="res://assets/levels/AC_Level/assets/fonts/LucrethiaFreeFont-zZo0.otf" type="DynamicFontData" id=27]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation6.png" type="Texture" id=28]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation7.png" type="Texture" id=29]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation1.png" type="Texture" id=30]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation2.png" type="Texture" id=31]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation3.png" type="Texture" id=32]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation4.png" type="Texture" id=33]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation5.png" type="Texture" id=34]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation9.png" type="Texture" id=35]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation8.png" type="Texture" id=36]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/explosion/explosion-animation10.png" type="Texture" id=37]
+[ext_resource path="res://assets/levels/AC_Level/assets/sounds/bike_mortor.ogg" type="AudioStream" id=38]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/particles/teleport_in.png" type="Texture" id=39]
+[ext_resource path="res://assets/levels/AC_Level/assets/sprites/characters/philips_aniamtions.png" type="Texture" id=40]
+[ext_resource path="res://assets/gui/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=41]
+[ext_resource path="res://assets/levels/AC_Level/assets/tiles/PL15_classroom.png" type="Texture" id=42]
+[ext_resource path="res://assets/levels/AC_Level/assets/tiles/PL14_AC_Wall.png" type="Texture" id=43]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Camera2D2:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.7, 1.7 ), Vector2( 0.6, 0.6 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Camera2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 300, 112.5 ), Vector2( 550, 212.5 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "transition_back"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Camera2D2:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.501388, 0.51253 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.6, 0.6 ), Vector2( 1.7, 1.7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Camera2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.501946, 0.512506 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 550, 212.5 ), Vector2( 500, 212.5 ), Vector2( 300, 112.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.97512 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+extra_spacing_char = 3
+font_data = ExtResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 26 )
+shader_param/shake_power = 4.622
+shader_param/shake_rate = 1.0
+shader_param/shake_speed = 2.033
+shader_param/shake_block_size = 1.027
+shader_param/shake_color_rate = 0.493
+
+[sub_resource type="Animation" id=5]
+length = 0.51
+tracks/0/type = "value"
+tracks/0/path = NodePath("instructions:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.48 ), Vector2( 1, 0 ) ]
+}
+
+[sub_resource type="TileSet" id=6]
 0/name = ""
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -5775,7 +5907,7 @@
 867/shapes = [  ]
 867/z_index = 0
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=7]
 0/name = ""
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -11531,7 +11663,7 @@
 867/shapes = [  ]
 867/z_index = 0
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="TileSet" id=8]
 0/name = ""
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -17287,7 +17419,7 @@
 867/shapes = [  ]
 867/z_index = 0
 
-[sub_resource type="TileSet" id=4]
+[sub_resource type="TileSet" id=9]
 0/name = ""
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -21181,216 +21313,1227 @@
 375/shapes = [  ]
 375/z_index = 0
 
-[sub_resource type="Animation" id=5]
-resource_name = "idle"
-loop = true
-step = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/idle:frame")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 0.999999 ),
-"update": 0,
-"values": [ 0, 3 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "jump"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/jump:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=7]
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("melee/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("sprites/melee:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 0.066986, 0.87055, 1 ),
-"update": 0,
-"values": [ 0, 1, 7 ]
-}
-
-[sub_resource type="Animation" id=8]
-resource_name = "walk"
-length = 0.3
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprites/walk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-tracks/1/type = "audio"
-tracks/1/path = NodePath("sounds/SD4_footsteps")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 17 )
-} ],
-"times": PoolRealArray( 0.15 )
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_change_footstep_pitch"
-} ]
-}
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 10, 29 )
-
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 34.0725, 29.1493 )
+extents = Vector2( 324.782, 16 )
 
-[sub_resource type="OccluderPolygon2D" id=11]
-polygon = PoolVector2Array( -10.5045, -28.5032, 3.45433, -28.335, 3.53842, -9.41481, 0.258926, -5.37851, 0.258926, -3.36036, 9.59288, 0.507763, 13.2087, -0.501312, 22.3745, -18.4965, 26.0744, -19.3374, 27.0835, -16.3943, 18.0018, 1.34866, 19.3473, 3.53499, 19.5155, 4.54407, 17.8337, 4.88042, 17.4973, 7.82356, 13.8814, 9.67354, 12.1997, 11.5235, 10.5179, 10.7667, 10.5179, 8.91673, 7.82699, 7.65539, 4.21114, 7.73948, 2.27708, 5.63723, 3.03388, 13.3735, 0.847549, 13.2053, 2.69753, 27.1642, 4.46341, 29.1823, 4.46341, 31.2005, -3.44102, 31.2846, -4.61827, 29.0982, -3.77738, 27.0801, -4.78645, 19.2598, -6.72052, 17.4939, -9.66365, 19.5961, -11.2614, 26.9119, -9.57956, 29.9391, -9.57956, 31.4528, -17.6522, 31.7891, -18.4931, 29.5187, -17.484, 27.1642, -13.784, 14.1303, -15.4658, 14.3826, -18.4931, 16.7371, -20.5112, 15.3075, -19.6703, 12.028, -25.0521, 8.41219, -25.893, 4.79634, -20.6794, -1.67857, -10.3364, -3.36036, -13.9843, -8.42379, -15.7854, -12.6616, -15.7854, -24.6336 )
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 43.75, 12.5 )
 
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 16 )
-region = Rect2( 0, 0, 13, 13 )
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 55.9539, 12.5 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 16 )
-region = Rect2( 13, 0, 13, 13 )
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 128, 96 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 16 )
-region = Rect2( 26, 0, 13, 13 )
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 128, 96 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 16 )
-region = Rect2( 39, 0, 13, 13 )
+region = Rect2( 0, 0, 128, 96 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 16 )
-region = Rect2( 52, 0, 13, 13 )
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 128, 96 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 16 )
-region = Rect2( 65, 0, 13, 13 )
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 128, 96 )
 
-[sub_resource type="SpriteFrames" id=18]
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 128, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 30 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 31 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 32 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 33 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 34 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 29 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 36 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 35 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 37 )
+region = Rect2( 0, 0, 112, 128 )
+
+[sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ ExtResource( 21 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "rear_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": false,
+"name": "defeat",
+"speed": 6.0
 } ]
 
-[sub_resource type="Animation" id=19]
-length = 0.5
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 47, 14 )
+
+[sub_resource type="Animation" id=32]
+resource_name = "defeated"
+length = 1.5
+step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("../animate_plus:root_node")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ NodePath("../green_plus") ]
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 550, 214.5 ), Vector2( 543.75, 206.25 ), Vector2( 537.5, 212.5 ), Vector2( 543.75, 206.25 ), Vector2( 550, 212.5 ), Vector2( 537.5, 206.25 ), Vector2( 550, 200 ), Vector2( 550, 214.5 ), Vector2( 543.75, 206.25 ), Vector2( 537.5, 212.5 ), Vector2( 543.75, 206.25 ), Vector2( 550, 212.5 ), Vector2( 537.5, 206.25 ), Vector2( 550, 200 ), Vector2( 537.5, 206.25 ), Vector2( 550, 214.5 ), Vector2( 543.75, 206.25 ), Vector2( 537.5, 212.5 ), Vector2( 543.75, 206.25 ), Vector2( 550, 212.5 ), Vector2( 537.5, 214.5 ), Vector2( 537.5, 214.5 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:scale")
+tracks/1/path = NodePath("aniamtions:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.11 ),
-"transitions": PoolRealArray( 1, 0.189465 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:position")
+tracks/2/path = NodePath(".:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( -5, 1 ),
+"times": PoolRealArray( 0, 1.45, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -4.52695, -22.4807 ), Vector2( -4.527, -44.481 ) ]
+"values": [ Vector2( -1.5, 1.5 ), Vector2( -1.5, 1.5 ), Vector2( -3, 3 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1143.75, 214.5 ), Vector2( 550, 214.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("lights/back_light:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("flames_charge:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("aniamtions:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "move", "idle" ]
+}
+
+[sub_resource type="Animation" id=34]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 550, 212.5 ), Vector2( 550, 212.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("flames_charge:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("aniamtions:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("lights/back_light:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+
+[sub_resource type="Animation" id=35]
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 543.75, 212.5 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 556.25, 206.25 ), Vector2( 562.5, 212.5 ), Vector2( 550, 206.25 ), Vector2( 543.75, 212.5 ), Vector2( 493.75, 212.5 ), Vector2( -512.5, 212.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("lights/back_light:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("flames_charge:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("aniamtions:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "idle", "rear_up", "move" ]
+}
 
-[sub_resource type="RectangleShape2D" id=20]
-extents = Vector2( 324.782, 16 )
+[sub_resource type="RectangleShape2D" id=36]
+extents = Vector2( 58.3333, 33.3333 )
 
-[sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 25, 8 )
+[sub_resource type="Animation" id=37]
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/incoming_ind:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.15 ),
+"transitions": PoolRealArray( 1, 3.24901 ),
+"update": 0,
+"values": [ Vector2( 19.593, 5 ), Vector2( 19.593, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/incoming_ind:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.498039 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.843137, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("damage_box:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("bike_trail:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("bike_trail:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("bike_trail:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../second_to_top/bike_trail:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 393.75, 18.352 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 571, 65 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 23 )
+region = Rect2( 571, 0, 571, 65 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 23 )
+region = Rect2( 1142, 0, 571, 65 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 23 )
+region = Rect2( 1713, 0, 571, 65 )
+
+[sub_resource type="SpriteFrames" id=43]
+animations = [ {
+"frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
+"loop": true,
+"name": "default",
+"speed": 30.0
+} ]
+
+[sub_resource type="Animation" id=44]
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/incoming_ind:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.15 ),
+"transitions": PoolRealArray( 1, 3.24901 ),
+"update": 0,
+"values": [ Vector2( 19.593, 5 ), Vector2( 19.593, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/incoming_ind:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.498039 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.843137, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("damage_box:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("bike_trail:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("bike_trail:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("bike_trail:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=45]
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/incoming_ind:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.15 ),
+"transitions": PoolRealArray( 1, 3.24901 ),
+"update": 0,
+"values": [ Vector2( 19.593, 5 ), Vector2( 19.593, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/incoming_ind:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.498039 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.843137, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("damage_box:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("bike_trail:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("bike_trail:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("bike_trail:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=46]
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/incoming_ind:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.15 ),
+"transitions": PoolRealArray( 1, 3.24901 ),
+"update": 0,
+"values": [ Vector2( 19.593, 5 ), Vector2( 19.593, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D/incoming_ind:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.498039 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.843137, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("damage_box:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.35, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("bike_trail:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("bike_trail:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("bike_trail:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.25, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("bike_trail:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="RectangleShape2D" id=47]
+extents = Vector2( 462.5, 39.5 )
+
+[sub_resource type="Animation" id=48]
+resource_name = "fade_in_class"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../normal_ac:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../normal_ac:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../normal_ac/ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Level1:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "philips_entrance"
+length = 3.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("philips:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -93.75, -43.75 ), Vector2( -162.5, 39.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("philips/Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 0.55, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, 0 ), Vector2( -18.75, -8.25 ), Vector2( -6.24951, -8.25 ), Vector2( -12.2039, -2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("philips/Camera2D:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("philips/name:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("philips/name:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ), Vector2( 1, 1e-05 ), Vector2( 1, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("philips:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../sounds/sprite_jump:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../intro_end_anim/ColorRect:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 3.3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../intro_end_anim/ColorRect:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 3.3, 3.4, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Camera2D2:current")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 3.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("philips:animation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "philips" ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("philips:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=50]
+resource_name = "teleport_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../sounds/enemy_spawn_in:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("philips:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "teleport_in" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("philips:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("philips:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("philips:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("philips:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("philips/name:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 40 )
+region = Rect2( 0, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 40 )
+region = Rect2( 32, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 40 )
+region = Rect2( 64, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 40 )
+region = Rect2( 96, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 40 )
+region = Rect2( 128, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 40 )
+region = Rect2( 160, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 40 )
+region = Rect2( 192, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 40 )
+region = Rect2( 224, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 40 )
+region = Rect2( 256, 0, 32, 61 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 39 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 39 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 39 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 39 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 39 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 39 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 39 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 39 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 39 )
+region = Rect2( 256, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 39 )
+region = Rect2( 288, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 39 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 39 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 39 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 39 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 39 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=75]
+animations = [ {
+"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ) ],
+"loop": true,
+"name": "philips",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
+"loop": false,
+"name": "teleport_in",
+"speed": 15.0
+} ]
+
+[sub_resource type="DynamicFont" id=76]
+font_data = ExtResource( 41 )
+
+[sub_resource type="Shader" id=77]
+code = "/*
+	Glitch Effect Shader by Yui Kinomoto @arlez80
+
+	MIT License
+*/
+
+shader_type canvas_item;
+
+// 振動の強さ
+uniform float shake_power = 0.03;
+// 振動率
+uniform float shake_rate : hint_range( 0.0, 1.0 ) = 0.2;
+// 振動速度
+uniform float shake_speed = 5.0;
+// 振動ブロックサイズ
+uniform float shake_block_size = 30.5;
+// 色の分離率
+uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
+
+float random( float seed )
+{
+	return fract( 543.2543 * sin( dot( vec2( seed, seed ), vec2( 3525.46, -54.3415 ) ) ) );
+}
+
+void fragment( )
+{
+	float enable_shift = float(
+		random( trunc( TIME * shake_speed ) )
+	<	shake_rate
+	);
+
+	vec2 fixed_uv = SCREEN_UV;
+	fixed_uv.x += (
+		random(
+			( trunc( SCREEN_UV.y * shake_block_size ) / shake_block_size )
+		+	TIME
+		) - 0.5
+	) * shake_power * enable_shift;
+
+	vec4 pixel_color = textureLod( SCREEN_TEXTURE, fixed_uv, 0.0 );
+	pixel_color.r = mix(
+		pixel_color.r
+	,	textureLod( SCREEN_TEXTURE, fixed_uv + vec2( shake_color_rate, 0.0 ), 0.0 ).r
+	,	enable_shift
+	);
+	pixel_color.b = mix(
+		pixel_color.b
+	,	textureLod( SCREEN_TEXTURE, fixed_uv + vec2( -shake_color_rate, 0.0 ), 0.0 ).b
+	,	enable_shift
+	);
+	COLOR = pixel_color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=78]
+shader = SubResource( 77 )
+shader_param/shake_power = 0.03
+shader_param/shake_rate = 1.0
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
 
 [node name="AC_level_boss" type="Node2D"]
 scale = Vector2( 1.28, 1.28 )
 script = ExtResource( 6 )
 
+[node name="intro_end_anim" type="Node2D" parent="."]
+position = Vector2( -106.25, -131.25 )
+scale = Vector2( 20.2216, 12.1044 )
+z_index = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="intro_end_anim"]
+anims/intro = SubResource( 1 )
+anims/transition_back = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="intro_end_anim"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="err_node" type="Node2D" parent="."]
+position = Vector2( -731.25, 0 )
+z_index = 8
+
+[node name="error_zone" type="Control" parent="err_node"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="error_text" type="Label" parent="err_node/error_zone"]
+margin_left = 931.25
+margin_top = 56.25
+margin_right = 1405.25
+margin_bottom = 111.25
+rect_scale = Vector2( 1, 0.48 )
+custom_fonts/font = SubResource( 3 )
+text = "error_text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="instructions" type="Label" parent="err_node/error_zone"]
+margin_left = 912.5
+margin_top = 50.0
+margin_right = 1303.5
+margin_bottom = 105.0
+rect_scale = Vector2( 1, 1e-05 )
+custom_fonts/font = SubResource( 3 )
+text = "Destroy ???"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center_glitch" type="ColorRect" parent="err_node/error_zone"]
+modulate = Color( 36.42, 1, 1, 0.21 )
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 600.0
+margin_top = 45.4905
+margin_right = 600.0
+margin_bottom = 45.4905
+rect_scale = Vector2( 21.9087, 1.15064 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="err_node/error_zone"]
+anims/transitino_instructions = SubResource( 5 )
+
+[node name="instructions_timeout" type="Timer" parent="err_node/error_zone"]
+wait_time = 2.0
+one_shot = true
+
+[node name="sounds" parent="err_node/error_zone" instance=ExtResource( 25 )]
+
+[node name="player" parent="." instance=ExtResource( 5 )]
+modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+position = Vector2( 287.5, 212.5 )
+z_index = 6
+
 [node name="Camera2D2" type="Camera2D" parent="."]
-position = Vector2( 300, 112.5 )
+position = Vector2( 289.473, 110.938 )
 z_index = 4
 current = true
 zoom = Vector2( 1.7, 1.7 )
@@ -21401,7 +22544,7 @@ scale = Vector2( 1.5, 1.5 )
 [node name="AutoLayer" type="TileMap" parent="Level1"]
 position = Vector2( -48, -144 )
 z_index = 1
-tile_set = SubResource( 1 )
+tile_set = SubResource( 6 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 0, 502, 0, 1, 502, 0, 2, 502, 0, 3, 502, 0, 4, 502, 0, 5, 502, 0, 6, 502, 0, 7, 502, 0, 8, 502, 0, 9, 502, 0, 10, 502, 0, 11, 502, 0, 12, 502, 0, 13, 502, 0, 14, 502, 0, 15, 502, 0, 16, 502, 0, 17, 502, 0, 18, 502, 0, 19, 502, 0, 20, 502, 0, 21, 502, 0, 22, 502, 0, 23, 502, 0, 24, 502, 0, 25, 502, 0, 26, 502, 0, 27, 502, 0, 28, 502, 0, 29, 502, 0, 30, 502, 0, 65536, 502, 0, 65537, 502, 0, 65538, 502, 0, 65539, 502, 0, 65540, 502, 0, 65541, 502, 0, 65542, 502, 0, 65543, 502, 0, 65544, 502, 0, 65545, 502, 0, 65546, 502, 0, 65547, 502, 0, 65548, 502, 0, 65549, 502, 0, 65550, 502, 0, 65551, 502, 0, 65552, 502, 0, 65553, 502, 0, 65554, 502, 0, 65555, 502, 0, 65556, 502, 0, 65557, 502, 0, 65558, 502, 0, 65559, 502, 0, 65560, 502, 0, 65561, 502, 0, 65562, 502, 0, 65563, 502, 0, 65564, 502, 0, 65565, 502, 0, 65566, 502, 0, 131072, 502, 0, 131073, 502, 0, 131074, 502, 0, 131075, 502, 0, 131076, 502, 0, 131077, 502, 0, 131078, 502, 0, 131079, 502, 0, 131080, 502, 0, 131081, 502, 0, 131082, 502, 0, 131083, 502, 0, 131084, 502, 0, 131085, 502, 0, 131086, 502, 0, 131087, 502, 0, 131088, 502, 0, 131089, 502, 0, 131090, 502, 0, 131091, 502, 0, 131092, 502, 0, 131093, 502, 0, 131094, 502, 0, 131095, 502, 0, 131096, 502, 0, 131097, 502, 0, 131098, 502, 0, 131099, 502, 0, 131100, 502, 0, 131101, 502, 0, 131102, 502, 0, 196608, 502, 0, 196609, 502, 0, 196610, 502, 0, 196611, 502, 0, 196612, 502, 0, 196613, 502, 0, 196614, 502, 0, 196615, 502, 0, 196616, 502, 0, 196617, 502, 0, 196618, 502, 0, 196619, 502, 0, 196620, 502, 0, 196621, 502, 0, 196622, 502, 0, 196623, 502, 0, 196624, 502, 0, 196625, 502, 0, 196626, 502, 0, 196627, 502, 0, 196628, 502, 0, 196629, 502, 0, 196630, 502, 0, 196631, 502, 0, 196632, 502, 0, 196633, 502, 0, 196634, 502, 0, 196635, 502, 0, 196636, 502, 0, 196637, 502, 0, 196638, 502, 0, 262144, 502, 0, 262145, 502, 0, 262146, 502, 0, 262147, 502, 0, 262148, 502, 0, 262149, 502, 0, 262150, 502, 0, 262151, 502, 0, 262152, 502, 0, 262153, 502, 0, 262154, 502, 0, 262155, 502, 0, 262156, 502, 0, 262157, 502, 0, 262158, 502, 0, 262159, 502, 0, 262160, 502, 0, 262161, 502, 0, 262162, 502, 0, 262163, 502, 0, 262164, 502, 0, 262165, 502, 0, 262166, 502, 0, 262167, 502, 0, 262168, 502, 0, 262169, 502, 0, 262170, 502, 0, 262171, 502, 0, 262172, 502, 0, 262173, 502, 0, 262174, 502, 0, 327680, 502, 0, 327681, 502, 0, 327682, 502, 0, 327683, 502, 0, 327684, 502, 0, 327685, 502, 0, 327686, 502, 0, 327687, 502, 0, 327688, 502, 0, 327689, 502, 0, 327690, 502, 0, 327691, 502, 0, 327692, 502, 0, 327693, 502, 0, 327694, 502, 0, 327695, 502, 0, 327696, 502, 0, 327697, 502, 0, 327698, 502, 0, 327699, 502, 0, 327700, 502, 0, 327701, 502, 0, 327702, 502, 0, 327703, 502, 0, 327704, 502, 0, 327705, 502, 0, 327706, 502, 0, 327707, 502, 0, 327708, 502, 0, 327709, 502, 0, 327710, 502, 0, 393216, 502, 0, 393217, 502, 0, 393218, 502, 0, 393219, 502, 0, 393220, 502, 0, 393221, 502, 0, 393222, 502, 0, 393223, 502, 0, 393224, 502, 0, 393225, 502, 0, 393226, 502, 0, 393227, 502, 0, 393228, 502, 0, 393229, 502, 0, 393230, 502, 0, 393231, 502, 0, 393232, 502, 0, 393233, 502, 0, 393234, 502, 0, 393235, 502, 0, 393236, 502, 0, 393237, 502, 0, 393238, 502, 0, 393239, 502, 0, 393240, 502, 0, 393241, 502, 0, 393242, 502, 0, 393243, 502, 0, 393244, 502, 0, 393245, 502, 0, 393246, 502, 0, 458752, 502, 0, 458753, 502, 0, 458754, 502, 0, 458755, 502, 0, 458756, 502, 0, 458757, 502, 0, 458758, 502, 0, 458759, 502, 0, 458760, 502, 0, 458761, 502, 0, 458762, 502, 0, 458763, 502, 0, 458764, 502, 0, 458765, 502, 0, 458766, 502, 0, 458767, 502, 0, 458768, 502, 0, 458769, 502, 0, 458770, 502, 0, 458771, 502, 0, 458772, 502, 0, 458773, 502, 0, 458774, 502, 0, 458775, 502, 0, 458776, 502, 0, 458777, 502, 0, 458778, 502, 0, 458779, 502, 0, 458780, 502, 0, 458781, 502, 0, 458782, 502, 0, 524288, 502, 0, 524289, 502, 0, 524290, 502, 0, 524291, 502, 0, 524292, 502, 0, 524293, 502, 0, 524294, 502, 0, 524295, 502, 0, 524296, 502, 0, 524297, 502, 0, 524298, 502, 0, 524299, 502, 0, 524300, 502, 0, 524301, 502, 0, 524302, 502, 0, 524303, 502, 0, 524304, 502, 0, 524305, 502, 0, 524306, 502, 0, 524307, 502, 0, 524308, 502, 0, 524309, 502, 0, 524310, 502, 0, 524311, 502, 0, 524312, 502, 0, 524313, 502, 0, 524314, 502, 0, 524315, 502, 0, 524316, 502, 0, 524317, 502, 0, 524318, 502, 0, 589824, 502, 0, 589825, 502, 0, 589826, 502, 0, 589827, 502, 0, 589828, 502, 0, 589829, 502, 0, 589830, 502, 0, 589831, 502, 0, 589832, 502, 0, 589833, 502, 0, 589834, 502, 0, 589835, 502, 0, 589836, 502, 0, 589837, 502, 0, 589838, 502, 0, 589839, 502, 0, 589840, 502, 0, 589841, 502, 0, 589842, 502, 0, 589843, 502, 0, 589844, 502, 0, 589845, 502, 0, 589846, 502, 0, 589847, 502, 0, 589848, 502, 0, 589849, 502, 0, 589850, 502, 0, 589851, 502, 0, 589852, 502, 0, 589853, 502, 0, 589854, 502, 0, 655360, 502, 0, 655361, 502, 0, 655362, 502, 0, 655363, 502, 0, 655364, 502, 0, 655365, 502, 0, 655366, 502, 0, 655367, 502, 0, 655368, 502, 0, 655369, 502, 0, 655370, 502, 0, 655371, 502, 0, 655372, 502, 0, 655373, 502, 0, 655374, 502, 0, 655375, 502, 0, 655376, 502, 0, 655377, 502, 0, 655378, 502, 0, 655379, 502, 0, 655380, 502, 0, 655381, 502, 0, 655382, 502, 0, 655383, 502, 0, 655384, 502, 0, 655385, 502, 0, 655386, 502, 0, 655387, 502, 0, 655388, 502, 0, 655389, 502, 0, 655390, 502, 0, 720896, 502, 0, 720897, 502, 0, 720898, 502, 0, 720899, 502, 0, 720900, 502, 0, 720901, 502, 0, 720902, 502, 0, 720903, 502, 0, 720904, 502, 0, 720905, 502, 0, 720906, 502, 0, 720907, 502, 0, 720908, 502, 0, 720909, 502, 0, 720910, 502, 0, 720911, 502, 0, 720912, 502, 0, 720913, 502, 0, 720914, 502, 0, 720915, 502, 0, 720916, 502, 0, 720917, 502, 0, 720918, 502, 0, 720919, 502, 0, 720920, 502, 0, 720921, 502, 0, 720922, 502, 0, 720923, 502, 0, 720924, 502, 0, 720925, 502, 0, 720926, 502, 0, 786432, 502, 0, 786433, 502, 0, 786434, 502, 0, 786435, 502, 0, 786436, 502, 0, 786437, 502, 0, 786438, 502, 0, 786439, 502, 0, 786440, 502, 0, 786441, 502, 0, 786442, 502, 0, 786443, 502, 0, 786444, 502, 0, 786445, 502, 0, 786446, 502, 0, 786447, 502, 0, 786448, 502, 0, 786449, 502, 0, 786450, 502, 0, 786451, 502, 0, 786452, 502, 0, 786453, 502, 0, 786454, 502, 0, 786455, 502, 0, 786456, 502, 0, 786457, 502, 0, 786458, 502, 0, 786459, 502, 0, 786460, 502, 0, 786461, 502, 0, 786462, 502, 0, 851968, 502, 0, 851969, 502, 0, 851970, 502, 0, 851971, 502, 0, 851972, 502, 0, 851973, 502, 0, 851974, 502, 0, 851975, 502, 0, 851976, 502, 0, 851977, 502, 0, 851978, 502, 0, 851979, 502, 0, 851980, 502, 0, 851981, 502, 0, 851982, 502, 0, 851983, 502, 0, 851984, 502, 0, 851985, 502, 0, 851986, 502, 0, 851987, 502, 0, 851988, 502, 0, 851989, 502, 0, 851990, 502, 0, 851991, 502, 0, 851992, 502, 0, 851993, 502, 0, 851994, 502, 0, 851995, 502, 0, 851996, 502, 0, 851997, 502, 0, 851998, 502, 0, 917504, 502, 0, 917505, 502, 0, 917506, 502, 0, 917507, 502, 0, 917508, 502, 0, 917509, 502, 0, 917510, 502, 0, 917511, 502, 0, 917512, 502, 0, 917513, 502, 0, 917514, 502, 0, 917515, 502, 0, 917516, 502, 0, 917517, 502, 0, 917518, 502, 0, 917519, 502, 0, 917520, 502, 0, 917521, 502, 0, 917522, 502, 0, 917523, 502, 0, 917524, 502, 0, 917525, 502, 0, 917526, 502, 0, 917527, 502, 0, 917528, 502, 0, 917529, 502, 0, 917530, 502, 0, 917531, 502, 0, 917532, 502, 0, 917533, 502, 0, 917534, 502, 0, 983040, 502, 0, 983041, 502, 0, 983042, 502, 0, 983043, 502, 0, 983044, 502, 0, 983045, 502, 0, 983046, 502, 0, 983047, 502, 0, 983048, 502, 0, 983049, 502, 0, 983050, 502, 0, 983051, 502, 0, 983052, 502, 0, 983053, 502, 0, 983054, 502, 0, 983055, 502, 0, 983056, 502, 0, 983057, 502, 0, 983058, 502, 0, 983059, 502, 0, 983060, 502, 0, 983061, 502, 0, 983062, 502, 0, 983063, 502, 0, 983064, 502, 0, 983065, 502, 0, 983066, 502, 0, 983067, 502, 0, 983068, 502, 0, 983069, 502, 0, 983070, 502, 0, 1048576, 502, 0, 1048577, 502, 0, 1048578, 502, 0, 1048579, 502, 0, 1048580, 502, 0, 1048581, 502, 0, 1048582, 502, 0, 1048583, 502, 0, 1048584, 502, 0, 1048585, 502, 0, 1048586, 502, 0, 1048587, 502, 0, 1048588, 502, 0, 1048589, 502, 0, 1048590, 502, 0, 1048591, 502, 0, 1048592, 502, 0, 1048593, 502, 0, 1048594, 502, 0, 1048595, 502, 0, 1048596, 502, 0, 1048597, 502, 0, 1048598, 502, 0, 1048599, 502, 0, 1048600, 502, 0, 1048601, 502, 0, 1048602, 502, 0, 1048603, 502, 0, 1048604, 502, 0, 1048605, 502, 0, 1048606, 502, 0, 1114112, 502, 0, 1114113, 502, 0, 1114114, 502, 0, 1114115, 502, 0, 1114116, 502, 0, 1114117, 502, 0, 1114118, 502, 0, 1114119, 502, 0, 1114120, 502, 0, 1114121, 502, 0, 1114122, 502, 0, 1114123, 502, 0, 1114124, 502, 0, 1114125, 502, 0, 1114126, 502, 0, 1114127, 502, 0, 1114128, 502, 0, 1114129, 502, 0, 1114130, 502, 0, 1114131, 502, 0, 1114132, 502, 0, 1114133, 502, 0, 1114134, 502, 0, 1114135, 502, 0, 1114136, 502, 0, 1114137, 502, 0, 1114138, 502, 0, 1114139, 502, 0, 1114140, 502, 0, 1114141, 502, 0, 1114142, 502, 0, 1179648, 502, 0, 1179649, 502, 0, 1179650, 502, 0, 1179651, 502, 0, 1179652, 502, 0, 1179653, 502, 0, 1179654, 502, 0, 1179655, 502, 0, 1179656, 502, 0, 1179657, 502, 0, 1179658, 502, 0, 1179659, 502, 0, 1179660, 502, 0, 1179661, 502, 0, 1179662, 502, 0, 1179663, 502, 0, 1179664, 502, 0, 1179665, 502, 0, 1179666, 502, 0, 1179667, 502, 0, 1179668, 502, 0, 1179669, 502, 0, 1179670, 502, 0, 1179671, 502, 0, 1179672, 502, 0, 1179673, 502, 0, 1179674, 502, 0, 1179675, 502, 0, 1179676, 502, 0, 1179677, 502, 0, 1179678, 502, 0, 1245184, 502, 0, 1245185, 502, 0, 1245186, 502, 0, 1245187, 502, 0, 1245188, 502, 0, 1245189, 502, 0, 1245190, 502, 0, 1245191, 502, 0, 1245192, 502, 0, 1245193, 502, 0, 1245194, 502, 0, 1245195, 502, 0, 1245196, 502, 0, 1245197, 502, 0, 1245198, 502, 0, 1245199, 502, 0, 1245200, 502, 0, 1245201, 502, 0, 1245202, 502, 0, 1245203, 502, 0, 1245204, 502, 0, 1245205, 502, 0, 1245206, 502, 0, 1245207, 502, 0, 1245208, 502, 0, 1245209, 502, 0, 1245210, 502, 0, 1245211, 502, 0, 1245212, 502, 0, 1245213, 502, 0, 1245214, 502, 0, 1310720, 502, 0, 1310721, 502, 0, 1310722, 502, 0, 1310723, 502, 0, 1310724, 502, 0, 1310725, 502, 0, 1310726, 502, 0, 1310727, 502, 0, 1310728, 502, 0, 1310729, 502, 0, 1310730, 502, 0, 1310731, 502, 0, 1310732, 502, 0, 1310733, 502, 0, 1310734, 502, 0, 1310735, 502, 0, 1310736, 502, 0, 1310737, 502, 0, 1310738, 502, 0, 1310739, 502, 0, 1310740, 502, 0, 1310741, 502, 0, 1310742, 502, 0, 1310743, 502, 0, 1310744, 502, 0, 1310745, 502, 0, 1310746, 502, 0, 1310747, 502, 0, 1310748, 502, 0, 1310749, 502, 0, 1310750, 502, 0, 1376256, 502, 0, 1376257, 502, 0, 1376258, 502, 0, 1376259, 502, 0, 1376260, 502, 0, 1376261, 502, 0, 1376262, 502, 0, 1376263, 502, 0, 1376264, 502, 0, 1376265, 502, 0, 1376266, 502, 0, 1376267, 502, 0, 1376268, 502, 0, 1376269, 502, 0, 1376270, 502, 0, 1376271, 502, 0, 1376272, 502, 0, 1376273, 502, 0, 1376274, 502, 0, 1376275, 502, 0, 1376276, 502, 0, 1376277, 502, 0, 1376278, 502, 0, 1376279, 502, 0, 1376280, 502, 0, 1376281, 502, 0, 1376282, 502, 0, 1376283, 502, 0, 1376284, 502, 0, 1376285, 502, 0, 1376286, 502, 0, 1441792, 502, 0, 1441793, 502, 0, 1441794, 502, 0, 1441795, 502, 0, 1441796, 502, 0, 1441797, 502, 0, 1441798, 502, 0, 1441799, 502, 0, 1441800, 502, 0, 1441801, 502, 0, 1441802, 502, 0, 1441803, 502, 0, 1441804, 502, 0, 1441805, 502, 0, 1441806, 502, 0, 1441807, 502, 0, 1441808, 502, 0, 1441809, 502, 0, 1441810, 502, 0, 1441811, 502, 0, 1441812, 502, 0, 1441813, 502, 0, 1441814, 502, 0, 1441815, 502, 0, 1441816, 502, 0, 1441817, 502, 0, 1441818, 502, 0, 1441819, 502, 0, 1441820, 502, 0, 1441821, 502, 0, 1441822, 502, 0, 1507328, 502, 0, 1507329, 502, 0, 1507330, 502, 0, 1507331, 502, 0, 1507332, 502, 0, 1507333, 502, 0, 1507334, 502, 0, 1507335, 502, 0, 1507336, 502, 0, 1507337, 502, 0, 1507338, 502, 0, 1507339, 502, 0, 1507340, 502, 0, 1507341, 502, 0, 1507342, 502, 0, 1507343, 502, 0, 1507344, 502, 0, 1507345, 502, 0, 1507346, 502, 0, 1507347, 502, 0, 1507348, 502, 0, 1507349, 502, 0, 1507350, 502, 0, 1507351, 502, 0, 1507352, 502, 0, 1507353, 502, 0, 1507354, 502, 0, 1507355, 502, 0, 1507356, 502, 0, 1507357, 502, 0, 1507358, 502, 0, 1572864, 502, 0, 1572865, 502, 0, 1572866, 502, 0, 1572867, 502, 0, 1572868, 502, 0, 1572869, 502, 0, 1572870, 502, 0, 1572871, 502, 0, 1572872, 502, 0, 1572873, 502, 0, 1572874, 502, 0, 1572875, 502, 0, 1572876, 502, 0, 1572877, 502, 0, 1572878, 502, 0, 1572879, 502, 0, 1572880, 502, 0, 1572881, 502, 0, 1572882, 502, 0, 1572883, 502, 0, 1572884, 502, 0, 1572885, 502, 0, 1572886, 502, 0, 1572887, 502, 0, 1572888, 502, 0, 1572889, 502, 0, 1572890, 502, 0, 1572891, 502, 0, 1572892, 502, 0, 1572893, 502, 0, 1572894, 502, 0 )
@@ -21412,7 +22555,7 @@ z_index = 2
 [node name="IntGrid" type="TileMap" parent="Level1"]
 position = Vector2( -48, -144 )
 z_index = 3
-tile_set = SubResource( 2 )
+tile_set = SubResource( 7 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 65540, 175, 0, 65558, 175, 0, 131076, 175, 0, 131094, 175, 0, 196612, 175, 0, 196630, 175, 0, 262148, 175, 0, 262166, 175, 0, 327684, 175, 0, 327702, 175, 0, 393220, 175, 0, 393238, 175, 0, 458756, 175, 0, 458774, 175, 0, 524292, 367, 0, 524310, 367, 0, 589828, 398, 0, 589836, 536870927, 0, 589837, 14, 0, 589838, 14, 0, 589839, 15, 0, 589840, 237, 0, 589846, 368, 0, 655372, 367, 0, 655373, 175, 0, 655375, 175, 0, 655376, 299, 0, 655377, 272, 0, 655382, 398, 0, 720908, 368, 0, 720909, 175, 0, 720911, 175, 0, 720913, 335, 0, 786444, 368, 0, 786445, 175, 0, 786447, 175, 0, 786449, 367, 0, 851980, 368, 0, 851981, 175, 0, 851983, 1073741964, 0, 851984, 536870927, 0, 851985, 14, 0, 851986, 14, 0, 851987, 14, 0, 851988, 15, 0, 917516, 367, 0, 917517, 175, 0, 917520, 367, 0, 917524, 367, 0, 983049, 536870927, 0, 983050, 14, 0, 983051, 14, 0, 983052, 15, 0, 983053, 1610612876, 0, 983056, 368, 0, 983060, 368, 0, 1048585, 367, 0, 1048588, 367, 0, 1048592, 368, 0, 1048596, 368, 0, 1114121, 335, 0, 1114124, 368, 0, 1114128, 368, 0, 1114132, 368, 0, 1179657, 335, 0, 1179660, 368, 0, 1179664, 368, 0, 1179668, 368, 0, 1245193, 398, 0, 1245196, 398, 0, 1245200, 398, 0, 1245204, 398, 0, 1310721, 140, 0, 1310722, 536870927, 0, 1310723, 14, 0, 1310724, 14, 0, 1310725, 14, 0, 1310726, 14, 0, 1310727, 14, 0, 1310728, 14, 0, 1310729, 14, 0, 1310730, 14, 0, 1310731, 14, 0, 1310732, 14, 0, 1310733, 14, 0, 1310734, 14, 0, 1310735, 14, 0, 1310736, 14, 0, 1310737, 14, 0, 1310738, 14, 0, 1310739, 14, 0, 1310740, 14, 0, 1310741, 14, 0, 1310742, 14, 0, 1310743, 14, 0, 1310744, 14, 0, 1310745, 14, 0, 1310746, 14, 0, 1310747, 14, 0, 1310748, 15, 0, 1310749, 237, 0, 1376257, 175, 0, 1376259, 175, 0, 1376260, 299, 0, 1376261, 300, 0, 1376262, 240, 0, 1376267, 334, 0, 1376268, 268, 0, 1376269, 268, 0, 1376270, 240, 0, 1376284, 239, 0, 1376285, 400, 0, 1441793, 1073741964, 0, 1441794, 141, 0, 1441795, 1610612876, 0, 1441797, 299, 0, 1441798, 240, 0, 1441803, 335, 0, 1441806, 368, 0, 1441812, 239, 0, 1441813, 236, 0, 1441814, 236, 0, 1441815, 236, 0, 1441816, 236, 0, 1441817, 236, 0, 1441818, 236, 0, 1441819, 236, 0, 1441820, 238, 0, 1441821, 268, 0, 1441822, 236, 0, 1507334, 368, 0, 1507339, 335, 0, 1507341, 267, 0, 1507342, 304, 0, 1507348, 368, 0, 1507356, 368, 0, 1572870, 398, 0, 1572875, 398, 0, 1572877, 398, 0, 1572884, 398, 0, 1572892, 398, 0 )
@@ -21420,7 +22563,7 @@ tile_data = PoolIntArray( 65540, 175, 0, 65558, 175, 0, 131076, 175, 0, 131094, 
 [node name="Indust_obj" type="TileMap" parent="Level1"]
 position = Vector2( -48, -144 )
 z_index = 4
-tile_set = SubResource( 3 )
+tile_set = SubResource( 8 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 655364, 298, 0, 720918, 298, 0 )
@@ -21428,15 +22571,15 @@ tile_data = PoolIntArray( 655364, 298, 0, 720918, 298, 0 )
 [node name="Other_tileset" type="TileMap" parent="Level1"]
 position = Vector2( -48, -144 )
 z_index = 5
-tile_set = SubResource( 4 )
+tile_set = SubResource( 9 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 524302, 149, 0, 524303, 150, 0, 786451, 149, 0, 786452, 150, 0, 917513, 149, 0, 917514, 150, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
 
 [node name="lights" type="Node2D" parent="."]
+visible = false
 
 [node name="Light2D" type="Light2D" parent="lights"]
 position = Vector2( 24, 24 )
@@ -21450,137 +22593,383 @@ texture = ExtResource( 4 )
 color = Color( 1, 0, 0, 1 )
 energy = 2.21
 
-[node name="player" type="KinematicBody2D" parent="." groups=[
-"player",
-]]
-collision_layer = 2147483649
-collision_mask = 10
-script = ExtResource( 5 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-anims/idle = SubResource( 5 )
-anims/jump = SubResource( 6 )
-anims/melee = SubResource( 7 )
-anims/walk = SubResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-visible = false
-position = Vector2( -6, 2 )
-shape = SubResource( 9 )
-
-[node name="melee" type="Area2D" parent="player" groups=[
-"hitbox",
-"player",
-]]
-visible = false
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/melee"]
-position = Vector2( 40.0971, 0 )
-shape = SubResource( 10 )
-disabled = true
-
-[node name="sprites" type="Node2D" parent="player"]
-
-[node name="idle" type="Sprite" parent="player/sprites"]
-texture = ExtResource( 9 )
-hframes = 4
-
-[node name="jump" type="Sprite" parent="player/sprites"]
-visible = false
-texture = ExtResource( 11 )
-
-[node name="melee" type="Sprite" parent="player/sprites"]
-visible = false
-texture = ExtResource( 8 )
-hframes = 8
-
-[node name="walk" type="Sprite" parent="player/sprites"]
-visible = false
-texture = ExtResource( 10 )
-hframes = 4
-
-[node name="game_UI" parent="player" instance=ExtResource( 7 )]
-margin_left = -5.66968
-margin_right = 34.3303
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="player"]
-visible = false
-occluder = SubResource( 11 )
-
-[node name="sounds" type="Node2D" parent="player"]
-
-[node name="SD4_footsteps" type="AudioStreamPlayer" parent="player/sounds"]
-stream = ExtResource( 17 )
-volume_db = -5.0
-
-[node name="SD19_player_hurt" type="AudioStreamPlayer" parent="player/sounds"]
-stream = ExtResource( 14 )
-
-[node name="SD5a_player_jump" type="AudioStreamPlayer" parent="player/sounds"]
-stream = ExtResource( 15 )
-volume_db = -10.0
-
-[node name="SD13a_sword_swing" type="AudioStreamPlayer2D" parent="player/sounds"]
-stream = ExtResource( 12 )
-volume_db = -5.0
-
-[node name="cola_healing" type="Control" parent="player"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="green_plus" type="AnimatedSprite" parent="player/cola_healing"]
-visible = false
-position = Vector2( -4.527, -44.481 )
-frames = SubResource( 18 )
-frame = 1
-playing = true
-
-[node name="animate_plus" type="AnimationPlayer" parent="player/cola_healing"]
-root_node = NodePath("../green_plus")
-anims/heal = SubResource( 19 )
-
-[node name="healing_sound" type="AudioStreamPlayer" parent="player/cola_healing"]
-stream = ExtResource( 13 )
-volume_db = -8.548
-pitch_scale = 0.89
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 47.7185, 31.25 )
+
+[node name="killzone" parent="StaticBody2D" instance=ExtResource( 7 )]
+position = Vector2( 364.782, 1706.25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 252.281, 250 )
 z_index = 4
-shape = SubResource( 20 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 121.031, 106.25 )
+position = Vector2( 143.688, 125 )
 z_index = 4
-shape = SubResource( 21 )
+shape = SubResource( 11 )
 one_way_collision = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 358.531, 58.4255 )
+position = Vector2( 327.282, 77.3438 )
 z_index = 4
-shape = SubResource( 21 )
+shape = SubResource( 12 )
 one_way_collision = true
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 239.781, -39.1245 )
+position = Vector2( 214.781, -18.75 )
 z_index = 4
-shape = SubResource( 21 )
+shape = SubResource( 11 )
 one_way_collision = true
 
-[node name="dean_philips_boss" parent="." instance=ExtResource( 18 )]
-position = Vector2( 273.026, 213.315 )
-scale = Vector2( 1.5, 1.5 )
+[node name="dean_philips_boss" type="KinematicBody2D" parent="."]
+position = Vector2( 537.5, 214.5 )
+scale = Vector2( -1, 1 )
 z_index = 3
-[connection signal="death" from="player" to="player" method="_on_player_death"]
-[connection signal="health_changed" from="player" to="player" method="_on_player_health_changed"]
-[connection signal="animation_finished" from="player/AnimationPlayer" to="player" method="_on_AnimationPlayer_animation_finished"]
-[connection signal="body_entered" from="player/melee" to="player" method="_on_melee_body_entered"]
-[connection signal="cola_healing" from="player/game_UI" to="player" method="_on_game_UI_cola_healing"]
-[connection signal="respawn_player" from="player/game_UI" to="player" method="_on_game_UI_respawn_player"]
+script = ExtResource( 9 )
+
+[node name="aniamtions" type="AnimatedSprite" parent="dean_philips_boss"]
+position = Vector2( -10, -15 )
+frames = SubResource( 30 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dean_philips_boss"]
+visible = false
+position = Vector2( 0, 18 )
+shape = SubResource( 31 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="dean_philips_boss"]
+visible = false
+position = Vector2( 0, 18.13 )
+polygon = PoolVector2Array( -32.424, -14.4139, -7.81928, -42.2728, -4.24763, -48.3843, 3.84812, -48.6224, 7.65788, -43.7808, 6.78481, -36.5581, -1.86653, -32.5896, 4.24497, -26.3194, 14.4043, -27.748, 15.3568, -20.8428, 27.2623, -23.6208, 28.6909, -16.7156, 25.5161, -14.0964 )
+
+[node name="lights" type="Node2D" parent="dean_philips_boss"]
+
+[node name="back_light" type="Light2D" parent="dean_philips_boss/lights"]
+position = Vector2( -53.4275, 17.4906 )
+texture = ExtResource( 12 )
+texture_scale = 2.0
+color = Color( 0.00392157, 0, 0.654902, 1 )
+energy = 2.0
+
+[node name="front_light" type="Light2D" parent="dean_philips_boss/lights"]
+position = Vector2( 25.1997, -1.91484 )
+texture = ExtResource( 14 )
+color = Color( 1, 0.960784, 0, 1 )
+energy = 1.5
+
+[node name="flames_charge" type="Node2D" parent="dean_philips_boss"]
+visible = false
+
+[node name="fire1" parent="dean_philips_boss/flames_charge" instance=ExtResource( 8 )]
+position = Vector2( -58.9489, 6.51694 )
+rotation = -0.674226
+scale = Vector2( 0.681526, 1.19763 )
+z_index = 2
+
+[node name="fire2" parent="dean_philips_boss/flames_charge" instance=ExtResource( 8 )]
+position = Vector2( -59.9579, 21.9894 )
+rotation = -0.674226
+scale = Vector2( 0.681526, 1.19763 )
+z_index = 3
+
+[node name="boss" type="AnimationPlayer" parent="dean_philips_boss"]
+anims/defeated = SubResource( 32 )
+anims/idle_into_right = SubResource( 33 )
+anims/idle_right = SubResource( 34 )
+anims/move_left = SubResource( 35 )
+
+[node name="Area2D" type="Area2D" parent="dean_philips_boss"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dean_philips_boss/Area2D"]
+position = Vector2( -8.33331, 0 )
+shape = SubResource( 36 )
+
+[node name="engine" type="AudioStreamPlayer2D" parent="dean_philips_boss"]
+position = Vector2( 0, -1.52588e-05 )
+stream = ExtResource( 38 )
+
+[node name="bike_attacks" type="Node2D" parent="."]
+z_index = 3
+
+[node name="top" type="Node2D" parent="bike_attacks"]
+position = Vector2( 300, -31.25 )
+
+[node name="bike_attack" type="AnimationPlayer" parent="bike_attacks/top"]
+anims/ground_bar = SubResource( 37 )
+
+[node name="damage_box" type="Area2D" parent="bike_attacks/top"]
+position = Vector2( -532, -43.75 )
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bike_attacks/top/damage_box"]
+visible = false
+position = Vector2( 532, 44.914 )
+shape = SubResource( 38 )
+
+[node name="Node2D" type="Node2D" parent="bike_attacks/top"]
+
+[node name="incoming_ind" type="ColorRect" parent="bike_attacks/top/Node2D"]
+modulate = Color( 1, 0, 0, 0 )
+margin_left = -19.9995
+margin_top = -18.75
+margin_right = 20.0005
+margin_bottom = 21.25
+rect_scale = Vector2( 19.593, 1 )
+rect_pivot_offset = Vector2( 20, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bike_trail" type="AnimatedSprite" parent="bike_attacks/top"]
+visible = false
+position = Vector2( 0.000488281, -6.25 )
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 43 )
+frame = 1
+
+[node name="second_to_top" type="Node2D" parent="bike_attacks"]
+position = Vector2( 300, 65.6875 )
+
+[node name="bike_attack" type="AnimationPlayer" parent="bike_attacks/second_to_top"]
+anims/ground_bar = SubResource( 44 )
+
+[node name="damage_box" type="Area2D" parent="bike_attacks/second_to_top"]
+position = Vector2( -532, -43.75 )
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bike_attacks/second_to_top/damage_box"]
+visible = false
+position = Vector2( 532, 44.914 )
+shape = SubResource( 38 )
+
+[node name="Node2D" type="Node2D" parent="bike_attacks/second_to_top"]
+
+[node name="incoming_ind" type="ColorRect" parent="bike_attacks/second_to_top/Node2D"]
+modulate = Color( 1, 0, 0, 0 )
+margin_left = -19.9995
+margin_top = -18.75
+margin_right = 20.0005
+margin_bottom = 21.25
+rect_scale = Vector2( 19.593, 1 )
+rect_pivot_offset = Vector2( 20, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bike_trail" type="AnimatedSprite" parent="bike_attacks/second_to_top"]
+visible = false
+position = Vector2( 0.000488281, -6.25 )
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 43 )
+frame = 3
+flip_h = true
+
+[node name="third_to_top" type="Node2D" parent="bike_attacks"]
+position = Vector2( 300, 110.938 )
+
+[node name="bike_attack" type="AnimationPlayer" parent="bike_attacks/third_to_top"]
+anims/ground_bar = SubResource( 45 )
+
+[node name="damage_box" type="Area2D" parent="bike_attacks/third_to_top"]
+position = Vector2( -532, -43.75 )
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bike_attacks/third_to_top/damage_box"]
+visible = false
+position = Vector2( 532, 44.914 )
+shape = SubResource( 38 )
+
+[node name="Node2D" type="Node2D" parent="bike_attacks/third_to_top"]
+
+[node name="incoming_ind" type="ColorRect" parent="bike_attacks/third_to_top/Node2D"]
+modulate = Color( 1, 0, 0, 0 )
+margin_left = -19.9995
+margin_top = -18.75
+margin_right = 20.0005
+margin_bottom = 21.25
+rect_scale = Vector2( 19.593, 1 )
+rect_pivot_offset = Vector2( 20, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bike_trail" type="AnimatedSprite" parent="bike_attacks/third_to_top"]
+visible = false
+position = Vector2( 0.000488281, -6.25 )
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 43 )
+frame = 3
+
+[node name="floor" type="Node2D" parent="bike_attacks"]
+position = Vector2( 300, 231.25 )
+
+[node name="bike_attack" type="AnimationPlayer" parent="bike_attacks/floor"]
+anims/ground_bar = SubResource( 46 )
+
+[node name="damage_box" type="Area2D" parent="bike_attacks/floor"]
+position = Vector2( -532, -43.75 )
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bike_attacks/floor/damage_box"]
+visible = false
+position = Vector2( 532, 44.914 )
+shape = SubResource( 38 )
+
+[node name="Node2D" type="Node2D" parent="bike_attacks/floor"]
+
+[node name="incoming_ind" type="ColorRect" parent="bike_attacks/floor/Node2D"]
+modulate = Color( 1, 0, 0, 0 )
+margin_left = -19.9995
+margin_top = -18.75
+margin_right = 20.0005
+margin_bottom = 21.25
+rect_scale = Vector2( 19.593, 1 )
+rect_pivot_offset = Vector2( 20, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bike_trail" type="AnimatedSprite" parent="bike_attacks/floor"]
+visible = false
+position = Vector2( 0.000488281, -6.25 )
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 43 )
+frame = 2
+flip_h = true
+
+[node name="world_timers" parent="." instance=ExtResource( 24 )]
+
+[node name="sounds" parent="." instance=ExtResource( 25 )]
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+position = Vector2( 300, 233.25 )
+z_index = 6
+
+[node name="top" type="Area2D" parent="Node2D"]
+position = Vector2( 0, -270.75 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/top"]
+shape = SubResource( 47 )
+
+[node name="second_top" type="Area2D" parent="Node2D"]
+position = Vector2( 0, -174.955 )
+scale = Vector2( 1.14244, 0.559667 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/second_top"]
+scale = Vector2( 1, 0.6875 )
+shape = SubResource( 47 )
+
+[node name="third_top" type="Area2D" parent="Node2D"]
+position = Vector2( 0, -89.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/third_top"]
+position = Vector2( 0, -9.37498 )
+scale = Vector2( 1.1992, 0.603239 )
+shape = SubResource( 47 )
+
+[node name="floor" type="Area2D" parent="Node2D"]
+position = Vector2( 0, -2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/floor"]
+shape = SubResource( 47 )
+
+[node name="philips" type="Node2D" parent="."]
+position = Vector2( 543.75, 193.75 )
+z_index = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="philips"]
+anims/fade_in_class = SubResource( 48 )
+anims/philips_entrance = SubResource( 49 )
+anims/teleport_in = SubResource( 50 )
+
+[node name="philips" type="AnimatedSprite" parent="philips"]
+frames = SubResource( 75 )
+animation = "philips"
+frame = 8
+playing = true
+
+[node name="Camera2D" type="Camera2D" parent="philips/philips"]
+position = Vector2( -12.2039, -2 )
+zoom = Vector2( 0.7, 0.7 )
+
+[node name="name" type="Label" parent="philips/philips"]
+visible = false
+modulate = Color( 3.47, 9.3, 8.67, 1 )
+margin_left = -31.25
+margin_top = -45.75
+margin_right = 34.75
+margin_bottom = -26.75
+rect_scale = Vector2( 1, 1e-05 )
+custom_fonts/font = SubResource( 76 )
+text = "Dr. Philips"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="normal_ac" type="Node2D" parent="."]
+visible = false
+position = Vector2( 75, -1.96104 )
+scale = Vector2( 1.02513, 1 )
+z_index = 5
+
+[node name="PL15_classroom" type="Sprite" parent="normal_ac"]
+position = Vector2( 215, 168.75 )
+scale = Vector2( 1.06641, 1 )
+texture = ExtResource( 42 )
+
+[node name="PL14_AC_Wall" type="Sprite" parent="normal_ac"]
+position = Vector2( -68.75, -30.4765 )
+scale = Vector2( 0.895191, 0.860352 )
+texture = ExtResource( 43 )
+
+[node name="PL14_AC_Wall2" type="Sprite" parent="normal_ac"]
+position = Vector2( 43.75, -29.289 )
+scale = Vector2( 0.895191, 0.860352 )
+texture = ExtResource( 43 )
+
+[node name="PL14_AC_Wall3" type="Sprite" parent="normal_ac"]
+position = Vector2( 156.25, -29.289 )
+scale = Vector2( 0.895191, 0.860352 )
+texture = ExtResource( 43 )
+
+[node name="PL14_AC_Wall4" type="Sprite" parent="normal_ac"]
+position = Vector2( 268.75, -29.289 )
+scale = Vector2( 0.895191, 0.860352 )
+texture = ExtResource( 43 )
+
+[node name="PL14_AC_Wall5" type="Sprite" parent="normal_ac"]
+position = Vector2( 381.25, -29.289 )
+scale = Vector2( 0.895191, 0.860352 )
+texture = ExtResource( 43 )
+
+[node name="PL14_AC_Wall6" type="Sprite" parent="normal_ac"]
+position = Vector2( 493.75, -29.289 )
+scale = Vector2( 1.01713, 0.860352 )
+texture = ExtResource( 43 )
+
+[node name="ColorRect" type="ColorRect" parent="normal_ac"]
+visible = false
+material = SubResource( 78 )
+margin_left = -175.0
+margin_top = -129.289
+margin_right = -135.0
+margin_bottom = -89.2889
+rect_scale = Vector2( 18.9223, 11.5915 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="area_entered" from="dean_philips_boss/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="bike_attacks/top/damage_box" to="." method="_on_damage_box_body_entered"]
+[connection signal="body_entered" from="bike_attacks/second_to_top/damage_box" to="." method="_on_damage_box_body_entered"]
+[connection signal="body_entered" from="bike_attacks/third_to_top/damage_box" to="." method="_on_damage_box_body_entered"]
+[connection signal="body_entered" from="bike_attacks/floor/damage_box" to="." method="_on_damage_box_body_entered"]
+[connection signal="body_entered" from="Node2D/top" to="." method="_on_top_body_entered"]
+[connection signal="body_entered" from="Node2D/second_top" to="." method="_on_second_top_body_entered"]
+[connection signal="body_entered" from="Node2D/third_top" to="." method="_on_third_top_body_entered"]
+[connection signal="body_entered" from="Node2D/floor" to="." method="_on_floor_body_entered"]
+
+[editable path="sounds"]

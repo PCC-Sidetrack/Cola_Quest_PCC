@@ -43,6 +43,9 @@ var _healing_enabled:  bool = true
 #-----------------------------------------------------------------------------#
 # Hide respawn counter by default
 func _ready() -> void:
+	_cola_count       = PlayerVariables.saved_cola
+	_respawn_count    = PlayerVariables.saved_deaths
+	green_plus.value  = PlayerVariables.saved_health
 	$ui_stat/stats/respawn_counter.visible         = false
 	$ui_stat/stats/total_cola_collected.visible    = false
 	green_plus.max_value  = _cola_requirement
@@ -72,7 +75,8 @@ func _on_game_UI_respawn_player() -> void:
 	_healing_enabled      = true
 	green_plus.value      =  0
 	green_plus_ss.visible = false
-	_respawn_count        += 1
+	_respawn_count               += 1
+	PlayerVariables.saved_deaths += 1
 	$ui_stat/stats/respawn_counter.visible       = false
 	$ui_stat/stats/total_cola_collected.visible  = false
 
@@ -85,6 +89,7 @@ func _on_game_UI_level_cleared():
 # On collecting a cola(s)
 func _on_game_UI_cola_collect(amount):
 	_cola_count += amount
+	PlayerVariables.saved_cola += amount
 	$ui_element/cola_counter/cola_tween.interpolate_property($ui_element/cola_counter/cola_icon, "scale", Vector2(2,2), Vector2(1,1), .5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$ui_element/cola_counter/cola_tween.start()
 	if _healing_enabled:
