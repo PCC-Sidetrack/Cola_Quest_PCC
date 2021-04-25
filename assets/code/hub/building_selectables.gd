@@ -38,7 +38,7 @@ func _level_transition() -> void:
 
 func _on_sports_center_mouse_entered():
 	Globals.update_local_highscore_from_file()
-	$sports_center/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().sports_center)
+	$sports_center/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().sports_center as int)
 	$sports_center/modulation.visible = true
 	
 	if get_parent().get_node("day_night_cycle").get_lights_on():
@@ -52,7 +52,7 @@ func _on_sports_center_mouse_exited():
 
 func _on_academic_center_mouse_entered():
 	Globals.update_local_highscore_from_file()
-	$academic_center/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().academic_center)
+	$academic_center/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().academic_center  as int)
 	$academic_center/modulation.visible = true
 	
 	if get_parent().get_node("day_night_cycle").get_lights_on():
@@ -66,7 +66,7 @@ func _on_academic_center_mouse_exited():
 
 func _on_makenzie_mouse_entered():
 	Globals.update_local_highscore_from_file()
-	$makenzie/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().makenzie)
+	$makenzie/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().makenzie  as int)
 	$makenzie/modulation.visible = true
 	
 	if get_parent().get_node("day_night_cycle").get_lights_on():
@@ -80,7 +80,7 @@ func _on_makenzie_mouse_exited():
 
 func _on_crown_centre_mouse_entered():
 	Globals.update_local_highscore_from_file()
-	$crown_centre/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().crown_centre)
+	$crown_centre/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().crown_centre  as int)
 	$crown_centre/modulation.visible = true
 	
 	if get_parent().get_node("day_night_cycle").get_lights_on():
@@ -94,7 +94,7 @@ func _on_crown_centre_mouse_exited():
 
 func _on_academic_center2_mouse_entered():
 	Globals.update_local_highscore_from_file()
-	$academic_center2/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().rooftop)
+	$academic_center2/modulation/highscore.text = "Highscore: " + str(Globals.get_highscore_dictionary().rooftop  as int)
 	$academic_center2/modulation.visible = true
 	
 	if get_parent().get_node("day_night_cycle").get_lights_on():

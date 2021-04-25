@@ -1043,7 +1043,7 @@ states/throw/node = SubResource( 84 )
 states/throw/position = Vector2( 45.5, 279.253 )
 transitions = [ "player_close", "swipe", SubResource( 85 ), "swipe", "player_close", SubResource( 86 ), "player_close", "pick_action", SubResource( 87 ), "delay", "player_close", SubResource( 88 ), "is_dead", "death", SubResource( 89 ), "enemies_dead", "player_close", SubResource( 90 ), "is_dead", "end_of_stage", SubResource( 91 ), "end_of_stage", "summon", SubResource( 92 ), "summon", "enemies_dead", SubResource( 93 ), "pick_action", "throw", SubResource( 94 ), "pick_action", "idle", SubResource( 95 ), "pick_action", "jump", SubResource( 96 ), "throw", "delay", SubResource( 97 ), "idle", "delay", SubResource( 98 ), "jump", "delay", SubResource( 99 ), "end_of_stage", "player_close", SubResource( 100 ), "delay", "is_dead", SubResource( 101 ), "throw", "is_dead", SubResource( 102 ), "idle", "is_dead", SubResource( 103 ), "jump", "is_dead", SubResource( 104 ), "pick_action", "is_dead", SubResource( 105 ), "player_close", "is_dead", SubResource( 106 ), "enemies_dead", "summon", SubResource( 107 ) ]
 end_node = "death"
-graph_offset = Vector2( 0, 169.489 )
+graph_offset = Vector2( 54.0222, 129.681 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=109]
 

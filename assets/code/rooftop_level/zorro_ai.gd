@@ -848,7 +848,7 @@ func _fight_finished_transition() -> void:
 	t.one_shot   = true
 	
 	Globals.game_locked = true
-	Globals.player.get_node("melee/CollisionShape2D").set_deferred("disabled", true)
+	#Globals.player.get_node("melee/CollisionShape2D").set_deferred("disabled", true)
 	set_movement_enabled(true)
 	
 	if Globals.player_position.x - global_position.x >= 0:
@@ -861,7 +861,10 @@ func _fight_finished_transition() -> void:
 			set_movement_direction(DIRECTION.RIGHT)
 
 	
-	#_on_zorro_boss_turned_around(Vector2(_current_direction.x, 0))	
+	#_on_zorro_boss_turned_around(Vector2(_current_direction.x, 0))
+	_points.get_node("drone_spawns/drone_a/spawn1/drone_a").ai_enabled = false
+	_points.get_node("drone_spawns/drone_a/spawn2/drone_a").ai_enabled = false
+	_points.get_node("drone_spawns/drone_a/spawn3/drone_a").ai_enabled = false
 	
 	yield(get_tree().create_timer(1.0), "timeout")
 	$audio/voice.play()
