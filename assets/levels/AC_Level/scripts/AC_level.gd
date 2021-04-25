@@ -70,6 +70,8 @@ func _ready():
 	section_1_borders.disable() 
 	$sounds/background_ambiant.play()
 	$sounds/music_idle.play()
+	
+	Globals.player.load_from_transition()
 
 
 func _physics_process(_delta):
@@ -312,6 +314,7 @@ func _on_game_unlock():
 
 func _on_next_scene_area_entered(area):
 	if area.is_in_group("hitbox"):
+		Globals.player.prepare_transition()
 		$sounds/door_transition.play()
 		yield($sounds/door_transition, "finished")
 		SceneFade.change_scene("res://assets/levels/AC_Level/main_scenes/AC_level_grass.tscn", 'fade')

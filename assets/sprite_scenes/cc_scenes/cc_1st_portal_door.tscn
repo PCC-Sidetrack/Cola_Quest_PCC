@@ -279,6 +279,7 @@ position = Vector2( 16, 31 )
 position = Vector2( 32, -98 )
 scale = Vector2( 1e-05, 1e-05 )
 frames = SubResource( 19 )
+frame = 1
 playing = true
 
 [node name="doorway" type="Area2D" parent="."]
