@@ -34,8 +34,3 @@ func _ready() -> void:
 	
 	portal.play("transition_out")
 	get_node("player").load_from_transition()
-
-func _on_Area2D_body_entered(body: Node) -> void:
-	if body.is_in_group(Globals.GROUP.PLAYER):
-		gui.on_player_level_cleared()
-		player.play("idle")

@@ -53,8 +53,8 @@ func on_player_killed         () -> void:
 	emit_signal("player_killed")
 
 # Emit signal on level_cleared
-func on_player_level_cleared  () -> void:
-	emit_signal("level_cleared")
+func on_player_level_cleared  (previous_score: float) -> void:
+	emit_signal("level_cleared", previous_score)
 
 # Emit signal when player health changes
 func on_player_health_changed (current_health, previous_health) -> void:
@@ -99,6 +99,12 @@ func on_game_ui_visible (visible: bool) -> void:
 	$HUD/ui_element/cola_counter.visible   = visible
 	$HUD/ui_element/cola_healing.visible   = visible
 	$player_healthbar/healthbar.visible    = visible
+	
+func get_cola_count() -> int:
+	return $HUD.get_cola_count()
+	
+func get_respawn_count() -> int:
+	return $HUD.get_respawn_count()
 
 #-----------------------------------------------------------------------------#
 #                             Private Functions                               #

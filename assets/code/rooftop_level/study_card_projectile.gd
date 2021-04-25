@@ -54,8 +54,8 @@ func initialize(interact_enemy: bool = true) -> void:
 	add_child(t)
 	t.start(0.3)
 	yield(t, "timeout")
-	if interact_enemy:
-		set_collision_mask_bit(Globals.LAYER.ENEMY, true)
+	#if interact_enemy:
+		#set_collision_mask_bit(Globals.LAYER.ENEMY, true)
 
 #-----------------------------------------------------------------------------#
 #                             Signal Functions                                #

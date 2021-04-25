@@ -1591,19 +1591,17 @@ hframes = 2
 script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="sword"]
-position = Vector2( -8, 12 )
-rotation = 2.00713
+position = Vector2( 30, -18 )
+rotation = -0.629196
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
-visible = false
-position = Vector2( -8.55, 14.3 )
-rotation = 2.00713
+position = Vector2( 31.5461, -19.7706 )
+rotation = 2.51064
 scale = Vector2( 2, 7 )
 shape = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -7.6562 )
 shape = SubResource( 13 )
 

@@ -14,8 +14,8 @@ extends Entity
 #-----------------------------------------------------------------------------#
 #                             Export Variables                                #
 #-----------------------------------------------------------------------------#
-export var accelleration:        float   = 15.0
-export var friction:             float   = 25.0
+export var accelleration:        float   = 30.0
+export var friction:             float   = 35.0
 export var camera_zoom:          Vector2 = Vector2(1.5, 1.5)
 export var original_zoom:        float   = 1.0
 export var damage:               int     = 1
@@ -233,7 +233,7 @@ func _get_input() -> Vector2:
 			_remaining_jumps -= 1
 		
 		if Input.is_action_just_pressed(CONTROLS.DASH) and _dash_cooldown >= _DASH_REFRESH and _remaining_dashes >= _MAX_DASHES and not _is_underwater:
-			set_velocity(Vector2(get_direction_facing() * get_speed() * 2.5, get_current_velocity().y))
+			set_velocity(Vector2(get_direction_facing() * get_speed() * 3.1, get_current_velocity().y))
 			_dash_cooldown     = 0.0
 			_remaining_dashes -= 1
 		

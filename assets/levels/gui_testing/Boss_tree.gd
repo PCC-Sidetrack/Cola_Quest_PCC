@@ -30,4 +30,4 @@ func _on_boss_health_changed(change) -> void:
 		$WT_01.visible    = true 
 		Globals.game_locked = true
 		get_owner().get_node("player/game_UI").on_boss_healthbar_visible(false)
-		get_owner().get_node("player/game_UI").on_player_level_cleared()
+		get_owner().get_node("player/game_UI").on_player_level_cleared(0)

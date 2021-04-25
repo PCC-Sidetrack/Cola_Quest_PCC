@@ -66,6 +66,8 @@ func _on_Exit_mouse_entered() -> void:
 
 # On restart button pressed
 func _on_Restart_pressed():
+	Globals.stop_highscore_timer()
+	Globals.reset_highscore_timer()
 	get_tree().paused = false
 	Globals.game_locked = false
 	SceneFade.change_scene(get_tree().current_scene.filename, 'fade')
